@@ -574,7 +574,8 @@ ekranu narzędziem `buscall` (`call navigate_to_folder`/`open_form` → `call ta
 - **Pola są wyrównane** — ułożone równo jedno pod drugim, kolumny się zgadzają, całość wygląda schludnie.
 
 Pełna procedura sterowania aplikacją i robienia zrzutów (konfiguracja bazy, uruchamianie, `take_screenshot`):
-skill `/soneta-programming` — [references/testing-buscall-mcp.md](../soneta-programming/references/testing-buscall-mcp.md).
+skill `/soneta-tools`, narzędzie `buscall` — dokument `buscall-live-testing.md` (weryfikacja na żywej
+aplikacji); składnia metod w `buscall.md`.
 
 ## Referencje
 
@@ -597,4 +598,4 @@ Form.xml opisuje **prezentację**; logikę i dane opisują skille obok. Mapa poj
 | `{Workers.Alias.Pole}`, `{new Extender.Pole}` | skill `/soneta-programming` — worker-extender.md |
 | `Command MethodName`/`OpenMethodName` | skill `/soneta-programming` — action-result.md, worker-extender.md |
 | pole `readonly`/selektor, definicja pól | skill `/soneta-business-xml` — table-reference.md |
-| wizualna weryfikacja wyglądu formularza na żywo (zrzut ekranu) | skill `/soneta-programming` — testing-buscall-mcp.md |
+| wizualna weryfikacja wyglądu formularza na żywo (zrzut ekranu) | skill `/soneta-tools` — buscall, `buscall-live-testing.md` |

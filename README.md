@@ -87,6 +87,17 @@ Tworzenie i konfiguracja definicji elementów wynagrodzenia na platformie Soneta
 
 **Kiedy używać:** tworzenie/modyfikacja definicji elementu wynagrodzenia, pisanie algorytmów płacowych (premia procentowa, dodatek stażowy, zasiłek chorobowy, ekwiwalent za urlop).
 
+### 7. soneta-tools
+
+Narzędzia deweloperskie wiersza poleceń używane w Soneta.
+
+**Zakres:**
+- `dbmgr` — zarządzanie bazami danych z CLI: tworzenie/rejestracja/kasowanie, konwersja, backup/restore (binarny `.bac` i tekstowy `.zip`), licencje i klucz wirtualny, rozszerzenia (extensions), import XML, analiza, kompilacja algorytmów
+- `buscall` — testowanie na żywej aplikacji: zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i zrzuty ekranu do analizy wizualnej; wariant MCP `callmcp`
+- Przygotowanie baz testowych/demo i automatyzacja operacji w skryptach/CI
+
+**Kiedy używać:** zarządzanie bazą enova z CLI, tworzenie bazy demo, backup/konwersja bazy, weryfikacja zmian w kodzie na uruchomionej aplikacji.
+
 ## Powiązania między skillami
 
 Skille są zaprojektowane do współpracy:
@@ -98,6 +109,7 @@ Skille są zaprojektowane do współpracy:
 5. **soneta-form-xml** → tworzy formularze UI dla obiektów
 6. **soneta-ui-style** → styluje interfejs webowy zgodnie z design systemem enova365
 7. **soneta-place-def-elementow** → konfiguruje warstwę płacową (definicje elementów wynagrodzenia)
+8. **soneta-tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
 
 ## Instalacja
 
