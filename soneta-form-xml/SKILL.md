@@ -542,6 +542,40 @@ Widok listy z panelem filtrów powyżej grida. `<Flow>` jako `FilterPanel` to st
 
 Dołączanie: `<Include Source="Adres.form.xml" DataContext="{Adres}" />`
 
+## Zasady projektowania okien (UX)
+
+### Etykiety i opisy — formularze konfiguracyjne vs operacyjne
+
+Długość etykiet (`CaptionHtml`) i obecność opisów dobieraj do **częstotliwości użycia** formularza:
+
+- **Formularze konfiguracyjne** (definicje, ustawienia, parametry — odwiedzane **rzadko**): etykiety
+  i pola opisowe powinny być **wyczerpujące i samotłumaczące**. Użytkownik wracający na taki formularz
+  po tygodniach/miesiącach musi bez wahania zrozumieć, do czego służy każde pole — nie może polegać na
+  pamięci. Preferuj pełne, jednoznaczne etykiety; tam, gdzie sens nie jest oczywisty, dodaj tekst
+  pomocniczy/opis (np. rozbudowany `CaptionHtml`, etykieta wprowadzająca `Label`, opis w grupie).
+  Priorytetem jest **zrozumiałość**, nie gęstość.
+
+- **Formularze operacyjne** (dokumenty, kartoteki używane **codziennie**): etykiety powinny być
+  **krótkie i zwięzłe**. Tu najważniejsza jest **przestrzeń na dane** — czytelność wprowadzanych
+  wartości i to, by na ekranie mieściło się ich dużo (mniej przewijania i przełączania między
+  zakładkami). Użytkownik zna te pola z codziennej pracy, więc rozwlekłe etykiety tylko zabierają
+  miejsce. Priorytetem jest **zwięzłość i gęstość danych**.
+
+### Wizualna weryfikacja formularza (buscall)
+
+Po zdefiniowaniu lub zmianie `form.xml` (i przebudowaniu projektu `.UI`) **zweryfikuj wygląd wizualnie**
+na żywej aplikacji — nie polegaj wyłącznie na poprawności XML. Otwórz formularz zdalnie i zrób zrzut
+ekranu narzędziem `buscall` (`call navigate_to_folder`/`open_form` → `call take_screenshot`), a następnie
+**obejrzyj PNG** i oceń estetykę i czytelność układu:
+
+- **Odstępy etykieta–pole** nie są zbyt duże — łatwo dopasować etykietę do jej pola.
+- **Etykiety są czytelne i w całości widoczne** — jest wystarczająco miejsca na tekst etykiety
+  (nie jest ucięty ani zawinięty w nieczytelny sposób).
+- **Pola są wyrównane** — ułożone równo jedno pod drugim, kolumny się zgadzają, całość wygląda schludnie.
+
+Pełna procedura sterowania aplikacją i robienia zrzutów (konfiguracja bazy, uruchamianie, `take_screenshot`):
+skill `/soneta-programming` — [references/testing-buscall-mcp.md](../soneta-programming/references/testing-buscall-mcp.md).
+
 ## Referencje
 
 - Pełna specyfikacja elementów: [references/ELEMENTS.md](references/ELEMENTS.md)
@@ -563,3 +597,4 @@ Form.xml opisuje **prezentację**; logikę i dane opisują skille obok. Mapa poj
 | `{Workers.Alias.Pole}`, `{new Extender.Pole}` | skill `/soneta-programming` — worker-extender.md |
 | `Command MethodName`/`OpenMethodName` | skill `/soneta-programming` — action-result.md, worker-extender.md |
 | pole `readonly`/selektor, definicja pól | skill `/soneta-business-xml` — table-reference.md |
+| wizualna weryfikacja wyglądu formularza na żywo (zrzut ekranu) | skill `/soneta-programming` — testing-buscall-mcp.md |
