@@ -5,9 +5,19 @@ i sprawdzania kodu**. Zamiast klikać ręcznie, sterujesz uruchomioną aplikacj�
 otwieranie formularzy, edycja pól) i robisz **zrzuty ekranu**, które oglądasz, aby potwierdzić
 layout, wartości pól, widoczność kontrolek czy motyw — na realnej bazie i na **swoim** kodzie.
 
-Składnię wywołań, katalog metod i kody wyjścia opisuje [buscall.md](buscall.md). Tu skupiamy się
+Składnię wywołań, katalog metod i kody wyjścia opisuje `buscall.md` w skillu `/soneta-tools`. Tu skupiamy się
 na tym, co jest specyficzne dla weryfikacji na żywo: **konfiguracji bazy startującej z Twojego
 kodu**, przeładowaniu kodu i pułapkach procesów.
+
+> **Zanim pierwszy raz uruchomisz `buscall`:** zapoznaj się z **aktualną składnią dostępnych metod**.
+> Katalog metod bywa różny między wersjami/gałęziami kodu — nie zakładaj z pamięci nazw metod ani ich
+> parametrów. Odczytaj bieżącą listę bezpośrednio z uruchomionego frame'a:
+>
+> ```bash
+> buscall --db Demo call methods.list
+> ```
+>
+> Pełny opis odkrywania metod (`methods.list`) i ich kontraktów znajdziesz w `buscall.md` (skill `/soneta-tools`).
 
 Używamy trybu `call` — każde wywołanie jest niezależne (`buscall --db <Baza> call <metoda> …`),
 frame (GUI) startuje przy pierwszym wywołaniu i **zostaje** w tle, więc kolejne `call`-e są szybkie.
@@ -61,21 +71,38 @@ buscall  ── named pipe "SonetaFrameBridge" ──►  SonetaFrameNew (GUI, z
 
 ### Aby frame miał NOWY kod
 
-1. Przebuduj właściwy projekt logiki: `dotnet build <projekt>.csproj` (ten, którego zmiany testujesz).
-2. Upewnij się, że **nie działa stary frame ANI osierocone serwery** — inaczej podłączysz się do
-   poprzedniego kodu (patrz „Osierocone serwery i porty" niżej).
+1. **Zamknij działający frame** metodą `application_close` — zamyka GUI *i* sprząta jego serwery
+   (`server.dll`/`web.dll`), więc nie zostają osierocone procesy trzymające porty i stary kod:
+   ```bash
+   buscall call application_close     # bez --db; zamyka bieżącą instancję
+   ```
+   - Gdy frame **nie działa**, metoda nic nie robi (**nie uruchamia** go po to, by zaraz zamknąć)
+     i zwraca komunikat „…nie jest uruchomiona…".
+   - Wywołanie wraca **dopiero** gdy proces faktycznie zniknął, więc kolejne `call`-e nie wstrzelą
+     się w zamykaną aplikację.
+2. Przebuduj właściwy projekt logiki: `dotnet build <projekt>.csproj` (ten, którego zmiany testujesz).
 3. Pierwsze wywołanie `call` uruchomi świeży frame z nowym DLL.
 
-### Osierocone serwery i porty (częsta pułapka — WERYFIKUJ ZAWSZE)
+**Dlaczego `application_close`, a nie `kill`:** łagodne zamknięcie przechodzi przez
+`SourceManager.CloseAll()` → `ConnectionSource.Close()`, które zatrzymuje procesy serwerów
+(`Kill(true)` na całym drzewie). Dzięki temu porty są zwalniane, a stary kod nie zostaje w tle.
+Osierocone serwery (PPID=1, zajęte porty, nieaktualny kod) powstają **tylko** gdy frame zostanie
+ubity gwałtownie — na taki wypadek jest nota ratunkowa niżej.
+
+### Ratunek: osierocone serwery i porty (awaryjnie, gdy `application_close` nie pomógł)
+
+> Ta sekcja to **ręczne czyszczenie awaryjne** — potrzebne tylko gdy frame padł/został ubity
+> gwałtownie i zostawił osierocone serwery, albo gdy z jakiegoś powodu `application_close` nie
+> posprzątał (np. frame nie odpowiada). W normalnym trybie zamykaj przez `application_close`.
 
 Frame **nie jest** procesem o nazwie `SonetaFrameNew` — uruchamia dwa procesy `dotnet` z DLL-kami
 z katalogu build projektu, które **nasłuchują na portach TCP**:
 - **`server.dll`** — `--runjobs=true --SingleDbName=<Baza> --Urls=http://+:<port>` (obserwowane: `22101`, dodatkowo `4000`),
 - **`web.dll`** — `--server-endpoint=http://localhost:<portServera> --Urls=http://+:<port>` (obserwowane: `5101`).
 
-Po przerwanym/zabitym teście te procesy **zostają jako osierocone** (`PPID=1`), trzymają porty i
-**ładują STARY kod** (sprzed rebuildu). Podłączenie do nich = weryfikacja nieaktualnego kodu.
-`grep SonetaFrameNew` ich **nie znajdzie** — szukaj po `server.dll`/`web.dll`/`--SingleDbName`.
+Osierocone (`PPID=1`) trzymają porty i **ładują STARY kod** (sprzed rebuildu). Podłączenie do nich =
+weryfikacja nieaktualnego kodu. `grep SonetaFrameNew` ich **nie znajdzie** — szukaj po
+`server.dll`/`web.dll`/`--SingleDbName`.
 
 **WAŻNE — porty per baza:** każda baza otwierana w programie dostaje **własny port**. Nie sprawdzaj
 tylko `22101`/`5101` — przeskanuj **kilka–kilkanaście kolejnych** (np. `22101–22120`, `5101–5120`,
@@ -97,7 +124,7 @@ Zabicie tych procesów jest bezpieczne i odwracalne (frame odtworzy je przy nast
 ## Zrzut ekranu → analiza wizualna
 
 Sedno tej weryfikacji: `take_screenshot` zwraca **ścieżkę do PNG** bieżącego widoku (kontrakt metody
-opisuje [buscall.md](buscall.md#take_screenshot--kontrakt)). Otwórz plik z tej ścieżki i **obejrzyj go**
+opisuje `buscall.md` w skillu `/soneta-tools`, sekcja `take_screenshot — kontrakt`). Otwórz plik z tej ścieżki i **obejrzyj go**
 narzędziem czytającym obrazy — tak potwierdzasz wizualnie layout formularza, wartości pól, widoczność
 kontrolek, wyrównanie, motyw itp. To krok, którego nie zastąpi odczyt danych JSON-em.
 
@@ -131,10 +158,11 @@ ID=$("$BUSCALL" --db "$DB" call retrieve_list | jq -r '.data.rows[0].objectID')
 ```
 
 Uwagi praktyczne:
-- Pierwsze wywołanie po starcie bywa wolne (uruchomienie/logowanie frame'a) — dawaj timeout ~120–300 s
+- Pierwsze wywołanie po starcie bywa wolne (uruchomienie/logowanie frame'a) — dawaj timeout ~30–60 s
   (zimny start po ubiciu serwerów potrafi przekroczyć 2 min). Kolejne `call`-e są szybkie (frame w tle).
 - `retrieve_list` **musi** poprzedzać `open_form` (inaczej „unsafe open").
-- Aby przeładować kod, ubij osierocone `server.dll`/`web.dll` i zwolnij porty (patrz wyżej) — samo
-  `grep SonetaFrameNew` NIE wystarczy.
+- Aby przeładować kod, zamknij frame przez `buscall call application_close` (posprząta też serwery),
+  przebuduj i wywołaj `call` ponownie. Do zabijania osieroconych `server.dll`/`web.dll` sięgaj tylko
+  awaryjnie (patrz nota ratunkowa wyżej) — samo `grep SonetaFrameNew` i tak NIE wystarczy.
 
-Pełna składnia metod, `methods.list` i wariant `callmcp`: [buscall.md](buscall.md).
+Pełna składnia metod, `methods.list` i wariant `callmcp`: `buscall.md` w skillu `/soneta-tools`.

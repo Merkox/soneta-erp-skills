@@ -30,7 +30,10 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 | **`dbmgr`** | [references/dbmgr.md](references/dbmgr.md) | referencja | Zarządzanie **bazami danych** z CLI: tworzenie/rejestracja/kasowanie, konwersja, backup/restore (`.bac`/`.zip`), licencje i klucz wirtualny, rozszerzenia, import XML, analiza, kompilacja. Wszystkie komendy i opcje. |
 | **`dbmgr`** | [references/dbmgr-cli-menu.md](references/dbmgr-cli-menu.md) + [assets/dbmgr-menu.cs](assets/dbmgr-menu.cs) | zastosowanie | Wzorzec + gotowy szablon: owinięcie `dbmgr` w interaktywne menu CLI (Spectre.Console) na jednoplikowej aplikacji C# — wybór bazy z listy, tryby środowisk, gotowe akcje. |
 | **`buscall`** | [references/buscall.md](references/buscall.md) | referencja | Zdalne wywoływanie metod aplikacji: tryby `call`/`callmcp`, składnia argumentów `klucz=wartość`, odkrywanie metod (`methods.list`), katalog metod Bundle (nawigacja, formularze, gridy, zrzuty), kody wyjścia. |
-| **`buscall`** | [references/buscall-live-testing.md](references/buscall-live-testing.md) | zastosowanie | Wizualna **weryfikacja kodu na żywej aplikacji**: baza startująca z Twojego kodu, przeładowanie DLL, pułapki osieroconych procesów/portów, zrzuty ekranu do oceny wyglądu formularzy. |
+
+> **Uwaga:** wizualną **weryfikację kodu na żywej aplikacji** przez `buscall` (baza startująca z Twojego kodu,
+> przeładowanie DLL, pułapki osieroconych procesów/portów, zrzuty ekranu do oceny wyglądu formularzy) opisuje
+> dokument `buscall-live-testing.md` w skillu **`/soneta-programming`**.
 
 ## Wspólny kontekst
 
@@ -48,9 +51,6 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 
 - Operujesz **na strukturze/danych bazy** (utwórz, skonwertuj, backup, licencja, extension)
   → **`dbmgr`** ([references/dbmgr.md](references/dbmgr.md)).
-- Chcesz **zweryfikować zachowanie kodu na uruchomionej aplikacji** (kliknięcia, formularze,
-  zrzut ekranu) → **`buscall`** — składnia i metody w [references/buscall.md](references/buscall.md),
-  a przepływ weryfikacji na żywo w [references/buscall-live-testing.md](references/buscall-live-testing.md).
 
 ## Powiązane skille
 
