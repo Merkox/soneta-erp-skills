@@ -50,6 +50,15 @@ Znaczenie pól:
 - `path=<katalog-projektu>` — **katalog projektu, z którego ładowany jest kod** (biblioteki z jego `bin/Debug`),
 - `user` / `pwd` — poświadczenia logowania (tu operator `Administrator`, puste hasło).
 
+> **Poświadczenia a automatyzacja.** Podanie tu `user`/`pwd` sprawia, że frame **loguje się do
+> bazy automatycznie** — dzięki temu `buscall`/refaktoryzacja działają w pełni bezobsługowo
+> (start aplikacji + zalogowanie bez ingerencji). **Bez** tych poświadczeń logowanie do bazy trzeba
+> **za każdym razem wykonać ręcznie** w GUI i **nie da się tego obejść** żadnym parametrem `buscall`.
+>
+> **⚠️ Nigdy nie wpisuj tu poświadczeń produkcyjnych — wyłącznie testowe.** Ten plik przechowuje
+> hasło **jawnie/niezabezpieczone**, więc każda tu wpisana wartość jest w praktyce dostępna dla
+> każdego, kto ma dostęp do dysku. Używaj konta testowego bez dostępu do danych produkcyjnych.
+
 Aby przetestować inny projekt: dodaj analogiczny wpis w `Sources` z własną nazwą bazy i `path`,
 po czym wywołuj `buscall --db <nazwa> call …`. Dodatkowo `IsDeveloperMode: true` w tym samym pliku
 włącza tryb dewelopera.
