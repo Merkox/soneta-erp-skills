@@ -53,6 +53,7 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Inwentaryzacja modułów i tabel (`*Module` / `*Row` / `*Table`) z DLL                  | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
 | **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | [references/buscall-live-testing.md](references/buscall-live-testing.md) (weryfikacja na żywo) |
+| **Testy integracyjne — klasa bazowa `TestBase`** — testy na realnej bazie z automatycznym rollbackiem (dwupoziomowa transakcja), wybór bazy `[TestDatabase]` (`nunit_default`/`nunit_ui`/`nunit_premiumui`), cykl życia (`ClassSetup`/`TestSetup`), `Session`/`ConfigSession`/`Context`, `InTransaction`/`SaveDispose`, podmiana DI (`ConfigureLoginServices`), asercje `AwesomeAssertions`, testy SQL (`SqlTraceInfo`), konwencje: nazewnictwo `Should_..._When_...` + prefiks grupy, `[Description]`, struktura AAA | [references/integration-tests.md](references/integration-tests.md) |
 
 ## Nowy dodatek od zera (CLI)
 
