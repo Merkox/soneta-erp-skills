@@ -1,3 +1,64 @@
+# Katalog tabel platformy Soneta (enova365, Triva)
+
+> **Jak korzystać z tego pliku.** Jest bardzo duży (>1000 linii). **Nigdy nie czytaj go w całości** — najpierw znajdź właściwy moduł w indeksie poniżej, potem przeczytaj tylko jego sekcję. Sekcje zaczynają się nagłówkiem `# Moduł: NazwaModułu`; możesz je szybko namierzyć poleceniem `grep -n '^# Moduł:' references/tables.md` albo czytając plik z odpowiednim `offset`.
+
+## Format tabel
+
+Pod każdym nagłówkiem modułu znajduje się tabela:
+
+| Tabela | Obiekt | Tytuł tabeli | Nadrzędny | Konfiguracyjna | Opis |
+
+- **Tabela** — nazwa tabeli w bazie danych
+- **Obiekt** — nazwa klasy C# (obiekt biznesowy)
+- **Nadrzędny** — tabela nadrzędna (`root` = tabela główna; inna nazwa = tabela szczegółów w relacji inner)
+- **Konfiguracyjna** — `X` = tabela konfiguracyjna (definicje, słowniki, ustawienia); pusta = tabela operacyjna
+- **Opis** — przeznaczenie tabeli
+
+## Indeks modułów
+
+Wybierz moduły istotne dla projektowanego dodatku i przeczytaj tylko je.
+
+| Moduł | Zakres |
+|-------|--------|
+| **BI** | Business Intelligence: kostki analityczne, miary, wymiary, raporty, agregacje, wizualizacje. |
+| **Business** | Systemowy: typy proste (string/int/decimal/date), konfiguracja systemu, uprawnienia, powiadomienia, wersjonowanie. |
+| **Core** | Podstawowy: kontrahenci, adresy, lokalizacje, banki, słowniki, szablony, definicje dokumentów, powiadomienia, załączniki. |
+| **CRM** | Relacje z klientami: kontrahenci, osoby kontaktowe, transakcje i leady, zdarzenia CRM, poczta, szablony korespondencji, opiekunowie. |
+| **CzlonkowieSzkolenia** | Członkowie organizacji i szkolenia: kartoteka członków, kursy, zapisy, certyfikaty, harmonogramy. |
+| **Deklaracje** | Deklaracje podatkowe i sprawozdawcze: szablony, formularze XML, generowanie i wysyłka do urzędów. |
+| **Delegacje** | Delegacje służbowe: definicje, etapy podróży, diety, koszty przejazdów, noclegi, rozliczenia. |
+| **Dms** | Zarządzanie dokumentami (DMS): rejestry, kategorie, statusy, obiegi, archiwizacja, wersjonowanie. |
+| **EwidencjaVat** | Ewidencja VAT: rejestry zakupu i sprzedaży, deklaracje VAT, JPK, kontrola i raportowanie podatku. |
+| **Handel** | Sprzedaż, zakup, zamówienia: definicje i relacje dokumentów, pozycje, sumy VAT, rozliczenia, fiskalizacja, EDI. |
+| **HR** | Zasoby ludzkie: struktura organizacyjna, stanowiska, kompetencje, oceny, szkolenia, rekrutacja, kariera. |
+| **HR2** | Rozszerzenie HR: zaawansowane kompetencje, cele, oceny okresowe, rozwój pracowników. |
+| **Import** | Import danych do księgowości: definicje importu dokumentów z zewnętrznych systemów FK. |
+| **Kadry** | Kadry: kartoteki pracowników, umowy o pracę, historia zatrudnienia, nieobecności, badania lekarskie, BHP, ubezpieczenia. |
+| **Kalend** | Czas pracy: kalendarze, definicje dni, strefy czasowe, harmonogramy, reguły rozliczania czasu, ewidencja obecności. |
+| **Kasa** | Kasowo-bankowy: płatności, zapłaty, przelewy, raporty kasowe, rozrachunki, magazyn walut, preliminarz, MPP. |
+| **Ksiega** | Księgowość: plan kont, zapisy, dekrety, dzienniki, schematy księgowe, rozrachunki, sprawozdania (bilans, RZiS), KPiR. |
+| **Magazyny** | Gospodarka magazynowa: stany i obroty, magazyny, okresy, partie (grupy dostaw), wycena rozchodu (FIFO/LIFO/wg cechy). |
+| **Oceny** | Oceny pracownicze: definicje arkuszy, kryteria, skale, przeprowadzanie i raportowanie ocen okresowych. |
+| **Place** | Płace: listy płac, składniki wynagrodzenia, elementy wypłat, potrącenia, zasiłki, PIT, ZUS, US. |
+| **PracaHybrydowa** | Praca zdalna i hybrydowa: definicje miejsc pracy, harmonogramy pracy zdalnej, ewidencja obecności w biurze/poza. |
+| **Produkcja** | Produkcja: technologie z operacjami, pozycje surowcowe/produktowe, czasy, zasoby, koszty wytworzenia, rezerwacje, braki. |
+| **ProdukcjaPro** | Zaawansowana produkcja: zlecenia, operacje technologiczne, harmonogramowanie, kontrola jakości, marszruty, koszty. |
+| **Przeszeregowania** | Przeszeregowania: masowe zmiany warunków zatrudnienia, wynagrodzeń i stanowisk. |
+| **RealEstate** | Nieruchomości: kartoteka nieruchomości i lokali, najemcy, umowy najmu, rozliczenia mediów, fakturowanie opłat. |
+| **RMK** | Rozliczenia międzyokresowe kosztów: harmonogramy rozliczania w czasie, pozycje, automatyczne dekrety. |
+| **Samochodowka** | Ewidencja przebiegu pojazdów (kilometrówka): pojazdy, trasy, stawki, rozliczenia przejazdów służbowych. |
+| **SrodkiTrwale** | Środki trwałe i WNiP: kartoteka, dokumenty OT/LT/MT, amortyzacja, inwentaryzacja, plan amortyzacji. |
+| **Support** | Wsparcie techniczne / helpdesk: zgłoszenia serwisowe, kolejki, SLA, baza wiedzy, śledzenie i eskalacja. |
+| **Towary** | Kartoteka towarów i usług: asortyment, jednostki miar, cenniki (indywidualne/grupowe/progowe/promocje), kody kreskowe, klasyfikacje. |
+| **Vehicles** | Flota pojazdów: kartoteka, przeglądy, ubezpieczenia, tankowania, koszty eksploatacji, przypisania kierowców. |
+| **Waluty** | Kursy walut: definicje walut, tabele kursowe (NBP, ECB), przeliczanie wartości walutowych. |
+| **WebAuthorization** | Autoryzacja webowa: uprawnienia, tokeny dostępu, uwierzytelnianie użytkowników aplikacji webowych. |
+| **Windykacja** | Windykacja należności: schematy windykacyjne, akcje, monity, śledzenie statusów kontrahentów. |
+| **Workflow** | Automatyzacja procesów: definicje procesów, kroki, warunki, akcje automatyczne, sterowanie obiegiem dokumentów. |
+| **Zadania** | Zadania i projekty: definicje zadań, harmonogramy, przypisania, śledzenie czasu (TimeTrack), rozliczanie. |
+
+---
+
 # Moduł: BI
 Moduł Business Intelligence. Zawiera definicje kostek analitycznych, miar, wymiarów, raportów oraz mechanizmy agregacji i wizualizacji danych biznesowych.
 | Tabela | Obiekt | Tytuł tabeli | Nadrzędny | Konfiguracyjna | Opis |
