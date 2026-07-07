@@ -319,6 +319,10 @@ obok kolumn `Field`. Mimo zagnieżdżenia w XML taki `Flow` działa na poziomie 
 pasek parametrów listy. Dzięki temu filtr jest **zarządzany przez organizator listy** i tworzy
 z listą jeden spójny element (zamiast luźnego `Flow` postawionego nad gridem).
 
+**Etykiety pól filtrujących umieszczaj na górze, nad polem** (`Class="LabelTop"`) — niezależnie od
+typu formularza (nawet gdy poza filtrem obowiązuje domyślny `LabelLeft`; o pozycji etykiet ogólnie
+patrz sekcja „Pozycja etykiety względem pola").
+
 Są **dwa sposoby** wskazania, skąd filtr czyta/zapisuje wartości:
 
 **1. Filtry w obiekcie kontekstu (dominujący wzorzec w programie).** `DataContext="{Context}"`,
@@ -561,6 +565,19 @@ Długość etykiet (`CaptionHtml`) i obecność opisów dobieraj do **częstotli
   zakładkami). Użytkownik zna te pola z codziennej pracy, więc rozwlekłe etykiety tylko zabierają
   miejsce. Priorytetem jest **zwięzłość i gęstość danych**.
 
+### Pozycja etykiety względem pola — `LabelLeft` vs `LabelTop`
+
+Na zakładkach formularzy obiektów **generalną zasadą jest umieszczanie etykiety po lewej stronie** pola
+edycyjnego (`Class="LabelLeft"`). Jest to wartość **domyślna** dla formularzy — jeśli nie ustawisz nic
+innego, obowiązuje układ z etykietą po lewej.
+
+Wyjątki, w których etykieta trafia **na górę, nad pole edycyjne** (`Class="LabelTop"`):
+
+- **Formularze aplikacji pulpitowej** uruchamianej dla operatorów pulpitowych — tu `LabelTop` jest
+  wartością **domyślną**: etykiety umieszczamy nad polami edycyjnymi.
+- **Pola filtrujące listy** (pasek parametrów `Flow Class="DataBar"`) — patrz sekcja
+  „Pasek filtra listy".
+
 ### Wizualna weryfikacja formularza (buscall)
 
 Po zdefiniowaniu lub zmianie `form.xml` (i przebudowaniu projektu `.UI`) **zweryfikuj wygląd wizualnie**
@@ -574,8 +591,8 @@ ekranu narzędziem `buscall` (`call navigate_to_folder`/`open_form` → `call ta
 - **Pola są wyrównane** — ułożone równo jedno pod drugim, kolumny się zgadzają, całość wygląda schludnie.
 
 Pełna procedura sterowania aplikacją i robienia zrzutów (konfiguracja bazy, uruchamianie, `take_screenshot`):
-skill `/soneta-tools`, narzędzie `buscall` — dokument `buscall-live-testing.md` (weryfikacja na żywej
-aplikacji); składnia metod w `buscall.md`.
+narzędzie `buscall` — dokument `buscall-live-testing.md` (weryfikacja na żywej aplikacji) w skillu
+`/soneta-programming`; składnia metod w `buscall.md` skilla `/soneta-tools`.
 
 ## Referencje
 
@@ -598,4 +615,4 @@ Form.xml opisuje **prezentację**; logikę i dane opisują skille obok. Mapa poj
 | `{Workers.Alias.Pole}`, `{new Extender.Pole}` | skill `/soneta-programming` — worker-extender.md |
 | `Command MethodName`/`OpenMethodName` | skill `/soneta-programming` — action-result.md, worker-extender.md |
 | pole `readonly`/selektor, definicja pól | skill `/soneta-business-xml` — table-reference.md |
-| wizualna weryfikacja wyglądu formularza na żywo (zrzut ekranu) | skill `/soneta-tools` — buscall, `buscall-live-testing.md` |
+| wizualna weryfikacja wyglądu formularza na żywo (zrzut ekranu) | skill `/soneta-programming` — `buscall-live-testing.md` (składnia `buscall` w `/soneta-tools`) |

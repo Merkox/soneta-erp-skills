@@ -118,6 +118,14 @@ throw new RowException(this, "Pole jest wymagane".Translate());
 throw new RowException(this, "Pole {0} jest wymagane".TranslateFormat(nameof(Nazwa)));
 ```
 
+### 5.3 Reguły spójności jako weryfikatory, nie ad-hoc `if` przy zapisie
+
+Trwałe reguły spójności danych (pole wymagane, zgodność pól, unikalność) modeluj jako
+**weryfikatory** uzbrajane na zmianę pól-źródeł — patrz [verifiers.md](verifiers.md). Weryfikator
+typu `Error` blokuje `Save()` automatycznie i w każdym punkcie wejścia. Wyjątek `VerifiersException`
+z `Save()` **nie może być połknięty** (ta sama zasada co [§4.2](#42-nie-ignoruj-wyjątku-z-save)
+i [§9.1](#91-nie-łap-exception-bez-konkretu)) — połknięcie = zapis niespójnych danych bez sygnału.
+
 ---
 
 ## 6. Filtrowanie po stronie serwera
@@ -359,6 +367,32 @@ Metoda przyjmująca `Login` zarządza sesją sama. Metoda przyjmująca `Session`
 | Logika biznesowa | nazwy polskie (`Towar`, `Faktura`) |
 | Klasy systemowe | nazwy angielskie (`Session`, `Module`) |
 
+### 14.4 Dostęp do modułu przez `session.GetX()`
+
+Preferowany sposób odczytu modułu (klasy `Module`) to dedykowana metoda rozszerzająca
+`session.GetX()`. Jest najkrótsza, typowana i jednolita w całym kodzie — po niej od razu widać,
+z jakiego obszaru pochodzą dane.
+
+```csharp
+// DOBRZE — extension method (preferowane)
+var tm = session.GetTowary();
+var hm = context.Session.GetHandel();
+var cm = towar.Session.GetCRM();
+
+// AKCEPTOWALNE — GetInstance, gdy mamy tylko ISessionable (property Session niedostępne)
+var tm = TowaryModule.GetInstance(sessionable);
+
+// ŹLE — ogólne API generyczne / ręczne wyszukiwanie w kolekcji modułów
+var tm = session.Get<TowaryModule>();
+var tm = (TowaryModule)session.Modules[typeof(TowaryModule)];
+```
+
+Dotyczy to również własnych modułów dodatku — generator na podstawie pliku `business.xml`
+**automatycznie generuje** metodę rozszerzającą `GetX()` dla każdego modułu, więc jest ona
+zawsze dostępna. Nazwa pochodzi od nazwy modułu (np. moduł `Zlecenia` →
+`session.GetZlecenia()`). Nie pisz jej ręcznie i nie zastępuj wywołaniem `GetInstance`
+z jawną sesją.
+
 ---
 
 ## 15. Code review checklist (TL;DR)
@@ -410,3 +444,4 @@ Do szybkiej weryfikacji PR-a / refaktoringu:
 - [ ] Brak `static` metod modyfikujących stan biznesowy (§14.2)
 - [ ] Parametry `bool` nazwane (§14.3)
 - [ ] Nazewnictwo: logika biznesowa po polsku, klasy systemowe po angielsku (§14.3)
+- [ ] Moduły odczytywane przez `session.GetX()` (ew. `GetInstance(ISessionable)`), nie `session.Get<TModule>()` / `Modules[...]` (§14.4)

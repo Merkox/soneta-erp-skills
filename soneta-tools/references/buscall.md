@@ -7,7 +7,7 @@ metodę warstwy **Bundle** i zwraca wynik jako JSON.
 
 To referencja **funkcji i składni**. Konkretne zastosowanie — wizualna weryfikacja kodu podczas
 developmentu (konfiguracja bazy, rebuild, pułapki procesów) — opisuje
-[buscall-live-testing.md](buscall-live-testing.md).
+`buscall-live-testing.md` w skillu `/soneta-programming`.
 
 ## Uruchamianie i tryby
 
@@ -28,7 +28,7 @@ Binarka `buscall` (oraz `BusCall.dll`) leży w katalogu build projektu BusCall
 
 `--db <Baza>` wskazuje **nazwę połączenia bazy** zdefiniowaną w SonetaFrame (nie fizyczną nazwę
 bazy SQL). To połączenie decyduje też, z jakiego kodu startuje aplikacja — szczegóły w
-[buscall-live-testing.md](buscall-live-testing.md).
+`buscall-live-testing.md` w skillu `/soneta-programming`.
 
 ## Argumenty metod: pary `klucz=wartość`
 
@@ -88,6 +88,7 @@ buscall --db Demo call navigate_to_folder "programFolderPath=Kadry i płace/Kadr
 | `update_field_value` | zmiana pól: `'fieldsValues=["Nazwa=Buciki"]'` |
 | `edit_grid_rows` | edycja / dodanie / usunięcie wierszy grida in-place |
 | `take_screenshot` | zrzut ekranu bieżącego widoku → ścieżka do PNG (patrz niżej) |
+| `application_close` | zamknięcie aplikacji Frame **wraz z serwerami** (patrz niżej); nie uruchamia jej, gdy nie działa |
 
 Pełny, aktualny zestaw metod i ich parametry daje `methods.list` — powyższa tabela to najczęściej
 używane. Grid w danych formularza jest domyślnie **obcinany do kilku wierszy** (`data.truncated=true`);
@@ -115,7 +116,25 @@ echo "$SHOT"     # np. /var/folders/.../T/soneta-screenshots/screenshot-<data>.p
 - Pliki są efemeryczne — kasuje je **Frame** (proces długożyjący) przy starcie serwera pipe;
   krótkożyjący `call` pliku **nie** usuwa, więc ścieżka pozostaje ważna po zakończeniu polecenia.
 
-Wykorzystanie zrzutu do wizualnej weryfikacji layoutu/pól opisuje [buscall-live-testing.md](buscall-live-testing.md).
+Wykorzystanie zrzutu do wizualnej weryfikacji layoutu/pól opisuje `buscall-live-testing.md` w skillu `/soneta-programming`.
+
+### `application_close` — kontrakt
+
+Łagodnie zamyka aplikację **Frame** (bez argumentów). Zamknięcie przechodzi przez wewnętrzne
+`SourceManager.CloseAll()`, więc **kończy też procesy serwerów** (`server.dll`/`web.dll`) i zwalnia
+porty — nie zostają osierocone procesy ze starym kodem.
+
+```bash
+buscall call application_close      # zwykle bez --db; zamyka bieżącą instancję Frame
+```
+
+- **Nie uruchamia** aplikacji tylko po to, by ją zamknąć: gdy Frame nie działa, zwraca komunikat
+  „…nie jest uruchomiona…" i nie startuje procesu.
+- Wraca **dopiero** gdy proces Frame faktycznie zniknął, więc kolejne wywołania nie wstrzelą się
+  w zamykaną aplikację.
+- To **preferowany** sposób zamknięcia/przeładowania kodu (zamiast `kill`). Ręczne ubijanie
+  osieroconych serwerów zostaje jako procedura awaryjna — patrz `buscall-live-testing.md`
+  w skillu `/soneta-programming`.
 
 ## Wyniki i kody wyjścia
 

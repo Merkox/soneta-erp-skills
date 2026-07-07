@@ -42,6 +42,8 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | ViewInfo - definicja widoków list (folderów i inline jako property), CreateView, args.DataSource, klasa Params, `[Accessor(AutoChange)]`, powiązanie z viewform.xml | [references/viewinfo.md](references/viewinfo.md) |
 | ChangeInfos - dziennik zmian / audyt (`session.ChangeInfos.Add`, pola Info/Data, pułapka 255 znaków, ChangeInfoType, prezentacja listy) | [references/changeinfos.md](references/changeinfos.md) |
 | Cechy (Features) - tabela Features, typy cech, dostęp typowany/nietypowany, bindowanie w form.xml | [references/features.md](references/features.md) |
+| Weryfikatory - walidacja spójności danych (`Verifier`, `RowVerifier<T>`, `ColVerifier<T>`, `MultiColVerifier<T>`, `RequiredVerifier`), poziomy `Error`/`Warning`/`Information`, uzbrajanie na zmianę pól-źródeł (`Session.Verifiers.Add`, `<verifier>` w business.xml), blokada `Save()` przy błędzie | [references/verifiers.md](references/verifiers.md) |
+| Eventy (zdarzenia sesji) - odraczanie ciężkich obliczeń i logika w transakcji serwerowej: **sesyjne** (`Session.Events`, odpalane na `CommitUI`/`Save`/`Invoke`) vs **serwerowe** (`Session.ServerEvents`, w transakcji `Save` — numeracja). Rejestracja `Add(handler[, args])`, dedup po `Equals`/`GetHashCode`, wymuszanie `Invoke(handler)`, argumenty (`BusEventArgs`, `RowEventArgs<TRow>`, `SessionBusEventArgs`), priorytety, transakcyjność | [references/events.md](references/events.md) |
 | Źródła praw (`IRightsSource`) - obiekt sterujący dostępem do danych operacyjnych, `AccessRight`, `Login.GetObjectRight` | [references/rights-source.md](references/rights-source.md) |
 | Notacja klamrowa (`AccessorFormatter`) - wstawki `{ścieżka}` / `{ścieżka:format}` w captionach, szablonach, promptach; metadane modeli (`ApplicationInfo`, `TableInfo`) | [references/metadata-formatting.md](references/metadata-formatting.md) |
 | Gotowe wzorce kodu end-to-end (import, CRUD, obsługa błędów)                                      | [references/examples.md](references/examples.md) |
@@ -52,7 +54,8 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Skanowanie pól obiektu biznesowego z DLL (Roslyn MetadataReference)                   | [references/scan-props.md](references/scan-props.md) |
 | Inwentaryzacja modułów i tabel (`*Module` / `*Row` / `*Table`) z DLL                  | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
-| **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | skill **`/soneta-tools`** — `buscall.md` (składnia, metody) i `buscall-live-testing.md` (weryfikacja na żywo) |
+| **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | [references/buscall-live-testing.md](references/buscall-live-testing.md) (weryfikacja na żywo) |
+| **Testy integracyjne — klasa bazowa `TestBase`** — testy na realnej bazie z automatycznym rollbackiem (dwupoziomowa transakcja), wybór bazy `[TestDatabase]` (`nunit_default`/`nunit_ui`/`nunit_premiumui`), cykl życia (`ClassSetup`/`TestSetup`), `Session`/`ConfigSession`/`Context`, `InTransaction`/`SaveDispose`, podmiana DI (`ConfigureLoginServices`), asercje `AwesomeAssertions`, testy SQL (`SqlTraceInfo`), konwencje: nazewnictwo `Should_..._When_...` + prefiks grupy, `[Description]`, struktura AAA | [references/integration-tests.md](references/integration-tests.md) |
 
 ## Nowy dodatek od zera (CLI)
 
@@ -183,8 +186,13 @@ Pełna dokumentacja (typy sesji edycyjna / readonly / konfiguracyjna, transakcje
 
 Moduł grupuje logicznie powiązane tabele. **Nie ma odwzorowania w bazie danych.**
 
+**Preferowany odczyt modułu to metoda rozszerzająca `session.GetX()` (generowanymi z `business.xml`, także dla modułów dodatków). ** Wariant
+`Module.GetInstance(ISessionable)` stosuj tylko, gdy nie masz dostępu do property `Session`.
+Nie używaj ogólnego `session.Get<TModule>()` ani `session.Modules[...]` — zasada
+[§14.4 w safe-code.md](references/safe-code.md).
+
 ```csharp
-// Dostęp do modułu - extension method (zalecane)
+// Dostęp do modułu - extension method (preferowane)
 var tm = session.GetTowary();
 var hm = session.GetHandel();
 var crm = session.GetCRM();
