@@ -71,7 +71,7 @@ Algorytm:
 
 ## Wymagania
 
-- .NET SDK (8.0+)
+- .NET SDK 10
 - `dotnet-script`:
   ```bash
   dotnet tool install -g dotnet-script
@@ -168,14 +168,14 @@ Pełna inwentaryzacja:
 
 ```bash
 dotnet script ~/.claude/skills/soneta-programming/scripts/scan-workers.csx \
-    -- ./bin/Debug/net8.0
+    -- ./bin/Debug/net10.0
 ```
 
 Tylko workery przypięte do `DokumentHandlowy`:
 
 ```bash
 dotnet script ~/.claude/skills/soneta-programming/scripts/scan-workers.csx \
-    -- ./bin/Debug/net8.0 DokumentHandlowy
+    -- ./bin/Debug/net10.0 DokumentHandlowy
 ```
 
 ### Format wyjścia: JSON

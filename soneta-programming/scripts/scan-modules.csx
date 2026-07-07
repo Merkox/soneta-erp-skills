@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp;
 if (Args.Count < 1)
 {
     Console.Error.WriteLine("Użycie: dotnet script scan-modules.csx -- <KatalogDll>");
-    Console.Error.WriteLine("Przykład: dotnet script scan-modules.csx -- ./bin/Debug/net8.0");
+    Console.Error.WriteLine("Przykład: dotnet script scan-modules.csx -- ./bin/Debug/net10.0");
     return 1;
 }
 

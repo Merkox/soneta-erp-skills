@@ -28,7 +28,7 @@ Na końcu, po zamknięciu etapów, generujesz dokument **TODO** z kolejnymi krok
 Etap 1 (Wizja) nie ma zależności technicznych — prowadź go zawsze. Etapy 2–3 opierają się na inwentaryzacji modelu danych platformy narzędziem `scan-modules` (patrz sekcja „Dane referencyjne"), które wymaga:
 
 - skompilowanych bibliotek platformy Soneta — katalog z plikami `*.dll` (u użytkownika zwykle `~/d/dev/bin/debug`),
-- .NET SDK 8.0+ oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
+- .NET SDK 10 oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
 
 Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu), wykonaj Etap 1 normalnie, a inwentaryzację danych zapisz jako **otwartą kwestię blokującą** dla Etapu 2 — nie zgaduj istniejących struktur.
 
