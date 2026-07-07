@@ -204,8 +204,10 @@ konieczne (testy wielowątkowe, testy blokad optimistic-lock między loginami).
 | `Login` | login bazy testowej |
 | `Database` | obiekt bazy (m.in. `StartSqlTraceInfo`) |
 
-Sesje są gotowe do użycia — moduły pobierasz standardowo: `Session.GetTowary()`,
-`Session.GetHandel()`, `ConfigSession.GetBusiness()` itd.
+Sesje są gotowe do użycia — moduły pobieraj **wyłącznie metodami rozszerzającymi** `GetX()`
+(generowanymi z `business.xml`, także dla modułów dodatków): `Session.GetTowary()`,
+`Session.GetHandel()`, `ConfigSession.GetBusiness()` itd. — zasada
+[safe-code.md §14.4](safe-code.md).
 
 > `ConfigEditSession` jest redundantne względem `ConfigSession` (zwraca to samo) — **nie stosuj go**,
 > używaj `ConfigSession`.

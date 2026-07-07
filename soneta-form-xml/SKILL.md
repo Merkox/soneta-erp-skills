@@ -319,6 +319,10 @@ obok kolumn `Field`. Mimo zagnieżdżenia w XML taki `Flow` działa na poziomie 
 pasek parametrów listy. Dzięki temu filtr jest **zarządzany przez organizator listy** i tworzy
 z listą jeden spójny element (zamiast luźnego `Flow` postawionego nad gridem).
 
+**Etykiety pól filtrujących umieszczaj na górze, nad polem** (`Class="LabelTop"`) — niezależnie od
+typu formularza (nawet gdy poza filtrem obowiązuje domyślny `LabelLeft`; o pozycji etykiet ogólnie
+patrz sekcja „Pozycja etykiety względem pola").
+
 Są **dwa sposoby** wskazania, skąd filtr czyta/zapisuje wartości:
 
 **1. Filtry w obiekcie kontekstu (dominujący wzorzec w programie).** `DataContext="{Context}"`,
@@ -560,6 +564,19 @@ Długość etykiet (`CaptionHtml`) i obecność opisów dobieraj do **częstotli
   wartości i to, by na ekranie mieściło się ich dużo (mniej przewijania i przełączania między
   zakładkami). Użytkownik zna te pola z codziennej pracy, więc rozwlekłe etykiety tylko zabierają
   miejsce. Priorytetem jest **zwięzłość i gęstość danych**.
+
+### Pozycja etykiety względem pola — `LabelLeft` vs `LabelTop`
+
+Na zakładkach formularzy obiektów **generalną zasadą jest umieszczanie etykiety po lewej stronie** pola
+edycyjnego (`Class="LabelLeft"`). Jest to wartość **domyślna** dla formularzy — jeśli nie ustawisz nic
+innego, obowiązuje układ z etykietą po lewej.
+
+Wyjątki, w których etykieta trafia **na górę, nad pole edycyjne** (`Class="LabelTop"`):
+
+- **Formularze aplikacji pulpitowej** uruchamianej dla operatorów pulpitowych — tu `LabelTop` jest
+  wartością **domyślną**: etykiety umieszczamy nad polami edycyjnymi.
+- **Pola filtrujące listy** (pasek parametrów `Flow Class="DataBar"`) — patrz sekcja
+  „Pasek filtra listy".
 
 ### Wizualna weryfikacja formularza (buscall)
 

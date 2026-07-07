@@ -184,8 +184,13 @@ Pełna dokumentacja (typy sesji edycyjna / readonly / konfiguracyjna, transakcje
 
 Moduł grupuje logicznie powiązane tabele. **Nie ma odwzorowania w bazie danych.**
 
+**Preferowany odczyt modułu to metoda rozszerzająca `session.GetX()` (generowanymi z `business.xml`, także dla modułów dodatków). ** Wariant
+`Module.GetInstance(ISessionable)` stosuj tylko, gdy nie masz dostępu do property `Session`.
+Nie używaj ogólnego `session.Get<TModule>()` ani `session.Modules[...]` — zasada
+[§14.4 w safe-code.md](references/safe-code.md).
+
 ```csharp
-// Dostęp do modułu - extension method (zalecane)
+// Dostęp do modułu - extension method (preferowane)
 var tm = session.GetTowary();
 var hm = session.GetHandel();
 var crm = session.GetCRM();
