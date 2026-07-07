@@ -17,9 +17,9 @@ var includeRelated = Args.Any(a => a == "--related");
 if (positional.Count < 1)
 {
     Console.Error.WriteLine("Użycie: dotnet script scan-workers.csx -- <KatalogDll> [<NazwaTypuDanych>] [--related]");
-    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net8.0");
-    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net8.0 DokumentHandlowy");
-    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net8.0 Pracownik --related");
+    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net10.0");
+    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net10.0 DokumentHandlowy");
+    Console.Error.WriteLine("Przykład: dotnet script scan-workers.csx -- ./bin/Debug/net10.0 Pracownik --related");
     return 1;
 }
 

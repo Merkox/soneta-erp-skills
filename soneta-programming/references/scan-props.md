@@ -62,7 +62,7 @@ Algorytm:
 
 ## Wymagania
 
-- .NET SDK (8.0+)
+- .NET SDK 10
 - `dotnet-script`:
   ```bash
   dotnet tool install -g dotnet-script
@@ -79,7 +79,7 @@ dotnet script ~/.claude/skills/soneta-programming/scripts/scan-props.csx \
 
 ```bash
 dotnet script ~/.claude/skills/soneta-programming/scripts/scan-props.csx \
-    -- DokumentHandlowy ./bin/Debug/net8.0
+    -- DokumentHandlowy ./bin/Debug/net10.0
 ```
 
 ### Przykładowe wyjście

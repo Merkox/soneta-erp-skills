@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.CSharp;
 if (Args.Count < 2)
 {
     Console.Error.WriteLine("Użycie: dotnet script scan-props.csx -- <NazwaRekordu> <KatalogDll>");
-    Console.Error.WriteLine("Przykład: dotnet script scan-props.csx -- DokumentHandlowy ./bin/Debug/net8.0");
+    Console.Error.WriteLine("Przykład: dotnet script scan-props.csx -- DokumentHandlowy ./bin/Debug/net10.0");
     return 1;
 }
 
