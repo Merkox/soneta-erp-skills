@@ -23,6 +23,15 @@ Proces składa się z trzech etapów o rosnącym poziomie szczegółowości. Ten
 
 Na końcu, po zamknięciu etapów, generujesz dokument **TODO** z kolejnymi krokami implementacji.
 
+## Wymagania
+
+Etap 1 (Wizja) nie ma zależności technicznych — prowadź go zawsze. Etapy 2–3 opierają się na inwentaryzacji modelu danych platformy narzędziem `scan-modules` (patrz sekcja „Dane referencyjne"), które wymaga:
+
+- skompilowanych bibliotek platformy Soneta — katalog z plikami `*.dll` (u użytkownika zwykle `~/d/dev/bin/debug`),
+- .NET SDK 8.0+ oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
+
+Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu), wykonaj Etap 1 normalnie, a inwentaryzację danych zapisz jako **otwartą kwestię blokującą** dla Etapu 2 — nie zgaduj istniejących struktur.
+
 ## Jak prowadzić rozmowę
 
 Proces jest interaktywny. **Nie generuj całego dokumentu naraz** — pracuj etap po etapie:
