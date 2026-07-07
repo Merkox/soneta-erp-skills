@@ -118,6 +118,14 @@ throw new RowException(this, "Pole jest wymagane".Translate());
 throw new RowException(this, "Pole {0} jest wymagane".TranslateFormat(nameof(Nazwa)));
 ```
 
+### 5.3 Reguły spójności jako weryfikatory, nie ad-hoc `if` przy zapisie
+
+Trwałe reguły spójności danych (pole wymagane, zgodność pól, unikalność) modeluj jako
+**weryfikatory** uzbrajane na zmianę pól-źródeł — patrz [verifiers.md](verifiers.md). Weryfikator
+typu `Error` blokuje `Save()` automatycznie i w każdym punkcie wejścia. Wyjątek `VerifiersException`
+z `Save()` **nie może być połknięty** (ta sama zasada co [§4.2](#42-nie-ignoruj-wyjątku-z-save)
+i [§9.1](#91-nie-łap-exception-bez-konkretu)) — połknięcie = zapis niespójnych danych bez sygnału.
+
 ---
 
 ## 6. Filtrowanie po stronie serwera

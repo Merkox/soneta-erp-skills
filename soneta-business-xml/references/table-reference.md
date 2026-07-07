@@ -253,8 +253,11 @@ Walidator pola wywoływany przy zapisie.
 | `name` | ✓ | string | Pełna nazwa klasy weryfikatora |
 | `onadded` | | boolean | `true` = tylko przy dodawaniu |
 
-> `business.xml` deklaruje jedynie nazwę weryfikatora — **kod** weryfikatora pisze się po
-> stronie klasy obiektu biznesowego (skill `/soneta-programming`).
+> `business.xml` deklaruje jedynie nazwę weryfikatora — **kod** weryfikatora (klasa dziedzicząca
+> po `Verifier`/`RowVerifier<T>`/`ColVerifier<T>`, poziomy `Error`/`Warning`/`Information`,
+> uzbrajanie na zmianę pola) pisze się po stronie klasy obiektu biznesowego: skill
+> `/soneta-programming`, `references/verifiers.md`. Kolumna z elementem `<verifier>` staje się
+> **źródłem** uzbrajającym weryfikator; `onadded="true"` ogranicza to do dodania wiersza.
 
 ---
 
