@@ -446,6 +446,7 @@ Po uzupełnieniu `Email` kolejne uzbrojenie sprawi, że przy najbliższej walida
 
 - [safe-code.md](safe-code.md) — §5 „Walidacja danych" i §9 „Obsługa wyjątków": nie połykaj `VerifiersException` z `Save()`.
 - [session-login.md](session-login.md) — `Session.Save()` / transakcje; tu odpalana jest walidacja błędów przed zapisem.
+- [events.md](events.md) — bliźniacza kolekcja sesyjna (`Session.Events`/`ServerEvents`): ten sam model transakcyjności i dedup po `Equals`/`GetHashCode`; do odraczania ciężkich przeliczeń zamiast liczenia ich przy każdej zmianie pola.
 - [features.md](features.md) — cechy wymagane korzystają z tego samego mechanizmu (weryfikator „cecha wymagana").
 - **Skill soneta-business-xml** — deklaratywna rejestracja: element `<verifier>` przy kolumnie, atrybut `onadded` (`references/table-reference.md`).
 - **Skill soneta-form-xml** — prezentacja komunikatów weryfikatorów w formularzu (błędy/ostrzeżenia przy polach).

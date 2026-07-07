@@ -317,7 +317,7 @@ using (var session = login.CreateSession(readOnly: false, config: false, name: "
 ### Commit() vs CommitUI()
 
 - `Commit()` - używaj w **kodzie biznesowym** (worker bez interakcji UI, kod uruchamiany w tle, testy, kod konsolowy).
-- `CommitUI()` - używaj w **kodzie UI** (worker uruchamiany z menu Czynności, extender, Command). Dodatkowo wymusza odświeżenie powiązanych widoków.
+- `CommitUI()` - używaj w **kodzie UI** (worker uruchamiany z menu Czynności, extender, Command). Dodatkowo wymusza odświeżenie powiązanych widoków **oraz odpala wszystkie zarejestrowane eventy sesyjne** (`Session.Events.Invoke()`) — czego samo `Commit()` nie robi. Odraczanie ciężkich przeliczeń przez eventy: [events.md](events.md).
 
 ```csharp
 [Action("Aktualizuj")]
