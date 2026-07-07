@@ -23,22 +23,22 @@ Dla każdego obiektu danych:
 
 Przykład: dokument jest numerowany, ma datę wprowadzenia i zatwierdzenia, stany (bufor/zatwierdzony/odrzucony), jest powiązany z pracownikiem i przypisany do definicji dokumentu określającej zasady numeracji, tytuł, warunki akceptacji.
 
-Na podstawie `references/tables.md`:
-- odwołuj się do istniejących tabel po nazwach (kolumna „Tabela") i obiektach (kolumna „Obiekt"),
-- wykorzystuj hierarchię nadrzędności (kolumna „Nadrzędny") jako wzorzec relacji inner,
-- rozróżniaj tabele konfiguracyjne i operacyjne (kolumna „Konfiguracyjna") — ten sam podział stosuj w nowym module,
-- identyfikuj istniejące słowniki i kartoteki zamiast tworzyć duplikaty.
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
+- odwołuj się do istniejących tabel po nazwach (`TableType`) i obiektach biznesowych (`RowType`),
+- wykorzystuj hierarchię `Guided` (`root` / `child: Pole→TypRow`) jako wzorzec relacji inner,
+- rozróżniaj tabele konfiguracyjne i operacyjne (kolumna `Konfig`) — ten sam podział stosuj w nowym module,
+- identyfikuj istniejące słowniki i kartoteki zamiast tworzyć duplikaty; do pól wybranego rekordu użyj `scan-props`.
 
 ### 3.2. Diagram relacji
 Graficzne przedstawienie relacji (Mermaid lub tabela):
 - Relacje 1:N (inner) — tabele szczegółów
 - Relacje N:1 (lookup) — odwołania do słowników i kartotek
-- Relacje do tabel spoza modułu (z nazwą modułu źródłowego, np. `Kontrahenci` z CRM, `Pracownicy` z Kadry — nazwy z `references/tables.md`)
+- Relacje do tabel spoza modułu (z nazwą modułu źródłowego, np. `Kontrahent` z CRM, `Pracownik` z Kadry — nazwy z inwentaryzacji `scan-modules`)
 
 ### 3.3. Relacje do danych platformy
-Dla każdej relacji do danych spoza modułu wskaż na podstawie `references/tables.md`:
+Dla każdej relacji do danych spoza modułu wskaż na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
 - nazwę modułu platformy Soneta (np. Handel, Kadry, Ksiega, CRM, Towary, Kasa),
-- konkretną tabelę i obiekt biznesowy (np. tabela `Kontrahenci`, obiekt `Kontrahent` z CRM),
+- konkretny `TableType` i `RowType` (np. tabela `Kontrahenci`, obiekt `Kontrahent` z CRM),
 - typ relacji (lookup, inner, powiązanie logiczne),
 - cel użycia danych w kontekście projektowanego modułu.
 

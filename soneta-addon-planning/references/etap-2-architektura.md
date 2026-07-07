@@ -13,7 +13,7 @@ Cel: określić **jak** moduł będzie zbudowany — role, dane, interfejs, inte
 - Jak powinna wyglądać struktura menu?
 
 **Trzecia tura — integracje i przyszłość:**
-- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(w tym momencie przeczytaj odpowiednie moduły z `references/tables.md`)*
+- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(w tym momencie zeskanuj moduły narzędziem `scan-modules` ze skilla `/soneta-programming` — patrz sekcja „Dane referencyjne" w SKILL.md)*
 - Czy moduł integruje się z systemami zewnętrznymi?
 - Czy klient ma dane do migracji?
 
@@ -28,18 +28,18 @@ Elementy konfigurowalne: definicje dokumentów, słowniki, ustawienia, opcje pro
 ### 2.3. Kluczowe struktury danych
 Najważniejsze struktury danych — dokumenty, kartoteki. Bez szczegółowej zawartości (to Etap 3). Ogólny diagram relacji między głównymi obiektami.
 
-Na podstawie `references/tables.md` sprawdź:
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md) sprawdź:
 - czy potrzebne struktury już istnieją w platformie (unikanie duplikacji),
-- jakie tabele nadrzędne mogą być wykorzystane,
-- jakie wzorce projektowe stosują istniejące moduły (podział konfiguracyjne/operacyjne, definicje dokumentów, obiekty główne Guided i szczegółowe w relacji do nich, datapacki).
+- jakie tabele nadrzędne (`Guided = root`) mogą być wykorzystane,
+- jakie wzorce projektowe stosują istniejące moduły (podział konfiguracyjne/operacyjne wg kolumny `Konfig`, definicje dokumentów, korzenie `Guided` i szczegóły w relacji do nich, datapacki).
 
 ### 2.4. Struktura menu i elementy interfejsu
 Foldery, hierarchia list w menu głównym, grupowanie funkcjonalne. Wyróżnij elementy interfejsu kluczowe dla sukcesu produktu (np. w kontrolingu — miejsce do budowania zapytań i warunków na wzór arkusza, AND/OR).
 
 ### 2.5. Relacje z modułami platformy Soneta
-Na podstawie `references/tables.md`:
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
 - wskaż konkretne moduły, z którymi nowy moduł współpracuje (np. Handel, Kadry, Ksiega, CRM),
-- wymień konkretne tabele i obiekty, do których się odwołuje (relacje lookup/inner),
+- wymień konkretne `RowType`/`TableType`, do których się odwołuje (relacje lookup/inner),
 - określ, czy realizacja wymaga rozszerzenia istniejących tabel (nowe kolumny lub relacje do już istniejących obiektów).
 
 ### 2.6. Relacje z innymi systemami

@@ -45,17 +45,34 @@ Każdy etap zapisz jako osobny plik Markdown w katalogu roboczym projektu (domy�
 
 Przed utworzeniem katalogu upewnij się z użytkownikiem co do nazwy modułu i lokalizacji.
 
-## Dane referencyjne — tabele platformy Soneta
+## Dane referencyjne — moduły i tabele platformy Soneta
 
-Plik `references/tables.md` zawiera kompletny model danych platformy: 36 modułów, tabele, obiekty biznesowe (klasy C#) i relacje. **Jest bardzo duży — nie czytaj go w całości.** Na jego górze znajduje się indeks modułów; wybierz z niego moduły istotne dla dodatku i przeczytaj tylko ich sekcje (nagłówki `# Moduł: Nazwa`, do namierzenia przez `grep -n '^# Moduł:' references/tables.md`).
+Aby osadzić plan w istniejącym modelu danych, potrzebujesz aktualnej listy modułów i tabel platformy. **Nie używaj statycznych snapshotów** (starzeją się) — zinwentaryzuj strukturę na żywo z bibliotek narzędziem `scan-modules` ze skilla `/soneta-programming` (dokument `scan-modules.md`). Czyta metadane skompilowanych DLL-ek przez Roslyn, więc odzwierciedla dokładnie tę wersję platformy i dodatków, z którą pracuje użytkownik.
 
-Korzystaj z niego, aby:
+Uruchomienie (katalog z DLL-kami platformy — u użytkownika zwykle `~/d/dev/bin/debug`; jeśli nie znasz, zapytaj lub potraktuj jako otwartą kwestię):
+
+```bash
+dotnet script ~/.claude/skills/soneta-programming/scripts/scan-modules.csx -- <KatalogDll> > modules.md
+```
+
+Wynik zapisz do pliku roboczego (`modules.md`) i **czytaj selektywnie** — jest duży (kilkadziesiąt modułów, >1000 tabel). Namierzaj moduły przez `grep -n '^## ' modules.md`, potem czytaj tylko istotne sekcje. Kolumny wyniku:
+
+| Kolumna | Znaczenie | Użycie w planie |
+|---------|-----------|-----------------|
+| `RowType` | klasa biznesowa (bez sufiksu `Row`) | obiekt, do którego się odwołujesz w kodzie/relacjach |
+| `TableType` | nazwa tabeli (`Session.Tables.*`) | fizyczna tabela w bazie |
+| `Guided` | `root` = korzeń drzewa obiektów; `child: Pole→TypRow` = tabela podrzędna; puste = subrow | wzorzec relacji nadrzędny-szczegółowy (inner) |
+| `Konfig` | `konfig` = tabela konfiguracyjna | podział konfiguracyjne/operacyjne — stosuj ten sam w nowym module |
+| `Interfaces` | relacje interfejsowe (`IXxx`) | punkty podpięcia do istniejących tabel |
+| `Tytuł` / `Opis` | etykieta i przeznaczenie tabeli | zrozumienie, czy struktura pokrywa potrzebę |
+
+Korzystaj z inwentaryzacji, aby:
 - sprawdzić, czy potrzebne struktury już istnieją (unikanie duplikacji),
-- wskazać konkretne tabele i obiekty, do których nowy moduł będzie się odwoływać,
-- rozpoznać wzorce projektowe (podział konfiguracyjne/operacyjne, hierarchia nadrzędny-szczegółowy, definicje dokumentów, obiekty Guided i datapacki),
+- wskazać konkretne `RowType`/`TableType`, do których nowy moduł będzie się odwoływać,
+- rozpoznać wzorce projektowe (podział konfiguracyjne/operacyjne, korzenie `Guided` i datapacki, relacje interfejsowe),
 - zidentyfikować moduły współpracujące.
 
-Najbardziej przydaje się w **Etapie 2** (sekcje 2.3, 2.5) i **Etapie 3** (sekcje 3.1–3.3). Gdy użytkownik wspomni o integracji z istniejącymi danymi (pracownicy, kontrahenci, towary), przeczytaj odpowiedni moduł i wskaż konkretne tabele i obiekty po nazwach.
+Najbardziej przydaje się w **Etapie 2** (sekcje 2.3, 2.5) i **Etapie 3** (sekcje 3.1–3.3) — tam skanujesz DLL-ki i sięgasz do konkretnych modułów. Gdy użytkownik wspomni o integracji z istniejącymi danymi (pracownicy, kontrahenci, towary), zeskanuj strukturę i wskaż konkretne `RowType`/`TableType` po nazwach. Do drążenia pól wybranego rekordu użyj `scan-props` z tego samego skilla `/soneta-programming`.
 
 ## Otwarte kwestie
 
@@ -119,6 +136,8 @@ Po zamknięciu wszystkich etapów wygeneruj dokument TODO z kolejnymi krokami:
 - [ ] Dokumentacja użytkownika i techniczna
 
 ## Powiązanie z innymi skillami
+
+Już na etapie planowania (Etap 2 i 3) korzystasz z **`/soneta-programming`** — narzędzia `scan-modules` i `scan-props` inwentaryzują istniejący model danych platformy (patrz sekcja „Dane referencyjne").
 
 Po zatwierdzeniu planu projektu:
 1. **`/soneta-business-xml`** — generowanie pliku business.xml na podstawie modelu danych z Etapu 3 (sekcje 3.1–3.3).
