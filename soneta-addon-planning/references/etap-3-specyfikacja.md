@@ -25,7 +25,7 @@ Dla każdego obiektu danych:
 
 Przykład: dokument jest numerowany, ma datę wprowadzenia i zatwierdzenia, stany (bufor/zatwierdzony/odrzucony), jest powiązany z pracownikiem i przypisany do definicji dokumentu określającej zasady numeracji, tytuł, warunki akceptacji.
 
-Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.md`):
 - odwołuj się do istniejących tabel po nazwach (`TableType`) i obiektach biznesowych (`RowType`),
 - wykorzystuj hierarchię `Guided` (`root` / `child: Pole→TypRow`) jako wzorzec relacji inner,
 - rozróżniaj tabele konfiguracyjne i operacyjne (kolumna `Konfig`) — ten sam podział stosuj w nowym module,
@@ -38,7 +38,7 @@ Graficzne przedstawienie relacji (Mermaid lub tabela):
 - Relacje do tabel spoza modułu (z nazwą modułu źródłowego, np. `Kontrahent` z CRM, `Pracownik` z Kadry — nazwy z inwentaryzacji `scan-modules`)
 
 ### 3.3. Relacje do danych platformy
-Dla każdej relacji do danych spoza modułu wskaż na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
+Dla każdej relacji do danych spoza modułu wskaż na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.md`):
 - nazwę modułu platformy Soneta (np. Handel, Kadry, Ksiega, CRM, Towary, Kasa),
 - konkretny `TableType` i `RowType` (np. tabela `Kontrahenci`, obiekt `Kontrahent` z CRM),
 - typ relacji (lookup, inner, powiązanie logiczne),

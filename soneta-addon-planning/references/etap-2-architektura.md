@@ -13,7 +13,7 @@ Cel: określić **jak** moduł będzie zbudowany — role, dane, interfejs, inte
 - Jak powinna wyglądać struktura menu?
 
 **Trzecia tura — integracje i przyszłość:**
-- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(w tym momencie zeskanuj moduły narzędziem `scan-modules` ze skilla `/soneta-programming` — patrz sekcja „Dane referencyjne" w SKILL.md)*
+- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(w tym momencie zeskanuj moduły narzędziem `scan-modules` — patrz `dane-referencyjne.md`)*
 - Czy moduł integruje się z systemami zewnętrznymi?
 - Czy klient ma dane do migracji?
 
@@ -28,7 +28,7 @@ Elementy konfigurowalne: definicje dokumentów, słowniki, ustawienia, opcje pro
 ### 2.3. Kluczowe struktury danych
 Najważniejsze struktury danych — dokumenty, kartoteki. Bez szczegółowej zawartości (to Etap 3). Ogólny diagram relacji między głównymi obiektami.
 
-Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md) sprawdź:
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.md`) sprawdź:
 - czy potrzebne struktury już istnieją w platformie (unikanie duplikacji),
 - jakie tabele nadrzędne (`Guided = root`) mogą być wykorzystane,
 - jakie wzorce projektowe stosują istniejące moduły (podział konfiguracyjne/operacyjne wg kolumny `Konfig`, definicje dokumentów, korzenie `Guided` i szczegóły w relacji do nich, datapacki).
@@ -37,7 +37,7 @@ Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md) sprawdź:
 Foldery, hierarchia list w menu głównym, grupowanie funkcjonalne. Wyróżnij elementy interfejsu kluczowe dla sukcesu produktu (np. w kontrolingu — miejsce do budowania zapytań i warunków na wzór arkusza, AND/OR).
 
 ### 2.5. Relacje z modułami platformy Soneta
-Na podstawie inwentaryzacji modułów (`scan-modules`, patrz SKILL.md):
+Na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.md`):
 - wskaż konkretne moduły, z którymi nowy moduł współpracuje (np. Handel, Kadry, Ksiega, CRM),
 - wymień konkretne `RowType`/`TableType`, do których się odwołuje (relacje lookup/inner),
 - określ, czy realizacja wymaga rozszerzenia istniejących tabel (nowe kolumny lub relacje do już istniejących obiektów).
