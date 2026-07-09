@@ -39,18 +39,29 @@ Dla definicji:
 - Klasa `ZgloszenieRecord` to techniczna struktura danych ORM — programista **jej nie pisze**
   ani nie używa wprost.
 
+Każda z tych dwóch klas ląduje w **osobnym pliku** (`Zgloszenie.cs`, `Zgloszenia.cs`) —
+jedna klasa najwyższego poziomu na plik. Stosuj **file-scoped namespace** (bez klamer):
+
 ```csharp
-namespace Soneta.Serwis {
+// Zgloszenie.cs
+namespace Firma.Serwis;
 
-    public class Zgloszenie : SerwisModule.ZgloszenieRow {
-        // logika biznesowa pojedynczego zgłoszenia
-    }
-
-    public class Zgloszenia : SerwisModule.ZgloszenieTable {
-        // metody wyszukiwania, stałe, Params
-    }
+public class Zgloszenie : SerwisModule.ZgloszenieRow {
+    // logika biznesowa pojedynczego zgłoszenia
 }
 ```
+
+```csharp
+// Zgloszenia.cs
+namespace Firma.Serwis;
+
+public class Zgloszenia : SerwisModule.ZgloszenieTable {
+    // metody wyszukiwania, stałe, Params
+}
+```
+
+> Przedrostek namespace bierze się z firmy tworzącej dodatek (`Firma.*`); `Soneta.*` jest
+> zarezerwowany dla modułów samego dostawcy platformy.
 
 > Klasa tabeli **nie musi** być `partial` ani `sealed` — to zwykła klasa dziedzicząca po
 > bazie. `partial` stosuje się tylko wtedy, gdy faktycznie dzielisz ją na kilka plików.
@@ -174,30 +185,33 @@ public enum TypZgloszenia {
 [assembly: BusinessRow(typeof(Zgloszenie.NaprawaType),    TypZgloszenia.Naprawa)]
 [assembly: BusinessRow(typeof(Zgloszenie.PrzegladType),   TypZgloszenia.Przeglad)]
 
-namespace Soneta.Serwis {
+namespace Firma.Serwis;
 
-    public abstract class Zgloszenie : SerwisModule.ZgloszenieRow {
+public abstract class Zgloszenie : SerwisModule.ZgloszenieRow {
 
-        protected Zgloszenie(TypZgloszenia typ) : base(typ) { }
-        protected Zgloszenie(RowCreator creator) : base(creator) { }
+    protected Zgloszenie(TypZgloszenia typ) : base(typ) { }
+    protected Zgloszenie(RowCreator creator) : base(creator) { }
 
-        public class ReklamacjaType : Zgloszenie {
-            [DefaultConstructor] public ReklamacjaType() : base(TypZgloszenia.Reklamacja) { }
-            public ReklamacjaType(RowCreator creator) : base(creator) { }
-        }
+    public class ReklamacjaType : Zgloszenie {
+        [DefaultConstructor] public ReklamacjaType() : base(TypZgloszenia.Reklamacja) { }
+        public ReklamacjaType(RowCreator creator) : base(creator) { }
+    }
 
-        public class NaprawaType : Zgloszenie {
-            [DefaultConstructor] public NaprawaType() : base(TypZgloszenia.Naprawa) { }
-            public NaprawaType(RowCreator creator) : base(creator) { }
-        }
+    public class NaprawaType : Zgloszenie {
+        [DefaultConstructor] public NaprawaType() : base(TypZgloszenia.Naprawa) { }
+        public NaprawaType(RowCreator creator) : base(creator) { }
+    }
 
-        public class PrzegladType : Zgloszenie {
-            [DefaultConstructor] public PrzegladType() : base(TypZgloszenia.Przeglad) { }
-            public PrzegladType(RowCreator creator) : base(creator) { }
-        }
+    public class PrzegladType : Zgloszenie {
+        [DefaultConstructor] public PrzegladType() : base(TypZgloszenia.Przeglad) { }
+        public PrzegladType(RowCreator creator) : base(creator) { }
     }
 }
 ```
+
+> Podtypy selector'a to typy **zagnieżdżone** w klasie `abstract` — należą do jednego pliku
+> klasy nadrzędnej (`Zgloszenie.cs`). Zasada „jedna klasa — jeden plik" dotyczy typów
+> najwyższego poziomu, nie zagnieżdżonych.
 
 Przy odczycie wiersza ORM patrzy na wartość kolumny-selector'a i buduje instancję klasy
 zarejestrowanej dla tej wartości. Każdy podtyp może mieć własną logikę (metody, walidacje).
@@ -240,6 +254,9 @@ Atrybut **assembly-level** `[NewRow]` decyduje, które typy operator może **dod
 4. Jeśli jest **selector**: enum (lub `int`) z jawnymi wartościami, `abstract` baza, podtypy
    z `[DefaultConstructor]`, rejestracja `[assembly: BusinessRow]`.
 5. `[assembly: NewRow(...)]` dla typów dostępnych w menu „Nowy" (pomiń, by zablokować dodawanie z UI).
+6. Każdą klasę najwyższego poziomu w **osobnym pliku**, z **file-scoped namespace** i nowoczesnymi
+   konstrukcjami C# .NET 10 (primary constructors przy jednym konstruktorze) — patrz SKILL.md,
+   sekcja „Standardy kodu C# (.NET 10)".
 
 > Perspektywę kodu/runtime tego samego mechanizmu (jak ORM materializuje obiekty, wzorce
 > użycia w logice biznesowej) opisuje skill `/soneta-programming` (artykuł row-types.md).

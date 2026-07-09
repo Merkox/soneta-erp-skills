@@ -9,6 +9,7 @@ Poziom szczegółowości jest ogólny — chodzi o założenia, zakres i kluczow
 Zacznij od ogólnej idei, potem doprecyzowuj. Zadawaj 2–4 pytania na raz i dostosowuj kolejne do odpowiedzi.
 
 **Pierwsza tura — zrozumienie idei:**
+- Jaka firma tworzy dodatek? (nazwa producenta — posłuży za przedrostek przestrzeni nazw i projektów, patrz „Przygotowanie" w SKILL.md; zapytaj, jeśli nie ustalono tego wcześniej)
 - Co jest głównym celem modułu? Jaki problem rozwiązuje?
 - Kto jest docelowym użytkownikiem? (mała/średnia/duża firma, branża)
 
@@ -52,7 +53,7 @@ Podział na:
 - **Ważne (should-have)** — istotne, ale moduł może działać bez nich w v1.
 - **Opcjonalne (nice-to-have)** — kolejne wersje.
 
-Te funkcjonalności będą rozwijane w Etapie 2 (architektura) i Etapie 3 (specyfikacja szczegółowa, sekcje 3.1–3.13).
+Te funkcjonalności będą rozwijane w Etapie 2 (architektura) i Etapie 3 (specyfikacja szczegółowa, sekcje 3.1–3.15).
 
 ### 1.5. Pokrycie przez standardowe funkcjonalności platformy
 Wynik weryfikacji z sekcji „Weryfikacja pokrycia przez standard platformy". Dla kluczowych funkcjonalności z sekcji 1.4 wskaż, na ile realizuje je już standard:

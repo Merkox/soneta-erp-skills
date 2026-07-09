@@ -13,10 +13,11 @@ description: >
 
 Skill prowadzi **interaktywny** proces planowania nowego modułu dla platformy Soneta (programy enova365 i Triva — oparte na tej samej platformie technologicznej). Efektem jest dokumentacja projektowa, która w kolejnych krokach zasila skille `/soneta-business-xml` (model danych), `/soneta-form-xml` (formularze) i `/soneta-programming` (logika).
 
-Proces składa się z trzech etapów o rosnącym poziomie szczegółowości. Ten plik jest mapą procesu — szczegółowe specyfikacje sekcji każdego etapu są w plikach `references/`, które czytasz dopiero, gdy dochodzisz do danego etapu.
+Proces poprzedza krok wstępny (Etap 0 — przygotowanie), a następnie składa się z trzech etapów o rosnącym poziomie szczegółowości. Ten plik jest mapą procesu — szczegółowe specyfikacje sekcji każdego etapu są w plikach `references/`, które czytasz dopiero, gdy dochodzisz do danego etapu.
 
 | Etap | Zakres | Odbiorca | Szczegóły |
 |------|--------|----------|-----------|
+| **0. Przygotowanie** | nazwa firmy, repozytorium Git | — (krok wstępny) | `references/etap-0-przygotowanie.md` |
 | **1. Wizja i kontekst biznesowy** | co, dla kogo, dlaczego | decydenci, marketing, sprzedaż | `references/etap-1-wizja.md` |
 | **2. Architektura modułu** | jak — role, dane, UI, integracje | zespół projektowy | `references/etap-2-architektura.md` |
 | **3. Specyfikacja szczegółowa** | szczegóły implementacyjne obiektów | zespół implementacyjny i AI | `references/etap-3-specyfikacja.md` |
@@ -32,10 +33,15 @@ Etap 1 (Wizja) prowadź zawsze. Jego rdzeń (idea, korzyści, funkcjonalności) 
 
 Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu), wykonaj Etap 1 normalnie, a weryfikację pokrycia (sekcja 1.5) oraz inwentaryzację danych zapisz jako **otwartą kwestię blokującą** dla Etapu 2 — nie zgaduj istniejących struktur.
 
+## Przygotowanie (Etap 0)
+
+Zanim przejdziesz do Etapu 1, wykonaj krok wstępny **niezależny od treści modułu**: ustal nazwę firmy tworzącej dodatek (przedrostek namespace/projektów) i zadbaj o repozytorium Git w katalogu roboczym. Szczegóły i gotowy `.gitignore`: `references/etap-0-przygotowanie.md`. To krok bez osobnego dokumentu — ale jego ustalenia warunkują cały dalszy proces.
+
 ## Jak prowadzić rozmowę
 
 Proces jest interaktywny. **Nie generuj całego dokumentu naraz** — pracuj etap po etapie:
 
+0. **Zacznij od Etapu 0** — wykonaj krok wstępny (`references/etap-0-przygotowanie.md`): ustal nazwę firmy i zadbaj o repozytorium Git, zanim przejdziesz do Etapu 1.
 1. **Wczytaj etap** — gdy zaczynasz Etap N, przeczytaj `references/etap-N-*.md`. Plik zawiera pytania do zadania oraz szczegółową specyfikację sekcji tego etapu.
 2. **Zbierz informacje** — zacznij od ogólnej idei modułu (co chce osiągnąć, dla kogo, jaki problem rozwiązuje), potem doprecyzowuj pytaniami z pliku etapu.
 3. **Opracuj etap** — na podstawie odpowiedzi wygeneruj dokument etapu. Gdy czegoś brakuje, zadaj konkretne pytanie zamiast zgadywać (lub zapisz jako otwartą kwestię — patrz niżej).
@@ -54,7 +60,7 @@ Każdy etap zapisz jako osobny plik Markdown w katalogu roboczym projektu (domy�
 
 Przed utworzeniem katalogu upewnij się z użytkownikiem co do nazwy modułu i lokalizacji.
 
-## Dane referencyjne — moduły i tabele platformy Soneta
+## Dane referencyjne — moduły, tabele i foldery menu platformy Soneta
 
 Aby osadzić plan w istniejącym modelu danych, potrzebujesz aktualnej listy modułów i tabel platformy. **Nie używaj statycznych snapshotów** (starzeją się) — zinwentaryzuj strukturę na żywo z bibliotek narzędziem `scan-modules` ze skilla `/soneta-programming` (dokument `scan-modules.md`). Czyta metadane skompilowanych DLL-ek przez Roslyn, więc odzwierciedla dokładnie tę wersję platformy i dodatków, z którą pracuje użytkownik.
 
@@ -124,6 +130,10 @@ Nie zostawiaj nierozstrzygniętych założeń ukrytych w treści dokumentu — k
 4. **Bramka jakości** — nie przechodź do kolejnego etapu z otwartymi kwestiami *blokującymi* dla tego etapu. Kwestie nieblokujące można przenieść dalej, ale muszą pozostać widoczne.
 5. **Powiązanie z TODO** — „Zamknięcie otwartych kwestii" jest pozycją TODO; do implementacji nie wchodzimy z otwartymi kwestiami blokującymi.
 
+## Lokalizacja projektów kodu (etap implementacji)
+
+Dokumenty planistyczne (etapy, otwarte kwestie, TODO) trzymasz w podkatalogu planu — patrz „Zapis dokumentów". Natomiast gdy proces dojdzie do **budowania folderów projektów** (rusztowanie solucji dodatku — patrz skill `/soneta-programming`, `new-addon-cli.md`), twórz je **bezpośrednio w bieżącym katalogu roboczym**: plik solucji (`.sln`) oraz projekty (`Firma.NazwaModulu`, `Firma.NazwaModulu.UI`, `Firma.NazwaModulu.Tests`) mają leżeć w katalogu, w którym pracujesz, a nie w zagnieżdżonym podfolderze. Dzięki temu repozytorium Git założone na starcie (patrz „Przygotowanie") obejmuje solucję od razu. Nazwy projektów budujesz z ustalonej nazwy firmy (patrz „Przygotowanie").
+
 ## Dokument TODO
 
 Po zamknięciu wszystkich etapów wygeneruj dokument TODO z kolejnymi krokami:
@@ -135,19 +145,22 @@ Po zamknięciu wszystkich etapów wygeneruj dokument TODO z kolejnymi krokami:
 - [ ] Zamknięcie otwartych kwestii
 
 ### Implementacja
+- [ ] Rusztowanie solucji w bieżącym katalogu (projekty `Firma.NazwaModulu*`, → skill `/soneta-programming`, `new-addon-cli.md`)
 - [ ] Model danych — tabele, pola, relacje
 - [ ] Plik business.xml (→ skill `/soneta-business-xml`)
 - [ ] Struktura menu, listy, widoki
 - [ ] Formularze i zakładki (→ skill `/soneta-form-xml`)
 - [ ] Konfiguracja — słowniki, definicje, ustawienia
+- [ ] Weryfikatory — walidacja danych wprowadzanych przez operatora (→ skill `/soneta-programming`, `verifiers.md`)
 - [ ] Workery i czynności (→ skill `/soneta-programming`)
+- [ ] Algorytmy w transakcji serwerowej — logika zależna od równoległej pracy stanowisk (→ skill `/soneta-programming`, `events.md`)
 - [ ] Raporty i wydruki
 - [ ] Procesy Workflow
 - [ ] Wskaźniki i wykresy BI
 - [ ] Uprawnienia i role
 - [ ] Integracje z innymi systemami
 - [ ] Baza Demo i dane demonstracyjne
-- [ ] Testy integracyjne i interfejsowe
+- [ ] **Testy integracyjne** — dla każdego workera, każdego algorytmu obiektu biznesowego, każdego weryfikatora i każdej logiki w transakcji serwerowej (→ skill `/soneta-programming`, `integration-tests.md`)
 - [ ] Dokumentacja użytkownika i techniczna
 
 ## Powiązanie z innymi skillami
@@ -157,4 +170,9 @@ Już na etapie planowania (Etap 1 sekcja 1.5, a następnie Etap 2 i 3) korzystas
 Po zatwierdzeniu planu projektu:
 1. **`/soneta-business-xml`** — generowanie pliku business.xml na podstawie modelu danych z Etapu 3 (sekcje 3.1–3.3).
 2. **`/soneta-form-xml`** — generowanie formularzy i widoków UI na podstawie sekcji 3.4 i 3.5.
-3. **`/soneta-programming`** — implementacja logiki biznesowej, workerów i czynności (sekcje 3.6, 3.8).
+3. **`/soneta-programming`** — implementacja logiki biznesowej i testów. Do konkretnych obszarów Etapu 3 służą dokumenty:
+   - `new-addon-cli.md` — rusztowanie solucji (projekty `Firma.NazwaModulu*` w bieżącym katalogu),
+   - `verifiers.md` — weryfikatory z sekcji 3.6 (walidacja danych operatora),
+   - `worker-extender.md` — workery i czynności z sekcji 3.7,
+   - `events.md` — algorytmy w transakcji serwerowej z sekcji 3.8 (logika zależna od równoległej pracy stanowisk),
+   - `integration-tests.md` — testy integracyjne z sekcji 3.13 (dla workerów, algorytmów, weryfikatorów i logiki serwerowej).

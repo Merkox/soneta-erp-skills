@@ -6,8 +6,10 @@ Cel: dostarczyć szczegółowy opis każdego elementu modułu na poziomie implem
 
 Na tym etapie pytania dotyczą szczegółów poszczególnych obiektów. Pracuj obiekt po obiekcie:
 - Jakie pola powinien mieć ten dokument/kartoteka?
+- Jakie reguły poprawności muszą spełniać dane? Co blokuje zapis, a co jest tylko ostrzeżeniem? (→ weryfikatory, 3.6)
 - Jakie stany przechodzi? (bufor, zatwierdzony, anulowany…)
-- Jakie czynności są dostępne? (zatwierdzanie, kopiowanie, generowanie…)
+- Jakie czynności i algorytmy są dostępne? (zatwierdzanie, kopiowanie, generowanie, przeliczenia…)
+- Czy któryś algorytm zależy od równoległej pracy innych stanowisk? (np. ciągła numeracja, rezerwacja, limit → transakcja serwerowa, 3.8)
 - Jakie wydruki i raporty?
 - Kto ma dostęp do czego?
 
@@ -54,24 +56,52 @@ Dla każdego formularza:
 - pola w każdej grupie,
 - listy szczegółów (sublists).
 
-### 3.6. Workery i czynności
+### 3.6. Weryfikatory (walidacja danych operatora)
+Dla każdego obiektu danych wyspecyfikuj **listę weryfikatorów** — reguł sprawdzających poprawność i spójność danych wprowadzanych przez operatora. To one pilnują, by do bazy nie trafiły dane naruszające reguły biznesowe. Implementację po stronie kodu opisuje skill `/soneta-programming` (`verifiers.md`).
+
+Dla każdego weryfikatora podaj:
+- **obiekt i pola-źródła** — czego dotyczy i zmiana których pól go uruchamia,
+- **regułę poprawności** — warunek, który dane muszą spełnić (np. „data zakończenia ≥ data rozpoczęcia", „kod niepusty i unikalny", „suma pozycji = wartość nagłówka"),
+- **poziom ważności** — *Error* (blokuje zapis), *Warning* (ostrzeżenie, można zignorować), *Information* (komunikat),
+- **komunikat** dla operatora.
+
+| Obiekt | Reguła | Pola-źródła | Poziom | Komunikat |
+|--------|--------|-------------|--------|-----------|
+| [nazwa] | [warunek poprawności] | [pola] | Error / Warning / Information | [treść] |
+
+> Każdy weryfikator wymaga **testu integracyjnego** (patrz sekcja 3.13) potwierdzającego, że reguła blokuje/przepuszcza zapis zgodnie z założeniem.
+
+### 3.7. Workery i czynności
 - **Czynności na formularzach** — menu „Czynności" na obiektach (zatwierdzanie, anulowanie, kopiowanie, generowanie powiązanych dokumentów). Dla każdej: warunki dostępności (np. stan dokumentu), efekt, wymagane uprawnienia.
 - **Czynności na listach** — operacje grupowe (zatwierdzanie wielu dokumentów, eksport, zbiorowe przypisanie).
 - **Workery** — procesy w tle (przeliczenia, synchronizacja, raporty wsadowe). Wskaż wyzwalacze (ręczne/harmonogramowe/zdarzeniowe) i oczekiwane czasy.
+- **Algorytmy obiektów biznesowych** — metody liczące i przekształcające dane (przeliczenia sum, generowanie powiązań, wyznaczanie stanów).
 
-### 3.7. Raporty i wydruki
+> Każdy worker, algorytm obiektu biznesowego i inny nietrywialny algorytm wymaga **testu integracyjnego** (patrz sekcja 3.13).
+
+### 3.8. Algorytmy w transakcji serwerowej
+Zidentyfikuj algorytmy i procesy, które **muszą wykonać się w transakcji serwerowej** — czyli takie, których poprawność zależy od zmian wykonywanych **równolegle na innych stanowiskach** (np. ciągła numeracja dokumentów, rezerwacja zasobu, kontrola limitu, sekwencyjne przydzielanie identyfikatorów). Bez transakcji serwerowej dwa stanowiska mogłyby pobrać ten sam numer lub przekroczyć limit. Mechanizm (eventy serwerowe `Session.ServerEvents`) opisuje skill `/soneta-programming` (`events.md`).
+
+Dla każdego takiego procesu podaj:
+- **obiekt i moment** wykonania (zwykle podczas `Save()`),
+- **na czym polega zależność międzystanowiskowa** (co się zepsuje przy równoległej pracy bez transakcji),
+- **wymóg krótkiego czasu** — logika serwerowa trzyma transakcję, więc musi być szybka (ciężkie obliczenia wynieś do workera/eventu sesyjnego).
+
+> Logika w transakcji serwerowej wymaga **testu integracyjnego** (patrz sekcja 3.13), najlepiej sprawdzającego zachowanie przy współbieżnym zapisie.
+
+### 3.9. Raporty i wydruki
 - **Wydruki dokumentów** — format (PDF, Excel), szablon, dane.
 - **Raporty zbiorcze** — parametry wejściowe (zakres dat, filtry), układ, grupowania.
 - **Eksport danych** — formaty (Excel, CSV).
 
-### 3.8. Procesy Workflow
+### 3.10. Procesy Workflow
 Uszczegółowienie procesów z sekcji 1.7:
 - **Stany obiektów** — lista stanów (np. Bufor → Zatwierdzony → W realizacji → Zakończony → Anulowany).
 - **Przejścia** — warunki i reguły (kto zatwierdza, jakie warunki, czy odwracalne).
 - **Automatyzacje** — akcje przy zmianie stanu (powiadomienie, zmiana pól, generowanie dokumentu).
 - **Ścieżki akceptacji** — reguły eskalacji, jeśli proces wymaga akceptacji przełożonego.
 
-### 3.9. Uprawnienia i role
+### 3.11. Uprawnienia i role
 - **Matryca uprawnień** — tabela ról (z sekcji 2.1) vs funkcjonalności:
 
 | Funkcjonalność | Rola A | Rola B | Rola C |
@@ -83,22 +113,31 @@ Uszczegółowienie procesów z sekcji 1.7:
 - **Uprawnienia do danych** — ograniczenia widoczności (operator widzi swoje dokumenty, kierownik — podwładnych).
 - **Uprawnienia konfiguracyjne** — kto modyfikuje ustawienia, definicje, słowniki.
 
-### 3.10. Integracje szczegółowe
+### 3.12. Integracje szczegółowe
 Uszczegółowienie integracji z sekcji 2.5 i 2.6:
 - **API i protokoły** — REST, SOAP, pliki CSV/XML, bezpośredni dostęp do bazy.
 - **Formaty danych** — struktura komunikatów i plików, mapowanie pól.
 - **Częstotliwość i tryb synchronizacji** — jednorazowy, cykliczny (harmonogram), w czasie rzeczywistym (zdarzeniowy).
 - **Obsługa błędów** — niedostępność systemu zewnętrznego, walidacja danych wejściowych, logowanie błędów.
 
-### 3.11. Scenariusze testowe
+### 3.13. Scenariusze i testy integracyjne
+Testy integracyjne pisze się na prawdziwej bazie (nie na mockach) — patrz skill `/soneta-programming` (`integration-tests.md`). Zaplanuj je **równolegle z logiką**, nie po fakcie.
+
+- **Obowiązkowe pokrycie testami integracyjnymi** — dla **każdego** elementu logiki z Etapu 3 zaplanuj odpowiedni test:
+  - każdy **worker** i proces w tle (3.7),
+  - każdy **algorytm obiektu biznesowego** i inny nietrywialny algorytm (3.7),
+  - każdy **weryfikator** — że blokuje/przepuszcza zapis zgodnie z poziomem ważności (3.6),
+  - każda **logika w transakcji serwerowej** — poprawność przy zależności międzystanowiskowej (3.8).
 - **Testy funkcjonalne** — scenariusze pokrywające ścieżki z sekcji 1.6 (kroki, dane wejściowe, oczekiwany rezultat).
-- **Testy integracyjne** — współpraca z innymi modułami Soneta i systemami zewnętrznymi.
+- **Testy współpracy** — integracja z innymi modułami platformy i systemami zewnętrznymi.
 - **Testy wydajnościowe** — weryfikacja założeń z sekcji 2.8 (wolumeny, czasy odpowiedzi).
 - **Przypadki brzegowe** — puste dane, maksymalne wolumeny, równoczesna edycja, brak uprawnień.
 
-### 3.12. Dane demonstracyjne
+Zestaw testów zapisz jako listę: *element logiki → scenariusz testu → oczekiwany rezultat*, tak aby pokrycie było widoczne (żaden worker/algorytm/weryfikator/proces serwerowy bez testu).
+
+### 3.14. Dane demonstracyjne
 - Dane do bazy Demo — reprezentatywne scenariusze pokazujące możliwości modułu.
 - Dane do testów — zestawy pokrywające przypadki typowe i brzegowe.
 
-### 3.13. Słownik terminów
+### 3.15. Słownik terminów
 Definicje kluczowych terminów biznesowych i technicznych, szczególnie przy modułach domenowych (kontroling, logistyka), gdzie terminologia bywa niejednoznaczna lub branżowa.

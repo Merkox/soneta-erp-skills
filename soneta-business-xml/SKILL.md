@@ -196,6 +196,18 @@ Pełny wzorzec (XML ↔ klasy, selector'y, konstruktory, `[BusinessRow]`, `[NewR
 [references/generated-classes.md](references/generated-classes.md). Implementację klas po stronie
 kodu opisuje skill `/soneta-programming` (row-types.md).
 
+### Standardy kodu C# (.NET 10)
+
+Klasy pisane ręcznie stosuj z **najnowszymi konstrukcjami języka C# (.NET 10)**:
+
+- **File-scoped namespace** — `namespace Firma.NazwaModulu;` bez klamer obejmujących cały plik (nie `namespace X { ... }`).
+- **Primary constructors** — gdy klasa ma **jeden** konstruktor, deklaruj parametry przy nazwie klasy (`class Kod(RowCreator creator) : XRow(creator)`). Przy kilku konstruktorach (np. inicjujący pola `readonly` + `(RowCreator creator)`) primary constructor nie ma zastosowania — użyj zwykłych konstruktorów.
+- Pozostałe nowoczesne konstrukcje: `is null` / wyrażenia `switch`, kolekcje `[...]`, `nameof`, wyrażenia lambda/`=>` w metodach jednolinijkowych.
+
+### Jedna klasa — jeden plik
+
+Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Zgloszenie.cs` i `Zgloszenia.cs`), nie w jednym pliku. Ta sama zasada dotyczy enumów, weryfikatorów i innych typów — jeden typ najwyższego poziomu na plik. Wyjątkiem są typy zagnieżdżone (np. podtypy selector'a wewnątrz klasy `abstract`), które z definicji należą do jednego pliku klasy nadrzędnej.
+
 ## Typy danych kolumn
 
 ### Typy proste
