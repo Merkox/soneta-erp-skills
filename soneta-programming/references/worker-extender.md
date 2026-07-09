@@ -72,6 +72,38 @@ Można stosować publiczne metod kontrolujące zachowanie property w edytorze:
 * `bool IsReadOnlyXxx()` - disable pola
 * `object GetListXxx()` - szczegóły edycji
 
+### Worker rozszerzający obiekt obcy (spoza dodatku)
+
+To **kanoniczny sposób dołożenia property lub kolekcji do obiektu biznesowego platformy Soneta,
+którego kodu nie da się zmodyfikować** (np. `Kontrahent`, `Towar`, `DokumentHandlowy`). Zamiast
+edytować obcą klasę, rejestrujesz worker na jej typie i przez `[Context]` sięgasz do własnych
+tabel z dodatku — property/kolekcje workera stają się dostępne w bindowaniu form.xml oraz w kodzie.
+
+```csharp
+[assembly: Worker<KontrahentOcenaWorker, Kontrahent>]
+
+public class KontrahentOcenaWorker
+{
+    // Obiekt obcy, który "rozszerzamy" — pobierany z kontekstu.
+    [Context]
+    public Kontrahent Kontrahent { get; set; }
+
+    // Kolekcja z dodatku, powiązana z obcym obiektem przez klucz (SubTable filtrowana kluczem).
+    public SubTable<OcenaKontrahenta> Oceny =>
+        Kontrahent.Session.GetOcenaKontrahenta().OcenyKontrah.WgKontrahent[Kontrahent];
+
+    [Caption("Liczba ocen")]
+    public int LiczbaOcen => Oceny.Count;
+}
+```
+
+* **Property i kolekcje dodatku wystawiasz z workera**, a nie z obcej klasy — dodatek nie modyfikuje
+  modułu bazowego i pozostaje odinstalowywalny.
+* Powiązanie realizuj **kluczem** (`WgKontrahent[Kontrahent]`) po polu wskazującym obcy obiekt w Twojej
+  tabeli — pełne filtrowanie serwerowe opisuje [rowcondition.md](rowcondition.md).
+* Sesję bierz z obiektu obcego (`Kontrahent.Session`) — nie trzymaj własnej referencji do sesji.
+* W bindowaniu form.xml odwołujesz się jak do każdego workera: `{Workers.KontrahentOcena.LiczbaOcen}`.
+
 ### Bindowanie na UI form.xml (liście)
 
 Bindowanie wg schematu: `{Workers.<NazwaTypuBezSufiksWorker>.NazwaProperty}`

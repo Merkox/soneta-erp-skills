@@ -180,6 +180,45 @@ cache'owaną metodą `AssemblyAttributes.GetCustom<T>()` — np. zbudowanie mapy
 Pełny opis (cache, sortowanie wg `Priority`, `Find`, iteracja po assembly, analiza DLL):
 [assembly-attributes.md](assembly-attributes.md).
 
+## Zdarzenia cyklu życia obiektu (Row / SubRow)
+
+Klasy `Row` i `SubRow` udostępniają **wirtualne metody zdarzeń**, które nadpisujesz we własnym
+obiekcie biznesowym, aby wpiąć logikę w kluczowe momenty cyklu życia rekordu. Wywołuje je ORM —
+nie wołaj ich ręcznie. Zawsze wołaj `base.OnXxx()` w override.
+
+| Metoda | Kiedy | Typowe zastosowanie / pułapki |
+|--------|-------|-------------------------------|
+| `OnLoaded()` | raz, po wczytaniu rekordu z bazy (pola jeszcze niezmienione) | **Nie edytuj pól** — każdy wczytany rekord natychmiast przeszedłby w tryb edycji |
+| `OnAdded()` | przy `Table.AddRow(row)` — dodaniu nowo utworzonego obiektu | inicjalizacja wartości domyślnych; `Session` jest już dostępna |
+| `OnEditing()` | jednokrotnie na start edycji obiektu | kolejne ustawienia property w tej samej edycji już go nie wywołują |
+| `OnParentDeleting()` | przed usunięciem obiektu **rodzica** | zablokuj usunięcie, gdy istnieją zależności |
+| `OnDeleting()` | przed usunięciem obiektu | zablokuj usunięcie, gdy istnieją zależności |
+| `OnDeleted()` | po usunięciu obiektu | dostęp do properties usuniętego obiektu jest ograniczony |
+| `OnImporting()` | przed ustawianiem pól w trakcie importu | podczas importu pola omijają standardowe properties biznesowe |
+| `OnImported()` | po ustawieniu wszystkich pól importowanego obiektu | uzupełnij logikę biznesową, która nie odpaliła się przez properties |
+
+```csharp
+public class Zgloszenie : SerwisModule.ZgloszenieRow {
+
+    protected override void OnAdded() {
+        base.OnAdded();
+        Status = StatusZgloszenia.Nowe;   // wartości domyślne — Session już dostępna
+    }
+
+    protected override void OnDeleting() {
+        base.OnDeleting();
+        if (Pozycje.Count > 0)
+            throw new InvalidOperationException(
+                "Nie można usunąć zgłoszenia z pozycjami.".Translate());
+    }
+}
+```
+
+> **Różnica względem eventów sesji.** Powyższe metody to zdarzenia **jednego obiektu** (override na
+> wierszu). Zdarzenia obejmujące wiele obiektów, odraczanie ciężkich obliczeń oraz logikę w
+> transakcji serwerowej realizuje mechanizm `Session.Events` / `Session.ServerEvents` —
+> [events.md](events.md).
+
 ## Skrót — co zaimplementować przy tabeli
 
 1. Klasa obiektu biznesowego (`X : <Moduł>Module.XRow`) i klasa tabeli (`Xs : <Moduł>Module.XTable`).

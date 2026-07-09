@@ -43,7 +43,7 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 <DataForm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
           xmlns="http://www.enova.pl/schema/form.xsd"
-          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd">
+          xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd">
   <!-- zawartość -->
 </DataForm>
 ```
@@ -478,7 +478,7 @@ Plik: `MojObiekt.Ogolne.pageform.xml`
 <DataForm xmlns="http://www.enova.pl/schema/form.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+          xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd"
           Priority="10">
   <Page CaptionHtml="Ogólne" DataContext="{DataSource}">
     <Group CaptionHtml="Dane podstawowe">
@@ -504,7 +504,7 @@ Widok listy z panelem filtrów powyżej grida. `<Flow>` jako `FilterPanel` to st
 <DataForm xmlns="http://www.enova.pl/schema/form.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd">
+          xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd">
   <Flow Name="FilterPanel">
     <Field CaptionHtml="Status" Width="15" EditValue="{ViewInfo+Params.Status}" Important="true" />
     <Field CaptionHtml="Typ" Width="12" EditValue="{ViewInfo+Params.Typ}" Important="true" />
@@ -530,7 +530,7 @@ Widok listy z panelem filtrów powyżej grida. `<Flow>` jako `FilterPanel` to st
 <DataForm xmlns="http://www.enova.pl/schema/form.xsd"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-          xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd">
+          xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd">
   <Stack>
     <Row>
       <Field CaptionHtml="Ulica" Width="40" EditValue="{Ulica}" />

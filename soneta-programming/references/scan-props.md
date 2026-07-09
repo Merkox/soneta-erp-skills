@@ -28,7 +28,7 @@ Algorytm:
 3. Przejdź rekurencyjnie po `IAssemblySymbol.GlobalNamespace` każdej referencji.
 4. Znajdź pierwszy typ kończący się na `Module`, który zawiera typ zagnieżdżony o nazwie `{NazwaRekordu}Record`.
 5. Odczytaj publiczne pola (`IFieldSymbol`, `DeclaredAccessibility == Public`) i ich typy → oznacz jako **bazodanowe**.
-6. Znajdź publiczną klasę najwyższego poziomu o nazwie `{NazwaRekordu}` (klasę biznesową, np. `DokumentHandlowy`) i wczytaj jej publiczne, instancyjne `IPropertySymbol` (wraz z dziedziczonymi).
+6. Znajdź publiczną klasę najwyższego poziomu o nazwie `{NazwaRekordu}` (klasę biznesową, np. `DokumentHandlowy`) i wczytaj jej publiczne, instancyjne `IPropertySymbol` (wraz z dziedziczonymi). **Pomijane są property infrastrukturalne** — te, których nazwa jest zadeklarowana w bazowych klasach ORM `Row` / `GuidedRow` / `ExportedRow` / `SubRow` (np. `ID`, `Guid`, `State`, `Status`, `Session`, `Table`, `Stamp`, `IsAdded`, `IsModified`, `IsDeleted`, `IsStandard`, `Caption`, `Note`, `Attachments`, `FirstChangeInfo`, `LastChangeInfo`). Nie mają one znaczenia biznesowego. Dodatkowo zawsze pomijane jest property `Module` (zwraca typowany moduł, więc nie występuje w bazowym `Row`). Matching jest po **nazwie** (a nie po `ContainingType`), bo klasy generowane potrafią redeklarować takie property przez `new` ze zawężonym typem zwracanym (np. `Table` → `Towary`) — mimo redeklaracji są nadal pomijane. Wyjątek: jeśli nazwa pokrywa się z bazodanowym polem rekordu (krok 5), wpis zostaje zachowany.
 7. Scal listy:
    - property o nazwie unikalnej (brak takiego pola w rekordzie) → oznacz jako **kalkulowane**;
    - property o nazwie pokrywającej się z polem rekordu → zachowaj znacznik **bazodanowe**, ale podmień typ na ten z property (bo property zwykle precyzuje typ, np. zwraca konkretny enum lub `Row` zamiast `Guid`/`int`).
@@ -133,7 +133,7 @@ Kolumna `Rodzaj` jest kombinacją znaczników rozdzielonych przecinkami:
 
 - Skanuje tylko górny poziom katalogu (`SearchOption.TopDirectoryOnly`) — jeśli DLL są rozproszone, skopiuj je do jednego katalogu.
 - Zwraca pierwszy znaleziony typ pasujący do wzorca `*Module+{Nazwa}Record` — jeśli dwa moduły mają taki sam zagnieżdżony rekord, dostaniesz tylko jeden (niedeterministycznie wg kolejności assembly).
-- Zwraca **publiczne pola** rekordu (`IFieldSymbol`) oraz **publiczne, instancyjne właściwości** klasy biznesowej (`IPropertySymbol`, łącznie z dziedziczonymi). Pola rekordu = źródło prawdy o schemacie DB (rodzaj `bazodanowe`); właściwości spoza rekordu = wyliczane w kodzie (rodzaj `kalkulowane`).
+- Zwraca **publiczne pola** rekordu (`IFieldSymbol`) oraz **publiczne, instancyjne właściwości** klasy biznesowej (`IPropertySymbol`, łącznie z dziedziczonymi), **z pominięciem property infrastrukturalnych** z klas bazowych `Row` / `GuidedRow` / `ExportedRow` / `SubRow` (patrz krok 6). Pola rekordu = źródło prawdy o schemacie DB (rodzaj `bazodanowe`); właściwości spoza rekordu = wyliczane w kodzie (rodzaj `kalkulowane`).
 - Jeśli klasa biznesowa o nazwie `{NazwaRekordu}` nie zostanie znaleziona w referencjach, skrypt zwraca tylko listę pól bazodanowych (z odpowiednią adnotacją w nagłówku) i kończy się kodem `0`.
 - Pierwsze uruchomienie pobiera pakiet NuGet `Microsoft.CodeAnalysis.CSharp` — wymaga połączenia internetowego (kolejne odpalenia działają offline).
 

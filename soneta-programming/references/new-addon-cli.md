@@ -367,6 +367,38 @@ Projekt testowy łamiący tę konwencję oznacz jawnie flagą w `.csproj`:
 </PropertyGroup>
 ```
 
+### Widoczność klas i składowych między projektami (`InternalsVisibleTo`)
+
+Podział na trzy projekty pozwala **domknąć widoczność składowych `internal`** — pola, property (patrz
+`modifier="internal"` w skillu /soneta-business-xml) czy klasy pomocnicze zostają wewnątrz dodatku,
+a nie w publicznym API dostępnym dla obcego kodu. Aby projekt UI i testy widziały `internal` z
+projektu biznesowego, dodaj `InternalsVisibleTo` w `.csproj` (lub `Directory.Build.props`) projektu,
+którego składowe udostępniasz:
+
+| Kierunek dostępu | Gdzie dodać `InternalsVisibleTo` |
+|------------------|----------------------------------|
+| **UI → Biznesowy** | w projekcie biznesowym: `Include="MyExtension.UI"` |
+| **Testy → Biznesowy** | w projekcie biznesowym: `Include="MyExtension.Tests"` |
+| **Testy → UI** | w projekcie UI: `Include="MyExtension.Tests"` |
+
+```xml
+<!-- MyExtension.csproj (projekt biznesowy) -->
+<ItemGroup>
+  <InternalsVisibleTo Include="MyExtension.UI" />
+  <InternalsVisibleTo Include="MyExtension.Tests" />
+</ItemGroup>
+```
+
+```xml
+<!-- MyExtension.UI.csproj (projekt UI) -->
+<ItemGroup>
+  <InternalsVisibleTo Include="MyExtension.Tests" />
+</ItemGroup>
+```
+
+Dzięki temu logikę wystawiasz na zewnątrz świadomie jako `public`, a resztę trzymasz jako `internal`
+widoczne tylko dla warstwy UI i testów tego samego dodatku.
+
 ## 7. Parametry MSBuild
 
 Dodatkowe właściwości ustawiane w `.csproj` lub `Directory.Build.props`:
@@ -455,7 +487,7 @@ Nowo generowane pliki XML mają już potrzebne atrybuty; istniejące uzupełnij 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 xmlns="http://www.enova.pl/schema/form.xsd"
-xsi:schemaLocation="http://www.enova.pl/schema/ http://www.enova.pl/schema/form.xsd"
+xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd"
 ```
 
 (`form.xsd` zamień na właściwy schemat dla danego typu pliku — np. `business.xsd`, `config.xsd`.)

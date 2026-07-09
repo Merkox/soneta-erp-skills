@@ -1,4 +1,7 @@
 
+/skill-creator
+/writing-great-skills
+
 # Zasady tworzenia skills.
 
 * Skill jest firmy Soneta, a enova365 i Triva to nazwy produktów. Skill-e są do obydwu produktów, więc nie należy ich stosować pojedynczo.

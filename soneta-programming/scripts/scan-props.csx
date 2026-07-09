@@ -274,12 +274,21 @@ static void ScanRecord(
     // 2. Właściwości klasy biznesowej (z dziedziczeniem) → kalkulowane lub nadpisanie pola bazodanowego.
     if (bizCls != null)
     {
+        // Nazwy property infrastrukturalnych — zdefiniowanych w bazowych klasach ORM
+        // Row / GuidedRow / ExportedRow (np. ID, Guid, State, Session, Table, Module, Stamp).
+        // Łapiemy je po NAZWIE, bo klasy generowane potrafią je redeklarować (`new`) ze
+        // zawężonym typem zwracanym (np. Table→Towary, Module→TowaryModule) — wtedy ich
+        // ContainingType wskazuje na klasę pochodną, nie na Row.
+        var infrastructureNames = CollectInfrastructurePropertyNames(bizCls);
         var seen = new HashSet<string>(StringComparer.Ordinal);
         foreach (var p in EnumerateInheritedProperties(bizCls))
         {
             if (p.DeclaredAccessibility != Accessibility.Public || p.IsStatic || p.IsIndexer || p.GetMethod == null)
                 continue;
             if (!seen.Add(p.Name)) continue;
+            // Pomijamy property infrastrukturalne, o ile nie pokrywają się z bazodanowym polem
+            // rekordu (krok 1) — te zostają nietknięte.
+            if (infrastructureNames.Contains(p.Name) && !merged.ContainsKey(prefix + p.Name)) continue;
             var key = prefix + p.Name;
             var typeStr = p.Type.ToDisplayString();
             var caption = GetAttributeFirstString(p, "CaptionAttribute");
@@ -338,6 +347,35 @@ static IEnumerable<INamedTypeSymbol> EnumerateAllTypes(INamespaceSymbol ns)
     foreach (var t in ns.GetTypeMembers()) yield return t;
     foreach (var sub in ns.GetNamespaceMembers())
         foreach (var t in EnumerateAllTypes(sub)) yield return t;
+}
+
+// Property zadeklarowane w bazowych klasach ORM Row / GuidedRow / ExportedRow / SubRow są
+// infrastrukturalne (ID, Guid, State, Session, Table, Module, Stamp, IsAdded, Prefix, Root,
+// Parent, ...) i nie mają znaczenia biznesowego — pomijamy je w wyniku. SubRow to baza
+// obiektów podrzędnych (subrowów), np. `Wymiary`, `ProduktInfo`.
+static readonly string[] InfrastructureBaseClasses = { "Row", "GuidedRow", "ExportedRow", "SubRow" };
+
+// Property zawsze pomijane po nazwie, niezależnie od klasy deklarującej — infrastrukturalne,
+// ale zadeklarowane w klasach generowanych (np. `Module` zwraca typowany moduł, więc nie ma go
+// w bazowym Row).
+static readonly string[] AlwaysInfrastructureNames = { "Module" };
+
+// Zbiera nazwy publicznych property zadeklarowanych w klasach bazowych Row / GuidedRow /
+// ExportedRow / SubRow występujących w łańcuchu dziedziczenia danej klasy biznesowej.
+static HashSet<string> CollectInfrastructurePropertyNames(INamedTypeSymbol type)
+{
+    var names = new HashSet<string>(StringComparer.Ordinal);
+    foreach (var n in AlwaysInfrastructureNames) names.Add(n);
+    for (var t = type; t != null && t.SpecialType != SpecialType.System_Object; t = t.BaseType)
+    {
+        if (Array.IndexOf(InfrastructureBaseClasses, t.Name) < 0) continue;
+        foreach (var p in t.GetMembers().OfType<IPropertySymbol>())
+        {
+            if (p.DeclaredAccessibility == Accessibility.Public && !p.IsStatic && !p.IsIndexer)
+                names.Add(p.Name);
+        }
+    }
+    return names;
 }
 
 static IEnumerable<IPropertySymbol> EnumerateInheritedProperties(INamedTypeSymbol type)

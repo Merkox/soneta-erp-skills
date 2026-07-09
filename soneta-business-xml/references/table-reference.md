@@ -125,6 +125,37 @@ tabeli, nie pojedyncze pola; dla tabel szczegółów warto wskazać tabelę nadr
 | `fulltext` | boolean | `true` = indeksowanie pełnotekstowe |
 | `specialaccess` | boolean | `true` = specjalne uprawnienia |
 
+#### Modyfikator widoczności property (`modifier`)
+
+`modifier` steruje modyfikatorami C# generowanego property w klasie obiektu biznesowego. Pozwala
+świadomie kontrolować, kto i jak korzysta z pola:
+
+| Wartość | Efekt | Kiedy stosować |
+|---------|-------|----------------|
+| `public virtual` | property można **nadpisać** (`override`) w klasie obiektu biznesowego | **zalecany wzorzec projektowy** — gdy chcesz opakować odczyt/zapis pola własną logiką, zachowując pełną kontrolę tylko nad tym dziedziczonym property |
+| `internal` | dostęp **tylko wewnątrz dodatku** (assembly) | gdy pole nie powinno być widoczne dla obcego kodu / innych dodatków |
+| `protected` | dostęp z klasy i jej podtypów | pola pomocnicze, ustawiane wyłącznie w logice obiektu |
+
+```xml
+<col name="Krotnosc" type="int" modifier="public virtual"/>
+<col name="KluczWewnetrzny" type="string" length="40" modifier="internal"/>
+```
+
+`public virtual` umożliwia w klasie C# nadpisanie generowanego property:
+
+```csharp
+public class DefinicjaCyklu : HarmonogramModule.DefinicjaCykluRow {
+    public override int Krotnosc {
+        get => base.Krotnosc;
+        set => base.Krotnosc = value < 1 ? 1 : value;   // własna walidacja przy zapisie
+    }
+}
+```
+
+> Nadpisywanie generowanego property (`public virtual` → `override`) opisuje też skill
+> **/soneta-programming** (row-types.md). Ograniczanie widoczności między projektami dodatku
+> (`internal` + `InternalsVisibleTo`) — patrz new-addon-cli.md w /soneta-programming.
+
 #### Pole selector (`selector="true"`)
 
 Selector pozwala przechowywać **wiele typów obiektów w jednej tabeli** — jego wartość

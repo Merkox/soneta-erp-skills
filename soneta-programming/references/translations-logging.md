@@ -68,3 +68,27 @@ class Test
     }
 }
 ```
+
+## Lokalizacja plików logów
+
+Logi z działania aplikacji zapisywane są do plików na dysku — pierwsze miejsce, gdzie szukać przyczyny
+błędu serwera biznesowego, konwersji bazy czy nieudanego testu. Na **macOS** znajdują się w katalogu
+`~/Library/Application Support/Soneta/Logs/`, z podziałem po komponencie:
+
+| Wzorzec pliku | Komponent |
+|---------------|-----------|
+| `server-*.log` | serwer biznesowy (aplikacja Soneta) |
+| `dbmgr-*.log` | menedżer baz danych (`dbmgr` — patrz /soneta-tools) |
+| `test-*.log` | uruchomienia testów |
+| `*-*.log` | pozostałe komponenty wg analogicznego wzorca `<komponent>-*.log` |
+
+```bash
+# najnowszy log serwera
+ls -t ~/Library/Application\ Support/Soneta/Logs/server-*.log | head -1
+
+# podgląd błędów na żywo
+tail -f ~/Library/Application\ Support/Soneta/Logs/server-*.log
+```
+
+> Operacje na bazie z wiersza poleceń (`dbmgr`, `buscall`) opisuje skill **/soneta-tools**;
+> uruchamianie testów integracyjnych — [integration-tests.md](integration-tests.md).
