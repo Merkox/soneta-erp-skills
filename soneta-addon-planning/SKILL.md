@@ -25,12 +25,12 @@ Na końcu, po zamknięciu etapów, generujesz dokument **TODO** z kolejnymi krok
 
 ## Wymagania
 
-Etap 1 (Wizja) nie ma zależności technicznych — prowadź go zawsze. Etapy 2–3 opierają się na inwentaryzacji modelu danych platformy narzędziem `scan-modules` (patrz sekcja „Dane referencyjne"), które wymaga:
+Etap 1 (Wizja) prowadź zawsze. Jego rdzeń (idea, korzyści, funkcjonalności) nie ma zależności technicznych, ale weryfikacja pokrycia zakresu przez standard platformy (sekcja 1.5) korzysta — jak Etapy 2–3 — z inwentaryzacji modelu danych narzędziem `scan-modules` (patrz sekcja „Dane referencyjne"), które wymaga:
 
 - skompilowanych bibliotek platformy Soneta — katalog z plikami `*.dll` (u użytkownika zwykle `~/d/dev/bin/debug`),
 - .NET SDK 10 oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
 
-Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu), wykonaj Etap 1 normalnie, a inwentaryzację danych zapisz jako **otwartą kwestię blokującą** dla Etapu 2 — nie zgaduj istniejących struktur.
+Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu), wykonaj Etap 1 normalnie, a weryfikację pokrycia (sekcja 1.5) oraz inwentaryzację danych zapisz jako **otwartą kwestię blokującą** dla Etapu 2 — nie zgaduj istniejących struktur.
 
 ## Jak prowadzić rozmowę
 
@@ -81,7 +81,13 @@ Korzystaj z inwentaryzacji, aby:
 - rozpoznać wzorce projektowe (podział konfiguracyjne/operacyjne, korzenie `Guided` i datapacki, relacje interfejsowe),
 - zidentyfikować moduły współpracujące.
 
-Najbardziej przydaje się w **Etapie 2** (sekcje 2.3, 2.5) i **Etapie 3** (sekcje 3.1–3.3) — tam skanujesz DLL-ki i sięgasz do konkretnych modułów. Gdy użytkownik wspomni o integracji z istniejącymi danymi (pracownicy, kontrahenci, towary), zeskanuj strukturę i wskaż konkretne `RowType`/`TableType` po nazwach. Do drążenia pól wybranego rekordu użyj `scan-props` z tego samego skilla `/soneta-programming`.
+Pierwszy raz sięgasz po nią już w **Etapie 1** (sekcja 1.5) — do weryfikacji, w jakim zakresie standard platformy pokrywa zamierzony zakres modułu. Najbardziej przydaje się w **Etapie 2** (sekcje 2.3, 2.5) i **Etapie 3** (sekcje 3.1–3.3) — tam skanujesz DLL-ki i sięgasz do konkretnych modułów. Gdy użytkownik wspomni o integracji z istniejącymi danymi (pracownicy, kontrahenci, towary), zeskanuj strukturę i wskaż konkretne `RowType`/`TableType` po nazwach. Do drążenia pól wybranego rekordu użyj `scan-props` z tego samego skilla `/soneta-programming`.
+
+Komplementarnie do `scan-modules` (perspektywa danych) użyj `scan-folders` (dokument `scan-folders.md` w `/soneta-programming`) — buduje drzewo folderów statycznych menu (`[assembly: FolderView]`), czyli **perspektywę funkcjonalno-użytkową**: jakie listy i formularze program faktycznie udostępnia użytkownikowi i którą tabelą/`ViewInfo` stoi dana pozycja. W **Etapie 1** (sekcja 1.5) bywa wygodniejsza niż `scan-modules`, bo funkcjonalność biznesową łatwiej dopasować do pozycji menu niż do surowej tabeli. Pełne drzewo to >1000 węzłów — filtruj prefiksem ścieżki (np. `Handel`) i ewentualnie `--flat` do grepowania.
+
+```bash
+dotnet script ~/.claude/skills/soneta-programming/scripts/scan-folders.csx -- <KatalogDll> [<PrefiksSciezki>] [--flat] > folders.md
+```
 
 ## Otwarte kwestie
 
@@ -146,7 +152,7 @@ Po zamknięciu wszystkich etapów wygeneruj dokument TODO z kolejnymi krokami:
 
 ## Powiązanie z innymi skillami
 
-Już na etapie planowania (Etap 2 i 3) korzystasz z **`/soneta-programming`** — narzędzia `scan-modules` i `scan-props` inwentaryzują istniejący model danych platformy (patrz sekcja „Dane referencyjne").
+Już na etapie planowania (Etap 1 sekcja 1.5, a następnie Etap 2 i 3) korzystasz z **`/soneta-programming`** — narzędzia `scan-modules` i `scan-props` inwentaryzują istniejący model danych platformy (patrz sekcja „Dane referencyjne"). W Etapie 1 służą do sprawdzenia pokrycia zakresu przez standard platformy.
 
 Po zatwierdzeniu planu projektu:
 1. **`/soneta-business-xml`** — generowanie pliku business.xml na podstawie modelu danych z Etapu 3 (sekcje 3.1–3.3).

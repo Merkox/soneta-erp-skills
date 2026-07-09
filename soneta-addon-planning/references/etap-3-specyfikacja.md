@@ -65,7 +65,7 @@ Dla każdego formularza:
 - **Eksport danych** — formaty (Excel, CSV).
 
 ### 3.8. Procesy Workflow
-Uszczegółowienie procesów z sekcji 1.6:
+Uszczegółowienie procesów z sekcji 1.7:
 - **Stany obiektów** — lista stanów (np. Bufor → Zatwierdzony → W realizacji → Zakończony → Anulowany).
 - **Przejścia** — warunki i reguły (kto zatwierdza, jakie warunki, czy odwracalne).
 - **Automatyzacje** — akcje przy zmianie stanu (powiadomienie, zmiana pól, generowanie dokumentu).
@@ -91,7 +91,7 @@ Uszczegółowienie integracji z sekcji 2.5 i 2.6:
 - **Obsługa błędów** — niedostępność systemu zewnętrznego, walidacja danych wejściowych, logowanie błędów.
 
 ### 3.11. Scenariusze testowe
-- **Testy funkcjonalne** — scenariusze pokrywające ścieżki z sekcji 1.5 (kroki, dane wejściowe, oczekiwany rezultat).
+- **Testy funkcjonalne** — scenariusze pokrywające ścieżki z sekcji 1.6 (kroki, dane wejściowe, oczekiwany rezultat).
 - **Testy integracyjne** — współpraca z innymi modułami Soneta i systemami zewnętrznymi.
 - **Testy wydajnościowe** — weryfikacja założeń z sekcji 2.8 (wolumeny, czasy odpowiedzi).
 - **Przypadki brzegowe** — puste dane, maksymalne wolumeny, równoczesna edycja, brak uprawnień.

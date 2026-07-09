@@ -54,6 +54,7 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Skanowanie pól obiektu biznesowego z DLL (Roslyn MetadataReference)                   | [references/scan-props.md](references/scan-props.md) |
 | Inwentaryzacja modułów i tabel (`*Module` / `*Row` / `*Table`) z DLL                  | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
+| Inwentaryzacja folderów statycznych menu (`[assembly: FolderView]`) z DLL — drzewo, listy, formularze | [references/scan-folders.md](references/scan-folders.md) |
 | **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | [references/buscall-live-testing.md](references/buscall-live-testing.md) (weryfikacja na żywo) |
 | **Testy integracyjne — klasa bazowa `TestBase`** — testy na realnej bazie z automatycznym rollbackiem (dwupoziomowa transakcja), wybór bazy `[TestDatabase]` (`nunit_default`/`nunit_ui`/`nunit_premiumui`), cykl życia (`ClassSetup`/`TestSetup`), `Session`/`ConfigSession`/`Context`, `InTransaction`/`SaveDispose`, podmiana DI (`ConfigureLoginServices`), asercje `AwesomeAssertions`, testy SQL (`SqlTraceInfo`), konwencje: nazewnictwo `Should_..._When_...` + prefiks grupy, `[Description]`, struktura AAA | [references/integration-tests.md](references/integration-tests.md) |
 
@@ -329,11 +330,12 @@ Gotowe **receptury per obiekt biznesowy** (realne pola, kolekcje i workery) są 
 
 ## Narzędzia pomocnicze
 
-Skill udostępnia trzy skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (Roslyn `MetadataReference.CreateFromFile`):
+Skill udostępnia cztery skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (Roslyn `MetadataReference.CreateFromFile`):
 
 - `scan-modules.csx` — listuje moduły (`*Module`) i ich tabele (`*Row`/`*Table`) z Caption/Description. Dobre na start. Szczegóły, parametry i przykłady uruchomienia: [references/scan-modules.md](references/scan-modules.md).
 - `scan-props.csx` — wypisuje pola i właściwości kalkulowane konkretnej klasy biznesowej, rekurencyjnie po polach typu subrow. Sięgnij po niego, gdy znasz już tabelę i potrzebujesz jej kontraktu. Szczegóły: [references/scan-props.md](references/scan-props.md).
 - `scan-workers.csx` — wypisuje na stdout **JSON** z workerami i extenderami zarejestrowanymi atrybutem assembly `[Worker<…>]`, pogrupowanymi wg `DataType`. Dla każdej klasy: parametry inicjowane z `Context` (ctor + `[Context]`, z rozwinięciem pod-property dla typów dziedziczących z `ContextBase`), property do bindowania, akcje menu Czynności. Opcjonalny drugi argument filtruje wynik do konkretnego typu danych (np. `DokumentHandlowy`) — w praktyce konieczny, bo pełne skanowanie zwraca tysiące rejestracji. Wynik łatwo przetwarzać `jq`. Szczegóły: [references/scan-workers.md](references/scan-workers.md).
+- `scan-folders.csx` — buduje **drzewo folderów statycznych** menu programu z atrybutów assembly `[assembly: FolderView(...)]` (wraz z atrybutami pochodnymi, np. `HandelFolderView`). Klasyfikuje każdy węzeł: 📋 lista/widok (`ViewInfoType`/`ViewType`/`TableName`), 📝 formularz (`ObjectType`) lub 📁 menu; przy widokach pokazuje `Description`. Opcjonalny drugi argument filtruje po prefiksie ścieżki (np. `Handel`), flaga `--flat` daje płaską listę pełnych ścieżek. Łapie tylko foldery statyczne — foldery dynamiczne generowane w runtime są poza zakresem. Szczegóły: [references/scan-folders.md](references/scan-folders.md).
 
 ## Konwencje nazewnicze
 

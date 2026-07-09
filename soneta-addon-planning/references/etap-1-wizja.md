@@ -21,6 +21,18 @@ Zacznij od ogólnej idei, potem doprecyzowuj. Zadawaj 2–4 pytania na raz i dos
 - Czy są ograniczenia techniczne, prawne, licencyjne?
 - Jakie moduły platformy Soneta będą wykorzystywane?
 
+## Weryfikacja pokrycia przez standard platformy
+
+Po zebraniu podstawowych informacji (idea, użytkownik, kluczowe funkcjonalności), a **przed** finalnym opracowaniem dokumentu, sprawdź, w jakim zakresie standardowe funkcjonalności platformy Soneta już pokrywają zamierzony zakres — i poinformuj użytkownika o wyniku. Chodzi o to, aby nie planować od zera tego, co platforma już oferuje.
+
+- Zinwentaryzuj standard z dwóch komplementarnych perspektyw (oba narzędzia w skillu `/soneta-programming`, patrz sekcja „Dane referencyjne" w `SKILL.md`):
+  - `scan-modules` — perspektywa **danych**: jakie moduły i tabele istnieją. Odpowiada na pytanie „czy platforma ma już strukturę danych pod tę funkcjonalność?".
+  - `scan-folders` — perspektywa **funkcjonalno-użytkowa**: jakie listy i formularze program faktycznie udostępnia w menu (foldery statyczne `[assembly: FolderView]`). Odpowiada na pytanie „czy użytkownik już dziś klika tę funkcję w standardzie?". Zwykle wygodniejsza w tym etapie, bo funkcjonalność biznesową łatwiej dopasować do pozycji menu niż do surowej tabeli, a wynik pokazuje też, którą tabelą/`ViewInfo` stoi dana pozycja.
+- Dla każdej kluczowej funkcjonalności z sekcji 1.4 ustal, czy istniejące moduły/tabele/pozycje menu ją realizują: **pokryte standardem**, **częściowo pokryte** (wymaga konfiguracji lub rozszerzenia), **brak** (do zbudowania w module).
+- Przedstaw wynik użytkownikowi i wspólnie zdecydujcie, czy zakres modułu się zawęża (np. rezygnacja z funkcji dostępnej standardowo na rzecz jej wykorzystania/konfiguracji).
+
+Gdy brak środowiska do skanowania (nieskompilowane biblioteki, brak dostępu do buildu), nie zgaduj — zapisz weryfikację jako **otwartą kwestię** (patrz `SKILL.md`) i kontynuuj Etap 1. Wynik weryfikacji trafia do sekcji 1.5.
+
 ## Sekcje dokumentu Etapu 1
 
 Wygeneruj dokument Markdown zawierający te sekcje:
@@ -42,24 +54,33 @@ Podział na:
 
 Te funkcjonalności będą rozwijane w Etapie 2 (architektura) i Etapie 3 (specyfikacja szczegółowa, sekcje 3.1–3.13).
 
-### 1.5. Scenariusze użytkownika
+### 1.5. Pokrycie przez standardowe funkcjonalności platformy
+Wynik weryfikacji z sekcji „Weryfikacja pokrycia przez standard platformy". Dla kluczowych funkcjonalności z sekcji 1.4 wskaż, na ile realizuje je już standard:
+
+| Funkcjonalność | Pokrycie | Moduł/tabela platformy | Uwagi |
+|----------------|----------|------------------------|-------|
+| [nazwa] | Pełne / Częściowe / Brak | np. Handel — `DokumentHandlowy` | co trzeba dokonfigurować lub zbudować |
+
+Podsumuj, co moduł faktycznie musi dostarczyć (luka względem standardu), a co można oprzeć na istniejących mechanizmach. Jeśli weryfikacji nie dało się przeprowadzić (brak środowiska), zaznacz to i odeślij do otwartej kwestii.
+
+### 1.6. Scenariusze użytkownika
 Kilka kluczowych scenariuszy krok po kroku — jakie działania podejmuje użytkownik, jakie dane wprowadza, jakie wyniki otrzymuje. Tylko najważniejsze dane, bez szczegółów.
 
-### 1.6. Procesy biznesowe
+### 1.7. Procesy biznesowe
 Procesy realizowane w całości przez moduł oraz procesy, w których moduł uczestniczy częściowo (z innymi elementami platformy). Zdefiniowane procesy posłużą później do budowy procesów workflow i przypisania ich do operatorów i ról.
 
-### 1.7. Ograniczenia modułu i wymagania licencyjne
+### 1.8. Ograniczenia modułu i wymagania licencyjne
 Ograniczenia funkcjonalne, techniczne, integracyjne, prawne. Wymagane licencje platformy Soneta oraz ewentualne licencje zewnętrzne.
 
-### 1.8. Założenia i zależności
+### 1.9. Założenia i zależności
 - **Założenia** — co zakładamy jako pewne (np. dostępność modułów, wersja platformy, dostęp do API zewnętrznych systemów).
 - **Zależności** — od czego projekt zależy (inne projekty, dane od klienta, dostępność zespołu).
 
-### 1.9. Ryzyka projektu
+### 1.10. Ryzyka projektu
 Ryzyka techniczne, biznesowe, integracyjne — z prawdopodobieństwem, wpływem i planem mitygacji. Dla każdego ryzyka wskaż działanie zapobiegawcze.
 
-### 1.10. Kryteria akceptacji
+### 1.11. Kryteria akceptacji
 Mierzalne kryteria gotowości: funkcjonalne (scenariusze, które muszą działać), wydajnościowe (orientacyjne wolumeny, czasy odpowiedzi), jakościowe (pokrycie testami, brak błędów krytycznych).
 
-### 1.11. Harmonogram i kamienie milowe
-Ramowy harmonogram: fazy projektu (planowanie, MVP, testy, pilotaż, produkcja), kamienie milowe (zatwierdzenie specyfikacji, gotowość MVP, koniec testów integracyjnych, wdrożenie pilotażowe, wersja produkcyjna), zależności czasowe (powiązane z sekcją 1.8). Charakter orientacyjny — służy do ogólnego planowania zasobów.
+### 1.12. Harmonogram i kamienie milowe
+Ramowy harmonogram: fazy projektu (planowanie, MVP, testy, pilotaż, produkcja), kamienie milowe (zatwierdzenie specyfikacji, gotowość MVP, koniec testów integracyjnych, wdrożenie pilotażowe, wersja produkcyjna), zależności czasowe (powiązane z sekcją 1.9). Charakter orientacyjny — służy do ogólnego planowania zasobów.
