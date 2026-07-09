@@ -4,7 +4,7 @@ description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
   soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-place-def-elementow, soneta-tools (narzędzia CLI: dbmgr,
-  buscall). Używaj gdy użytkownik: (1) rozpoczyna
+  buscall, SonetaFrame). Używaj gdy użytkownik: (1) rozpoczyna
   zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
   o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
   Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne
@@ -34,6 +34,8 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   bazami danych (tworzenie/rejestracja, konwersja, backup/restore, licencje, rozszerzenia,
   analiza, kompilacja); przygotowanie baz testowych/demo i automatyzacja w CI. `buscall` —
   testowanie na żywej aplikacji: zdalne sterowanie programem i zrzuty ekranu do analizy
-  wizualnej. Używaj gdy użytkownik zarządza bazą z CLI, tworzy bazę demo, robi backup/konwersję,
-  albo weryfikuje zmiany na uruchomionej aplikacji.
+  wizualnej. `SonetaFrame` / `SonetaFrameNew` (obie nazwy używane równolegle) — aplikacja ramki hostująca webową wersję
+  programu: uruchamianie, parametry startowe, plik ustawień i źródła baz danych. Używaj gdy
+  użytkownik zarządza bazą z CLI, tworzy bazę demo, robi backup/konwersję, uruchamia ramkę
+  i konfiguruje połączenia do baz, albo weryfikuje zmiany na uruchomionej aplikacji.
 * `/soneta-form-xml` - XML z nieistniejącymi elementami. ZAWSZE używaj tego skilla gdy użytkownik: (1) prosi o utworzenie lub modyfikację pliku pageform.xml, viewform.xml, form.xml, lookupform.xml lub gridform.xml dla platformy Soneta (enova365); (2) pyta o elementy DataForm, Page, Group, Grid, Field, Row, Stack, Flow, Command, Include, Appearance, GroupBy w Soneta; (3) pyta o składnię EditValue, DataContext, Visibility, RowCondition, Renderable, CaptionHtml, Footer, Class lub układ UI formularzy Soneta; (4) pokazuje istniejący plik form.xml/pageform.xml/viewform.xml i pyta o jego strukturę lub chce go rozszerzyć; (5) pyta o warunkową widoczność, formatowanie warunkowe (Appearance), bindowanie danych lub wzorce UI w Soneta.

@@ -8,10 +8,13 @@ description: >
   (2) chce przygotować bazę testową/demo z wiersza poleceń albo zautomatyzować
   operacje na bazach w skrypcie/CI; (3) testuje działającą aplikację przez `buscall`
   — zdalnie steruje programem (nawigacja, formularze, gridy, edycja) i robi zrzuty
-  ekranu do analizy wizualnej; (4) pyta o składnię, komendy lub opcje narzędzi CLI
-  Soneta (`dbmgr`, `buscall`, `callmcp`); (5) wspomina „narzędzia Soneta",
-  „zarządzanie bazą enova", „utwórz bazę demo", „konwersja bazy", „backup bazy",
-  „testowanie na żywej aplikacji". Sięgnij też, gdy inny skill potrzebuje operacji
+  ekranu do analizy wizualnej; (4) uruchamia aplikację ramki `SonetaFrame`
+  (`SonetaFrameNew`), konfiguruje połączenia i źródła baz danych (`demo:`, `http`,
+  `docker:`, `process:`, `orchestrator:`) albo pyta o jej plik ustawień (`Settings_<Product>.json`);
+  (5) pyta o składnię, komendy lub opcje narzędzi CLI Soneta (`dbmgr`, `buscall`,
+  `callmcp`, `SonetaFrame`); (6) wspomina „narzędzia Soneta", „zarządzanie bazą enova",
+  „utwórz bazę demo", „konwersja bazy", „backup bazy", „testowanie na żywej aplikacji",
+  „ramka Soneta", „źródła baz danych". Sięgnij też, gdy inny skill potrzebuje operacji
   na bazie lub weryfikacji zmian na uruchomionej aplikacji.
 ---
 
@@ -30,6 +33,7 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 | **`dbmgr`** | [references/dbmgr.md](references/dbmgr.md) | referencja | Zarządzanie **bazami danych** z CLI: tworzenie/rejestracja/kasowanie, konwersja, backup/restore (`.bac`/`.zip`), licencje i klucz wirtualny, rozszerzenia, import XML, analiza, kompilacja. Wszystkie komendy i opcje. |
 | **`dbmgr`** | [references/dbmgr-cli-menu.md](references/dbmgr-cli-menu.md) + [assets/dbmgr-menu.cs](assets/dbmgr-menu.cs) | zastosowanie | Wzorzec + gotowy szablon: owinięcie `dbmgr` w interaktywne menu CLI (Spectre.Console) na jednoplikowej aplikacji C# — wybór bazy z listy, tryby środowisk, gotowe akcje. |
 | **`buscall`** | [references/buscall.md](references/buscall.md) | referencja | Zdalne wywoływanie metod aplikacji: tryby `call`/`callmcp`, składnia argumentów `klucz=wartość`, odkrywanie metod (`methods.list`), katalog metod Bundle (nawigacja, formularze, gridy, zrzuty), kody wyjścia. |
+| **`SonetaFrame`** | [references/sonetaframe.md](references/sonetaframe.md) | referencja | Aplikacja ramki (`SonetaFrameNew`) hostująca webową wersję programu: uruchamianie (`dotnet SonetaFrameNew.dll`), parametry `-s`/`--start`, `-c`/`--connection`, plik konfiguracyjny (`Settings_<Product>.json`) i pełna składnia **źródeł baz danych** (`demo:`, `http(s):`, `docker:`, `process:`, `orchestrator:` + modyfikatory). |
 
 > **Uwaga:** wizualną **weryfikację kodu na żywej aplikacji** przez `buscall` (baza startująca z Twojego kodu,
 > przeładowanie DLL, pułapki osieroconych procesów/portów, zrzuty ekranu do oceny wyglądu formularzy) opisuje
@@ -41,16 +45,22 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
   Dokładna ścieżka zależy od Twojego układu repozytoriów — w przykładach piszemy krótko
   `dbmgr` / `buscall`, zakładając alias, wpis w `PATH` albo uruchamianie z katalogu buildu:
   - `dbmgr` → `dbmgr.exe` (Windows) lub `dotnet dbmgr.dll` (cross-platform),
-  - `buscall` → `buscall` lub `dotnet BusCall.dll` (katalog buildu projektu BusCall).
+  - `buscall` → `buscall` lub `dotnet BusCall.dll` (katalog buildu projektu BusCall),
+  - `SonetaFrame` → `dotnet SonetaFrameNew.dll` (aplikacja ramki).
 - **Nazwa bazy** w obu narzędziach (`--db <Baza>` w `buscall`, `<database_name>` w `dbmgr`)
-  odwołuje się do **wpisu w konfiguracji** (SonetaFrame / plik konfiguracji baz), a nie
-  bezpośrednio do fizycznej nazwy bazy SQL. Szczegóły w referencjach.
+  odwołuje się do **wpisu w konfiguracji** (połączenie zdefiniowane w `SonetaFrame` /
+  plik `Settings_<Product>.json`), a nie bezpośrednio do fizycznej nazwy bazy SQL.
+  Szczegóły w referencjach.
 - **Platforma .NET 10**, narzędzia działają cross-platform (macOS/Windows/Linux).
 
 ## Jak wybrać
 
 - Operujesz **na strukturze/danych bazy** (utwórz, skonwertuj, backup, licencja, extension)
   → **`dbmgr`** ([references/dbmgr.md](references/dbmgr.md)).
+- **Sterujesz uruchomioną aplikacją** (nawigacja, formularze, zrzuty ekranu)
+  → **`buscall`** ([references/buscall.md](references/buscall.md)).
+- **Uruchamiasz samą aplikację**, konfigurujesz połączenia/źródła baz danych albo pytasz
+  o plik ustawień ramki → **`SonetaFrame`** ([references/sonetaframe.md](references/sonetaframe.md)).
 
 ## Powiązane skille
 
