@@ -34,8 +34,9 @@ Innymi słowy: nazwa po `--db` = nazwa połączenia w SonetaFrame, a to połącz
 
 ### Gdzie jest definicja bazy
 
-Konfiguracja połączeń SonetaFrame (macOS):
-`~/Library/Application Support/Soneta.Frame/Settings_Standard.json`, tablica **`Sources`**. Każdy
+Konfiguracja połączeń SonetaFrame to plik `Settings_Standard.json` — macOS:
+`~/Library/Application Support/Soneta.Frame/`, Windows: `%APPDATA%\Soneta.Frame\`
+(pełna tabela lokalizacji: `sonetaframe.md` w skillu `/soneta-tools`) — tablica **`Sources`**. Każdy
 wpis to string z parametrami rozdzielonymi `;`. Przykład bazy `Demo` startującej kod z projektu:
 
 ```json

@@ -72,8 +72,14 @@ class Test
 ## Lokalizacja plików logów
 
 Logi z działania aplikacji zapisywane są do plików na dysku — pierwsze miejsce, gdzie szukać przyczyny
-błędu serwera biznesowego, konwersji bazy czy nieudanego testu. Na **macOS** znajdują się w katalogu
-`~/Library/Application Support/Soneta/Logs/`, z podziałem po komponencie:
+błędu serwera biznesowego, konwersji bazy czy nieudanego testu. Lokalizacja katalogu `Soneta/Logs/`:
+
+| System | Katalog logów |
+|---|---|
+| **macOS** | `~/Library/Application Support/Soneta/Logs/` |
+| **Windows** | `%APPDATA%\Soneta\Logs\` (czyli `C:\Users\<user>\AppData\Roaming\Soneta\Logs\`) |
+
+Pliki dzielą się po komponencie:
 
 | Wzorzec pliku | Komponent |
 |---------------|-----------|
@@ -83,11 +89,15 @@ błędu serwera biznesowego, konwersji bazy czy nieudanego testu. Na **macOS** z
 | `*-*.log` | pozostałe komponenty wg analogicznego wzorca `<komponent>-*.log` |
 
 ```bash
-# najnowszy log serwera
+# macOS/Linux — najnowszy log serwera i podgląd na żywo
 ls -t ~/Library/Application\ Support/Soneta/Logs/server-*.log | head -1
-
-# podgląd błędów na żywo
 tail -f ~/Library/Application\ Support/Soneta/Logs/server-*.log
+```
+
+```powershell
+# Windows (PowerShell) — najnowszy log serwera i podgląd na żywo
+Get-ChildItem "$env:APPDATA\Soneta\Logs\server-*.log" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+Get-Content "$env:APPDATA\Soneta\Logs\server-*.log" -Wait -Tail 50
 ```
 
 > Operacje na bazie z wiersza poleceń (`dbmgr`, `buscall`) opisuje skill **/soneta-tools**;

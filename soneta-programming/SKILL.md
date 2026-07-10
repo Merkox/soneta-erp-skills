@@ -36,7 +36,7 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Klasy parametrów (ContextBase) - filtry, trwałość, InvokeChanged                                  | [references/contextbase.md](references/contextbase.md) |
 | Obiekty Worker i Extender - rozszerzenia modelu, akcje w menu Czynności, **rozszerzanie obiektów obcych** (property/kolekcje dodatku na obcym typie Soneta bez modyfikacji jego kodu) | [references/worker-extender.md](references/worker-extender.md) |
 | Serwisy biznesowe (App / Database / Login / Session scope)                                        | [references/services.md](references/services.md) |
-| Tłumaczenia (Translate, TranslateIgnore), ILogger, ActSource, **lokalizacja plików logów** (`~/Library/Application Support/Soneta/Logs/` — `server-*`/`dbmgr-*`/`test-*`) | [references/translations-logging.md](references/translations-logging.md) |
+| Tłumaczenia (Translate, TranslateIgnore), ILogger, ActSource, **lokalizacja plików logów** (katalog `Soneta/Logs/` — macOS: `~/Library/Application Support/`, Windows: `%APPDATA%\`; pliki `server-*`/`dbmgr-*`/`test-*`) | [references/translations-logging.md](references/translations-logging.md) |
 | Action result (rezultaty workera) zwracany przez worker / extender / Command - raporty, dialogi, nawigacja | [references/action-result.md](references/action-result.md) |
 | RowCondition - serwerowe warunki LINQ, filtrowanie SubTable / View / Query                        | [references/rowcondition.md](references/rowcondition.md) |
 | ViewInfo - definicja widoków list (folderów i inline jako property), CreateView, args.DataSource, klasa Params, `[Accessor(AutoChange)]`, powiązanie z viewform.xml | [references/viewinfo.md](references/viewinfo.md) |

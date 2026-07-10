@@ -4,7 +4,7 @@ Aby osadzić plan w istniejącym modelu danych platformy Soneta, **zinwentaryzuj
 
 ## Wymagania środowiska
 
-- skompilowane biblioteki platformy Soneta — katalog z plikami `*.dll` (u użytkownika zwykle `~/d/dev/bin/debug`; jeśli nie znasz, zapytaj lub potraktuj jako otwartą kwestię),
+- skompilowane biblioteki platformy Soneta — katalog z plikami `*.dll` (np. `bin/Debug` instalacji deweloperskiej lub katalog binariów zainstalowanego programu; jeśli nie znasz ścieżki, zapytaj użytkownika lub potraktuj jako otwartą kwestię),
 - .NET SDK 10 oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
 
 Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu) — **nie zgaduj istniejących struktur**; zapisz inwentaryzację jako otwartą kwestię **blokującą** dla Etapu 2 i kontynuuj Etap 1.

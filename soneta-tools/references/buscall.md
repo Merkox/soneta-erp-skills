@@ -18,6 +18,11 @@ Binarka `buscall` (oraz `BusCall.dll`) leży w katalogu build projektu BusCall
 <ścieżka>/buscall --db <Baza> <tryb> …          # albo: dotnet <ścieżka>/BusCall.dll …
 ```
 
+> **Windows:** przykłady w tym dokumencie są w składni bash (podstawienia `$(...)`, potoki z `jq`).
+> W PowerShell wywołania wyglądają analogicznie (`$wynik = & <ścieżka>\buscall.exe --db <Baza> call …`
+> lub `dotnet <ścieżka>\BusCall.dll …`), a `jq` trzeba doinstalować (np. `winget install jqlang.jq`);
+> zamiast `jq` można też parsować wynik przez `ConvertFrom-Json`.
+
 - **`call`** — pojedyncze wywołanie: `buscall --db <Baza> call <metoda> [klucz=wartość ...]`.
   Wykonuje **jedną** metodę, wypisuje wynik JSON na STDOUT i kończy proces. Bez handshake'u
   i utrzymywania procesu. **Domyślny, najprostszy tryb.**

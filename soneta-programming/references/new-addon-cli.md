@@ -262,8 +262,9 @@ projektów testowych. SDK `1.2.0` przypina zgodne wersje paczek testowych (NUnit
 Microsoft.NET.Test.Sdk) — nie trzeba ich nadpisywać. Gdyby zaszła potrzeba podmiany konkretnej wersji,
 służą do tego właściwości `Soneta*PackageVersion` (**nie** jawny `PackageReference` — SDK je wstrzykuje,
 co dałoby `NU1504: Duplicate PackageReference`). Pełną listę właściwości i ich domyślne wartości
-znajdziesz w `Sdk.props` paczki SDK — na macOS/Linux:
-`~/.nuget/packages/soneta.sdk/<wersja>/Sdk/Sdk.props` (m.in. `SonetaNUnitPackageVersion`,
+znajdziesz w `Sdk.props` paczki SDK — macOS/Linux:
+`~/.nuget/packages/soneta.sdk/<wersja>/Sdk/Sdk.props`, Windows:
+`%USERPROFILE%\.nuget\packages\soneta.sdk\<wersja>\Sdk\Sdk.props` (m.in. `SonetaNUnitPackageVersion`,
 `SonetaNUnitTestAdapterPackageVersion`, `SonetaMicrosoftNETTestSdkPackageVersion`,
 `SonetaNSubstitutePackageVersion`, `SonetaAwesomeAssertionsPackageVersion`).
 - Projekt jest rozpoznawany jako **testowy**, gdy nazwa zawiera `.Test` (warunek `MSBuildProjectName.Contains('.Test')`).

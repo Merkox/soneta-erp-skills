@@ -24,8 +24,9 @@ Backup/Restore operują na katalogu backupów serwera SQL.
 #:package Spectre.Console.Cli@*          // deklaracja pakietu NuGet inline (bez .csproj)
 ```
 
-- `chmod +x dbmgr-menu.cs` → uruchamiasz przez `./dbmgr-menu.cs`.
-- Albo bez shebanga: `dotnet run dbmgr-menu.cs`.
+- macOS/Linux: `chmod +x dbmgr-menu.cs` → uruchamiasz przez `./dbmgr-menu.cs` (shebang wskazuje
+  binarkę `dotnet` — dostosuj ścieżkę do swojej instalacji).
+- Windows: shebang nie działa — uruchamiaj przez `dotnet run dbmgr-menu.cs` (działa też na macOS/Linux).
 - Dyrektywa `#:package` pobiera NuGet w locie — nie potrzeba projektu ani `dotnet add package`.
 
 ### 2. Cienki wrapper wywołujący `dbmgr` przez `Process`
