@@ -141,6 +141,27 @@ Domyślny handler otwiera obiekt w nowym formularzu
 public Kontrahent OtworzKontrahenta() => Wystawca;
 ```
 
+#### Wzorzec: utworzenie obiektu i otwarcie go jako „szkic"
+
+Zwrócenie **świeżo utworzonego** wiersza (stan `Added`, po `transaction.CommitUI()`, **bez**
+`Save()`) otwiera jego formularz jako szkic do uzupełnienia — z komunikatem „Rekord jest w trakcie
+dodawania"; użytkownik dokańcza edycję i sam zapisuje (zweryfikowane na żywej aplikacji):
+
+```csharp
+[Action("Nowe zgłoszenie")]
+public Zgloszenie UtworzZgloszenie() {
+    var session = Kontrahent.Session;
+    Zgloszenie z;
+    using (var transaction = session.Logout(editMode: true)) {
+        z = new Zgloszenie();
+        session.GetSerwis().Zgloszenia.AddRow(z);
+        z.Kontrahent = Kontrahent;
+        transaction.CommitUI();        // akcja UI — CommitUI(), NIE Commit(); bez Save()
+    }
+    return z;                          // stan Added → formularz otwiera się jako szkic
+}
+```
+
 ## Nawigacja po programie
 
 ### `NavigationResult`

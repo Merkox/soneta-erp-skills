@@ -6,6 +6,11 @@ Klasa bazowa `Soneta.Test.TestBase` (projekt `Soneta.Test`, referencyjny przykł
 testowej i **automatycznie wycofuje wszystkie zmiany** po każdym teście. Test nie tworzy bazy,
 nie otwiera loginu i nie sprząta po sobie — skupia się wyłącznie na scenariuszu biznesowym.
 
+> ⚠ **Testujesz WŁASNY dodatek?** Bez dwóch kroków testy padną na starcie:
+> **(1)** rejestracja assembly dodatku w `[SetUpFixture]` (inaczej `InvalidCastException`
+> przy `session.GetMojDodatek()`), **(2)** rola z prawami do obiektów dodatku (inaczej
+> `AccessWriteDeniedException`). Szczegóły → [Testy własnego dodatku](#testy-własnego-dodatku-testbase).
+
 ## Co robi TestBase za Ciebie
 
 - **Zarządza bazą testową** — baza jest przygotowana raz (inicjalizator), test dostaje gotowe
@@ -132,9 +137,12 @@ działa użytkownik pulpitu.
 testowa oznacza kolejną bazę do zbudowania i utrzymania na infrastrukturze, co znacząco spowalnia
 późniejsze wykonywanie testów integracyjnych. Najpierw sprawdź, czy scenariusz da się zrealizować
 na jednej z gotowych baz (`nunit_default` / `nunit_ui` / `nunit_premiumui`), wpisując potrzebne
-dane w `ClassSetup`. Jeśli własny inicjalizator jest naprawdę konieczny — dziedzicz po
-`TestDatabaseInitializer`, ustaw nazwę bazy atrybutem i wypełnij dane w `Initialize()`
-(dostępne `Session`/`ConfigSession` + skróty `InSave`/`InConfigSave`):
+dane w `ClassSetup`. Uzasadniony przypadek własnego inicjalizatora to m.in. **testy własnego
+dodatku** (import roli z prawami do obiektów dodatku — sekcja
+[Testy własnego dodatku](#testy-własnego-dodatku-testbase)). Jeśli własny inicjalizator jest
+naprawdę konieczny — dziedzicz po `TestDatabaseInitializer` (lub po gotowym inicjalizatorze,
+np. `GoldStandardDatabaseInitializer`), ustaw nazwę bazy atrybutem i wypełnij dane
+w `Initialize()` (dostępne `Session`/`ConfigSession` + skróty `InSave`/`InConfigSave`):
 
 ```csharp
 [TestDatabase(typeof(GoldStandardDatabaseInitializer), "nunit_mojmodul")]
@@ -155,6 +163,145 @@ public class MojModulDatabaseInitializer : TestDatabaseInitializer {
 > uruchomieniu `TestBase` automatycznie utworzy nową bazę i wypełni ją danymi z inicjalizatora.
 > Uwaga: **odbudowa bazy testowej od zera jest długotrwała** i może chwilę potrwać — to normalne,
 > po jednorazowym odtworzeniu kolejne uruchomienia testów są już szybkie.
+
+## Testy własnego dodatku (TestBase)
+
+Testy integracyjne modułu dodatkowego (np. `Soneta.MojDodatek` z `MojDodatekModule`) piszesz
+na tym samym `TestBase`, ale host testowy nie wie nic o Twoim dodatku — trzeba go **zarejestrować**
+i **nadać prawa**. Poniższe problemy występują zawsze; rozwiązania są potwierdzone w praktyce.
+
+### ⚠ Rejestracja modułu dodatku — `[SetUpFixture]` + `Assembly.Load`
+
+Host testowy enumeruje moduły z **załadowanych** assembly. Assembly dodatku nie jest jeszcze
+załadowane w momencie budowania kolekcji modułów, więc `session.GetMojDodatek()` rozwiązuje się
+na **błędny** moduł platformy. Objaw:
+
+```
+InvalidCastException: Unable to cast object of type 'Soneta.BI.BIModule'
+to type 'Soneta.MojDodatek.MojDodatekModule'   (w Module.GetInstance / session.Modules[moduleInfo])
+```
+
+Rozwiązanie — osobna klasa `[SetUpFixture]` w przestrzeni nazw testów, która ładuje assembly
+**zanim** wykona się setup `TestBase`:
+
+```csharp
+using System.Reflection;
+using NUnit.Framework;
+
+namespace Soneta.MojDodatek.Tests;
+
+[SetUpFixture]
+public class ModuleLoader {
+    [OneTimeSetUp]
+    public void LoadAddonAssembly() => Assembly.Load("Soneta.MojDodatek");
+}
+```
+
+`[SetUpFixture]` uruchamia się raz, przed wszystkimi klasami testowymi w danej przestrzeni nazw.
+**NIE działa** `Assembly.Load` w `ClassSetup()` (czyli w override `OneTimeSetUp` samego `TestBase`) —
+to za późno, host zbudował już kolekcję modułów.
+
+### ⚠ Prawa do nowych obiektów dodatku — rola „pełny dostęp"
+
+Domyślny operator `TestBase` („Administrator") **nie ma prawa zapisu** do świeżo dodanych obiektów
+dodatku — prawa nowego modułu nie są nadane w żadnej istniejącej roli. Objaw przy `Commit`/`Save`:
+
+```
+AccessWriteDeniedException   (ścieżka praw: Dodatki\MojDodatek\MojObiekt)
+```
+
+Rozwiązanie — **własny initializer bazy testowej** (to jeden z uzasadnionych przypadków, o których
+mowa wyżej), który importuje rolę nadającą pełne prawa do gałęzi `Dodatki`:
+
+```csharp
+[TestDatabase(typeof(GoldStandardDatabaseInitializer), "nunit_addon")]
+public class AddonDatabaseInitializer : GoldStandardDatabaseInitializer {
+    protected override void Initialize() {
+        base.Initialize();
+        ImportBusinessXml("RolaPelnePrawa.xml");   // zasób osadzony (EmbeddedResource)
+    }
+}
+
+[TestDatabase(typeof(AddonDatabaseInitializer))]
+public class MojObiektTest : TestBase { ... }
+```
+
+Baza `nunit_addon` budowana jest raz (pierwsze uruchomienie ~2 min); kolejne uruchomienia są szybkie.
+
+**Struktura pliku roli** (`RolaPelnePrawa.xml`, osadzony jako `<EmbeddedResource>` w projekcie
+testowym) — to plik business.xml z obiektem `SystemRole`, którego pole `RoleText` zawiera
+**zaescape'owany** XML definicji roli (`&lt;`/`&gt;`):
+
+```xml
+<session xmlns="http://www.soneta.pl/schema/business">
+  <SystemRole id="SystemRole_5" guid="00000000-0015-0004-0003-000000000000">
+    <RoleText>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Role xmlns:xsi="..." xmlns:xsd="..." Guid="00000000-0015-0004-0003-000000000000"
+      Name="Pełny dostęp do programu" Mode="Advanced"&gt;
+  &lt;Right Name="Rights"&gt;
+    &lt;Right Name="Wielokrotne"  AccessRight="Granted" /&gt;
+    &lt;Right Name="Dodatki"      AccessRight="Granted" /&gt;   &lt;!-- klucz: prawa do obiektów dodatków --&gt;
+    &lt;Right Name="Konfiguracja" AccessRight="Granted" /&gt;
+    &lt;Right Name="Program"      AccessRight="Granted" /&gt;
+  &lt;/Right&gt;
+  &lt;Description&gt;Pełny dostęp do wszystkich funkcji i danych.&lt;/Description&gt;
+&lt;/Role&gt;</RoleText>
+  </SystemRole>
+</session>
+```
+
+Najprościej: wyeksportuj z programu rolę systemową „Pełny dostęp" i użyj jej bez zmian — kluczowe
+jest `Dodatki=Granted`. Plik **musi być w UTF-8** i mieć poprawnie zaescape'owaną treść `RoleText`;
+uszkodzone kodowanie lub niedomknięte encje objawiają się błędem importu przy budowie bazy.
+
+### ⚠ Tabele `config="true"` są read-only w sesji operacyjnej
+
+Słowniki konfiguracyjne dodatku (tabele z `config="true"` w business.xml) **nie dadzą się edytować**
+w `Session`/`InTransaction` — próba kończy się `ReadOnlyException`. Rozróżnienie:
+
+- dane **OPERACYJNE** → `Session` + `InTransaction`,
+- dane **KONFIGURACYJNE** → `ConfigSession` + `InConfigTransaction` (lub `EditInConfigSession`).
+
+```csharp
+// ŹLE — ReadOnlyException:
+InTransaction(() => Session.GetMojDodatek().Slowniki.AddRow(new SlownikDef { ... }));
+
+// DOBRZE:
+InConfigTransaction(() => ConfigSession.GetMojDodatek().Slowniki.AddRow(new SlownikDef { ... }));
+```
+
+**Odczyt** danych konfiguracyjnych z sesji operacyjnej oraz **przypisanie** config-relacji
+w obiekcie operacyjnym działają normalnie — read-only dotyczy tylko zapisu samych wierszy
+konfiguracyjnych. Pamiętaj też o zapisie `ConfigSession` przed użyciem danych w `Session`
+(sekcja [Dostęp do danych](#dostęp-do-danych)).
+
+### Projekt testowy dodatku i uruchamianie
+
+- Projekt testowy potrzebuje `<ProjectReference>` do projektu logiki dodatku — daje typy
+  w kompilacji i kopiuje assembly do outputu, dzięki czemu `Assembly.Load("Soneta.MojDodatek")`
+  je znajdzie.
+- Plik roli dodaj jako `<EmbeddedResource Include="RolaPelnePrawa.xml" />`.
+- `dotnet test` na **Microsoft.Testing.Platform** wymaga `--project` ze ścieżką do `.csproj`
+  (nie katalogu ani samej nazwy projektu):
+
+```bash
+dotnet test --project Soneta.MojDodatek.Tests/Soneta.MojDodatek.Tests.csproj \
+    --filter "FullyQualifiedName~MojObiektTest"
+```
+
+- Pierwsze uruchomienie buduje bazę testową (długo — to normalne); kolejne są szybkie.
+
+### Checklista — testy własnego dodatku
+
+- [ ] `[SetUpFixture]` z `[OneTimeSetUp]` wołającym `Assembly.Load("<AssemblyDodatku>")`
+      (nie w `ClassSetup` — za późno).
+- [ ] Własny initializer (np. `AddonDatabaseInitializer`) z **własną nazwą bazy** (np. `nunit_addon`)
+      i `ImportBusinessXml` roli „pełny dostęp" (`Dodatki=Granted`).
+- [ ] `[TestDatabase(typeof(AddonDatabaseInitializer))]` na klasach testowych dodatku.
+- [ ] Plik roli: UTF-8, `RoleText` poprawnie zaescape'owany, osadzony jako `EmbeddedResource`.
+- [ ] Słowniki `config="true"` edytujesz przez `ConfigSession`/`InConfigTransaction`, nie `Session`.
+- [ ] `<ProjectReference>` z projektu testów do projektu logiki dodatku.
+- [ ] Uruchamianie: `dotnet test --project <ścieżka.csproj> --filter "FullyQualifiedName~<Klasa>"`.
 
 ## Cykl życia testu — metody wirtualne
 
@@ -376,6 +523,14 @@ dotnet test Soneta.Business.Test --filter "FullyQualifiedName~TowarUpdateTest"
 Zgodnie z konwencją: gdy pracujesz nad jedną klasą testową, uruchamiaj tylko ją (`--filter`),
 a nie cały projekt.
 
+Projekt na **Microsoft.Testing.Platform** (typowo projekt testowy dodatku) wymaga jawnego
+`--project` ze ścieżką do pliku `.csproj` — nie zadziała katalog ani sama nazwa projektu:
+
+```bash
+dotnet test --project Soneta.MojDodatek.Tests/Soneta.MojDodatek.Tests.csproj \
+    --filter "FullyQualifiedName~MojObiektTest"
+```
+
 ## Checklist / pułapki
 
 - Styl .NET 10: **file-scoped namespace** (bez klamer), **raw string literals** (`""" … """`) dla tekstów wielowierszowych/SQL.
@@ -389,3 +544,6 @@ a nie cały projekt.
 - Nie sprzątaj ręcznie danych — transakcja `TestBase` wycofa je sama (chyba że `EnableDbTransation => false`).
 - Dane globalne dla klasy wpisuj w `ClassSetup`, dane per-test w teście lub `TestSetup`.
 - DI podmieniaj przez `ConfigureXxxServices` — nie modyfikuj rejestracji atrybutami assembly (wpłynęłoby na inne testy).
+- Testujesz własny dodatek? Przejdź checklistę z sekcji
+  [Testy własnego dodatku](#testy-własnego-dodatku-testbase) (`Assembly.Load` w `[SetUpFixture]`,
+  rola z prawami `Dodatki`, `ConfigSession` dla tabel `config="true"`).

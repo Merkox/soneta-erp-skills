@@ -119,7 +119,7 @@ Operator, WebOperator, Entitle i pokrewne dane autoryzacyjne pobieraj **z sesji*
 
 | Z `Session.AuthorizationInfo` | Znaczenie |
 |---|---|
-| `.Operator` | Operator właściwy dla tej sesji |
+| `.Operator` | Operator właściwy dla tej sesji (typ `Soneta.Business.App.Operator`) — np. do ustawienia relacji „autor" |
 | `.WebOperator` | Operator pulpitu webowego (jeśli dotyczy) |
 | `.LoggedWebOperator` | Fizycznie zalogowany operator pulpitu |
 
@@ -208,7 +208,7 @@ using (var session = login.CreateSession(readOnly: false, config: false, name: "
 | `false` | `true` | **Edycja konfiguracyjna** - ustawienia systemu |
 | `true` | `true` | **Odczyt konfiguracyjny** - odczyt słowników |
 
-**WAŻNE:** W sesji operacyjnej (`config: false`) nie można modyfikować obiektów konfiguracyjnych. Do modyfikacji konfiguracji wymagana jest sesja konfiguracyjna (`config: true`).
+**WAŻNE:** W sesji operacyjnej (`config: false`) nie można modyfikować obiektów konfiguracyjnych. Do modyfikacji konfiguracji wymagana jest sesja konfiguracyjna (`config: true`). **Odczyt** tabeli konfiguracyjnej przez moduł sesji operacyjnej i przypisanie jej wiersza do relacji obiektu operacyjnego (np. `faktura.Definicja = hm.DefDokHandlowe[...]`) jest natomiast poprawne — to nie jest mieszanie sesji (przykład: [examples.md](examples.md#odczyt-konfiguracji-z-sesji-operacyjnej), zapis konfiguracji w testach: [integration-tests.md](integration-tests.md)).
 
 ### Właściwości
 

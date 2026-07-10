@@ -123,6 +123,8 @@ Bindowanie wg schematu: `{Workers.<NazwaTypuBezSufiksWorker>.NazwaProperty}`
 Worker udostępnia metodę w menu Czynności za pomocą atrybutu `[Action("Tytuł")]`.
 
 * Jeden worker może udostępniać wiele pozycji (metod) w menu Czynności.
+* Akcja workera pojawia się **w dwóch miejscach naraz**: w menu Czynności listy/formularza oraz
+  jako `Command` możliwy do umieszczenia na formularzu (element `Command` — skill `/soneta-form-xml`).
 * Metoda Action (w przykładzie metoda `SendEmails`) obiektu worker zwraca [action result](./action-result.md)
 * Metoda `bool IsVisibleXxx()` (np `bool IsVisibleSendEmails()`) jest opcjonalna i kontroluje widoczność w menu
 * Metoda `bool IsEnabledXxx()` (np `bool IsEnabledSendEmails()`) jest opcjonalna i kontroluje aktywność pozycji w menu
@@ -393,9 +395,19 @@ Taki sposób użycia jest przydatny w testach jednostkowych, w workerach wywoły
 workerów oraz w kodzie biznesowym, który chce skorzystać z logiki zamkniętej w workerze bez
 przechodzenia przez UI.
 
+## Częste pułapki (namespace'y i typy)
+
+* **`[Caption]` jest w `Soneta.Types`** — wymaga `using Soneta.Types;`, nie `Soneta.Business`.
+* **Daty: `Soneta.Types.Date`** (`Date.Today`), nie `DateTime.Now`/`DateTime.Today` — poza
+  szczególnymi potrzebami (znaczniki czasu z godziną).
+* **Bieżący zalogowany operator: `session.AuthorizationInfo.Operator`** (typ
+  `Soneta.Business.App.Operator`), **NIE** `Login.Operator`. Nadaje się np. do ustawienia relacji
+  „autor" na tworzonym obiekcie. Szczegóły: [session-login.md](session-login.md#dostęp-do-informacji-o-operatorze).
+
 ## Dobre praktyki
 
 1. **Używaj [Context]** w obiektach worker i extender dla parametrów inicjowanych z context
 2. **Dziedzicz z ContextBase** dla własnych klas parametrów (patrz [contextbase.md](contextbase.md))
-3. **Metody Action zwracają [action result](./action-result.md)** - nie wywołuj UI bezpośrednio
+3. **Metody Action zwracają [action result](./action-result.md)** - nie wywołuj UI bezpośrednio;
+   akcja zwracająca `Row` otwiera jego formularz (wzorzec „szkicu" — [action-result.md](action-result.md#zwrócenie-row-lub-dowolnego-object))
 4. **`CommitUI()` zamiast `Commit()`** - w workerach/extenderach uruchamianych z UI używaj `CommitUI()`

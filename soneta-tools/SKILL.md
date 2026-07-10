@@ -39,6 +39,12 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 > przeładowanie DLL, pułapki osieroconych procesów/portów, zrzuty ekranu do oceny wyglądu formularzy) opisuje
 > dokument `buscall-live-testing.md` w skillu **`/soneta-programming`**.
 
+> **Żywa aplikacja z WŁASNYM dodatkiem** — kompletny przepis w trzech krokach: (1) per-bazowy
+> `serversettings.json` (`Ext` + `Server.DbRegister`) i utworzenie bazy z tabelami dodatku —
+> [references/dbmgr.md](references/dbmgr.md), sekcja „Baza z własnym dodatkiem"; (2) wpięcie tej samej
+> konfiguracji w `Sources` ramki przez `config-file=` — [references/sonetaframe.md](references/sonetaframe.md);
+> (3) sterowanie i zrzuty ekranu — [references/buscall.md](references/buscall.md), „Typowy przepływ".
+
 ## Wspólny kontekst
 
 - **Binaria** znajdują się w katalogu wyjściowym buildu (`bin/Debug`) odpowiedniego projektu.

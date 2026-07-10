@@ -28,7 +28,7 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 |---------------------------------------------------------------------------------------------------|---|
 | **Nowy dodatek od zera** — wygenerowanie szkieletu źródeł przez CLI (`dotnet new soneta-addon`, Soneta.MsBuild.SDK, `global.json`/`Directory.Build.props`, solucja, debug VS Code) | [references/new-addon-cli.md](references/new-addon-cli.md) |
 | Hierarchia ORM, Row / Table / Module, klucze, ISessionable                                        | sekcje poniżej |
-| Implementacja klas Row/Table, konstruktory (pola readonly, `RowCreator`), selector + `[BusinessRow]`, `[NewRow]`, `[DefaultConstructor]`, jawne wartości enum'ów, **zdarzenia cyklu życia** (`OnLoaded`/`OnAdded`/`OnEditing`/`OnDeleting`/`OnImported`…) | [references/row-types.md](references/row-types.md) |
+| Implementacja klas Row/Table, konstruktory (pola readonly, `RowCreator`), selector + `[BusinessRow]`, `[NewRow]`, `[DefaultConstructor]`, jawne wartości enum'ów, **zdarzenia cyklu życia** (`OnAdded`/`OnLoaded`/`OnEditing`/`OnDeleting`/`OnDeleted`/`OnRepacked` — override z `base.OnXxx()`; alternatywa bez dziedziczenia: statyczne delegaty `XSchema`) | [references/row-types.md](references/row-types.md) |
 | `AssemblyAttributes` - odczyt atrybutów z załadowanych modułów (`GetCustom<T>`, `Find`, iteracja po assembly, cache, analiza DLL w runtime) | [references/assembly-attributes.md](references/assembly-attributes.md) |
 | Sesje, transakcje, Login, Database, BusApplication, optimistic locking                            | [references/session-login.md](references/session-login.md) |
 | Paczki danych, Datapack, GuidedRow, ExportedRow, synchronizacja, blokady                          | [references/datapack-guidedrow.md](references/datapack-guidedrow.md) |
@@ -90,6 +90,11 @@ Powstaje gotowa solucja `MyExtension.sln` z projektami `MyExtension` (logika), `
 
 Gotowa treść wszystkich trzech plików: [references/new-addon-cli.md](references/new-addon-cli.md#5a-pliki-konfiguracyjne--poprawna-treść-krok-obowiązkowy).
 Dopiero po tym uruchom `dotnet build` (powinien przejść z 0 ostrzeżeń, 0 błędów).
+
+**`dotnet build` = walidator obu warstw** (generacja `business.xml → business.cs` **i** C#) — jednym
+poleceniem wychodzą błędy generatora i braki klas konkretnych; to najszybsza pętla iteracji.
+W raportach rozróżniaj „zweryfikowane buildem" vs „wymaga weryfikacji runtime" (żywa aplikacja /
+testy) — zielony build ≠ działające runtime.
 
 **Kryterium ukończenia:** w katalogu docelowym istnieją trzy `*.csproj`, `global.json`
 i `Directory.Build.props`. Dalej wypełniasz szkielet: definicje (**soneta-business-xml**) → kod

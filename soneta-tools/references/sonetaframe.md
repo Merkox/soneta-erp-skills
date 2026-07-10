@@ -57,11 +57,9 @@ Przykładowa zawartość:
   "Maximized": false,
   "Sources": [
     "demo:",
-    "process:OcenaKontrahenta;caption=OcenaKontrahenta;path=~/d/dev;config-file=/Users/marcin/p/Ocena Kontrahenta/serversettings.json",
-    "process:Demo;caption=dev;path=~/d/dev",
-    "process:Test2;caption=Addon;path=~/d/dev;user=Administrator;pwd=;config-file=/Users/marcin/Desktop/app.json",
-    "http://localhost:5005;user=Administrator;pwd=;caption=Demo",
-    "process:Test;path=~/d/dev"
+    "process:Demo;caption=dev;path=<katalog-kodu-soneta>",
+    "process:moja_baza;caption=moja_baza;path=<katalog-kodu-soneta>;user=Administrator;pwd=;config-file=<ścieżka>/serversettings.json",
+    "http://localhost:5005;user=Administrator;pwd=;caption=Demo"
   ],
   "Favorites": null,
   "Language": null,
@@ -178,10 +176,27 @@ program `orchestrator.dll` (inny sposób startu procesów). Przyjmuje te same pa
 
 | Modyfikator | Znaczenie |
 |---|---|
-| `;user=Administrator;pwd=` | Operator i hasło programu. |
-| `;config-file=path-to-appsettings.json` | Indywidualne ustawienia serwerów. |
+| `;user=Administrator;pwd=` | Operator i hasło programu — podanie ich daje **autologin** (start w pełni bezobsługowy, np. dla `buscall`). |
+| `;config-file=path-to-appsettings.json` | Indywidualne ustawienia serwerów (per baza). |
 | `;trusted=true` | Połączenie traktowane jako zaufane. |
 | `;caption=Nazwa_w_menu` | Alternatywna nazwa wyświetlana w menu. |
+
+### Baza z własnym dodatkiem (`process:` + `config-file=`)
+
+Aby połączenie startowało z **Twoim dodatkiem** i wskazaną bazą SQL, dodaj do `Sources` wpis:
+
+```
+process:moja_baza;caption=moja_baza;path=<katalog-kodu-soneta>;user=Administrator;pwd=;config-file=<ścieżka>/serversettings.json
+```
+
+- **Klucz to `config-file=`** — ⚠️ **nie** `config=` (starsza forma, **nie działa**).
+- `path` — katalog kodu platformy zawierający `bin/debug` (stąd ładowane są DLL-e programu).
+- `user=Administrator;pwd=` — autologin, bez którego każdorazowo trzeba logować się ręcznie w GUI.
+- `config-file` wskazuje ten sam per-bazowy `serversettings.json` (tablica `Ext` z DLL dodatku +
+  `Server.DbRegister` z połączeniem SQL), którym `dbmgr create … --config-file=…` utworzył bazę —
+  **jedno źródło prawdy**; struktura pliku i utworzenie bazy: [dbmgr.md](dbmgr.md), sekcja
+  „Baza z własnym dodatkiem". Pełny przepis weryfikacji dodatku na żywej aplikacji:
+  `buscall-live-testing.md` w skillu `/soneta-programming`.
 
 ## Powiązania
 

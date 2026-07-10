@@ -63,6 +63,33 @@ Aby przetestować inny projekt: dodaj analogiczny wpis w `Sources` z własną na
 po czym wywołuj `buscall --db <nazwa> call …`. Dodatkowo `IsDeveloperMode: true` w tym samym pliku
 włącza tryb dewelopera.
 
+### Baza z WŁASNYM dodatkiem — przepis w trzech krokach
+
+Gdy testujesz **własny dodatek** (np. `Soneta.MojDodatek`), potrzebna jest baza z jego tabelami
+i frame ładujący jego DLL-e. Przepis (szczegóły w skillu `/soneta-tools`):
+
+1. **Per-bazowy `serversettings.json`** — tablica `Ext` (DLL logiki + `.UI` z `bin/Debug` dodatku)
+   oraz `Server.DbRegister` (połączenie SQL). Struktura pliku: `dbmgr.md` w `/soneta-tools`,
+   sekcja „Baza z własnym dodatkiem".
+2. **Utworzenie bazy z tabelami dodatku i danymi demo** (~3 min):
+   ```bash
+   dbmgr create moja_baza --config-file=<ścieżka>/serversettings.json --demo gold --recreate
+   ```
+3. **Wpięcie w SonetaFrame** — wpis w `Sources` z **tym samym** `serversettings.json`
+   (jedno źródło prawdy):
+   ```
+   process:moja_baza;caption=moja_baza;path=<katalog-kodu-soneta>;user=Administrator;pwd=;config-file=<ścieżka>/serversettings.json
+   ```
+   ⚠️ Klucz to **`config-file=`**, nie `config=` (starsza forma nie działa). Szczegóły
+   modyfikatorów: `sonetaframe.md` w `/soneta-tools`.
+
+Pułapki:
+- **Prawa do dodatku:** operator `Administrator` z bazy demo-gold **nie ma praw** do obiektów
+  nowego dodatku — nadaj rolę z `Dodatki=Granted` (np. `dbmgr importxml` pliku roli; plik musi być
+  UTF-8 i poprawnie zaescape'owany — błędny import potrafi **zablokować logowanie**).
+- **Okno „Wersja demonstracyjna":** po autologinie na bazie demo wyskakuje dialog — zamknij go
+  pierwszym wywołaniem `buscall --db moja_baza call cancel_form`, inaczej blokuje nawigację.
+
 ## Architektura
 
 ```
@@ -141,6 +168,14 @@ kontrolek, wyrównanie, motyw itp. To krok, którego nie zastąpi odczyt danych 
 SHOT=$(buscall --db Demo call take_screenshot)
 echo "$SHOT"     # ścieżka do PNG — otwórz i obejrzyj
 ```
+
+### Zasada raportowania: „zweryfikowane buildem" ≠ „zweryfikowane wizualnie"
+
+Layout i zachowania UI (formularze, widoczność pól, wyrównanie, zakładki) weryfikuje się
+**TYLKO wizualnie** — przez `buscall` + zrzut ekranu i obejrzenie PNG. Sam poprawny build
+(kompilacja, brak błędów XML) **nie** potwierdza, że formularz wygląda i działa dobrze.
+W raportach dla użytkownika **rozróżniaj jawnie**: „zweryfikowane buildem" (kod się kompiluje)
+vs „wymaga weryfikacji runtime" (wygląd/zachowanie nie zostały jeszcze obejrzane na żywo).
 
 ## Minimalny przepływ (skopiuj i uruchom)
 

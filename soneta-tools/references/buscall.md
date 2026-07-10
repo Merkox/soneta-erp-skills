@@ -78,12 +78,17 @@ buscall --db Demo call navigate_to_folder "programFolderPath=Kadry i płace/Kadr
 
 | Metoda | Do czego |
 |---|---|
-| `where_I_am` | bieżące położenie w aplikacji (bez argumentów) |
+| `where_I_am` | bieżące położenie w aplikacji (bez argumentów); wywołane w korzeniu — punkt startowy odkrywania folderów |
+| `get_folders` | lista podfolderów wskazanego foldera: `programFolderPath=<folder>` (odkrywanie struktury menu) |
 | `navigate_to_folder` | przejście do foldera programu, np. `programFolderPath=Handel/Kartoteki/Towary i usługi` |
 | `retrieve_list` | odczyt danych listy (stronicowane); zwraca `data.rows[{objectID,values}]` i oznacza wiersze jako „odwiedzone" (wymagane przez `open_form`) |
 | `open_form` | otwarcie formularza obiektu: `tableName=Towary objectID=<id>` |
 | `search_object` | otwarcie formularza po warunku: `tableName=… objectSelector=Kod=…` |
+| `get_form_pages` | lista zakładek otwartego formularza (zwraca `pageID` do `switch_form_page`) |
 | `switch_form_page` | zmiana zakładki formularza: `pageID=TowarCennikKontrahentowPage` |
+| `cancel_form` | zamknięcie bieżącego okna/dialogu bez zapisu (np. okna „Wersja demonstracyjna" po zalogowaniu) |
+| `get_actions` | lista czynności dostępnych w bieżącym kontekście; zwraca `workerID` w formie `Namespace.Worker,Assembly\|Metoda` |
+| `execute_action` | wykonanie czynności: `workerID=<Namespace.Worker,Assembly\|Metoda>` |
 | `get_grid_rows` | pełny grid z formularza + filtr regex: `gridPath=… regexFilter=… regexOptions=IgnoreCase` |
 | `update_field_value` | zmiana pól: `'fieldsValues=["Nazwa=Buciki"]'` |
 | `edit_grid_rows` | edycja / dodanie / usunięcie wierszy grida in-place |
@@ -135,6 +140,36 @@ buscall call application_close      # zwykle bez --db; zamyka bieżącą instanc
 - To **preferowany** sposób zamknięcia/przeładowania kodu (zamiast `kill`). Ręczne ubijanie
   osieroconych serwerów zostaje jako procedura awaryjna — patrz `buscall-live-testing.md`
   w skillu `/soneta-programming`.
+
+## Typowy przepływ: zrzut formularza od zera
+
+Od zimnego startu do obejrzanego zrzutu ekranu (szczegóły i konfiguracja bazy z własnym kodem —
+`buscall-live-testing.md` w skillu `/soneta-programming`):
+
+```bash
+# 0) pierwsze `call` z --db STARTUJE frame (wolno, potem zostaje w tle);
+#    po autologinie może wyskoczyć okno „Wersja demonstracyjna" — zamknij je:
+buscall --db moja_baza call cancel_form
+
+# 1) odkrywanie folderów: korzeń + drążenie
+buscall --db moja_baza call where_I_am
+buscall --db moja_baza call get_folders programFolderPath=<folder>
+
+# 2) lista → formularz → zakładka → zrzut
+buscall --db moja_baza call navigate_to_folder "programFolderPath=<ścieżka-foldera>"
+ID=$(buscall --db moja_baza call retrieve_list | jq -r '.data.rows[0].objectID')
+buscall --db moja_baza call open_form tableName=<tbl> objectID="$ID"
+buscall --db moja_baza call get_form_pages                       # dostępne pageID
+buscall --db moja_baza call switch_form_page pageID=<x>
+buscall --db moja_baza call take_screenshot                      # → ścieżka PNG: otwórz i OBEJRZYJ
+
+# 3) czynności (menu „Czynności")
+buscall --db moja_baza call get_actions                          # zwraca workerID
+buscall --db moja_baza call execute_action "workerID=<Namespace.Worker,Assembly|Metoda>"
+
+# koniec pracy / przeładowanie kodu:
+buscall call application_close                                   # bez --db
+```
 
 ## Wyniki i kody wyjścia
 

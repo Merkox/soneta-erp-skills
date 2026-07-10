@@ -345,9 +345,18 @@ zna tylko globalne źródła, zwykle sam `nuget.org`, i nie znajdzie bibliotek S
 </configuration>
 ```
 
-Po nadpisaniu tych trzech plików `dotnet build` przechodzi z **0 ostrzeżeń, 0 błędów**. Datowe
-wersje (`SonetaPackageVersion 2606.0.0`, `Version`) dobierz pod docelową instalację Soneta; wersja
-MSBuild SDK (`1.2.0`) jest niezależna od wersji bibliotek.
+Wpisy źródeł możesz też skopiować z istniejącego `NuGet.Config` użytkownika (np. z innego
+działającego dodatku) — zwłaszcza gdy feed wymaga uwierzytelnienia.
+
+Po nadpisaniu tych trzech plików `dotnet build` przechodzi z **0 ostrzeżeń, 0 błędów** — to
+kryterium sukcesu tego kroku (dokładnie te trzy zmiany są wymagane, potwierdzone w praktyce na
+szablonie `1.0.7`). Datowe wersje (`SonetaPackageVersion 2606.0.0`, `Version`) dobierz pod docelową
+instalację Soneta; wersja MSBuild SDK (`1.2.0`) jest niezależna od wersji bibliotek.
+
+> **Zanim zdiagnozujesz „brak dostępu do feedu"** — sprawdź lokalny cache NuGet: restore często
+> działa **offline** z cache. macOS/Linux: `ls ~/.nuget/packages/soneta.sdk`; Windows:
+> `dir %USERPROFILE%\.nuget\packages\soneta.sdk`. Jeśli paczki są w cache, build przejdzie bez
+> dostępu do sieci.
 
 ## 6. Typy projektów i konwencja nazw
 
@@ -559,12 +568,22 @@ a samą treść pisz wg odpowiedniego skilla. Typowa kolejność:
    `soneta-item-dashboard`; treść wg **soneta-form-xml** i [references/viewinfo.md](viewinfo.md).
 5. **Testy** → projekt `*.Test*`.
 
+### Pętla iteracji i raportowanie
+
+`dotnet build` jest walidatorem **obu warstw naraz**: generacji `business.xml → business.cs`
+i kodu C#. Jednym poleceniem wychodzą błędy generatora oraz braki klas konkretnych — to
+najszybsza pętla iteracji, uruchamiaj go po każdej porcji zmian.
+
+Raportując postęp rozróżniaj: **„zweryfikowane buildem"** vs **„wymaga weryfikacji runtime"**
+(żywa aplikacja — [buscall-live-testing.md](buscall-live-testing.md), testy —
+[integration-tests.md](integration-tests.md)). Zielony build ≠ działające runtime.
+
 ## 14. Troubleshooting
 
 | Objaw | Przyczyna / rozwiązanie |
 |-------|-------------------------|
 | `dotnet new soneta-addon` — *No templates found* | Szablony niezainstalowane lub brak feedu. Powtórz `dotnet new install Soneta.Platform.Developer`; sprawdź `dotnet new list`. |
-| Build nie znajduje bibliotek Soneta / `Unable to find package …` | Brak `NuGet.Config` z feedem Soneta (szablon go nie generuje — [sekcja 5](#nugetconfig--źródła-paczek-szablon-go-nie-generuje)), zły `SonetaPackageVersion`, albo brak dostępu/uwierzytelnienia do feedu `Soneta.Products.Modules`. |
+| Build nie znajduje bibliotek Soneta / `Unable to find package …` | Brak `NuGet.Config` z feedem Soneta (szablon go nie generuje — [sekcja 5](#nugetconfig--źródła-paczek-szablon-go-nie-generuje)), zły `SonetaPackageVersion`, albo brak dostępu/uwierzytelnienia do feedu `Soneta.Products.Modules`. Przed diagnozą „brak dostępu" sprawdź lokalny cache (`~/.nuget/packages/soneta.sdk`) — restore może zadziałać offline; wpisy feedów można skopiować z istniejącego `NuGet.Config` użytkownika. |
 | `error : Invalid framework identifier ''` na restore | `$(SonetaTargetFramework)` puste — `Soneta.Sdk 1.2.0` nie ustawia tej zmiennej. Ustaw jawnie `<SonetaTargetFramework>net10.0</SonetaTargetFramework>` w `Directory.Build.props` ([sekcja 5](#directorybuildprops--wersja-bibliotek-i-ustawienia-wspólne)). |
 | `warning NU1504: Duplicate PackageReference` w projekcie testowym | Dodano wprost `PackageReference` na paczkę, którą SDK już wstrzykuje. Usuń jawną referencję i steruj wersją przez właściwość `Soneta*PackageVersion` zamiast dublować. |
 | `Soneta.Sdk` nie rozwiązuje wersji | Brak `global.json` z `msbuild-sdks` **lub** brak `/<numerWersji>` w atrybucie `Sdk` w `.csproj`. |

@@ -83,6 +83,30 @@ public Currency Wartosc {
 }
 ```
 
+### Zabezpieczenia handlera przeliczającego (potwierdzone w praktyce)
+
+Handler „przelicz przy zapisie" (drenowany przy `CommitUI()`/`Save()`), który **edytuje wiersze
+podrzędne**, może przez ich settery ponownie uzbrajać samego siebie. Dwa guardy:
+
+1. **Guard reentrancji** — pole `bool przeliczanie` blokuje wejście handlera w trakcie własnego
+   wykonania.
+2. **Guardy zmiany** — przypisuj tylko przy faktycznej różnicy (`if (pole != nowa) pole = nowa;`).
+   Ograniczają zbędne edycje i pętle zdarzeń oraz zapewniają zbieżność w ≤2 przebiegach.
+
+```csharp
+bool przeliczanie;
+
+void PrzeliczSume(BusEventArgs args) {
+    if (przeliczanie) return;              // guard reentrancji
+    przeliczanie = true;
+    try {
+        var nowa = Pozycje.Aggregate(Currency.Zero, (s, p) => s + p.Wartosc);
+        if (suma != nowa) suma = nowa;     // guard zmiany — brak edycji bez różnicy
+    }
+    finally { przeliczanie = false; }
+}
+```
+
 ## Sesyjne vs serwerowe — porównanie
 
 | Cecha | Eventy sesyjne (`Session.Events`) | Eventy serwerowe (`Session.ServerEvents`) |
@@ -281,6 +305,8 @@ w trakcie edycji → **sesyjnie** (`Events`).
 - [ ] Event serwerowy jest **krótki** i **idempotentny** (może zostać wykonany raz w transakcji Save).
 - [ ] Nie polegasz na `Commit()` (biznesowym) do odpalenia eventów sesyjnych — używasz `Invoke`
       albo `Save()`/`CommitUI()`.
+- [ ] Handler edytujący wiersze podrzędne ma **guard reentrancji** (`bool przeliczanie`) i **guardy
+      zmiany** (`if (pole != nowa) pole = nowa;`) — zbieżność w ≤2 przebiegach.
 
 ## Powiązane materiały
 

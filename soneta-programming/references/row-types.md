@@ -186,6 +186,12 @@ Klasy `Row` i `SubRow` udostępniają **wirtualne metody zdarzeń**, które nadp
 obiekcie biznesowym, aby wpiąć logikę w kluczowe momenty cyklu życia rekordu. Wywołuje je ORM —
 nie wołaj ich ręcznie. Zawsze wołaj `base.OnXxx()` w override.
 
+Generowana klasa bazowa (`<Moduł>Module.XRow`) udostępnia je jako `protected override void`:
+`OnAdded`, `OnLoaded`, `OnEditing`, `OnDeleting`, `OnDeleted`, `OnRepacked` — każda woła `base`
+oraz odpowiadający statyczny delegat generatora (`XSchema.OnXxx`). **Nadpisanie w klasie
+konkretnej** (zawsze z `base.OnXxx()`) to najczystsze miejsce na wartości domyślne (`OnAdded`)
+i wyzwalanie przeliczeń (`OnEditing`/`OnDeleting`).
+
 | Metoda | Kiedy | Typowe zastosowanie / pułapki |
 |--------|-------|-------------------------------|
 | `OnLoaded()` | raz, po wczytaniu rekordu z bazy (pola jeszcze niezmienione) | **Nie edytuj pól** — każdy wczytany rekord natychmiast przeszedłby w tryb edycji |
@@ -194,6 +200,7 @@ nie wołaj ich ręcznie. Zawsze wołaj `base.OnXxx()` w override.
 | `OnParentDeleting()` | przed usunięciem obiektu **rodzica** | zablokuj usunięcie, gdy istnieją zależności |
 | `OnDeleting()` | przed usunięciem obiektu | zablokuj usunięcie, gdy istnieją zależności |
 | `OnDeleted()` | po usunięciu obiektu | dostęp do properties usuniętego obiektu jest ograniczony |
+| `OnRepacked()` | po przepakowaniu rekordu (reorganizacja danych w sesji) | rzadko nadpisywane; nie edytuj pól |
 | `OnImporting()` | przed ustawianiem pól w trakcie importu | podczas importu pola omijają standardowe properties biznesowe |
 | `OnImported()` | po ustawieniu wszystkich pól importowanego obiektu | uzupełnij logikę biznesową, która nie odpaliła się przez properties |
 
@@ -214,10 +221,23 @@ public class Zgloszenie : SerwisModule.ZgloszenieRow {
 }
 ```
 
+### Alternatywa bez dziedziczenia — statyczne delegaty generatora
+
+Gdy **nie kontrolujesz klasy konkretnej** (rozszerzasz obcy obiekt z dodatku), zamiast override
+możesz dopiąć logikę do statycznych delegatów generowanej klasy `XSchema`:
+
+- `Add<Pole>BeforeEdit(RowDelegate<XRow, T>)` / `Add<Pole>AfterEdit(RowDelegate<XRow>)` — wokół
+  zmiany konkretnego pola;
+- `AddOnAdded` / `AddOnLoaded` / `AddOnEditing` / `AddOnDeleting` — odpowiedniki metod cyklu życia.
+
+Delegaty wymagają **punktu rejestracji przy starcie** (np. konstruktor statyczny modułu / kod
+inicjalizacyjny dodatku) i działają dla **wszystkich** instancji typu. Preferuj override w klasie
+konkretnej, gdy masz nad nią kontrolę.
+
 > **Różnica względem eventów sesji.** Powyższe metody to zdarzenia **jednego obiektu** (override na
 > wierszu). Zdarzenia obejmujące wiele obiektów, odraczanie ciężkich obliczeń oraz logikę w
 > transakcji serwerowej realizuje mechanizm `Session.Events` / `Session.ServerEvents` —
-> [events.md](events.md).
+> [events.md](events.md) (tam też guardy reentrancji i zmiany dla handlerów przeliczających).
 
 ## Skrót — co zaimplementować przy tabeli
 

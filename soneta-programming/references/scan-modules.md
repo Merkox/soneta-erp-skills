@@ -72,6 +72,10 @@ Algorytm:
   ```bash
   dotnet tool install -g dotnet-script
   ```
+  Global tool ląduje w `~/.dotnet/tools`, który bywa **poza PATH** (`which dotnet-script` nie
+  znajduje mimo `dotnet tool list -g`). Dodaj go do PATH — macOS/Linux:
+  `export PATH="$PATH:$HOME/.dotnet/tools"`; Windows (PowerShell):
+  `$env:PATH += ";$env:USERPROFILE\.dotnet\tools"`.
 
 ## Uruchomienie
 

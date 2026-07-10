@@ -128,6 +128,56 @@ dbmgr create Test --standard --recreate --demo gold
 dbmgr create exampleDb --sqlserver localhost --sqldb exampleDbName --sqltrusted --licence licence.xml
 ```
 
+## Baza z własnym dodatkiem — `serversettings.json` + `--config-file`
+
+Aby `create` utworzył bazę **wraz z tabelami Twojego dodatku**, przygotuj per-bazowy plik
+konfiguracji (nazwa umowna: `serversettings.json`) i podaj go przez `-c/--config-file`.
+Plik łączy dwie rzeczy: **ścieżki DLL dodatku** (`Ext`) i **połączenie SQL** (`Server.DbRegister`):
+
+```json
+{
+  "Ext": [
+    "<katalog-dodatku>/bin/Debug/Soneta.MojDodatek.dll",
+    "<katalog-dodatku>/bin/Debug/Soneta.MojDodatek.UI.dll"
+  ],
+  "Server": {
+    "DbRegister": {
+      "Name": "moja_baza",
+      "Server": "localhost",
+      "DatabaseName": "moja_baza",
+      "Trusted": false,
+      "User": "sa",
+      "Password": "<hasło>"
+    }
+  }
+}
+```
+
+- `Ext` — biblioteki dodatku ładowane przy starcie: logika **i** projekt `.UI`.
+- `DbRegister` — połączenie SQL: `Server`, `DatabaseName` oraz `User`/`Password`
+  albo `Trusted: true` (Windows Authentication).
+
+```bash
+# tworzy bazę Z tabelami dodatku (bo Ext jest w config-file) + dane demo (~3 min):
+dbmgr create moja_baza --config-file=<ścieżka>/serversettings.json --demo gold --recreate
+```
+
+**Jedno źródło prawdy:** ten sam plik podłącz do połączenia w SonetaFrame modyfikatorem
+`config-file=` w źródle `process:` (patrz [sonetaframe.md](sonetaframe.md)) — aplikacja
+wystartuje z tym samym dodatkiem i tą samą bazą SQL, którą utworzył `dbmgr`.
+
+> **Serwer SQL w Dockerze.** Lokalny serwer bywa kontenerem `mcr.microsoft.com/mssql/server`
+> (`localhost:1433`). Hasło SA odczytasz ze zmiennych środowiskowych kontenera zamiast pytać
+> użytkownika:
+> ```bash
+> docker inspect <kontener> --format '{{range .Config.Env}}{{println .}}{{end}}' | grep MSSQL_SA_PASSWORD
+> ```
+
+> **⚠️ Prawa operatora do dodatku.** Operator `Administrator` z bazy demo-gold **nie ma praw**
+> do obiektów nowego dodatku. Nadaj rolę z prawem `Dodatki=Granted` — np. importując plik roli
+> przez `dbmgr importxml moja_baza rola.xml`. Plik roli musi być w **UTF-8** i poprawnie
+> zaescape'owany — **błędny import potrafi zablokować logowanie** do bazy.
+
 ## Konwersja (`convert`)
 
 Podnosi strukturę bazy do wersji bieżącej logiki biznesowej — wymagana po aktualizacji DLL.

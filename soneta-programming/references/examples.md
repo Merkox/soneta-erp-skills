@@ -148,15 +148,15 @@ public void UtworzFakture(Login login, Kontrahent kontrahentZInnejSesji,
             faktura.Kontrahent = kontrahent;
             faktura.Data = Date.Today;
             
-            // Dodanie pozycji
+            // Dodanie pozycji — rodzic w KONSTRUKTORZE, AddRow na TABELI pozycji
             int lp = 1;
             foreach (var (towarZInnejSesji, ilosc) in pozycjeZInnejSesji)
             {
                 // Doczytaj towar w bieżącej sesji
                 var towar = session.Get(towarZInnejSesji);
                 
-                var poz = new PozycjaDokHandlowego(faktura);
-                faktura.Pozycje.AddRow(poz);
+                var poz = new PozycjaDokHandlowego(faktura);   // rodzic ustawiany konstruktorem
+                hm.PozycjeDokHandlowych.AddRow(poz);           // AddRow na tabeli modułu, NIE na faktura.Pozycje
                 
                 poz.Towar = towar;
                 poz.Ilosc = new Quantity(ilosc, towar.Jednostka.Kod);
@@ -172,6 +172,13 @@ public void UtworzFakture(Login login, Kontrahent kontrahentZInnejSesji,
 ```
 
 **WAŻNE:** W jednej sesji nie można mieszać obiektów z różnych sesji. Użyj `session.Get(obiekt)` aby doczytać obiekt w bieżącej sesji.
+
+> **`SubTable<T>` NIE ma metody `AddRow`.** Kolekcja podrzędna na rodzicu (np. `faktura.Pozycje`)
+> to `SubTable<T>` — przefiltrowany **widok** tabeli, typowo tworzony w property rodzica przez
+> `Module.<Detale>.Wg<Parent>.CreateSubTable(this)`. Kod `faktura.Pozycje.AddRow(poz)` **nie
+> kompiluje się**. Wiersz podrzędny (inner) dodaje się zawsze przez `AddRow` na **tabeli modułu**
+> (`hm.PozycjeDokHandlowych.AddRow(poz)`), a rodzica ustawia **konstruktor**
+> (`new PozycjaDokHandlowego(faktura)`) — dzięki temu pozycja od razu pojawia się w `faktura.Pozycje`.
 
 ## Modyfikacja obiektów
 
@@ -260,6 +267,21 @@ Przykłady klasy parametrów dziedziczącej z `ContextBase` - patrz [contextbase
 Przykłady dostępu do historii zmian (`ChangeInfos`) i pracy z załącznikami (dodawanie z transakcją, odczyt, `DefaultImage`) - patrz [datapack-guidedrow.md](datapack-guidedrow.md).
 
 ## Dane konfiguracyjne vs operacyjne
+
+### Odczyt konfiguracji z sesji operacyjnej
+
+Tabelę konfiguracyjną (`config="true"` w business.xml — słownik, definicje) można **czytać przez
+moduł sesji operacyjnej** (`session.GetX().Slownik`) i przypisywać jej wiersze wprost do relacji
+obiektu operacyjnego — to **nie jest** mieszanie sesji. Pełny skan małej tabeli konfiguracyjnej
+też jest dozwolony:
+
+```csharp
+// sesja operacyjna (config: false) — odczyt słownika i przypisanie do relacji
+faktura.Definicja = hm.DefDokHandlowe.WgSymbolu["FV"];
+```
+
+**ZAPIS** danych konfiguracyjnych wymaga natomiast **sesji konfiguracyjnej** (`config: true`) —
+szczegóły i wzorzec testowy: [integration-tests.md](integration-tests.md).
 
 ### Odczyt danych konfiguracyjnych
 
