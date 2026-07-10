@@ -8,6 +8,8 @@
 4. [Relacja do interfejsu](#relacja-do-interfejsu)
 5. [Historia (wersjonowanie)](#historia-wersjonowanie)
 6. [Relacja zwrotna (self-reference)](#relacja-zwrotna)
+7. [Kolekcja odwrotna dla tabel z innego modułu](#kolekcja-odwrotna-dla-tabel-z-innego-modułu)
+8. [Automatyczne wypełnianie z kontekstu (Context)](#automatyczne-wypełnianie-z-kontekstu-context)
 
 ---
 
@@ -243,12 +245,48 @@ Wbudowany typ dla okresów czasowych z polami `From` i `To`.
 
 ---
 
+## Kolekcja odwrotna dla tabel z innego modułu
+
+`children="X"` na relacji do tabeli **zewnętrznej** (z innego modułu/assembly, np. `Kontrahent`
+z CRM) **nie tworzy** property kolekcji na klasie zewnętrznej — generator nie może modyfikować
+obcego assembly. Dostęp do „dzieci" realizuje się przez tabelę **własnego** modułu i akcesor
+indeksu `Wg<NazwaKolumnyRelacji>`:
+
+```csharp
+var modul = session.Get<SerwisModule>();
+SubTable<Zgloszenie> zgloszenia = modul.Zgloszenia.WgKontrahent[kontrahent];
+```
+
+`Wg…[parent]` zwraca przefiltrowaną `SubTable<T>` — wybiera po indeksie, bez skanu tabeli.
+Dla relacji między tabelami **własnego** modułu property kolekcji (`dokument.Pozycje`)
+generuje się normalnie. Kontrakt akcesorów widać w wygenerowanym `*.business.cs`
+(patrz [generated-classes.md](generated-classes.md)).
+
+---
+
+## Automatyczne wypełnianie z kontekstu (Context)
+
+`<attribute>Context</attribute>` na kolumnie relacji powoduje automatyczne wypełnienie pola
+z kontekstu UI — nowy rekord otwierany „z" kontrahenta (z jego listy lub formularza) dostaje
+wypełnionego kontrahenta. Przydatne dla czynności „Nowy z…".
+
+```xml
+<col name="Kontrahent" type="Kontrahent" required="true" relname="Dokumenty kontrahenta">
+  <attribute>Context</attribute>
+</col>
+```
+
+Warianty (`Context(Required=false)`) — patrz [table-reference.md](table-reference.md),
+sekcja „Element attribute".
+
+---
+
 ## Wzorce złożone
 
 ### Relacja z dodatkowymi danymi
 
 ```xml
-<table name="UdzialWProjekcie" tablename="UdzialyWProjektach">
+<table name="UdzialWProjekcie" tablename="UdzialyWProj">
   <col name="Projekt" type="Projekt" 
        keyprimary="true" keyunique="true"
        children="Udzialy" delete="cascade">

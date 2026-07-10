@@ -8,6 +8,11 @@
 4. [Element verifier](#element-verifier)
 5. [Element attribute](#element-attribute)
 
+> ⚠ **`description` i `caption` zawsze w JEDNEJ linii XML.** Generator wstawia wartość atrybutu
+> dosłownie do stałej C# `[Description("…")]` — wartość zawinięta na kilka linii daje
+> `error CS1010: Newline in constant` i kaskadę błędów kompilacji. Skracaj treść, nie łam linii.
+> Dotyczy wszystkich `description`/`caption` (module, table, col).
+
 ---
 
 ## Atrybuty table
@@ -37,6 +42,10 @@ ale **skrócona forma nadal musi być w liczbie mnogiej** (to wciąż nazwa tabe
 `DokumentyHandlowe` → `tablename="DokHandlowe"`, `PozycjeDokumentow` → `tablename="PozDokumentow"`.
 Nazwa klasy C# (`name`, l. poj.) nie ma tego ograniczenia.
 
+`tablename` musi być też **globalnie unikalny w bazie danych** — służy jako identyfikator tabeli
+w relacjach interfejsowych, więc uważaj na kolizje z tabelami modułów platformy
+(katalog: [modules-catalog.md](modules-catalog.md)).
+
 ### Atrybut `description` — opis zastosowania tabeli
 
 Krótki, **dwu- trzyzdaniowy** opis tego, po co tabela powstała. Pozwala szybko zorientować się
@@ -45,9 +54,11 @@ tabeli, nie pojedyncze pola; dla tabel szczegółów warto wskazać tabelę nadr
 
 ```xml
 <table name="Zgloszenie" tablename="Zgloszenia" guided="Root"
-       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy
-                    i przeglądy wraz z opisem i datą przyjęcia.">
+       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy i przeglądy wraz z opisem i datą przyjęcia.">
 ```
+
+> Wartość `description` musi być w **jednej linii** (patrz ostrzeżenie na górze dokumentu) —
+> nawet długi opis nie może być zawinięty w XML.
 
 ### Rodzaje tabel
 
@@ -215,9 +226,16 @@ skill `/soneta-programming` (row-types.md).
 
 ## ReadonlyType - wartości
 
-- `true` - tylko do odczytu
-- `false` - edytowalne
-- `set` - można ustawić tylko przy tworzeniu
+- `true` — property **tylko z getterem**; wartość ustawialna wyłącznie w konstruktorze (generator
+  dodaje konstruktor z parametrem). Dobre dla pól ustalanych raz przy tworzeniu (np. relacja
+  nadrzędna `relguided="inner"`, selector). **Błędne** dla pól wyliczanych/agregatów
+  aktualizowanych z kodu po utworzeniu obiektu.
+- `false` — edytowalne (getter + setter).
+- `set` — jak `true`, ale dodatkowo generuje `protected` property `base<Pole>` **tylko z setterem**,
+  pozwalające ustawić wartość z kodu obiektu biznesowego. Używaj dla pól liczonych z kodu
+  (sumy pozycji, statusy wyliczane).
+
+> Konsekwencje dla konstruktorów klas i przykłady — [generated-classes.md](generated-classes.md).
 
 ---
 
@@ -312,12 +330,19 @@ Atrybut C# dodawany do właściwości.
 | Atrybut | Opis |
 |---------|------|
 | `Browsable(false)` | Ukrywa pole w UI |
-| `Context` | Pole kontekstowe |
+| `Context` | Automatyczne wypełnienie kolumny relacji z kontekstu UI (patrz niżej) |
 | `Context(Required=false)` | Opcjonalny kontekst |
 | `Dictionary("nazwa")` | Słownik podpowiedzi |
 | `MaskEdit("maska")` | Maska wprowadzania |
 | `Obsolete("msg")` | Oznacza jako przestarzałe |
 | `NumeratorItem` | Element numeratora |
+
+### `Context` — automatyczne wypełnianie z kontekstu UI
+
+`<attribute>Context</attribute>` na kolumnie relacji powoduje **automatyczne wypełnienie** pola
+z kontekstu interfejsu: nowy rekord otwierany „z" kontrahenta (z jego listy lub formularza)
+dostaje wypełnionego kontrahenta. Przydatne dla czynności „Nowy z…".
+Wzorce relacji — [relations-guide.md](relations-guide.md).
 
 ---
 

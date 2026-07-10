@@ -16,16 +16,23 @@ Skill do generowania plików `business.xml` dla platform firmy Soneta:
 
 Pliki te definiują obiekty biznesowe (encje ORM), które platforma automatycznie mapuje na tabele w bazie danych i generuje klasy C#.
 
+## ⚠ Krytyczne zasady — łamią kompilację
+
+1. **`description` i `caption` zawsze w JEDNEJ linii XML.** Generator wstawia wartość dosłownie do stałej C# `[Description("…")]` — zawinięcie na kilka linii daje `error CS1010: Newline in constant` i kaskadę błędów. Skróć treść zamiast łamać linię ([references/table-reference.md](references/table-reference.md)).
+2. **Ostatni segment `namespace` ≠ `name` żadnej tabeli** — inaczej `error CS0118: 'X' is a namespace but is used like a type`. Wzorzec platformy: namespace w liczbie mnogiej, encje w pojedynczej (`Soneta.Oceny` + `OcenaRealizacja`, `Soneta.Towary` + `Towar`).
+3. **business.xml + klasy Row/Table = jeden nierozłączny krok.** Sam XML się nie kompiluje — wygenerowany `*.business.cs` wymaga klas konkretnych, bez nich `error CS0246` ([references/generated-classes.md](references/generated-classes.md)).
+4. **`<module>` bez `description`** = `#warning 'Description for module X is not defined'` w generowanym kodzie — zawsze podawaj opis modułu.
+
 ## Struktura pliku business.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <module xmlns="http://www.enova.pl/schema/business_struct.xsd" 
         name="NazwaModulu" 
-        namespace="Soneta.NazwaModulu" 
-        versionName="soneta">
+        namespace="Firma.NazwyModulow" 
+        versionName="soneta"
+        description="Krótki opis przeznaczenia modułu.">
   
-  <import>../..</import>
   <using>Soneta.Core</using>
   
   <!-- Definicje enum, subrow, interface, table -->
@@ -37,10 +44,18 @@ Pliki te definiują obiekty biznesowe (encje ORM), które platforma automatyczni
 | Atrybut | Wymagany | Opis |
 |---------|----------|------|
 | `name` | ✓ | Nazwa modułu (np. "Handel", "Kadry") |
-| `namespace` | ✓ | Namespace C# (np. "Soneta.Handel") |
+| `namespace` | ✓ | Namespace C# (np. "Soneta.Handel"); ostatni segment ≠ `name` żadnej tabeli (patrz wyżej) |
 | `versionName` | ✓ | Zazwyczaj "soneta" |
+| `description` | zalecany | Opis modułu; brak = `#warning 'Description for module X is not defined'` w generowanym kodzie |
 | `versionNumber` | | Numer wersji (int) |
 | `internal` | | true dla modułów wewnętrznych |
+
+> **Namespace ≠ nazwa projektu/assembly.** `namespace` w business.xml może różnić się od nazwy
+> projektu — moduł identyfikuje klasa modułu (`[assembly: ModuleType]`), nie nazwa DLL.
+>
+> **Szablon `dotnet new soneta-item-businessxml`** ustawia `namespace="<Projekt>.<NazwaModulu>"`
+> i `versionName` = nazwa modułu — po wygenerowaniu popraw oba w nagłówku `<module>` do docelowego
+> namespace modułu (i `versionName="soneta"`, jeśli tak przyjęto w projekcie).
 
 ## Atrybuty table
 
@@ -92,13 +107,16 @@ Pliki te definiują obiekty biznesowe (encje ORM), które platforma automatyczni
 ### 1. Import i using
 
 ```xml
-<import>../..</import>
 <using>Soneta.Core</using>
 <using>Soneta.CRM</using>
 ```
 
-- **import** - ścieżka do katalogu z innymi plikami business.xml, do których można referować (np. typy z innych modułów)
 - **using** - namespace C# dla obiektów używanych w tym business.xml (potrzebne gdy referujesz typy z innych modułów)
+- **import** - ścieżka do katalogu z innymi plikami business.xml (np. `<import>../..</import>`)
+
+> **W dodatkach opartych o Soneta SDK `<import>` jest zbędny** — referencje międzymodułowe
+> rozwiązują się przez `<using>` + biblioteki z SDK. Przykłady z `<import>../..</import>`
+> pochodzą ze świata budowania platformy ze źródeł.
 
 ### 2. Enum - definicja typu wyliczeniowego
 
@@ -185,6 +203,12 @@ dopisuje klasy konkretne: rekord `class X : <Moduł>Module.XRow` i tabelę
 `class Xs : <Moduł>Module.XTable`. Klasy te **nie muszą** być `partial` ani `sealed`
 (`partial` stosuje się tylko, gdy faktycznie dzielisz klasę na kilka plików).
 
+Sam `business.xml` **nie skompiluje się bez tych klas** — wygenerowany `*.business.cs` odwołuje
+się do klas konkretnych (fabryki `CreateRow`, `TableInfo.Create<…>`); bez nich `error CS0246`.
+Kontrakt nazw: klasa obiektu biznesowego = `name` tabeli (l. poj.), klasa tabeli = `tablename`
+(l. mn., ≤16 znaków). Po pierwszym buildzie warto **przeczytać wygenerowany `*.business.cs`**
+jako źródło prawdy o kontrakcie (konstruktory, settery, akcesory `Wg…`, `session.Get<Moduł>()`).
+
 - **Pola `readonly`** (w tym selector) wymagają konstruktora inicjującego oraz konstruktora
   `(RowCreator creator)` dla ORM; bez pól readonly wystarcza konstruktor domyślny.
 - **Selector** (`selector="true"`, pole `int`/enum) pozwala przechowywać wiele typów obiektów
@@ -263,10 +287,12 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
 5. **Zdefiniuj tabele** - główne obiekty biznesowe
 6. **Dodaj relacje** - powiązania między tabelami (zwykłe i interface'owe)
 7. **Dodaj indeksy** - klucze dla wyszukiwania
-8. **Utwórz klasy biznesowe obok** - dla każdej tabeli klasa obiektu biznesowego i klasa tabeli;
-   przy polach `readonly` konstruktory; dla tabel z selector'em - `abstract` baza, podtypy
-   z `[BusinessRow]` i `[DefaultConstructor]`, pozycje `[NewRow]` (patrz [references/generated-classes.md](references/generated-classes.md))
-9. **Waliduj** - sprawdź zgodność ze schematem XSD
+8. **Utwórz klasy biznesowe obok** (nierozłączny krok — bez nich build nie przejdzie) - dla każdej
+   tabeli klasa obiektu biznesowego i klasa tabeli; przy polach `readonly` konstruktory; dla tabel
+   z selector'em - `abstract` baza, podtypy z `[BusinessRow]` i `[DefaultConstructor]`, pozycje
+   `[NewRow]` (patrz [references/generated-classes.md](references/generated-classes.md))
+9. **Waliduj** - sprawdź zgodność ze schematem XSD; po pierwszym buildzie przeczytaj wygenerowany
+   `*.business.cs` (kontrakt konstruktorów, setterów, akcesorów `Wg…`)
 
 ## Szczegółowa dokumentacja
 
@@ -282,10 +308,12 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
 ## Konwencje nazewnicze Soneta
 
 - **Nazwa tabeli (name)**: PascalCase, liczba pojedyncza (np. `Towar`, `DokumentHandlowy`)
-- **Nazwa w bazie (tablename)**: PascalCase, liczba mnoga, **maks. 16 znaków** (np. `Towary`, `DokHandlowe`)
+- **Nazwa w bazie (tablename)**: PascalCase, liczba mnoga, **maks. 16 znaków**, **globalnie unikalna
+  w bazie** — uwaga na kolizje z tabelami modułów platformy (np. `Towary`, `DokHandlowe`)
 - **Nazwa kolumny**: PascalCase (np. `KodPocztowy`, `DataWystawienia`)
 - **Klucz**: `Wg` + nazwa kolumny (np. `WgKodu`, `WgNazwy`)
-- **Namespace**: `Soneta.NazwaModulu`
+- **Namespace**: `Firma.NazwaModulu` w **liczbie mnogiej**; ostatni segment **nie może** równać się
+  `name` żadnej tabeli — inaczej `CS0118` (wzorzec: `Soneta.Towary` + encja `Towar`)
 
 ### Język nazewnictwa
 
@@ -333,7 +361,7 @@ Tabela szczegółów (bez `guided`) musi mieć dokładnie jedną relację `relgu
 </table>
 
 <!-- TABELA SZCZEGÓŁÓW (bez guided, jedna relacja relguided="inner") -->
-<table name="PozycjaDokumentu" tablename="PozycjeDokumentow"
+<table name="PozycjaDokumentu" tablename="PozycjeDok"
        caption="Pozycja" tablecaption="Pozycje dokumentu">
   <col name="Dokument" type="Dokument" 
        required="true" readonly="true" keyprimary="true"

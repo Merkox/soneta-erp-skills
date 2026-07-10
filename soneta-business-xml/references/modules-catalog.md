@@ -44,7 +44,7 @@ Platforma Soneta stosuje wzorzec **Definicja → Operacja**, gdzie:
 
 | Moduł | Namespace | Opis |
 |-------|-----------|------|
-| Business | Soneta.Business.Db | Definicje systemowe, operatorzy, uprawnienia |
+| Business | Soneta.Business.Db | Definicje systemowe, uprawnienia (klasa `Operator` — w Soneta.Business.App) |
 | Core | Soneta.Core | Definicje dokumentów, stawki VAT, oddziały, adresy |
 | CRM | Soneta.CRM | Kontrahenci, banki, urzędy, kontakty |
 | Kadry | Soneta.Kadry | Pracownicy, umowy, wydziały |
@@ -127,6 +127,17 @@ Platforma Soneta stosuje wzorzec **Definicja → Operacja**, gdzie:
 <col name="Waluta" type="Waluta" relname="..."/>
 <col name="FormaPlatnosci" type="FormaPlatnosci" relname="..."/>
 <col name="Platnosc" type="Platnosc" relname="..."/>
+```
+
+### Operator systemu (Business.App)
+
+Klasa `Operator` (tabela `Operators`) należy do namespace **`Soneta.Business.App`**
+(nie `Soneta.Business.Db`). Relację robi się jak każdą inną:
+
+```xml
+<using>Soneta.Business.App</using>
+
+<col name="Operator" type="Operator" relname="..."/>
 ```
 
 ### Definicje i konfiguracja (Core)
@@ -519,7 +530,10 @@ FieldProxy, TableProxy
 ### Business (Soneta.Business.Db)
 
 **Tabele konfiguracyjne (config=true):**
-CfgNode, Operator, Entitle, DBItem, DBGroup, WizardDefinition, WizardStepDefinition, UserGroup, SysNotification, DashboardArea, DashboardView, SystemRole, RoleCategory, RuntimeSolution, RuntimeProject, PivotViews, NotifiCategories
+CfgNode, Entitle, DBItem, DBGroup, WizardDefinition, WizardStepDefinition, UserGroup, SysNotification, DashboardArea, DashboardView, SystemRole, RoleCategory, RuntimeSolution, RuntimeProject, PivotViews, NotifiCategories
+
+> Klasa `Operator` (tabela `Operators`) jest w namespace **`Soneta.Business.App`** — relacja:
+> `type="Operator"` + `<using>Soneta.Business.App</using>` (patrz „Operator systemu" wyżej).
 
 **Tabele operacyjne (guided=Root):**
 FeatureDefinition, FeatureTransferDefinition, FeatureSetDefinition, DictionaryItem, Task, SystemFiles, AppTokens

@@ -271,11 +271,11 @@
 <module xmlns="http://www.enova.pl/schema/business_struct.xsd" 
         name="Projekty" 
         namespace="Soneta.Projekty" 
-        versionName="soneta">
+        versionName="soneta"
+        description="Ewidencja projektów i zadań realizowanych dla klientów.">
 
-  <!-- Ścieżka do katalogu z innymi business.xml (względna od tego pliku) -->
-  <!-- Pozwala referować typy z innych modułów np. Kontrahent, Pracownik -->
-  <import>../..</import>
+  <!-- <import>../..</import> tylko przy budowaniu platformy ze źródeł; -->
+  <!-- w dodatkach Soneta SDK jest zbędny — wystarczą <using> + biblioteki SDK -->
   
   <!-- Namespaces C# potrzebne do użycia typów z innych modułów -->
   <using>Soneta.Core</using>

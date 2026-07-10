@@ -9,6 +9,18 @@ dziedziczące po nich służące do implementacji logiki biznesowej.
 > biznesowego** (pojedynczy wiersz) i klasa **tabeli** (cała kolekcja). Tworzymy je od razu
 > przy definiowaniu tabeli w business.xml.
 
+## Kontrakt kompilacji — XML i klasy to jeden krok
+
+Sam `business.xml` **się nie kompiluje**: wygenerowany `*.business.cs` odwołuje się do klas
+konkretnych (fabryki `CreateRow`, `TableInfo.Create<…>`) — bez nich `error CS0246`. Kontrakt nazw:
+klasa obiektu biznesowego = `name` tabeli (l. poj.), klasa tabeli = `tablename` (l. mn., skrócona
+≤16 znaków). „Wygeneruj business.xml" i „napisz klasy Row/Table" to **jeden nierozłączny krok**
+do zielonego builda.
+
+Po pierwszym buildzie **przeczytaj wygenerowany `*.business.cs`** — to źródło prawdy o kontrakcie:
+sygnatury konstruktorów, dostępność setterów (`readonly`), akcesory indeksów `Wg…`, metoda
+`session.Get<Moduł>()`.
+
 ## Co generuje narzędzie, co pisze programista
 
 Dla definicji:
@@ -16,8 +28,7 @@ Dla definicji:
 ```xml
 <table name="Zgloszenie" tablename="Zgloszenia" guided="Root"
        caption="Zgłoszenie" tablecaption="Zgłoszenia"
-       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy
-                    i przeglądy wraz z opisem i datą przyjęcia.">
+       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy i przeglądy.">
   <key name="WgNumeru" keyunique="true" keyprimary="true">
     <keycol name="Numer"/>
   </key>
@@ -74,10 +85,11 @@ przez modele językowe analizujące schemat).
 
 ```xml
 <table name="Zgloszenie" tablename="Zgloszenia" ...
-       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy
-                    i przeglądy wraz z opisem i datą przyjęcia.">
+       description="Zgłoszenie serwisowe od klienta. Rejestruje reklamacje, naprawy i przeglądy wraz z opisem i datą przyjęcia.">
 ```
 
+- ⚠ wartość **zawsze w jednej linii XML** — zawinięcie daje `error CS1010: Newline in constant`
+  (generator wkleja tekst do stałej C# `[Description]`); patrz [table-reference.md](table-reference.md);
 - pisz o **przeznaczeniu** tabeli, nie o pojedynczych polach;
 - dla tabel szczegółów warto zaznaczyć powiązanie z tabelą nadrzędną;
 - `description` ≠ `caption`/`tablecaption` (te są etykietami UI, nie opisem zastosowania).
@@ -125,6 +137,22 @@ public class Zgloszenie : SerwisModule.ZgloszenieRow {
 > **Reguła kciuka:** są pola `readonly` (w szczególności **selector**, patrz niżej) →
 > musisz napisać konstruktor `(RowCreator creator)`. Brak pól `readonly` → nie musisz.
 
+### `readonly="true"` vs `readonly="set"`
+
+- **`readonly="true"`** — property **tylko z getterem**; wartość ustawialna wyłącznie
+  w konstruktorze (generator dodaje konstruktor z parametrem). Dobre dla pól ustalanych raz
+  przy tworzeniu obiektu (np. relacja nadrzędna `relguided="inner"`, selector). **Błędny wybór**
+  dla pól wyliczanych/agregatów aktualizowanych z kodu po utworzeniu — nie da się ich ustawić.
+- **`readonly="set"`** — dodatkowo generuje `protected` property **`base<Pole>`** tylko
+  z setterem, pozwalające ustawić wartość z kodu obiektu biznesowego (z UI pole pozostaje
+  tylko do odczytu). Tego używaj dla pól liczonych z kodu (sumy pozycji, statusy wyliczane):
+
+```csharp
+public class Faktura : HandelModule.FakturaRow {
+    internal void PrzeliczWartosc(decimal suma) => baseWartoscNetto = suma;  // readonly="set"
+}
+```
+
 > Pełną dokumentację klas Row/Table i wzorca selektora (`[BusinessRow]`, `[NewRow]`,
 > konstruktor `RowCreator`, pola readonly) zawiera skill `/soneta-programming` (row-types.md).
 
@@ -143,8 +171,7 @@ oznacza się `selector="true"`, zawsze `readonly` i `required`.
 
 <table name="Zgloszenie" tablename="Zgloszenia" guided="Root"
        caption="Zgłoszenie" tablecaption="Zgłoszenia"
-       description="Zgłoszenie serwisowe. Jedna tabela przechowuje reklamacje, naprawy
-                    i przeglądy, rozróżniane polem Typ.">
+       description="Zgłoszenie serwisowe. Jedna tabela przechowuje reklamacje, naprawy i przeglądy, rozróżniane polem Typ.">
   <key name="WgNumeru" keyunique="true" keyprimary="true">
     <keycol name="Numer"/>
   </key>
