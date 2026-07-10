@@ -26,17 +26,17 @@
       </Row>
     </Group>
     
-    <!-- Grupa z układem dwukolumnowym -->
+    <!-- Grupa z układem dwukolumnowym: Field WPROST w Row, stałe szerokości,
+         jeden Row = jeden wiersz layoutu (NIE Row z zagnieżdżonymi Stack —
+         kolumny nakładałyby się na siebie) -->
     <Group CaptionHtml="Dane szczegółowe">
       <Row>
-        <Stack>
-          <Field CaptionHtml="Typ" Width="15" EditValue="{Typ}" />
-          <Field CaptionHtml="Kategoria" Width="20" EditValue="{Kategoria}" />
-        </Stack>
-        <Stack>
-          <Field CaptionHtml="Źródło" Width="15" EditValue="{Zrodlo}" />
-          <Field CaptionHtml="Priorytet" Width="10" EditValue="{Priorytet}" />
-        </Stack>
+        <Field CaptionHtml="Typ" Width="15" EditValue="{Typ}" />
+        <Field CaptionHtml="Źródło" Width="15" EditValue="{Zrodlo}" />
+      </Row>
+      <Row>
+        <Field CaptionHtml="Kategoria" Width="20" EditValue="{Kategoria}" />
+        <Field CaptionHtml="Priorytet" Width="10" EditValue="{Priorytet}" />
       </Row>
     </Group>
     

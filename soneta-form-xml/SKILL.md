@@ -135,7 +135,32 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 </Flow>
 ```
 
-**Układ dwukolumnowy:** `<Row>` zawierający dwa `<Stack>`.
+> **⚠️ Układ dwukolumnowy — NIE używaj `<Row>` z zagnieżdżonymi `<Stack>`!** Potwierdzone
+> wizualnie (zrzut ekranu z żywej aplikacji): `<Row>` zawierający `<Stack>` z polami `Width="*"`
+> renderuje „kolumny" **jedna na drugiej** — etykiety i pola się nakładają. **Poprawny wzorzec:**
+> pola `<Field>` **wprost** w `<Row>`, o **stałych** szerokościach, po jednym `<Row>` na każdy
+> wiersz layoutu:
+>
+> ```xml
+> <!-- ŹLE: kolumny nakładają się na siebie -->
+> <Row>
+>   <Stack><Field CaptionHtml="Kod"  Width="*" EditValue="{Kod}" /></Stack>
+>   <Stack><Field CaptionHtml="Data" Width="*" EditValue="{Data}" /></Stack>
+> </Row>
+>
+> <!-- DOBRZE: Field wprost w Row, stałe szerokości, jeden Row = jeden wiersz -->
+> <Row>
+>   <Field CaptionHtml="Kod"    Width="20" EditValue="{Kod}" />
+>   <Field CaptionHtml="Data"   Width="14" EditValue="{Data}" />
+> </Row>
+> <Row>
+>   <Field CaptionHtml="Nazwa"  Width="40" EditValue="{Nazwa}" />
+>   <Field CaptionHtml="Status" Width="15" EditValue="{Status}" />
+> </Row>
+> ```
+>
+> Po zbudowaniu układu wielokolumnowego **zawsze zweryfikuj go wizualnie** zrzutem ekranu
+> (sekcja „Wizualna weryfikacja formularza (buscall)").
 
 ### Zasada budowania zakładki
 
@@ -144,10 +169,10 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
   <Group CaptionHtml="Dane podstawowe">
     <!-- pola pionowo -->
     <Field CaptionHtml="Kod" Width="20" EditValue="{Kod}" />
-    <!-- lub wielokolumnowo: -->
+    <!-- lub wielokolumnowo — Field WPROST w Row, stałe szerokości (patrz ostrzeżenie wyżej): -->
     <Row>
-      <Stack><Field ... /></Stack>
-      <Stack><Field ... /></Stack>
+      <Field CaptionHtml="Data" Width="14" EditValue="{Data}" />
+      <Field CaptionHtml="Status" Width="15" EditValue="{Status}" />
     </Row>
   </Group>
   <Group CaptionHtml="Pozycje">
@@ -538,7 +563,7 @@ Widok listy z panelem filtrów powyżej grida. `<Flow>` jako `FilterPanel` to st
     </Row>
     <Row>
       <Field CaptionHtml="Kod pocztowy" Width="12" EditValue="{KodPocztowy}" />
-      <Field CaptionHtml="Miasto" Width="*" EditValue="{Miasto}" />
+      <Field CaptionHtml="Miasto" Width="30" EditValue="{Miasto}" />
     </Row>
   </Stack>
 </DataForm>

@@ -36,6 +36,13 @@ Układ poziomy - elementy obok siebie.
 </Row>
 ```
 
+> **⚠️ Układ dwukolumnowy formularza — NIE zagnieżdżaj `<Stack>` w `<Row>`.** Potwierdzone
+> wizualnie: `<Row>` z `<Stack>` i polami `Width="*"` renderuje kolumny **jedna na drugiej**
+> (etykiety i pola się nakładają). Poprawnie: pola `<Field>` **wprost** w `<Row>`, o **stałych**
+> szerokościach, po jednym `<Row>` na wiersz layoutu — przykład i pełne ostrzeżenie w `SKILL.md`
+> (sekcja „Stack, Row, Flow"). Zagnieżdżenie Row/Stack jest dopuszczalne w szablonach kart
+> (`Cards`/`CardTemplate`), które renderują się inaczej.
+
 ### Flow
 Układ płynny z automatycznym zawijaniem.
 

@@ -10,10 +10,11 @@ Cel: określić **jak** moduł będzie zbudowany — role, dane, interfejs, inte
 
 **Druga tura — dane i interfejs:**
 - Jakie są główne obiekty danych? (dokumenty, kartoteki, słowniki)
+  *(zanim zaproponujesz strukturę — najpierw inwentaryzacja: patrz twarda kolejność w sekcji 2.3)*
 - Jak powinna wyglądać struktura menu?
 
 **Trzecia tura — integracje i przyszłość:**
-- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(w tym momencie zeskanuj moduły narzędziem `scan-modules` — patrz `dane-referencyjne.md`)*
+- Jakie dane z istniejących modułów Soneta będą wykorzystywane? *(jeśli jeszcze nie zeskanowano — zeskanuj moduły narzędziem `scan-modules` — patrz `dane-referencyjne.md`)*
 - Czy moduł integruje się z systemami zewnętrznymi?
 - Czy klient ma dane do migracji?
 
@@ -27,6 +28,12 @@ Elementy konfigurowalne: definicje dokumentów, słowniki, ustawienia, opcje pro
 
 ### 2.3. Kluczowe struktury danych
 Najważniejsze struktury danych — dokumenty, kartoteki. Bez szczegółowej zawartości (to Etap 3). Ogólny diagram relacji między głównymi obiektami.
+
+**Twarda kolejność: inwentaryzacja PRZED decyzjami o strukturach.** Nie projektuj żadnej nowej
+tabeli ani kartoteki, dopóki nie wykonasz inwentaryzacji (`scan-modules`, `scan-folders`) — skan
+potrafi ujawnić istniejący moduł platformy pokrywający część potrzeb. Decyzję „budować własne
+vs użyć istniejącego" podejmuj dopiero **po** inwentaryzacji i odnotuj ją (z uzasadnieniem)
+w liście otwartych kwestii.
 
 Na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.md`) sprawdź:
 - czy potrzebne struktury już istnieją w platformie (unikanie duplikacji),

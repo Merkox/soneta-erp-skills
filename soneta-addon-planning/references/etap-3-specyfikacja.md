@@ -31,6 +31,19 @@ Na podstawie inwentaryzacji modułów (`scan-modules`, patrz `dane-referencyjne.
 - rozróżniaj tabele konfiguracyjne i operacyjne (kolumna `Konfig`) — ten sam podział stosuj w nowym module,
 - identyfikuj istniejące słowniki i kartoteki zamiast tworzyć duplikaty; do pól wybranego rekordu użyj `scan-props`.
 
+**Mapowanie nazw logicznych na `tablename`.** Plan operuje nazwami logicznymi obiektów, ale
+fizyczna nazwa tabeli (`tablename` w business.xml, skill `/soneta-business-xml`) ma **limit
+≤16 znaków**. Już w Etapie 3 zapisz w dokumencie tabelę mapowań i utrzymuj ją przy każdym nowym
+obiekcie — inaczej przy generowaniu business.xml spójność nazw się rozjedzie:
+
+| Nazwa logiczna (plan) | `tablename` (≤16 znaków) |
+|---|---|
+| Ocena kontrahenta | `OcenyKontrah` |
+| Kryterium oceny | `KryteriaOcen` |
+
+Zasady: **liczba mnoga**, **unikalność globalna** (w całej bazie, nie tylko w module — sprawdź
+kolizje z inwentaryzacją `scan-modules`), skróty czytelne i konsekwentne.
+
 ### 3.2. Diagram relacji
 Graficzne przedstawienie relacji (Mermaid lub tabela):
 - Relacje 1:N (inner) — tabele szczegółów
