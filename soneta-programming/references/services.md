@@ -67,3 +67,39 @@ class MyWorker2
     private IRegistry Registry { get; set; }
 }
 ```
+
+## Rejestracja warunkowa — ServiceInitializer
+
+`[assembly: Service]` rejestruje implementację bezwarunkowo dla wszystkich instancji danego
+scope. Gdy rejestracja ma zależeć od instancji właściciela (np. od typu silnika bazy danych),
+zamiast atrybutu `Service` używa się **`ServiceInitializer`** — kod wykonywany przy budowaniu
+kolekcji serwisów **każdej instancji** scope'a (każdej bazy, każdego loginu itd.):
+
+```csharp
+[assembly: ServiceInitializer(typeof(DbNotificationInitializer), ServiceScope.Database)]
+
+// rejestracja tylko dla baz MS SQL; inny silnik rejestruje własną implementację
+// analogicznym initializerem we własnym assembly - bez [assembly: Service]
+class DbNotificationInitializer : IServiceInitializer {
+    public void Initialize(ServiceInitializerArgs args) {
+        if (args.Owner is MsSqlDatabase)
+            args.Services.AddSingleton<IDbNotification, DbNotification>();
+    }
+}
+```
+
+- `args.Owner` — instancja właściciela scope'a (Database/Login/Session…); **internal** — dostępne
+  w assembly platformy przez `InternalsVisibleTo` (np. drivery baz danych), nie w dodatkach.
+- `args.Services` — standardowa `IServiceCollection` (`AddSingleton` itd.); platforma ma też
+  internal `ReplaceService`/`RemoveService` (`ServiceCollectionExtensions`).
+- **Kolejność**: `ServiceInitializerAttribute` dziedziczy z `PriorityAttribute` (default 100),
+  initializery wykonują się rosnąco po `Priority`. Atrybuty `[assembly: Service]` rejestruje
+  `CustomServicesInitializer` (priorytet 100) — initializer z `Priority = 200` wykona się po nim
+  i może podmienić wcześniejszą rejestrację.
+- Przy wielu rejestracjach tego samego interfejsu `GetRequiredService<T>` zwraca **ostatnią**,
+  `GetServices<T>` — wszystkie.
+
+Wzorzec silnikowy (rdzeń: `IDbNotification` — MS SQL `DbNotification`/SqlDependency,
+PostgreSQL `PgDbNotification`/LISTEN+NOTIFY): każdy silnik rejestruje swoją implementację
+własnym initializerem warunkowo po `args.Owner is XxxDatabase` — bez priorytetów i podmian,
+bo dla jednej instancji bazy powstaje najwyżej jedna rejestracja.
