@@ -98,6 +98,17 @@ Narzędzia deweloperskie wiersza poleceń używane w Soneta.
 
 **Kiedy używać:** zarządzanie bazą enova z CLI, tworzenie bazy demo, backup/konwersja bazy, weryfikacja zmian w kodzie na uruchomionej aplikacji.
 
+### 8. soneta-config
+
+Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami domenowymi platformy. Zawartość jest rozwijana — poniżej to, co faktycznie obecne w skillu.
+
+**Zakres:**
+- `scan-folders` — inwentaryzacja **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL: drzewo pozycji menu (listy, formularze) i ich powiązanie z tabelą/`ViewInfo`; czyta metadane przez Roslyn, bez uruchamiania aplikacji. Perspektywa funkcjonalno-użytkowa, komplementarna do skanów danych (`scan-modules`) ze `soneta-programming`.
+
+**Kiedy używać:** mapowanie struktury menu dodatku, szukanie ścieżki-rodzica dla nowego folderu, weryfikacja gdzie w menu trafiła pozycja.
+
+> Uwaga: kod ORM/workery/foldery pisane w C# → `soneta-programming`; operacje na bazie z CLI → `soneta-tools`.
+
 ## Powiązania między skillami
 
 Skille są zaprojektowane do współpracy:
@@ -109,7 +120,8 @@ Skille są zaprojektowane do współpracy:
 5. **soneta-form-xml** → tworzy formularze UI dla obiektów
 6. **soneta-ui-style** → styluje interfejs webowy zgodnie z design systemem enova365
 7. **soneta-place-def-elementow** → konfiguruje warstwę płacową (definicje elementów wynagrodzenia)
-8. **soneta-tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
+8. **soneta-config** → konfiguruje działający program (ustawienia, cechy, prawa) i uruchamia funkcje domenowe (czynności, harmonogram)
+9. **soneta-tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
 
 ## Instalacja
 

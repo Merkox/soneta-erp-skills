@@ -3,7 +3,8 @@ name: soneta-erp
 description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
   soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
-  soneta-form-xml, soneta-place-def-elementow, soneta-tools (narzędzia CLI: dbmgr,
+  soneta-form-xml, soneta-place-def-elementow, soneta-config (konfiguracja
+  i funkcje domenowe — m.in. scan-folders), soneta-tools (narzędzia CLI: dbmgr,
   buscall, SonetaFrame). Używaj gdy użytkownik: (1) rozpoczyna
   zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
   o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
@@ -30,6 +31,14 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
    ze schematem XSD. Używaj gdy użytkownik prosi o stworzenie nowego modułu biznesowego,
    zdefiniowanie obiektów lub encji do przechowywania w bazie danych, utworzenie relacji
    między obiektami, lub generowanie plików business.xml dla platformy Soneta.
+* `/soneta-config` - Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami
+  domenowymi platformy (zawartość rozwijana). Obecnie: `scan-folders` — inwentaryzacja
+  **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL; buduje drzewo
+  pozycji menu (listy, formularze) i ich powiązanie z tabelą/`ViewInfo`, w perspektywie
+  funkcjonalno-użytkowej komplementarnej do skanów danych ze `/soneta-programming`. Używaj
+  gdy użytkownik chce zmapować strukturę menu dodatku, znaleźć ścieżkę-rodzica dla nowego
+  folderu lub sprawdzić, gdzie w menu trafiła pozycja. Kod ORM/workery/foldery w C# →
+  `/soneta-programming`; operacje na bazie z CLI → `/soneta-tools`.
 * `/soneta-tools` - Narzędzia deweloperskie wiersza poleceń Soneta. `dbmgr` — zarządzanie
   bazami danych (tworzenie/rejestracja, konwersja, backup/restore, licencje, rozszerzenia,
   analiza, kompilacja); przygotowanie baz testowych/demo i automatyzacja w CI. `buscall` —

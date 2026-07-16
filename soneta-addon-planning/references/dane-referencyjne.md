@@ -1,6 +1,6 @@
 # Dane referencyjne — inwentaryzacja modułów, tabel i folderów menu
 
-Aby osadzić plan w istniejącym modelu danych platformy Soneta, **zinwentaryzuj strukturę na żywo z bibliotek** — nie używaj statycznych snapshotów (starzeją się). Narzędzia pochodzą ze skilla `/soneta-programming` (dokumenty `scan-modules.md`, `scan-folders.md`, `scan-props.md`) — tam pełna semantyka wyników i opcji; tutaj tylko użycie planistyczne.
+Aby osadzić plan w istniejącym modelu danych platformy Soneta, **zinwentaryzuj strukturę na żywo z bibliotek** — nie używaj statycznych snapshotów (starzeją się). Narzędzia `scan-modules` i `scan-props` pochodzą ze skilla `/soneta-programming`, a `scan-folders` ze skilla `/soneta-config` — tam pełna semantyka wyników i opcji; tutaj tylko użycie planistyczne.
 
 ## Wymagania środowiska
 
@@ -48,7 +48,7 @@ Korzystaj z inwentaryzacji, aby:
 Komplementarnie do `scan-modules` (perspektywa danych) buduje drzewo folderów statycznych menu (`[assembly: FolderView]`): jakie listy i formularze program faktycznie udostępnia użytkownikowi i którą tabelą/`ViewInfo` stoi dana pozycja. Odpowiada na pytanie „czy użytkownik już dziś klika tę funkcję w standardzie?".
 
 ```bash
-dotnet script ~/.claude/skills/soneta-programming/scripts/scan-folders.csx -- <KatalogDll> [<PrefiksSciezki>] [--flat] > folders.md
+dotnet script ~/.claude/skills/soneta-config/scripts/scan-folders.csx -- <KatalogDll> [<PrefiksSciezki>] [--flat] > folders.md
 ```
 
 Pełne drzewo to >1000 węzłów — filtruj prefiksem ścieżki (np. `Handel`) i ewentualnie `--flat` do grepowania.

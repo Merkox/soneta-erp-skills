@@ -118,7 +118,7 @@ Po zamknięciu wszystkich etapów wygeneruj dokument TODO z kolejnymi krokami:
 
 ## Powiązanie z innymi skillami
 
-Już podczas planowania korzystasz z **`/soneta-programming`** — narzędzia `scan-modules`, `scan-folders` i `scan-props` inwentaryzują istniejący model danych platformy (patrz `references/dane-referencyjne.md`).
+Już podczas planowania korzystasz z narzędzi inwentaryzacyjnych: `scan-modules` i `scan-props` (skill **`/soneta-programming`**) oraz `scan-folders` (skill **`/soneta-config`**) — łącznie odwzorowują istniejący model danych i menu platformy (patrz `references/dane-referencyjne.md`).
 
 Po zatwierdzeniu planu projektu:
 1. **`/soneta-business-xml`** — generowanie pliku business.xml na podstawie modelu danych z Etapu 3 (sekcje 3.1–3.3).

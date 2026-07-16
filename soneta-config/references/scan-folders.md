@@ -75,7 +75,7 @@ Algorytm:
 ## Uruchomienie
 
 ```bash
-dotnet script ~/.claude/skills/soneta-programming/scripts/scan-folders.csx \
+dotnet script ~/.claude/skills/soneta-config/scripts/scan-folders.csx \
     -- <KatalogDll> [<PrefiksSciezki>] [--flat]
 ```
 
@@ -141,8 +141,8 @@ _Łącznie folderów: …_
 
 ## Powiązania
 
-- [scan-modules.md](./scan-modules.md) — inwentaryzacja modułów i tabel; z niego weźmiesz nazwę
-  `TableName`, którą zobaczysz jako źródło listy w folderze.
-- [scan-props.md](./scan-props.md) — pola konkretnej tabeli/`ViewInfo` widocznej w folderze.
-- [viewinfo.md](./viewinfo.md) — jak działa `ViewInfo` sterujący zawartością listy w folderze.
-- Klasa atrybutu: `Soneta.Business/UI/FolderViewAttribute.cs` (oraz atrybuty pochodne w `*.UI`).
+- `scan-modules` (skill `/soneta-programming`) — inwentaryzacja modułów i tabel; z niego weźmiesz
+  nazwę `TableName`, którą zobaczysz jako źródło listy w folderze.
+- `scan-props` (skill `/soneta-programming`) — pola konkretnej tabeli/`ViewInfo` widocznej w folderze.
+- `viewinfo` (skill `/soneta-programming`) — jak działa `ViewInfo` sterujący zawartością listy w folderze.
+- Narzędzia inwentaryzacyjne komplementarne do tego skanu opisuje skill `/soneta-programming`.
