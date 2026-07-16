@@ -103,11 +103,12 @@ Narzędzia deweloperskie wiersza poleceń używane w Soneta.
 Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami domenowymi platformy. Zawartość jest rozwijana — poniżej to, co faktycznie obecne w skillu.
 
 **Zakres:**
+- **Import/eksport danych i ustawień konfiguracyjnych przez pliki XML** — struktura pliku `<session>`: import według rekordów (dane konfiguracyjne, pliki `*.dbinit.xml`, baza demo), import przez logikę biznesową (`business="true"`, pełna walidacja), eksport rekordów guidowanych z datapackiem; identyfikacja rekordów (GUID, `where`, `key`, `id`), formaty wartości, atrybuty specjalne, przenoszenie ustawień między bazami.
 - `scan-folders` — inwentaryzacja **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL: drzewo pozycji menu (listy, formularze) i ich powiązanie z tabelą/`ViewInfo`; czyta metadane przez Roslyn, bez uruchamiania aplikacji. Perspektywa funkcjonalno-użytkowa, komplementarna do skanów danych (`scan-modules`) ze `soneta-programming`.
 
-**Kiedy używać:** mapowanie struktury menu dodatku, szukanie ścieżki-rodzica dla nowego folderu, weryfikacja gdzie w menu trafiła pozycja.
+**Kiedy używać:** budowa/analiza pliku XML importu danych, przenoszenie konfiguracji między bazami, eksport danych do XML; mapowanie struktury menu dodatku, szukanie ścieżki-rodzica dla nowego folderu.
 
-> Uwaga: kod ORM/workery/foldery pisane w C# → `soneta-programming`; operacje na bazie z CLI → `soneta-tools`.
+> Uwaga: warstwa kodu importu/eksportu (`SessionReader`/`SessionWriter`) i kod ORM → `soneta-programming`; operacje na bazie z CLI → `soneta-tools`.
 
 ## Powiązania między skillami
 

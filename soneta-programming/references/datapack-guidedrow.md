@@ -256,3 +256,9 @@ Towar towar = towary[guid];
 | `guided` | `<table>` | Root, Exported, Child, None | Rola w Datapack |
 | `relguided` | `<col>` | inner, outer, (puste) | Relacja Child→Root |
 | `delete` | `<col>` | cascade, restrict, setnull | Akcja przy usuwaniu roota |
+
+## Powiązania
+
+- Import/eksport rekordów guidowanych (datapack jako jednostka eksportu XML):
+  struktura pliku — artykuł *import-export-xml* w `/soneta-config`; warstwa kodu —
+  [sessionreader-sessionwriter.md](./sessionreader-sessionwriter.md).

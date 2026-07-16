@@ -12,6 +12,7 @@ Na tym etapie pytania dotyczą szczegółów poszczególnych obiektów. Pracuj o
 - Czy któryś algorytm zależy od równoległej pracy innych stanowisk? (np. ciągła numeracja, rezerwacja, limit → transakcja serwerowa, 3.8)
 - Jakie wydruki i raporty?
 - Kto ma dostęp do czego?
+- Czy moduł wymaga danych konfiguracyjnych zainicjowanych w bazie od razu po instalacji? (słowniki, definicje dokumentów, role, ustawienia domyślne → dane inicjujące, 3.14)
 
 ## Sekcje dokumentu Etapu 3
 
@@ -148,9 +149,30 @@ Testy integracyjne pisze się na prawdziwej bazie (nie na mockach) — patrz ski
 
 Zestaw testów zapisz jako listę: *element logiki → scenariusz testu → oczekiwany rezultat*, tak aby pokrycie było widoczne (żaden worker/algorytm/weryfikator/proces serwerowy bez testu).
 
-### 3.14. Dane demonstracyjne
+### 3.14. Dane konfiguracyjne inicjujące bazę (dbinit)
+Określ, czy moduł potrzebuje danych konfiguracyjnych wczytywanych do bazy automatycznie
+(przy tworzeniu bazy i przy konwersji do nowszej wersji) — **o ile takie dane w ogóle są
+potrzebne**; jeśli nie, odnotuj to jawnie i pomiń sekcję.
+
+Typowe kandydaci: słowniki i wartości domyślne, definicje dokumentów z numeracją, definicje
+list/cech, role i uprawnienia, ustawienia startowe modułu. Dla każdego zestawu danych określ:
+- **obiekty i rekordy** do zainicjowania (nazwy obiektów biznesowych, kluczowe pola),
+- **stałe GUID-y** rekordów (nadane raz, niezmienne między wydaniami),
+- **kolejność wczytywania** względem innych zestawów (zależności, np. słownik przed danymi,
+  które się do niego odwołują → `priority`),
+- **wersję wprowadzenia** każdego rekordu (→ `dbversion`; także przyszłe konwersje ustawień).
+
+Dane te trafią do plików **`*.dbinit.xml`** osadzonych w projekcie jako **EmbeddedResource**
+— strukturę i reguły plików opisuje artykuł *import-export-xml* w skillu `/soneta-config`,
+a osadzanie w projekcie skill `/soneta-programming` (SDK osadza `*.dbinit.xml` automatycznie).
+W TODO planuje się z tej sekcji budowę i przetestowanie tych plików.
+
+Nie myl z sekcją 3.15: dane demonstracyjne trafiają tylko do bazy Demo, dane inicjujące —
+do **każdej** bazy z zainstalowanym dodatkiem.
+
+### 3.15. Dane demonstracyjne
 - Dane do bazy Demo — reprezentatywne scenariusze pokazujące możliwości modułu.
 - Dane do testów — zestawy pokrywające przypadki typowe i brzegowe.
 
-### 3.15. Słownik terminów
+### 3.16. Słownik terminów
 Definicje kluczowych terminów biznesowych i technicznych, szczególnie przy modułach domenowych (kontroling, logistyka), gdzie terminologia bywa niejednoznaczna lub branżowa.

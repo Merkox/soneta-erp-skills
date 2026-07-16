@@ -204,6 +204,10 @@ i wyzwalanie przeliczeń (`OnEditing`/`OnDeleting`).
 | `OnImporting()` | przed ustawianiem pól w trakcie importu | podczas importu pola omijają standardowe properties biznesowe |
 | `OnImported()` | po ustawieniu wszystkich pól importowanego obiektu | uzupełnij logikę biznesową, która nie odpaliła się przez properties |
 
+`OnImporting`/`OnImported` dotyczą importu XML **według rekordów** — mechanizm i strukturę pliku
+opisuje artykuł *import-export-xml* w `/soneta-config`, a warstwę kodu
+[sessionreader-sessionwriter.md](./sessionreader-sessionwriter.md).
+
 ```csharp
 public class Zgloszenie : SerwisModule.ZgloszenieRow {
 

@@ -53,7 +53,7 @@ Podział na:
 - **Ważne (should-have)** — istotne, ale moduł może działać bez nich w v1.
 - **Opcjonalne (nice-to-have)** — kolejne wersje.
 
-Te funkcjonalności będą rozwijane w Etapie 2 (architektura) i Etapie 3 (specyfikacja szczegółowa, sekcje 3.1–3.15).
+Te funkcjonalności będą rozwijane w Etapie 2 (architektura) i Etapie 3 (specyfikacja szczegółowa, sekcje 3.1–3.16).
 
 ### 1.5. Pokrycie przez standardowe funkcjonalności platformy
 Wynik weryfikacji z sekcji „Weryfikacja pokrycia przez standard platformy". Dla kluczowych funkcjonalności z sekcji 1.4 wskaż, na ile realizuje je już standard:
