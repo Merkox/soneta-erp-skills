@@ -110,7 +110,7 @@ foreach (var list in interfaceImpls.Values)
 Directory.CreateDirectory(outDir);
 
 // INDEX + zliczniki
-var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string RelPath)>();
+var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string Caption, string Interfaces, string RelPath)>();
 var moduleMeta = new Dictionary<string, (string Caption, string Description)>(StringComparer.Ordinal);
 int filesWritten = 0, modulesWithTables = 0;
 
@@ -146,7 +146,7 @@ foreach (var module in modules)
         var record = module.GetTypeMembers(recordBaseName + "Record").FirstOrDefault();
         if (record == null) continue; // brak *Record → nie realna tabela danych
 
-        var (md, konfig, guided, tableType) = BuildRecordMarkdown(
+        var (md, konfig, guided, tableType, caption, interfaces) = BuildRecordMarkdown(
             recordBaseName, module, record, topLevelClasses, interfaceImpls);
 
         var filePath = Path.Combine(moduleDir, recordBaseName + ".md");
@@ -154,7 +154,7 @@ foreach (var module in modules)
         filesWritten++;
 
         var rel = moduleShort + "/" + recordBaseName + ".md";
-        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, rel));
+        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, caption, interfaces, rel));
     }
 }
 
@@ -165,6 +165,8 @@ idx.AppendLine();
 idx.AppendLine("Pliki w tym katalogu zostały wygenerowane wsadowo przez");
 idx.AppendLine("`scripts/export-props-all.csx` (ta sama logika co `scan-props.csx`).");
 idx.AppendLine("Każdy plik `<Moduł>/<RowType>.md` zawiera pełną tabelę pól jednej tabeli.");
+idx.AppendLine("Ten INDEX to zarazem pełna inwentaryzacja modułów i tabel (moduł z `Opis`; tabela:");
+idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Interfaces | Plik`).");
 idx.AppendLine("Instrukcja odczytu i regeneracji: [../references/scan-props.md](../../references/scan-props.md).");
 idx.AppendLine();
 idx.AppendLine($"- Modułów z tabelami: {modulesWithTables}");
@@ -183,10 +185,10 @@ foreach (var grp in indexRows.GroupBy(r => r.Module).OrderBy(g => g.Key, StringC
         if (!string.IsNullOrEmpty(meta.Description)) idx.AppendLine($"- Opis: {InlineText(meta.Description)}");
         if (!string.IsNullOrEmpty(meta.Caption) || !string.IsNullOrEmpty(meta.Description)) idx.AppendLine();
     }
-    idx.AppendLine("| RowType | Tabela | Konfig | Guided | Plik |");
-    idx.AppendLine("|---------|--------|--------|--------|------|");
+    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Interfaces | Plik |");
+    idx.AppendLine("|---------|-------|--------|--------|--------|------------|------|");
     foreach (var r in grp.OrderBy(r => r.RowType, StringComparer.Ordinal))
-        idx.AppendLine($"| {r.RowType} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | [{r.RelPath}]({r.RelPath}) |");
+        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.Interfaces)} | [{r.RelPath}]({r.RelPath}) |");
     idx.AppendLine();
 }
 
@@ -199,7 +201,7 @@ return 0;
 // ══════════════════════════════════════════════════════════════════════════════
 // Budowa markdown pojedynczej tabeli — logika identyczna jak scan-props.csx.
 // Zwraca (markdown, konfig, guided, tableType) — trzy ostatnie do INDEX-u.
-static (string Md, string Konfig, string Guided, string TableType) BuildRecordMarkdown(
+static (string Md, string Konfig, string Guided, string TableType, string Caption, string Interfaces) BuildRecordMarkdown(
     string recordBaseName,
     INamedTypeSymbol enclosing,
     INamedTypeSymbol foundRecord,
@@ -249,6 +251,7 @@ static (string Md, string Konfig, string Guided, string TableType) BuildRecordMa
     }
 
     string guidedText = "";
+    var thisInterfaces = nestedTableCls != null ? GetTableInterfaces(nestedTableCls).ToList() : new List<string>();
     if (!string.IsNullOrEmpty(tableTypeName))
     {
         sb.AppendLine($"Nazwa tabeli: `{tableTypeName}`");
@@ -261,7 +264,6 @@ static (string Md, string Konfig, string Guided, string TableType) BuildRecordMa
             sb.AppendLine($"Guided: child — nadrzędna przez pole `{guidedParentField}` → `{guidedParentType}`");
             guidedText = $"child: {guidedParentField}→{guidedParentType}";
         }
-        var thisInterfaces = nestedTableCls != null ? GetTableInterfaces(nestedTableCls).ToList() : new List<string>();
         if (thisInterfaces.Count > 0)
             sb.AppendLine($"Implementuje interfejsy: {string.Join(", ", thisInterfaces.Select(i => "`" + i + "`"))}");
     }
@@ -326,7 +328,8 @@ static (string Md, string Konfig, string Guided, string TableType) BuildRecordMa
         }
     }
 
-    return (sb.ToString(), isConfigTable ? "konfig" : "", guidedText, tableTypeName ?? "");
+    return (sb.ToString(), isConfigTable ? "konfig" : "", guidedText, tableTypeName ?? "",
+        tableCaption ?? "", string.Join(", ", thisInterfaces));
 }
 
 static string ShortTypeName(string fullName)
