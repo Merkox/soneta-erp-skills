@@ -125,6 +125,13 @@ var nestedTableCls = enclosing?.GetTypeMembers(recordBaseName + "Table").FirstOr
 if (nestedTableCls != null)
     isConfigTable = IsConfigTable(nestedTableCls);
 
+// Tytuł/Opis tabeli — atrybuty [Caption]/[Description] na klasie *Table (fallback: *Row).
+// Opisują całą tabelę (zwykle l.mn., np. „Dokumenty handlowe"), niezależnie od opisów pól.
+var tableCaption = GetAttributeFirstString(nestedTableCls, "CaptionAttribute");
+if (string.IsNullOrEmpty(tableCaption)) tableCaption = GetAttributeFirstString(rowClass, "CaptionAttribute");
+var tableDescription = GetAttributeFirstString(nestedTableCls, "DescriptionAttribute");
+if (string.IsNullOrEmpty(tableDescription)) tableDescription = GetAttributeFirstString(rowClass, "DescriptionAttribute");
+
 // Wyznacz status guided: root (dziedziczy po GuidedTable/ExportedTable) lub child→ParentRow
 // (pole rekordu z [ColumnInfo(GuidedRelation=...)]). Pole zapamiętujemy też w guidedParentField,
 // żeby oznaczyć je później w tabeli pól.
@@ -134,8 +141,9 @@ string guidedParentType = null;
 if (!isGuidedRoot)
     (guidedParentField, guidedParentType) = FindGuidedParent(foundRecord, rowClass);
 
-// Klucz: nazwa pola z notacją kropkową dla subrowów; Wartość: (typ, czyBazodanowe, tytuł, opis)
-var merged = new SortedDictionary<string, (string Type, bool IsDb, string Caption, string Description)>(StringComparer.Ordinal);
+// Klucz: nazwa pola z notacją kropkową dla subrowów; Wartość: (typ, symbol typu, czyBazodanowe, tytuł, opis).
+// Symbol typu (Sym) niesie informację potrzebną do rozpoznania enuma (TypeKind.Enum, także pod Nullable<>).
+var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)>(StringComparer.Ordinal);
 
 var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 ScanRecord(foundRecord, "", visited, merged, topLevelClasses);
@@ -153,6 +161,8 @@ else
 if (!string.IsNullOrEmpty(tableTypeName))
 {
     Console.WriteLine($"Nazwa tabeli: `{tableTypeName}`");
+    if (!string.IsNullOrEmpty(tableCaption)) Console.WriteLine($"Tytuł: {InlineText(tableCaption)}");
+    if (!string.IsNullOrEmpty(tableDescription)) Console.WriteLine($"Opis: {InlineText(tableDescription)}");
     Console.WriteLine($"Tabela konfiguracyjna: {(isConfigTable ? "Tak" : "Nie")}");
     if (isGuidedRoot)
         Console.WriteLine("Guided: root");
@@ -186,6 +196,9 @@ foreach (var asmRef in compilation.References)
         }
     }
 }
+// Deterministyczna kolejność tabel implementujących (spójna z export-props-all.csx).
+foreach (var list in interfaceImpls.Values)
+    list.Sort(StringComparer.Ordinal);
 Console.WriteLine();
 var dbCount = merged.Values.Count(v => v.IsDb);
 var calcCount = merged.Count - dbCount;
@@ -195,6 +208,8 @@ Console.WriteLine();
 Console.WriteLine("| Pole | Typ | Rodzaj | Tytuł | Opis |");
 Console.WriteLine("|------|-----|--------|-------|------|");
 var interfaceFields = new System.Collections.Generic.List<(string Field, string IfaceShort, System.Collections.Generic.List<string> Impls)>();
+// Enumy użyte w polach tej tabeli (klucz = pełna nazwa, wartość = symbol) — do sekcji `## Enumy`.
+var enumsUsed = new SortedDictionary<string, INamedTypeSymbol>(StringComparer.Ordinal);
 foreach (var kv in merged)
 {
     var rodzaj = kv.Value.IsDb ? "bazodanowe" : "";
@@ -206,6 +221,12 @@ foreach (var kv in merged)
     {
         rodzaj = string.IsNullOrEmpty(rodzaj) ? "iface-ref" : rodzaj + ", iface-ref";
         interfaceFields.Add((kv.Key, shortType, impls));
+    }
+    var en = AsEnum(kv.Value.Sym);
+    if (en != null)
+    {
+        rodzaj = string.IsNullOrEmpty(rodzaj) ? "enum" : rodzaj + ", enum";
+        enumsUsed[en.ToDisplayString()] = en;
     }
     Console.WriteLine($"| {kv.Key} | `{kv.Value.Type}` | {rodzaj} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
 }
@@ -225,6 +246,21 @@ if (interfaceFields.Count > 0)
         Console.WriteLine($"| {f.Field} | `{f.IfaceShort}` | {string.Join(", ", f.Impls.Select(i => "`" + i + "`"))} |");
     }
 }
+
+if (enumsUsed.Count > 0)
+{
+    Console.WriteLine();
+    Console.WriteLine("## Enumy");
+    Console.WriteLine();
+    Console.WriteLine("Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).");
+    foreach (var en in enumsUsed.Values)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"### {en.Name} (`{en.ToDisplayString()}`)");
+        foreach (var (name, value, caption) in GetEnumMembers(en))
+            Console.WriteLine(string.IsNullOrEmpty(caption) ? $"- `{name}` = {value}" : $"- `{name}` = {value} — {EscapeCell(caption)}");
+    }
+}
 return 0;
 
 static string ShortTypeName(string fullName)
@@ -240,7 +276,7 @@ static void ScanRecord(
     INamedTypeSymbol record,
     string prefix,
     HashSet<INamedTypeSymbol> visited,
-    SortedDictionary<string, (string Type, bool IsDb, string Caption, string Description)> merged,
+    SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)> merged,
     Dictionary<string, INamedTypeSymbol> topLevelClasses)
 {
     if (record == null) return;
@@ -266,6 +302,7 @@ static void ScanRecord(
         var key = prefix + f.Name;
         merged[key] = (
             f.Type.ToDisplayString(),
+            f.Type,
             true,
             GetAttributeFirstString(f, "CaptionAttribute"),
             GetAttributeFirstString(f, "DescriptionAttribute"));
@@ -297,13 +334,14 @@ static void ScanRecord(
             {
                 merged[key] = (
                     typeStr,
+                    p.Type,
                     existing.IsDb,
                     !string.IsNullOrEmpty(caption) ? caption : existing.Caption,
                     !string.IsNullOrEmpty(description) ? description : existing.Description);
             }
             else
             {
-                merged[key] = (typeStr, false, caption, description);
+                merged[key] = (typeStr, p.Type, false, caption, description);
             }
         }
     }
@@ -328,7 +366,7 @@ static void ScanRecord(
             var description = !string.IsNullOrEmpty(entry.Description)
                 ? entry.Description
                 : GetAttributeFirstString(member, "DescriptionAttribute");
-            merged[key] = (entry.Type, entry.IsDb, caption, description);
+            merged[key] = (entry.Type, entry.Sym, entry.IsDb, caption, description);
         }
     }
 
@@ -495,4 +533,35 @@ static string EscapeCell(string s)
 {
     if (string.IsNullOrEmpty(s)) return "";
     return s.Replace("\\", "\\\\").Replace("|", "\\|").Replace("\r", " ").Replace("\n", " ");
+}
+
+// Tekst do linii nagłówka (nie do komórki tabeli) — spłaszcza znaki nowej linii, bez escapowania `|`.
+static string InlineText(string s)
+{
+    if (string.IsNullOrEmpty(s)) return "";
+    return s.Replace("\r", " ").Replace("\n", " ").Trim();
+}
+
+// Zwraca symbol enuma, jeśli typ jest enumem lub Nullable<enum>; w innym wypadku null.
+static INamedTypeSymbol AsEnum(ITypeSymbol type)
+{
+    if (type is not INamedTypeSymbol n) return null;
+    if (n.TypeKind == TypeKind.Enum) return n;
+    if (n.OriginalDefinition?.SpecialType == SpecialType.System_Nullable_T
+        && n.TypeArguments.FirstOrDefault() is INamedTypeSymbol inner && inner.TypeKind == TypeKind.Enum)
+        return inner;
+    return null;
+}
+
+// Wartości enuma w kolejności deklaracji: (nazwa stałej, wartość całkowita, Tytuł z [Caption]/[Description]).
+static IEnumerable<(string Name, string Value, string Caption)> GetEnumMembers(INamedTypeSymbol en)
+{
+    foreach (var m in en.GetMembers().OfType<IFieldSymbol>())
+    {
+        if (!m.HasConstantValue) continue;
+        var cap = GetAttributeFirstString(m, "CaptionAttribute");
+        if (string.IsNullOrEmpty(cap)) cap = GetAttributeFirstString(m, "DescriptionAttribute");
+        var val = Convert.ToString(m.ConstantValue, System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        yield return (m.Name, val, cap);
+    }
 }

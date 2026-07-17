@@ -1,0 +1,337 @@
+# Pola i właściwości klasy biznesowej: `Soneta.SrodkiTrwale.DokumentST`
+Nazwa tabeli: `DokumentyST`
+Tytuł: Dokumenty ŚT
+Opis: Dokumenty ewidencyjne środków trwałych (OT, LT, MT i inne). Rejestrują operacje przyjęcia, likwidacji, zmiany wartości oraz modernizacji majątku. Zawierają dane księgowe, wartości bilansowe i podatkowe oraz powiązania z historią środka i opisem analitycznym.
+Tabela konfiguracyjna: Nie
+Guided: root
+Implementuje interfejsy: `IDokumentKsiegowalny`
+
+- pola bazodanowe: 35
+- pola kalkulowane (z klas biznesowych): 21
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| BudynkiLokaleMieszkalne | `bool` | bazodanowe | Budynki i lokale mieszkalne |  |
+| Bufor | `bool` | bazodanowe |  | Bufor |
+| BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
+| Data | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu |
+| DataDokumentuDodatkowego | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu dodatkowego |
+| DataOperacji | `Soneta.Types.Date` | bazodanowe |  | Data operacji |
+| Definicja | `Soneta.SrodkiTrwale.DokumentST.DefDokST` | bazodanowe |  | Definicja dokumentu |
+| DokumentDodatkowy | `Soneta.Core.DokEwidencji` |  |  |  |
+| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Historia | `Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria` | bazodanowe |  | Zapis historyczny środka związany z tym dokumentem |
+| HistoriaPodzielnika | `Soneta.Core.HistoriaPodzielnika` | bazodanowe |  | Historia podzielnika kosztów |
+| IdentDokumentuDodatkowego | `System.Guid` | bazodanowe |  |  |
+| KategoriaF03 | `Soneta.SrodkiTrwale.KategoriaF03` | bazodanowe, enum | Kategoria F-03 |  |
+| KategoriaSTDokumentu | `Soneta.SrodkiTrwale.KategoriaST` | bazodanowe |  | Kategoria, dla którego powstał dokument |
+| Kierunek | `Soneta.SrodkiTrwale.KierunekObrotuST` | bazodanowe, enum | Wartość bilansowa | Kirunek obrotów dokumentu |
+| Ksiegowanie | `Soneta.SrodkiTrwale.KsiegowanieWorker` |  |  |  |
+| KwotaNieumorzona | `Soneta.Types.Currency` |  |  |  |
+| Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe |  | Lokalizacja dla podatku od nieruchomości |
+| MiejsceUzytkowaniaDokumentu | `Soneta.SrodkiTrwale.MiejsceUzytkowania` | bazodanowe |  | Miejsce użytkowania, dla którego powstał dokument |
+| MiejsceUzytkowaniaInfo | `string` |  | Informacja o miejscu użytkowania |  |
+| Miejscowosc | `string` | bazodanowe | Miejscowość |  |
+| NazwaPodmiotu | `string` | bazodanowe | Nazwa podmiotu |  |
+| NieodplatnieOtrzymany | `Soneta.SrodkiTrwale.NieodplatneOtrzymanie` | bazodanowe, enum | ŚT nieodpłatnie otrzymany/przekazany |  |
+| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| Numer.Numer | `int` | bazodanowe |  |  |
+| Numer.NumerPelny | `string` |  |  |  |
+| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Symbol | `string` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| NumerDokumentuDodatkowego | `string` | bazodanowe |  | Numer dokumentu dodatkowego |
+| NumerKSeF | `string` | bazodanowe |  | Numer KSeF dokumentu dodatkowego |
+| NumerProceduryISO | `string` | bazodanowe |  | Numer procedury ISO |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
+| Odpowiedzialny | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik odpowiedzialny za dokument |
+| Opis | `string` | bazodanowe |  | Opis dokumentu |
+| OpisyAnalityczne | `Soneta.Business.ListWithView` |  |  |  |
+| PageF03Visibility | `bool` |  |  |  |
+| Podmiot | `Soneta.Core.IPodmiot` | iface-ref |  |  |
+| PodzielnikKosztow | `Soneta.Core.PodzielnikKosztow` | bazodanowe |  | Podzielnik kosztów |
+| Pozycje | `Soneta.Business.LpSubTable<Soneta.SrodkiTrwale.ObrotST>` |  |  |  |
+| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
+| SrodekTrwaly | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe |  | Środek związany z tym dokumentem |
+| StanDokumentuPozwalaNaBuforowanieOA | `bool` |  |  |  |
+| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` |  |  |  |
+| SymbolOkresuWgDatyDokumentu | `string` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu środków trwałych |
+| Tytul | `Soneta.SrodkiTrwale.TytulDokumentuST` | bazodanowe | Tytuł dokumentu | Tytuł dokumentu środków trwałych |
+| WartoscBilansowa | `Soneta.Types.Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa dokumentu |
+| WartoscPodatkowa | `Soneta.Types.Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa dokumentu |
+| WidokAktywny | `bool` |  |  |  |
+| Wielooddzialowosc | `bool` |  |  |  |
+| ZasadzeniaWieloletnie | `bool` | bazodanowe | Zasadzenia wieloletnie |  |
+| Zatwierdzony | `bool` |  |  |  |
+
+## Relacje interfejsowe
+
+Pola, których typ jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=...)]` innych tabel.
+Pole może wskazywać na rekord dowolnej z poniższych tabel.
+
+| Pole | Interfejs | Tabele implementujące |
+|------|-----------|------------------------|
+| Podmiot | `IPodmiot` | `Bank`, `InstytucjaFinansowaPPK`, `Kontrahent`, `Pracownik`, `UrzadCelny`, `UrzadSkarbowy`, `ZUS` |
+
+## Enumy
+
+Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
+
+### TypDokumentu (`Soneta.Core.TypDokumentu`)
+- `Niezdefiniowany` = 0
+- `RaportESP` = 101 — Raport EŚP
+- `Wpłata` = 102
+- `Wypłata` = 103
+- `Przelew` = 104
+- `PaczkaPrzelewow` = 105
+- `PotwierdzenieSalda` = 111
+- `WezwanieDoZaplaty` = 112
+- `NotaOdsetkowa` = 113
+- `Kompensata` = 114
+- `RozliczenieZaliczki` = 115
+- `RozliczenieDelegacji` = 116
+- `Cesja` = 117
+- `NotaKorygujaca` = 118 — Nota korygująca
+- `NotaKorygujacaOtrzymana` = 119 — Nota korygująca otrzymana
+- `WyciągBankowyEwidencja` = 120
+- `RaportKasowyEwidencja` = 121
+- `RozliczenieEwidencja` = 122
+- `NotaOdsetkowaEwidencja` = 123
+- `DelegacjaPWSEwidencja` = 124 — Delegacja PWS ewidencja
+- `Preliminarz` = 125 — Dokument Preliminarza
+- `GIODOOświadczenie` = 201
+- `GIODOUprawnienie` = 202
+- `GIODOPozyskanieDanych` = 203 — Pozyskanie danych osobowych
+- `GIODOPowierzenieDanych` = 204 — Powierzenie danych osobowych
+- `GIODOPrzetwarzanie` = 205
+- `GIODOUdostępnienieDanych` = 206 — Udostępnienie danych osobowych
+- `GIODONaruszenie` = 216 — Naruszenie ochrony danych osobowych
+- `Dekret` = 801
+- `BO` = 802
+- `ZapisKsiegowy` = 803
+- `PKEwidencja` = 804
+- `RóżniceKursoweEwidencja` = 805
+- `BOEwidencja` = 806
+- `RóżniceKursoweMWEwidencja` = 807 — Różnice kursowe MW ewidencja
+- `RozniceKursoweKPiREwidencja` = 808 — Różnice kursowe KPiR ewidencja
+- `DokumentZleDlugi` = 809
+- `VAT7` = 207
+- `VAT_UE` = 208
+- `VAT_UEA` = 209
+- `VAT_UEB` = 210
+- `VAT_UEK` = 211
+- `VAT_UEK_Pozycja` = 212
+- `VAT_UEC` = 213
+- `VAT_ZD` = 214
+- `VAT27` = 215
+- `VAT9M` = 217
+- `VAT_UES` = 218
+- `VIIDO` = 219
+- `VIIDO_Pozycja` = 220
+- `VIUDO` = 221
+- `VIUDO_Pozycja` = 222
+- `VAT8` = 223
+- `VAT7ParametryRozliczen` = 224
+- `Umowa` = 301
+- `OfertaPracy` = 302
+- `Wypadek` = 303
+- `UmowaZewnetrzna` = 304
+- `ZgloszenieSygnalisty` = 305
+- `Sprawa` = 321
+- `RozliczenieCzasuPracy` = 401
+- `ListaPlac` = 501
+- `Wyplata` = 502
+- `ListaPlacEwidencja` = 503
+- `WyplataUmowyEwidencja` = 504
+- `DokumentAktualizacjiKalendarza` = 505
+- `PlanowanaListaPłac` = 520
+- `PlanowanaListaPłacEwidencja` = 521
+- `KEDU` = 1001
+- `ZgloszenieZUS` = 1002
+- `ZalacznikZUS` = 1003
+- `ZUSDRA` = 1004
+- `PIT4` = 1005
+- `PIT11` = 1006
+- `PIT40` = 1007
+- `PIT8A` = 1008
+- `PIT8B` = 1009
+- `PIT8C` = 1010
+- `IFT1` = 1011
+- `CIT2` = 1012
+- `CIT2O` = 1013
+- `PIT5` = 1014
+- `AKC2` = 1015
+- `AKC2E` = 1016
+- `ZUSIWA` = 1017
+- `PIT5L` = 1018
+- `WND` = 1019
+- `PFRON` = 1020
+- `IFT1R` = 1021
+- `PITR` = 1022
+- `CIT8` = 1023
+- `CIT8O` = 1024
+- `PIT8S` = 1025
+- `PIT11Z` = 1026
+- `PIT40Z` = 1027
+- `PIT8CZ` = 1028
+- `PITRZ` = 1029
+- `CITST` = 1030
+- `CITSTA` = 1031
+- `CITZAL` = 1032
+- `CITD` = 1033
+- `IFT2` = 1034
+- `CIT10Z` = 1035
+- `CIT8BR` = 1036
+- `CITMIT` = 1037
+- `CIT8S` = 1038
+- `CIT8SP` = 1039
+- `PITRyczałt` = 1040
+- `CITIP` = 1041
+- `CITWZ` = 1042
+- `CITKW` = 1043
+- `CITF` = 1044
+- `CITM` = 1045
+- `WNU` = 1050
+- `ZSWA` = 1060
+- `ZUSRMUA` = 1070
+- `OSW` = 1080
+- `ZUSRIA` = 1090
+- `CIT8E` = 1100
+- `CITEZ` = 1110
+- `CITCSR` = 2700
+- `CITRB` = 1150
+- `CITWOT` = 1160
+- `ZUSDRAII` = 3000
+- `ZUSRCAII` = 3010
+- `DEKR` = 3020
+- `INF2` = 3030
+- `LukaPlacowa` = 3040
+- `DeklaracjaRozliczeniowa` = 1099
+- `MagazynEwidencja` = 1101
+- `SprzedażEwidencja` = 1201
+- `ZakupEwidencja` = 1202
+- `RozliczenieKasoweVATEwidencja` = 1203 — Rozliczenie kasowe VAT ewidencja
+- `RozliczenieKasoweAkcyzyEwidencja` = 1204 — Rozliczenie kasowe akcyzy ewidencja
+- `SprzedażZbiorczaEwidencja` = 1205
+- `FWUENabyciaNaliczonyEwidencja` = 1206 — DW nabycia naliczony ewidencja
+- `FWUENabyciaNależnyEwidencja` = 1207 — DW nabycia należny ewidencja
+- `VATMarżaEwidencja` = 1210
+- `OT` = 1301
+- `LT` = 1302
+- `Amortyzacja` = 1303
+- `Przeszacowanie` = 1304
+- `ZmianaWartości` = 1305
+- `ŚrodkiTrwałeEwidencja` = 1306
+- `ŚrodkiTrwałe` = 1307
+- `BOT` = 1308
+- `Wyposażenie` = 1309
+- `ZmianaMiejscaUżytkowania` = 1310
+- `ZmianaOsobyOdpowiedzialnej` = 1311
+- `ZmianaParametrówAmortyzacji` = 1312
+- `ZmianaCentrumKosztów` = 1313
+- `Inwentaryzacja` = 1314
+- `ZmianaWartościRezydualnej` = 1315
+- `OdpisAktualizujący` = 1317
+- `ZmianaWartosciDok` = 1318 — Zmiana wartości i ilości
+- `PodatekOdNieruchomosci` = 1319 — Podatek od nieruchomości
+- `ZmianaParametrowPodatku` = 1320
+- `ZmianaKategorii` = 1321
+- `InwentaryzacjaCzastkowa` = 1322 — Inwentaryzacja cząstkowa
+- `ZmianaPodzielnikaKosztow` = 1323 — Zmiana podzielnika kosztów
+- `Leasing` = 1324 — Leasing
+- `ZmianaParametrowLeasingu` = 1325 — Zmiana parametrów leasingu
+- `RataLeasingowa` = 1326 — Rata leasingowa
+- `FakturaImportowa` = 1401
+- `SAD` = 1402
+- `IntrastatPrzywóz` = 1501
+- `IntrastatWywóz` = 1502
+- `IntrastatTowar` = 1503
+- `ZdarzenieCRM` = 1601 — Zdarzenie CRM
+- `ZadanieCRM` = 1602 — Zadanie CRM
+- `ProjektCRM` = 1603 — Projekt CRM
+- `KampaniaCRM` = 1604 — Kampania CRM
+- `Korespondencja` = 1605 — Korespondencja
+- `Budget` = 1606 — Budżet
+- `Wyroznienie` = 1651
+- `Zgloszenie` = 1652
+- `SkladkaEwidencja` = 1660 — Składka ewidencja
+- `RozliczenieEP` = 1701 — Rozliczenie EP
+- `RozliczenieEPEwidencja` = 1702 — Rozliczenie EP Ewidencja
+- `Rezerwacja` = 1751
+- `DokumentRMK` = 1801
+- `RMKEwidencja` = 1802 — RMK ewidencja
+- `Delegacja` = 1900
+- `Workflow` = 2000
+- `BasicDocument` = 2001
+- `Matter` = 2002
+- `DocPkg` = 2003
+- `ChronoOrderElem` = 2004
+- `DbTuple` = 2100
+- `SprawaWindykacyjna` = 2200 — Sprawa windykacyjna
+- `PPK_DokumentyPracodawcy` = 2300 — PPK - Dokumenty pracodawcy
+- `PPK_DokumentyInstytucjiFinansowej` = 2301 — PPK - Dokumenty instytucji finansowej
+- `PPK_RozliczenieSkładek` = 2302 — PPK - Rozliczenie składek
+- `PPK_RozliczenieNadpłat` = 2303 — PPK - Rozliczenie nadpłat
+- `PPK_DokumentPracodawcy` = 2310
+- `PPK_RejestracjaUczestnika` = 2311 — PPK - Rejestracja uczestnika
+- `PPK_Składka` = 2312 — PPK - Składka
+- `PPK_KorektaSkładki` = 2313 — PPK - Korekta składki
+- `PPK_DeklaracjaUczestnika` = 2314 — PPK - Deklaracja uczestnika
+- `PPK_ZmianaDanychKontaktu` = 2315 — PPK - Zmiana danych kontaktu elektronicznego uczestnika
+- `PPK_ZmianaDanychIdentyfikacyjnych` = 2316 — PPK - Zmiana danych identyfikacyjnych uczestnika
+- `PPK_ZwolnienieUczestnika` = 2317 — PPK - Zwolnienie pracownika (zleceniobiorcy) –  uczestnika
+- `PPK_DokumentInstytucjiFinansowej` = 2320
+- `PPK_WypłataŚrodków` = 2321 — PPK - Wypłata środków przez uczestnika
+- `PPK_ZwrotNadpłaty` = 2322 — PPK - Zwrot środków w wyniku rozliczenia korekty lub rezygnacji z dokonywania wpłat
+- `PPK_WypłataTransferowa` = 2323 — PPK - Wypłata transferowa
+- `PPK_NadanieUczestnikowiNumeruEwidencji` = 2324 — PPK - Nadanie uczestnikowi numeru ewidencji PPK
+- `PPK_ZwrotŚrodków` = 2325 — PPK - Zwrot (art. 12.6, art. 19.6.)
+- `ZAW_NR` = 2400 — ZAW-NR
+- `CUK` = 2600 — CUK
+- `DokumentRozliczeniaKontrahenta` = 2500
+- `DokumentRozliczeniaPracownika` = 2501
+- `Discussion` = 2750 — Dyskusja
+- `DiscussionRequirements` = 2751 — Wymagania dyskusji
+- `WniosekOZwrotNienależnieOpłaconychSkładek` = 2800
+- `ZUS_Z3` = 2900 — ZUS-Z3
+- `ZUS_Z3a` = 2910 — ZUS-Z3a
+
+### KategoriaF03 (`Soneta.SrodkiTrwale.KategoriaF03`)
+- `Brak` = 0
+- `BudowaNowegoST` = 1 — Budowa nowego ŚT
+- `DarowiznaOtrzymanie` = 2 — Darowizna – otrzymanie
+- `DarowiznaPrzekazanie` = 3 — Darowizna – przekazanie
+- `Dzierzawa` = 4 — Dzierżawa
+- `LeasingFinansowyPozyskanieNowyST` = 5 — Leasing finansowy – pozyskanie (nowy ŚT)
+- `LeasingFinansowyPozyskanieUzywanyST` = 6 — Leasing finansowy – pozyskanie (używany ŚT)
+- `LeasingFinansowyPrzekazanie` = 7 — Leasing finansowy – przekazanie
+- `Likwidacja` = 8 — Likwidacja
+- `NabyciePrawaUzytkowaniaWieczystegoGruntu` = 9 — Nabycie prawa użytkowania wieczystego gruntu
+- `NabycieSTWBudowie` = 10 — Nabycie ŚT w budowie
+- `NabycieWDrodzeZasiedzenia` = 11 — Nabycie w drodze zasiedzenia
+- `NieodplatneOtrzymanie` = 12 — Nieodpłatne otrzymanie
+- `NieodplatnePrzekazanie` = 13 — Nieodpłatne przekazanie
+- `PrzekazanieInneJednostceNaUzytek` = 14 — Przekazanie innej jednostce na użytek – amortyzacja przez użytkownika
+- `Przekwalifikowanie` = 15 — Przekwalifikowanie
+- `SpoldzielczePrawoDoLokalu` = 16 — Spółdzielcze prawo do lokalu użytkowego lub mieszkalnego
+- `Sprzedaz` = 17 — Sprzedaż
+- `Ujawnienie` = 18 — Ujawnienie
+- `Ulepszenie` = 19 — Ulepszenie (przebudowa, rozbudowa, rekonstrukcja, modernizacja)
+- `UmowaNajmu` = 20 — Umowa najmu
+- `WkladRzeczowyOtrzymanie` = 21 — Wkład rzeczowy (aport) - otrzymanie
+- `WkladRzeczowyPrzekazanie` = 22 — Wkład rzeczowy (aport) - przekazanie
+- `ZakupNowyST` = 23 — Zakup – nowy ŚT
+- `ZakupUzywanyST` = 24 — Zakup – używany ŚT
+
+### KierunekObrotuST (`Soneta.SrodkiTrwale.KierunekObrotuST`)
+- `ZmniejszenieWartości` = 0 — Zmniejszenie wartości
+- `ZwiększenieWartości` = 1
+
+### NieodplatneOtrzymanie (`Soneta.SrodkiTrwale.NieodplatneOtrzymanie`)
+- `Nie` = 0
+- `Otrzymany` = 10
+- `Przekazany` = 20

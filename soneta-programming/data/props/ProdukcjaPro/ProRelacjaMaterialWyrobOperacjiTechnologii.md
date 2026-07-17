@@ -1,0 +1,15 @@
+# Pola i właściwości klasy biznesowej: `Soneta.ProdukcjaPro.ProRelacjaMaterialWyrobOperacjiTechnologii`
+Nazwa tabeli: `ProRMatWyrOT`
+Tytuł: Relacje materiałów i wyrobów operacji techologii
+Opis: Element szczegółowy materiału operacji technologii (ProMaterialOperacjiTechnologii). Definiuje powiązanie między materiałem a wyrobem w ramach operacji technologicznej, określając przepływ surowca do konkretnego produktu wyjściowego.
+Tabela konfiguracyjna: Nie
+Guided: child — nadrzędna przez pole `Material` → `ProMaterialOperacjiTechnologii`
+
+- pola bazodanowe: 3
+- pola kalkulowane (z klas biznesowych): 0
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| Lp | `int` | bazodanowe |  | Liczba porządkowa dla relacji materiał wyrób operacji techologii. |
+| Material | `Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii` | bazodanowe, guided-parent | Materiał | Materiał dla relacji materiał wyrób operacji techologii. |
+| Wyrob | `Soneta.ProdukcjaPro.ProWyrobOperacjiTechnologii` | bazodanowe | Wyrób | Wyrób dla relacji materiał wyrób operacji techologii. |

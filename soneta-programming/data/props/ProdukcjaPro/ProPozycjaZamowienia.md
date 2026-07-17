@@ -1,0 +1,16 @@
+# Pola i właściwości klasy biznesowej: `Soneta.ProdukcjaPro.ProPozycjaZamowienia`
+Nazwa tabeli: `ProPZamowien`
+Tytuł: Pozycje zamówień
+Opis: Element szczegółowy pozycji zamówienia (ProWyrobOperacjiZlecenia). Wiąże wyrób operacji zlecenia z pozycją dokumentu handlowego zamówienia. Umożliwia śledzenie ilości zamówionych w powiązaniu z produkcją.
+Tabela konfiguracyjna: Nie
+Guided: child — nadrzędna przez pole `Wyrob` → `ProWyrobOperacjiZlecenia`
+
+- pola bazodanowe: 4
+- pola kalkulowane (z klas biznesowych): 0
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość pozycji zamówienia. |
+| Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji zamówienia. |
+| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja dokumentu handlowego dla pozycji zamówienia. |
+| Wyrob | `Soneta.ProdukcjaPro.ProWyrobOperacjiZlecenia` | bazodanowe, guided-parent | Wyrób | Wyrób operacji zlecenia dla pozycji zamówienia. |

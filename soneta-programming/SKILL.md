@@ -51,7 +51,7 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Receptury kodu per obiekt biznesowy (domena Handel) — `DokumentHandlowy` (faktury/magazynowe/zamówienia/korekty, relacje `IRelacjeService`, cykl życia, magazyn/partie/obroty, VAT/waluty, płatności, KSeF/fiskal/Intrastat, wydruki). Indeks + mapa receptur (HANDEL-W1–W82); rozdziały `references/domeny/handel/HANDEL01..HANDEL14` | [references/domeny/handel.md](references/domeny/handel.md) |
 | Receptury kodu per obiekt biznesowy (domena Kadry-Płace) — `Pracownik` (zatrudnienie i dane kadrowe, historia `PracHistoria`+`Etat`, dodatki, nieobecności/limity, plan pracy/RCP, umowy cywilnoprawne, naliczanie wypłat, listy płac, wydruki PDF). Indeks + mapa receptur (KADRY-A*…K*); rozdziały `references/domeny/kadry/KADRY01..KADRY11` | [references/domeny/kadry.md](references/domeny/kadry.md) |
 | **Zasady bezpiecznego kodu biznesowego — checklist do review i refaktoringu**                     | [references/safe-code.md](references/safe-code.md) |
-| Skanowanie pól obiektu biznesowego z DLL (Roslyn MetadataReference)                   | [references/scan-props.md](references/scan-props.md) |
+| Pola obiektów biznesowych — dane wygenerowane (`data/props/`) + skaner/regeneracja z DLL      | [references/scan-props.md](references/scan-props.md) |
 | Inwentaryzacja modułów i tabel (`*Module` / `*Row` / `*Table`) z DLL                  | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
 | Inwentaryzacja folderów statycznych menu (`[assembly: FolderView]`) z DLL — drzewo, listy, formularze | narzędzie `scan-folders` w skillu `/soneta-config` |
@@ -336,10 +336,12 @@ Gotowe **receptury per obiekt biznesowy** (realne pola, kolekcje i workery) są 
 
 ## Narzędzia pomocnicze
 
-Skill udostępnia trzy skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (Roslyn `MetadataReference.CreateFromFile`):
+Skill udostępnia skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (Roslyn `MetadataReference.CreateFromFile`):
 
+- **Pola tabel — najpierw dane wygenerowane.** Kontrakty pól **wszystkich ~1200 tabel** są już wyeksportowane do [`data/props/`](data/props/) (plik na tabelę + [`data/props/INDEX.md`](data/props/INDEX.md)). Odczyt jest natychmiastowy — nie skanuj DLL, gdy tabela tam jest. Jak znaleźć i jak regenerować po zmianie wersji: [references/scan-props.md](references/scan-props.md).
 - `scan-modules.csx` — listuje moduły (`*Module`) i ich tabele (`*Row`/`*Table`) z Caption/Description. Dobre na start. Szczegóły, parametry i przykłady uruchomienia: [references/scan-modules.md](references/scan-modules.md).
-- `scan-props.csx` — wypisuje pola i właściwości kalkulowane konkretnej klasy biznesowej, rekurencyjnie po polach typu subrow. Sięgnij po niego, gdy znasz już tabelę i potrzebujesz jej kontraktu. Szczegóły: [references/scan-props.md](references/scan-props.md).
+- `export-props-all.csx` — **wsadowo** regeneruje cały `data/props/` z DLL (kompilacja budowana raz, ~1200 tabel w kilka sekund). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku. Szczegóły: [references/scan-props.md](references/scan-props.md).
+- `scan-props.csx` — skaner **na żądanie** dla pojedynczej tabeli (fallback, gdy tabeli nie ma w `data/props/`). Wypisuje pola i właściwości kalkulowane klasy biznesowej, rekurencyjnie po polach typu subrow. Szczegóły: [references/scan-props.md](references/scan-props.md).
 - `scan-workers.csx` — wypisuje na stdout **JSON** z workerami i extenderami zarejestrowanymi atrybutem assembly `[Worker<…>]`, pogrupowanymi wg `DataType`. Dla każdej klasy: parametry inicjowane z `Context` (ctor + `[Context]`, z rozwinięciem pod-property dla typów dziedziczących z `ContextBase`), property do bindowania, akcje menu Czynności. Opcjonalny drugi argument filtruje wynik do konkretnego typu danych (np. `DokumentHandlowy`) — w praktyce konieczny, bo pełne skanowanie zwraca tysiące rejestracji. Wynik łatwo przetwarzać `jq`. Szczegóły: [references/scan-workers.md](references/scan-workers.md).
 Inwentaryzację **folderów statycznych menu** (`[assembly: FolderView]`) — drzewo pozycji menu, list i formularzy — realizuje narzędzie **`scan-folders`** przeniesione do skilla **`/soneta-config`** (komplementarne do `scan-modules`: perspektywa funkcjonalno-użytkowa zamiast danych).
 
