@@ -6,14 +6,18 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 2
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
@@ -21,9 +25,9 @@ Implementuje interfejsy: `IAdresHost`
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
-| Osoba | `Soneta.Core.Osoba` | bazodanowe |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Osoba | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
 | Osoba.Adres | `string` | bazodanowe |  |  |
 | Osoba.Osoba | `string` | bazodanowe |  |  |
 | Osoba.Telefon | `string` | bazodanowe |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |

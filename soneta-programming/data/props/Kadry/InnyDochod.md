@@ -5,12 +5,16 @@ Opis: Element szczegółowy pracownika (Pracownik). Rejestracja dodatkowych doch
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dochod | `decimal` | bazodanowe | Dochód |  |
 | Miesiac | `int` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| RokMiesiac | `Soneta.Types.YearMonth` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| RokMiesiac | `YearMonth` |  |  |  |

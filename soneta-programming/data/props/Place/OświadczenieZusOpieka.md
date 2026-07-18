@@ -5,20 +5,24 @@ Opis: Oświadczenie pracownika wymagane do przyznania zasiłku opiekuńczego z Z
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | DzieckoChoreDo14lat | `int` | bazodanowe |  |  |
 | DzieckoDo8lat | `int` | bazodanowe |  |  |
 | DzieckoDo8tygodna | `int` | bazodanowe |  |  |
 | DzieckoNiepelnospDo18lat | `int` | bazodanowe |  |  |
-| Limit14 | `int` |  |  |  |
-| Limit30 | `int` |  |  |  |
-| Limit60 | `int` |  |  |  |
+| Limit14 | `int` | tylko-odczyt |  |  |
+| Limit30 | `int` | tylko-odczyt |  |  |
+| Limit60 | `int` | tylko-odczyt |  |  |
 | Opiekun | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
 | Podopieczny | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
 | PozostaliChorzy | `int` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |

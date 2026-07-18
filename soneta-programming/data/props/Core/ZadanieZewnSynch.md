@@ -4,8 +4,12 @@ Tytuł: Zadania do synchronizacji
 Opis: Kolejka zadań synchronizacji danych z systemami zewnętrznymi. Każde zadanie zawiera identyfikator obiektu programu, typ tabeli, akcję do wykonania, system zewnętrzny, datę zarejestrowania i dodatkowe informacje.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

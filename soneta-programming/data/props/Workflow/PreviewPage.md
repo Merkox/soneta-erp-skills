@@ -5,23 +5,27 @@ Opis: Definicja okna podglądu wyświetlanego w kontekście procesu workflow lub
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataTable | `Soneta.Business.Table` |  |  |  |
-| DataType | `System.Type` |  |  |  |
+| DataTable | `Table` | podlista |  |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
 | Description | `string` | bazodanowe | Opis | Opis okna podglądu |
-| Host | `Soneta.Business.IPreviewPageHost` | bazodanowe, iface-ref | Definicja dokumentu dodatkowego | Definicja dokumentu dodatkowego |
+| Host | `IPreviewPageHost` | bazodanowe, tylko-odczyt, iface-ref | Definicja dokumentu dodatkowego | Definicja dokumentu dodatkowego |
 | Locked | `bool` | bazodanowe | Zablokowany |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa okna podglądu |
-| PageType | `Soneta.Workflow.PreviewPageType` | bazodanowe, enum | Typ okna |  |
+| PageType | `Soneta.Workflow.PreviewPageType` (enum) | bazodanowe | Typ okna |  |
 | Priority | `int` | bazodanowe | Priorytet |  |
-| TableName | `string` | bazodanowe | Typ obiektu | Określa typ obiektu |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe |  |  |
+| TableName | `string` | bazodanowe, tylko-odczyt | Typ obiektu | Określa typ obiektu |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe |  |  |
 | WFDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe |  |  |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika |  |
+| Xml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika |  |
 
 ## Relacje interfejsowe
 

@@ -5,8 +5,12 @@ Opis: Słownik kategorii aktywności CRM służący do grupowania definicji zada
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 1
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

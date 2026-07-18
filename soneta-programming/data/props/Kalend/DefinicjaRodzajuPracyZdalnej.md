@@ -5,8 +5,12 @@ Opis: Konfigurowalna definicja rodzaju pracy zdalnej. Określa, czy praca zdalna
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,9 +18,9 @@ Guided: root
 | DefinicjaStrefy | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
 | JestLimit | `bool` | bazodanowe |  |  |
 | Limit | `int` | bazodanowe |  |  |
-| NaWniosek | `Soneta.Kalend.PracaZdalnaNaWniosek` | bazodanowe, enum |  |  |
+| NaWniosek | `Soneta.Kalend.PracaZdalnaNaWniosek` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| TypLimitu | `Soneta.Kalend.TypLimituPracyZdalnej` | bazodanowe, enum |  |  |
+| TypLimitu | `Soneta.Kalend.TypLimituPracyZdalnej` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

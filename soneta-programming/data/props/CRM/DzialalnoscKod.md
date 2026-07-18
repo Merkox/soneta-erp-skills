@@ -4,13 +4,17 @@ Tytuł: Wykaz kodów PDK z opisem działalności
 Opis: Słownik kodów Polskiej Klasyfikacji Działalności (PKD) z hierarchiczną strukturą sekcji, działów, grup i klas. Służy do klasyfikacji rodzajów działalności gospodarczej kontrahentów zgodnie ze standardem GUS.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dzial | `string` | bazodanowe |  |  |
-| DzialalnoscKody | `Soneta.Business.SubTable<Soneta.CRM.KthDzialalnKod>` |  |  |  |
+| DzialalnoscKody | `SubTable<Soneta.CRM.KthDzialalnKod>` | podlista |  |  |
 | Grupa | `string` | bazodanowe |  |  |
 | Klasa | `string` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
@@ -18,7 +22,7 @@ Tabela konfiguracyjna: Nie
 | Nazwa | `string` | bazodanowe |  |  |
 | Podstawowa | `bool` | bazodanowe |  |  |
 | Sekcja | `string` | bazodanowe |  |  |
-| TypDzialalnosci | `Soneta.CRM.TypKoduDzialalnosci` | bazodanowe, enum |  |  |
+| TypDzialalnosci | `Soneta.CRM.TypKoduDzialalnosci` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

@@ -6,11 +6,15 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawieniePracy`
 Implementuje interfejsy: `IRozliczenieNadgodzinHost`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
+| Czas | `Time` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
-| Zestawienie | `Soneta.Kalend.ZestawieniePracy` | bazodanowe, guided-parent |  |  |
+| Zestawienie | `Soneta.Kalend.ZestawieniePracy` | bazodanowe, tylko-odczyt, guided-parent |  |  |

@@ -6,25 +6,29 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWfPlugInItemHost`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 4
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ConfigCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ContentInfo | `string` |  |  |  |
-| DataType | `System.Type` |  |  |  |
-| DataTypeFullName | `string` |  |  |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
-| FullName | `string` |  |  |  |
-| IconName | `string` |  |  |  |
+| ConfigCode | `MemoText` | bazodanowe, podlista |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
+| ContentInfo | `string` | tylko-odczyt |  |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DataTypeFullName | `string` | tylko-odczyt |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis |  |
+| FullName | `string` | tylko-odczyt |  |  |
+| IconName | `string` | tylko-odczyt |  |  |
 | Interface | `string` | bazodanowe | Interfejs | Interfejs wymagane od klasy obiektu zarządzanego |
-| Items | `Soneta.Business.SubTable<Soneta.Workflow.Config.WfPlugInItem>` |  |  |  |
+| Items | `SubTable<Soneta.Workflow.Config.WfPlugInItem>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa tranzycji |
-| PlugIn | `Soneta.Workflow.Config.IWfPlugInItemHost` | bazodanowe, iface-ref |  |  |
-| TableName | `string` | bazodanowe | Klasa | Klasa obiektu nadrzędanego. |
-| Type | `Soneta.Business.WfPlugInItemType` | bazodanowe, enum |  |  |
+| PlugIn | `Soneta.Workflow.Config.IWfPlugInItemHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| TableName | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa obiektu nadrzędanego. |
+| Type | `WfPlugInItemType` (enum) | bazodanowe, tylko-odczyt |  |  |
 | VariantTypeName | `string` | bazodanowe | Typ wtyczki wielowariantowej | Typ wtyczki wielowariantowej |
 
 ## Relacje interfejsowe
@@ -40,7 +44,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### WfPlugInItemType (`Soneta.Business.WfPlugInItemType`)
+### WfPlugInItemType (`WfPlugInItemType`)
 - `Task` = 1 — Zadanie
 - `Transition` = 2 — Przejście
 - `ProcessRole` = 3 — Role procesowa

@@ -4,19 +4,23 @@ Tytuł: Rejestr konfiguracji
 Opis: Tabela przechowuje wpisy rejestru konfiguracji systemu enova365. Każdy wpis zawiera nazwę, opis, dane w formacie JSON oraz informacje o wersji bazy danych i dacie utworzenia lub modyfikacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DatabaseVersion | `string` | bazodanowe | Wersja bazy danych |  |
 | DateCreated | `System.DateTime` | bazodanowe | Data utworzenia |  |
 | DateModified | `System.DateTime` | bazodanowe | Data modyfikacji |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
-| Json | `Soneta.Business.MemoText` | bazodanowe | Json |  |
-| LastEditDate | `System.DateTime` |  |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis |  |
+| Json | `MemoText` | bazodanowe, podlista | Json |  |
+| LastEditDate | `System.DateTime` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| RegType | `Soneta.Config.Reg.RegType` | bazodanowe, enum | Typ rejestru |  |
+| RegType | `Soneta.Config.Reg.RegType` (enum) | bazodanowe | Typ rejestru |  |
 
 ## Enumy
 

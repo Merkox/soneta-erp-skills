@@ -5,12 +5,16 @@ Opis: Element szczegółowy Delegacja (Delegacja). Rejestruje zaliczkę wypłaco
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Delegacja` → `Delegacja`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, guided-parent |  | Zaliczki wypłacone do delegacji. |
+| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, tylko-odczyt, guided-parent |  | Zaliczki wypłacone do delegacji. |
 | DokWyplaty | `Soneta.Kasa.Zaplata` | bazodanowe |  | Dokument zaliczki |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota zaliczki |
+| Kwota | `Currency` | bazodanowe |  | Kwota zaliczki |
 | Lp | `int` | bazodanowe |  | Numer kolejny rozliczenia |

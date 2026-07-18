@@ -5,19 +5,23 @@ Opis: Element szczegółowy definicji obszaru (AnalysisAreaDefinition). Przechow
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `AreaDefinition` → `AnalysisAreaDefinition`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AreaDefinition | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe, guided-parent |  |  |
-| Color | `Soneta.Business.UI.PastelColorPaletteBase` | bazodanowe, enum | Kolor obszaru |  |
+| AreaDefinition | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Color | `UI.PastelColorPaletteBase` (enum) | bazodanowe | Kolor obszaru |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### PastelColorPaletteBase (`Soneta.Business.UI.PastelColorPaletteBase`)
+### PastelColorPaletteBase (`UI.PastelColorPaletteBase`)
 - `Green` = 0 — Zielony
 - `ForestGreen` = 1 — Zielony leśny
 - `Lime` = 2 — Limonkowy

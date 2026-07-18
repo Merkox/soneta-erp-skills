@@ -5,19 +5,23 @@ Opis: Słownik przyczyn rozwiązania umowy o pracę z kodami podstawy prawnej, i
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Inicjatywa | `Soneta.Kadry.KodInicjatywyZwolnienia` | bazodanowe, enum |  |  |
-| KodZwolnienia | `Soneta.Kadry.KodZwolnienia` | bazodanowe, enum |  |  |
+| Inicjatywa | `Soneta.Kadry.KodInicjatywyZwolnienia` (enum) | bazodanowe |  |  |
+| KodZwolnienia | `Soneta.Kadry.KodZwolnienia` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| PodstawaPrawna | `Soneta.Kadry.KodPodstawyPrawnejZwolnienia` | bazodanowe, enum |  |  |
-| Przyczyna | `Soneta.Kadry.PrzyczynaWyrejestrowania` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kadry.TypPrzyczynyRozwUmowy` | bazodanowe, enum |  |  |
+| PodstawaPrawna | `Soneta.Kadry.KodPodstawyPrawnejZwolnienia` (enum) | bazodanowe |  |  |
+| Przyczyna | `Soneta.Kadry.PrzyczynaWyrejestrowania` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Kadry.TypPrzyczynyRozwUmowy` (enum) | bazodanowe |  |  |
 | ZaOdszkodowaniem | `bool` | bazodanowe |  |  |
 
 ## Enumy

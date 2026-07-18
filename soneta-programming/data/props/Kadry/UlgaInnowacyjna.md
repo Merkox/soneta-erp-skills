@@ -5,22 +5,26 @@ Opis: Element szczegółowy pracownika (Pracownik). Miesięczna ewidencja procen
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czerwiec | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Grudzien | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Kwiecien | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Lipiec | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Listopad | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Luty | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Maj | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Marzec | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Pazdziernik | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
+| Czerwiec | `Percent` | bazodanowe |  |  |
+| Grudzien | `Percent` | bazodanowe |  |  |
+| Kwiecien | `Percent` | bazodanowe |  |  |
+| Lipiec | `Percent` | bazodanowe |  |  |
+| Listopad | `Percent` | bazodanowe |  |  |
+| Luty | `Percent` | bazodanowe |  |  |
+| Maj | `Percent` | bazodanowe |  |  |
+| Marzec | `Percent` | bazodanowe |  |  |
+| Pazdziernik | `Percent` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Rok | `int` | bazodanowe |  |  |
-| Sierpien | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Styczen | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Wrzesien | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Sierpien | `Percent` | bazodanowe |  |  |
+| Styczen | `Percent` | bazodanowe |  |  |
+| Wrzesien | `Percent` | bazodanowe |  |  |

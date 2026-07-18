@@ -5,14 +5,18 @@ Opis: Element szczegółowy hosta adresowego (IAdresHost). Przechowuje adres dan
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IAdresHost`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 9
+- podlisty: 0
+- subrowy: 2
+- razem: 32
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` | bazodanowe |  |  |
-| Adres.AdresExt | `Soneta.Core.AdresExt` |  |  |  |
-| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` |  |  |  |
+| Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |
+| Adres.AdresExt | `Soneta.Core.AdresExt` | tylko-odczyt |  |  |
+| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` | tylko-odczyt |  |  |
 | Adres.Faks | `string` | bazodanowe |  | Numer faksu |
 | Adres.GLN | `string` |  |  |  |
 | Adres.Gmina | `string` | bazodanowe |  | Gmina |
@@ -21,8 +25,8 @@ Guided: child — nadrzędna przez pole `Host` → `IAdresHost`
 | Adres.KodPocztowy | `int` | bazodanowe |  | Kod pocztowy |
 | Adres.KodPocztowyS | `string` |  |  |  |
 | Adres.Kraj | `string` | bazodanowe |  | Kraj |
-| Adres.Linia1 | `string` |  |  |  |
-| Adres.Linia2 | `string` |  |  |  |
+| Adres.Linia1 | `string` | tylko-odczyt |  |  |
+| Adres.Linia2 | `string` | tylko-odczyt |  |  |
 | Adres.Miejscowosc | `string` | bazodanowe | Miejscowość | Miejscowość |
 | Adres.NietypowaLokalizacja | `string` | bazodanowe |  | Nietypowe miejsce lokalizacji |
 | Adres.NrDomu | `string` | bazodanowe |  | Numer domu (bloku) |
@@ -32,16 +36,16 @@ Guided: child — nadrzędna przez pole `Host` → `IAdresHost`
 | Adres.Powiat | `string` | bazodanowe |  | Powiat |
 | Adres.Telefon | `string` | bazodanowe |  | Numer telefonu |
 | Adres.Ulica | `string` | bazodanowe |  | Nazwa ulicy (alei, osiedla) |
-| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` | bazodanowe, enum |  | Województwo |
+| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe |  | Województwo |
 | Adres.ZagranicznyKodPocztowy | `string` | bazodanowe |  | Zagraniczny kod pocztowy |
 | Blokada | `bool` | bazodanowe |  |  |
-| Host | `Soneta.Core.IAdresHost` | bazodanowe, guided-parent, iface-ref |  |  |
-| IdentyfikacjaAdresu | `Soneta.Core.IdentyfikacjaAdresu` | bazodanowe |  |  |
+| Host | `Soneta.Core.IAdresHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| IdentyfikacjaAdresu | `Soneta.Core.IdentyfikacjaAdresu` (subrow) | bazodanowe |  |  |
 | IdentyfikacjaAdresu.GLN | `string` | bazodanowe | GLN (ILN) | Globalny numer lakalizacji. |
-| Info | `string` |  |  |  |
-| Kod | `string` |  |  |  |
-| RcpWorkMode | `Soneta.Core.Enums.RcpWorkMode` | enum |  |  |
-| Typ | `Soneta.Core.RodzajAdresu` | bazodanowe, enum |  |  |
+| Info | `string` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| RcpWorkMode | `Soneta.Core.Enums.RcpWorkMode` (enum) | tylko-odczyt |  |  |
+| Typ | `Soneta.Core.RodzajAdresu` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

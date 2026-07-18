@@ -6,54 +6,58 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`
 
-- pola bazodanowe: 25
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 20
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 8
+- podlisty: 10
+- subrowy: 2
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla leada. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla leada | Kod klasy kalkulatora dla leada. |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Uruchom procesy |  |
-| DataType | `System.Type` |  |  |  |
-| DefinedTypeName | `string` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla leada | Kod klasy kalkulatora dla leada. |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Uruchom procesy |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefinedTypeName | `string` | tylko-odczyt |  |  |
 | DefinicjaTransakcja | `Soneta.CRM.Config.DefTransakcja` | bazodanowe | Domyślna definicja Transakcji | Domyślna definicja transakcji dla tego Leada |
 | Domyslna | `bool` | bazodanowe | Domyślna | Domyślna definicja leada. |
 | FormularzUzytkownika | `bool` |  |  |  |
 | InicjujNazwe | `bool` | bazodanowe | Inicjuje nazwę leada | Określa, czy lead ma zainicjowaną nazwę z definicji. |
-| IsSource | `bool` |  |  |  |
+| IsSource | `bool` | tylko-odczyt |  |  |
 | KanbanColor | `string` | bazodanowe | Kolor | Kolor na tablicy Kanban. |
-| NamePrefix | `string` |  |  |  |
+| NamePrefix | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa definicji leada. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji leadów. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji leadów. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
 | OpisHTML | `bool` | bazodanowe | Opis w postaci HTML. | Określa, czy opis będzie w postaci HTML. |
-| PlugIns | `Soneta.Business.SubTable` |  |  |  |
+| PlugIns | `SubTable` | podlista |  |  |
 | PokazKomunikat | `bool` | bazodanowe |  | Decyduje o pokazywaniu komunikatu o kontrahencie podczas jego ustawianiu na dokument CRM. |
-| Priorytety | `Soneta.Business.LpSubTable<Soneta.CRM.Config.PriorytetLeada>` |  |  |  |
-| RodzajFormularza | `Soneta.CRM.RodzajFormularzaCrm` | bazodanowe, enum | Rodzaj formularza | Rodzaj formularza. |
+| Priorytety | `LpSubTable<Soneta.CRM.Config.PriorytetLeada>` | podlista |  |  |
+| RodzajFormularza | `Soneta.CRM.RodzajFormularzaCrm` (enum) | bazodanowe | Rodzaj formularza | Rodzaj formularza. |
 | RoleGuid | `System.Guid` | bazodanowe |  | Domyślna rola dla której przypisany zostanie lead. |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Stany | `Soneta.Business.LpSubTable<Soneta.CRM.Config.StanLeada>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Stany | `LpSubTable<Soneta.CRM.Config.StanLeada>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji leada wykorzystywana do wyszukiwania definicji oraz numeracji leadów CRM. |
-| SysNotifications | `Soneta.Business.SubTable<Soneta.Business.Db.Notifications.SysNotification>` |  |  |  |
-| TableName | `string` |  |  |  |
-| Temperatury | `Soneta.Business.LpSubTable<Soneta.CRM.Config.TemperaturaLeada>` |  |  |  |
-| TypeFullName | `string` |  |  |  |
-| WFDefinition | `Soneta.Business.IWFDefinition` | iface-ref |  |  |
-| WfEngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WfEngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
-| XmlForm | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| SysNotifications | `SubTable<Db.Notifications.SysNotification>` | podlista |  |  |
+| TableName | `string` | tylko-odczyt |  |  |
+| Temperatury | `LpSubTable<Soneta.CRM.Config.TemperaturaLeada>` | podlista |  |  |
+| TypeFullName | `string` | tylko-odczyt |  |  |
+| WFDefinition | `IWFDefinition` | tylko-odczyt, iface-ref |  |  |
+| WfEngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| WfEngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+| XmlForm | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 
 ## Relacje interfejsowe
 

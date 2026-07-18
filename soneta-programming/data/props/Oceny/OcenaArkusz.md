@@ -5,37 +5,41 @@ Opis: Arkusz oceny wypełniany przez oceniającego dla konkretnego ocenianego w 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 13
+- podlisty: 8
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Częściowe | `System.Collections.Generic.IEnumerable<Soneta.Oceny.OcenaArkusz>` |  |  |  |
+| Częściowe | `System.Collections.Generic.IEnumerable<Soneta.Oceny.OcenaArkusz>` | podlista |  |  |
 | DefinicjaArkusza | `Soneta.Oceny.DefinicjaArkuszaOceny` | bazodanowe |  |  |
-| Etap | `Soneta.Oceny.EtapyArkuszaOceny` | bazodanowe, enum |  |  |
-| Kategorie | `Soneta.Business.SubTable<Soneta.Oceny.OcenaKategoriaArkusza>` |  |  |  |
-| Nazwa | `string` |  |  |  |
+| Etap | `Soneta.Oceny.EtapyArkuszaOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kategorie | `SubTable<Soneta.Oceny.OcenaKategoriaArkusza>` | podlista |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | NazwaKontrahenta | `string` | bazodanowe | Nazwa kontrahenta |  |
-| Ocena | `Soneta.Oceny.OcenaRealizacja` | bazodanowe |  |  |
+| Ocena | `Soneta.Oceny.OcenaRealizacja` | bazodanowe, tylko-odczyt |  |  |
 | Oceniajacy | `Soneta.Oceny.OcenaOceniający` | bazodanowe |  |  |
-| OceniajacyRef | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
+| OceniajacyRef | `Soneta.Oceny.IOceniający` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | Oceniany | `Soneta.Oceny.OcenaOceniany` | bazodanowe |  |  |
-| OcenianyRef | `Soneta.Oceny.IOceniany` | bazodanowe, iface-ref |  |  |
-| Oczekujący | `bool` |  |  |  |
-| Podstawa | `decimal` |  |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Oceny.OcenaPozycjaArkusza>` |  |  |  |
-| Przygotowywany | `bool` |  |  |  |
+| OcenianyRef | `Soneta.Oceny.IOceniany` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Oczekujący | `bool` | tylko-odczyt |  |  |
+| Podstawa | `decimal` | tylko-odczyt |  |  |
+| Pozycje | `LpSubTable<Soneta.Oceny.OcenaPozycjaArkusza>` | podlista |  |  |
+| Przygotowywany | `bool` | tylko-odczyt |  |  |
 | Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| RazemElementyOceny | `Soneta.Business.View` |  |  |  |
-| TylkoElementyOceny | `Soneta.Business.View` |  |  |  |
-| TylkoKompetencje | `Soneta.Business.View` |  |  |  |
-| TylkoZachowania | `Soneta.Business.View` |  |  |  |
-| TylkoZadania | `Soneta.Business.View` |  |  |  |
-| Typ | `Soneta.Oceny.TypArkuszaOceny` | bazodanowe, enum |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Percent` | bazodanowe |  |  |
-| WartoscWgKategorii | `bool` | bazodanowe |  |  |
-| WartoscWgWagi | `Soneta.Types.Percent` | bazodanowe |  |  |
+| RazemElementyOceny | `View` | podlista |  |  |
+| TylkoElementyOceny | `View` | podlista |  |  |
+| TylkoKompetencje | `View` | podlista |  |  |
+| TylkoZachowania | `View` | podlista |  |  |
+| TylkoZadania | `View` | podlista |  |  |
+| Typ | `Soneta.Oceny.TypArkuszaOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wartosc | `Percent` | bazodanowe, tylko-odczyt |  |  |
+| WartoscWgKategorii | `bool` | bazodanowe, tylko-odczyt |  |  |
+| WartoscWgWagi | `Percent` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

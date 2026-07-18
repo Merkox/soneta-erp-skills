@@ -4,11 +4,15 @@ Tytuł: Tryby zajęć
 Opis: Słownik trybów realizacji zajęć szkoleniowych. Definiuje dostępne formy organizacji nauki, takie jak dzienny, zaoczny, weekendowy czy e-learning, przypisywane do grup szkoleniowych.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada trybu |  |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa trybu |  |

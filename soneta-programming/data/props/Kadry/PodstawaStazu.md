@@ -5,11 +5,15 @@ Opis: Element szczegółowy historii zatrudnienia (HistoriaZatrudnieniaBase). Pr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Kadry.DefPodstawyStazu` | bazodanowe |  |  |
-| Staż | `Soneta.Kadry.StazPracy` |  |  |  |
-| Zatrudnienie | `Soneta.Kadry.HistoriaZatrudnieniaBase` | bazodanowe |  |  |
+| Staż | `Soneta.Kadry.StazPracy` | tylko-odczyt |  |  |
+| Zatrudnienie | `Soneta.Kadry.HistoriaZatrudnieniaBase` | bazodanowe, tylko-odczyt |  |  |

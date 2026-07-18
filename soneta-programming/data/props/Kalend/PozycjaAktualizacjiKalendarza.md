@@ -4,16 +4,20 @@ Tytuł: Źródła kalendarza na dokumentach aktualizacji kalendarzy
 Opis: Pozycja aktualizacji planu pracy na dokumencie aktualizacji kalendarza. Łączy źródło planu (pracownika/umowę) z dokumentem aktualizacji, umożliwiając śledzenie zmian w kalendarzu planu pracy.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AktualizacjeKalendarza | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaAktualizacja>` |  |  |  |
-| Dokument | `Soneta.Kalend.DokumentAktualizacjiKalendarza` | bazodanowe |  |  |
-| Nazwa | `string` |  |  |  |
-| ObiektyAktualizacji | `Soneta.Business.SubTable<Soneta.Kalend.PozycjaObiektuAktualizacjiKalendarza>` |  |  |  |
-| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, iface-ref |  |  |
+| AktualizacjeKalendarza | `SubTable<Soneta.Kalend.DzienKalendarzaAktualizacja>` | podlista |  |  |
+| Dokument | `Soneta.Kalend.DokumentAktualizacjiKalendarza` | bazodanowe, tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| ObiektyAktualizacji | `SubTable<Soneta.Kalend.PozycjaObiektuAktualizacjiKalendarza>` | podlista |  |  |
+| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

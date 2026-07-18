@@ -5,60 +5,64 @@ Opis: Pozycja budżetu projektu tworząca hierarchiczną strukturę kosztów i p
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 32
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 20
+- podlisty: 11
+- subrowy: 0
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BudgetItemKindFromContext | `Soneta.Zadania.Budzetowanie.RodzajPozycjiBudzetuFiltr` | enum |  |  |
+| BudgetItemKindFromContext | `Soneta.Zadania.Budzetowanie.RodzajPozycjiBudzetuFiltr` (enum) |  |  |  |
 | BudzetProjektu | `Soneta.Zadania.Budzetowanie.BudzetProjektu` | bazodanowe |  | Budzet projektu, z którym powiązana jest pozycja |
-| ElementyOpisuAnalitycznego | `Soneta.Business.SubTable<Soneta.Ksiega.ElemOpisuAnalitycznego>` |  |  |  |
-| ElementyOpisuAnalitycznegoWszystkie | `Soneta.Business.View` |  |  |  |
-| HasEntriesInAnalysisSource | `bool` |  |  |  |
-| HasRight | `bool` |  |  |  |
-| IsPlanned | `bool` |  |  |  |
-| IsReadOnlyJednostka | `bool` |  |  |  |
+| ElementyOpisuAnalitycznego | `SubTable<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
+| ElementyOpisuAnalitycznegoWszystkie | `View` | podlista |  |  |
+| HasEntriesInAnalysisSource | `bool` | tylko-odczyt |  |  |
+| HasRight | `bool` | tylko-odczyt |  |  |
+| IsPlanned | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyJednostka | `bool` | tylko-odczyt |  |  |
 | Jednostka | `Soneta.Towary.Jednostka` | bazodanowe |  | Jednostka ilości planowanych i realizacji pozycji budżetowej. |
-| JestPlanowanaWGore | `bool` |  |  |  |
-| JestRoot | `bool` |  |  |  |
-| KwotyBudzProj | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.KwotaBudzProj>` |  |  |  |
-| KwotyBudzProj2 | `System.Collections.IEnumerable` |  |  |  |
-| KwotyBudzProjektuPlan | `Soneta.Business.View` |  |  |  |
-| KwotyBudzProjektuPlanKoszt | `Soneta.Business.View` |  |  |  |
-| KwotyBudzProjektuPlanPrzychod | `Soneta.Business.View` |  |  |  |
+| JestPlanowanaWGore | `bool` | tylko-odczyt |  |  |
+| JestRoot | `bool` | tylko-odczyt |  |  |
+| KwotyBudzProj | `SubTable<Soneta.Zadania.Budzetowanie.KwotaBudzProj>` | podlista |  |  |
+| KwotyBudzProj2 | `System.Collections.IEnumerable` | tylko-odczyt |  |  |
+| KwotyBudzProjektuPlan | `View` | podlista |  |  |
+| KwotyBudzProjektuPlanKoszt | `View` | podlista |  |  |
+| KwotyBudzProjektuPlanPrzychod | `View` | podlista |  |  |
 | Nadrzedna | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | bazodanowe | Pozycja nadrzędna | Określa nadrzędną pozycję budżetu projektu. |
 | NadrzednaSymbol | `string` |  |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa pozycji. |
-| ObjectRight | `Soneta.Business.AccessRights` | enum |  |  |
-| ObrotyPozycji | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.BudzetObrot>` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis pozycji. |
+| ObjectRight | `AccessRights` (enum) | tylko-odczyt |  |  |
+| ObrotyPozycji | `SubTable<Soneta.Zadania.Budzetowanie.BudzetObrot>` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis pozycji. |
 | Path | `string` |  | Ścieżka |  |
 | Planowana | `bool` | bazodanowe |  |  |
-| PlanowanaWGore | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.PozycjaBudzProj>` |  |  |  |
-| PodrzedneWszystkie | `Soneta.Business.View` |  |  |  |
-| QuantityUnitSymbol | `string` |  |  |  |
-| RodzajPozycjiBudzetu | `Soneta.Zadania.Budzetowanie.RodzajPozycjiBudzetu` | bazodanowe, enum | Rodzaj pozycji budzetu | Określa rodzaj pozycji budzetu. |
+| PlanowanaWGore | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | tylko-odczyt |  |  |
+| Podrzedne | `SubTable<Soneta.Zadania.Budzetowanie.PozycjaBudzProj>` | podlista |  |  |
+| PodrzedneWszystkie | `View` | podlista |  |  |
+| QuantityUnitSymbol | `string` | tylko-odczyt |  |  |
+| RodzajPozycjiBudzetu | `Soneta.Zadania.Budzetowanie.RodzajPozycjiBudzetu` (enum) | bazodanowe | Rodzaj pozycji budzetu | Określa rodzaj pozycji budzetu. |
 | RozliczanieIlosci | `bool` | bazodanowe | Rozliczanie ilości | Określa, czy na pozycji należy rozliczać ilości |
-| SaKorekty | `bool` |  |  |  |
-| SaKwoty | `bool` |  |  |  |
-| SaKwotyPlan | `bool` |  |  |  |
-| SaKwotyPlanKoszt | `bool` |  |  |  |
-| SaKwotyPlanPrzychod | `bool` |  |  |  |
-| SaOpisy | `bool` |  |  |  |
-| SaPodrzedne | `bool` |  |  |  |
-| SaZapisy | `bool` |  |  |  |
-| Sciezka | `string` | bazodanowe |  |  |
-| Segment | `string` |  |  |  |
+| SaKorekty | `bool` | tylko-odczyt |  |  |
+| SaKwoty | `bool` | tylko-odczyt |  |  |
+| SaKwotyPlan | `bool` | tylko-odczyt |  |  |
+| SaKwotyPlanKoszt | `bool` | tylko-odczyt |  |  |
+| SaKwotyPlanPrzychod | `bool` | tylko-odczyt |  |  |
+| SaOpisy | `bool` | tylko-odczyt |  |  |
+| SaPodrzedne | `bool` | tylko-odczyt |  |  |
+| SaZapisy | `bool` | tylko-odczyt |  |  |
+| Sciezka | `string` | bazodanowe, tylko-odczyt |  |  |
+| Segment | `string` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol pozycji. |
 | SymbolKonta | `string` | bazodanowe | Symbol konta | Domyślny symbol konta dla opisu analitycznego. |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.BudzetUprawnienie>` |  |  |  |
+| Uprawnienia | `SubTable<Soneta.Zadania.Budzetowanie.BudzetUprawnienie>` | podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AccessRights (`Soneta.Business.AccessRights`)
+### AccessRights (`AccessRights`)
 - `Denied` = 0 — Zakaz dostępu
 - `ReadOnly` = 1 — Tylko odczyt
 - `Granted` = 2 — Pełne prawo

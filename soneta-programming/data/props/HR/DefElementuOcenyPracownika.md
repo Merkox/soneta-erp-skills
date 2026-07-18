@@ -5,8 +5,12 @@ Opis: Słownik kryteriów stosowanych w ocenach pracowniczych. Każde kryterium 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,8 +18,8 @@ Guided: root
 | Kategoria | `string` | bazodanowe |  |  |
 | Limit | `decimal` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
-| Wartości | `Soneta.Business.SubTable<Soneta.HR.WartośćElementuOcenyPracownika>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisLinia | `string` | tylko-odczyt |  |  |
+| OpisPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Wartości | `SubTable<Soneta.HR.WartośćElementuOcenyPracownika>` | podlista |  |  |
 | ZLimitem | `bool` |  |  |  |

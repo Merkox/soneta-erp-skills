@@ -6,32 +6,36 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`, `IDokument`, `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 4
+- podlisty: 6
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataDecyzji | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Kalend.DefinicjaRozliczeniaCzasuPracy` | bazodanowe |  |  |
-| DniKalendarzaHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` |  |  |  |
-| DniPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienPracyHistoria>` |  |  |  |
-| Elementy | `Soneta.Business.LpSubTable<Soneta.Kalend.ElementRozliczeniaCzasuPracy>` |  |  |  |
-| ManagedState | `Soneta.Core.ManagedRowStates` | enum |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataDecyzji | `Date` | bazodanowe |  |  |
+| Definicja | `Soneta.Kalend.DefinicjaRozliczeniaCzasuPracy` | bazodanowe, tylko-odczyt |  |  |
+| DniKalendarzaHistorie | `SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` | podlista |  |  |
+| DniPracyHistorie | `SubTable<Soneta.Kalend.DzienPracyHistoria>` | podlista |  |  |
+| Elementy | `LpSubTable<Soneta.Kalend.ElementRozliczeniaCzasuPracy>` | podlista |  |  |
+| ManagedState | `Soneta.Core.ManagedRowStates` (enum) | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Stan | `Soneta.Kalend.StanyRozliczeniaCzasuPracy` | bazodanowe, enum |  |  |
-| ZlecenieCzas | `Soneta.Types.Time` |  |  |  |
-| ZlecenieData | `Soneta.Types.Date` |  |  |  |
-| ZlecenieOdGodziny | `Soneta.Types.Time` |  |  |  |
+| Stan | `Soneta.Kalend.StanyRozliczeniaCzasuPracy` (enum) | bazodanowe |  |  |
+| ZlecenieCzas | `Time` |  |  |  |
+| ZlecenieData | `Date` |  |  |  |
+| ZlecenieOdGodziny | `Time` |  |  |  |
 
 ## Enumy
 

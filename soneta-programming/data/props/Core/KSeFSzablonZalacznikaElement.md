@@ -5,44 +5,48 @@ Opis: Zawiera listę elementów szablonów załączników zdefiniowanych dla kon
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 6
+- pola tylko-odczyt: 7
+- podlisty: 7
+- subrowy: 1
+- razem: 36
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualnaWartoscWiersza | `object` |  |  |  |
 | AktywnyAlgorytmWidocznosci | `bool` | bazodanowe | Czy aktywny kod widoczności | Czy aktywny kod widoczności. |
-| AlgorytmEksportu | `Soneta.Business.MemoText` | bazodanowe | Algorytm eksportu elementu załącznika KSeF | Algorytm eksportu elementu załącznika KSeF |
-| AlgorytmEksportuEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| AlgorytmWidocznosci | `Soneta.Business.MemoText` | bazodanowe | Własny algorytm widoczności dla elementu załącznika KSeF | Własny algorytm widoczności dla elementu załącznika KSeF |
-| AlgorytmWidocznosciEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| AlgorytmEksportu | `MemoText` | bazodanowe, podlista | Algorytm eksportu elementu załącznika KSeF | Algorytm eksportu elementu załącznika KSeF |
+| AlgorytmEksportuEdytor | `Compiler.ICodeEditorSource` |  |  |  |
+| AlgorytmWidocznosci | `MemoText` | bazodanowe, podlista | Własny algorytm widoczności dla elementu załącznika KSeF | Własny algorytm widoczności dla elementu załącznika KSeF |
+| AlgorytmWidocznosciEdytor | `Compiler.ICodeEditorSource` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | DefinicjaXmlNag | `Soneta.Core.DefXmlNag` |  |  |  |
 | DefinicjaXmlNagGuid | `System.Guid` | bazodanowe | Identyfikator definicji komunikatu KSeF | Identyfikator definicji komunikatu KSeF |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | DodatkoweAtrybuty | `string` | bazodanowe | Dodatkowe atrybuty elementu załącznika KSeF | Dodatkowe atrybuty elementu załącznika KSeF |
-| DodatkoweAtrybutyDict | `System.Collections.Generic.Dictionary<string, string>` |  |  |  |
-| DokumentBazowy | `Soneta.Business.Row` |  |  |  |
-| IloscWierszy | `int` |  |  |  |
+| DodatkoweAtrybutyDict | `System.Collections.Generic.Dictionary<string, string>` | podlista |  |  |
+| DokumentBazowy | `Row` |  |  |  |
+| IloscWierszy | `int` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa elementu. |
 | Nadrzedny | `Soneta.Core.KSeFSzablonZalacznikaElement` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| PodgladAlgorytmuWyliczaniaWartosci | `string` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Core.KSeFSzablonZalacznikaElement>` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PodgladAlgorytmuWyliczaniaWartosci | `string` | tylko-odczyt |  |  |
+| Podrzedne | `SubTable<Soneta.Core.KSeFSzablonZalacznikaElement>` | podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SciezkaProperty | `string` | bazodanowe | Wskazanie pola dla wartosci elementu załącznika KSeF | Wskazanie pola dla wartosci elementu załącznika KSeF |
-| SlownikWartosciWgLp | `System.Collections.Generic.Dictionary<int, object>` |  |  |  |
-| SposobWyliczaniaWartosci | `Soneta.Core.Enums.SposobWyliczaniaWartosciElementuZalacznikaKSeF` | bazodanowe, enum | Sposób obliczania wartości elementu: Wartość stała klucza, wartość pola obiektu bazowego, algorytm własny | Sposób obliczania wartości elementu: Wartość stała klucza, wartość pola obiektu bazowego, algorytm własny |
-| SzablonZalacznika | `Soneta.Core.KSeFSzablonZalacznika` | bazodanowe |  |  |
+| SlownikWartosciWgLp | `System.Collections.Generic.Dictionary<int, object>` | podlista |  |  |
+| SposobWyliczaniaWartosci | `Soneta.Core.Enums.SposobWyliczaniaWartosciElementuZalacznikaKSeF` (enum) | bazodanowe | Sposób obliczania wartości elementu: Wartość stała klucza, wartość pola obiektu bazowego, algorytm własny | Sposób obliczania wartości elementu: Wartość stała klucza, wartość pola obiektu bazowego, algorytm własny |
+| SzablonZalacznika | `Soneta.Core.KSeFSzablonZalacznika` | bazodanowe, tylko-odczyt |  |  |
 | TableNameBazowegoObiektu | `string` | bazodanowe | Nazwa tabeli obiektu bazowego | Nazwa tabeli obiektu bazowego. |
 | TableNameZwracanegoObiektu | `string` | bazodanowe | Nazwa tabeli obiektu zwracanego | Nazwa tabeli obiektu zwracanego. |
-| Typ | `Soneta.Core.Enums.TypElementuZalacznikaKSeF` | bazodanowe, enum | Typ elementu | Typ elementu |
+| Typ | `Soneta.Core.Enums.TypElementuZalacznikaKSeF` (enum) | bazodanowe, tylko-odczyt | Typ elementu | Typ elementu |
 | WartoscStala | `string` | bazodanowe | Wartość stała elementu załącznika KSeF | Wartość stała elementu załącznika KSeF |
 | WyliczonaWartosc | `object` |  |  |  |
 | ZwracaKolekcje | `bool` | bazodanowe | Czy obiekt zwracany jest kolekcją | Czy obiekt zwracany jest kolekcją. |

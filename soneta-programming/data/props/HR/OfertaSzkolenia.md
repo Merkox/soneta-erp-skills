@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 1
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresSzkolenia | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresSzkolenia | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| Cena | `Soneta.Types.Currency` | bazodanowe |  |  |
-| CenaOdOsoby | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Cena | `Currency` | bazodanowe |  |  |
+| CenaOdOsoby | `Currency` | bazodanowe |  |  |
 | CzasTrwaniaDni | `int` | bazodanowe |  |  |
-| CzasTrwaniaGodz | `Soneta.Types.Time` | bazodanowe |  |  |
+| CzasTrwaniaGodz | `Time` | bazodanowe |  |  |
 | Definicja | `Soneta.HR.DefinicjaSzkolenia` | bazodanowe |  |  |
-| Dostawca | `Soneta.HR.DostawcaSzkoleń` | bazodanowe |  |  |
+| Dostawca | `Soneta.HR.DostawcaSzkoleń` | bazodanowe, tylko-odczyt |  |  |
 | Kod | `string` | bazodanowe |  |  |
 | KodUDostawcy | `string` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Lokalizacja | `Soneta.HR.TypLokalizacjiSzkolenia` | bazodanowe, enum |  |  |
+| Lokalizacja | `Soneta.HR.TypLokalizacjiSzkolenia` (enum) | bazodanowe |  |  |
 | MaxOsob | `int` | bazodanowe | Max. ilość uczestników |  |
 | MinOsob | `int` | bazodanowe | Min. ilość uczestników |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Osoba | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |
-| Typ | `Soneta.HR.TypOfertySzkolenia` | bazodanowe, enum |  |  |
+| Typ | `Soneta.HR.TypOfertySzkolenia` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -6,44 +6,48 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 8
+- podlisty: 5
+- subrowy: 3
+- razem: 36
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza.AlgorytmBase` |  |  |  |
+| Algorytm | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza.AlgorytmBase` | tylko-odczyt |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Powiązany proces |  |
-| CzasPracy | `bool` |  |  |  |
-| DefPowiazania | `Soneta.Kalend.DefinicjaPowiązaniaDokumentu` | bazodanowe |  |  |
-| DefPowiazania.RodzajStruktury | `string` | bazodanowe |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Powiązany proces |  |
+| CzasPracy | `bool` | tylko-odczyt |  |  |
+| DefPowiazania | `Soneta.Kalend.DefinicjaPowiązaniaDokumentu` (subrow) | bazodanowe |  |  |
+| DefPowiazania.RodzajStruktury | `string` | bazodanowe, tylko-odczyt |  |  |
 | DefPowiazania.StrOrganizacyjna | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe | Struktura organizacyjna |  |
 | DefPowiazania.StrukturaFirmy | `Soneta.Oceny.TableRef` |  |  |  |
-| DefPowiazania.WgStrOrganizacyjna | `Soneta.Business.Key` |  |  |  |
+| DefPowiazania.WgStrOrganizacyjna | `Key` | podlista |  |  |
 | DefinicjaProcesu | `System.Guid` | bazodanowe | Powiązany proces |  |
-| DlaJednegoZrodla | `bool` |  |  |  |
-| DokumentDla | `Soneta.Kalend.DokumentDlaAktualizacjiKalendarza` | bazodanowe, enum |  |  |
-| FormatedName | `string` |  |  |  |
+| DlaJednegoZrodla | `bool` | tylko-odczyt |  |  |
+| DokumentDla | `Soneta.Kalend.DokumentDlaAktualizacjiKalendarza` (enum) | bazodanowe |  |  |
+| FormatedName | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| PlanPracy | `bool` |  |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PlanPracy | `bool` | tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Seria | `bool` | bazodanowe | Ogólne |  |
 | Symbol | `string` | bazodanowe |  |  |
-| WfDefinition | `Soneta.Business.IWFDefinition` | iface-ref |  |  |
-| WidoczneCechy | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Zestawienia | `Soneta.Business.SubTable<Soneta.Kalend.ZestawienieAktualizacjiKalendarza>` |  |  |  |
+| WfDefinition | `IWFDefinition` | iface-ref |  |  |
+| WidoczneCechy | `MemoText` | bazodanowe, podlista |  |  |
+| Zestawienia | `SubTable<Soneta.Kalend.ZestawienieAktualizacjiKalendarza>` | podlista |  |  |
 | ZrodloEtat | `bool` | bazodanowe | Ogólne |  |
 | ZrodloUmowyZewn | `bool` | bazodanowe | Ogólne |  |
 | ZrodloUmowyZlec | `bool` | bazodanowe | Ogólne |  |

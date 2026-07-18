@@ -6,15 +6,19 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Kompetencje | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.Kompetencje.KompetencjaUniwersalna>` |  |  |  |
+| Kompetencje | `SubTable<Soneta.HR.ZKL.Slowniki.Kompetencje.KompetencjaUniwersalna>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| ZklSlownik | `Soneta.HR.IZklSlownik` |  |  |  |
+| ZklSlownik | `Soneta.HR.IZklSlownik` | tylko-odczyt |  |  |

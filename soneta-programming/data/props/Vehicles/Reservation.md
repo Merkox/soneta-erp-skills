@@ -6,61 +6,65 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDocumentHostCRM`, `IEmailElement`
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 28
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 9
+- pola tylko-odczyt: 18
+- podlisty: 5
+- subrowy: 1
+- razem: 50
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Active | `bool` |  |  |  |
-| AllDayEvent | `bool` |  |  |  |
-| Booker | `Soneta.Business.IRezerwujacy` | bazodanowe | Rezerwujący |  |
-| CanCreateFinalReading | `bool` |  |  |  |
-| CanCreateInitialReading | `bool` |  |  |  |
+| Active | `bool` | tylko-odczyt |  |  |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| Booker | `IRezerwujacy` | bazodanowe | Rezerwujący |  |
+| CanCreateFinalReading | `bool` | tylko-odczyt |  |  |
+| CanCreateInitialReading | `bool` | tylko-odczyt |  |  |
 | Contractor | `Soneta.CRM.Kontrahent` | bazodanowe | Kontrahent |  |
-| Data | `Soneta.Types.Date` |  |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
 | DateFrom | `System.DateTime` | bazodanowe | Data od |  |
 | DateTo | `System.DateTime` | bazodanowe | Data do |  |
-| Definicja | `Soneta.Core.IDefinicjaDokumentu` | iface-ref |  |  |
+| Definicja | `Soneta.Core.IDefinicjaDokumentu` | tylko-odczyt, iface-ref |  |  |
 | Definition | `Soneta.Vehicles.Models.Database.Config.ReservationDef` | bazodanowe | Definicja |  |
 | Description | `string` | bazodanowe | Opis | Opis |
 | Destination | `Soneta.CRM.Lokalizacja` | bazodanowe | Lokalizacja kontrahenta |  |
-| DokumentyCRM | `Soneta.Business.SubTable<Soneta.Zadania.DokumentCRM>` |  |  |  |
-| End | `System.DateTime` |  |  |  |
-| FinalReading | `Soneta.Vehicles.VehicleReading` | bazodanowe | Odczyt końcowy | Odczyt końcowy pomiaru licznika |
+| DokumentyCRM | `SubTable<Soneta.Zadania.DokumentCRM>` | podlista |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
+| FinalReading | `Soneta.Vehicles.VehicleReading` | bazodanowe, tylko-odczyt | Odczyt końcowy | Odczyt końcowy pomiaru licznika |
 | FinalReadingValue | `int` |  |  |  |
-| From | `Soneta.Types.Date` |  |  |  |
+| From | `Date` |  |  |  |
 | FuelLevel | `string` | bazodanowe | Poziom paliwa | Poziom paliwa |
-| IDokumentNumerPelny | `string` |  |  |  |
-| InitialReading | `Soneta.Vehicles.VehicleReading` | bazodanowe | Odczyt początkowy | Odczyt początkowy pomiaru licznika |
-| IsReadOnlyCreateReading | `bool` |  |  |  |
-| IsStanReadOnly | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt |  |  |
+| InitialReading | `Soneta.Vehicles.VehicleReading` | bazodanowe, tylko-odczyt | Odczyt początkowy | Odczyt początkowy pomiaru licznika |
+| IsReadOnlyCreateReading | `bool` | tylko-odczyt |  |  |
+| IsStanReadOnly | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Length | `decimal` | bazodanowe | Długość | Długość trasy |
-| MailTo | `string` |  |  |  |
-| Notes | `Soneta.Business.MemoText` | bazodanowe | Uwagi |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe | Numer |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Notes | `MemoText` | bazodanowe, podlista | Uwagi |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe | Numer |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | PickupLocation | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe | Miejsce odbioru |  |
 | Purpose | `string` | bazodanowe | Cel | Cel |
 | ReservationState | `Soneta.Vehicles.Models.Database.Config.ReservationState` | bazodanowe | Stan |  |
-| Resource | `object` |  |  |  |
+| Resource | `object` | tylko-odczyt |  |  |
 | ReturnLocation | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe | Miejsce oddania |  |
-| SchedulerInterval | `Soneta.Types.Interval` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| Start | `System.DateTime` |  |  |  |
+| SchedulerInterval | `Interval` |  |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
 | Text | `string` |  |  |  |
-| TimeFrom | `Soneta.Types.Time` |  |  |  |
-| TimeTo | `Soneta.Types.Time` |  |  |  |
-| To | `Soneta.Types.Date` |  |  |  |
-| TripType | `Soneta.Samochodowka.TypTrasy` | bazodanowe, enum | Typ Trasy |  |
+| TimeFrom | `Time` |  |  |  |
+| TimeTo | `Time` |  |  |  |
+| To | `Date` |  |  |  |
+| TripType | `Soneta.Samochodowka.TypTrasy` (enum) | bazodanowe | Typ Trasy |  |
 | Vehicle | `Soneta.Vehicles.Vehicle` | bazodanowe | Pojazd |  |
 | VehicleContext | `Soneta.Vehicles.Vehicle` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

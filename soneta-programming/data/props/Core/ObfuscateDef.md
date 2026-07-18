@@ -6,19 +6,23 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ConditionText | `string` | bazodanowe |  |  |
 | Default | `bool` | bazodanowe |  |  |
 | Description | `string` | bazodanowe | Opis |  |
-| Fields | `Soneta.Business.SubTable<Soneta.Core.ObfuscateField>` |  |  |  |
-| IsAnalyze | `bool` |  |  |  |
+| Fields | `SubTable<Soneta.Core.ObfuscateField>` | podlista |  |  |
+| IsAnalyze | `bool` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| ObfuscateType | `Soneta.Core.ObfuscateType` | bazodanowe, enum | Rodzaj anonimizacji |  |
-| TableName | `string` | bazodanowe | Nazwa tabeli |  |
+| ObfuscateType | `Soneta.Core.ObfuscateType` (enum) | bazodanowe, tylko-odczyt | Rodzaj anonimizacji |  |
+| TableName | `string` | bazodanowe, tylko-odczyt | Nazwa tabeli |  |
 
 ## Enumy
 

@@ -6,53 +6,57 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IWFWorkflow`, `IWFFeatureDefs`, `IDokument`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 12
+- podlisty: 7
+- subrowy: 1
+- razem: 30
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ActiveTasks | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.Task>` |  |  |  |
-| AllTasks | `Soneta.Business.SubTable<Soneta.Business.Db.Task>` |  |  |  |
-| AsString | `string` |  |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` |  |  |  |
-| DateFrom | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia procesu |
-| DateTimeFrom | `System.DateTime` |  | Data i czas rozpoczęcia | Data i czas rozpoczęcia procesu |
-| DateTimeTo | `System.DateTime` |  | Data i czas zakończenia | Data i czas zakończenia procesu |
-| DateTo | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Data zakończenia procesu |
-| DefinitionType | `Soneta.Business.Db.DefinitionTypeEnum` | bazodanowe, enum | Tryb edycji | Określa tryb edycji definicji workflow |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
+| ActiveTasks | `System.Collections.Generic.IEnumerable<Db.Task>` | podlista |  |  |
+| AllTasks | `SubTable<Db.Task>` | podlista |  |  |
+| AsString | `string` | tylko-odczyt |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
+| DateFrom | `Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia procesu |
+| DateTimeFrom | `System.DateTime` | tylko-odczyt | Data i czas rozpoczęcia | Data i czas rozpoczęcia procesu |
+| DateTimeTo | `System.DateTime` | tylko-odczyt | Data i czas zakończenia | Data i czas zakończenia procesu |
+| DateTo | `Date` | bazodanowe | Data zakończenia | Data zakończenia procesu |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
 | IsClosed | `bool` | bazodanowe | Status procesu | Status procesu (zamknięty lub aktywny) |
-| LiveTasks | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.Task>` |  |  |  |
-| ManagingRow | `Soneta.Business.IManagingRow` | bazodanowe | Wiersz zarządzający | Wiersz zarządzający w procesie |
+| LiveTasks | `System.Collections.Generic.IEnumerable<Db.Task>` | podlista |  |  |
+| ManagingRow | `IManagingRow` | bazodanowe, tylko-odczyt | Wiersz zarządzający | Wiersz zarządzający w procesie |
 | Name | `string` | bazodanowe | Nazwa | Nazwa elementu workflow |
-| NotificationCategory | `Soneta.Business.NotificationCategory` |  |  |  |
-| Number | `Soneta.Core.NumerDokumentu` | bazodanowe | Numer | Numer elementu workflow |
+| NotificationCategory | `NotificationCategory` | tylko-odczyt |  |  |
+| Number | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe | Numer | Numer elementu workflow |
 | Number.Numer | `int` | bazodanowe |  |  |
 | Number.NumerPelny | `string` |  |  |  |
-| Number.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Number.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Number.Symbol | `string` | bazodanowe |  |  |
-| Number.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Number.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe | Operator inicjujący | Operator powiązany z elementem workflow |
-| OtherOperatorOperatorSimpleRight | `Soneta.Business.AccessRights` | enum |  |  |
-| SimpleRightAccessOnList | `Soneta.Business.AccessRights` | enum |  |  |
-| Tasks | `Soneta.Business.View` |  |  |  |
-| TimeFrom | `Soneta.Types.TimeSec` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia procesu |
-| TimeTo | `Soneta.Types.TimeSec` | bazodanowe | Godzina zakończenia | Godzina zakończenia procesu |
-| WorkflowDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe | Definicja workflow | Definicja workflow powiązana z elementem workflow |
+| Number.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Number.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Operator | `App.Operator` | bazodanowe | Operator inicjujący | Operator powiązany z elementem workflow |
+| OtherOperatorOperatorSimpleRight | `AccessRights` (enum) | tylko-odczyt |  |  |
+| SimpleRightAccessOnList | `AccessRights` (enum) | tylko-odczyt |  |  |
+| Tasks | `View` | podlista |  |  |
+| TimeFrom | `TimeSec` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia procesu |
+| TimeTo | `TimeSec` | bazodanowe | Godzina zakończenia | Godzina zakończenia procesu |
+| WorkflowDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe, tylko-odczyt | Definicja workflow | Definicja workflow powiązana z elementem workflow |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AccessRights (`Soneta.Business.AccessRights`)
+### AccessRights (`AccessRights`)
 - `Denied` = 0 — Zakaz dostępu
 - `ReadOnly` = 1 — Tylko odczyt
 - `Granted` = 2 — Pełne prawo
 - `NoInit` = 3 — Niezainicjowane
 
-### DefinitionTypeEnum (`Soneta.Business.Db.DefinitionTypeEnum`)
+### DefinitionTypeEnum (`Db.DefinitionTypeEnum`)
 - `Standard` = 0 — Wielozakładkowy
 - `Engine` = 1 — Jednozakładkowy
 - `None` = 2 — Brak

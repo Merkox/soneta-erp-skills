@@ -4,68 +4,72 @@ Opis: Kalendarz pracy określający normy czasu pracy, zasady rozliczania nadgod
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 52
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 44
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 4
+- razem: 57
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
 | BezWeryfikacjiRegul | `bool` | bazodanowe |  |  |
 | BladBraku | `bool` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | DefinicjaDnia | `Soneta.Kalend.DefinicjaDnia` | bazodanowe |  |  |
-| Dni | `Soneta.Business.DateSubTable<Soneta.Kalend.DzienKalendarzaBase>` |  |  |  |
-| Nadgodziny | `Soneta.Kalend.Nadgodziny` | bazodanowe |  |  |
-| Nadgodziny.AlgorytmDobowa | `Soneta.Kalend.AlgorytmNorma` | bazodanowe, enum |  |  |
-| Nadgodziny.AlgorytmTygodniowa | `Soneta.Kalend.AlgorytmNorma` | bazodanowe, enum |  |  |
-| Nadgodziny.Bilansowanie | `Soneta.Kalend.BilansowanieNadgodzin` | bazodanowe, enum |  |  |
+| Dni | `DateSubTable<Soneta.Kalend.DzienKalendarzaBase>` | podlista |  |  |
+| Nadgodziny | `Soneta.Kalend.Nadgodziny` (subrow) | bazodanowe |  |  |
+| Nadgodziny.AlgorytmDobowa | `Soneta.Kalend.AlgorytmNorma` (enum) | bazodanowe |  |  |
+| Nadgodziny.AlgorytmTygodniowa | `Soneta.Kalend.AlgorytmNorma` (enum) | bazodanowe |  |  |
+| Nadgodziny.Bilansowanie | `Soneta.Kalend.BilansowanieNadgodzin` (enum) | bazodanowe |  |  |
 | Nadgodziny.BilansowanieMiesiecznie | `bool` | bazodanowe |  |  |
-| Nadgodziny.DlaKazdejUmowy | `Soneta.Place.DlaKażdejUmowy` | bazodanowe, enum |  |  |
+| Nadgodziny.DlaKazdejUmowy | `Soneta.Place.DlaKażdejUmowy` (enum) | bazodanowe |  |  |
 | Nadgodziny.DoboweMiesiecznie | `bool` | bazodanowe |  |  |
-| Nadgodziny.Nadgodz50 | `Soneta.Types.Time` | bazodanowe |  |  |
+| Nadgodziny.Nadgodz50 | `Time` | bazodanowe |  |  |
 | Nadgodziny.NieujemneBilansowanieOkresowe | `bool` | bazodanowe |  |  |
-| Nadgodziny.OdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
+| Nadgodziny.OdDnia | `Date` | bazodanowe |  |  |
 | Nadgodziny.Okres | `int` | bazodanowe |  |  |
 | Nadgodziny.PodstawaWgNormyKP | `bool` | bazodanowe |  |  |
 | Nadgodziny.PriorytetOkresowych | `bool` | bazodanowe |  |  |
 | Nadgodziny.Przesuniecie | `int` | bazodanowe |  |  |
 | Nadgodziny.Rocznie | `bool` | bazodanowe |  |  |
 | Nadgodziny.Rozliczaj | `bool` | bazodanowe |  |  |
-| Nadgodziny.Rozliczanie | `Soneta.Kalend.RozliczanieNadgodzin` | bazodanowe, enum |  |  |
-| Nadgodziny.RozliczanieDobowych | `Soneta.Kalend.RozliczanieDobowych` | bazodanowe, enum |  |  |
+| Nadgodziny.Rozliczanie | `Soneta.Kalend.RozliczanieNadgodzin` (enum) | bazodanowe |  |  |
+| Nadgodziny.RozliczanieDobowych | `Soneta.Kalend.RozliczanieDobowych` (enum) | bazodanowe |  |  |
 | Nadgodziny.SwiateczneMiesiecznie | `bool` | bazodanowe |  |  |
-| Nadgodziny.TypOkresu | `Soneta.Kalend.TypOkresuNadgodzin` | bazodanowe, enum |  |  |
-| Nadgodziny.WartoscDobowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nadgodziny.WartoscDobowaTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nadgodziny.WartoscTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
+| Nadgodziny.TypOkresu | `Soneta.Kalend.TypOkresuNadgodzin` (enum) | bazodanowe |  |  |
+| Nadgodziny.WartoscDobowa | `Time` | bazodanowe |  |  |
+| Nadgodziny.WartoscDobowaTygodniowa | `Time` | bazodanowe |  |  |
+| Nadgodziny.WartoscTygodniowa | `Time` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Net | `Soneta.Kalend.DefinicjaSeriiNet` | bazodanowe |  |  |
+| Net | `Soneta.Kalend.DefinicjaSeriiNet` (subrow) | bazodanowe |  |  |
 | Net.WidocznaWNet | `bool` | bazodanowe |  | Czy definicja jest dostępna z poziomu pulpitów |
-| Nocne | `Soneta.Kalend.Nocne` | bazodanowe |  |  |
-| Nocne.Do | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nocne.DoUI | `Soneta.Types.Time` |  |  |  |
-| Nocne.Limit | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nocne.Od | `Soneta.Types.Time` | bazodanowe |  |  |
+| Nocne | `Soneta.Kalend.Nocne` (subrow) | bazodanowe |  |  |
+| Nocne.Do | `Time` | bazodanowe |  |  |
+| Nocne.DoUI | `Time` |  |  |  |
+| Nocne.Limit | `Time` | bazodanowe |  |  |
+| Nocne.Od | `Time` | bazodanowe |  |  |
 | Nocne.Rozliczaj | `bool` | bazodanowe |  |  |
 | Nocne.Standardowe | `bool` |  |  |  |
-| NormaDobowa | `Soneta.Types.Time` | bazodanowe |  | Dobowa norma czasu pracy dla limitu urlopu wypoczynkowego |
-| PierwszyPrzepracowany | `Soneta.Kalend.RodzajePierwszyPrzepracowany` | bazodanowe, enum |  | Sposób wyliczania pierwszego przepracowanego miesiaca dla urlopu w pierwszym roku zatrudnienia |
-| PoczatekDobyPracNiSW | `Soneta.Types.Time` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| NormaDobowa | `Time` | bazodanowe |  | Dobowa norma czasu pracy dla limitu urlopu wypoczynkowego |
+| PierwszyPrzepracowany | `Soneta.Kalend.RodzajePierwszyPrzepracowany` (enum) | bazodanowe |  | Sposób wyliczania pierwszego przepracowanego miesiaca dla urlopu w pierwszym roku zatrudnienia |
+| PoczatekDobyPracNiSW | `Time` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | RownowaznyCzasPracy | `bool` | bazodanowe |  |  |
 | RuchomyCzasPracy | `bool` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` | bazodanowe, enum |  |  |
-| Umowa | `Soneta.Kalend.IUmowaZKalendarzem` | bazodanowe, iface-ref |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Umowa | `Soneta.Kalend.IUmowaZKalendarzem` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | UwzglWymiarEtatu | `bool` | bazodanowe |  |  |
 | WersjonowanieCzas | `bool` | bazodanowe |  |  |
 | WersjonowaniePlan | `bool` | bazodanowe |  |  |
-| WeryfikacjaRegul | `Soneta.Kalend.WeryfikacjaRegulCzasuPracy` | bazodanowe, enum |  |  |
-| Weryfikatory | `Soneta.Business.SubTable<Soneta.Kalend.WeryfikatorKalendarza>` |  |  |  |
+| WeryfikacjaRegul | `Soneta.Kalend.WeryfikacjaRegulCzasuPracy` (enum) | bazodanowe |  |  |
+| Weryfikatory | `SubTable<Soneta.Kalend.WeryfikatorKalendarza>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

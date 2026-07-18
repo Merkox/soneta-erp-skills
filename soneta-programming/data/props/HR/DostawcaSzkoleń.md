@@ -5,18 +5,22 @@ Opis: Rejestr zewnętrznych firm szkoleniowych powiązanych z kontrahentami. Prz
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| EuVAT | `string` | bazodanowe |  |  |
-| Kod | `string` | bazodanowe |  |  |
-| Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| NIP | `string` | bazodanowe |  |  |
-| Nazwa | `string` | bazodanowe |  |  |
-| NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
-| Oferty | `Soneta.Business.SubTable<Soneta.HR.OfertaSzkolenia>` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| EuVAT | `string` | bazodanowe, tylko-odczyt |  |  |
+| Kod | `string` | bazodanowe, tylko-odczyt |  |  |
+| Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe, tylko-odczyt |  |  |
+| NIP | `string` | bazodanowe, tylko-odczyt |  |  |
+| Nazwa | `string` | bazodanowe, tylko-odczyt |  |  |
+| NazwaFormatowana | `string` | tylko-odczyt |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Oferty | `SubTable<Soneta.HR.OfertaSzkolenia>` | podlista |  |  |
 | Osoba | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |

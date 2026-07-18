@@ -5,25 +5,29 @@ Opis: Konfigurowalna definicja weryfikatora kalendarza pracy. Określa rodzaj we
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Kalend.DefinicjaWeryfikatoraKalendarza.AlgorytmBase` |  |  |  |
+| Algorytm | `Soneta.Kalend.DefinicjaWeryfikatoraKalendarza.AlgorytmBase` | tylko-odczyt |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Kalendarze | `Soneta.Business.SubTable<Soneta.Kalend.WeryfikatorKalendarza>` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| Kalendarze | `SubTable<Soneta.Kalend.WeryfikatorKalendarza>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajWeryfikacjiKalendarza` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajWeryfikacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 
 ## Enumy
 

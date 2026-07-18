@@ -5,45 +5,49 @@ Opis: Element szczegółowy zadania (Zadanie). Przechowuje migawkę stanu zadani
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zadanie` → `Zadanie`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 29
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 1
+- razem: 35
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasDo | `Soneta.Types.Time` | bazodanowe | Godzina zakończenia | Planowana godzina zakończenia zadania |
-| CzasModyfikacji | `Soneta.Types.Time` | bazodanowe |  |  |
-| CzasOd | `Soneta.Types.Time` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia zadania |
-| CzasZamkniecia | `Soneta.Types.Time` | bazodanowe | Godzina zamknięcia zadania | Godzina zamknięcia zadania |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Planowana data zakończenia zadania |
-| DataModyfikacji | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia zadania |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia zadania | Data zamknięcia zadania |
+| CzasDo | `Time` | bazodanowe | Godzina zakończenia | Planowana godzina zakończenia zadania |
+| CzasModyfikacji | `Time` | bazodanowe |  |  |
+| CzasOd | `Time` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia zadania |
+| CzasZamkniecia | `Time` | bazodanowe | Godzina zamknięcia zadania | Godzina zamknięcia zadania |
+| DataDo | `Date` | bazodanowe | Data zakończenia | Planowana data zakończenia zadania |
+| DataModyfikacji | `Date` | bazodanowe |  |  |
+| DataOd | `Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia zadania |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia zadania | Data zamknięcia zadania |
 | EtapProjektu | `Soneta.Zadania.EtapProjektu` | bazodanowe |  |  |
 | Kampania | `Soneta.Zadania.Kampania` | bazodanowe |  | Kampania, z którą powiązane jest zadanie |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  |  |
-| Koszt | `Soneta.Types.Currency` | bazodanowe | Koszt | Szacowany koszt zadania |
-| Modyfikujacy | `Soneta.Business.App.Operator` | bazodanowe | Operator modyfikujący zadanie |  |
+| Koszt | `Currency` | bazodanowe | Koszt | Szacowany koszt zadania |
+| Modyfikujacy | `App.Operator` | bazodanowe | Operator modyfikujący zadanie |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Krótka nazwa zadania lub zdarzenia, na podstawie której będzie można go wyszukiwać |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis zadania lub zdarzenia |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis zadania lub zdarzenia |
 | PriorytetZadania | `Soneta.Zadania.PriorytetZadania` | bazodanowe |  | Priorytet projektu. |
 | Projekt | `Soneta.Zadania.Projekt` | bazodanowe |  | Projekt, z którym powiązane jest zadanie |
-| Prowadzacy | `Soneta.Business.App.Operator` | bazodanowe | Zlecający | Osoba zlecająca zadanie |
+| Prowadzacy | `App.Operator` | bazodanowe | Zlecający | Osoba zlecająca zadanie |
 | Przedstawiciel | `Soneta.CRM.KontaktOsoba` | bazodanowe | Przedstawiciel | Osoba odpowiedzialna za wykonanie zadania ze strony kontrahenta |
-| Przychod | `Soneta.Types.Currency` | bazodanowe | Przychód | Szacowany przychód zadania |
-| Rodzaj | `Soneta.Core.RodzajZadania` | bazodanowe, enum | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
-| Role | `Soneta.Business.App.Role` |  |  |  |
+| Przychod | `Currency` | bazodanowe | Przychód | Szacowany przychód zadania |
+| Rodzaj | `Soneta.Core.RodzajZadania` (enum) | bazodanowe | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
+| Role | `App.Role` |  |  |  |
 | RoleGuid | `System.Guid` | bazodanowe |  | Rola dla której przypisane jest zadanie. |
 | StanZadania | `Soneta.Zadania.StanZadania` | bazodanowe |  | Stan projektu. |
-| Telefon | `string` |  |  |  |
+| Telefon | `string` | tylko-odczyt |  |  |
 | Urzadzenie | `Soneta.Zadania.Urzadzenie` | bazodanowe | Urządzenie, którego dotyczy przegląd | Urządzenie, którego dotyczy przegląd |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi | Uwagi dotyczące zadania wpisywane przez operatora wykonującego zadanie. |
-| Wykonujacy | `Soneta.Business.App.Operator` | bazodanowe | Operator | Osoba wykonująca zadanie |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi | Uwagi dotyczące zadania wpisywane przez operatora wykonującego zadanie. |
+| Wykonujacy | `App.Operator` | bazodanowe | Operator | Osoba wykonująca zadanie |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe, guided-parent |  |  |
 
 ## Relacje interfejsowe

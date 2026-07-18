@@ -5,16 +5,20 @@ Opis: Element szczegółowy pracownika (Pracownik). Ewidencja znajomości język
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataWydaniaZaswiadczenia | `Soneta.Types.Date` | bazodanowe | Data wydania zaświadczenia |  |
+| DataWydaniaZaswiadczenia | `Date` | bazodanowe | Data wydania zaświadczenia |  |
 | Jezyk | `Soneta.Kadry.DefinicjaJęzykaObcego` | bazodanowe |  |  |
 | Mowa | `Soneta.Kadry.DefinicjaStopiaZnajomościJęzykaObcego` | bazodanowe |  |  |
 | Pismo | `Soneta.Kadry.DefinicjaStopiaZnajomościJęzykaObcego` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | TypPotwierdzenia | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.TypPotwierdzenia` | bazodanowe | Typ potwierdzenia |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
 | Zaswiadczenie | `string` | bazodanowe | Zaświadczenie |  |

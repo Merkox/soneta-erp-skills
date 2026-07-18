@@ -5,15 +5,19 @@ Opis: Element szczegółowy sprawy windykacyjnej (SprawaWindykacyjna). Wiąże k
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Sprawa` → `SprawaWindykacyjna`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  |  |
-| Naleznosc | `Soneta.Kasa.IRozliczalny` | bazodanowe, iface-ref | Należność |  |
-| Numer | `string` |  |  |  |
-| Sprawa | `Soneta.Windykacja.SprawaWindykacyjna` | bazodanowe, guided-parent |  |  |
+| Naleznosc | `Soneta.Kasa.IRozliczalny` | bazodanowe, tylko-odczyt, iface-ref | Należność |  |
+| Numer | `string` | tylko-odczyt |  |  |
+| Sprawa | `Soneta.Windykacja.SprawaWindykacyjna` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 
 ## Relacje interfejsowe
 

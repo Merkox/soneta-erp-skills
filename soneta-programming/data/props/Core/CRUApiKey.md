@@ -5,8 +5,12 @@ Opis: Zarządzanie tokenami dostępowymi dla Centralnego Rejestru Umów. Pozwala
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,8 +18,8 @@ Guided: root
 | ApiKeyDescription | `string` | bazodanowe | Opis | Opis |
 | IsActive | `bool` | bazodanowe | Aktywna | Aktywność klucza API |
 | IsProd | `bool` | bazodanowe | Produkcja | Konfiguracja dla środowiska produkcyjnego |
-| IsReadOnlyTaskUser | `bool` |  |  |  |
-| TaskUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Właściciel konfiguracji | Właściciel konfiguracji |
+| IsReadOnlyTaskUser | `bool` | tylko-odczyt |  |  |
+| TaskUser | `ITaskUser` | bazodanowe, iface-ref | Właściciel konfiguracji | Właściciel konfiguracji |
 
 ## Relacje interfejsowe
 

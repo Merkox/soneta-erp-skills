@@ -5,20 +5,24 @@ Opis: Element szczegółowy pracownika (Pracownik). Ewidencja pojedynczego dnia 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 2
+- subrowy: 1
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | RcpOK | `bool` | bazodanowe |  | Informacja o stanie rekordu po imporcie z RCP |
-| RównoważnyCzasPracy | `bool` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaPracy>` |  |  |  |
-| WeWy | `Soneta.Business.LpSubTable<Soneta.Kalend.WejscieWyjscie>` |  |  |  |
+| RównoważnyCzasPracy | `bool` | tylko-odczyt |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaPracy>` | podlista |  |  |
+| WeWy | `LpSubTable<Soneta.Kalend.WejscieWyjscie>` | podlista |  |  |

@@ -4,18 +4,22 @@ Tytuł: Powiadomienia
 Opis: Konfiguracja powiadomień powiązanych ze zgłoszeniami serwisowymi. Określa rodzaj powiadomienia (email, zadanie), akcję wyzwalającą, szablon wiadomości oraz warunki wysyłki, np. weryfikację operatora lub ograniczenie do obserwowanych zgłoszeń.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Action | `Soneta.Support.Support.NotificationActions` | bazodanowe, enum | Akcja |  |
+| Action | `Soneta.Support.Support.NotificationActions` (enum) | bazodanowe | Akcja |  |
 | ActionParams | `string` | bazodanowe |  |  |
 | Host | `Soneta.Core.IDaneKontaktoweHost` | bazodanowe, iface-ref |  |  |
 | MessageTemplate | `Soneta.CRM.SzablonEmail` | bazodanowe | Szablon wiadomości | Szablon wiadomości |
-| NotificationType | `Soneta.Support.Support.NotificationTypes` | bazodanowe, enum | Rodzaj powiadomienia |  |
+| NotificationType | `Soneta.Support.Support.NotificationTypes` (enum) | bazodanowe | Rodzaj powiadomienia |  |
 | OnlyForFollowedTickets | `bool` | bazodanowe | Tylko dla obserwowanych zgłoszeń | Powiadomienie tylko dla obserwowanych zgłoszeń. |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe | Definicja zadania | Definicja zadania |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe | Definicja zadania | Definicja zadania |
 | TicketDefinition | `Soneta.Support.Support.TicketDefinition` | bazodanowe | Definicja zadania |  |
 | VerifyOperator | `bool` | bazodanowe | Weryfikacja operatora zmieniającego dane | Wyślij powiadomienie, gdy operator zmieniający dane różni się od operatora prowadzącego. |
 

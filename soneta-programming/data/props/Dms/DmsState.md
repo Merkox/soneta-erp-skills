@@ -5,19 +5,23 @@ Opis: Przechowuje informacje o statusach przypisanych do konkretnych obiektów (
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BasicDocStates | `Soneta.Business.SubTable<Soneta.Workflow.Dms.BasicDocument>` |  |  |  |
+| BasicDocStates | `SubTable<Soneta.Workflow.Dms.BasicDocument>` | podlista |  |  |
 | FormattedName | `string` | bazodanowe | Nazwa formatowana | Nazwa statusu DMS wyświetlana dla obiektu |
 | IsActive | `bool` | bazodanowe | Aktywny | Status aktywny |
 | IsDefault | `bool` | bazodanowe | Domyślny | Status domyślny |
-| MatterStates | `Soneta.Business.SubTable<Soneta.Workflow.Dms.Matter>` |  |  |  |
-| ObjectGuid | `System.Guid` | bazodanowe | Guid obiektu | Guid obiektu, do którego jest przypisany ten status |
-| ObjectType | `string` | bazodanowe | Typ obiektu | Typ obiektu, do którego jest przypisany ten status |
+| MatterStates | `SubTable<Soneta.Workflow.Dms.Matter>` | podlista |  |  |
+| ObjectGuid | `System.Guid` | bazodanowe, tylko-odczyt | Guid obiektu | Guid obiektu, do którego jest przypisany ten status |
+| ObjectType | `string` | bazodanowe, tylko-odczyt | Typ obiektu | Typ obiektu, do którego jest przypisany ten status |
 | SortOrder | `int` | bazodanowe | Kolejność | Kolejność statusu |
 | StateDef | `Soneta.Workflow.Dms.DmsStateDef` | bazodanowe | Definicja statusu | Definicja statusu DMS |
-| StateDefCode | `string` |  |  |  |
-| StateDefName | `string` |  |  |  |
+| StateDefCode | `string` | tylko-odczyt |  |  |
+| StateDefName | `string` | tylko-odczyt |  |  |

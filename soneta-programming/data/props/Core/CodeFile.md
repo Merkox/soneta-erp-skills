@@ -5,22 +5,26 @@ Opis: Dodatkowy plik kodu źródłowego do kompilacji dynamicznej. Przechowuje n
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Core.ICodeFileHost` | bazodanowe, iface-ref |  |  |
-| Identifier | `string` |  |  |  |
+| Host | `Soneta.Core.ICodeFileHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Identifier | `string` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowane |  |
 | Name | `string` | bazodanowe |  |  |
-| Namespace | `string` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Namespace | `string` | tylko-odczyt |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Text | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Text | `MemoText` | bazodanowe, podlista |  |  |
 
 ## Relacje interfejsowe
 

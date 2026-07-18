@@ -5,58 +5,62 @@ Opis: Element szczegółowy nagłówka rozliczenia VAT (NagRozliczeniaVATAkcyzy)
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Naglowek` → `NagRozliczeniaVATAkcyzy`
 
-- pola bazodanowe: 35
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 27
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 17
+- podlisty: 1
+- subrowy: 2
+- razem: 47
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akcyza | `Soneta.Types.Currency` |  |  |  |
-| Brutto | `Soneta.Types.Currency` | bazodanowe |  | Wartość rozlczenia brutto |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data powstania obowiązku podatkowego VAT |
-| Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| DzialalnoscGosp | `Soneta.EwidencjaVat.DzialalnoscGospodarcza` | bazodanowe, enum | Działalność gosp | Czy zakupy na cel działalności gospodarczej |
-| Element | `Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy` | bazodanowe |  | Rozliczany element ewidencji VAT  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| Grupa | `Soneta.Core.GrupaElementuVAT` | bazodanowe, enum | Grupa | Grupa elementu VAT |
+| Akcyza | `Currency` | tylko-odczyt |  |  |
+| Brutto | `Currency` | bazodanowe |  | Wartość rozlczenia brutto |
+| Data | `Date` | bazodanowe |  | Data powstania obowiązku podatkowego VAT |
+| Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe, tylko-odczyt |  |  |
+| DzialalnoscGosp | `Soneta.EwidencjaVat.DzialalnoscGospodarcza` (enum) | bazodanowe | Działalność gosp | Czy zakupy na cel działalności gospodarczej |
+| Element | `Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy` | bazodanowe, tylko-odczyt |  | Rozliczany element ewidencji VAT  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Grupa | `Soneta.Core.GrupaElementuVAT` (enum) | bazodanowe | Grupa | Grupa elementu VAT |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa elementu w nagłówku |
-| Naglowek | `Soneta.EwidencjaVat.NagRozliczeniaVATAkcyzy` | bazodanowe, guided-parent |  | Nagłówek rozliczenia VAT |
-| Nalezny | `bool` |  |  |  |
-| Naliczony | `bool` |  |  |  |
-| Netto | `Soneta.Types.Currency` | bazodanowe |  | Wartość rozliczenia netto |
-| NumerDokumentu | `string` | bazodanowe |  |  |
+| Naglowek | `Soneta.EwidencjaVat.NagRozliczeniaVATAkcyzy` | bazodanowe, tylko-odczyt, guided-parent |  | Nagłówek rozliczenia VAT |
+| Nalezny | `bool` | tylko-odczyt |  |  |
+| Naliczony | `bool` | tylko-odczyt |  |  |
+| Netto | `Currency` | bazodanowe |  | Wartość rozliczenia netto |
+| NumerDokumentu | `string` | bazodanowe, tylko-odczyt |  |  |
 | NumerEwidencji | `string` | bazodanowe |  |  |
-| Odliczenia | `Soneta.EwidencjaVat.OdliczeniaVAT` | bazodanowe, enum |  | Odliczenia VAT związane z tą pozycją |
+| Odliczenia | `Soneta.EwidencjaVat.OdliczeniaVAT` (enum) | bazodanowe |  | Odliczenia VAT związane z tą pozycją |
 | ParametryRozliczen | `Soneta.Core.ParametrRozlicz` | bazodanowe | Parametry rozliczeń | Powiązane parametry rozliczeń |
 | PodlegaPSD | `bool` | bazodanowe | Podlega PSD | Podlega podatkowi od sprzedaży detalicznej |
-| Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref |  |  |
+| Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | ProceduraSME | `bool` | bazodanowe | Procedura SME | Procedura SME |
-| Rodzaj | `Soneta.EwidencjaVat.RodzajZakupuVAT` | bazodanowe, enum |  | Rodzaj zakupu związany z tą pozycją |
-| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` | bazodanowe, enum |  | Rodzaj podmiotu |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | bazodanowe, enum |  | Status podmiotu |
-| Stawka | `Soneta.Core.StawkaVat` | bazodanowe |  |  |
+| Rodzaj | `Soneta.EwidencjaVat.RodzajZakupuVAT` (enum) | bazodanowe |  | Rodzaj zakupu związany z tą pozycją |
+| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | bazodanowe |  | Rodzaj podmiotu |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | bazodanowe |  | Status podmiotu |
+| Stawka | `Soneta.Core.StawkaVat` (subrow) | bazodanowe |  |  |
 | Stawka.Kraj | `Soneta.Core.KrajTbl` | bazodanowe |  |  |
 | Stawka.Obnizona | `bool` | bazodanowe |  |  |
-| Stawka.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Stawka.Status | `Soneta.Core.StatusStawkiVat` | bazodanowe, enum |  |  |
-| Stawka.WgKraj | `Soneta.Business.Key` |  |  |  |
-| Stawka.WymagaSWW | `bool` |  |  |  |
-| Stawka.Zrodlowa | `Soneta.Types.Percent` | bazodanowe |  |  |
-| StawkaAkcyzy | `Soneta.Core.StawkaAkcyzy` | bazodanowe |  |  |
+| Stawka.Procent | `Percent` | bazodanowe |  |  |
+| Stawka.Status | `Soneta.Core.StatusStawkiVat` (enum) | bazodanowe |  |  |
+| Stawka.WgKraj | `Key` | podlista |  |  |
+| Stawka.WymagaSWW | `bool` | tylko-odczyt |  |  |
+| Stawka.Zrodlowa | `Percent` | bazodanowe |  |  |
+| StawkaAkcyzy | `Soneta.Core.StawkaAkcyzy` (subrow) | bazodanowe |  |  |
 | StawkaAkcyzy.Grupa | `string` | bazodanowe |  | Grupa wyrobów |
 | StawkaAkcyzy.Pozycja | `int` | bazodanowe |  | Pozycja tabeli stawek |
-| StawkaAkcyzy.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
+| StawkaAkcyzy.Procent | `Percent` | bazodanowe |  |  |
 | StawkaAkcyzy.Symbol | `string` | bazodanowe |  | Symbol - np. SWW |
-| StawkaAkcyzy.Typ | `Soneta.Core.TypStawkiAkcyzy` | bazodanowe, enum |  |  |
-| StawkaAkcyzy.TypGrupy | `Soneta.Core.TypGrupyAkcyzy` | bazodanowe, enum |  | Typ grupy wyrobów |
+| StawkaAkcyzy.Typ | `Soneta.Core.TypStawkiAkcyzy` (enum) | bazodanowe |  |  |
+| StawkaAkcyzy.TypGrupy | `Soneta.Core.TypGrupyAkcyzy` (enum) | bazodanowe |  | Typ grupy wyrobów |
 | StrukturaSprzedazyNie | `bool` | bazodanowe |  | Nie uwzględniaj w liczeniu struktury sprzedaży |
-| TypEwidencji | `Soneta.EwidencjaVat.TypEwidencjiVAT` | bazodanowe, enum |  | Typ ewidencji VAT |
-| VAT | `Soneta.Types.Currency` | bazodanowe |  | Wartość rozliczenia podatku VAT |
-| VATKoszt | `Soneta.Types.Currency` |  |  |  |
-| VATKosztWsp | `Soneta.Types.Currency` |  |  |  |
-| VATOdliczenia | `Soneta.Types.Currency` |  |  |  |
-| VATOdliczeniaWsp | `Soneta.Types.Currency` |  |  |  |
-| WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` |  | Wartości w Eur |  |
-| WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` |  | Wartości księgowe |  |
+| TypEwidencji | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  | Typ ewidencji VAT |
+| VAT | `Currency` | bazodanowe |  | Wartość rozliczenia podatku VAT |
+| VATKoszt | `Currency` | tylko-odczyt |  |  |
+| VATKosztWsp | `Currency` | tylko-odczyt |  |  |
+| VATOdliczenia | `Currency` | tylko-odczyt |  |  |
+| VATOdliczeniaWsp | `Currency` | tylko-odczyt |  |  |
+| WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
+| WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
 
 ## Relacje interfejsowe
 

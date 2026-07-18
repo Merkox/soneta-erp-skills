@@ -5,24 +5,28 @@ Opis: Element szczegółowy zestawienia materiałów (ProZestawienieMaterialow).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zestawienie` → `ProZestawienieMaterialow`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość pozycji zestawienia materiałów. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość pozycji zestawienia materiałów. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa pozycji zestawienia materiałów. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla pozycji zestawienia materiałów. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla pozycji zestawienia materiałów. |
 | IloscStala | `bool` | bazodanowe | Ilość stała | Ilość stała pozycji zestawienia materiałów. |
 | Krotnosc | `double` | bazodanowe | Krotność | Krotność ilości stałej pozycji zestawienia materiałów. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji zestawienia materiałów. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe |  | Magazyn pozycji zestawienia materiałów. |
-| Narzut | `Soneta.Types.Percent` | bazodanowe |  | Narzut pozycji zestawienia materiałów. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis pozycji zestawienia materiałów. |
+| Narzut | `Percent` | bazodanowe |  | Narzut pozycji zestawienia materiałów. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis pozycji zestawienia materiałów. |
 | PominWKalkulacji | `bool` | bazodanowe | Pomiń w kalkulacji | Parametr pomijania w kalkulacji pozycji zestawienia materiałów. |
-| RodzajCeny | `Soneta.ProdukcjaPro.ProRodzajCeny` | bazodanowe, enum | Rodzaj ceny | Rodzaj ceny pozycji zestawienia materiałów. |
+| RodzajCeny | `Soneta.ProdukcjaPro.ProRodzajCeny` (enum) | bazodanowe | Rodzaj ceny | Rodzaj ceny pozycji zestawienia materiałów. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar pozycji zestawienia materiałów. |
-| Typ | `Soneta.ProdukcjaPro.ProTypMaterialu` | bazodanowe, enum | Typ materiału | Typ materiału pozycji zestawienia materiałów. |
+| Typ | `Soneta.ProdukcjaPro.ProTypMaterialu` (enum) | bazodanowe | Typ materiału | Typ materiału pozycji zestawienia materiałów. |
 | Zestawienie | `Soneta.ProdukcjaPro.ProZestawienieMaterialow` | bazodanowe, guided-parent |  | Zestawienie materiałów dla pozycji zestawienia materiałów. |
 
 ## Enumy

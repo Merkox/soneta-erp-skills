@@ -5,25 +5,29 @@ Opis: Element szczegółowy pozycji dokumentu handlowego (PozycjaDokHandlowego).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaDokHandlowego`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataDo | `Soneta.Types.Date` | bazodanowe |  | Data zakończenia trwania elementu. |
-| DataOd | `Soneta.Types.Date` | bazodanowe |  | Data rozpoczęcia trwania elementu. |
-| DataRealizacji | `Soneta.Types.Date` | bazodanowe |  | Data bieżącej realizacji. |
+| DataDo | `Date` | bazodanowe |  | Data zakończenia trwania elementu. |
+| DataOd | `Date` | bazodanowe |  | Data rozpoczęcia trwania elementu. |
+| DataRealizacji | `Date` | bazodanowe |  | Data bieżącej realizacji. |
 | DokumentRozliczajacy | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  | Dokument rozliczający pozycję elementu. |
 | IloscPlanowana | `Soneta.Towary.Quantity` | bazodanowe |  | Ilość planowana do rozliczenia w elemencie. |
 | IloscRozliczona | `Soneta.Towary.Quantity` | bazodanowe |  | Ilość rozliczona w elemencie. |
 | IloscZrealizowana | `Soneta.Towary.Quantity` | bazodanowe |  | Ilość zrealizowana w elemencie. |
-| Okres | `Soneta.Types.FromTo` |  |  |  |
-| PowodZawieszenia | `Soneta.Business.MemoText` | bazodanowe |  | Powód zawieszenia - opis słowny. |
-| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, guided-parent |  | Pozycja, której realizacja jest rozbita na elementy. |
+| Okres | `FromTo` | podlista |  |  |
+| PowodZawieszenia | `MemoText` | bazodanowe, podlista |  | Powód zawieszenia - opis słowny. |
+| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, tylko-odczyt, guided-parent |  | Pozycja, której realizacja jest rozbita na elementy. |
 | StanPoczatkowy | `Soneta.Towary.Quantity` | bazodanowe |  | Stan początkowy. |
 | StanRozliczony | `Soneta.Towary.Quantity` | bazodanowe |  | Stan rozliczony. |
 | StanZrealizowany | `Soneta.Towary.Quantity` | bazodanowe |  | Stan zrealizowany. |
-| Typ | `Soneta.Handel.TypElementuRozliczenia` | bazodanowe, enum |  | Typ elementu. |
+| Typ | `Soneta.Handel.TypElementuRozliczenia` (enum) | bazodanowe |  | Typ elementu. |
 
 ## Enumy
 

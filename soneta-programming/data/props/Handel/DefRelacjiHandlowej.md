@@ -5,35 +5,38 @@ Opis: Konfigurowalna definicja relacji między dokumentami handlowymi. Określa 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 97
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 86
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 3
+- podlisty: 6
+- subrowy: 7
+- razem: 106
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AutoKompensata | `bool` | bazodanowe |  | Automatycznie tworzy kompensate. |
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie relacji. Zablokowane definicje relacji dokumentów nie wpływają na dokumenty. |
-| CechaWidocznosc | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Cecha dokumentu handlowego (warunek, algorytm z argumentem DefDokPodrzednego) umożliwiająca ograniczenie dostępnych przekształceń dokumentów w relacjach. |
+| CechaWidocznosc | `FeatureDefinition` | bazodanowe |  | Cecha dokumentu handlowego (warunek, algorytm z argumentem DefDokPodrzednego) umożliwiająca ograniczenie dostępnych przekształceń dokumentów w relacjach. |
 | DefinicjaNadrzednego | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Def. dokumentu nadrzędnego | Definicja dokumentu nadrzędnego, z którego pochodzi relacja |
 | DefinicjaPodrzednego | `Soneta.Handel.DefDokHandlowego` |  |  |  |
 | DefinicjaPodrzednego2 | `Soneta.Handel.DefDokHandlowego` |  |  |  |
 | DefinicjaPodrzednego3 | `Soneta.Handel.DefDokHandlowego` |  |  |  |
 | DefinicjaPodrzednego4 | `Soneta.Handel.DefDokHandlowego` |  |  |  |
-| DefinicjePodrzedne | `System.Collections.Generic.IEnumerable<Soneta.Handel.DefDokHandlowego>` |  |  |  |
-| Flags | `Soneta.Handel.Helpers.Flags` | bazodanowe, enum |  | Flagi dodatkowe. |
+| Flags | `Soneta.Handel.Helpers.Flags` (enum) | bazodanowe |  | Flagi dodatkowe. |
 | Hidden | `bool` | bazodanowe |  | Określa, czy definicja jest ukryta w menu Relacje. |
 | Numer | `int` | bazodanowe |  | Określa numer relacji podrzędnej w typie. |
-| PełnaNazwa | `string` |  |  |  |
-| PodrzedneDefinicje | `Soneta.Business.SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` |  |  |  |
-| SposobKopiowania | `Soneta.Handel.SposobKopiowaniaPozycji` | bazodanowe, enum |  | Określa sposób kopiowania wartości pozycji dokumentów handlowych do dokumentów podrzędnych. |
-| SposobKopiowaniaKorekta | `Soneta.Handel.SposobKopiowaniaPozycji` | bazodanowe, enum | Wartość pozycji przenoszona na korektę | Określa sposób kopiowania wartości pozycji na korekty automatyczne. |
-| Typ | `Soneta.Handel.TypRelacjiHandlowej` | bazodanowe, enum |  | Określa typ relacji opisujący jej zachowanie |
-| ZNadrzednego | `Soneta.Handel.DefRelacjiZ` | bazodanowe |  | Określa zasady tworzenia dokumentów podrzędnych z nadrzędnych. |
+| PełnaNazwa | `string` | tylko-odczyt |  |  |
+| PodrzedneDefinicje | `SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` | podlista |  |  |
+| SposobKopiowania | `Soneta.Handel.SposobKopiowaniaPozycji` (enum) | bazodanowe |  | Określa sposób kopiowania wartości pozycji dokumentów handlowych do dokumentów podrzędnych. |
+| SposobKopiowaniaKorekta | `Soneta.Handel.SposobKopiowaniaPozycji` (enum) | bazodanowe | Wartość pozycji przenoszona na korektę | Określa sposób kopiowania wartości pozycji na korekty automatyczne. |
+| Typ | `Soneta.Handel.TypRelacjiHandlowej` (enum) | bazodanowe, tylko-odczyt |  | Określa typ relacji opisujący jej zachowanie |
+| ZNadrzednego | `Soneta.Handel.DefRelacjiZ` (subrow) | bazodanowe |  | Określa zasady tworzenia dokumentów podrzędnych z nadrzędnych. |
 | ZNadrzednego.AnulujNierozliczone | `bool` | bazodanowe |  | Anuluj nierozliczone pozycje. |
 | ZNadrzednego.AutomatycznieNowy | `bool` | bazodanowe |  | Dokument zależny jest tworzony automatycznie dla nowego dokumentu. |
 | ZNadrzednego.DlaKorygowanego | `bool` | bazodanowe |  | Możliwość tworzenia nadrzędnego korygowanego. |
 | ZNadrzednego.IstniejacyDokument | `bool` | bazodanowe |  | Możliwość dołączania istniejących dokumentów zależnych. |
-| ZNadrzednego.Kasowanie | `Soneta.Handel.KasowanieRelacji` | bazodanowe, enum |  | Zachowanie dokumentu zależnego podczas kasowania dokumentu. |
-| ZNadrzednego.Klawisz | `Soneta.Commands.CommandShortcut` | bazodanowe, enum |  | Skrót klawiaturowy wywołujący dokument z danej relacji. |
+| ZNadrzednego.Kasowanie | `Soneta.Handel.KasowanieRelacji` (enum) | bazodanowe |  | Zachowanie dokumentu zależnego podczas kasowania dokumentu. |
+| ZNadrzednego.Klawisz | `Soneta.Commands.CommandShortcut` (enum) | bazodanowe |  | Skrót klawiaturowy wywołujący dokument z danej relacji. |
 | ZNadrzednego.Nazwa | `string` | bazodanowe |  | Nazwa dokumentu widoczna z dokumentu. |
 | ZNadrzednego.NowyDokument | `bool` | bazodanowe |  | Możliwość tworzenia nowego dokumentu zależnego. |
 | ZNadrzednego.PodczasZatwierdzaniaNowy | `bool` | bazodanowe |  | Dokument zależny jest tworzony automatycznie podczas zatwierdzania dokumentu. |
@@ -41,85 +44,82 @@ Guided: root
 | ZNadrzednego.RecznieZatwierdzony | `bool` | bazodanowe |  | Dokument zależny może być tworzony ręcznie dla zatwierdzonych dokumentów. |
 | ZNadrzednego.RozliczajPozycje | `bool` | bazodanowe |  | Możliwość rozliczania istniejących pozycji dokumentów zależnych. |
 | ZNadrzednego.WieleDokumentow | `bool` | bazodanowe |  | Możliwość tworzenia lub dołączania wielu dokumentów zależnych. |
-| ZPodrzednego | `Soneta.Handel.DefRelacjiZ` | bazodanowe |  | Określa zasady tworzenia dokumentów nadrzędnych z podrzędnych. |
-| Zachowanie | `Soneta.Handel.ZachowanieRelacji` | bazodanowe |  |  |
+| ZPodrzednego | `Soneta.Handel.DefRelacjiZ` (subrow) | bazodanowe |  | Określa zasady tworzenia dokumentów nadrzędnych z podrzędnych. |
+| Zachowanie | `Soneta.Handel.ZachowanieRelacji` (subrow) | bazodanowe |  |  |
 | Zachowanie.AutomatycznaKorektaWgPodrzednego | `bool` | bazodanowe | Automatycznie generuj korektę dokumentu magazynowego po zmianie wartości handlowego | Generuje korektę magazynowego, której celem jest synchronizacja wartości zasobów magazynowych z wartością dokumentu handlowego. |
 | Zachowanie.AutomatyczniePrzeliczajKosztWytworzenia | `bool` | bazodanowe |  |  |
-| Zachowanie.BezKorektyMagazynu | `bool` | bazodanowe |  | Wyklucza automatyczne generowanie korekty dokumentu magazynowego (np KFVP->FVP->PAR->WZ->KWZ). |
 | Zachowanie.BlokujOtwarcie | `bool` | bazodanowe |  | Blokuje otwarcie zamkniętego dokumentu nadrzędnego, dopóki istnieje relacja. |
 | Zachowanie.CechaLaczenia | `string` | bazodanowe |  | Cecha wykorzystywana podczas łączenia pozcyji na dokumencie podrzędnym. |
 | Zachowanie.DaneKontrahentaZKarty | `bool` | bazodanowe |  | Określa, czy dane kontrahenta mają być pobierane z kartoteki, czy z dokumentu nadrzędnego. |
-| Zachowanie.DataDokumentu | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum |  | Sposób inicjowania daty dokumentu podrzędnego z dokumentu nadrzędnego. |
-| Zachowanie.DataDostawy | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum |  | Sposób inicjowania daty dostawy dokumentu podrzędnego z dokumentu nadrzędnego. |
-| Zachowanie.DataKorekty | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum | Data korekty |  |
-| Zachowanie.DataKursu | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum |  | Sposób inicjowania daty kursu dokumentu podrzędnego z dokumentu nadrzędnego. |
-| Zachowanie.DataObcy | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum |  | Sposób inicjowania daty obcej dokumentu podrzędnego z dokumentu nadrzędnego. |
-| Zachowanie.DataOperacji | `Soneta.Handel.SposobPrzenoszeniaDaty` | bazodanowe, enum |  | Sposób inicjowania daty operacji dokumentu podrzędnego z dokumentu nadrzędnego. |
+| Zachowanie.DataDokumentu | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe |  | Sposób inicjowania daty dokumentu podrzędnego z dokumentu nadrzędnego. |
+| Zachowanie.DataDostawy | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe |  | Sposób inicjowania daty dostawy dokumentu podrzędnego z dokumentu nadrzędnego. |
+| Zachowanie.DataKorekty | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe | Data korekty |  |
+| Zachowanie.DataKursu | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe |  | Sposób inicjowania daty kursu dokumentu podrzędnego z dokumentu nadrzędnego. |
+| Zachowanie.DataObcy | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe |  | Sposób inicjowania daty obcej dokumentu podrzędnego z dokumentu nadrzędnego. |
+| Zachowanie.DataOperacji | `Soneta.Handel.SposobPrzenoszeniaDaty` (enum) | bazodanowe |  | Sposób inicjowania daty operacji dokumentu podrzędnego z dokumentu nadrzędnego. |
 | Zachowanie.DodajRelacjeDoPrzesylki | `bool` | bazodanowe |  | Jeśli na dokumencie nadrzędnym istnieje przesyłka to zostaje dodana relacja do kolejnego dokumentu |
-| Zachowanie.DomyslnyMagazynInfo | `Soneta.Handel.DomyslnyMagazynInfo` | bazodanowe | Reguły inicjowania magazynu. |  |
-| Zachowanie.DomyslnyMagazynInfo.Cecha | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha ustalająca magazyn | Określa cechę dokumentu (algorytmiczną i referencyjną do tabeli Magazyny) wskazującą magazyn dokumentu podrzędnego. |
-| Zachowanie.DomyslnyMagazynInfo.SposobUstalania | `Soneta.Handel.ZrodloMagazynu` | bazodanowe, enum | Magazyn dokumentu podrzędnego | Określa sposób ustalania magazynu na dokumencie podrzędnym. |
-| Zachowanie.DomyslnyMagazynInfo.WgCecha | `Soneta.Business.Key` |  |  |  |
-| Zachowanie.DostawcaWg | `Soneta.Towary.DostawcaWedług` | bazodanowe, enum |  | Określa sposób ustalania dostawcy towaru. |
+| Zachowanie.DomyslnyMagazynInfo | `Soneta.Handel.DomyslnyMagazynInfo` (subrow) | bazodanowe | Reguły inicjowania magazynu. |  |
+| Zachowanie.DomyslnyMagazynInfo.Cecha | `FeatureDefinition` | bazodanowe | Cecha ustalająca magazyn | Określa cechę dokumentu (algorytmiczną i referencyjną do tabeli Magazyny) wskazującą magazyn dokumentu podrzędnego. |
+| Zachowanie.DomyslnyMagazynInfo.SposobUstalania | `Soneta.Handel.ZrodloMagazynu` (enum) | bazodanowe | Magazyn dokumentu podrzędnego | Określa sposób ustalania magazynu na dokumencie podrzędnym. |
+| Zachowanie.DomyslnyMagazynInfo.WgCecha | `Key` | podlista |  |  |
+| Zachowanie.DostawcaWg | `Soneta.Towary.DostawcaWedług` (enum) | bazodanowe |  | Określa sposób ustalania dostawcy towaru. |
 | Zachowanie.DowolnaData | `bool` | bazodanowe |  | Określa, czy data dokumentu podrzędnego może być wcześniejsza niż dokumentu nadrzędnego. |
 | Zachowanie.DziedziczyUstawienia | `bool` | bazodanowe |  | Pewne ustawienia dokumentu nie zależą od definicji, tylko od dokumentu nadrzędnego. |
 | Zachowanie.FiltrPozycji | `string` | bazodanowe |  |  |
-| Zachowanie.FiltrPozycjiTechnologii | `Soneta.Handel.FiltrPozycjiTechnologii` | bazodanowe, enum |  | Określa jakie pozycje technologii mają być przenoszone do dokumentów podrzednych. |
-| Zachowanie.FiltrTowarow | `Soneta.Towary.TypFiltruTowaru` | bazodanowe, enum |  | Określa jakie pozycje towarów mają być przenoszone do dokumentów podrzednych. |
-| Zachowanie.InicjalizatorStawkiVatInfo | `Soneta.Handel.InicjalizatorStawkiVatDefRelacjiInfo` | bazodanowe | Reguły inicjacji stawki VAT. | Ustawienia inicjacji stawki VAT dla pozycji podrzędnego w relacji. |
-| Zachowanie.InicjalizatorStawkiVatInfo.ZrodloStawkiVat | `Soneta.Handel.ZrodloStawkiVat` | bazodanowe, enum |  | Określa źródło stawki VAT dla pozycji podrzędnej w relacji. |
-| Zachowanie.InicjalizatorWalutyInfo | `Soneta.Handel.InicjalizatorWalutyInfo` | bazodanowe | Reguły doboru walut. | Ustawienia sposobu doboru walut dla: wartości pozycji, wartości dokumentu lub płatności. |
-| Zachowanie.InicjalizatorWalutyInfo.KursWaluty | `Soneta.Handel.ZrodloKursuWaluty` | bazodanowe, enum |  | Określa źródło pozyskania kursu waluty. |
-| Zachowanie.InicjalizatorWalutyInfo.WalutaPlatnosci | `Soneta.Handel.ZrodloWaluty` | bazodanowe, enum |  | Określa źródło pozyskania waluty dla podsumowania/płatności dokumentu podrzędnego. |
-| Zachowanie.InicjalizatorWalutyInfo.WalutaPozycji | `Soneta.Handel.ZrodloWaluty` | bazodanowe, enum |  | Określa na źródło pozyskania waluty dla wartości pozycji dokumentu podrzędnego. |
-| Zachowanie.JestFiltrPozycji | `bool` |  |  |  |
-| Zachowanie.Kontrahent | `Soneta.Handel.SposobPrzenoszeniaKontrahenta` | bazodanowe, enum |  | Określa sposób przenoszenia kontrahenta z dokumentu nadrzędnego do dokuemntu podrzędnego. |
-| Zachowanie.KontrahentCecha | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha ustalająca kontrahenta | Określa cechę dokumentu (algorytmiczną i referencyjną do tabeli Kontrahenci) wskazującą kontrahenta i odbiorcę dokumentu podrzędnego. |
+| Zachowanie.FiltrPozycjiTechnologii | `Soneta.Handel.FiltrPozycjiTechnologii` (enum) | bazodanowe |  | Określa jakie pozycje technologii mają być przenoszone do dokumentów podrzednych. |
+| Zachowanie.FiltrTowarow | `Soneta.Towary.TypFiltruTowaru` (enum) | bazodanowe |  | Określa jakie pozycje towarów mają być przenoszone do dokumentów podrzednych. |
+| Zachowanie.InicjalizatorStawkiVatInfo | `Soneta.Handel.InicjalizatorStawkiVatDefRelacjiInfo` (subrow) | bazodanowe | Reguły inicjacji stawki VAT. | Ustawienia inicjacji stawki VAT dla pozycji podrzędnego w relacji. |
+| Zachowanie.InicjalizatorStawkiVatInfo.ZrodloStawkiVat | `Soneta.Handel.ZrodloStawkiVat` (enum) | bazodanowe |  | Określa źródło stawki VAT dla pozycji podrzędnej w relacji. |
+| Zachowanie.InicjalizatorWalutyInfo | `Soneta.Handel.InicjalizatorWalutyInfo` (subrow) | bazodanowe | Reguły doboru walut. | Ustawienia sposobu doboru walut dla: wartości pozycji, wartości dokumentu lub płatności. |
+| Zachowanie.InicjalizatorWalutyInfo.KursWaluty | `Soneta.Handel.ZrodloKursuWaluty` (enum) | bazodanowe |  | Określa źródło pozyskania kursu waluty. |
+| Zachowanie.InicjalizatorWalutyInfo.WalutaPlatnosci | `Soneta.Handel.ZrodloWaluty` (enum) | bazodanowe |  | Określa źródło pozyskania waluty dla podsumowania/płatności dokumentu podrzędnego. |
+| Zachowanie.InicjalizatorWalutyInfo.WalutaPozycji | `Soneta.Handel.ZrodloWaluty` (enum) | bazodanowe |  | Określa na źródło pozyskania waluty dla wartości pozycji dokumentu podrzędnego. |
+| Zachowanie.JestFiltrPozycji | `bool` | tylko-odczyt |  |  |
+| Zachowanie.Kontrahent | `Soneta.Handel.SposobPrzenoszeniaKontrahenta` (enum) | bazodanowe |  | Określa sposób przenoszenia kontrahenta z dokumentu nadrzędnego do dokuemntu podrzędnego. |
+| Zachowanie.KontrahentCecha | `FeatureDefinition` | bazodanowe | Cecha ustalająca kontrahenta | Określa cechę dokumentu (algorytmiczną i referencyjną do tabeli Kontrahenci) wskazującą kontrahenta i odbiorcę dokumentu podrzędnego. |
 | Zachowanie.KopiujCechyDokumentu | `bool` | bazodanowe |  | Wymusza kopiowanie cech dokumentu z dokumentu nadrzędnego do podrzędnego. |
 | Zachowanie.KopiujCechyPozycji | `bool` | bazodanowe |  | Wymusza kopiowanie cech pozycji z dokumentu nadrzędnego do podrzędnego. |
 | Zachowanie.KopiujDaneKontaktowe | `bool` | bazodanowe |  | Wymusza kopiowanie danych kontaktowych z dokumentu nadrzędnego do podrzędnego. |
 | Zachowanie.KopiujNumerObcy | `bool` | bazodanowe |  | Wymusza kopiowanie numeru obcego z dokumentu nadrzędnego do podrzędnego. |
-| Zachowanie.KopiujOpis | `Soneta.Handel.KopiujOpis` | bazodanowe, enum |  | Wymusza kopiowanie opisu dokumentu z dokumentu nadrzędnego do podrzędnego. |
-| Zachowanie.KopiujSerie | `Soneta.Handel.ZrodloDanychPrzyPrzeksztalcaniu` | bazodanowe, enum | Przenoszenie serii | Sposób przenoszenia serii. |
+| Zachowanie.KopiujOpis | `Soneta.Handel.KopiujOpis` (enum) | bazodanowe |  | Wymusza kopiowanie opisu dokumentu z dokumentu nadrzędnego do podrzędnego. |
+| Zachowanie.KopiujSerie | `Soneta.Handel.ZrodloDanychPrzyPrzeksztalcaniu` (enum) | bazodanowe | Przenoszenie serii | Sposób przenoszenia serii. |
 | Zachowanie.KopiujZadaniaCRM | `bool` | bazodanowe |  | Wymusza kopiowanie zadań CRM z dokumentu nadrzędnego do podrzędnego. |
 | Zachowanie.KorektaWartosci | `bool` | bazodanowe |  | Wartość dokumentu nadrzędnego wpływa na wartość podrzędnego (dotyczy również sum VAT). |
-| Zachowanie.LaczeniePozycji | `Soneta.Handel.SposobLaczeniaPozycji` | bazodanowe, enum |  | Określa reguły łączenia wielu pozycji z dokumentu nadrzędnego w dokumencie podrzędnym. |
-| Zachowanie.OgraniczDoStanu | `bool` | bazodanowe |  | Ogranicza ilość kopiowanego towaru tylko do ilości dostępnej w magazynie. |
-| Zachowanie.OpisAnalitycznyInfo | `Soneta.Core.KopiowanieOpisuAnalitycznego` | bazodanowe | Konfiguracja kopiowania opisu analitycznego |  |
-| Zachowanie.OpisAnalitycznyInfo.Cecha | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Cecha warunkująca kopiowania opisu analitycznego |
+| Zachowanie.LaczeniePozycji | `Soneta.Handel.SposobLaczeniaPozycji` (enum) | bazodanowe |  | Określa reguły łączenia wielu pozycji z dokumentu nadrzędnego w dokumencie podrzędnym. |
+| Zachowanie.OpisAnalitycznyInfo | `Soneta.Core.KopiowanieOpisuAnalitycznego` (subrow) | bazodanowe | Konfiguracja kopiowania opisu analitycznego |  |
+| Zachowanie.OpisAnalitycznyInfo.Cecha | `FeatureDefinition` | bazodanowe |  | Cecha warunkująca kopiowania opisu analitycznego |
 | Zachowanie.OpisAnalitycznyInfo.MaskaWymiaru | `string` | bazodanowe |  | Maska wymiaru |
-| Zachowanie.OpisAnalitycznyInfo.SposobKopiowania | `Soneta.Core.SposobKopiowaniaOpisuAnalitycznego` | bazodanowe, enum |  | Sposób kopiowania opisu analitycznego |
-| Zachowanie.OpisAnalitycznyInfo.WgCecha | `Soneta.Business.Key` |  |  |  |
-| Zachowanie.PlatnoscKaucji | `Soneta.Handel.PlatnoscKaucji` | bazodanowe, enum | Płatność kaucji |  |
+| Zachowanie.OpisAnalitycznyInfo.SposobKopiowania | `Soneta.Core.SposobKopiowaniaOpisuAnalitycznego` (enum) | bazodanowe |  | Sposób kopiowania opisu analitycznego |
+| Zachowanie.OpisAnalitycznyInfo.WgCecha | `Key` | podlista |  |  |
+| Zachowanie.PlatnoscKaucji | `Soneta.Handel.PlatnoscKaucji` (enum) | bazodanowe | Płatność kaucji |  |
 | Zachowanie.PomniejszajIloscZarezerwowana | `bool` | bazodanowe | Pomniejszaj ilość zarezerwowaną | Określa, czy na dokumencie ma być pomniejszana ilość zarezerwowana z dokumentu podrzędnego. |
 | Zachowanie.PozwalajNaZmianePlatnosciKaucji | `bool` | bazodanowe |  | Dozwolona zmiana rodzaju płatności na dokumencie kaucji z poziomu dokumentu sprzedaży. |
 | Zachowanie.PrzenoszenieDanychEParagon | `bool` | bazodanowe | Przenoszenie danych do e-paragonu | Przenoszenie danych do e-paragonu. |
-| Zachowanie.PrzenoszenieGratisow | `Soneta.Handel.SposobPrzenoszeniaGratisow` | bazodanowe, enum | Sposób przenoszenia gratisów (naliczonych automatycznie) |  |
-| Zachowanie.PrzenoszenieIlosci | `Soneta.Handel.SposobPrzenoszeniaIlosci` | bazodanowe, enum | Sposób przenoszenia pozycji | Określa sposób przenoszenia ilości i wartości do podrzędnej pozycji dokumentu. |
-| Zachowanie.PrzenoszenieRozliczonychPozycji | `Soneta.Handel.SposobPrzenoszeniaRozliczonychPozycji` | bazodanowe, enum | Sposób przenoszenia rozliczonych pozycji | Określa sposób przenoszenia ilości i wartości rozliczonej pozycji do podrzędnej pozycji dokumentu. |
+| Zachowanie.PrzenoszenieGratisow | `Soneta.Handel.SposobPrzenoszeniaGratisow` (enum) | bazodanowe | Sposób przenoszenia gratisów (naliczonych automatycznie) |  |
+| Zachowanie.PrzenoszenieIlosci | `Soneta.Handel.SposobPrzenoszeniaIlosci` (enum) | bazodanowe | Sposób przenoszenia pozycji | Określa sposób przenoszenia ilości i wartości do podrzędnej pozycji dokumentu. |
+| Zachowanie.PrzenoszenieRozliczonychPozycji | `Soneta.Handel.SposobPrzenoszeniaRozliczonychPozycji` (enum) | bazodanowe | Sposób przenoszenia rozliczonych pozycji | Określa sposób przenoszenia ilości i wartości rozliczonej pozycji do podrzędnej pozycji dokumentu. |
 | Zachowanie.PrzepisujDatyDostawy | `bool` | bazodanowe | Przepisuj daty dostawy | Określa, czy daty dostawy mają być przepisywane z dokumentu nadrzędnego na podrzędny. |
 | Zachowanie.RozliczenieZKorektami | `bool` | bazodanowe | Korekta dok. podrzędnego zmienia rozliczenie relacji | Określa, czy korekta dok. podrzędnego zmienia rozliczenie relacji. |
 | Zachowanie.SchematPodzialowyDok | `Soneta.Core.ISchematPodziałowy` | bazodanowe, iface-ref | Schemat podziałowy opisu analitycznego dla dokumentu |  |
 | Zachowanie.SchematPodzialowyPoz | `Soneta.Core.ISchematPodziałowy` | bazodanowe, iface-ref | Schemat podziałowy opisu analitycznego dla pozycji |  |
-| Zachowanie.SposobFiltrowaniaPozycji | `Soneta.Handel.SposobFiltrowaniaPozycjiDokumentuNadrzednego` | bazodanowe, enum |  |  |
-| Zachowanie.SposobKorektyMagazynowego | `Soneta.Handel.SposobKorektyMagazynowego` | bazodanowe, enum |  | Określa sposób generowania korekty dokumentu magazynowego. |
-| Zachowanie.SposobPrzenoszniaPlatnosciDokumentu | `Soneta.Handel.SposobPrzenoszniaPlatnosciDokumentu` | bazodanowe, enum |  |  |
+| Zachowanie.SposobFiltrowaniaPozycji | `Soneta.Handel.SposobFiltrowaniaPozycjiDokumentuNadrzednego` (enum) | bazodanowe |  |  |
+| Zachowanie.SposobKorektyMagazynowego | `Soneta.Handel.SposobKorektyMagazynowego` (enum) | bazodanowe |  | Określa sposób generowania korekty dokumentu magazynowego. |
+| Zachowanie.SposobPrzenoszniaPlatnosciDokumentu | `Soneta.Handel.SposobPrzenoszniaPlatnosciDokumentu` (enum) | bazodanowe |  |  |
 | Zachowanie.SynchroniujStan | `bool` | bazodanowe |  | Określa, czy dokumenty będące w relacji mają być jednocześnie otwierane i zamykane (zmiana stanu dokumentu). |
 | Zachowanie.UsuwajAutomatycznie | `bool` | bazodanowe |  | Określa, czy relacja kopiowania będzie rozłączana po zatwierdzeniu dokumentu podrzędnego, gdy ten nie rozlicza nadrzędnego. |
 | Zachowanie.UwzgledniajPowiazanyDoPodrzPrzeciwnyDokOpakowan | `bool` | bazodanowe |  | Uwzględniaj w płatnościach i w KSeF powiązany do dokumentu opakowań dokument opakowań o przeciwnym kierunku |
 | Zachowanie.UwzgledniajUstawieniePlatnosciKaucji | `bool` | bazodanowe |  | W relacji kopiowania do dokumentu wydania/przyjecia opakowań steruje sposobem uwzględniania parametru Płatność Kaucji z dokumentu nadrzędnego |
 | Zachowanie.VatWgPodrzednego | `bool` | bazodanowe |  | Określa, czy VAT będzie liczony wg ustawień w definicji dokumentu podrzędnego, jeśli metoda liczenia VAT w dokumencie nadrzędnym jest inna niż w definicji dokumentu podrzędnego. |
-| Zachowanie.WalutaPozycjiJakDokumentu | `bool` | bazodanowe |  | Określa, czy waluta pozycji dokumentu będzie zmieniana na walutę podsumowania dokumentu. |
 | Zachowanie.WartoscZPrzeciwnymZnakiem | `bool` | bazodanowe |  |  |
-| Zachowanie.WgKontrahentCecha | `Soneta.Business.Key` |  |  |  |
-| Zachowanie.WgSchematPodzialowyDok | `Soneta.Business.Key` |  |  |  |
-| Zachowanie.WgSchematPodzialowyPoz | `Soneta.Business.Key` |  |  |  |
+| Zachowanie.WgKontrahentCecha | `Key` | podlista |  |  |
+| Zachowanie.WgSchematPodzialowyDok | `Key` | podlista |  |  |
+| Zachowanie.WgSchematPodzialowyPoz | `Key` | podlista |  |  |
 | Zachowanie.WielePozycji | `bool` | bazodanowe |  | Określa, czy do jednej pozycji nadrzędnej może istnieć wiele pozycji podrzędnych. |
-| Zachowanie.WyborPozycji | `Soneta.Handel.WyborPozycjiDlaRelacji` | bazodanowe, enum |  | Określa formularz wyświetlany podczas tworzenia dokumentu podrzędnego, w którym można wybrać dodatkowe informacje o dokumencie podrzędnym. |
-| Zachowanie.WyliczanieIlosci | `Soneta.Handel.SposobWyliczaniaIlosci` | bazodanowe, enum |  | Określa sposób wyliczania ilości przenoszonej do podrzędnej pozycji dokumentu. |
+| Zachowanie.WyborPozycji | `Soneta.Handel.WyborPozycjiDlaRelacji` (enum) | bazodanowe |  | Określa formularz wyświetlany podczas tworzenia dokumentu podrzędnego, w którym można wybrać dodatkowe informacje o dokumencie podrzędnym. |
+| Zachowanie.WyliczanieIlosci | `Soneta.Handel.SposobWyliczaniaIlosci` (enum) | bazodanowe |  | Określa sposób wyliczania ilości przenoszonej do podrzędnej pozycji dokumentu. |
 | Zachowanie.ZasobyZNadrzednego | `bool` | bazodanowe | Zasoby z nadrzędnego | Na pozycji podrzędnego powstaje wskazanie dostawy i pobierany jest zasób utworzony przez pozycję nadrzędnego. |
 | Zachowanie.ZastepowanieProduktowSkladnikami | `bool` | bazodanowe |  | Określa, czy w relacji kopiowania produkt na pozycji nadrzędnej zostanie zastąpiony składnikami na pozycji podrzędnej. |
-| Zachowanie.ZrodloNazwyTowaru | `Soneta.Handel.ZrodloDanychPrzyPrzeksztalcaniu` | bazodanowe, enum | Zródło nazwy towaru | Określa skąd pobierana ma być nazwa towaru na pozycje. |
+| Zachowanie.ZrodloNazwyTowaru | `Soneta.Handel.ZrodloDanychPrzyPrzeksztalcaniu` (enum) | bazodanowe | Zródło nazwy towaru | Określa skąd pobierana ma być nazwa towaru na pozycje. |
 
 ## Relacje interfejsowe
 

@@ -5,15 +5,19 @@ Opis: Tabela łączy profil z konkretnymi kompetencjami merytorycznymi. Jest klu
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kompetencja | `Soneta.HR.ZKL.Slowniki.Kompetencje.KompetencjaMerytoryczna` | bazodanowe | Kompetencja |  |
 | Poziom | `Soneta.HR.ZKL.Slowniki.Kompetencje.PoziomRozwojuKompetencjiMerytorycznych` | bazodanowe | Poziom rozwoju |  |
-| Profil | `Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiMerytorycznych` | bazodanowe |  |  |
-| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` | bazodanowe, enum | Rodzaj wymagania |  |
+| Profil | `Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiMerytorycznych` | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` (enum) | bazodanowe | Rodzaj wymagania |  |
 | Uwagi | `string` | bazodanowe | Uwagi |  |
 
 ## Enumy

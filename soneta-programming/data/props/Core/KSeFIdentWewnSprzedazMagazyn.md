@@ -4,12 +4,16 @@ Tytuł: Przypisane magazyny dla sprzedaży dla identyfikatora wewnętrznego KSeF
 Opis: Tabela przechowuje przypisania magazynów do wewnętrznych identyfikatorów KSeF dla sprzedaży. ŝączy identyfikator wewnętrzny KSeF z magazynem, z którego dokumenty sprzedaży są przekazywane do Krajowego Systemu e-Faktur.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| IdentWewnKSeF | `Soneta.Core.KSeFIdentWewn` | bazodanowe |  |  |
+| IdentWewnKSeF | `Soneta.Core.KSeFIdentWewn` | bazodanowe, tylko-odczyt |  |  |
 | Magazyn | `Soneta.Core.IElementSlownika` | bazodanowe, iface-ref |  |  |
 
 ## Relacje interfejsowe

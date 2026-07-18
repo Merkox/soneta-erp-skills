@@ -6,40 +6,44 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentST`
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 15
+- podlisty: 1
+- subrowy: 0
+- razem: 30
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data obrotu |
-| DataKsiegowania | `Soneta.Types.Date` | bazodanowe | Data księgowania | Data księgowania obrotu |
-| Dokument | `Soneta.SrodkiTrwale.DokumentST` | bazodanowe, guided-parent |  | Dokument obrotu środka trwałego |
+| Data | `Date` | bazodanowe |  | Data obrotu |
+| DataKsiegowania | `Date` | bazodanowe | Data księgowania | Data księgowania obrotu |
+| Dokument | `Soneta.SrodkiTrwale.DokumentST` | bazodanowe, tylko-odczyt, guided-parent |  | Dokument obrotu środka trwałego |
 | ElementPodatku | `Soneta.SrodkiTrwale.ElementPodatkuOdNieruch` | bazodanowe |  | Element obrotu podatku od nieruchomości |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
 | Ilosc | `double` | bazodanowe | Ilość | Ilość inwentarzowa |
-| IloscRoznica | `double` |  |  |  |
-| IloscWgKartoteki | `double` |  |  |  |
-| JednostkaMiary | `Soneta.Towary.Jednostka` |  |  |  |
-| Kierunek | `Soneta.SrodkiTrwale.KierunekObrotuST` | bazodanowe, enum |  | Kierunek obrotu środka trwałego |
-| KwotaNKUP | `Soneta.Types.Currency` |  |  |  |
+| IloscRoznica | `double` | tylko-odczyt |  |  |
+| IloscWgKartoteki | `double` | tylko-odczyt |  |  |
+| JednostkaMiary | `Soneta.Towary.Jednostka` | tylko-odczyt |  |  |
+| Kierunek | `Soneta.SrodkiTrwale.KierunekObrotuST` (enum) | bazodanowe |  | Kierunek obrotu środka trwałego |
+| KwotaNKUP | `Currency` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa obrotu w dokumencie |
-| Opis | `string` |  |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| OpisAnalitycznyBufor | `bool` |  |  |  |
-| PageVisible | `bool` |  |  |  |
-| Parametr | `Soneta.SrodkiTrwale.ParametrOdpisu` |  |  |  |
+| Opis | `string` | tylko-odczyt |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| OpisAnalitycznyBufor | `bool` | tylko-odczyt |  |  |
+| PageVisible | `bool` | tylko-odczyt |  |  |
+| Parametr | `Soneta.SrodkiTrwale.ParametrOdpisu` | tylko-odczyt |  |  |
 | Powierzchnia | `double` | bazodanowe |  | Powierzchnia elementu podatku od nieruchomości |
-| ReadOnlyKierunek | `bool` |  |  |  |
+| ReadOnlyKierunek | `bool` | tylko-odczyt |  |  |
 | SrodekTrwaly | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe | Środek trwały | Środek trwały |
 | Stawka | `decimal` | bazodanowe |  | Stawka obrotu opodatkowania podatku od nieruchomości |
-| SymbolBilansowy | `string` |  |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
-| SymbolPodatkowy | `string` |  |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
-| Typ | `Soneta.SrodkiTrwale.TypObrotuST` | bazodanowe, enum |  | Typ obrotu środka trwałego |
+| SymbolBilansowy | `string` | tylko-odczyt |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
+| SymbolPodatkowy | `string` | tylko-odczyt |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
+| Typ | `Soneta.SrodkiTrwale.TypObrotuST` (enum) | bazodanowe, tylko-odczyt |  | Typ obrotu środka trwałego |
 | Uwagi | `string` | bazodanowe |  | Uwagi |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  | Wartość obrotu elementu podatku od nieruchomości |
-| WartoscBilansowa | `Soneta.Types.Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa obrotu |
-| WartoscOplaty | `Soneta.Types.Currency` |  |  |  |
-| WartoscPodatkowa | `Soneta.Types.Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa obrotu |
+| Wartosc | `Currency` | bazodanowe |  | Wartość obrotu elementu podatku od nieruchomości |
+| WartoscBilansowa | `Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa obrotu |
+| WartoscOplaty | `Currency` | tylko-odczyt |  |  |
+| WartoscPodatkowa | `Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa obrotu |
 | ZrodloFinansowania | `Soneta.Core.ZrodloFinansowania` | bazodanowe | Źródło finansowania |  |
 
 ## Enumy

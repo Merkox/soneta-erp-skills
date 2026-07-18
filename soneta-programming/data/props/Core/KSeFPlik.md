@@ -5,47 +5,49 @@ Opis: Plik dokumentu pobranego z Krajowego Systemu e-Faktur (KSeF). Zawiera dane
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 34
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 33
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 2
+- subrowy: 0
+- razem: 45
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AkceptacjaKlienta | `bool` | bazodanowe | Akceptacja klienta | Akceptacja klienta |
 | Czesc | `Soneta.Core.KSeFPartList` | bazodanowe | Pakiet | Pakiet danych |
-| Data | `Soneta.Types.Date` | bazodanowe | Data wystawienia | Data dokumentu z pola P_1 w XML |
-| DataKSeF | `Soneta.Types.Date` | bazodanowe | Data KSeF | Data wystawienia dokumentu na platformie KSeF |
-| DataZPolaP6 | `Soneta.Types.Date` | bazodanowe | Data dokonania lub zakończenia dostawy towarów lub wykonania usługi | Data dokonania lub zakończenia dostawy towarów lub wykonania usługi |
-| DataZPolaP6Do | `Soneta.Types.Date` | bazodanowe | Data końcowa okresu, którego dotyczy faktura | Data końcowa okresu, którego dotyczy faktura |
-| DataZPolaP6Od | `Soneta.Types.Date` | bazodanowe | Data początkowa okresu, którego dotyczy faktura | Data początkowa okresu, którego dotyczy faktura |
+| Data | `Date` | bazodanowe | Data wystawienia | Data dokumentu z pola P_1 w XML |
+| DataKSeF | `Date` | bazodanowe | Data KSeF | Data wystawienia dokumentu na platformie KSeF |
+| DataZPolaP6 | `Date` | bazodanowe | Data dokonania lub zakończenia dostawy towarów lub wykonania usługi | Data dokonania lub zakończenia dostawy towarów lub wykonania usługi |
+| DataZPolaP6Do | `Date` | bazodanowe | Data końcowa okresu, którego dotyczy faktura | Data końcowa okresu, którego dotyczy faktura |
+| DataZPolaP6Od | `Date` | bazodanowe | Data początkowa okresu, którego dotyczy faktura | Data początkowa okresu, którego dotyczy faktura |
 | Dokument | `Soneta.Core.IKomunikatKSeFHost` | bazodanowe | Dokument | Dokument, który powstał z pliku KSeF |
-| DokumentHost | `string` |  | Dokument |  |
-| DozwolonaZmianaRodzaju | `bool` |  |  |  |
+| DozwolonaZmianaRodzaju | `bool` | tylko-odczyt |  |  |
 | FormaPlatnosci | `string` | bazodanowe | Forma płatności | Forma płatności |
-| HtmlVisualization | `string` |  |  |  |
-| HtmlVisualizationForPrint | `string` |  |  |  |
-| ImportExportXml | `Soneta.Core.ImportExportXml` | bazodanowe | ImportExportXml |  |
-| ImportExportXmlKSeF | `Soneta.Core.ImportExportXml` |  |  |  |
-| ImportExportXmls | `System.Collections.Generic.IEnumerable<Soneta.Core.ImportExportXml>` |  |  |  |
-| IsKBNLicence | `bool` |  |  |  |
-| IsReadOnlyKategoria | `bool` |  |  |  |
-| IsReadOnlyKontrahent | `bool` |  |  |  |
-| Kategoria | `Soneta.Core.KategoriaKSeF` | bazodanowe, enum | Kategoria KSeF |  |
+| HtmlVisualization | `string` | tylko-odczyt |  |  |
+| HtmlVisualizationForPrint | `string` | tylko-odczyt |  |  |
+| ImportExportXmlKSeF | `Soneta.Core.ImportExportXml` | tylko-odczyt |  |  |
+| ImportExportXmls | `System.Collections.Generic.IEnumerable<Soneta.Core.ImportExportXml>` | podlista |  |  |
+| IsKBNLicence | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyKategoria | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyKontrahent | `bool` | tylko-odczyt |  |  |
+| Kategoria | `Soneta.Core.KategoriaKSeF` (enum) | bazodanowe | Kategoria KSeF |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Kontrahent | Obiekt kontrahenta powiązany z plikiem KSeF |
-| Kwota | `Soneta.Types.DoubleCy` | bazodanowe | Wartość brutto | Wartość brutto dokumentu |
-| KwotaNetto | `Soneta.Types.DoubleCy` | bazodanowe | Wartość netto | Wartość netto dokumentu |
-| KwotaVat | `Soneta.Types.DoubleCy` | bazodanowe | Suma VAT w walucie dokumentu | Suma VAT w walucie dokumentu |
+| Kwota | `DoubleCy` | bazodanowe | Wartość brutto | Wartość brutto dokumentu |
+| KwotaNetto | `DoubleCy` | bazodanowe | Wartość netto | Wartość netto dokumentu |
+| KwotaVat | `DoubleCy` | bazodanowe | Suma VAT w walucie dokumentu | Suma VAT w walucie dokumentu |
 | KwotaVatPln | `double` | bazodanowe | Suma VAT w walucie PLN | Suma VAT w walucie PLN |
 | NIPKontrahenta | `string` | bazodanowe | NIP Kontrahenta | NIP Kontrahenta |
 | NazwaKontrahenta | `string` | bazodanowe | Nazwa kontrahenta |  |
-| NazwaPliku | `string` |  |  |  |
+| NazwaPliku | `string` | tylko-odczyt |  |  |
 | NumerDokumentu | `string` | bazodanowe | Numer dokumentu | Numer dokumentu |
 | NumerKSeF | `string` | bazodanowe | Numer KSeF | Numer KSeF |
 | NumeryWZ | `string` | bazodanowe | Numery dokumentów WZ | Numery dokumentów WZ |
 | NumeryZamowien | `string` | bazodanowe | Numery zamówień | Numery zamówień |
-| OddzialFirmy | `Soneta.Core.OddzialFirmy` |  |  |  |
+| OddzialFirmy | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe | Opis | Opis |
 | PrzyczynaKorekty | `string` | bazodanowe | Przyczyna korekty | Przyczyna korekty |
-| Rodzaj | `Soneta.Core.RodzajDokumentuKSeFZapytanieOFa` | bazodanowe, enum | Rodzaj | Rodzaj |
+| Rodzaj | `Soneta.Core.RodzajDokumentuKSeFZapytanieOFa` (enum) | bazodanowe | Rodzaj | Rodzaj |
 | RodzajDokKSeF | `Soneta.Core.RodzajDokumentuKseF` | bazodanowe | Rodzaj dokumentu KSeF |  |
 | RodzajDokumentu | `string` | bazodanowe | Rodzaj dokumentu | Rodzaj dokumentu |
 | Rola11Podmiot3IdWew | `string` | bazodanowe | Identyfikator wewnętrzny - Pracownik | Identyfikator wewnętrzny - Pracownik |
@@ -53,10 +55,10 @@ Guided: root
 | Rola4Podmiot3IdWew | `string` | bazodanowe | Identyfikator wewnętrzny - dodatkowy nabywca | Identyfikator wewnętrzny - dodatkowy nabywca |
 | Rola6Podmiot3IdWew | `string` | bazodanowe | Identyfikator wewnętrzny - dokonujący płatności | Identyfikator wewnętrzny - dokonujący płatności |
 | Rola8Podmiot3IdWew | `string` | bazodanowe | Identyfikator wewnętrzny - JST Odbiorca | Identyfikator wewnętrzny - JST Odbiorca |
-| TerminPlatnosci | `Soneta.Types.Date` | bazodanowe | Termin płatności | Termin płatności |
+| TerminPlatnosci | `Date` | bazodanowe | Termin płatności | Termin płatności |
 | Wykluczone | `bool` | bazodanowe | Wykluczone | Pliki KSeF wykluczone z księgowania lub ewidencji handlowej |
-| Xml | `Soneta.Business.MemoText` |  |  |  |
-| Zapytanie | `Soneta.Core.KSeFZapytanieOFa` |  |  |  |
+| Xml | `MemoText` | podlista |  |  |
+| Zapytanie | `Soneta.Core.KSeFZapytanieOFa` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

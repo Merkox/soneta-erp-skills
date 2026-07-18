@@ -6,71 +6,75 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 42
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 39
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 11
+- podlisty: 7
+- subrowy: 1
+- razem: 60
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzyMSR | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data ewidencji |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Data do |
-| DataOd | `Soneta.Types.Date` | bazodanowe |  | Data od |
-| DataWaluty | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZakonczenia | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Data zakończenia umowy |
-| DataZawarcia | `Soneta.Types.Date` | bazodanowe |  | Data zawarcia |
+| CzyMSR | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  | Data ewidencji |
+| DataDo | `Date` | bazodanowe | Data zakończenia | Data do |
+| DataOd | `Date` | bazodanowe |  | Data od |
+| DataWaluty | `Date` | bazodanowe |  |  |
+| DataZakonczenia | `Date` | bazodanowe | Data zakończenia | Data zakończenia umowy |
+| DataZawarcia | `Date` | bazodanowe |  | Data zawarcia |
 | Definicja | `Soneta.SrodkiTrwale.DokumentUL.DefDokUL` | bazodanowe |  | Definicja dokumentu |
-| DzienSplatyRaty | `Soneta.SrodkiTrwale.DzienSplatyRaty` | bazodanowe, enum |  | Dzień spłaty raty |
+| DzienSplatyRaty | `Soneta.SrodkiTrwale.DzienSplatyRaty` (enum) | bazodanowe |  | Dzień spłaty raty |
 | Finansujacy | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Finansujący |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | GenerujPlatnosci | `bool` | bazodanowe |  | Generowanie płatności dla rat |
 | IloscRat | `int` | bazodanowe |  | Ilość rat |
 | Kontrahent | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Kontrahent |
-| Korekta | `bool` |  |  |  |
+| Korekta | `bool` | tylko-odczyt |  |  |
 | Kurs | `double` | bazodanowe |  |  |
-| MetodaPodzialu | `Soneta.SrodkiTrwale.MetodaPodzialuRaty` | bazodanowe, enum |  | Metoda podziału raty |
-| MetodaWyceny | `Soneta.SrodkiTrwale.MetodyWyceny` | bazodanowe, enum |  |  |
-| NadrzedneRelacje | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.DokumentUL>` |  |  |  |
+| MetodaPodzialu | `Soneta.SrodkiTrwale.MetodaPodzialuRaty` (enum) | bazodanowe |  | Metoda podziału raty |
+| MetodaWyceny | `Soneta.SrodkiTrwale.MetodyWyceny` (enum) | bazodanowe |  |  |
+| NadrzedneRelacje | `SubTable<Soneta.SrodkiTrwale.DokumentUL>` | podlista |  |  |
 | Nadrzedny | `Soneta.SrodkiTrwale.DokumentUL` | bazodanowe | Dokument nadrzędny | Nadrzędny dokument. |
-| NaliczenieRat | `Soneta.SrodkiTrwale.NaliczenieRat` | bazodanowe, enum |  | Naliczenie |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| NaliczenieRat | `Soneta.SrodkiTrwale.NaliczenieRat` (enum) | bazodanowe |  | Naliczenie |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerObcy | `string` | bazodanowe |  | Numer obcy |
-| NumerUmowyPierwotnej | `Soneta.SrodkiTrwale.DokumentUL` |  | Numer umowy pierwotnej |  |
+| NumerUmowyPierwotnej | `Soneta.SrodkiTrwale.DokumentUL` | tylko-odczyt | Numer umowy pierwotnej |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
-| OdliczeniaVAT | `bool` |  |  |  |
-| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczenL` | bazodanowe, enum |  | Okres rozliczeń |
+| OdliczeniaVAT | `bool` | tylko-odczyt |  |  |
+| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczenL` (enum) | bazodanowe |  | Okres rozliczeń |
 | Opis | `string` | bazodanowe |  | Opis |
-| PodrzedneRelacje | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.DokumentUL>` |  |  |  |
-| PodrzedneWithRights | `System.Collections.Generic.IEnumerable<Soneta.SrodkiTrwale.DokumentUL>` |  |  |  |
+| PodrzedneRelacje | `SubTable<Soneta.SrodkiTrwale.DokumentUL>` | podlista |  |  |
+| PodrzedneWithRights | `System.Collections.Generic.IEnumerable<Soneta.SrodkiTrwale.DokumentUL>` | podlista |  |  |
 | Podrzedny | `Soneta.SrodkiTrwale.DokumentUL` | bazodanowe | Dokument podrzędny | Podrzędny dokument. |
-| PowiazaneDok | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.DokumentPowiazanyUL>` |  |  |  |
+| PowiazaneDok | `SubTable<Soneta.SrodkiTrwale.DokumentPowiazanyUL>` | podlista |  |  |
 | PowodZakonczenia | `string` | bazodanowe | Powód zakończenia | Powód zakończenia umowy |
-| Pozycje | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.SrodekTrwalyLeasing>` |  |  |  |
-| PrzedmiotUmowy | `Soneta.SrodkiTrwale.SrodekTrwalyBase` |  |  |  |
-| RodzajLeasingu | `Soneta.SrodkiTrwale.RodzajLeasingu` | bazodanowe, enum |  | Rodzaj leasingu |
+| Pozycje | `SubTable<Soneta.SrodkiTrwale.SrodekTrwalyLeasing>` | podlista |  |  |
+| PrzedmiotUmowy | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | tylko-odczyt |  |  |
+| RodzajLeasingu | `Soneta.SrodkiTrwale.RodzajLeasingu` (enum) | bazodanowe |  | Rodzaj leasingu |
 | Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` |  |  |  |
-| Stan | `Soneta.SrodkiTrwale.StatusUmowy` | bazodanowe, enum |  | Status umowy |
-| StopaDyskontowa | `Soneta.Types.Percent` | bazodanowe |  | Stopa dyskontowa |
-| StopaMetoda | `Soneta.SrodkiTrwale.StopaMetoda` | bazodanowe, enum |  |  |
+| Stan | `Soneta.SrodkiTrwale.StatusUmowy` (enum) | bazodanowe |  | Status umowy |
+| StopaDyskontowa | `Percent` | bazodanowe |  | Stopa dyskontowa |
+| StopaMetoda | `Soneta.SrodkiTrwale.StopaMetoda` (enum) | bazodanowe |  |  |
 | StopaOpis | `string` | bazodanowe |  |  |
-| StopaProcentowa | `Soneta.SrodkiTrwale.StopaProcentowa` | bazodanowe, enum |  |  |
+| StopaProcentowa | `Soneta.SrodkiTrwale.StopaProcentowa` (enum) | bazodanowe |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
-| TerminPierwszejRaty | `Soneta.Types.Date` | bazodanowe |  | Termin pierwszej raty |
-| TerminWykupu | `Soneta.Types.Date` | bazodanowe |  | Termin wykupu |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu |
+| TerminPierwszejRaty | `Date` | bazodanowe |  | Termin pierwszej raty |
+| TerminWykupu | `Date` | bazodanowe |  | Termin wykupu |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu |
 | Tytul | `Soneta.SrodkiTrwale.TytulDokumentuST` | bazodanowe | Tytuł dokumentu | Tytuł dokumentu środków trwałych |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | WskazanyDzienSplaty | `int` | bazodanowe |  | Wskazany dzień spłaty raty |
-| WspolczynnikDyskonta | `double` |  |  |  |
-| WspolczynnikDyskontaStr | `string` |  |  |  |
+| WspolczynnikDyskonta | `double` | tylko-odczyt |  |  |
+| WspolczynnikDyskontaStr | `string` | tylko-odczyt |  |  |
 | Zakonczona | `bool` | bazodanowe | Zakończona | Zakończenie umowy |
-| ZaplaconeDo | `Soneta.Types.Date` | bazodanowe |  | Uwzględniaj jako zapłacone do |
+| ZaplaconeDo | `Date` | bazodanowe |  | Uwzględniaj jako zapłacone do |
 
 ## Relacje interfejsowe
 

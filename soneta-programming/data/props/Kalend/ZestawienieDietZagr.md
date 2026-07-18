@@ -5,15 +5,19 @@ Opis: Element szczegółowy hosta zestawienia diet zagranicznych (IZestawienieDi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IZestawienieDietZagrHost`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Diety | `int` | bazodanowe |  |  |
-| Host | `Soneta.Kalend.IZestawienieDietZagrHost` | bazodanowe, guided-parent, iface-ref |  |  |
-| OddelegowanyDo | `Soneta.Kadry.IKrajDelegacji` | iface-ref |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Host | `Soneta.Kalend.IZestawienieDietZagrHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| OddelegowanyDo | `Soneta.Kadry.IKrajDelegacji` | tylko-odczyt, iface-ref |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 
 ## Relacje interfejsowe
 

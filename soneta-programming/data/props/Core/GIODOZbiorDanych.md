@@ -5,35 +5,39 @@ Opis: Zbiór danych osobowych w rejestrze RODO. Zawiera symbol, nazwę, typ (wł
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 7
+- subrowy: 0
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Administrator | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Adminstrator danych | Adminstrator danych osobowych |
-| AdministratorDanychOsobowych | `string` |  |  |  |
+| AdministratorDanychOsobowych | `string` | tylko-odczyt |  |  |
 | CelPrzetwarzania | `Soneta.Core.GIODOCelPrzetwarzania` | bazodanowe | Cel przetwarzania | Cel przetwarzania |
-| CzynnosciPrzetwarzania | `Soneta.Business.SubTable` |  |  |  |
-| GIODOUdostępnienia | `Soneta.Business.SubTable<Soneta.Core.GIODOWymianaDanych>` |  |  |  |
-| InspektorDanychOsobowych | `string` |  |  |  |
+| CzynnosciPrzetwarzania | `SubTable` | podlista |  |  |
+| GIODOUdostępnienia | `SubTable<Soneta.Core.GIODOWymianaDanych>` | podlista |  |  |
+| InspektorDanychOsobowych | `string` | tylko-odczyt |  |  |
 | KategoriaOsob | `Soneta.Core.GIODO.GIODOKategoriaOsob` | bazodanowe | Kategorie osób | Kategorie osób, których dane dotyczą |
-| Kategorie | `Soneta.Business.SubTable<Soneta.Core.GIODO.GIODOZbiorKategoria>` |  |  |  |
-| KategorieCzynnosciPrzetwarzania | `Soneta.Business.SubTable` |  |  |  |
-| KategorieDanychOsobowychTekst | `string` |  |  |  |
-| KategorieOdbiorcowTekst | `string` |  |  |  |
+| Kategorie | `SubTable<Soneta.Core.GIODO.GIODOZbiorKategoria>` | podlista |  |  |
+| KategorieCzynnosciPrzetwarzania | `SubTable` | podlista |  |  |
+| KategorieDanychOsobowychTekst | `string` | tylko-odczyt |  |  |
+| KategorieOdbiorcowTekst | `string` | tylko-odczyt |  |  |
 | Lokalizacja | `string` | bazodanowe | Lokalizacja zbioru | Lokalizacja zbioru danych |
-| Naruszenia | `Soneta.Business.SubTable<Soneta.Core.GIODO.GIODONaruszenie>` |  |  |  |
+| Naruszenia | `SubTable<Soneta.Core.GIODO.GIODONaruszenie>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa zbioru danych | Nazwa zbioru danych |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
 | Odpowiedzialny | `string` | bazodanowe | Odpowiedzialny | Odpowiedzialny za zbiór danych |
-| OpisSrodkowBezp | `Soneta.Business.MemoText` | bazodanowe | Opis środków bezpieczeństwa | Opis technicznych i organizacyjnych środków bezpieczeństwa |
+| OpisSrodkowBezp | `MemoText` | bazodanowe, podlista | Opis środków bezpieczeństwa | Opis technicznych i organizacyjnych środków bezpieczeństwa |
 | Panstwa | `string` | bazodanowe | Przekazanie danych do państwa trzeciego | Przekazanie danych do państwa trzeciego lub organizacji międzynarodowej |
 | PlanUsuniecie | `string` | bazodanowe | Planowane usunięcie | Planowane usunięcie zbioru |
-| Przetwarzania | `Soneta.Business.SubTable<Soneta.Core.GIODO.GIODOPrzetwarzanie>` |  |  |  |
+| Przetwarzania | `SubTable<Soneta.Core.GIODO.GIODOPrzetwarzanie>` | podlista |  |  |
 | SposobPrzetwarzania | `string` | bazodanowe |  | Sposób przetwarzania (papierowy/elektroniczny) |
 | Symbol | `string` | bazodanowe | Symbol | Unikatowy symbol zbioru danych |
 | SystemyKomp | `string` | bazodanowe | Aplikacja komputerowa | Nazwa aplikacji komputerowej wykorzystywanej do przetwarzania |
-| Typ | `Soneta.Core.GIODO.TypZbioruDanych` | bazodanowe, enum |  | Typ zbioru danych własny/powierzony |
+| Typ | `Soneta.Core.GIODO.TypZbioruDanych` (enum) | bazodanowe |  | Typ zbioru danych własny/powierzony |
 
 ## Relacje interfejsowe
 

@@ -4,13 +4,17 @@ Opis: Słownik kodów Nomenklatury Scalonej (CN) stosowanych w obrocie międzyna
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaStawkiVAT | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe | Definicja stawki VAT |  |
 | JednostkaUzupelniajaca | `Soneta.Towary.Jednostka` | bazodanowe | Jednostka uzupełniająca |  |
 | Kod | `string` | bazodanowe | Kod |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | WymagaMasyNetto | `bool` | bazodanowe |  |  |

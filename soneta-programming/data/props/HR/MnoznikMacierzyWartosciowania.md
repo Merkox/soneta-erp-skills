@@ -4,21 +4,25 @@ Tytuł: Mnożniki macierzy kryteriów wartościowania
 Opis: Tabela zawiera mnożniki korygujące wartości macierzy. Pozwala dostosować wyniki do specyfiki organizacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 7
+- podlisty: 0
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Macierz | `Soneta.HR.ZKL.Wartosciowanie.Macierze.MacierzWartosciowania` | bazodanowe | Macierz wartościowania |  |
+| Macierz | `Soneta.HR.ZKL.Wartosciowanie.Macierze.MacierzWartosciowania` | bazodanowe, tylko-odczyt | Macierz wartościowania |  |
 | Mnoznik | `decimal` | bazodanowe | Mnożnik |  |
-| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` | bazodanowe | Pozycja |  |
-| Pozycja.Ident | `System.Guid` | bazodanowe | Identyfikator pozycji słownika |  |
-| Pozycja.Nazwa | `string` | bazodanowe | Nazwa pozycji |  |
-| Pozycja.Opis | `string` | bazodanowe | Opis pozycji |  |
-| Pozycja.Opis2 | `string` | bazodanowe | Opis2 pozycji |  |
+| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` (subrow) | bazodanowe | Pozycja |  |
+| Pozycja.Ident | `System.Guid` | bazodanowe, tylko-odczyt | Identyfikator pozycji słownika |  |
+| Pozycja.Nazwa | `string` | bazodanowe, tylko-odczyt | Nazwa pozycji |  |
+| Pozycja.Opis | `string` | bazodanowe, tylko-odczyt | Opis pozycji |  |
+| Pozycja.Opis2 | `string` | bazodanowe, tylko-odczyt | Opis2 pozycji |  |
 | Pozycja.PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
-| Pozycja.Slownik | `string` | bazodanowe | Nazwa słownika |  |
-| Pozycja.Typ | `string` | bazodanowe | Typ pozycji, tabela słownika |  |
+| Pozycja.Slownik | `string` | bazodanowe, tylko-odczyt | Nazwa słownika |  |
+| Pozycja.Typ | `string` | bazodanowe, tylko-odczyt | Typ pozycji, tabela słownika |  |
 | PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
 
 ## Relacje interfejsowe

@@ -5,15 +5,19 @@ Opis: Tabela opisuje poziom i kierunek wykształcenia. Umożliwia ewidencję wym
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kierunek | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Kierunek |  |
-| Profil | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.ProfilKwalifikacyjny` | bazodanowe |  |  |
+| Profil | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.ProfilKwalifikacyjny` | bazodanowe, tylko-odczyt |  |  |
 | Specjalnosc | `string` | bazodanowe | Specjalność |  |
-| Typ | `Soneta.HR.ZKL.Enums.WyksztalcenieProfiluSelektor` | bazodanowe, enum | Typ |  |
+| Typ | `Soneta.HR.ZKL.Enums.WyksztalcenieProfiluSelektor` (enum) | bazodanowe, tylko-odczyt | Typ |  |
 | TytulStopien | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.TytulZawodowyStopienNaukowy` | bazodanowe | Tytuł/stopień |  |
 
 ## Relacje interfejsowe

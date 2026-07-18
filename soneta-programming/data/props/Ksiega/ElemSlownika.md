@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Ksiega.DefinicjaSlownika` | bazodanowe |  | Definicja słownika |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| Definicja | `Soneta.Ksiega.DefinicjaSlownika` | bazodanowe, tylko-odczyt |  | Definicja słownika |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable<Soneta.Ksiega.PowiazanieKontaBase>` |  |  |  |
+| PowiazaniaKontElementu | `SubTable<Soneta.Ksiega.PowiazanieKontaBase>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | Zablokowany | `bool` | bazodanowe |  |  |

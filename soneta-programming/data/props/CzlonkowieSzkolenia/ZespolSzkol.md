@@ -4,22 +4,26 @@ Tytuł: Zespoły
 Opis: Zespoły szkoleniowe wydzielone w ramach grupy szkoleniowej. Umożliwiają podział uczestników grupy na mniejsze podgrupy do realizacji zajęć laboratoryjnych, ćwiczeniowych lub projektowych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 7
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | GrupaSzkol | `Soneta.CzlonkowieSzkolenia.GrupaSzkol` | bazodanowe |  |  |
-| IloscGodzinRealizacja | `double` |  |  |  |
-| IloscUczestnikow | `int` |  |  |  |
+| IloscGodzinRealizacja | `double` | tylko-odczyt |  |  |
+| IloscUczestnikow | `int` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe | Numer kolejny zespołu |  |
-| PrzedmiotyRoznica | `System.Collections.ArrayList` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| StrLp | `string` |  |  |  |
-| Uczestnicy | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi | Dodatkowe uwagi. |
-| View | `Soneta.Business.View` |  |  |  |
+| PrzedmiotyRoznica | `System.Collections.ArrayList` | podlista |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| StrLp | `string` | tylko-odczyt |  |  |
+| Uczestnicy | `SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi | Dodatkowe uwagi. |
+| View | `View` | podlista |  |  |
 | WliczajDoZajec | `bool` | bazodanowe | Wliczaj do zajęć zrealizowanych |  |
-| Zajecia | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.ZajecieSzkolBase>` |  |  |  |
-| ZajeciaGrupyZespolu | `Soneta.Business.View` |  |  |  |
-| ZajeciaWszystkieWliczane | `System.Collections.Generic.IEnumerable<Soneta.CzlonkowieSzkolenia.ZajecieSzkolBase>` |  |  |  |
+| Zajecia | `SubTable<Soneta.CzlonkowieSzkolenia.ZajecieSzkolBase>` | podlista |  |  |
+| ZajeciaGrupyZespolu | `View` | podlista |  |  |
+| ZajeciaWszystkieWliczane | `System.Collections.Generic.IEnumerable<Soneta.CzlonkowieSzkolenia.ZajecieSzkolBase>` | podlista |  |  |

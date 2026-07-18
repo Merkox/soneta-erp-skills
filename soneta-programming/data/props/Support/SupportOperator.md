@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operator` → `Operator`
 Implementuje interfejsy: `IDaneKontaktoweHost`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 1
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Contact | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Contact | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Contact.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Contact.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Contact.Skype | `string` |  |  |  |
 | Contact.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Contact.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe, guided-parent |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
+| Operator | `App.Operator` | bazodanowe, guided-parent |  |  |

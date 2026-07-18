@@ -4,28 +4,32 @@ Tytuł: Zasoby
 Opis: Zasób (partia) w magazynie walut reprezentujący stan środków walutowych z konkretnej wpłaty. Przechowuje kurs nabycia waluty, datę i wartość partii, umożliwiając wycenę rozchodu metodą FIFO i wyliczanie różnic kursowych przy wypłatach.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 13
+- podlisty: 0
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DokEwidencji | `Soneta.Core.DokEwidencji` | bazodanowe |  |  |
-| Ewidencja | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Okres | `Soneta.Kasa.OkresMW` | bazodanowe |  | Okres magazynu walut, do którego został naliczony zasób. |
-| Partia | `Soneta.Kasa.PartiaMW` | bazodanowe |  |  |
-| Partia.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Partia.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| DokEwidencji | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  |  |
+| Ewidencja | `Soneta.Kasa.EwidencjaSP` | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| Okres | `Soneta.Kasa.OkresMW` | bazodanowe, tylko-odczyt |  | Okres magazynu walut, do którego został naliczony zasób. |
+| Partia | `Soneta.Kasa.PartiaMW` (subrow) | bazodanowe |  |  |
+| Partia.Czas | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Partia.Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Partia.Kurs | `double` | bazodanowe |  |  |
-| Partia.Kwota | `Soneta.Types.Currency` |  |  |  |
+| Partia.Kwota | `Currency` | tylko-odczyt |  |  |
 | Partia.Wartosc | `decimal` | bazodanowe | Wartość |  |
-| Partia.Zapłata | `Soneta.Kasa.Zaplata` |  |  |  |
-| Przychod | `Soneta.Kasa.PartiaMW` |  |  |  |
-| Rozchod | `Soneta.Kasa.PartiaMW` |  |  |  |
-| Wpłata | `Soneta.Types.Currency` |  |  |  |
-| Wypłata | `Soneta.Types.Currency` |  |  |  |
-| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe |  |  |
+| Partia.Zapłata | `Soneta.Kasa.Zaplata` | tylko-odczyt |  |  |
+| Przychod | `Soneta.Kasa.PartiaMW` | tylko-odczyt |  |  |
+| Rozchod | `Soneta.Kasa.PartiaMW` | tylko-odczyt |  |  |
+| Wpłata | `Currency` | tylko-odczyt |  |  |
+| Wypłata | `Currency` | tylko-odczyt |  |  |
+| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

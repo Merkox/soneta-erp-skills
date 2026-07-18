@@ -5,25 +5,29 @@ Opis: Element szczegółowy rozliczenia czasu pracy (RozliczenieCzasuPracy). Poj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 3
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| CzasDostępny | `Soneta.Types.Time` |  |  |  |
-| CzasPozostały | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Czas | `Time` | bazodanowe |  |  |
+| CzasDostępny | `Time` | tylko-odczyt |  |  |
+| CzasPozostały | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
-| Dokument | `Soneta.Kalend.RozliczenieCzasuPracy` | bazodanowe |  |  |
+| Dokument | `Soneta.Kalend.RozliczenieCzasuPracy` | bazodanowe, tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa elementu na dokumencie. |
-| OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kalend.TypRozliczenia` | enum |  |  |
-| StrefyPracy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaPracy>` |  |  |  |
-| StrefyPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.StrefaPracyHistoria>` |  |  |  |
-| StrefyRCP | `Soneta.Business.SubTable<Soneta.Kalend.StrefaRCP>` |  |  |  |
-| Zrealizowane | `Soneta.Types.Time` |  |  |  |
+| OdGodziny | `Time` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kalend.TypRozliczenia` (enum) | tylko-odczyt |  |  |
+| StrefyPracy | `SubTable<Soneta.Kalend.StrefaPracy>` | podlista |  |  |
+| StrefyPracyHistorie | `SubTable<Soneta.Kalend.StrefaPracyHistoria>` | podlista |  |  |
+| StrefyRCP | `SubTable<Soneta.Kalend.StrefaRCP>` | podlista |  |  |
+| Zrealizowane | `Time` | tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,37 +5,40 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Za
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 26
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 25
+- podlisty: 0
+- subrowy: 0
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AxesSwap | `bool` | bazodanowe | Odwrócenie osi | Zamienia miejscami osie X i Y |
-| ChartColor | `Soneta.Business.UI.ColorPaletteBase` | bazodanowe, enum | Kolor wykresu | Określa kolorystykę wykresu |
-| ChartLabelBackground | `bool` | bazodanowe | Tło etykiet | Włączenie tła etykiet |
-| ChartLabelPosition | `Soneta.Business.UI.ChartLabelPosition` | bazodanowe, enum | Położenie etykiet | Określa położenie etykiet wykresu |
-| ChartLabelRotate | `int` | bazodanowe | Pochylenie etykiety danych | Określa kąt pochylenia etykiety danych |
-| ChartLabelValueRounding | `bool` | bazodanowe | Zokrąglenie wartości etykiet | Określa czy wartość etykiety powinna być zaokrąglona z jednostką |
-| ChartType | `Soneta.Business.UI.ChartType` | bazodanowe, enum | Typ wykresu | Typ wykresu elementu wizualizacji |
-| ChartVariant | `Soneta.BI.ChartVariant` | bazodanowe, enum | Wariant wykresu | Określa wariant wykresu |
-| ColorGradientOff | `bool` | bazodanowe | Wyłącz gradient | Określa czy na wykresie ma być wyłączony gradient koloru |
-| ColorShading | `bool` | bazodanowe | Cieniowanie | Określa czy kolejne serie danych mają być cieniowane |
-| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe |  |  |
-| Legend | `bool` | bazodanowe | Legenda | Wyświetla legendę na wykresach |
-| PieChartLabelPosition | `Soneta.Business.UI.PieChartLabelPosition` | bazodanowe, enum | Położenie etykiet | Określa położenie etykiet wykresu typu Pie, Donut |
-| SecondAxis | `bool` | bazodanowe | Druga seria na osi X | Określa występowanie drugiej serii danych na osi X |
-| SecondAxisGrouping | `bool` | bazodanowe | Grupowanie drugiej serii danych na osi X | Określa czy druga seria danych na osi X ma być pogrupowana |
-| SecondChartColor | `Soneta.Business.UI.ColorPaletteBase` | bazodanowe, enum | Kolor wykresu drugiej osi Y | Określa kolorystykę wykresu związanego z drugą osią Y |
-| SecondChartLabelPosition | `Soneta.Business.UI.ChartLabelPosition` | bazodanowe, enum | Położenie etykiet drugiej osi Y | Określa położenie etykiet wykresu związanego z drugą osią Y |
-| SecondChartLabelRotate | `int` | bazodanowe | Pochylenie etykiety danych drugiej osi | Określa kąt pochylenia etykiety danych drugiej osi Y |
-| SecondChartLabelValueRounding | `bool` | bazodanowe | Zokrąglenie wartości etykiet drugiej osi | Określa czy wartość etykiety związanej z drugą osią Y powinna być zaokrąglona z jednostką |
-| SecondChartType | `Soneta.Business.UI.ChartType` | bazodanowe, enum | Typ wykresu drugiej osi Y | Typ wykresu związanego z drugą osią Y |
-| SecondYAxisTitle | `string` | bazodanowe | Tytuł drugiej osi Y | Tytuł drugiej osi Y |
-| SegmentChartLabelFormat | `Soneta.Business.UI.SegmentChartLabelFormat` | bazodanowe, enum | Format etykiet | Określa format etykiet wykresów typu: Pie, Donut, Pyramid, Funnel |
-| StackType | `Soneta.Business.UI.StackType` | bazodanowe, enum | Układ danych | Określa w jaki sposób dane mają być przedstawiane na wykresie kolumnowym |
-| TrendLine | `Soneta.Business.UI.ChartTrendLine` | bazodanowe, enum | Linia trendu | Włącza i pozwala wybrać linię trendu |
-| XAxisTitle | `string` | bazodanowe | Tytuł osi X | Tytuł osi X |
-| YAxisTitle | `string` | bazodanowe | Tytuł osi Y | Tytuł osi Y |
+| AxesSwap | `bool` | bazodanowe, tylko-odczyt | Odwrócenie osi | Zamienia miejscami osie X i Y |
+| ChartColor | `UI.ColorPaletteBase` (enum) | bazodanowe, tylko-odczyt | Kolor wykresu | Określa kolorystykę wykresu |
+| ChartLabelBackground | `bool` | bazodanowe, tylko-odczyt | Tło etykiet | Włączenie tła etykiet |
+| ChartLabelPosition | `UI.ChartLabelPosition` (enum) | bazodanowe, tylko-odczyt | Położenie etykiet | Określa położenie etykiet wykresu |
+| ChartLabelRotate | `int` | bazodanowe, tylko-odczyt | Pochylenie etykiety danych | Określa kąt pochylenia etykiety danych |
+| ChartLabelValueRounding | `bool` | bazodanowe, tylko-odczyt | Zokrąglenie wartości etykiet | Określa czy wartość etykiety powinna być zaokrąglona z jednostką |
+| ChartType | `UI.ChartType` (enum) | bazodanowe, tylko-odczyt | Typ wykresu | Typ wykresu elementu wizualizacji |
+| ChartVariant | `Soneta.BI.ChartVariant` (enum) | bazodanowe, tylko-odczyt | Wariant wykresu | Określa wariant wykresu |
+| ColorGradientOff | `bool` | bazodanowe, tylko-odczyt | Wyłącz gradient | Określa czy na wykresie ma być wyłączony gradient koloru |
+| ColorShading | `bool` | bazodanowe, tylko-odczyt | Cieniowanie | Określa czy kolejne serie danych mają być cieniowane |
+| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe, tylko-odczyt |  |  |
+| Legend | `bool` | bazodanowe, tylko-odczyt | Legenda | Wyświetla legendę na wykresach |
+| PieChartLabelPosition | `UI.PieChartLabelPosition` (enum) | bazodanowe, tylko-odczyt | Położenie etykiet | Określa położenie etykiet wykresu typu Pie, Donut |
+| SecondAxisGrouping | `bool` | bazodanowe, tylko-odczyt | Grupowanie drugiej serii danych na osi X | Określa czy druga seria danych na osi X ma być pogrupowana |
+| SecondChartColor | `UI.ColorPaletteBase` (enum) | bazodanowe, tylko-odczyt | Kolor wykresu drugiej osi Y | Określa kolorystykę wykresu związanego z drugą osią Y |
+| SecondChartLabelPosition | `UI.ChartLabelPosition` (enum) | bazodanowe, tylko-odczyt | Położenie etykiet drugiej osi Y | Określa położenie etykiet wykresu związanego z drugą osią Y |
+| SecondChartLabelRotate | `int` | bazodanowe, tylko-odczyt | Pochylenie etykiety danych drugiej osi | Określa kąt pochylenia etykiety danych drugiej osi Y |
+| SecondChartLabelValueRounding | `bool` | bazodanowe, tylko-odczyt | Zokrąglenie wartości etykiet drugiej osi | Określa czy wartość etykiety związanej z drugą osią Y powinna być zaokrąglona z jednostką |
+| SecondChartType | `UI.ChartType` (enum) | bazodanowe, tylko-odczyt | Typ wykresu drugiej osi Y | Typ wykresu związanego z drugą osią Y |
+| SecondYAxisTitle | `string` | bazodanowe, tylko-odczyt | Tytuł drugiej osi Y | Tytuł drugiej osi Y |
+| SegmentChartLabelFormat | `UI.SegmentChartLabelFormat` (enum) | bazodanowe, tylko-odczyt | Format etykiet | Określa format etykiet wykresów typu: Pie, Donut, Pyramid, Funnel |
+| StackType | `UI.StackType` (enum) | bazodanowe, tylko-odczyt | Układ danych | Określa w jaki sposób dane mają być przedstawiane na wykresie kolumnowym |
+| TrendLine | `UI.ChartTrendLine` (enum) | bazodanowe, tylko-odczyt | Linia trendu | Włącza i pozwala wybrać linię trendu |
+| XAxisTitle | `string` | bazodanowe, tylko-odczyt | Tytuł osi X | Tytuł osi X |
+| YAxisTitle | `string` | bazodanowe, tylko-odczyt | Tytuł osi Y | Tytuł osi Y |
 
 ## Enumy
 
@@ -50,7 +53,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Bubble` = 5 — Podstawowy (1 wymiar, 3 miary)
 - `Scatter` = 6 — Podstawowy (1 wymiar i 2 miary)
 
-### ChartLabelPosition (`Soneta.Business.UI.ChartLabelPosition`)
+### ChartLabelPosition (`UI.ChartLabelPosition`)
 - `Center` = 0 — Wewnątrz
 - `Left` = 1 — Na zewnątrz po lewej
 - `Right` = 2 — Na zewnątrz po prawej
@@ -70,14 +73,14 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `BarSeriesAggregateBottom` = 42 — Podsumowanie + serie do dołu
 - `None` = 99 — Brak
 
-### ChartTrendLine (`Soneta.Business.UI.ChartTrendLine`)
+### ChartTrendLine (`UI.ChartTrendLine`)
 - `None` = 0 — Brak
 - `LinearSingleLine` = 1 — Regresja liniowa (1 linia)
 - `LinearMultiline` = 2 — Regresja liniowa (wiele linii)
 - `MovingAverageSingleLine` = 3 — Średnia krocząca (1 linia)
 - `MovingAverageMultiline` = 4 — Średnia krocząca (wiele linii)
 
-### ChartType (`Soneta.Business.UI.ChartType`)
+### ChartType (`UI.ChartType`)
 - `Bar` = 0 — Kolumnowy (Bar)
 - `Line` = 1 — Liniowy (Line)
 - `Pie` = 2 — Kołowy (Pie)
@@ -91,7 +94,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Scatter` = 10 — Punktowy (Scatter)
 - `Gauge` = 11
 
-### ColorPaletteBase (`Soneta.Business.UI.ColorPaletteBase`)
+### ColorPaletteBase (`UI.ColorPaletteBase`)
 - `None` = -1 — Brak
 - `Default` = 0 — Automatyczny
 - `Red` = 1 — Czerwony
@@ -102,17 +105,17 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Green` = 6 — Zielony
 - `Turquise` = 7 — Turkusowy
 
-### PieChartLabelPosition (`Soneta.Business.UI.PieChartLabelPosition`)
+### PieChartLabelPosition (`UI.PieChartLabelPosition`)
 - `Circle` = 0 — Wewnątrz
 - `Side` = 1 — Na zewnątrz
 
-### SegmentChartLabelFormat (`Soneta.Business.UI.SegmentChartLabelFormat`)
+### SegmentChartLabelFormat (`UI.SegmentChartLabelFormat`)
 - `Percent` = 0 — Procent
 - `Value` = 1 — Wartość
 - `PercentAndValue` = 2 — Procent i wartość
 - `ValueAndPercent` = 3 — Wartośc i procent
 
-### StackType (`Soneta.Business.UI.StackType`)
+### StackType (`UI.StackType`)
 - `Stack` = 0 — Skumulowany
 - `Side` = 1 — Grupowany
 - `Overlay` = 2 — Nakładany

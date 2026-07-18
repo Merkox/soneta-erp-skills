@@ -4,29 +4,33 @@ Tytuł: Obrót księgowy
 Opis: Zagregowany obrót księgowy konta za dany okres. Przechowuje skumulowane wartości obrotów Winien i Ma (zatwierdzonych i buforowych), narastająco i za okres, oraz salda. Służy do szybkiego wyliczania stanów kont bez konieczności sumowania poszczególnych zapisów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 18
+- podlisty: 0
+- subrowy: 0
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| IndexObr | `Soneta.Ksiega.IndexObrotu` | bazodanowe, enum | Index obrotu |  |
-| IsEmpty | `bool` |  |  |  |
-| Konto | `Soneta.Ksiega.KontoBase` | bazodanowe |  |  |
-| Ma | `decimal` | bazodanowe |  |  |
-| MaB | `decimal` | bazodanowe |  |  |
-| NMa | `decimal` | bazodanowe |  |  |
-| NMaB | `decimal` | bazodanowe |  |  |
-| NWn | `decimal` | bazodanowe |  |  |
-| NWnB | `decimal` | bazodanowe |  |  |
-| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  |  |
-| SaldoMa | `decimal` | bazodanowe |  |  |
-| SaldoMaB | `decimal` | bazodanowe |  |  |
-| SaldoWn | `decimal` | bazodanowe |  |  |
-| SaldoWnB | `decimal` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypObrotu` | bazodanowe, enum |  |  |
-| Wn | `decimal` | bazodanowe |  |  |
-| WnB | `decimal` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| IndexObr | `Soneta.Ksiega.IndexObrotu` (enum) | bazodanowe, tylko-odczyt | Index obrotu |  |
+| IsEmpty | `bool` | tylko-odczyt |  |  |
+| Konto | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt |  |  |
+| Ma | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| MaB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| NMa | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| NMaB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| NWn | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| NWnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  |  |
+| SaldoMa | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| SaldoMaB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| SaldoWn | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| SaldoWnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypObrotu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wn | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| WnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,23 +5,27 @@ Opis: Ewidencja uprawnień posiadanych przez pracownika. Rejestruje datę uzyska
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataUtraty | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataUzyskania | `Soneta.Types.Date` | bazodanowe |  |  |
+| DataUtraty | `Date` | bazodanowe |  |  |
+| DataUzyskania | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.HR.DefinicjaUprawnienia` | bazodanowe |  |  |
 | Kategoria | `Soneta.HR.KategoriaUprawnienia` |  |  |  |
 | Numer | `string` | bazodanowe | Numer uprawnienia |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| TerminWaznosci | `Soneta.Types.Date` | bazodanowe | Termin ważności |  |
-| WażneDo | `Soneta.Types.Date` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| TerminWaznosci | `Date` | bazodanowe | Termin ważności |  |
+| WażneDo | `Date` | tylko-odczyt |  |  |
 | WydanePrzez | `string` | bazodanowe |  |  |
-| Zrodlo | `Soneta.HR.IŹródłoUzyskaniaUprawnienia` | bazodanowe, iface-ref |  |  |
+| Zrodlo | `Soneta.HR.IŹródłoUzyskaniaUprawnienia` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

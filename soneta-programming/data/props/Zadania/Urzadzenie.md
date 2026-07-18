@@ -6,51 +6,55 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IKodowany`, `IZasobCRM`, `IElementSlownika`, `IDocumentHostCRM`
 
-- pola bazodanowe: 23
-- pola kalkulowane (z klas biznesowych): 17
+- pola bazodanowe (zapisywalne): 22
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 10
+- subrowy: 0
+- razem: 40
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Aktywne | `bool` | bazodanowe | Aktywne | Wpozwala na określenie, czy urządzenie jest aktywne |
-| DataGwarancji | `Soneta.Types.Date` | bazodanowe | Data gwarancji | Data do jakiej obowiązuje gwarancja |
-| DataSprzedazy | `Soneta.Types.Date` | bazodanowe | Data sprzedaży | Data sprzedaży urządzenia |
+| DataGwarancji | `Date` | bazodanowe | Data gwarancji | Data do jakiej obowiązuje gwarancja |
+| DataSprzedazy | `Date` | bazodanowe | Data sprzedaży | Data sprzedaży urządzenia |
 | DokumentHandlowy | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  | Lista towarów. |
-| DokumentyCRM | `Soneta.Business.SubTable<Soneta.Zadania.DokumentCRM>` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| DokumentyCRM | `SubTable<Soneta.Zadania.DokumentCRM>` | podlista |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Identyfikator | `string` | bazodanowe | Identyfikator | Unikalny identyfikator urządzenia |
 | Inwentarz | `Soneta.SrodkiTrwale.IInwentarz` | bazodanowe, iface-ref | Środek trwały, wyposażenie | Środek trwały, wyposażenie |
-| JednostkaRozliczenia | `Soneta.Towary.Jednostka` |  |  |  |
-| Kod | `string` |  |  |  |
-| KodZasobu | `string` |  |  |  |
-| KodyKreskowe | `Soneta.Business.SubTable<Soneta.Core.KodKreskowy>` |  |  |  |
+| JednostkaRozliczenia | `Soneta.Towary.Jednostka` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KodZasobu | `string` | tylko-odczyt |  |  |
+| KodyKreskowe | `SubTable<Soneta.Core.KodKreskowy>` | podlista |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  | Kontrahent, do którego przypisane jest urządzenie. |
-| Kontrola | `Soneta.Core.Kontrola` | enum |  |  |
+| Kontrola | `Soneta.Core.Kontrola` (enum) | tylko-odczyt |  |  |
 | Lokalizacja | `Soneta.CRM.Lokalizacja` | bazodanowe | Lokalizacja urządzenia | Lokalizacja urządzenia. |
 | ModelUrz | `Soneta.Zadania.ModelUrz` | bazodanowe | Model urządzenia | Model urządzenia. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa urządzenia |
-| NazwaZasobu | `string` |  |  |  |
+| NazwaZasobu | `string` | tylko-odczyt |  |  |
 | OddzialFirmy | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisane jest urządzenie. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis urządzenia |
-| PlanowanePrzeglady | `Soneta.Business.SubTable<Soneta.Zadania.PlanowanyPrzeglad>` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable<Soneta.Ksiega.PowiazanieKontaBase>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis urządzenia |
+| PlanowanePrzeglady | `SubTable<Soneta.Zadania.PlanowanyPrzeglad>` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable<Soneta.Ksiega.PowiazanieKontaBase>` | podlista |  |  |
 | PozycjaDokHandlowego | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja dokumentu handlowego |
 | PrzegladOkres | `int` | bazodanowe |  | Co ile miesięcy przegląd |
-| RodzajRozliczenia | `Soneta.Zadania.RodzajRozliczeniaUrzadzenia` | enum |  |  |
-| Serwisant | `Soneta.Business.App.Operator` | bazodanowe | Serwisant | Serwisant odpowiedzialny za urządzenie |
+| RodzajRozliczenia | `Soneta.Zadania.RodzajRozliczeniaUrzadzenia` (enum) | tylko-odczyt |  |  |
+| Serwisant | `App.Operator` | bazodanowe | Serwisant | Serwisant odpowiedzialny za urządzenie |
 | Serwisowane | `bool` | bazodanowe | Urządzenie przyjmowane do serwisu | Oznacza możliwość przyjmowania urządzenia do serwisu. |
-| Stawka | `Soneta.Types.Currency` | bazodanowe |  | Stawka za jednostkę czasu wypożyczenia. |
+| Stawka | `Currency` | bazodanowe |  | Stawka za jednostkę czasu wypożyczenia. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Lista towarów. |
 | TowarUsluga | `Soneta.Towary.Towar` | bazodanowe |  | Towar typu usługa, do rozliczenia użycia. |
 | TypUrzadzenia | `Soneta.Zadania.TypUrzadzenia` | bazodanowe | Typ urządzenia | Typ urządzenia. |
-| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` | bazodanowe, enum |  | Określa rodzaj zaokrąglenia. |
-| TypZasobu | `string` |  |  |  |
-| UrzadzeniaUzyte | `Soneta.Business.SubTable<Soneta.Zadania.UrzadzenieUzyte>` |  |  |  |
+| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` (enum) | bazodanowe |  | Określa rodzaj zaokrąglenia. |
+| TypZasobu | `string` | tylko-odczyt |  |  |
+| UrzadzeniaUzyte | `SubTable<Soneta.Zadania.UrzadzenieUzyte>` | podlista |  |  |
 | Wlasne | `bool` | bazodanowe | Urządzenie własne | Oznacza urządzenie własne. |
 | Wypozyczane | `bool` | bazodanowe | Możliwość wypożyczenia urządzenia. | Oznacza możliwość wypożyczania urządzenia. |
-| Wypozyczenia | `Soneta.Business.View` |  |  |  |
-| ZasobyCRM | `Soneta.Business.SubTable<Soneta.Zadania.ZasobCRM>` |  |  |  |
-| Zlecenia | `Soneta.Business.View` |  |  |  |
+| Wypozyczenia | `View` | podlista |  |  |
+| ZasobyCRM | `SubTable<Soneta.Zadania.ZasobCRM>` | podlista |  |  |
+| Zlecenia | `View` | podlista |  |  |
 
 ## Relacje interfejsowe
 

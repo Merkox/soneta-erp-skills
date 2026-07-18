@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Amount | `Soneta.Types.Currency` | bazodanowe | Kwota |  |
-| Culprit | `Soneta.Business.IRezerwujacy` | bazodanowe | Sprawca |  |
+| Amount | `Currency` | bazodanowe | Kwota |  |
+| Culprit | `IRezerwujacy` | bazodanowe | Sprawca |  |
 | CulpritInsurer | `Soneta.CRM.Kontrahent` | bazodanowe | Ubezpieczyciel sprawcy |  |
 | CulpritNumber | `string` | bazodanowe | Numer polisy sprawcy |  |
 | CulpritRegNo | `string` | bazodanowe | Nr rej. sprawcy | Numer rejestracyjny pojazdu sprawcy |
 | Date | `System.DateTime` | bazodanowe | Data zdarzenia |  |
-| Decision | `Soneta.Zadania.Decision` | bazodanowe, enum | Decyzja ubezpieczyciela |  |
-| DecisionName | `string` |  |  |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis zdarzenia |  |
-| Driver | `Soneta.Business.IRezerwujacy` | bazodanowe | Kierowca |  |
+| Decision | `Soneta.Zadania.Decision` (enum) | bazodanowe | Decyzja ubezpieczyciela |  |
+| DecisionName | `string` | tylko-odczyt |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis zdarzenia |  |
+| Driver | `IRezerwujacy` | bazodanowe | Kierowca |  |
 | Guardian | `Soneta.CRM.KontaktOsoba` | bazodanowe | Opiekun | Opiekun szkody |
 | Insurance | `Soneta.Vehicles.Insurance` | bazodanowe | Ubezpieczenie |  |
 | Number | `string` | bazodanowe | Numer szkody |  |
 | OwnDamage | `bool` | bazodanowe | Szkoda własna |  |
-| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe | Pojazd |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
+| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt | Pojazd |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
 
 ## Enumy
 

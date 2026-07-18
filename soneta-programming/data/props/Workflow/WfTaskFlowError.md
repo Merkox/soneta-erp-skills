@@ -5,21 +5,25 @@ Opis: Element szczegółowy zadania (Task). Rejestruje błędy powstałe podczas
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Task` → `Task`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 9
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CallStack | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| IsResolved | `bool` |  |  |  |
-| Message | `string` | bazodanowe |  |  |
-| Name | `string` | bazodanowe |  |  |
-| Registered | `System.DateTime` | bazodanowe |  |  |
-| RegisteredInfo | `string` |  |  |  |
-| Resolved | `System.DateTime` | bazodanowe |  |  |
-| ResolvedInfo | `string` |  |  |  |
-| Task | `Soneta.Business.Db.Task` | bazodanowe, guided-parent |  |  |
-| TaskUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref |  |  |
+| CallStack | `MemoText` | bazodanowe, podlista |  |  |
+| IsResolved | `bool` | tylko-odczyt |  |  |
+| Message | `string` | bazodanowe, tylko-odczyt |  |  |
+| Name | `string` | bazodanowe, tylko-odczyt |  |  |
+| Registered | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| RegisteredInfo | `string` | tylko-odczyt |  |  |
+| Resolved | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| ResolvedInfo | `string` | tylko-odczyt |  |  |
+| Task | `Db.Task` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| TaskUser | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

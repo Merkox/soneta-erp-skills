@@ -4,14 +4,18 @@ Tytuł: Zgłoszenia na grupę.
 Opis: Przypisanie zgłoszonych uczestników do konkretnych grup szkoleniowych. Łączy uczestnika z grupą i modułem szkoleniowym, umożliwiając indywidualne ustalenie kosztów i rabatów za szkolenie.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | GrupaSzkol | `Soneta.CzlonkowieSzkolenia.GrupaSzkol` | bazodanowe |  |  |
-| IndywidualnaCena | `Soneta.Types.Currency` | bazodanowe |  |  |
+| IndywidualnaCena | `Currency` | bazodanowe |  |  |
 | IndywidualnyKoszt | `bool` | bazodanowe |  |  |
-| IndywidualnyRabat | `Soneta.Types.Percent` | bazodanowe |  |  |
+| IndywidualnyRabat | `Percent` | bazodanowe |  |  |
 | Modul | `Soneta.CzlonkowieSzkolenia.ModulSzkol` | bazodanowe | Moduł | Moduł z którym powiązane jest szkolenie. |
 | ZgloszenieUczestnik | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` | bazodanowe |  |  |

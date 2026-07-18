@@ -5,14 +5,18 @@ Opis: Element szczegółowy hosta wtyczek (IWfPlugInReferenceHost). Powiązanie 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definition` → `IWfPlugInReferenceHost`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definition | `Soneta.Business.IWfPlugInReferenceHost` | bazodanowe, guided-parent, iface-ref | Wtyczka dla |  |
-| Managed | `bool` | bazodanowe |  |  |
-| PlugIn | `Soneta.Workflow.Config.WfPlugIn` | bazodanowe |  |  |
+| Definition | `IWfPlugInReferenceHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Wtyczka dla |  |
+| Managed | `bool` | bazodanowe, tylko-odczyt |  |  |
+| PlugIn | `Soneta.Workflow.Config.WfPlugIn` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

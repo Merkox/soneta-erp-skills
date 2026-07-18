@@ -5,22 +5,26 @@ Opis: Element szczegółowy hosta zestawienia diet pakietu mobilności (IZestawi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IZestawienieDietPakietMobilHost`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
+| Czas | `Time` | bazodanowe |  |  |
 | Diety | `double` | bazodanowe |  |  |
 | DietyKorekta | `double` | bazodanowe |  |  |
-| DzienMiesiaca | `Soneta.Types.Date` | bazodanowe |  |  |
-| Host | `Soneta.Kalend.IZestawienieDietPakietMobilHost` | bazodanowe, guided-parent, iface-ref |  |  |
+| DzienMiesiaca | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Host | `Soneta.Kalend.IZestawienieDietPakietMobilHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 | KodKraju | `string` |  |  |  |
 | KorektaReczna | `bool` | bazodanowe |  |  |
 | KrajOddelegowania | `Soneta.Kadry.IKrajDelegacji` | bazodanowe, iface-ref |  |  |
-| Miesiac | `Soneta.Types.YearMonth` |  |  |  |
-| WartoscDiet | `Soneta.Types.Currency` | bazodanowe |  |  |
-| WartoscDietPIT | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Miesiac | `YearMonth` |  |  |  |
+| WartoscDiet | `Currency` | bazodanowe |  |  |
+| WartoscDietPIT | `Currency` | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

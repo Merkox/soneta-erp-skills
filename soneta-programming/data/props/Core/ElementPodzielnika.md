@@ -5,15 +5,18 @@ Opis: Pozycja podzielnika kosztów przypisana do historycznej wersji podzielnika
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Historia` → `HistoriaPodzielnika`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Centrum | `Soneta.Core.CentrumKosztow` |  |  |  |
 | ElementPodzialowy | `Soneta.Core.IElementSlownika` | bazodanowe, iface-ref |  |  |
-| Historia | `Soneta.Core.HistoriaPodzielnika` | bazodanowe, guided-parent |  |  |
-| Procent | `Soneta.Types.Percent` |  |  |  |
+| Historia | `Soneta.Core.HistoriaPodzielnika` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Procent | `Percent` | tylko-odczyt |  |  |
 | Wspolczynnik | `double` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

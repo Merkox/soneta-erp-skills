@@ -5,18 +5,22 @@ Opis: Potwierdzenie odbioru komunikatu przez adresata. ŝączy komunikat z odbio
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ConfirmationStatus | `Soneta.Core.ConfirmationStatus` | bazodanowe, enum | Status potwierdzenia | Status potwierdzenia. |
+| ConfirmationStatus | `Soneta.Core.ConfirmationStatus` (enum) | bazodanowe | Status potwierdzenia | Status potwierdzenia. |
 | ConfirmationTime | `System.DateTime` | bazodanowe | Czas potwierdzenia | Czas potwierdzenia otrzymanego powiadomienia |
-| ConfirmedTime | `string` |  |  |  |
+| ConfirmedTime | `string` | tylko-odczyt |  |  |
 | Notice | `Soneta.Core.Notice` | bazodanowe | Wiadomość |  |
-| ReceiptStatus | `Soneta.Core.NoticeReceiptStatus` | bazodanowe, enum |  |  |
-| Recipient | `Soneta.Business.INoticeRecipient` | bazodanowe, iface-ref | Adresat |  |
-| ResponseTime | `string` |  |  |  |
+| ReceiptStatus | `Soneta.Core.NoticeReceiptStatus` (enum) | bazodanowe |  |  |
+| Recipient | `INoticeRecipient` | bazodanowe, iface-ref | Adresat |  |
+| ResponseTime | `string` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

@@ -5,12 +5,16 @@ Opis: Słownik przedmiotów realizowanych w ramach szkoleń. Definiuje tematykę
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe | Nazwa przedmiotu | Nazwa przedmiotu. |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis przedmiotu | Opis przedmiotu. |
+| Opis | `MemoText` | bazodanowe, podlista | Opis przedmiotu | Opis przedmiotu. |
 | Zakres | `Soneta.CzlonkowieSzkolenia.PrzedmiotSzkol` | bazodanowe | Zakres przedmiotu | Zakres przedmiotu. |

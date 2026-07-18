@@ -5,15 +5,19 @@ Opis: Słownik tytułów dokumentów środków trwałych (np. OT, LT, MT). Defin
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| KategoriaF03 | `Soneta.SrodkiTrwale.KategoriaF03` | bazodanowe, enum | Kategoria F-03 |  |
-| Kod | `string` |  |  |  |
+| KategoriaF03 | `Soneta.SrodkiTrwale.KategoriaF03` (enum) | bazodanowe | Kategoria F-03 |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum | Typ dokumentu | Typ dokumentu środków trwałych |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe | Typ dokumentu | Typ dokumentu środków trwałych |
 | Tytul | `string` | bazodanowe | Tytuł dokumentu |  |
 
 ## Enumy

@@ -6,43 +6,47 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPlatny`, `IDokumentKsiegowalny`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 20
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 15
+- podlisty: 5
+- subrowy: 1
+- razem: 33
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Bufor | `bool` |  |  |  |
+| Bufor | `bool` | tylko-odczyt |  |  |
 | Czlonek | `Soneta.CzlonkowieSzkolenia.UczestnikBase` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data naliczenia |
-| DataOperacji | `Soneta.Types.Date` |  |  |  |
-| DataWpływu | `Soneta.Types.Date` |  |  |  |
+| Data | `Date` | bazodanowe |  | Data naliczenia |
+| DataOperacji | `Date` | tylko-odczyt |  |  |
+| DataWpływu | `Date` | tylko-odczyt |  |  |
 | DefSkladki | `Soneta.CzlonkowieSzkolenia.DefSkladki` | bazodanowe | Definicja składki |  |
-| DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Informacja o miejscu umieszczenia dokumentu w ewidencji księgowej (sposobie księgowania). |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| DomyślnaKasa | `Soneta.Kasa.Kasa` |  |  |  |
-| DomyślnyRachunek | `Soneta.Kasa.RachunekBankowyFirmy` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
-| KasaOperatora | `bool` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer składki. |
+| DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe, tylko-odczyt |  | Informacja o miejscu umieszczenia dokumentu w ewidencji księgowej (sposobie księgowania). |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| DomyślnaKasa | `Soneta.Kasa.Kasa` | tylko-odczyt |  |  |
+| DomyślnyRachunek | `Soneta.Kasa.RachunekBankowyFirmy` | tylko-odczyt |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
+| KasaOperatora | `bool` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer składki. |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy w którym naliczono składkę. |
-| Oddział | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Oddział | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe | Dodatkowy opis | Dodatkowy opis |
-| Platnosci | `Soneta.Business.SubTable` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| Płatnosc | `Soneta.Kasa.Platnosc` |  |  |  |
-| RokMiesiac | `Soneta.Types.YearMonth` |  |  |  |
-| Stan | `Soneta.CzlonkowieSzkolenia.StanSkładki` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  | Wartość naliczonej składki |
-| ZaOkres | `Soneta.Types.YearMonth` | bazodanowe |  | Rok i miesiąc za który naliczona jest składka |
-| ZaOkresInfo | `string` |  |  |  |
+| Platnosci | `SubTable` | podlista |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| Płatnosc | `Soneta.Kasa.Platnosc` | tylko-odczyt |  |  |
+| RokMiesiac | `YearMonth` | tylko-odczyt |  |  |
+| Stan | `Soneta.CzlonkowieSzkolenia.StanSkładki` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| Wartosc | `Currency` | bazodanowe |  | Wartość naliczonej składki |
+| ZaOkres | `YearMonth` | bazodanowe |  | Rok i miesiąc za który naliczona jest składka |
+| ZaOkresInfo | `string` | tylko-odczyt |  |  |
 | ZaRok | `int` |  |  |  |
 
 ## Enumy

@@ -6,40 +6,44 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`, `IElementStrukturyOrganizacyjnej`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 20
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 8
+- podlisty: 14
+- subrowy: 0
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Config | `Soneta.Core.ElementStrukturyOrganizacyjnej.ElementConfig` |  |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DataDo | `Soneta.Types.Date` |  |  |  |
-| DataOd | `Soneta.Types.Date` |  |  |  |
+| Config | `Soneta.Core.ElementStrukturyOrganizacyjnej.ElementConfig` | tylko-odczyt |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
+| DataDo | `Date` |  |  |  |
+| DataOd | `Date` |  |  |  |
 | Definicja | `Soneta.Core.DefinicjaElementuStrukturyOrganizacyjnej` | bazodanowe |  |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Elementy | `Soneta.Business.SubTable` |  |  |  |
-| HistoriaPodleglosci | `Soneta.Business.HistorySubTable<Soneta.Core.ElementStrukturyOrganizacyjnejRef>` |  |  |  |
-| IsReadOnlyDataDo | `bool` |  |  |  |
-| IsReadOnlyDataOd | `bool` |  |  |  |
-| IsVisibleEfektywnyOkres | `bool` |  |  |  |
-| IsVisibleOkresEx | `bool` |  |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
+| Elementy | `SubTable` | podlista |  |  |
+| HistoriaPodleglosci | `HistorySubTable<Soneta.Core.ElementStrukturyOrganizacyjnejRef>` | podlista |  |  |
+| IsReadOnlyDataDo | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyDataOd | `bool` | tylko-odczyt |  |  |
+| IsVisibleEfektywnyOkres | `bool` | tylko-odczyt |  |  |
+| IsVisibleOkresEx | `bool` | tylko-odczyt |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| KontrolaPraw | `Soneta.Business.IRightsSource` | bazodanowe, iface-ref |  |  |
-| Nadrzedny | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
+| KontrolaPraw | `IRightsSource` | bazodanowe, iface-ref |  |  |
+| Nadrzedny | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe, tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaPomocnicza | `string` | bazodanowe |  |  |
-| ObiektyDoPlanowania | `Soneta.Business.SubTable` |  |  |  |
-| ObjectRight | `Soneta.Business.AccessRights` | enum |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres | Okres obowiązywania elementu struktury organizacyjnej |
-| OkresEx | `Soneta.Types.FromTo` |  | Okres |  |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
-| PodelementyWgAktualnosci | `Soneta.Business.SubTable<Soneta.Core.ElementStrukturyOrganizacyjnejRef>` |  |  |  |
-| Powiązania | `Soneta.Business.SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` |  |  |  |
-| Struktura | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe |  |  |
-| SubDrzewo | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` |  |  |  |
-| WszystkieElementy | `Soneta.Business.SubTable` |  |  |  |
-| WszystkieLiście | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` |  |  |  |
-| WszystkieSubElementy | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` |  |  |  |
+| ObiektyDoPlanowania | `SubTable` | podlista |  |  |
+| ObjectRight | `AccessRights` (enum) | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres | Okres obowiązywania elementu struktury organizacyjnej |
+| OkresEx | `FromTo` | podlista | Okres |  |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
+| PodelementyWgAktualnosci | `SubTable<Soneta.Core.ElementStrukturyOrganizacyjnejRef>` | podlista |  |  |
+| Powiązania | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
+| Struktura | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe, tylko-odczyt |  |  |
+| SubDrzewo | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` | podlista |  |  |
+| WszystkieElementy | `SubTable` | podlista |  |  |
+| WszystkieLiście | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` | podlista |  |  |
+| WszystkieSubElementy | `System.Collections.Generic.IEnumerable<Soneta.Core.ElementStrukturyOrganizacyjnej>` | podlista |  |  |
 
 ## Relacje interfejsowe
 
@@ -54,7 +58,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AccessRights (`Soneta.Business.AccessRights`)
+### AccessRights (`AccessRights`)
 - `Denied` = 0 — Zakaz dostępu
 - `ReadOnly` = 1 — Tylko odczyt
 - `Granted` = 2 — Pełne prawo

@@ -5,18 +5,22 @@ Opis: Element szczegółowy oceny pracownika (IOcenaPracownika). Przechowuje war
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ocena` → `IOcenaPracownika`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualny | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Aktualny | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Definicja | `Soneta.HR.DefElementuOcenyPracownika` | bazodanowe |  |  |
 | ElementWartość | `Soneta.HR.WartośćElementuOcenyPracownika` |  | Nazwa wartości |  |
-| Ocena | `Soneta.HR.IOcenaPracownika` | bazodanowe, guided-parent, iface-ref |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Typ | `Soneta.HR.TypyElementowOceny` | bazodanowe, enum |  |  |
+| Ocena | `Soneta.HR.IOcenaPracownika` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.HR.TypyElementowOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Wartosc | `decimal` | bazodanowe | Wartość |  |
 
 ## Relacje interfejsowe

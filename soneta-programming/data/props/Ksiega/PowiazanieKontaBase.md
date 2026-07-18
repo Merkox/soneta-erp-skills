@@ -5,15 +5,19 @@ Opis: Element szczegółowy konta księgowego (KontoBase). Reprezentuje powiąza
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Konto` → `KontoBase`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Element | `Soneta.Core.IElementSlownika` | bazodanowe, iface-ref |  |  |
-| Konto | `Soneta.Ksiega.KontoBase` | bazodanowe, guided-parent |  |  |
-| KontoSlownikowe | `Soneta.Ksiega.KontoBase` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypPowiazania` | bazodanowe, enum |  |  |
+| Element | `Soneta.Core.IElementSlownika` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Konto | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| KontoSlownikowe | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypPowiazania` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

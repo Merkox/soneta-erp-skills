@@ -5,15 +5,19 @@ Opis: Element szczegółowy definicji kręgu kosztów (DefinicjaKregu). Określa
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefinicjaKregu`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Ksiega.DefinicjaKregu` | bazodanowe, guided-parent |  | Definicja kręgu |
+| Definicja | `Soneta.Ksiega.DefinicjaKregu` | bazodanowe, tylko-odczyt, guided-parent |  | Definicja kręgu |
 | Konto | `string` | bazodanowe |  | Symbol lub filtr konta |
 | Lp | `int` | bazodanowe |  |  |
-| Strona | `Soneta.Core.StronaKsiegowania` | bazodanowe, enum |  | Strona księgowania |
+| Strona | `Soneta.Core.StronaKsiegowania` (enum) | bazodanowe |  | Strona księgowania |
 
 ## Enumy
 

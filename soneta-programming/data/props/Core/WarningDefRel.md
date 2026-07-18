@@ -5,12 +5,16 @@ Opis: Element szczegółowy hosta ostrzeżeń (IWarningHost). Powiązanie defini
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Core.VerifiersConfig.IWarningHost` | bazodanowe, iface-ref |  | Zapis, do którego przypisany jest dana definicja warningu |
+| Host | `Soneta.Core.VerifiersConfig.IWarningHost` | bazodanowe, tylko-odczyt, iface-ref |  | Zapis, do którego przypisany jest dana definicja warningu |
 | WarningDefinition | `Soneta.Core.WarningDef` | bazodanowe | Definicja warningu | Definicja warningu |
 
 ## Relacje interfejsowe

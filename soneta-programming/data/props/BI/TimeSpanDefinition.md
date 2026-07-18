@@ -5,16 +5,20 @@ Opis: Definicja przedziału czasowego wykorzystywanego w analizach BI. Określa 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| FromText | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| FromTo | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| FromText | `MemoText` | bazodanowe, podlista |  |  |
+| FromTo | `FromTo` | bazodanowe, podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| ToText | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Type | `Soneta.BI.TimeSpanType` | bazodanowe, enum | Typ | Typ przedziału czasowego |
+| ToText | `MemoText` | bazodanowe, podlista |  |  |
+| Type | `Soneta.BI.TimeSpanType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ przedziału czasowego |
 
 ## Enumy
 

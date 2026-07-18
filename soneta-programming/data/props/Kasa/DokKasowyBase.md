@@ -6,34 +6,38 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKasowy`, `IDokumentCRM`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 10
+- podlisty: 5
+- subrowy: 1
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| EwidencjaSP | `Soneta.Kasa.EwidencjaSP` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Kasa | `Soneta.Kasa.Kasa` | bazodanowe |  |  |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | tylko-odczyt |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Kasa | `Soneta.Kasa.Kasa` | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| Raport | `Soneta.Kasa.RaportESP` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| Raport | `Soneta.Kasa.RaportESP` | bazodanowe, tylko-odczyt |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| SymbolOkresuWgDatyDokumentu | `string` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| ZadaniaCRM | `Soneta.Business.SubTable` |  |  |  |
-| Zaplata | `Soneta.Kasa.Zaplata` |  |  |  |
-| Zaplaty | `Soneta.Business.SubTable<Soneta.Kasa.Zaplata>` |  |  |  |
+| SymbolOkresuWgDatyDokumentu | `string` | tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| ZadaniaCRM | `SubTable` | podlista |  |  |
+| Zaplata | `Soneta.Kasa.Zaplata` | tylko-odczyt |  |  |
+| Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Enumy

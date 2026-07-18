@@ -5,62 +5,66 @@ Opis: Element szczegółowy schematu księgowego (SchematKsiegowy). Pojedyncza r
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Schemat` → `SchematKsiegowy`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 45
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 19
+- pola tylko-odczyt: 9
+- podlisty: 20
+- subrowy: 0
+- razem: 51
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AlgorytmBinder | `Soneta.Business.Compiler.ICodeEditorSource` |  |  | Kod weryfikacji schematu |
-| Bilnasowanie | `Soneta.Ksiega.PozycjaSchematuKsiegowego.BilnasowanieDekretu` | enum |  | Bilansowanie |
+| AlgorytmBinder | `Compiler.ICodeEditorSource` |  |  | Kod weryfikacji schematu |
+| Bilnasowanie | `Soneta.Ksiega.PozycjaSchematuKsiegowego.BilnasowanieDekretu` (enum) |  |  | Bilansowanie |
 | Blokada | `bool` | bazodanowe |  | Blokuje pozycję - nie jest używana podczas predekretacji |
-| Cechy | `Soneta.Business.MemoText` |  |  | Kopiowane cechy |
-| ClassName | `string` |  |  |  |
-| DataPodatkowa | `Soneta.Business.MemoText` |  |  | Data podatkowa |
-| DataPodatkowaP | `Soneta.Ksiega.DataSchematu` | enum |  | Data podatkowa - tryb podstawowy |
-| ElementKsiegowalny | `Soneta.Business.MemoText` |  |  | Element księgowalny |
-| ElementSlownika | `Soneta.Business.MemoText` |  |  | Element słownika |
-| ElementSlownikaP | `Soneta.Ksiega.ElementSlownikaSchematu` | enum |  | Element słownika - tryb podstawowy |
-| ElementyKwotyOperacji | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyKwotyCollection` |  |  |  |
-| ElementyKwotyZapisu | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyKwotyCollection` |  |  |  |
-| ElementyOpisu | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyOpisuCollection` |  |  |  |
-| ElementyWarunku | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyWarunkuCollection` |  |  |  |
-| Kod | `Soneta.Business.MemoText` |  |  | Kod |
-| KodWeryfikacji | `Soneta.Business.MemoText` |  |  |  |
-| Kontekst | `Soneta.Business.MemoText` |  |  | Kontekst |
-| KontekstP | `Soneta.Ksiega.KontekstSchematu` | enum |  | Kontekst - tryb podstawowy |
-| Konto | `Soneta.Business.MemoText` |  |  | Konto |
+| Cechy | `MemoText` | podlista |  | Kopiowane cechy |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DataPodatkowa | `MemoText` | podlista |  | Data podatkowa |
+| DataPodatkowaP | `Soneta.Ksiega.DataSchematu` (enum) |  |  | Data podatkowa - tryb podstawowy |
+| ElementKsiegowalny | `MemoText` | podlista |  | Element księgowalny |
+| ElementSlownika | `MemoText` | podlista |  | Element słownika |
+| ElementSlownikaP | `Soneta.Ksiega.ElementSlownikaSchematu` (enum) |  |  | Element słownika - tryb podstawowy |
+| ElementyKwotyOperacji | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyKwotyCollection` | podlista |  |  |
+| ElementyKwotyZapisu | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyKwotyCollection` | podlista |  |  |
+| ElementyOpisu | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyOpisuCollection` | podlista |  |  |
+| ElementyWarunku | `Soneta.Ksiega.PozycjaSchematuKsiegowego.ElementyWarunkuCollection` | podlista |  |  |
+| Kod | `MemoText` | podlista |  | Kod |
+| KodWeryfikacji | `MemoText` | podlista |  |  |
+| Kontekst | `MemoText` | podlista |  | Kontekst |
+| KontekstP | `Soneta.Ksiega.KontekstSchematu` (enum) |  |  | Kontekst - tryb podstawowy |
+| Konto | `MemoText` | podlista |  | Konto |
 | KontoP1 | `Soneta.Ksiega.KontoBase` |  |  | Konto1 - tryb podstawowy |
-| KontoP2 | `Soneta.Ksiega.KontoSchematu` | enum |  | Konto2 - tryb podstawowy |
-| KontoPozycji | `string` |  |  |  |
-| KopiowaneCechy | `Soneta.Ksiega.PozycjaSchematuKsiegowego.KopiowaneCechyCollection` |  |  |  |
-| KwotaOperacji | `Soneta.Business.MemoText` |  |  | Kwota operacji |
-| KwotaOperacjiP | `Soneta.Ksiega.KwotaSchematu` | enum |  | Kwota operacji - tryb podstawowy |
-| KwotaPozycji | `string` |  |  |  |
-| KwotaZapisu | `Soneta.Business.MemoText` |  |  | Kwota zapisu |
-| KwotaZapisuP | `Soneta.Ksiega.KwotaSchematu` | enum |  | Kwota zapisu - tryb podstawowy |
+| KontoP2 | `Soneta.Ksiega.KontoSchematu` (enum) |  |  | Konto2 - tryb podstawowy |
+| KontoPozycji | `string` | tylko-odczyt |  |  |
+| KopiowaneCechy | `Soneta.Ksiega.PozycjaSchematuKsiegowego.KopiowaneCechyCollection` | podlista |  |  |
+| KwotaOperacji | `MemoText` | podlista |  | Kwota operacji |
+| KwotaOperacjiP | `Soneta.Ksiega.KwotaSchematu` (enum) |  |  | Kwota operacji - tryb podstawowy |
+| KwotaPozycji | `string` | tylko-odczyt |  |  |
+| KwotaZapisu | `MemoText` | podlista |  | Kwota zapisu |
+| KwotaZapisuP | `Soneta.Ksiega.KwotaSchematu` (enum) |  |  | Kwota zapisu - tryb podstawowy |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji w schemacie |
-| Opis | `Soneta.Business.MemoText` |  |  | Opis |
+| Opis | `MemoText` | podlista |  | Opis |
 | OpisP1 | `string` |  |  | Opis1 - tryb podstawowy |
-| OpisP2 | `Soneta.Ksiega.OpisSchematu` | enum |  | Opis2 - tryb podstawowy |
-| OpisP3 | `Soneta.Ksiega.OpisSchematu` | enum |  | Opis3 - tryb podstawowy |
-| OpisPozycji | `string` |  |  |  |
+| OpisP2 | `Soneta.Ksiega.OpisSchematu` (enum) |  |  | Opis2 - tryb podstawowy |
+| OpisP3 | `Soneta.Ksiega.OpisSchematu` (enum) |  |  | Opis3 - tryb podstawowy |
+| OpisPozycji | `string` | tylko-odczyt |  |  |
 | PowiazZZapisem | `bool` |  |  | Powiąż z zapisem |
-| PozycjaBaseTypeName | `string` |  |  |  |
-| RuntimeDefinition | `Soneta.Business.Compiler.IRuntimeDefinition` |  |  |  |
-| Schemat | `Soneta.Ksiega.SchematKsiegowy` | bazodanowe, guided-parent |  | Pozycje schematu księgowego |
-| SegmentyKonta | `Soneta.Ksiega.PozycjaSchematuKsiegowego.SegmentyKontaCollection` |  |  |  |
-| Strona | `Soneta.Business.MemoText` |  |  | Strona |
-| StronaP | `Soneta.Ksiega.StronaSchematu` | enum |  | Strona - tryb podstawowy |
-| StronaPozycji | `string` |  |  |  |
+| PozycjaBaseTypeName | `string` | tylko-odczyt |  |  |
+| RuntimeDefinition | `Compiler.IRuntimeDefinition` | tylko-odczyt |  |  |
+| Schemat | `Soneta.Ksiega.SchematKsiegowy` | bazodanowe, tylko-odczyt, guided-parent |  | Pozycje schematu księgowego |
+| SegmentyKonta | `Soneta.Ksiega.PozycjaSchematuKsiegowego.SegmentyKontaCollection` | podlista |  |  |
+| Strona | `MemoText` | podlista |  | Strona |
+| StronaP | `Soneta.Ksiega.StronaSchematu` (enum) |  |  | Strona - tryb podstawowy |
+| StronaPozycji | `string` | tylko-odczyt |  |  |
 | SumujZapisy | `bool` |  |  | Sumuj zapisy |
-| TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` | bazodanowe, enum |  | Tryb edycji pozycji |
-| TypEwidencji | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu ewidencji schematu |
-| Warunek | `Soneta.Business.MemoText` |  |  | Warunek |
-| WarunekP1 | `Soneta.Ksiega.WarunekSchematu` | enum |  | Warunek1 - tryb podstawowy |
+| TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` (enum) | bazodanowe |  | Tryb edycji pozycji |
+| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ewidencji schematu |
+| Warunek | `MemoText` | podlista |  | Warunek |
+| WarunekP1 | `Soneta.Ksiega.WarunekSchematu` (enum) |  |  | Warunek1 - tryb podstawowy |
 | WarunekP2 | `string` |  |  | Warunek2 - tryb podstawowy |
 | WeryfikowacPozycje | `bool` |  |  |  |
-| ZnakKwotyP | `Soneta.Ksiega.ZnakKwotySchematu` | enum |  | Znak kowty - tryb podstawowy |
-| text | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| ZnakKwotyP | `Soneta.Ksiega.ZnakKwotySchematu` (enum) |  |  | Znak kowty - tryb podstawowy |
+| text | `MemoText` | bazodanowe, podlista |  |  |
 
 ## Enumy
 

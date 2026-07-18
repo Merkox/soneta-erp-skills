@@ -6,28 +6,32 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 6
+- subrowy: 1
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy teczka w tym stanie jest aktywna (otwarta). |
-| Data | `Soneta.Types.Date` |  |  |  |
+| Aktywny | `bool` | bazodanowe, tylko-odczyt | Aktywny | Wskazuje, czy teczka w tym stanie jest aktywna (otwarta). |
+| Data | `Date` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefTeczki` | bazodanowe |  | Definicja teczki |
-| Elementy | `Soneta.Business.LpSubTable<Soneta.Core.ElemTeczki>` |  |  |  |
-| ElementyTeczki | `Soneta.Business.View` |  |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
-| IsPageVisible | `bool` |  |  |  |
+| Elementy | `LpSubTable<Soneta.Core.ElemTeczki>` | podlista |  |  |
+| ElementyTeczki | `View` | podlista |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
+| IsPageVisible | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa teczki | Krótka nazwa teczki, na podstawie której będzie można ją wyszukiwać |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis teczki |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis teczki |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
 | Stan | `Soneta.Core.StanTeczki` | bazodanowe |  | Stan teczki. |
-| UseIndividualAccessRights | `bool` |  |  |  |
-| Wlasciciel | `Soneta.Business.App.Operator` | bazodanowe |  | Właściciel teczki |
+| UseIndividualAccessRights | `bool` | tylko-odczyt |  |  |
+| Wlasciciel | `App.Operator` | bazodanowe |  | Właściciel teczki |

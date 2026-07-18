@@ -4,13 +4,17 @@ Opis: Element szczegółowy definicji elementu wynagrodzenia (DefinicjaElementu)
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Definicja` → `DefinicjaElementu`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe, guided-parent |  |  |
-| Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
+| Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | Rachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

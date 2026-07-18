@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 9
+- podlisty: 3
+- subrowy: 1
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
 | Kontakt | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  |  |
-| Last | `Soneta.CRM.PozycjaZdarzenia` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Last | `Soneta.CRM.PozycjaZdarzenia` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
-| PełnyOpis | `string` |  |  |  |
-| Pozostaje | `int` |  |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.CRM.PozycjaZdarzenia>` |  |  |  |
-| Realizacja | `Soneta.Types.Date` | bazodanowe |  |  |
-| RealizacjaGodzina | `Soneta.Types.Time` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Operator | `App.Operator` | bazodanowe |  |  |
+| PełnyOpis | `string` | tylko-odczyt |  |  |
+| Pozostaje | `int` | tylko-odczyt |  |  |
+| Pozycje | `LpSubTable<Soneta.CRM.PozycjaZdarzenia>` | podlista |  |  |
+| Realizacja | `Date` | bazodanowe |  |  |
+| RealizacjaGodzina | `Time` | bazodanowe |  |  |
 | Temat | `string` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| TerminGodzina | `Soneta.Types.Time` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| Zrealizowany | `bool` |  |  |  |
-| Zwłoka | `int` |  |  |  |
+| Termin | `Date` | bazodanowe, tylko-odczyt |  |  |
+| TerminGodzina | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| Zrealizowany | `bool` | tylko-odczyt |  |  |
+| Zwłoka | `int` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

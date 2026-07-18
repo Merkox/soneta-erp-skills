@@ -5,15 +5,19 @@ Opis: Tabela służy do powiązania definicji poszczególnych stanowisk z odpowi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe | Definicja stanowiska |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt | Definicja stanowiska |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Pozycja | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Pozycja słownika |  |
-| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaSlownikaZkl` | bazodanowe, enum | Typ powiązania |  |
+| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaSlownikaZkl` (enum) | bazodanowe, tylko-odczyt | Typ powiązania |  |
 
 ## Relacje interfejsowe
 

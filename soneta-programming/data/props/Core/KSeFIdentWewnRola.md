@@ -4,14 +4,18 @@ Tytuł: Role identyfikatorów wewnętrznych KSeF
 Opis: Przypisanie roli podmiotu trzeciego KSeF do identyfikatora wewnętrznego. Określa typ roli (sprzedaż/zakup) i konkretną rolę podmiotu trzeciego, dla której identyfikator wewnętrzny jest stosowany.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| IdentWewnKSeF | `Soneta.Core.KSeFIdentWewn` | bazodanowe |  |  |
-| Rola | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola podmiotu trzeciego KSeF | Rola podmiotu trzeciego KSeF |
-| TypRoli | `Soneta.Core.Enums.TypRoliPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Typ roli podmiotu (sprzedaż, zakup) | Typ roli podmiotu (sprzedaż, zakup) |
+| IdentWewnKSeF | `Soneta.Core.KSeFIdentWewn` | bazodanowe, tylko-odczyt |  |  |
+| Rola | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola podmiotu trzeciego KSeF | Rola podmiotu trzeciego KSeF |
+| TypRoli | `Soneta.Core.Enums.TypRoliPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Typ roli podmiotu (sprzedaż, zakup) | Typ roli podmiotu (sprzedaż, zakup) |
 
 ## Enumy
 

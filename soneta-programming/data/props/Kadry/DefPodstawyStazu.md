@@ -5,8 +5,12 @@ Opis: Definicja podstawy naliczania stażu pracy. Pozwala skonfigurować, które
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,7 +18,7 @@ Guided: root
 | Nazwa | `string` | bazodanowe |  |  |
 | OkresNauki | `bool` | bazodanowe |  |  |
 | OkresyNiewliczane | `bool` | bazodanowe |  |  |
-| RodzajPodstawy | `Soneta.Kadry.RodzajPodstawyStażuPracy` | enum |  |  |
+| RodzajPodstawy | `Soneta.Kadry.RodzajPodstawyStażuPracy` (enum) | tylko-odczyt |  |  |
 | StazDoUrlopu | `bool` | bazodanowe |  |  |
 | StazPodsumowanie | `bool` | bazodanowe |  |  |
 | StazPracy | `bool` | bazodanowe |  |  |

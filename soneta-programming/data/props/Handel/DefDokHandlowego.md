@@ -6,15 +6,19 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarningHost`, `IDefinicjaDokumentuOA`
 
-- pola bazodanowe: 266
-- pola kalkulowane (z klas biznesowych): 74
+- pola bazodanowe (zapisywalne): 236
+- pola kalkulowane (zapisywalne): 22
+- pola tylko-odczyt: 36
+- podlisty: 19
+- subrowy: 15
+- razem: 328
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AktualizujCeny | `Soneta.Handel.SposobAktualizacjiCen` | bazodanowe, enum |  | Określa sposób aktualizowania cennika podczas zatwierdzania dokumentu. |
+| AktualizujCeny | `Soneta.Handel.SposobAktualizacjiCen` (enum) | bazodanowe |  | Określa sposób aktualizowania cennika podczas zatwierdzania dokumentu. |
 | Anulowany | `bool` | bazodanowe |  | Określa czy dokument może być anulowany. |
 | Bazowa | `System.Guid` | bazodanowe |  |  |
-| BazowaDefinicja | `Soneta.Handel.DefDokHandlowego` |  | Definicja bazowa | Bazowa definicja dokumentu, na podstawie której powstała aktualna definicja. |
+| BazowaDefinicja | `Soneta.Handel.DefDokHandlowego` | tylko-odczyt | Definicja bazowa | Bazowa definicja dokumentu, na podstawie której powstała aktualna definicja. |
 | Blokada | `bool` | bazodanowe |  | Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |
 | BlokadaCeny | `bool` | bazodanowe |  | Blokuje możliwość edycji ceny na pozycji dokumentu. |
 | BlokadaEdycjiDaty | `bool` | bazodanowe |  | Uniemożliwia edycję daty głównej (pole data na zakładce ogólne) |
@@ -22,42 +26,41 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarni
 | BlokadaEdycjiDatyOtrzymania | `bool` | bazodanowe |  | Uniemożliwia edycję daty otrzymania. |
 | BlokadaEdycjiMagazynu | `bool` | bazodanowe |  | Uniemożliwia edycję magazynu z poziomu dokumentu (pole Magazyn na zakładce ogólne) |
 | BlokadaZasobuMagazynowego | `bool` | bazodanowe | Blokada zasobu magazynowego | Blokada zasobu magazynowego. |
-| Buforowanie | `Soneta.Handel.SposobBuforowania` | bazodanowe, enum | Buforowanie | Określa sposób działania stanu dokumentu w buforze. |
-| CechaNazwaTowaru | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha wyliczająca nazwę towaru na wydruku | Określa cechę pozycji dokumentu (typu tekst), która wyznaczy nazwę towaru na wydruku. |
-| CechaPodzialuKosztuDodatkowego | `Soneta.Business.FeatureDefinition` | bazodanowe | Współczynnik podziału kosztu dodatkowego na pozycje | Określa cechę do pozycji dokumentu (algorytmiczną, typu wartość), liczącą współczynnik podziału kosztu. |
+| Buforowanie | `Soneta.Handel.SposobBuforowania` (enum) | bazodanowe | Buforowanie | Określa sposób działania stanu dokumentu w buforze. |
+| CechaNazwaTowaru | `FeatureDefinition` | bazodanowe | Cecha wyliczająca nazwę towaru na wydruku | Określa cechę pozycji dokumentu (typu tekst), która wyznaczy nazwę towaru na wydruku. |
+| CechaPodzialuKosztuDodatkowego | `FeatureDefinition` | bazodanowe | Współczynnik podziału kosztu dodatkowego na pozycje | Określa cechę do pozycji dokumentu (algorytmiczną, typu wartość), liczącą współczynnik podziału kosztu. |
 | CechaProcedura | `string` |  | Cecha wyliczająca nazwę procedury na fakturze | Określa cechę do dokumentu handlowego (typu tekst), która wyznaczy nazwę procedury. |
-| CechyPozycjiWymagane | `Soneta.Business.MemoText` | bazodanowe |  | Lista cech wymaganych na pozycjach dokumentów. |
-| CechyWymagane | `Soneta.Business.MemoText` | bazodanowe |  | Lista cech wymaganych na dokumentach. |
+| CechyPozycjiWymagane | `MemoText` | bazodanowe, podlista |  | Lista cech wymaganych na pozycjach dokumentów. |
+| CechyWymagane | `MemoText` | bazodanowe, podlista |  | Lista cech wymaganych na dokumentach. |
 | Cena | `Soneta.Towary.DefinicjaCeny` | bazodanowe |  | Określa rodzaj ceny stosowanej w pozycjach dokumentu. |
 | Cena2 | `Soneta.Towary.DefinicjaCeny` |  |  | Do użytku wewnętrznego. |
 | CenaKosztuUslugi | `Soneta.Towary.DefinicjaCeny` | bazodanowe |  | Określa rodzaj ceny dla kosztu usługi składnika kompletacji. |
-| CenaKosztuUsługi | `Soneta.Towary.DefinicjaCeny` |  |  |  |
 | CenaPoRabacieLiczonaOdWartosci | `bool` | bazodanowe |  | Włącza przeliczanie ceny po rabacie po zmianie wartości pozycji. |
 | CenaWartosc0 | `bool` | bazodanowe | Zerowa wartość pozycji | Określa, czy pozycje dokumentu mają zerową cenę i wartość. |
-| CyklFakturowaniaSposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` | bazodanowe, enum |  | Określa domyślny sposób obsługi, gdy dzień faktuorowania wypada na dzień wolny. |
-| CyklFakturowaniaUmowy | `Soneta.Core.DefinicjaCykluTyp` | bazodanowe, enum | Cykl fakturowania | Określa domyślny cykl fakturowania umowy. |
+| CyklFakturowaniaSposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` (enum) | bazodanowe |  | Określa domyślny sposób obsługi, gdy dzień faktuorowania wypada na dzień wolny. |
+| CyklFakturowaniaUmowy | `Soneta.Core.DefinicjaCykluTyp` (enum) | bazodanowe | Cykl fakturowania | Określa domyślny cykl fakturowania umowy. |
 | DaneKontaktoweKontrahenta | `bool` | bazodanowe |  | Określa czy istnieje możliwość wprowadzania danych kontaktowych kontrahenta. |
 | DaneKontaktoweOdbiorcy | `bool` | bazodanowe |  | Określa czy istnieje możliwość wprowadzania danych kontaktowych odbiorcy. |
-| DataKursu | `Soneta.Handel.DefDataKursu` | bazodanowe, enum |  | Określa datę kursu waluty użytego na dokumencie. |
-| DataOkresIntrastat | `Soneta.Handel.DataOkresIntrastat` | bazodanowe, enum |  | Data wejścia do deklaracji Intrastat |
-| DataZobowiazanNaleznosci | `Soneta.Handel.DataZobowiazanNaleznosci` | bazodanowe, enum | Data zobowiązań/należności |  |
-| DefNaglowek1Xml | `Soneta.Business.MemoText` | bazodanowe |  | Parametr przechowujący definicję pierwszego definiowalnego nagłówka |
-| DefNaglowek2Xml | `Soneta.Business.MemoText` | bazodanowe |  | Parametr przechowujący definicję drugiego definiowalnego nagłówka |
-| DefNaglowekPXml | `Soneta.Business.MemoText` | bazodanowe |  | Parametr przechowujący definicję definiowalnego nagłówka dla pozycji |
-| DefPodsumowanieXml | `Soneta.Business.MemoText` | bazodanowe |  | Parametr przechowujący definicję definiowalnego podsumowania |
+| DataKursu | `Soneta.Handel.DefDataKursu` (enum) | bazodanowe |  | Określa datę kursu waluty użytego na dokumencie. |
+| DataOkresIntrastat | `Soneta.Handel.DataOkresIntrastat` (enum) | bazodanowe |  | Data wejścia do deklaracji Intrastat |
+| DataZobowiazanNaleznosci | `Soneta.Handel.DataZobowiazanNaleznosci` (enum) | bazodanowe | Data zobowiązań/należności |  |
+| DefNaglowek1Xml | `MemoText` | bazodanowe, podlista |  | Parametr przechowujący definicję pierwszego definiowalnego nagłówka |
+| DefNaglowek2Xml | `MemoText` | bazodanowe, podlista |  | Parametr przechowujący definicję drugiego definiowalnego nagłówka |
+| DefNaglowekPXml | `MemoText` | bazodanowe, podlista |  | Parametr przechowujący definicję definiowalnego nagłówka dla pozycji |
+| DefPodsumowanieXml | `MemoText` | bazodanowe, podlista |  | Parametr przechowujący definicję definiowalnego podsumowania |
 | DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Określa ewidencję księgoweą, do której trafi dokument (sposób księgowania). |
 | DefinicjaEwidencjiCecha | `string` | bazodanowe | Cecha wyliczająca definicję ewidencji | Określa cechę dokumentu (algorytmiczną i referencyjną do tabeli DefDokumentow), która dostarczy definicję ewidencji. |
-| DefinicjaEwidencjiFeatureDefinition | `Soneta.Business.FeatureDefinition` |  |  | Wskazuje cechę dokumentu (algorytmiczną i referencyjną do tabeli DefDokumentow), która dostarczy definicję ewidencji. |
-| DefinicjaEwidencjiZrodlo | `Soneta.Handel.ZrodloEwidencji` | bazodanowe, enum | Źródło definicji ewidencji | Określa źródło pozyskania definicji ewidencji. |
-| DefinicjaKorekty | `bool` |  |  |  |
+| DefinicjaEwidencjiFeatureDefinition | `FeatureDefinition` |  |  | Wskazuje cechę dokumentu (algorytmiczną i referencyjną do tabeli DefDokumentow), która dostarczy definicję ewidencji. |
+| DefinicjaEwidencjiZrodlo | `Soneta.Handel.ZrodloEwidencji` (enum) | bazodanowe | Źródło definicji ewidencji | Określa źródło pozyskania definicji ewidencji. |
+| DefinicjaKorekty | `bool` | tylko-odczyt |  |  |
 | DodajTransportNaZatwierdzeniu | `bool` | bazodanowe | Transport | Podczas zatwierdzania utwórz obiekt przesyłki kurierskiej |
-| Dodawanie | `Soneta.Handel.SposobDodawaniaHandlowego` | bazodanowe, enum |  | Określa tryb dodawania dokumentu. |
-| DodawanieTylkoUslug | `bool` |  |  | Wskazuje na to, czy do dokumentu "z ręki" mogą być dodane tylko usługi. |
-| DokumentKoncowyInfo | `Soneta.Handel.DokumentKoncowyInfo` | bazodanowe |  |  |
+| Dodawanie | `Soneta.Handel.SposobDodawaniaHandlowego` (enum) | bazodanowe |  | Określa tryb dodawania dokumentu. |
+| DodawanieTylkoUslug | `bool` | tylko-odczyt |  | Wskazuje na to, czy do dokumentu "z ręki" mogą być dodane tylko usługi. |
+| DokumentKoncowyInfo | `Soneta.Handel.DokumentKoncowyInfo` (subrow) | bazodanowe |  |  |
 | DokumentKoncowyInfo.DokumentKoncowy | `bool` | bazodanowe | Dokument końcowy | Określa, czy dokument ma być traktowany jako końcowy dokument w relacjach do innych dokumentów nadrzędnych. |
-| DostawcaOdbiorca | `string` |  |  | Opis kontrahenta operującego partiami towaru magazynowego: Dostawca/Odbiorca/Kontrahent. |
+| DostawcaOdbiorca | `string` | tylko-odczyt |  | Opis kontrahenta operującego partiami towaru magazynowego: Dostawca/Odbiorca/Kontrahent. |
 | DozwolonyIncydentalny | `bool` | bazodanowe | Dozwolony kontrahent incydentalny | Określa, czy kontrahent incydentalny jest dozwolony. |
-| DrugiKontrahent | `Soneta.Handel.DostawcaOdbiorca` | bazodanowe, enum | Drugi kontrahent |  |
+| DrugiKontrahent | `Soneta.Handel.DostawcaOdbiorca` (enum) | bazodanowe | Drugi kontrahent |  |
 | DrugiSymbol | `string` | bazodanowe |  | Drugi symbol dokumentu, wykorzystywany do alternatywnej numeracji dokumentów handlowych. |
 | DrukowanieCenyIRabatu | `bool` | bazodanowe |  | Określa, czy będzie drukowana cena przed rabatem i rabat procentowy. |
 | DrukowanieNumerowNadrzednych | `bool` | bazodanowe |  | Określa, czy będą drukowane numery dokumentów nadrzędnych. |
@@ -70,7 +73,7 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarni
 | DrukujDateDostawy | `bool` | bazodanowe |  | Określa, czy będzie drukowana data dostawy. |
 | DrukujDateOperacji | `bool` | bazodanowe |  | Określa, czy będzie drukowana data operacji. |
 | DrukujDateOtrzymania | `bool` | bazodanowe |  | Określa, czy będzie drukowana data otrzymania. |
-| DrukujDokKSeFBezNr | `Soneta.Handel.ZezwalajNaDrukowanieDokBezNrKSef` | bazodanowe, enum |  | Drukowanie faktur przeznaczonych do KSeF bez numeru KSeF. |
+| DrukujDokKSeFBezNr | `Soneta.Handel.ZezwalajNaDrukowanieDokBezNrKSef` (enum) | bazodanowe |  | Drukowanie faktur przeznaczonych do KSeF bez numeru KSeF. |
 | DrukujDrugiRachunek | `bool` | bazodanowe |  | Określa czy będzie drukowany drugi numer rachunku. |
 | DrukujKgo | `bool` | bazodanowe | Drukuj KGO |  |
 | DrukujNipZgodnyZKrajemVat | `bool` | bazodanowe |  | Drukuj NIP sprzedawcy zgodny z krajem zastosowanej stawki VAT |
@@ -81,122 +84,114 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarni
 | DrukujPlatnosci | `bool` | bazodanowe |  | Określa, czy będzie drukowana lista nierozliczonych płatności. |
 | DrukujSWIFTZawsze | `bool` | bazodanowe |  | Określa czy będzie drukowany numer SWIFT zawsze, gdy kontrahent nie jest krajowy |
 | DrukujTabVATWWaluciePLN | `bool` | bazodanowe | Drukuj dodatkową tabelę VAT w walucie PLN | Widoczna gdy dokument posiada podstawową tabele VAT w walucie obcej oraz gdy kwota VAT jest równa 0,00. |
-| DrukujTabeleSystemuKaucyjnego | `bool` | bazodanowe | Drukuj podsumowanie opakowań/kaucji systemu kaucyjnego. |  |
-| DrukujTabeleZOpakowaniami | `Soneta.Handel.OpcjeDrukowaniaTabelOpakowan` | bazodanowe, enum | Drukuj tabele z opakowaniami/kaucjami. |  |
-| DrukujTabeleZRodzajamiOpakowan | `Soneta.Handel.OpcjeDrukowaniaTabelOpakowan` | bazodanowe, enum | Drukuj tabelę z rodzajem opakowań w systemie kaucyjnym. |  |
+| DrukujTabeleZOpakowaniami | `Soneta.Handel.OpcjeDrukowaniaTabelOpakowan` (enum) | bazodanowe | Drukuj tabele z opakowaniami/kaucjami. |  |
+| DrukujTabeleZRodzajamiOpakowan | `Soneta.Handel.OpcjeDrukowaniaTabelOpakowan` (enum) | bazodanowe | Drukuj tabelę z rodzajem opakowań w systemie kaucyjnym. |  |
 | DrukujTylkoRoznicePoKorekcie | `bool` | bazodanowe |  | Określa, czy na korekcie będą drukowane tylko pozycje korygowane (zmienione) |
 | DrukujTylkoRoznicePrzedKorekta | `bool` | bazodanowe |  | Określa, czy na korekcie będa drukowane tylko pozycje korygowane (zmienione) |
 | DuplikatWartosci | `bool` | bazodanowe | Duplikat wartości | Określa, czy dokument duplikuje wartość innego dokumentu i nie powinien być uwzgledniany w sumowaniu. |
-| EdycjaDatyDostawy | `Soneta.Handel.EdycjaDatyDostawy` | bazodanowe, enum | Edycja daty dostawy | Określa tryb edycji daty dostawy |
-| EdycjaDatyDostawyPozycji | `Soneta.Handel.EdycjaDatyDostawy` | bazodanowe, enum | Edycja daty dostawy pozycji | Włącza edycję daty dostawy na pozycji dokumentu. |
-| EdycjaIlosciZrealizowanej | `Soneta.Handel.EdycjaIlosciZrealizowanej` | bazodanowe, enum | Edycja ilości zrealizowanej | Włącza edycję ilości zrealizowanej w pozycji zatwierdzonego dokumentu. |
+| EdycjaDatyDostawy | `Soneta.Handel.EdycjaDatyDostawy` (enum) | bazodanowe | Edycja daty dostawy | Określa tryb edycji daty dostawy |
+| EdycjaDatyDostawyPozycji | `Soneta.Handel.EdycjaDatyDostawy` (enum) | bazodanowe | Edycja daty dostawy pozycji | Włącza edycję daty dostawy na pozycji dokumentu. |
+| EdycjaIlosciZrealizowanej | `Soneta.Handel.EdycjaIlosciZrealizowanej` (enum) | bazodanowe | Edycja ilości zrealizowanej | Włącza edycję ilości zrealizowanej w pozycji zatwierdzonego dokumentu. |
 | EdycjaKosztuDodatkowego | `bool` | bazodanowe | Edycja kosztu dodatkowego | Włącza dodawanie/edycję kosztu dodatkowego. |
-| EdycjaStanuRealizacji | `Soneta.Handel.EdycjaStanuRealizacji` | bazodanowe, enum | Edycja stanu realizacji | Włącza edycję stanu realizacji w zatwierdzonym dokumencie. |
+| EdycjaStanuRealizacji | `Soneta.Handel.EdycjaStanuRealizacji` (enum) | bazodanowe | Edycja stanu realizacji | Włącza edycję stanu realizacji w zatwierdzonym dokumencie. |
 | EdycjaStawkiVAT | `bool` | bazodanowe |  | Określa, czy w pozycjach dokumentu jest możliwa zmiana stawki VAT. |
-| EdycjaTerminuPlatnosci | `Soneta.Handel.EdycjaTerminuPlatnosci` | bazodanowe, enum | Edycja terminu płatności | Edycja terminu płatności. |
-| EdycjaWTrybieKoszyka | `Soneta.Handel.EdycjaWTrybieKoszyka` | bazodanowe, enum |  | Określa, czy dokument może być wystawiany jako koszyk. |
-| EdycjaWartosci | `Soneta.Handel.EdycjaWartosciDokumentu` | bazodanowe, enum |  | Określa sposób edycji wartości dokumentu (np w celu zmiany waluty). |
+| EdycjaTerminuPlatnosci | `Soneta.Handel.EdycjaTerminuPlatnosci` (enum) | bazodanowe | Edycja terminu płatności | Edycja terminu płatności. |
+| EdycjaWTrybieKoszyka | `Soneta.Handel.EdycjaWTrybieKoszyka` (enum) | bazodanowe |  | Określa, czy dokument może być wystawiany jako koszyk. |
+| EdycjaWartosci | `Soneta.Handel.EdycjaWartosciDokumentu` (enum) | bazodanowe |  | Określa sposób edycji wartości dokumentu (np w celu zmiany waluty). |
 | EwidencjaZKorekty | `bool` | bazodanowe | Ewidencja z korygowanego | Określa użycie definicji ewidencji księgowej takiej, jak na dokumencie korygowanym. |
 | FiltrKontrahenta | `string` | bazodanowe | Filtr kontrahentów | Filtr listy kontrahentów, wprowadzanych do dokumentu. |
-| FiltrKontrahentaCondition | `Soneta.Business.RowCondition` |  |  |  |
-| FiltrKontrahentaStosowanie | `Soneta.Handel.FiltrKontrahentaStosowanie` | bazodanowe, enum | Pozwalaj na wykluczonego kontrahenta | Określa sposób stosowania filtra kontrahentów podczas wprowadzania kontrahenta na dokument. |
-| FiltrStanuTowaru | `Soneta.Towary.FiltrStanuTowaru` | bazodanowe, enum |  | Określa filtrowanie towaru wg stanu w magazynie. |
+| FiltrKontrahentaCondition | `RowCondition` | tylko-odczyt |  |  |
+| FiltrKontrahentaStosowanie | `Soneta.Handel.FiltrKontrahentaStosowanie` (enum) | bazodanowe | Pozwalaj na wykluczonego kontrahenta | Określa sposób stosowania filtra kontrahentów podczas wprowadzania kontrahenta na dokument. |
+| FiltrStanuTowaru | `Soneta.Towary.FiltrStanuTowaru` (enum) | bazodanowe |  | Określa filtrowanie towaru wg stanu w magazynie. |
 | FiltrTowaru | `string` | bazodanowe |  | Filtr listy towarów, wyświetlanej podczas dodawania pozycji na dokument. |
-| FiltrTowaruCondition | `Soneta.Business.RowCondition` |  |  |  |
+| FiltrTowaruCondition | `RowCondition` | tylko-odczyt |  |  |
 | FiltrZasobow | `string` | bazodanowe |  | Filtr zawężający listę zasobów do pobrania. |
 | Fiskalizowany | `bool` | bazodanowe |  | Określa, czy dokument jest fiskalizowany czyli drukowany jest na drukarce fiskalnej. |
-| Flags | `Soneta.Handel.Helpers.Flags` | bazodanowe, enum |  | Flagi dodatkowe. |
+| Flags | `Soneta.Handel.Helpers.Flags` (enum) | bazodanowe |  | Flagi dodatkowe. |
 | FormNET | `bool` | bazodanowe | Określa czy istnieje zakładka użytkownika w Pulpicie kontrahenta. |  |
 | GrupyTowaroweVat | `bool` | bazodanowe |  |  |
 | IloscKopii | `int` | bazodanowe |  | Określa drukowaną ilość kopii dokumentu. |
-| IloscPozycji | `Soneta.Handel.IloscPozycjiDokumentuHandlowego` | bazodanowe, enum | Ilość pozycji | Określa dozwoloną ilość pozycji na zatwierdzonym dokumencie. |
-| IloscTowaruKopiowana | `Soneta.Handel.IloscTowaruKopiowana` | bazodanowe, enum |  | Ilość towaru kopiowana do dokumentu podrzędnego. |
+| IloscPozycji | `Soneta.Handel.IloscPozycjiDokumentuHandlowego` (enum) | bazodanowe | Ilość pozycji | Określa dozwoloną ilość pozycji na zatwierdzonym dokumencie. |
+| IloscTowaruKopiowana | `Soneta.Handel.IloscTowaruKopiowana` (enum) | bazodanowe |  | Ilość towaru kopiowana do dokumentu podrzędnego. |
 | InformacjeKRS | `bool` | bazodanowe |  | Określa, czy będą drukowane informacje z KRS. |
-| InicjalizacjaDatyDostawy | `Soneta.Handel.InicjalizacjaDatyDostawy` | bazodanowe, enum | Inicjowanie daty dostawy | Określa sposób inicjowania daty dostawy |
+| InicjalizacjaDatyDostawy | `Soneta.Handel.InicjalizacjaDatyDostawy` (enum) | bazodanowe | Inicjowanie daty dostawy | Określa sposób inicjowania daty dostawy |
 | InicjalizacjaDatyDostawyCecha | `string` | bazodanowe | Cecha daty dostawy | Określa cechę dokumentu (algorytmiczną typu Data), która wyliczy datę dostawy. |
-| InicjalizacjaDatyDostawyFeatureDefinition | `Soneta.Business.FeatureDefinition` |  |  | Wskazuje cechę dokumentu (typu Data), która dostarczy datę dostawy. |
-| InicjalizatorWalutyInfo | `Soneta.Handel.InicjalizatorWalutyInfo` | bazodanowe | Reguły doboru walut. | Ustawienia sposobu doboru walut dla: pozycji, wartości dokumentu lub płatności. |
-| InicjalizatorWalutyInfo.KursWaluty | `Soneta.Handel.ZrodloKursuWaluty` | bazodanowe, enum |  | Określa źródło pozyskania kursu waluty. |
-| InicjalizatorWalutyInfo.WalutaPlatnosci | `Soneta.Handel.ZrodloWaluty` | bazodanowe, enum |  | Określa źródło pozyskania waluty dla podsumowania/płatności dokumentu podrzędnego. |
-| InicjalizatorWalutyInfo.WalutaPozycji | `Soneta.Handel.ZrodloWaluty` | bazodanowe, enum |  | Określa na źródło pozyskania waluty dla wartości pozycji dokumentu podrzędnego. |
-| Intrastat | `Soneta.Handel.RodzajIntrastat` | bazodanowe, enum |  | Sposób uwzględniania dokumentu w deklaracji Intrastat. |
-| InwentaryzacjaInfo | `Soneta.Handel.InwentaryzacjaInfo` | bazodanowe | Reguły dotyczące inwentaryzacji. | Ustawienie sposobu obsługi inwentaryzacji. |
+| InicjalizacjaDatyDostawyFeatureDefinition | `FeatureDefinition` |  |  | Wskazuje cechę dokumentu (typu Data), która dostarczy datę dostawy. |
+| InicjalizatorWalutyInfo | `Soneta.Handel.InicjalizatorWalutyInfo` (subrow) | bazodanowe | Reguły doboru walut. | Ustawienia sposobu doboru walut dla: pozycji, wartości dokumentu lub płatności. |
+| InicjalizatorWalutyInfo.KursWaluty | `Soneta.Handel.ZrodloKursuWaluty` (enum) | bazodanowe |  | Określa źródło pozyskania kursu waluty. |
+| InicjalizatorWalutyInfo.WalutaPlatnosci | `Soneta.Handel.ZrodloWaluty` (enum) | bazodanowe |  | Określa źródło pozyskania waluty dla podsumowania/płatności dokumentu podrzędnego. |
+| InicjalizatorWalutyInfo.WalutaPozycji | `Soneta.Handel.ZrodloWaluty` (enum) | bazodanowe |  | Określa na źródło pozyskania waluty dla wartości pozycji dokumentu podrzędnego. |
+| Intrastat | `Soneta.Handel.RodzajIntrastat` (enum) | bazodanowe |  | Sposób uwzględniania dokumentu w deklaracji Intrastat. |
+| InwentaryzacjaInfo | `Soneta.Handel.InwentaryzacjaInfo` (subrow) | bazodanowe | Reguły dotyczące inwentaryzacji. | Ustawienie sposobu obsługi inwentaryzacji. |
 | InwentaryzacjaInfo.BlokowanieTowarow | `bool` | bazodanowe | Blokada inwentaryzowanych towarów | Wskazuje na to, czy użycie inwentaryzowanych towarów na dokumentach magazynowych będzie blokowane? |
-| IsParagon | `bool` |  |  | Wskazuje, czy dana definicja jest paragonem. |
+| IsParagon | `bool` | tylko-odczyt |  | Wskazuje, czy dana definicja jest paragonem. |
 | JednostkaAlternatywna | `bool` | bazodanowe |  | Ilość pozycji wyrażona w alternatywnej jednostce towaru. |
-| JestDefinicjaEwidencji | `bool` |  |  | Informuje, czy jest określona definicja ewidencji księgowej dla tej definicji dokumentu handlowego. |
-| JestFiltrKontrahenta | `bool` |  |  |  |
-| JestFiltrTowaru | `bool` |  |  |  |
-| JestFiltrZasobow | `bool` |  |  |  |
-| JestIndywidulanaNazwa | `bool` |  |  |  |
+| JestDefinicjaEwidencji | `bool` | tylko-odczyt |  | Informuje, czy jest określona definicja ewidencji księgowej dla tej definicji dokumentu handlowego. |
+| JestFiltrKontrahenta | `bool` | tylko-odczyt |  |  |
+| JestFiltrTowaru | `bool` | tylko-odczyt |  |  |
+| JestFiltrZasobow | `bool` | tylko-odczyt |  |  |
+| JestIndywidulanaNazwa | `bool` | tylko-odczyt |  |  |
 | JestKWPZ | `bool` | bazodanowe | JestKWPZ |  |
-| JestWalutaKontrahenta | `bool` | bazodanowe |  | Określa, czy ceny pozycji na dokumencie będą wyrażone w walucie kontrahenta. |
 | KasaZbiorcza | `bool` | bazodanowe | Zbiorcze księgowanie zapłat | Określa, że księgowanie płatności będzie odbywać się zbiorczo. |
 | Kasowany | `bool` | bazodanowe |  | Określa czy dokument może być kasowany przez operatora programu. |
-| Kategoria | `Soneta.Handel.KategoriaHandlowa` | bazodanowe, enum |  | Kategoria dokumentów grupująca dokumenty na liście. |
-| KierunekMagazynu | `Soneta.Magazyny.KierunekPartii` | bazodanowe, enum | Kierunek magazynu | Określa kierunek operacji magazynowych. |
-| KierunekPlatnosci | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  | Określa sposób generowania płatności do dokumentu i czy w ogólóle płatnosć ma się generować. |
-| KierunekZaliczki | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  | Określa sposób dołączania zaliczki (wpłaty) do dokumentu i czy w ogóle można dołączać zaliczkę. |
+| Kategoria | `Soneta.Handel.KategoriaHandlowa` (enum) | bazodanowe |  | Kategoria dokumentów grupująca dokumenty na liście. |
+| KierunekMagazynu | `Soneta.Magazyny.KierunekPartii` (enum) | bazodanowe | Kierunek magazynu | Określa kierunek operacji magazynowych. |
+| KierunekPlatnosci | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe |  | Określa sposób generowania płatności do dokumentu i czy w ogólóle płatnosć ma się generować. |
+| KierunekZaliczki | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe |  | Określa sposób dołączania zaliczki (wpłaty) do dokumentu i czy w ogóle można dołączać zaliczkę. |
 | Klawisz | `string` | bazodanowe |  | Klawisz do szybkiego dodawania dokumentu. |
-| KodKreskowyZNumeremDok | `Soneta.Handel.KodKreskowyZNumeremDok` | bazodanowe, enum |  | Drukowanie kodu kreskowego pod numerem dokumentu |
-| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` |  |  |  |
-| KontrahentWymagany | `Soneta.Handel.WymaganieKontrahenta` | bazodanowe, enum | Kontrahent | Określa sposób wprowadzania kontrahenta do dokumentu handlowego. |
+| KodKreskowyZNumeremDok | `Soneta.Handel.KodKreskowyZNumeremDok` (enum) | bazodanowe |  | Drukowanie kodu kreskowego pod numerem dokumentu |
+| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` | tylko-odczyt |  |  |
+| KontrahentWymagany | `Soneta.Handel.WymaganieKontrahenta` (enum) | bazodanowe | Kontrahent | Określa sposób wprowadzania kontrahenta do dokumentu handlowego. |
 | KontrolaLimituKredytowego | `bool` | bazodanowe | Kontrola limitu kredytowego | Określa, czy podczas wystawiania dokumentu stosowana będzie kontrola limitu kredytowego. |
-| KontrolerRelacjiInfo | `Soneta.Handel.KontrolerRelacjiInfo` | bazodanowe |  | Kontroler relacji. |
+| KontrolerRelacjiInfo | `Soneta.Handel.KontrolerRelacjiInfo` (subrow) | bazodanowe |  | Kontroler relacji. |
 | KontrolerRelacjiInfo.Disabled | `bool` | bazodanowe |  | Określa, czy kontroler relacji jest włączony. |
 | KontrolerRelacjiInfo.PrzeliczajPozycjeRelacji | `bool` | bazodanowe |  | Określa, czy kontroler relacji powinien przeliczać pozycje relacji handlwych. |
-| KopiowanieOANaPlatnosci | `Soneta.Core.KopiowanieOpisuAnalitycznego` |  |  |  |
 | KopiujCechyDostawy | `bool` | bazodanowe | Kopiuj cechy z dostawy. | Określa, czy cechy z dostawy zostaną przeniesione na pozycję dokumentu rozchodowego. |
-| KrajPrzeznaczeniaEtykieta | `string` |  |  | Określa etykietę pola 'Kraj przeznaczenia'. |
-| KreatorDokumentu | `Soneta.Handel.KreatorDokumentu` | bazodanowe |  | Ustawienia kreatora dokumentu handlowego. |
-| KreatorDokumentu.DomyslnaPodlistaTowaru | `Soneta.Handel.SzybkaTransakcjaTowarPodlista` | bazodanowe, enum |  | Określa, która z dodatkowych podlist przy wyborze towaru będzie domyślna. |
+| KrajPrzeznaczeniaEtykieta | `string` | tylko-odczyt |  | Określa etykietę pola 'Kraj przeznaczenia'. |
+| KreatorDokumentu | `Soneta.Handel.KreatorDokumentu` (subrow) | bazodanowe |  | Ustawienia kreatora dokumentu handlowego. |
+| KreatorDokumentu.DomyslnaPodlistaTowaru | `Soneta.Handel.SzybkaTransakcjaTowarPodlista` (enum) | bazodanowe |  | Określa, która z dodatkowych podlist przy wyborze towaru będzie domyślna. |
 | KreatorDokumentu.JestWlaczony | `bool` | bazodanowe |  | Określa, czy używać mechanizmu szybkiego wprowadzania pozycji dokumentu. |
-| KreatorDokumentu.Towary | `Soneta.Handel.KreatorDokumentuStrona` | bazodanowe |  | Ustawienia indywidualne listy towarów. |
-| KreatorDokumentu.Towary.Podsumowanie | `Soneta.Handel.KreatorDokumentuStronaIndywidualna` | bazodanowe |  | Ustawienia podsumowania indywidualnego. |
+| KreatorDokumentu.Towary | `Soneta.Handel.KreatorDokumentuStrona` (subrow) | bazodanowe |  | Ustawienia indywidualne listy towarów. |
+| KreatorDokumentu.Towary.Podsumowanie | `Soneta.Handel.KreatorDokumentuStronaIndywidualna` (subrow) | bazodanowe |  | Ustawienia podsumowania indywidualnego. |
 | KreatorDokumentu.Towary.Podsumowanie.Visible | `bool` | bazodanowe |  | Określa, czy na formularzu będzie widoczne sekcja indywidualna użytkownika. |
-| KreatorDokumentu.Towary.Podsumowanie.Xml | `Soneta.Business.MemoText` |  |  |  |
-| KreatorDokumentuTowaryPodsumowanieXml | `Soneta.Business.MemoText` | bazodanowe |  | Definicja indywidualnego podsumowania listy towarów. |
-| KursWgDaty | `Soneta.Handel.KursWgDaty` | bazodanowe, enum |  | Określa, według której daty ma być pobierany kurs. |
-| LiczonaOd | `Soneta.Handel.SposobLiczeniaVAT` | bazodanowe, enum |  | Określa sposób liczenia wartości dokumentu i rodzaj stosowanych cen: od brutto lub od netto. |
-| LimitWartosciInfo | `Soneta.Handel.LimitWartosciInfo` | bazodanowe |  |  |
-| LimitWartosciInfo.ReakcjaZatwierdzanie | `Soneta.Handel.LimitWartosciReakcjaZatwierdzanie` | bazodanowe, enum | Zatwierdzanie | Określa, czy zatwierdzanie jest dozwolone wtedy, kiedy limit wartości został przekroczony. |
-| LimityWartosci | `Soneta.Business.SubTable<Soneta.Handel.LimitWartosci>` |  |  |  |
-| LinieParagonu | `Soneta.Handel.LinieParagonu` | bazodanowe, enum | Sposób wydruku paragonu fiskalnego | Określa sposób tworzenia linii paragonu fiskalnego, mogą to być pozycje dokumentu, albo jego tabela VAT |
-| LogoWydruk | `Soneta.Core.Enums.LogoWydruk` | bazodanowe, enum |  | Logo w nagłówku dokumentu. |
+| KreatorDokumentu.Towary.Podsumowanie.Xml | `MemoText` | podlista |  |  |
+| KreatorDokumentuTowaryPodsumowanieXml | `MemoText` | bazodanowe, podlista |  | Definicja indywidualnego podsumowania listy towarów. |
+| KursWgDaty | `Soneta.Handel.KursWgDaty` (enum) | bazodanowe |  | Określa, według której daty ma być pobierany kurs. |
+| LiczonaOd | `Soneta.Handel.SposobLiczeniaVAT` (enum) | bazodanowe |  | Określa sposób liczenia wartości dokumentu i rodzaj stosowanych cen: od brutto lub od netto. |
+| LimitWartosciInfo | `Soneta.Handel.LimitWartosciInfo` (subrow) | bazodanowe |  |  |
+| LimitWartosciInfo.ReakcjaZatwierdzanie | `Soneta.Handel.LimitWartosciReakcjaZatwierdzanie` (enum) | bazodanowe | Zatwierdzanie | Określa, czy zatwierdzanie jest dozwolone wtedy, kiedy limit wartości został przekroczony. |
+| LimityWartosci | `SubTable<Soneta.Handel.LimitWartosci>` | podlista |  |  |
+| LinieParagonu | `Soneta.Handel.LinieParagonu` (enum) | bazodanowe | Sposób wydruku paragonu fiskalnego | Określa sposób tworzenia linii paragonu fiskalnego, mogą to być pozycje dokumentu, albo jego tabela VAT |
+| LogoWydruk | `Soneta.Core.Enums.LogoWydruk` (enum) | bazodanowe |  | Logo w nagłówku dokumentu. |
 | LogoWydrukNazwa | `string` | bazodanowe |  | Nazwa logo w nagłówku dokumentu. |
-| MagazynInfo | `string` |  |  |  |
-| MinimumMarzy | `bool` | bazodanowe |  | Określa, czy dozwolony jest rozchód z marżą poniżej minimalnej. |
-| MomentMagazynu | `Soneta.Magazyny.MomentMagazynu` | bazodanowe, enum |  | Określa moment, w którym będzie wykonana operacja magazynowa. |
-| MozliwosciEdycjiPozycji | `Soneta.Handel.MozliwosciEdycji` | bazodanowe |  |  |
-| MozliwosciEdycjiPozycji.Dodawanie | `Soneta.Handel.MozliwosciEdycji.OpcjeDodawania` | bazodanowe, enum |  |  |
-| MozliwosciEdycjiPozycji.Edycja | `Soneta.Handel.MozliwosciEdycji.OpcjeEdycji` | bazodanowe, enum |  |  |
-| MozliwosciEdycjiPozycji.EdycjaPozycjiGratisowych | `Soneta.Handel.MozliwosciEdycji.OpcjeEdycji` | bazodanowe, enum |  |  |
+| MagazynInfo | `string` | tylko-odczyt |  |  |
+| MomentMagazynu | `Soneta.Magazyny.MomentMagazynu` (enum) | bazodanowe |  | Określa moment, w którym będzie wykonana operacja magazynowa. |
+| MozliwosciEdycjiPozycji | `Soneta.Handel.MozliwosciEdycji` (subrow) | bazodanowe |  |  |
+| MozliwosciEdycjiPozycji.Dodawanie | `Soneta.Handel.MozliwosciEdycji.OpcjeDodawania` (enum) | bazodanowe |  |  |
+| MozliwosciEdycjiPozycji.Edycja | `Soneta.Handel.MozliwosciEdycji.OpcjeEdycji` (enum) | bazodanowe |  |  |
+| MozliwosciEdycjiPozycji.EdycjaPozycjiGratisowych | `Soneta.Handel.MozliwosciEdycji.OpcjeEdycji` (enum) | bazodanowe |  |  |
 | MozliwosciEdycjiPozycji.Kasowanie | `bool` | bazodanowe |  |  |
-| Nadrzedne | `Soneta.Business.SubTable` |  |  |  |
-| Nadrzedne2 | `Soneta.Business.SubTable` |  |  |  |
-| Nadrzedne3 | `Soneta.Business.SubTable` |  |  |  |
-| Nadrzedne4 | `Soneta.Business.SubTable` |  |  |  |
-| NadrzedneDefinicje | `Soneta.Business.SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` |  |  |  |
-| NadrzędneDefinicjeInfo | `string` |  |  |  |
+| NadrzedneDefinicje | `SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` | podlista |  |  |
+| NadrzędneDefinicjeInfo | `string` | tylko-odczyt |  |  |
 | Naglowek | `string` | bazodanowe |  | Określa widok pierwszego nagłówka dokumentu. |
 | Naglowek2 | `string` | bazodanowe |  | Określa widok drugiego nagłówka dokumentu. |
 | NaglowekP | `string` | bazodanowe |  | Określa widok nagłówka pozycji dokumentu. |
 | Nazwa | `string` | bazodanowe |  | Pełna nazwa definicji dokumentu, wykorzystywana do wyszukiwania deifnicji. |
 | NazwaDaty | `string` | bazodanowe |  | Określa nazwę pola 'Data' wyświetlanego na formularzu dokumentu. |
 | NazwaDatyDostawy | `string` | bazodanowe |  | Określa nazwę pola 'Dostawa.Termin' wyświetlanego na formularzu dokumentu. |
-| NazwaDatyDostawyEtykietaShort | `string` |  |  |  |
-| NazwaDatyEtykieta | `string` |  |  |  |
-| NazwaDatyEtykietaShort | `string` |  |  |  |
+| NazwaDatyDostawyEtykietaShort | `string` | tylko-odczyt |  |  |
+| NazwaDatyEtykieta | `string` | tylko-odczyt |  |  |
+| NazwaDatyEtykietaShort | `string` | tylko-odczyt |  |  |
 | NazwaDatyOperacji | `string` | bazodanowe |  | Określa nazwę pola 'DataOperacji' wyświetlanego na formularzu dokumentu. |
-| NazwaDatyOperacjiEtykieta | `string` |  |  |  |
-| NazwaDatyOperacjiEtykietaShort | `string` |  |  |  |
-| NazwaStanuRealizacji | `string` |  |  |  |
-| NazwaTowaru | `Soneta.Handel.NazwaTowaruNaPozycji` | bazodanowe, enum |  | Określa sposób tworzenia nazwy towaru w pozycjach dokumentu. |
+| NazwaDatyOperacjiEtykieta | `string` | tylko-odczyt |  |  |
+| NazwaDatyOperacjiEtykietaShort | `string` | tylko-odczyt |  |  |
+| NazwaStanuRealizacji | `string` | tylko-odczyt |  |  |
+| NazwaTowaru | `Soneta.Handel.NazwaTowaruNaPozycji` (enum) | bazodanowe |  | Określa sposób tworzenia nazwy towaru w pozycjach dokumentu. |
 | NieWplywaNaOstatniaCeneZakupu | `bool` | bazodanowe | Nie wpływa na ostatnią cenę zakupu | Określa, czy dokument ma wpływ na ostatnią cenę zakupu. |
 | NieWymagajCech | `bool` | bazodanowe |  | Wyłącza wymagalność cech dokumentu i pozycji. |
 | NiezgodnoscWartosci | `bool` | bazodanowe |  | Umożliwia pojawienie się pewnych niezgodności w wyliczeniu wartości pozycji, ponieważ po zmianie wartości i przeliczeniu innego elementu pozycji wartość nie będzie ponownie naliczana. |
-| NumerEwidencji | `Soneta.Handel.NumerEwidencji` | bazodanowe, enum |  | Określa sposób nadawania numeru dokumentu ewidencji. |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
+| NumerEwidencji | `Soneta.Handel.NumerEwidencji` (enum) | bazodanowe |  | Określa sposób nadawania numeru dokumentu ewidencji. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
@@ -204,54 +199,53 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarni
 | ObslugaAukcji | `bool` | bazodanowe | Obsługa aukcji | Określa, czy dokument obsługuje aukcję |
 | ObslugaCRU | `bool` | bazodanowe | Obsługa CRU dla definicji dokumentu handlowego |  |
 | ObslugaSLA | `bool` | bazodanowe | Obsługa parametrów SLA | Obsługa parametrów SLA ServiceDesk |
-| OgraniczDoStanu | `bool` |  |  |  |
-| OkrDostawcaOdbiorca | `Soneta.Handel.OkreslenieKontrahenta` | bazodanowe, enum |  | Określenie drugiego kontrahenta. |
-| OkreslenieDatyWplaty | `Soneta.Handel.OkreslenieDatyZaplaty` | bazodanowe, enum |  | Określa sposób ustalania daty zapłaty (wpłaty) tworzonej podczas zatwierdzania dokumentu. |
-| OkreslenieDatyWyplaty | `Soneta.Handel.OkreslenieDatyZaplaty` | bazodanowe, enum |  | Określa sposób ustalania daty zapłaty (wypłaty) tworzonej podczas zatwierdzania dokumentu. |
+| OgraniczDoStanu | `bool` | tylko-odczyt |  |  |
+| OkrDostawcaOdbiorca | `Soneta.Handel.OkreslenieKontrahenta` (enum) | bazodanowe |  | Określenie drugiego kontrahenta. |
+| OkreslenieDatyWplaty | `Soneta.Handel.OkreslenieDatyZaplaty` (enum) | bazodanowe |  | Określa sposób ustalania daty zapłaty (wpłaty) tworzonej podczas zatwierdzania dokumentu. |
+| OkreslenieDatyWyplaty | `Soneta.Handel.OkreslenieDatyZaplaty` (enum) | bazodanowe |  | Określa sposób ustalania daty zapłaty (wypłaty) tworzonej podczas zatwierdzania dokumentu. |
 | OpakJakoPozycje | `bool` | bazodanowe | Obsługa opakowań za pomocą pozycji | Obsługa opakowań za pomocą pozycji. |
-| OpisEwidencji | `Soneta.Handel.TworzenieOpisuEwidencji` | bazodanowe, enum | Tworzenie opisu ewidencji | Określa sposób tworzenia opisu ewidencji. |
-| OpisEwidencjiCecha | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha do dokumentu tworząca opis ewidencji. | Określa cechę dokumentu (algorytmiczną typu tekst), która utworzy opis w dokumencie ewidencji. |
-| OpisWydruku | `Soneta.Business.MemoText` | bazodanowe |  | Opis umieszczany na wydruku dokumentu. |
+| OpisEwidencji | `Soneta.Handel.TworzenieOpisuEwidencji` (enum) | bazodanowe | Tworzenie opisu ewidencji | Określa sposób tworzenia opisu ewidencji. |
+| OpisEwidencjiCecha | `FeatureDefinition` | bazodanowe | Cecha do dokumentu tworząca opis ewidencji. | Określa cechę dokumentu (algorytmiczną typu tekst), która utworzy opis w dokumencie ewidencji. |
+| OpisWydruku | `MemoText` | bazodanowe, podlista |  | Opis umieszczany na wydruku dokumentu. |
 | OpisWydrukuCecha | `string` |  | Cecha tworząca opis wydruku | Określa cechę do dokumentu handlowego (typu tekst), która utworzy opis na wydruku. |
-| OstrzezenieDlaEdycji | `Soneta.Handel.OstrzezenieDlaEdycji` | bazodanowe |  |  |
-| OstrzezenieDlaEdycji.Message | `string` |  |  |  |
+| OstrzezenieDlaEdycji | `Soneta.Handel.OstrzezenieDlaEdycji` (subrow) | bazodanowe |  |  |
+| OstrzezenieDlaEdycji.Message | `string` | tylko-odczyt |  |  |
 | OstrzezenieDlaEdycji.Pokaz | `bool` | bazodanowe |  |  |
-| OstrzezenieDlaEdycji.ShowMessage | `bool` |  |  |  |
-| OznaczJakoEParagon | `Soneta.Handel.OznaczJakoEParagon` | bazodanowe, enum | Oznacz jako e-paragon. | Oznacz jako e-paragon |
+| OstrzezenieDlaEdycji.ShowMessage | `bool` | tylko-odczyt |  |  |
+| OznaczJakoEParagon | `Soneta.Handel.OznaczJakoEParagon` (enum) | bazodanowe | Oznacz jako e-paragon. | Oznacz jako e-paragon |
 | PlanSplat | `bool` | bazodanowe |  | Określa, czy płatności mają być tylko propozycją spłat (nie podlegają rozliczeniu). |
 | PlatnoscKaucji | `bool` | bazodanowe |  | Określa, czy na dokumencie jest stosowana płatność kaucji. |
-| PodgladZalacznika | `Soneta.Core.AttachmentPreviewDisplayMode` | bazodanowe, enum | Podgląd dokumentów KSeF oraz załączników na zakładce 'Ogólne' |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Handel.DefRelacjiHandlowej>` |  |  |  |
-| PodrzedneDefinicje | `Soneta.Business.SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` |  |  |  |
-| PodrzędneDefinicjeInfo | `string` |  |  |  |
+| PodgladZalacznika | `Soneta.Core.AttachmentPreviewDisplayMode` (enum) | bazodanowe | Podgląd dokumentów KSeF oraz załączników na zakładce 'Ogólne' |  |
+| Podrzedne | `SubTable<Soneta.Handel.DefRelacjiHandlowej>` | podlista |  |  |
+| PodrzedneDefinicje | `SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` | podlista |  |  |
+| PodrzędneDefinicjeInfo | `string` | tylko-odczyt |  |  |
 | Podsumowanie | `string` | bazodanowe |  | Określa widok podsumowania dokumentu. |
-| PodzialKosztuDodatkowego | `Soneta.Handel.PodzialKosztuDodatkowego` | bazodanowe, enum | Sposób podziału kosztu dodatkowego | Sposób podziału kosztu dodatkowego na pozycje dokumentu. |
-| PodzialOkresuProporcja | `Soneta.Handel.UmowaPodzialOkresuProporcja` | bazodanowe, enum | Podział okresu proporcją | Podział okresu proporcją. |
+| PodzialKosztuDodatkowego | `Soneta.Handel.PodzialKosztuDodatkowego` (enum) | bazodanowe | Sposób podziału kosztu dodatkowego | Sposób podziału kosztu dodatkowego na pozycje dokumentu. |
+| PodzialOkresuProporcja | `Soneta.Handel.UmowaPodzialOkresuProporcja` (enum) | bazodanowe | Podział okresu proporcją | Podział okresu proporcją. |
 | PokazKomunikat | `bool` | bazodanowe |  | Decyduje o pokazywaniu komunikatu o kontrahencie po jego wybraaniu w dokumencie. |
 | PokazNieZeroweWykluczone | `bool` |  |  | Dodatkowo pokazuje na liście towarów takie niezerowe towary, które są wykluczone przez filtr na magazynie. |
-| PokazParametryWydruku | `Soneta.Handel.ParametryWydrukuMonit` | bazodanowe, enum |  | Określa, czy okno z parametrami wydruku dla wydruku domyślnego będzie wyświetlane. |
+| PokazParametryWydruku | `Soneta.Handel.ParametryWydrukuMonit` (enum) | bazodanowe |  | Określa, czy okno z parametrami wydruku dla wydruku domyślnego będzie wyświetlane. |
 | PoleSortowania | `string` | bazodanowe |  | Określa pole, po którym zostaną przesortowane pozycjie dokumentu po jego zapisaniu. |
 | PostfixSerii | `string` | bazodanowe |  | Postfix identyfikujący serię w słowniku |
 | PozwalajIlosc0 | `bool` | bazodanowe |  | Określa, czy można zatwierdzać dokumenty, które mają pozycje z zerową ilością. |
-| PozwalajMagazynBezPraw | `Soneta.Handel.PozwalajMagazynBezPraw` | bazodanowe, enum | Pozwalaj na nieuprawniony magazyn | Pozwala na wybranie magazynu docelowego, do którego operator nie ma praw. |
+| PozwalajMagazynBezPraw | `Soneta.Handel.PozwalajMagazynBezPraw` (enum) | bazodanowe | Pozwalaj na nieuprawniony magazyn | Pozwala na wybranie magazynu docelowego, do którego operator nie ma praw. |
 | PozwalajWartosc0 | `bool` | bazodanowe |  | Określa, czy można zatwierdzać dokumenty, które mają pozycje z zerową wartością. |
 | PozwalajWartosc0Gratisu | `bool` | bazodanowe |  | Określa, czy można zatwierdzać dokumenty, które mają pozycje gratisowe z zerową wartością. |
 | PozwalajWielowalutowy | `bool` | bazodanowe |  | Określa, czy dopuszczalne są płatności w różnych walutach. |
-| PozwalajZatwierdzacBezPozycji | `bool` | bazodanowe |  | Określa czy dokument może być zatwierdzany, jeśli nie ma pozycji. |
-| PrawaDoDefinicji | `Soneta.Business.SubTable<Soneta.Handel.MagDefDokRight>` |  |  |  |
-| PrecyzjaCeny | `Soneta.Towary.PrecyzjaCeny` | bazodanowe |  | Określa ilość miejsc dziesiętynych dla ceny. |
+| PrawaDoDefinicji | `SubTable<Soneta.Handel.MagDefDokRight>` | podlista |  |  |
+| PrecyzjaCeny | `Soneta.Towary.PrecyzjaCeny` (subrow) | bazodanowe |  | Określa ilość miejsc dziesiętynych dla ceny. |
 | PrecyzjaCeny.Precyzja | `int` | bazodanowe |  | Precyzja zaokrąglenia (wyliczania) cen towaru |
 | PrecyzjaCeny.Wymuszaj | `bool` | bazodanowe |  | Wskazuje na to, że precyzja ceny ustalona na definicji ma pierwszeńśtwo przed precyzją ceny na kartotece towaru |
 | Procedura | `string` | bazodanowe | Nazwa procedury na fakturze | Nazwa procedury na fakturze (pod tytułem). |
 | ProceduryVat | `bool` | bazodanowe |  |  |
-| ProdukcjaInfo | `Soneta.Handel.ProdukcjaShortInfo` | bazodanowe |  |  |
+| ProdukcjaInfo | `Soneta.Handel.ProdukcjaShortInfo` (subrow) | bazodanowe |  |  |
 | ProdukcjaInfo.ObslugaTechnologii | `bool` | bazodanowe | Obsługa technologii | Określa, czy dokument obsługuje technologię. |
 | RelacjaCykliczna | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku rozliczenia cyklicznego dokumentu. |
-| RelacjaCyklicznaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania naliczania cyklicznego. |
+| RelacjaCyklicznaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania naliczania cyklicznego. |
 | RelacjaKaucji | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku rozliczenia opakowań dla towarów z dokumentu. |
 | RelacjaKaucji2 | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku rozliczenia opakowań dla towarów z dokumentu. |
 | RelacjaKaucji3 | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku rozliczenia opakowań dla towarów z dokumentu. |
-| RelacjaKaucjiDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania naliczania opakowań. |
+| RelacjaKaucjiDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania naliczania opakowań. |
 | RelacjaKopiowania | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku kopiowania dokumentu. |
 | RelacjaKopiowania2 | `Soneta.Handel.DefDokHandlowego` |  |  | Druga definicja dokumentu powstającego w wyniku kopiowania dokumentu. |
 | RelacjaKopiowania3 | `Soneta.Handel.DefDokHandlowego` |  |  | Trzecia definicja dokumentu powstającego w wyniku kopiowania dokumentu. |
@@ -260,96 +254,94 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarni
 | RelacjaKopiowaniaB2 | `Soneta.Handel.DefDokHandlowego` |  |  | Druga definicja dokumentu powstającego w wyniku drugiego kopiowania dokumentu. |
 | RelacjaKopiowaniaB3 | `Soneta.Handel.DefDokHandlowego` |  |  | Trzecia definicja dokumentu powstającego w wyniku drugiego kopiowania dokumentu. |
 | RelacjaKopiowaniaB4 | `Soneta.Handel.DefDokHandlowego` |  |  | Czwarta definicja dokumentu powstającego w wyniku drugiego kopiowania dokumentu. |
-| RelacjaKopiowaniaBDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania drugiego kopiowania. |
-| RelacjaKopiowaniaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania kopiowania. |
+| RelacjaKopiowaniaBDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania drugiego kopiowania. |
+| RelacjaKopiowaniaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania kopiowania. |
 | RelacjaKorekty | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu powstającego w wyniku tworzenia korekty. |
-| RelacjaKorektyDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania korekty. |
+| RelacjaKorektyDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania korekty. |
 | RelacjaMagazynowa | `Soneta.Handel.DefDokHandlowego` |  |  | Definicja dokumentu magazynowego. |
-| RelacjaMagazynowaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` |  |  | Definicja relacji, zawierająca szczegóły działania relacji magazynowej. |
-| RezerwacjaDo | `Soneta.Magazyny.TypDatyRezerwacji` | bazodanowe, enum | Koniec okresu rezerwacji | Data, od której wyliczana będzie końcowa data rezerwacji ilościowej. |
+| RelacjaMagazynowaDefinicja | `Soneta.Handel.DefRelacjiHandlowej` | tylko-odczyt |  | Definicja relacji, zawierająca szczegóły działania relacji magazynowej. |
+| RezerwacjaDo | `Soneta.Magazyny.TypDatyRezerwacji` (enum) | bazodanowe | Koniec okresu rezerwacji | Data, od której wyliczana będzie końcowa data rezerwacji ilościowej. |
 | RezerwacjaDoDni | `int` | bazodanowe |  |  |
-| RezerwacjaOd | `Soneta.Magazyny.TypDatyRezerwacji` | bazodanowe, enum | Początek okresu rezerwacji | Data, od której wyliczana będzie podczątkowa data rezerwacji ilościowej. |
+| RezerwacjaOd | `Soneta.Magazyny.TypDatyRezerwacji` (enum) | bazodanowe | Początek okresu rezerwacji | Data, od której wyliczana będzie podczątkowa data rezerwacji ilościowej. |
 | RezerwacjaOdDni | `int` | bazodanowe |  |  |
 | RezerwowacTowar | `bool` | bazodanowe |  | Określa, czy dokument rezerwuje ilościowo (bez wskazania zasobów) towar w magazynie. |
 | RodzajLokDlaDostawy | `Soneta.Core.SlownikElem` | bazodanowe | Rodzaj lokalizacji | Rodzaj lokalizacji dla miejsca dostawy. |
-| RodzajTransakcji | `Soneta.Handel.KodRodzajuTransakcji` | bazodanowe, enum |  | Rodzaj transakcji dla deklaracji Intrastat. |
-| RodzajTransportu | `Soneta.Handel.KodRodzajuTransportu` | bazodanowe, enum |  | Kod rodzaju transportu dla deklaracji Intrastat. |
-| RodzajUmowy | `Soneta.Handel.RodzajUmowy` | bazodanowe, enum | Domyślny rodzaj umowy | Określa domyślny rodzaj umowy. |
-| RodzajWydruku | `Soneta.Handel.RodzajWydruku` | bazodanowe, enum |  | Rodzaj wydruku (pełny lub uproszczony). |
-| RodzajWydrukuFiskalnego | `Soneta.Handel.RodzajWydrukuFiskalnego` | bazodanowe, enum |  | Rodzaj wydruku fiskalnego dla drukarek fiskalnych nowego typu. |
-| RodzajZamowieniaNaPozycji | `Soneta.Handel.RodzajZamowieniaNaPozycji` | bazodanowe, enum | Domyślny rodzaj zamówienia na pozycji |  |
-| RodzajeKomunikatow | `Soneta.Business.LpSubTable<Soneta.Core.RodzajKomunikatuHost>` |  |  |  |
+| RodzajTransakcji | `Soneta.Handel.KodRodzajuTransakcji` (enum) | bazodanowe |  | Rodzaj transakcji dla deklaracji Intrastat. |
+| RodzajTransportu | `Soneta.Handel.KodRodzajuTransportu` (enum) | bazodanowe |  | Kod rodzaju transportu dla deklaracji Intrastat. |
+| RodzajUmowy | `Soneta.Handel.RodzajUmowy` (enum) | bazodanowe | Domyślny rodzaj umowy | Określa domyślny rodzaj umowy. |
+| RodzajWydruku | `Soneta.Handel.RodzajWydruku` (enum) | bazodanowe |  | Rodzaj wydruku (pełny lub uproszczony). |
+| RodzajWydrukuFiskalnego | `Soneta.Handel.RodzajWydrukuFiskalnego` (enum) | bazodanowe |  | Rodzaj wydruku fiskalnego dla drukarek fiskalnych nowego typu. |
+| RodzajZamowieniaNaPozycji | `Soneta.Handel.RodzajZamowieniaNaPozycji` (enum) | bazodanowe | Domyślny rodzaj zamówienia na pozycji |  |
+| RodzajeKomunikatow | `LpSubTable<Soneta.Core.RodzajKomunikatuHost>` | podlista |  |  |
 | RozchodBezMarzy | `bool` |  |  | Określa, czy rozchód ma być liczony bez marży. |
 | RozliczajAutomatycznieBlokadeZasobu | `bool` | bazodanowe | Rozliczaj automatycznie blokadę zasobu | Rozliczaj automatycznie blokadę zasobu. |
 | RozliczajBlokadeKorektaPrzyjecia | `bool` | bazodanowe | Rozliczaj blokadę korektą przyjęcia | Rozliczaj blokadę korektą przyjęcia. |
 | RozliczajZasobIlosciaZrealizowana | `bool` | bazodanowe | Rozliczaj zasób ilością zrealizowaną | Rozliczaj zasób ilością zrealizowaną. |
 | RozneWalutyPozycjiIPodsumowania | `bool` | bazodanowe | Dopuszczaj ceny na pozycjach w innej walucie niż wartość dokumentu | Dopuszczaj ceny na pozycjach w innej walucie niż wartość dokumentu |
-| SeriaCategory | `string` |  |  |  |
-| SeriaDictionaryList | `Soneta.Business.View` |  |  |  |
+| SeriaCategory | `string` | tylko-odczyt |  |  |
+| SeriaDictionaryList | `View` | podlista |  |  |
 | SeriaOperatora | `bool` | bazodanowe |  | Włącza uzupełnienie pola 'Seria' w dokumencie kodem aktualnie pracującego operatora. |
 | SlownikSerii | `bool` | bazodanowe |  | Umożliwia wprowadzenie serii bazującej na słowniku. |
-| SposobEdycjiKompletacji | `Soneta.Handel.SposobEdycjiKompletacji` | bazodanowe, enum |  | Określa sposób przeliczenia składników/produktów po zmianie ilości w pozycji kompletacji. |
-| SposobPrzenoszeniaZaliczki | `Soneta.Handel.SposobPrzenoszeniaZaliczki` | bazodanowe, enum |  | Określa sposób, w jaki faktura zaliczkowa jest rozliczana przez dokument końcowy. |
-| SposobRozliczaniaNadrzednego | `Soneta.Handel.SposobRozliczaniaNadrzednego` | bazodanowe, enum |  | Określa, czy zmiany na dokumencie będą powodowały zmiany w rozliczeniu, które dokument powoduje względem dokumentu sobie nadrzędnego. |
+| SposobEdycjiKompletacji | `Soneta.Handel.SposobEdycjiKompletacji` (enum) | bazodanowe |  | Określa sposób przeliczenia składników/produktów po zmianie ilości w pozycji kompletacji. |
+| SposobPrzenoszeniaZaliczki | `Soneta.Handel.SposobPrzenoszeniaZaliczki` (enum) | bazodanowe |  | Określa sposób, w jaki faktura zaliczkowa jest rozliczana przez dokument końcowy. |
+| SposobRozliczaniaNadrzednego | `Soneta.Handel.SposobRozliczaniaNadrzednego` (enum) | bazodanowe |  | Określa, czy zmiany na dokumencie będą powodowały zmiany w rozliczeniu, które dokument powoduje względem dokumentu sobie nadrzędnego. |
 | SposobZaplaty | `Soneta.Kasa.SposobZaplaty` | bazodanowe |  | Określa sposób zapłaty stosowany w dokumencie. |
-| SprzedazPonizejCenyMinimalnej | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` | bazodanowe, enum |  |  |
-| SprzedazPonizejCenyZakupu | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` | bazodanowe, enum |  |  |
-| SprzedazPonizejMarzyMinimalnej | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` | bazodanowe, enum |  |  |
+| SprzedazPonizejCenyMinimalnej | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` (enum) | bazodanowe |  |  |
+| SprzedazPonizejCenyZakupu | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` (enum) | bazodanowe |  |  |
+| SprzedazPonizejMarzyMinimalnej | `Soneta.Handel.SprzedazPonizejCenyMinimalnej` (enum) | bazodanowe |  |  |
 | StatusPozycjiObsluga | `bool` | bazodanowe | Obsługa statusu pozycji |  |
-| SumyVAT | `Soneta.Handel.SposobLiczeniaSumVAT` | bazodanowe, enum |  | Określa sposób liczenia tabeli VAT oraz czy możliwa jest jej edycja. |
+| SumyVAT | `Soneta.Handel.SposobLiczeniaSumVAT` (enum) | bazodanowe |  | Określa sposób liczenia tabeli VAT oraz czy możliwa jest jej edycja. |
 | Symbol | `string` | bazodanowe |  | Skrótowa nazwa definicji dokumentu, wykorzystywana do wyszukiwania definicji oraz numeracji dokumentów handlowych. |
 | SzablonPolOpcjonalnychEksportKSeF | `Soneta.Core.KSeFSzablonPolOpcjonalnych` | bazodanowe |  | Szablon pól opcjonalnych KSeF - eksport |
-| TerminPlatnosciLiczonyOd | `Soneta.Handel.TerminPłatnościLiczonyOd` | bazodanowe, enum | Termin płatności liczony od daty | Określa datę, od której ma być obliczany termin płatności. |
+| TerminPlatnosciLiczonyOd | `Soneta.Handel.TerminPłatnościLiczonyOd` (enum) | bazodanowe | Termin płatności liczony od daty | Określa datę, od której ma być obliczany termin płatności. |
 | TerminWaznosciWersjonowania | `bool` | bazodanowe |  | Daje możliwość wersjonowania dokumentów. |
-| TowarWgDostawcy | `Soneta.Handel.TowarWgDostawcy` | bazodanowe, enum |  | Wymusza filtrowanie wyszukiwanie towaru wg dostawcy, którym jest kontrahent z dokument. |
+| TowarWgDostawcy | `Soneta.Handel.TowarWgDostawcy` (enum) | bazodanowe |  | Wymusza filtrowanie wyszukiwanie towaru wg dostawcy, którym jest kontrahent z dokument. |
 | Transport | `bool` | bazodanowe | Transport | Określa, czy dokument obsługuje spedycje. |
 | TylkoPodglad | `bool` | bazodanowe |  | Uniemożliwia edycję dokumentu przez operatora programu. |
-| TypFiltruKontrahenta | `Soneta.Towary.TypFiltruKontrahenta` | bazodanowe, enum | Typ filtru kontrahenta | Określa filtrowanie kontrahentów na liście podczas wprowadzania dokumentu. |
-| TypFiltruTowaru | `Soneta.Towary.TypFiltruTowaru` | bazodanowe, enum |  | Określa filtrowanie towaru wg typu. |
-| TypPartiiMagazynowej | `Soneta.Magazyny.TypPartii` | bazodanowe, enum | Typ partii magazynowej | Określa typ zapisu dotyczącego operacji magazynowych. |
+| TypFiltruTowaru | `Soneta.Towary.TypFiltruTowaru` (enum) | bazodanowe |  | Określa filtrowanie towaru wg typu. |
+| TypPartiiMagazynowej | `Soneta.Magazyny.TypPartii` (enum) | bazodanowe | Typ partii magazynowej | Określa typ zapisu dotyczącego operacji magazynowych. |
 | TytulWydruku | `string` | bazodanowe |  | Tytuł umieszczany na wydruku w nagłówku dokumentu. |
 | TytulWydruku2 | `string` | bazodanowe |  | Tytuł w języku obcym, umieszczany na wydruku w nagłówku dokumentu. |
-| Umowa | `Soneta.Handel.TypUmowy` | bazodanowe, enum |  |  |
-| UstawianiePriorytetu | `Soneta.Handel.UstawianiePriorytetu` | bazodanowe, enum | Ustawianie priorytetu |  |
-| UstawianiePriorytetuCecha | `Soneta.Business.FeatureDefinition` | bazodanowe | Wybór definicji cechy algorytmicznej. |  |
-| UstawieniaWskazaniePartii | `Soneta.Handel.UstawieniaWskazaniePartii` | bazodanowe |  | Ustawienia dotyczące wskazania partii i zasobów. |
+| Umowa | `Soneta.Handel.TypUmowy` (enum) | bazodanowe |  |  |
+| UstawianiePriorytetu | `Soneta.Handel.UstawianiePriorytetu` (enum) | bazodanowe | Ustawianie priorytetu |  |
+| UstawianiePriorytetuCecha | `FeatureDefinition` | bazodanowe | Wybór definicji cechy algorytmicznej. |  |
+| UstawieniaWskazaniePartii | `Soneta.Handel.UstawieniaWskazaniePartii` (subrow) | bazodanowe |  | Ustawienia dotyczące wskazania partii i zasobów. |
 | UstawieniaWskazaniePartii.DoZamowien | `bool` | bazodanowe |  | Określa, czy możliwe jest wskazanie partii do zasobów zamówionych. |
-| UstawieniaWskazaniePartii.Flags | `Soneta.Handel.Helpers.Flags` | bazodanowe, enum |  | Flagi dodatkowe. |
-| UstawieniaWskazaniePartii.Opcje | `Soneta.Handel.WyborPartiiOpcje` | bazodanowe, enum | Wybór partii i zasobu | Opcje mechanizmu wyboru partii. |
-| UstawieniaWskazaniePartii.Przedmiot | `Soneta.Handel.WyborPartiiPrzedmiot` | bazodanowe, enum | Dotyczy | Przedmiot mechanizmu wyboru partii. |
+| UstawieniaWskazaniePartii.Flags | `Soneta.Handel.Helpers.Flags` (enum) | bazodanowe |  | Flagi dodatkowe. |
+| UstawieniaWskazaniePartii.Opcje | `Soneta.Handel.WyborPartiiOpcje` (enum) | bazodanowe | Wybór partii i zasobu | Opcje mechanizmu wyboru partii. |
+| UstawieniaWskazaniePartii.Przedmiot | `Soneta.Handel.WyborPartiiPrzedmiot` (enum) | bazodanowe | Dotyczy | Przedmiot mechanizmu wyboru partii. |
 | UstawieniaWskazaniePartii.WydanieZeWskazanejDostawy | `bool` | bazodanowe | Wydanie ze wskazanej dostawy | Dla zamówień odbiorcy z subzasobami wydania magazynowe realizowane wyłącznie ze wskazanych dostaw. |
 | UstawieniaWskazaniePartii.ZasobyPodrzedne | `bool` | bazodanowe |  | Określa, czy rezerwowanie partii będzie realizowane za pomocą zasobów podrzędnych. |
 | UsuwanieZerowychPozycjiKorekty | `bool` | bazodanowe | Usuwaj niekorygowane pozycje | Dotyczy tylko i wyłącznie korekt i powoduje usuwanie pozycji niekorygowanych podczas zatwierdzania dokumentów i ich odtwarzanie podczas cofania do bufora. |
 | WalutaPlatnosci | `Soneta.Waluty.Waluta` | bazodanowe | Waluta płatności | Waluta, w której będzie wyliczona płatność dokumentu. |
-| Warnings | `Soneta.Business.SubTable<Soneta.Core.WarningDefRel>` |  |  |  |
+| Warnings | `SubTable<Soneta.Core.WarningDefRel>` | podlista |  |  |
 | WartosciTylkoZeSlownika | `bool` | bazodanowe |  | Określa, czy operator może wprowadzić wartość spoza słownika |
-| WarunkiDostawy | `Soneta.Handel.WarunkiDostawy` | bazodanowe, enum |  | Kod warunków dostawy towaru dla deklaracji Intrastat. |
-| WaznaDo | `Soneta.Magazyny.TypDatyRezerwacji` | bazodanowe, enum | Koniec okresu rezerwacji | Data, od której wyliczana będzie końcowa data ważności wersji. |
+| WarunkiDostawy | `Soneta.Handel.WarunkiDostawy` (enum) | bazodanowe |  | Kod warunków dostawy towaru dla deklaracji Intrastat. |
+| WaznaDo | `Soneta.Magazyny.TypDatyRezerwacji` (enum) | bazodanowe | Koniec okresu rezerwacji | Data, od której wyliczana będzie końcowa data ważności wersji. |
 | WaznaDoDni | `int` | bazodanowe |  |  |
 | WersjonowanieDokumentu | `bool` | bazodanowe |  | Możliwość wersjonowania dokumentów. |
-| WersjonowanieWydruk | `Soneta.Handel.WersjonowanieWydruk` | bazodanowe, enum |  |  |
+| WersjonowanieWydruk | `Soneta.Handel.WersjonowanieWydruk` (enum) | bazodanowe |  |  |
 | WeryfikacjaZmianyDanych | `bool` | bazodanowe | Weryfikacja zmiany danych | Weryfikuj na korektach zmiany w danych nabywcy i odbiorcy. |
 | WeryfikujRezerwacje | `bool` | bazodanowe |  | Określa, czy dokument ma uwzględniać rezerwacje iloścowe, czyli korzystać z ilości dostępnej, a nie stanu towaru. |
 | Wewnetrzny | `bool` | bazodanowe |  | Określa, czy dokument magazynowy ma być w grupie wewnętrznych. |
-| WpisBDO | `Soneta.Handel.WpisBDO` | bazodanowe, enum | Rodzaj wpisu BDO | Określa rodzaj wpisu BDO. |
-| WszystkieNadrzędne | `System.Collections.Generic.IEnumerable<Soneta.Handel.DefRelacjiHandlowej>` |  |  |  |
-| WyborStawkiVAT | `Soneta.Handel.WyborStawkiVAT` | bazodanowe, enum |  | Określa, w jaki sposób będzie inicjowana stawka VAT podczas dodawania pozycji dokumentu. |
-| WyborStawkiVATWgDaty | `Soneta.Handel.RodzajDaty` | bazodanowe, enum |  | Określa datę, według której będzie inicjowana stawka VAT podczas dodawania pozycji dokumentu. |
-| WyborTowaru | `Soneta.Handel.WyborTowaru` | bazodanowe, enum | Wybór towaru | Określa sposób wyboru towaru. |
-| WyborWariantu | `Soneta.Handel.WyborWariantu` | bazodanowe, enum | Wybór wariantu | Określa sposób wyboru wariantu. |
+| WpisBDO | `Soneta.Handel.WpisBDO` (enum) | bazodanowe | Rodzaj wpisu BDO | Określa rodzaj wpisu BDO. |
+| WszystkieNadrzędne | `System.Collections.Generic.IEnumerable<Soneta.Handel.DefRelacjiHandlowej>` | podlista |  |  |
+| WyborStawkiVAT | `Soneta.Handel.WyborStawkiVAT` (enum) | bazodanowe |  | Określa, w jaki sposób będzie inicjowana stawka VAT podczas dodawania pozycji dokumentu. |
+| WyborStawkiVATWgDaty | `Soneta.Handel.RodzajDaty` (enum) | bazodanowe |  | Określa datę, według której będzie inicjowana stawka VAT podczas dodawania pozycji dokumentu. |
+| WyborWariantu | `Soneta.Handel.WyborWariantu` (enum) | bazodanowe | Wybór wariantu | Określa sposób wyboru wariantu. |
 | WydrukDomyslny | `bool` | bazodanowe |  | Określa, czy podczas zatwierdzania formularza z dokumentem ma być drukowany domyślny wydruk. |
-| WymaganyDrugiMagazyn | `bool` |  |  | Informuje, czy dany dokument potrzebuje wprowadzenia drugiego magazynu. |
+| WymaganyDrugiMagazyn | `bool` | tylko-odczyt |  | Informuje, czy dany dokument potrzebuje wprowadzenia drugiego magazynu. |
 | WzorzecOpisuPlatnosci | `string` | bazodanowe | Wzorzec opisu płatności | Określa niestandardowy sposób tworzenia opisu w płatności dokumentu. |
-| WzórVAT | `string` |  |  | Wzór opisujący sposób liczenia podatku VAT. |
-| XmlNET | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika w Pulpicie kontrahenta. |  |
+| WzórVAT | `string` | tylko-odczyt |  | Wzór opisujący sposób liczenia podatku VAT. |
+| XmlNET | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika w Pulpicie kontrahenta. |  |
 | ZablokujEdycjeKursu | `bool` | bazodanowe |  | Uniemożliwia edycję daty i wartości kursu waluty. |
-| ZachowaniePoLimicie | `Soneta.Handel.ZachowaniePoPrzekroczeniuLimituKredytowego` | bazodanowe, enum | Zachowanie dokumentu po przekroczeniu limitu kredytowego | Określa zachowanie dokumentu po przekroczeniu limitu kredytowego. |
-| ZaplataPrzyZatwierdzaniu | `Soneta.Handel.DostepnoscMenadzeraRozliczen` | bazodanowe, enum | Zapłata przy zatwierdzaniu | Określa, czy podczas zatwierdzania dokumentu powstanie zapłata. |
-| ZeWskazaniemPartii | `bool` |  |  | Określa, czy dokument jest ze wskazaniem partii towaru. |
-| ZmianaMarzy | `Soneta.Magazyny.ZmianaMarzy` | bazodanowe, enum |  | Określa sposób wpływania dokumentów przychodowych na marżę dokumentu rozchodowego. |
-| ZmianaParametrowZasobuInfo | `Soneta.Handel.ZmianaParametrowZasobuShortInfo` | bazodanowe |  |  |
+| ZachowaniePoLimicie | `Soneta.Handel.ZachowaniePoPrzekroczeniuLimituKredytowego` (enum) | bazodanowe | Zachowanie dokumentu po przekroczeniu limitu kredytowego | Określa zachowanie dokumentu po przekroczeniu limitu kredytowego. |
+| ZaplataPrzyZatwierdzaniu | `Soneta.Handel.DostepnoscMenadzeraRozliczen` (enum) | bazodanowe | Zapłata przy zatwierdzaniu | Określa, czy podczas zatwierdzania dokumentu powstanie zapłata. |
+| ZeWskazaniemPartii | `bool` | tylko-odczyt |  | Określa, czy dokument jest ze wskazaniem partii towaru. |
+| ZmianaMarzy | `Soneta.Magazyny.ZmianaMarzy` (enum) | bazodanowe |  | Określa sposób wpływania dokumentów przychodowych na marżę dokumentu rozchodowego. |
+| ZmianaParametrowZasobuInfo | `Soneta.Handel.ZmianaParametrowZasobuShortInfo` (subrow) | bazodanowe |  |  |
 | ZmianaParametrowZasobuInfo.ZmianaParametrowZasobu | `bool` | bazodanowe | Zmiana parametrów zasobu | Określa, czy dokument umożliwia zmianę wartości (bez ilości) lub ilości (bez wartości) zasobu. |
-| ZmianaWartosciPozycji | `Soneta.Handel.ZmianaWartosciPozycji` | bazodanowe, enum |  | Określa zachowanie dokumentu po zmianie wartości pozycji dokumentu. |
+| ZmianaWartosciPozycji | `Soneta.Handel.ZmianaWartosciPozycji` (enum) | bazodanowe |  | Określa zachowanie dokumentu po zmianie wartości pozycji dokumentu. |
 | bi_disabled | `bool` | bazodanowe |  | Wyłącza mechanizm Business Integrity kontrolujący spójność zapisów dotyczących operacji magazynowych. Mechanizm działa na MSSQL. |
 
 ## Enumy
@@ -901,19 +893,6 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Kaucji` = 5
 - `Złom` = 6 —  - 
 
-### WyborTowaru (`Soneta.Handel.WyborTowaru`)
-- `ZKartotekiLubWskazanie` = 0 — Z kartoteki lub przez wskazanie
-- `ZKartoteki` = 1 — Dodawanie i edycja
-- `WskazaniePartiiTowaru` = 2
-- `ZakazDodawania` = 3
-- `ZakazDodawaniaIKasowania` = 4
-- `ZakazEdycjiPozycji` = 5
-- `WskazaniePartiiPrzyZatwierdzaniu` = 6
-- `AutomatyczneWskazaniePartiiTowaru` = 7
-- `DodawanieTylkoUsług` = 8
-- `DodawanieTylkoUsługEdycjaCen` = 9 — Edycja cen, dodawanie tylko usług
-- `DodawanieTylkoOpakowań` = 10
-
 ### WyborWariantu (`Soneta.Handel.WyborWariantu`)
 - `Recznie` = 0 — Ręcznie
 - `Automatycznie` = 1
@@ -1010,9 +989,6 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `ZerowyIUjemny` = 6
 - `DodatniGratisów` = 7
 - `UkryjNieZeroweWykluczone` = 256
-
-### TypFiltruKontrahenta (`Soneta.Towary.TypFiltruKontrahenta`)
-- `Razem` = 0
 
 ### TypFiltruTowaru (`Soneta.Towary.TypFiltruTowaru`)
 - `Razem` = 0

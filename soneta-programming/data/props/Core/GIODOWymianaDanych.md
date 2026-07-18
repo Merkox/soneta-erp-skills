@@ -4,34 +4,38 @@ Opis: Rejestr udostępnień i pozyskań danych osobowych zgodnie z RODO. Dokumen
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 3
+- subrowy: 1
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data udostępnienia. |
+| Data | `Date` | bazodanowe | Data | Data udostępnienia. |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Host | `Soneta.Core.IGIODOWymianaDanychHost` | bazodanowe, iface-ref |  | Zapis do którego przypisano informacja o wymianie danych |
-| Kierunek | `Soneta.Core.GIODOKierunekWymianyDanych` | bazodanowe, enum | Kierunek | Udostępnienie czy pozyskanie. |
-| NaWniosekOsoby | `bool` | bazodanowe | Na wniosek osoby | Dane udostępnione na wniosek osoby, której dotyczą. |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Host | `Soneta.Core.IGIODOWymianaDanychHost` | bazodanowe, tylko-odczyt, iface-ref |  | Zapis do którego przypisano informacja o wymianie danych |
+| Kierunek | `Soneta.Core.GIODOKierunekWymianyDanych` (enum) | bazodanowe, tylko-odczyt | Kierunek | Udostępnienie czy pozyskanie. |
+| NaWniosekOsoby | `bool` | bazodanowe, tylko-odczyt | Na wniosek osoby | Dane udostępnione na wniosek osoby, której dotyczą. |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
 | Podmiot | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Kontrahent | Podmiot, któremu udostępniono dane. |
-| PodmiotExt | `Soneta.Core.IGIODOPodmiot` |  | Podmiot |  |
+| PodmiotExt | `Soneta.Core.IGIODOPodmiot` | tylko-odczyt | Podmiot |  |
 | PozyskaneOdOsoby | `bool` | bazodanowe | Pozyskane od osoby | Dane pozyskane od osoby, której dotyczą. |
 | SposobPozyskania | `string` | bazodanowe | Sposób pozyskania | Sposób pozyskania |
 | TylkoDostep | `bool` | bazodanowe | Tylko dostęp | Przetwarzanie danych na infrastrukturze powierzającego. |
 | UdostepnioneOsobie | `bool` | bazodanowe | Udostępnione osobie | Dane udostępnione osobie, której dotyczą. |
-| Zakres | `Soneta.Business.MemoText` | bazodanowe | Zakres | Zakres udostępnionych danych. |
+| Zakres | `MemoText` | bazodanowe, podlista | Zakres | Zakres udostępnionych danych. |
 | Zatwierdzony | `bool` |  |  |  |
-| ZbiorDanych | `Soneta.Core.GIODO.GIODOZbiorDanych` | bazodanowe |  | Zbiór danych do którego przypisano informacja o wymianie danych |
+| ZbiorDanych | `Soneta.Core.GIODO.GIODOZbiorDanych` | bazodanowe, tylko-odczyt |  | Zbiór danych do którego przypisano informacja o wymianie danych |
 
 ## Relacje interfejsowe
 

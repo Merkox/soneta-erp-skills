@@ -6,22 +6,26 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IOcenaPracownika`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.HR.DefinicjaEtapuRekrutacji` | bazodanowe |  |  |
-| ElementyOceny | `Soneta.Business.SubTable<Soneta.HR.ElementOcenyPracownika>` |  |  |  |
+| ElementyOceny | `SubTable<Soneta.HR.ElementOcenyPracownika>` | podlista |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Odpowiedzialny | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
-| Rekrutacja | `Soneta.HR.Rekrutacja` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisLinia | `string` | tylko-odczyt |  |  |
+| OpisPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| Rekrutacja | `Soneta.HR.Rekrutacja` | bazodanowe, tylko-odczyt |  |  |
+| Termin | `Date` | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

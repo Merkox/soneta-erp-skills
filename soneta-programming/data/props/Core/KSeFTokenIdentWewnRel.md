@@ -4,8 +4,12 @@ Tytuł: Powiązanie tokenu systemu zewnętrznego z identyfikatorem wewnętrznym 
 Opis: Tabela przechowuje powiązania między tokenami systemów zewnętrznych a wewnętrznymi identyfikatorami w Krajowym Systemie e-Faktur. Umożliwia mapowanie tokenów autoryzacyjnych KSeF na identyfikatory wewnętrzne podmiotu. Służy do zarządzania uprawnieniami dostępu do KSeF w kontekście wielu podmiotów i tokenów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

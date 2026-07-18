@@ -5,32 +5,36 @@ Opis: Kategoria klasyfikacji pozycji budżetowych (np. memoriałowa, płatność
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` |  |  |  |
-| AllowedValueOfElement | `Soneta.Core.AllowedValueOfElement` | bazodanowe, enum | Dozwolone wartości | Dozwolone kwoty i ilości opisów analitycznych. |
-| AmountKind | `Soneta.Core.CategoryAmountKind` | bazodanowe, enum | Rodzaj kwoty | Rodzaj kwoty kategorii budżetowej. |
-| AvailableSettlementKind | `Soneta.Core.SettlementOAKind` | bazodanowe, enum | Dostępny rodzaj rozliczenia | Dostępny rodzaj rozliczenia. |
-| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` | bazodanowe, enum | Typ kategorii budżetu | Typ kategorii budżetu |
-| CategoryDefinitionRelationships | `System.Collections.Generic.IEnumerable<Soneta.Core.IBudgetCategoryDefinition>` |  |  |  |
-| CorrectionType | `Soneta.Core.CorrectionType` | bazodanowe, enum | Typ korekty | Typ korekty |
-| DefBudgetCateg | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.DefBudgetCategoryRelation>` |  |  |  |
+| AllowedValueOfElement | `Soneta.Core.AllowedValueOfElement` (enum) | bazodanowe | Dozwolone wartości | Dozwolone kwoty i ilości opisów analitycznych. |
+| AmountKind | `Soneta.Core.CategoryAmountKind` (enum) | bazodanowe | Rodzaj kwoty | Rodzaj kwoty kategorii budżetowej. |
+| AvailableSettlementKind | `Soneta.Core.SettlementOAKind` (enum) | bazodanowe | Dostępny rodzaj rozliczenia | Dostępny rodzaj rozliczenia. |
+| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe, tylko-odczyt | Typ kategorii budżetu | Typ kategorii budżetu |
+| CategoryDefinitionRelationships | `System.Collections.Generic.IEnumerable<Soneta.Core.IBudgetCategoryDefinition>` | podlista |  |  |
+| CorrectionType | `Soneta.Core.CorrectionType` (enum) | bazodanowe | Typ korekty | Typ korekty |
+| DefBudgetCateg | `SubTable<Soneta.Zadania.Budzetowanie.DefBudgetCategoryRelation>` | podlista |  |  |
 | Description | `string` | bazodanowe | Opis | Opis definicji kategorii budżetu. |
 | Domyslna | `bool` |  |  |  |
-| IsPlanned | `bool` |  |  |  |
-| IsReadOnlyCategories | `bool` |  |  |  |
+| IsPlanned | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyCategories | `bool` | tylko-odczyt |  |  |
 | Lock | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje nie będą wyświetlane w liście wyboru. |
 | MemorialCategory | `bool` | bazodanowe | Kategoria memoriałowa | Kategoria memoriałowa. |
-| MemorialLevel | `Soneta.Core.MemorialLevel` | bazodanowe, enum | Poziom memoriału | Poziom dla kategorii memoriałowej. |
-| MethodBillingCategory | `Soneta.Core.MethodBillingCategory` | bazodanowe, enum | Sposób rozliczania poprzedniej kategorii | Sposób rozliczania poprzedniej kategorii. |
+| MemorialLevel | `Soneta.Core.MemorialLevel` (enum) | bazodanowe | Poziom memoriału | Poziom dla kategorii memoriałowej. |
+| MethodBillingCategory | `Soneta.Core.MethodBillingCategory` (enum) | bazodanowe | Sposób rozliczania poprzedniej kategorii | Sposób rozliczania poprzedniej kategorii. |
 | Name | `string` | bazodanowe | Nazwa | Pełna nazwa definicji kategorii budżetu. |
 | Nazwa | `string` |  |  |  |
 | PaymentCategory | `bool` | bazodanowe | Kategoria zapłata | Kategoria zapłata. |
 | SettlementCategory | `bool` | bazodanowe | Kategoria płatność | Kategoria płatność. |
-| SettlementKind | `Soneta.Core.SettlementKind` | enum |  |  |
+| SettlementKind | `Soneta.Core.SettlementKind` (enum) |  |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji wykorzystywana do wyszukiwania definicji oraz numeracji. |
 
 ## Enumy

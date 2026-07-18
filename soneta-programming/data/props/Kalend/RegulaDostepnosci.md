@@ -5,32 +5,36 @@ Opis: Tabela przechowuje reguły dostępności i niedostępności przypisane do 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 41
+- pola bazodanowe (zapisywalne): 25
+- pola kalkulowane (zapisywalne): 29
+- pola tylko-odczyt: 11
+- podlisty: 3
+- subrowy: 1
+- razem: 69
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CalyDzien | `bool` |  |  |  |
-| Cykl | `Soneta.Core.DefinicjaCyklu` | bazodanowe | Definicja cyklu | Określa definicję cyklu |
-| Cykl.AlgorytmCykluInstance | `Soneta.Core.IAlgorytmCyklu` |  |  | Instancja skompilowanego kalkulatora. |
-| Cykl.Czas | `Soneta.Types.Time` | bazodanowe |  | Określa czas wystąpienia cyklu. |
+| Cykl | `Soneta.Core.DefinicjaCyklu` (subrow) | bazodanowe | Definicja cyklu | Określa definicję cyklu |
+| Cykl.AlgorytmCykluInstance | `Soneta.Core.IAlgorytmCyklu` | tylko-odczyt |  | Instancja skompilowanego kalkulatora. |
+| Cykl.Czas | `Time` | bazodanowe |  | Określa czas wystąpienia cyklu. |
 | Cykl.Czerwiec | `bool` |  |  | Czerwiec - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Czwartek | `bool` |  |  | Czwartek - dzień tygodnia wystąpienia cyklu tygodniowego. |
 | Cykl.DataKoniecCyklu | `bool` | bazodanowe |  | Data wystąpienia w ostatnim miesiącu/roku okresu |
-| Cykl.Dzien | `Soneta.Types.Date` |  |  | Data rozpoczęcia wykonywania cyklu. |
-| Cykl.DzienCzas | `System.DateTime` |  |  |  |
+| Cykl.Dzien | `Date` |  |  | Data rozpoczęcia wykonywania cyklu. |
+| Cykl.DzienCzas | `System.DateTime` | tylko-odczyt |  |  |
 | Cykl.DzienMiesiaca | `int` |  |  | Dzień w miesiącu wystąpienia cyklu miesięcznego lub rocznego. |
 | Cykl.DzienTygodnia | `Soneta.Core.DefinicjaCykluDzienTygodnia` |  |  | W zaawansowanej wersji dzień tygodnia. |
 | Cykl.Godzina | `int` |  |  | Godzina wystąpienia cyklu. |
-| Cykl.Godziny | `string[]` |  |  | Wybrane godziny w trybie godzinowym. |
+| Cykl.Godziny | `string[]` | podlista |  | Wybrane godziny w trybie godzinowym. |
 | Cykl.Grudzien | `bool` |  |  | Grudzień - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Interwal | `int` | bazodanowe |  |  |
-| Cykl.IsAdvanced | `bool` |  |  |  |
-| Cykl.IsMultiSelect | `bool` |  |  |  |
-| Cykl.IsSingleSelect | `bool` |  |  |  |
-| Cykl.JestAlgorytm | `bool` |  |  |  |
-| Cykl.JestOpcjaZaawansowana | `bool` |  |  |  |
-| Cykl.JestTermin | `bool` |  |  |  |
+| Cykl.IsAdvanced | `bool` | tylko-odczyt |  |  |
+| Cykl.IsMultiSelect | `bool` | tylko-odczyt |  |  |
+| Cykl.IsSingleSelect | `bool` | tylko-odczyt |  |  |
+| Cykl.JestAlgorytm | `bool` | tylko-odczyt |  |  |
+| Cykl.JestOpcjaZaawansowana | `bool` | tylko-odczyt |  |  |
+| Cykl.JestTermin | `bool` | tylko-odczyt |  |  |
 | Cykl.KodAlgorytmu | `string` |  |  | Kod algorytmu wyliczania wystąpień cyklu. |
 | Cykl.Krotnosc | `int` | bazodanowe |  | Określa ile razy cykl będzie powtórzony. |
 | Cykl.Kwiecien | `bool` |  |  | Kwiecień - miesiąc wystąpienia cyklu tygodniowego. |
@@ -39,21 +43,21 @@ Guided: root
 | Cykl.Luty | `bool` |  |  | Luty - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Maj | `bool` |  |  | Maj - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Marzec | `bool` |  |  | Marzec - miesiąc wystąpienia cyklu tygodniowego. |
-| Cykl.MiesiacRoku | `Soneta.Core.DefinicjaCykluMiesiacRoku` | enum |  | W zaawansowanej wersji miesiąc w roku. |
+| Cykl.MiesiacRoku | `Soneta.Core.DefinicjaCykluMiesiacRoku` (enum) |  |  | W zaawansowanej wersji miesiąc w roku. |
 | Cykl.MinutaGodziny | `int` |  |  | Minuta w godzinie wystąpienia cyklu godzinowego. |
 | Cykl.Niedziela | `bool` |  |  | Niedziela - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Cykl.OkresCyklu | `Soneta.Core.DefinicjaCykluOkresCyklu` | bazodanowe, enum |  | Określa okres, w którym oczekiwane jest wystąpienie cyklu. |
-| Cykl.Options | `Soneta.Core.DefinicjaCykluOptions` | enum |  |  |
+| Cykl.OkresCyklu | `Soneta.Core.DefinicjaCykluOkresCyklu` (enum) | bazodanowe |  | Określa okres, w którym oczekiwane jest wystąpienie cyklu. |
+| Cykl.Options | `Soneta.Core.DefinicjaCykluOptions` (enum) | tylko-odczyt |  |  |
 | Cykl.Pazdziernik | `bool` |  |  | Październik - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Piatek | `bool` |  |  | Piątek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Cykl.Podglad | `Soneta.Core.ElementCyklu` |  |  |  |
+| Cykl.Podglad | `Soneta.Core.ElementCyklu` | tylko-odczyt |  |  |
 | Cykl.Poniedzialek | `bool` |  |  | Poniedziałek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Cykl.PozycjaDnia | `Soneta.Core.DefinicjaCykluPozycjaDnia` | bazodanowe, enum |  | Określa pozycję dnia w okresie, w którym oczekiwane jest wystąpienie cyklu. |
-| Cykl.PozycjaDniaZaawansowana | `Soneta.Core.DefinicjaCykluPozycjaDniaZaawansowana` | bazodanowe, enum |  | Określa pozycję dnia w miesiącu, w którym oczekiwane jest wystąpienie cyklu. |
-| Cykl.RodzajTerminu | `Soneta.Core.DefinicjaCykluRodzajTerminu` | bazodanowe, enum |  | Wskazuje na to, czy określono termin cyklu lub termin wynika z opisu cyklu. |
+| Cykl.PozycjaDnia | `Soneta.Core.DefinicjaCykluPozycjaDnia` (enum) | bazodanowe |  | Określa pozycję dnia w okresie, w którym oczekiwane jest wystąpienie cyklu. |
+| Cykl.PozycjaDniaZaawansowana | `Soneta.Core.DefinicjaCykluPozycjaDniaZaawansowana` (enum) | bazodanowe |  | Określa pozycję dnia w miesiącu, w którym oczekiwane jest wystąpienie cyklu. |
+| Cykl.RodzajTerminu | `Soneta.Core.DefinicjaCykluRodzajTerminu` (enum) | bazodanowe |  | Wskazuje na to, czy określono termin cyklu lub termin wynika z opisu cyklu. |
 | Cykl.Sierpien | `bool` |  |  | Sierpień - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Sobota | `bool` |  |  | Sobota - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Cykl.SposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` | bazodanowe, enum |  | Określa sposób zachowania, kiedy cykl wystąpi w dniu wolnym. |
+| Cykl.SposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` (enum) | bazodanowe |  | Określa sposób zachowania, kiedy cykl wystąpi w dniu wolnym. |
 | Cykl.Sroda | `bool` |  |  | Środa - dzień tygodnia wystąpienia cyklu tygodniowego. |
 | Cykl.Styczen | `bool` |  |  | Styczeń - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Termin | `int` | bazodanowe |  | Określa termin wystąpienia cyklu. Wartość w polu nie jest czytelna dla użytkownika. |
@@ -61,23 +65,23 @@ Guided: root
 | Cykl.Termin3 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (minuty w godzinie). Wartość w polu nie jest czytelna dla użytkownika. |
 | Cykl.Termin4 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (dni w miesiącu/roku w kolejności). Wartość w polu nie jest czytelna dla użytkownika. |
 | Cykl.Termin5 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (miesiące w roku w kolejności). Wartość w polu nie jest czytelna dla użytkownika. |
-| Cykl.Typ | `Soneta.Core.DefinicjaCykluTyp` | bazodanowe, enum |  | Określa rodzaj cyklu za pomocą jednostki interwału czasu. |
+| Cykl.Typ | `Soneta.Core.DefinicjaCykluTyp` (enum) | bazodanowe |  | Określa rodzaj cyklu za pomocą jednostki interwału czasu. |
 | Cykl.Wrzesien | `bool` |  |  | Wrzesień - miesiąc wystąpienia cyklu tygodniowego. |
 | Cykl.Wtorek | `bool` |  |  | Wtorek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Czas | `Soneta.Types.Time` | bazodanowe | Czas |  |
+| Czas | `Time` | bazodanowe | Czas |  |
 | Czynnosc | `Soneta.Kalend.CzynnoscNaObiekcieDoPlanowania` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data cyklu | Określa datę wystąpienia cyklu |
-| DataDecyzji | `Soneta.Types.Date` | bazodanowe |  |  |
-| GodzinaDo | `Soneta.Types.Time` |  |  |  |
-| GodzinaOd | `Soneta.Types.Time` | bazodanowe | Od godziny |  |
-| Host | `Soneta.Kalend.IDostepnoscHost` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe | Data cyklu | Określa datę wystąpienia cyklu |
+| DataDecyzji | `Date` | bazodanowe |  |  |
+| GodzinaDo | `Time` |  |  |  |
+| GodzinaOd | `Time` | bazodanowe | Od godziny |  |
+| Host | `Soneta.Kalend.IDostepnoscHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | IsCykl | `bool` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe | Priorytet | Określa priorytet dostępności |
-| Rodzaj | `Soneta.Kalend.RodzajDostepnosci` | bazodanowe, enum |  | Określa rodzaj dostępność/niedostępność |
-| Stan | `Soneta.Kalend.StanRegulyDostepnosci` | bazodanowe, enum |  |  |
-| Wyjatki | `Soneta.Business.SubTable<Soneta.Kalend.WyjatekRegulyDostepnosci>` |  |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajDostepnosci` (enum) | bazodanowe |  | Określa rodzaj dostępność/niedostępność |
+| Stan | `Soneta.Kalend.StanRegulyDostepnosci` (enum) | bazodanowe |  |  |
+| Wyjatki | `SubTable<Soneta.Kalend.WyjatekRegulyDostepnosci>` | podlista |  |  |
 | Zatwierdzajacy | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

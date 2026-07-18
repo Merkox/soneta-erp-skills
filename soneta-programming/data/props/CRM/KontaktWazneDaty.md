@@ -5,18 +5,22 @@ Opis: Rejestr ważnych dat powiązanych z osobami kontaktowymi (np. urodziny, ro
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Kontakt | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
+| Operator | `App.Operator` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Przypomnienie | `int` | bazodanowe |  |  |
-| PrzypomnienieWg | `Soneta.CRM.RodzajPrzypomnienia` | bazodanowe, enum |  |  |
+| PrzypomnienieWg | `Soneta.CRM.RodzajPrzypomnienia` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

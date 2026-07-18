@@ -5,17 +5,21 @@ Opis: Kartoteka stanowisk pracy przypisanych do pomieszczeń w nieruchomościach
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywne | `bool` | bazodanowe | Określa, czy stanowisko pracy jest aktywne | Określa, czy stanowisko pracy jest aktywne |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa stanowiska pracy |
-| NieruchomoscGuid | `System.Guid` | bazodanowe | Id pomieszczenia w nieruchomości | Identifikator pomieszczenia w nieruchomości |
+| NieruchomoscGuid | `System.Guid` | bazodanowe, tylko-odczyt | Id pomieszczenia w nieruchomości | Identifikator pomieszczenia w nieruchomości |
 | Opis | `string` | bazodanowe | Opis | Opis stanowiska pracy |
-| Rezerwacje | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.RezerwacjaStanowiskaPracy>` |  |  |  |
+| Rezerwacje | `SubTable<Soneta.RealEstate.Models.Database.RezerwacjaStanowiskaPracy>` | podlista |  |  |
 | Room | `Soneta.RealEstate.Models.Database.Nieruchomosc` |  |  |  |
-| RoomAndLocation | `string` |  |  |  |
-| SerializedDiagram | `Soneta.Business.MemoText` | bazodanowe | Serializowane dane diagramu | Określa serializowane dane diagramu |
-| SrodkiTrwale | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.StnPracSrTrwalyRel>` |  |  |  |
+| RoomAndLocation | `string` | tylko-odczyt |  |  |
+| SerializedDiagram | `MemoText` | bazodanowe, podlista | Serializowane dane diagramu | Określa serializowane dane diagramu |
+| SrodkiTrwale | `SubTable<Soneta.RealEstate.Models.Database.StnPracSrTrwalyRel>` | podlista |  |  |

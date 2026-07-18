@@ -5,12 +5,16 @@ Opis: Element szczegółowy pozycji zamówienia (ProWyrobOperacjiZlecenia). Wią
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wyrob` → `ProWyrobOperacjiZlecenia`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość pozycji zamówienia. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość pozycji zamówienia. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji zamówienia. |
 | Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja dokumentu handlowego dla pozycji zamówienia. |
 | Wyrob | `Soneta.ProdukcjaPro.ProWyrobOperacjiZlecenia` | bazodanowe, guided-parent | Wyrób | Wyrób operacji zlecenia dla pozycji zamówienia. |

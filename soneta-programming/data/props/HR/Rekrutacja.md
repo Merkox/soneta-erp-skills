@@ -5,26 +5,30 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoKartyCharakterystykiPracownika`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 3
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowana | `bool` | bazodanowe | Nieaktualna |  |
-| DataZatrudnienia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZgloszenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etap | `string` |  |  |  |
-| Etapy | `Soneta.Business.LpSubTable<Soneta.HR.EtapRekrutacji>` |  |  |  |
-| KartyKompetencji | `Soneta.Business.SubTable<Soneta.HR2.KartaKompetencjiPracownika>` |  |  |  |
+| DataZatrudnienia | `Date` | bazodanowe |  |  |
+| DataZgloszenia | `Date` | bazodanowe |  |  |
+| Etap | `string` | tylko-odczyt |  |  |
+| Etapy | `LpSubTable<Soneta.HR.EtapRekrutacji>` | podlista |  |  |
+| KartyKompetencji | `SubTable<Soneta.HR2.KartaKompetencjiPracownika>` | podlista |  |  |
 | Odpowiedzialny | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Stan | `Soneta.HR.StanyRekrutacji` | bazodanowe, enum |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisLinia | `string` | tylko-odczyt |  |  |
+| OpisPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Stan | `Soneta.HR.StanyRekrutacji` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Zrodlo | `Soneta.HR2.IŹródłoRekrutacji` | bazodanowe, iface-ref |  |  |
+| Zrodlo | `Soneta.HR2.IŹródłoRekrutacji` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

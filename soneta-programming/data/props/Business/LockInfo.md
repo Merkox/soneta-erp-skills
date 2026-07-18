@@ -4,24 +4,28 @@ Tytuł: Edytowane zapisy
 Opis: Informacja o blokadzie zapisu edytowanego przez operatora. Służy do zarządzania współbieżnym dostępem do rekordów w systemie wieloużytkownikowym.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Action | `Soneta.Business.Db.LockInfoAction` | bazodanowe, enum |  |  |
-| Instance | `System.Guid` | bazodanowe |  |  |
-| ModificationTime | `System.DateTime` | bazodanowe |  |  |
-| OperatorID | `int` | bazodanowe |  |  |
-| RecordID | `int` | bazodanowe |  |  |
-| RecordTable | `string` | bazodanowe |  |  |
-| SessionID | `int` | bazodanowe |  |  |
+| Action | `Db.LockInfoAction` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Instance | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| ModificationTime | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| OperatorID | `int` | bazodanowe, tylko-odczyt |  |  |
+| RecordID | `int` | bazodanowe, tylko-odczyt |  |  |
+| RecordTable | `string` | bazodanowe, tylko-odczyt |  |  |
+| SessionID | `int` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### LockInfoAction (`Soneta.Business.Db.LockInfoAction`)
+### LockInfoAction (`Db.LockInfoAction`)
 - `RecordEditing` = 0
 - `RecordUndone` = 1
 - `SessionCommitted` = 2

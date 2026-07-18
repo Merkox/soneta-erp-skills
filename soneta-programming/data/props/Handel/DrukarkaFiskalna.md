@@ -5,8 +5,12 @@ Opis: Konfiguracja drukarki fiskalnej: nazwa, port, symbol kasy, ustawienia druk
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 56
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 56
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 64
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -16,7 +20,6 @@ Guided: root
 | CechaNazwyTowaru | `string` | bazodanowe |  |  |
 | ComTimeout | `int` |  |  |  |
 | DodawajStawkeVATDoNazwy | `bool` | bazodanowe |  |  |
-| DodawajStawkęVATDoNazwy | `bool` |  |  |  |
 | Domyslna | `bool` | bazodanowe |  |  |
 | Drukarka | `string` | bazodanowe |  |  |
 | DrukujJednostkiNaPozycji | `bool` | bazodanowe |  |  |
@@ -26,23 +29,19 @@ Guided: root
 | DrukujQR | `bool` | bazodanowe |  | Drukowanie kodu QR |
 | DrukujRabatNaPozycji | `bool` | bazodanowe |  |  |
 | DrukujSposobZaplaty | `bool` | bazodanowe |  |  |
-| DrukujSposóbZapłaty | `bool` |  |  |  |
 | EParagonyPlClientId | `string` | bazodanowe |  |  |
 | EParagonyPlClientSecret | `string` | bazodanowe |  |  |
 | EParagonyPlPosId | `string` | bazodanowe |  |  |
 | EParagonyWebhookSecret | `string` | bazodanowe |  |  |
-| ElzabTD | `Soneta.Fiskal.ElzabTekstDodatkowy` | bazodanowe, enum |  |  |
+| ElzabTD | `Soneta.Fiskal.ElzabTekstDodatkowy` (enum) | bazodanowe |  |  |
 | FiskalizujNPJakoZW | `bool` | bazodanowe |  |  |
 | IloscZnakowNazwy | `int` | bazodanowe |  |  |
-| IlośćZnakówNazwy | `int` |  |  |  |
 | Logowanie | `bool` | bazodanowe |  |  |
-| MapaStawekVat | `System.Tuple<int, char, string, decimal>[]` |  |  |  |
-| MapowanieStawekVat | `Soneta.Handel.MapowanieStawekVat` | bazodanowe, enum |  | Rodzaj mapowania stawek Vat. |
-| MiejsceFiskalizacjiParagonow | `Soneta.Fiskal.MiejsceFiskalizacjiParagonow` | bazodanowe, enum | Miejsce fiskalizacji paragonów | Miejsce fiskalizacji paragonów |
+| MapaStawekVat | `System.Tuple<int, char, string, decimal>[]` | podlista |  |  |
+| MapowanieStawekVat | `Soneta.Handel.MapowanieStawekVat` (enum) | bazodanowe |  | Rodzaj mapowania stawek Vat. |
+| MiejsceFiskalizacjiParagonow | `Soneta.Fiskal.MiejsceFiskalizacjiParagonow` (enum) | bazodanowe | Miejsce fiskalizacji paragonów | Miejsce fiskalizacji paragonów |
 | MinDlugoscIlosci | `int` | bazodanowe |  |  |
 | MinDlugoscNazwy | `int` | bazodanowe |  |  |
-| MinDługośćIlości | `int` |  |  |  |
-| MinDługośćNazwy | `int` |  |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaKolejki | `string` | bazodanowe |  |  |
 | NazwaKolejkiDrukarki | `string` |  |  |  |
@@ -51,17 +50,15 @@ Guided: root
 | NumerRejestracyjny | `string` | bazodanowe |  |  |
 | NumerZamowienia | `string` | bazodanowe |  |  |
 | OsobaZamawiajaca | `string` | bazodanowe |  |  |
-| PlatformaEParagonow | `Soneta.Fiskal.PlatformaEParagonow` | bazodanowe, enum | Platforma e-paragonów | Platforma e-paragonów |
+| PlatformaEParagonow | `Soneta.Fiskal.PlatformaEParagonow` (enum) | bazodanowe | Platforma e-paragonów | Platforma e-paragonów |
 | Port | `string` | bazodanowe |  |  |
 | PrzesylajNaLCD | `bool` | bazodanowe |  |  |
-| PrzesyłajNaLCD | `bool` |  |  |  |
 | QRCode | `string` | bazodanowe |  | QR code |
-| ReczneMapowanieStawekVat | `bool` |  |  |  |
-| RodzajKontaEParagonyPl | `Soneta.Fiskal.RodzajKontaEParagonyPl` | bazodanowe, enum | Rodzaj konta eparagony.pl | Rodzaj konta eparagony.pl |
+| ReczneMapowanieStawekVat | `bool` | tylko-odczyt |  |  |
+| RodzajKontaEParagonyPl | `Soneta.Fiskal.RodzajKontaEParagonyPl` (enum) | bazodanowe | Rodzaj konta eparagony.pl | Rodzaj konta eparagony.pl |
 | SposobDostawy | `string` | bazodanowe |  |  |
 | SprzedazNiefiskalna | `bool` | bazodanowe |  |  |
-| SprzedażNiefiskalna | `bool` |  |  |  |
-| Stanowiska | `Soneta.Business.SubTable<Soneta.Handel.DrukarkaFiskalnaStanowisko>` |  |  |  |
+| Stanowiska | `SubTable<Soneta.Handel.DrukarkaFiskalnaStanowisko>` | podlista |  |  |
 | StawkaA | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Stawka przypisana do rejestru A. |
 | StawkaB | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Stawka przypisana do rejestru B. |
 | StawkaC | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Stawka przypisana do rejestru C. |

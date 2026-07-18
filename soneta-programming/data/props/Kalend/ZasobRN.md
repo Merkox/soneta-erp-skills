@@ -5,21 +5,25 @@ Opis: Element szczegółowy strefy pracy (StrefaPracy). Zasób magazynu nadgodzi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Strefa` → `StrefaPracy`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 9
+- podlisty: 0
+- subrowy: 1
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` | bazodanowe, enum |  |  |
-| Partia | `Soneta.Kalend.PartiaRN` | bazodanowe |  |  |
-| Partia.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Partia.CzasExt | `Soneta.Types.Time` |  |  |  |
-| Partia.Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` | enum |  |  |
-| Partia.Rozliczany | `Soneta.Types.Time` | bazodanowe |  |  |
-| Partia.RozliczanyExt | `Soneta.Types.Time` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik, dla którego został naliczony zasób magazynu nadgodzin. |
-| Strefa | `Soneta.Kalend.StrefaPracy` | bazodanowe, guided-parent |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Partia | `Soneta.Kalend.PartiaRN` (subrow) | bazodanowe |  |  |
+| Partia.Czas | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Partia.CzasExt | `Time` | tylko-odczyt |  |  |
+| Partia.Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` (enum) | tylko-odczyt |  |  |
+| Partia.Rozliczany | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Partia.RozliczanyExt | `Time` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  | Pracownik, dla którego został naliczony zasób magazynu nadgodzin. |
+| Strefa | `Soneta.Kalend.StrefaPracy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 
 ## Enumy
 

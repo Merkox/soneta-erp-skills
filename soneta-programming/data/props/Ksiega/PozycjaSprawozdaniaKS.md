@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `RootPoz` → `IPozycjaSprawozdaniaRoot`
 Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 5
+- podlisty: 2
+- subrowy: 5
+- razem: 28
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Attachment | `Soneta.Business.Db.Attachment` | bazodanowe | Załącznik | Załącznik powiązany z pozycją sprawozdania |
-| Jednostka | `Soneta.Ksiega.JednostkaSprawozdaniaKS` | bazodanowe |  | Jednostka sprawozdania, do którego należy pozycja |
-| Kwoty | `Soneta.Ksiega.PozSprKsKwoty` | bazodanowe |  | Kwoty główne pozycji sprawozdania księgowego |
+| Attachment | `Db.Attachment` | bazodanowe | Załącznik | Załącznik powiązany z pozycją sprawozdania |
+| Jednostka | `Soneta.Ksiega.JednostkaSprawozdaniaKS` | bazodanowe, tylko-odczyt |  | Jednostka sprawozdania, do którego należy pozycja |
+| Kwoty | `Soneta.Ksiega.PozSprKsKwoty` (subrow) | bazodanowe |  | Kwoty główne pozycji sprawozdania księgowego |
 | Kwoty.CzyRP | `bool` | bazodanowe |  | Czy podane są kwoty za rok poprzedni |
-| Kwoty.RB | `Soneta.Ksiega.PozSprKsKwoty3` | bazodanowe |  | Kwoty za rok bieżący |
+| Kwoty.RB | `Soneta.Ksiega.PozSprKsKwoty3` (subrow) | bazodanowe |  | Kwoty za rok bieżący |
 | Kwoty.RB.CzyBC | `bool` | bazodanowe |  | Czy kwoty podane są w rozbiciu |
 | Kwoty.RB.KwotaA | `decimal` | bazodanowe |  | Wartość łączna kwoty |
 | Kwoty.RB.KwotaAInt | `long` |  |  |  |
@@ -23,22 +27,22 @@ Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
 | Kwoty.RB.KwotaBInt | `long` |  |  |  |
 | Kwoty.RB.KwotaC | `decimal` | bazodanowe |  | Część kwoty z innych źródeł przychodów |
 | Kwoty.RB.KwotaCInt | `long` |  |  |  |
-| Kwoty.RP | `Soneta.Ksiega.PozSprKsKwoty3` | bazodanowe |  | Kwoty za rok poprzedni |
+| Kwoty.RP | `Soneta.Ksiega.PozSprKsKwoty3` (subrow) | bazodanowe |  | Kwoty za rok poprzedni |
 | Lp | `int` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa pozycji sprawozdania księgowego |
 | NazwaPliku | `string` | bazodanowe |  | Nazwa pliku |
-| Podstawa | `Soneta.Ksiega.PozSprKsPodstawa` | bazodanowe |  | Podstawa prawna pozycji użytkownika |
+| Podstawa | `Soneta.Ksiega.PozSprKsPodstawa` (subrow) | bazodanowe |  | Podstawa prawna pozycji użytkownika |
 | Podstawa.Art | `string` | bazodanowe |  |  |
 | Podstawa.Lit | `string` | bazodanowe |  |  |
 | Podstawa.Pkt | `string` | bazodanowe |  |  |
 | Podstawa.Ust | `string` | bazodanowe |  |  |
-| Pozostale | `Soneta.Ksiega.PozSprKsKwoty` | bazodanowe |  | Kwoty pozostałe pozycji sprawozdania księgowego |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaSprawozdaniaKS>` |  |  |  |
-| RootPoz | `Soneta.Ksiega.IPozycjaSprawozdaniaRoot` | bazodanowe, guided-parent, iface-ref |  |  |
-| Sprawozdanie | `Soneta.Ksiega.SprawozdanieKS` | bazodanowe |  | Sprawozdanie, do którego należy pozycja |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe |  | Treść pozycji sprawozdania księgowego |
-| Typ | `Soneta.Ksiega.TypPozycjiSprawozdzaniaKS` | bazodanowe, enum |  | Typ pozycji sprawozdania księgowego |
-| Typ2 | `Soneta.Ksiega.Typ2PozycjiSprawozdzaniaKS` | bazodanowe, enum |  | Subtyp pozycji sprawozdania księgowego |
+| Pozostale | `Soneta.Ksiega.PozSprKsKwoty` (subrow) | bazodanowe |  | Kwoty pozostałe pozycji sprawozdania księgowego |
+| Pozycje | `SubTable<Soneta.Ksiega.PozycjaSprawozdaniaKS>` | podlista |  |  |
+| RootPoz | `Soneta.Ksiega.IPozycjaSprawozdaniaRoot` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| Sprawozdanie | `Soneta.Ksiega.SprawozdanieKS` | bazodanowe, tylko-odczyt |  | Sprawozdanie, do którego należy pozycja |
+| Tresc | `MemoText` | bazodanowe, podlista |  | Treść pozycji sprawozdania księgowego |
+| Typ | `Soneta.Ksiega.TypPozycjiSprawozdzaniaKS` (enum) | bazodanowe, tylko-odczyt |  | Typ pozycji sprawozdania księgowego |
+| Typ2 | `Soneta.Ksiega.Typ2PozycjiSprawozdzaniaKS` (enum) | bazodanowe, tylko-odczyt |  | Subtyp pozycji sprawozdania księgowego |
 
 ## Relacje interfejsowe
 

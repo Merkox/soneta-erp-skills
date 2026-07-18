@@ -6,100 +6,103 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZrodloNieobecnosci`, `IBazaZrodlaWyplaty`, `IBilansOtwarcia`, `IZrodloDeklaracji`
 
-- pola bazodanowe: 45
-- pola kalkulowane (z klas biznesowych): 44
+- pola bazodanowe (zapisywalne): 31
+- pola kalkulowane (zapisywalne): 8
+- pola tylko-odczyt: 29
+- podlisty: 14
+- subrowy: 6
+- razem: 88
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BackColor | `int` |  | Kolor tła |  |
+| BackColor | `int` | tylko-odczyt | Kolor tła |  |
 | BilansOtwarcia | `bool` | bazodanowe |  |  |
-| BlokadaOkresu | `bool` |  |  |  |
-| Czas | `Soneta.Types.Time` |  |  |  |
+| BlokadaOkresu | `bool` | tylko-odczyt |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
 | CzescUrlopu | `int` | bazodanowe |  |  |
 | CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
-| Deklaracje | `Soneta.Business.SubTable` |  |  |  |
-| Dni | `int` |  |  |  |
-| DoGodziny | `Soneta.Types.Time` |  |  |  |
-| EfektywnyOkres | `Soneta.Types.Periods` |  |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` |  |  |  |
-| ForeColor | `int` |  | Kolor czcionki |  |
+| Deklaracje | `SubTable` | podlista |  |  |
+| Dni | `int` | tylko-odczyt |  |  |
+| DoGodziny | `Time` |  |  |  |
+| EfektywnyOkres | `Periods` | tylko-odczyt |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` | podlista |  |  |
+| ForeColor | `int` | tylko-odczyt | Kolor czcionki |  |
 | IlośćDni | `int` |  |  |  |
-| Indeksy | `Soneta.Business.SubTable<Soneta.Kalend.NieobecnośćIdx>` |  |  |  |
-| Info | `string` |  |  |  |
-| InfoText | `string` |  |  |  |
-| IsRozliczalna | `bool` |  |  |  |
-| IsRozliczona | `bool` |  |  |  |
-| IsStorno | `bool` |  |  |  |
-| IsVisibleWłączBO | `bool` |  |  |  |
-| KategoriaZUS | `string` |  |  |  |
-| Korygowana | `bool` | bazodanowe |  |  |
-| KorygowanyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Macierzynski | `Soneta.Kalend.UrlopMacierzyński` | bazodanowe |  |  |
+| Indeksy | `SubTable<Soneta.Kalend.NieobecnośćIdx>` | podlista |  |  |
+| Info | `string` | tylko-odczyt |  |  |
+| InfoText | `string` | tylko-odczyt |  |  |
+| IsRozliczalna | `bool` | tylko-odczyt |  |  |
+| IsRozliczona | `bool` | tylko-odczyt |  |  |
+| IsStorno | `bool` | tylko-odczyt |  |  |
+| IsVisibleWłączBO | `bool` | tylko-odczyt |  |  |
+| KategoriaZUS | `string` | tylko-odczyt |  |  |
+| Korygowana | `bool` | bazodanowe, tylko-odczyt |  |  |
+| KorygowanyOkres | `FromTo` | podlista |  |  |
+| Macierzynski | `Soneta.Kalend.UrlopMacierzyński` (subrow) | bazodanowe |  |  |
 | Macierzynski.CzescUrlopu | `int` |  |  |  |
 | Macierzynski.CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` |  |  |  |
-| Macierzynski.Limit | `int` |  |  |  |
-| Macierzynski.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` |  |  |  |
-| Macierzynski.PonownieUstalPodstawe | `bool` |  |  |  |
-| Macierzynski.ProcentZasiłku | `Soneta.Types.Percent` |  |  |  |
-| Macierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
+| Macierzynski.Limit | `int` | tylko-odczyt |  |  |
+| Macierzynski.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` | tylko-odczyt |  |  |
+| Macierzynski.PonownieUstalPodstawe | `bool` | tylko-odczyt |  |  |
+| Macierzynski.ProcentZasiłku | `Percent` | tylko-odczyt |  |  |
+| Macierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
 | Macierzynski.ZawieszenieSkladkiFP | `bool` |  |  |  |
-| Nieobecnosci | `Soneta.Business.FromToSubTable<Soneta.Kalend.Nieobecnosc>` |  |  |  |
-| Norma | `Soneta.Types.Time` | bazodanowe |  |  |
-| NormaNie | `Soneta.Types.Time` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Okolicznosciowy | `Soneta.Kalend.UrlopOkolicznościowy` | bazodanowe |  |  |
-| Okolicznosciowy.Limit | `int` |  |  |  |
-| Okolicznosciowy.Przyczyna | `Soneta.Kalend.PrzyczynaUrlopuOkolicznościowego` | bazodanowe, enum |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresSwiadczenie | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Nieobecnosci | `FromToSubTable<Soneta.Kalend.Nieobecnosc>` | podlista |  |  |
+| Norma | `Time` | bazodanowe |  |  |
+| NormaNie | `Time` | bazodanowe |  |  |
+| OdGodziny | `Time` | bazodanowe |  |  |
+| Okolicznosciowy | `Soneta.Kalend.UrlopOkolicznościowy` (subrow) | bazodanowe |  |  |
+| Okolicznosciowy.Limit | `int` | tylko-odczyt |  |  |
+| Okolicznosciowy.Przyczyna | `Soneta.Kalend.PrzyczynaUrlopuOkolicznościowego` (enum) | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresSwiadczenie | `FromTo` | bazodanowe, podlista |  |  |
 | PierwotnaDefinicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
-| Pomniejszenia | `Soneta.Business.SubTable<Soneta.Place.WypSkladnik>` |  |  |  |
-| PomniejszeniaAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypSkladnik>` |  |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
+| Pomniejszenia | `SubTable<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| PomniejszeniaAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
 | RezygnacjaSwiadczenie | `bool` | bazodanowe |  |  |
-| Rozliczenia | `Soneta.Business.SubTable` |  |  |  |
-| RozliczenieData | `Soneta.Types.Date` | bazodanowe |  |  |
+| Rozliczenia | `SubTable` | podlista |  |  |
+| RozliczenieData | `Date` | bazodanowe |  |  |
 | RozliczenieWDniu | `bool` | bazodanowe |  |  |
-| RozliczonyOkres | `Soneta.Types.FromTo` |  |  |  |
-| TypDni | `Soneta.Kalend.TypyDni` | enum |  |  |
-| TypZrodla | `Soneta.Kalend.TypŹródłaNieobecności` | bazodanowe, enum |  |  |
-| Urlop | `Soneta.Kalend.UrlopWypoczynkowy` | bazodanowe |  |  |
-| Urlop.PodstawaDo | `Soneta.Types.Date` | bazodanowe |  |  |
-| Urlop.Przyczyna | `Soneta.Kalend.PrzyczynaUrlopu` | bazodanowe, enum |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Wychowawczy | `Soneta.Kalend.UrlopWychowawczy` | bazodanowe |  |  |
+| RozliczonyOkres | `FromTo` | podlista |  |  |
+| TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
+| TypZrodla | `Soneta.Kalend.TypŹródłaNieobecności` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Urlop | `Soneta.Kalend.UrlopWypoczynkowy` (subrow) | bazodanowe |  |  |
+| Urlop.PodstawaDo | `Date` | bazodanowe |  |  |
+| Urlop.Przyczyna | `Soneta.Kalend.PrzyczynaUrlopu` (enum) | bazodanowe |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| Wychowawczy | `Soneta.Kalend.UrlopWychowawczy` (subrow) | bazodanowe |  |  |
 | Wychowawczy.CzescUrlopu | `int` |  |  |  |
 | Wychowawczy.CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` |  |  |  |
-| Wychowawczy.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` |  |  |  |
+| Wychowawczy.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` | tylko-odczyt |  |  |
 | Wychowawczy.ZawieszenieSkladkiFP | `bool` |  |  |  |
-| ZLA | `Soneta.Kalend.ZLA` | bazodanowe |  |  |
-| ZLA.Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| ZLA.Wersja | `Soneta.Kalend.WersjaZLA` | bazodanowe, enum |  |  |
-| ZLA.Zrodlo | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| ZLA | `Soneta.Kalend.ZLA` (subrow) | bazodanowe |  |  |
+| ZLA.Data | `Date` | bazodanowe |  |  |
+| ZLA.Wersja | `Soneta.Kalend.WersjaZLA` (enum) | bazodanowe |  |  |
+| ZLA.Zrodlo | `MemoText` | bazodanowe, podlista |  |  |
 | ZawieszenieSkladkiFP | `bool` | bazodanowe |  |  |
-| Zrodlo | `Soneta.Kalend.IZrodloNieobecnosci` | bazodanowe, iface-ref |  |  |
-| Zwolnienie | `Soneta.Kalend.ZwolnienieZUS` | bazodanowe |  |  |
+| Zrodlo | `Soneta.Kalend.IZrodloNieobecnosci` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Zwolnienie | `Soneta.Kalend.ZwolnienieZUS` (subrow) | bazodanowe |  |  |
 | Zwolnienie.BezOkresuWyczekiwania | `bool` | bazodanowe |  |  |
-| Zwolnienie.BezPomniejszaniaZasiłkuOd | `Soneta.Types.Date` |  |  |  |
-| Zwolnienie.IsPrzyczyna | `bool` |  |  |  |
-| Zwolnienie.IsZLA | `bool` |  |  |  |
+| Zwolnienie.BezPomniejszaniaZasiłkuOd | `Date` | tylko-odczyt |  |  |
+| Zwolnienie.IsPrzyczyna | `bool` | tylko-odczyt |  |  |
+| Zwolnienie.IsZLA | `bool` | tylko-odczyt |  |  |
 | Zwolnienie.KodChoroby | `string` | bazodanowe |  |  |
-| Zwolnienie.KontynuacjaOZ | `bool` |  |  |  |
-| Zwolnienie.KontynuacjaOkrZas | `Soneta.Kalend.KontynuacjaOkrZas` | bazodanowe, enum |  |  |
-| Zwolnienie.Kwarantanna | `Soneta.Kalend.ZwolnienieKwarantanna` | bazodanowe, enum |  |  |
+| Zwolnienie.KontynuacjaOkrZas | `Soneta.Kalend.KontynuacjaOkrZas` (enum) | bazodanowe |  |  |
+| Zwolnienie.Kwarantanna | `Soneta.Kalend.ZwolnienieKwarantanna` (enum) | bazodanowe |  |  |
 | Zwolnienie.LeczenieSzpitalne | `bool` | bazodanowe |  |  |
 | Zwolnienie.Numer | `string` | bazodanowe |  |  |
 | Zwolnienie.PierwszyBezplatny | `bool` | bazodanowe |  |  |
 | Zwolnienie.PomniejszajZasilek | `bool` | bazodanowe |  |  |
-| Zwolnienie.PonownieUstalPodstawe | `bool` | bazodanowe |  |  |
-| Zwolnienie.PrzedluzeniaData | `Soneta.Types.Date` | bazodanowe |  |  |
+| Zwolnienie.PonownieUstalPodstawe | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Zwolnienie.PrzedluzeniaData | `Date` | bazodanowe |  |  |
 | Zwolnienie.PrzedluzenieOkrZas | `bool` | bazodanowe |  |  |
-| Zwolnienie.Przyczyna | `Soneta.Kalend.PrzyczynaZwolnienia` | bazodanowe, enum |  |  |
-| Zwolnienie.ZwolnienieDostarczone | `Soneta.Types.Date` | bazodanowe |  |  |
-| Zwolnienie.ZwolnienieWystawione | `Soneta.Types.Date` | bazodanowe |  |  |
+| Zwolnienie.Przyczyna | `Soneta.Kalend.PrzyczynaZwolnienia` (enum) | bazodanowe |  |  |
+| Zwolnienie.ZwolnienieDostarczone | `Date` | bazodanowe |  |  |
+| Zwolnienie.ZwolnienieWystawione | `Date` | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

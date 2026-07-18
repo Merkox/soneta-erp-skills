@@ -5,17 +5,21 @@ Opis: Element szczegółowy realizacji oceny (OcenaOceniający). Rejestruje osob
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ocena` → `OcenaRealizacja`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Anulowany | `bool` | bazodanowe |  |  |
-| Arkusze | `Soneta.Business.SubTable<Soneta.Oceny.OcenaArkusz>` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Ocena | `Soneta.Oceny.OcenaRealizacja` | bazodanowe, guided-parent |  |  |
+| Anulowany | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Arkusze | `SubTable<Soneta.Oceny.OcenaArkusz>` | podlista |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Ocena | `Soneta.Oceny.OcenaRealizacja` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Oceniajacy | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

@@ -6,19 +6,23 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Host` → `IWfPlugInItemReferenceHost`
 Implementuje interfejsy: `IWFRecipientHost`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Config | `Soneta.Workflow.Config.PlugInItemConfig` |  |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Host | `Soneta.Business.IWfPlugInItemReferenceHost` | bazodanowe, guided-parent, iface-ref | Wtyczka dla |  |
+| Config | `Soneta.Workflow.Config.PlugInItemConfig` | tylko-odczyt |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
+| Host | `IWfPlugInItemReferenceHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Wtyczka dla |  |
 | Locked | `bool` | bazodanowe |  |  |
-| Managed | `bool` | bazodanowe |  |  |
-| PlugIn | `Soneta.Workflow.Config.WfPlugInItem` | bazodanowe |  |  |
+| Managed | `bool` | bazodanowe, tylko-odczyt |  |  |
+| PlugIn | `Soneta.Workflow.Config.WfPlugInItem` | bazodanowe, tylko-odczyt |  |  |
 | Priority | `int` | bazodanowe |  |  |
-| WFRecipients | `Soneta.Business.SubTable<Soneta.Workflow.Config.WFRecipient>` |  |  |  |
+| WFRecipients | `SubTable<Soneta.Workflow.Config.WFRecipient>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

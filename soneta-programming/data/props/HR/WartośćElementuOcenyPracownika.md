@@ -5,11 +5,15 @@ Opis: Element szczegółowy definicji kryterium oceny (DefElementuOcenyPracownik
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefElementuOcenyPracownika`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.HR.DefElementuOcenyPracownika` | bazodanowe, guided-parent |  |  |
+| Definicja | `Soneta.HR.DefElementuOcenyPracownika` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Wartosc | `decimal` | bazodanowe | Wartość |  |

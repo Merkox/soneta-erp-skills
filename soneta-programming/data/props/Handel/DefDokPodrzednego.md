@@ -4,12 +4,16 @@ Opis: Element szczegółowy definicji relacji handlowej (DefRelacjiHandlowej). W
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefRelacjiHandlowej`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Handel.DefRelacjiHandlowej` | bazodanowe, guided-parent |  |  |
+| Definicja | `Soneta.Handel.DefRelacjiHandlowej` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Index | `int` | bazodanowe |  |  |
-| Nadrzedna | `Soneta.Handel.DefDokHandlowego` | bazodanowe |  |  |
+| Nadrzedna | `Soneta.Handel.DefDokHandlowego` | bazodanowe, tylko-odczyt |  |  |
 | Podrzedna | `Soneta.Handel.DefDokHandlowego` | bazodanowe |  |  |

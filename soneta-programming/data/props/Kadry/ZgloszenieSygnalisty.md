@@ -6,40 +6,43 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 3
+- subrowy: 1
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AdresEmail | `string` | bazodanowe | Adres e-mail |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data dokumentu |  |
-| DataWystapieniaNaruszenia | `Soneta.Types.Date` | bazodanowe | Data wystąpienia naruszenia |  |
-| DataZakonczenia | `Soneta.Types.Date` | bazodanowe | Data zakończenia |  |
+| Data | `Date` | bazodanowe | Data dokumentu |  |
+| DataWystapieniaNaruszenia | `Date` | bazodanowe | Data wystąpienia naruszenia |  |
+| DataZakonczenia | `Date` | bazodanowe | Data zakończenia |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
 | Email | `string` | bazodanowe | Adres e-mail |  |
-| Godzina | `Soneta.Types.Time` | bazodanowe | Godzina wystąpienia naruszenia |  |
-| IsReadOnlyPodsumowanieGrup | `bool` |  |  |  |
-| IsVisibleOpisZadaniaDlaOperatora | `bool` |  |  |  |
+| Godzina | `Time` | bazodanowe | Godzina wystąpienia naruszenia |  |
+| IsReadOnlyPodsumowanieGrup | `bool` | tylko-odczyt |  |  |
+| IsVisibleOpisZadaniaDlaOperatora | `bool` | tylko-odczyt |  |  |
 | KanalZgloszenia | `Soneta.Kadry.KanalZgloszeniaSygnalisty` | bazodanowe | Kanał zgłoszenia |  |
 | Kategoria | `Soneta.Kadry.KategoriaZgloszeniaSygnalisty` | bazodanowe |  |  |
-| Kontrahent | `Soneta.Core.IKontrahent` | iface-ref |  |  |
+| Kontrahent | `Soneta.Core.IKontrahent` | tylko-odczyt, iface-ref |  |  |
 | Miejsce | `string` | bazodanowe | Miejsce wystąpienia naruszenia |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe | Numer sprawy |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe | Numer sprawy |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | OczekiwanaOdpowiedz | `bool` | bazodanowe | Oczekiwana odpowiedź |  |
 | Odpowiedz | `string` | bazodanowe | Odpowiedź |  |
 | Opis | `string` | bazodanowe | Opis zgłoszenia |  |
 | OpisZadaniaDlaOperatora | `string` | bazodanowe | Opis zadania dla operatora |  |
-| PodsumowaniePodjetychDzialan | `string` |  |  |  |
+| PodsumowaniePodjetychDzialan | `string` | tylko-odczyt |  |  |
 | PowodAnulowania | `string` | bazodanowe | Powód anulowania |  |
-| PrzetwarzanieZgloszenSygnalisty | `Soneta.Business.SubTable<Soneta.Kadry.PrzetwarzanieZgloszeniaSygnalisty>` |  |  |  |
-| StatusZgloszenia | `Soneta.Kadry.StatusZgloszeniaSygnalisty` | bazodanowe, enum |  |  |
-| Zglaszajacy | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Zgłaszający |  |
+| PrzetwarzanieZgloszenSygnalisty | `SubTable<Soneta.Kadry.PrzetwarzanieZgloszeniaSygnalisty>` | podlista |  |  |
+| StatusZgloszenia | `Soneta.Kadry.StatusZgloszeniaSygnalisty` (enum) | bazodanowe |  |  |
+| Zglaszajacy | `ITaskUser` | bazodanowe, iface-ref | Zgłaszający |  |
 | ZgloszenieAnonimowe | `bool` | bazodanowe | Zgłoszenie anonimowe |  |
 
 ## Relacje interfejsowe

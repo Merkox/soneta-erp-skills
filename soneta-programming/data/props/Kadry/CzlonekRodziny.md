@@ -6,38 +6,42 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZrodloDeklaracji`, `IAdresHost`, `IPowiązanieDodatku`
 
-- pola bazodanowe: 23
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 5
+- subrowy: 2
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| Deklaracje | `Soneta.Business.SubTable` |  |  |  |
-| Dodatki | `Soneta.Business.SubTable<Soneta.Kadry.Dodatek>` |  |  |  |
-| Dokument | `Soneta.Kadry.DokumentOsoby` | bazodanowe |  |  |
-| Dokument.DataWaznosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| Dokument.DataWydania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Dokument.Rodzaj | `Soneta.Kadry.KodRodzajuDokumentu` | bazodanowe, enum |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| Deklaracje | `SubTable` | podlista |  |  |
+| Dodatki | `SubTable<Soneta.Kadry.Dodatek>` | podlista |  |  |
+| Dokument | `Soneta.Kadry.DokumentOsoby` (subrow) | bazodanowe |  |  |
+| Dokument.DataWaznosci | `Date` | bazodanowe |  |  |
+| Dokument.DataWydania | `Date` | bazodanowe |  |  |
+| Dokument.Rodzaj | `Soneta.Kadry.KodRodzajuDokumentu` (enum) | bazodanowe |  |  |
 | Dokument.SeriaNumer | `string` | bazodanowe |  |  |
 | Dokument.WydanyPrzez | `string` | bazodanowe |  |  |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
 | Imie | `string` | bazodanowe |  |  |
 | ImieDrugie | `string` | bazodanowe |  |  |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | NIP | `string` | bazodanowe |  |  |
 | NaUtrzymaniu | `bool` | bazodanowe |  |  |
 | Nazwisko | `string` | bazodanowe |  |  |
 | OdbKsztalcenie | `bool` | bazodanowe |  |  |
-| OpiekaOpiekuna | `Soneta.Business.SubTable<Soneta.Place.OświadczenieZusOpieka>` |  |  |  |
-| OpiekaPodopiecznego | `Soneta.Business.SubTable<Soneta.Place.OświadczenieZusOpieka>` |  |  |  |
+| OpiekaOpiekuna | `SubTable<Soneta.Place.OświadczenieZusOpieka>` | podlista |  |  |
+| OpiekaPodopiecznego | `SubTable<Soneta.Place.OświadczenieZusOpieka>` | podlista |  |  |
 | PESEL | `string` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| StNiepelnosprawnosci | `Soneta.Kadry.KodStNiepelnosprawnosci` | bazodanowe, enum |  |  |
-| StPokrewienstwa | `Soneta.Kadry.KodStPokrewienstwa` | bazodanowe, enum |  |  |
-| UbezpieczenieOkres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| StNiepelnosprawnosci | `Soneta.Kadry.KodStNiepelnosprawnosci` (enum) | bazodanowe |  |  |
+| StPokrewienstwa | `Soneta.Kadry.KodStPokrewienstwa` (enum) | bazodanowe |  |  |
+| UbezpieczenieOkres | `FromTo` | bazodanowe, podlista |  |  |
 | Ubezpieczony | `bool` | bazodanowe |  |  |
-| Urodzony | `Soneta.Kadry.Urodzony` | bazodanowe |  |  |
-| Urodzony.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Urodzony | `Soneta.Kadry.Urodzony` (subrow) | bazodanowe |  |  |
+| Urodzony.Data | `Date` | bazodanowe |  |  |
 | Urodzony.Miejsce | `string` | bazodanowe |  |  |
 | WspolneGospDomowe | `bool` | bazodanowe |  |  |
 

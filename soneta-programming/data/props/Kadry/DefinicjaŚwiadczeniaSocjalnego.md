@@ -5,12 +5,16 @@ Opis: Słownik definicji świadczeń socjalnych (np. zapomogi, dopłaty do wypoc
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |

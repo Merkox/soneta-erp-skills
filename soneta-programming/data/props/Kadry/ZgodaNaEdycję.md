@@ -5,18 +5,22 @@ Opis: Zgoda na edycję danych kadrowo-płacowych w zamkniętym okresie dla danej
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kadry | `bool` | bazodanowe |  |  |
 | LimityNieobecnosci | `bool` | bazodanowe |  |  |
-| Nazwa | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Place | `bool` | bazodanowe |  |  |
-| Poczatek | `Soneta.Types.YearMonth` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
+| Poczatek | `YearMonth` | bazodanowe |  |  |
+| Termin | `Date` | bazodanowe |  |  |
 | Web | `bool` | bazodanowe |  |  |
-| Wycofana | `bool` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| Wycofana | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |

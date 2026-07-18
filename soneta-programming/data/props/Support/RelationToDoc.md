@@ -4,15 +4,19 @@ Opis: Tabela relacji między zgłoszeniami serwisowymi a innymi dokumentami w sy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Child | `Soneta.Core.IDokument` | bazodanowe, iface-ref | Dokument podrzędny | Podrzędny dokument. |
-| Parent | `Soneta.Support.Support.Ticket` | bazodanowe | Dokument nadrzędny | Nadrzędny dokument. |
-| RealizationTime | `Soneta.Types.TimeSec` | bazodanowe | Czas realizacji | Czas realizacji |
-| Type | `Soneta.Core.ServiceDesk.DocumentRelationType` | bazodanowe, enum | Typ relacji | Określa typ relacji |
+| Child | `Soneta.Core.IDokument` | bazodanowe, tylko-odczyt, iface-ref | Dokument podrzędny | Podrzędny dokument. |
+| Parent | `Soneta.Support.Support.Ticket` | bazodanowe, tylko-odczyt | Dokument nadrzędny | Nadrzędny dokument. |
+| RealizationTime | `TimeSec` | bazodanowe | Czas realizacji | Czas realizacji |
+| Type | `Soneta.Core.ServiceDesk.DocumentRelationType` (enum) | bazodanowe, tylko-odczyt | Typ relacji | Określa typ relacji |
 
 ## Relacje interfejsowe
 

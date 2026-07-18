@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,4 +23,4 @@ Implementuje interfejsy: `IZklPozycjaSlownika`
 | Priorytet | `int` |  |  |  |
 | Symbol | `string` |  |  |  |
 | SymbolGrupy | `string` | bazodanowe |  |  |
-| ZklSlownik | `Soneta.HR.IZklSlownik` |  |  |  |
+| ZklSlownik | `Soneta.HR.IZklSlownik` | tylko-odczyt |  |  |

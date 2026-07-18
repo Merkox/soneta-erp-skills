@@ -5,17 +5,21 @@ Opis: Rejestr zdarzeń związanych z pojazdami, takich jak przeglądy, naprawy c
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Comments | `Soneta.Business.MemoText` | bazodanowe | Uwagi |  |
-| CreationDate | `Soneta.Types.Date` | bazodanowe | Data utworzenia | Data utworzenia |
+| Comments | `MemoText` | bazodanowe, podlista | Uwagi |  |
+| CreationDate | `Date` | bazodanowe | Data utworzenia | Data utworzenia |
 | Number | `string` | bazodanowe | Numer |  |
 | Reading | `int` |  |  |  |
-| ReadingDate | `Soneta.Types.Date` |  |  |  |
-| ReadingTime | `Soneta.Types.Time` |  |  |  |
-| Task | `Soneta.Vehicles.Models.VehicleTask` | bazodanowe | Zadanie |  |
-| Vehicle | `Soneta.Vehicles.Vehicle` |  |  |  |
+| ReadingDate | `Date` |  |  |  |
+| ReadingTime | `Time` |  |  |  |
+| Task | `Soneta.Vehicles.Models.VehicleTask` | bazodanowe, tylko-odczyt | Zadanie |  |
+| Vehicle | `Soneta.Vehicles.Vehicle` | tylko-odczyt |  |  |
 | VehicleReading | `Soneta.Vehicles.VehicleReading` | bazodanowe | Odczyt | Odczyt pomiaru licznika |

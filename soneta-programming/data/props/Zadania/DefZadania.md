@@ -6,85 +6,89 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IManagedRowDefinion`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`, `IPreviewPageHost`
 
-- pola bazodanowe: 81
-- pola kalkulowane (z klas biznesowych): 39
+- pola bazodanowe (zapisywalne): 70
+- pola kalkulowane (zapisywalne): 16
+- pola tylko-odczyt: 12
+- podlisty: 20
+- subrowy: 2
+- razem: 120
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualizujCzas | `bool` | bazodanowe | Aktualizuj czas zakończenia zadania | Aktualizuje datę i czas zakończenia zadania po zmianie stanu na nieaktywny |
-| AlgorithmType | `Soneta.Zadania.AlgorithmType` | bazodanowe, enum |  |  |
+| AlgorithmType | `Soneta.Zadania.AlgorithmType` (enum) | bazodanowe |  |  |
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla zadania. |
 | AlgorytmDlaNazwy | `string` |  |  |  |
 | AlgorytmDlaOpisu | `string` |  |  |  |
-| AlgorytmNazwyIOpisu | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla nazwy i opisu zadania w kalendarzu | Kod kalkulatora dla nazwy i opisu zadania w kalendarzu. |
+| AlgorytmNazwyIOpisu | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla nazwy i opisu zadania w kalendarzu | Kod kalkulatora dla nazwy i opisu zadania w kalendarzu. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje zadań nie będą wyświetlane w liście wyboru. |
 | Calodzienne | `bool` | bazodanowe | Zadanie całodzienne | Określa, czy zadanie jest całodzienne. |
-| CechyKopiowane | `Soneta.Business.MemoText` | bazodanowe |  | Reprezentuje listę cech kopiowanych z aktywności nadrzędnej. |
-| CechyWymagane | `Soneta.Business.MemoText` | bazodanowe |  | Reprezentuje listę cech wymaganych na aktywnościach. |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla zadania | Kod klasy kalkulatora dla zadania. |
-| ColorsXml | `Soneta.Business.MemoText` |  |  |  |
+| CechyKopiowane | `MemoText` | bazodanowe, podlista |  | Reprezentuje listę cech kopiowanych z aktywności nadrzędnej. |
+| CechyWymagane | `MemoText` | bazodanowe, podlista |  | Reprezentuje listę cech wymaganych na aktywnościach. |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla zadania | Kod klasy kalkulatora dla zadania. |
+| ColorsXml | `MemoText` | podlista |  |  |
 | ConfigClass | `string` | bazodanowe | Klasa do zapisu konfiguracji | Klasa z definicją obiektu przechowującego statyczną konfigrację. |
 | ConfigTypeFullName | `string` |  |  |  |
 | CountersContractDefinition | `Soneta.Handel.DefDokHandlowego` |  |  |  |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Uruchom procesy |  |
-| DataType | `System.Type` |  |  |  |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Uruchom procesy |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
 | DefDlaOutlook | `bool` | bazodanowe | Definicja dla importu z Outlook 2007 | Określa, czy definicja jest dla importu maili z Outlook 2007. |
 | DefDokHanUslugi | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja dokumentu handlowego | Domyślna definicja dokumentu handlowego dla usług dla wypożyczenia/zlecenia serwisowego |
-| DefKolorow | `Soneta.Business.MemoText` | bazodanowe | Definicja warunków kolorowania wierszy | Określa definicję warunków kolorowania wierszy. |
+| DefKolorow | `MemoText` | bazodanowe, podlista | Definicja warunków kolorowania wierszy | Określa definicję warunków kolorowania wierszy. |
 | DefinicjaDokHandlowego | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja dokumentu handlowego | Domyślna definicja dokumentu handlowego generowanego dla tego zadania |
 | DescCode | `string` |  |  |  |
 | DlaRoli | `bool` |  |  |  |
 | DlaUprawnienia | `bool` |  |  |  |
 | Domyslna | `bool` | bazodanowe | Domyślna | Określa, że jest to domyślna definicja zadania |
 | DrugiSymbol | `string` | bazodanowe | Seria | Seria aktywności. |
-| EngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| EngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Algorytm zadania | Algorytm zadania |
+| EngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| EngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Algorytm zadania | Algorytm zadania |
 | EntitleGuid | `System.Guid` | bazodanowe |  | Domyślne uprawnienie dla którego przypisane jest zadanie. |
-| EventColor | `Soneta.Zadania.GoogleEventColor` | bazodanowe, enum | Kolor zdarzenia w kalendarzu Google | Określa kolor zdarzenia w kalendarzu Google. |
+| EventColor | `Soneta.Zadania.GoogleEventColor` (enum) | bazodanowe | Kolor zdarzenia w kalendarzu Google | Określa kolor zdarzenia w kalendarzu Google. |
 | FiltrDokumentCRM | `string` | bazodanowe | Filtr dokumentow CRM | Filtr wg jakiego wyświetlana jest lista dokumentów CRM. |
 | FiltrZasobu | `string` | bazodanowe | Filtr zasobu | Filtr wg jakiego wyświetlana jest lista zasobów IZasobCRM. |
-| Formularz | `Soneta.Core.RodzajFormularzaZadania` | bazodanowe, enum | Rodzaj formularza | Określa sposób wyświetlania formularza |
+| Formularz | `Soneta.Core.RodzajFormularzaZadania` (enum) | bazodanowe | Rodzaj formularza | Określa sposób wyświetlania formularza |
 | Grupowe | `Soneta.Zadania.DefZadania` | bazodanowe | Zadanie grupowe | Definicja podrzędnego zadania grupowego. |
 | Historia | `bool` | bazodanowe | Czy zapisywać historię zmian |  |
 | InicjujNazwe | `bool` | bazodanowe | Inicjuje nazwę zadania | Określa, czy zadanie ma zainicjowaną nazwę z definicji. |
-| IntervalType | `Soneta.Zadania.TaskInterval` | bazodanowe, enum | Interwał czasowy |  |
+| IntervalType | `Soneta.Zadania.TaskInterval` (enum) | bazodanowe | Interwał czasowy |  |
 | IntervalValue | `int` | bazodanowe | Wartość interwału czasowego |  |
-| IsDefinicjaWizji | `bool` |  |  |  |
-| IsDefinicjaWytycznej | `bool` |  |  |  |
-| IsDefinicjaZadaniaOPZ | `bool` |  |  |  |
-| IsProjectDefinition | `bool` |  |  |  |
-| IsSource | `bool` |  |  |  |
+| IsDefinicjaWizji | `bool` | tylko-odczyt |  |  |
+| IsDefinicjaWytycznej | `bool` | tylko-odczyt |  |  |
+| IsDefinicjaZadaniaOPZ | `bool` | tylko-odczyt |  |  |
+| IsProjectDefinition | `bool` | tylko-odczyt |  |  |
+| IsSource | `bool` | tylko-odczyt |  |  |
 | KanbanColor | `string` | bazodanowe | Kolor | Kolor na tablicy Kanban. |
 | KanbanDefinition | `bool` | bazodanowe | Pobieranie stanów Kanban |  |
 | Kategoria | `Soneta.Zadania.KategoriaAkt` | bazodanowe | Kategoria definicji | Kategoria definicji. |
-| Kod | `string` |  |  |  |
-| KontrolaCzasuZasobu | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola czasu zasobów | Określa sposób kontroli czasu zasobów przypisanych do zadania. |
-| KontrolaDokCRM | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola dokumentu CRM. | Kontroluje dodawanie dokumentu CRM do wielu zadań. |
-| KontrolaDostUrz | `Soneta.Core.TypKontroli` | bazodanowe, enum | Typ kontroli dostępności urządzenia | Określa typ kontroli dostępności urządzenia. |
-| Kreatory | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KontrolaCzasuZasobu | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola czasu zasobów | Określa sposób kontroli czasu zasobów przypisanych do zadania. |
+| KontrolaDokCRM | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola dokumentu CRM. | Kontroluje dodawanie dokumentu CRM do wielu zadań. |
+| KontrolaDostUrz | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Typ kontroli dostępności urządzenia | Określa typ kontroli dostępności urządzenia. |
+| Kreatory | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
 | LeaseContractDefinition | `Soneta.Handel.DefDokHandlowego` |  |  |  |
 | LiczbaStanow | `int` |  |  |  |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe | Domyślny magazyn | Określa, domyślny magazyn. |
 | MailAutoTemplate | `Soneta.CRM.SzablonEmail` | bazodanowe | Szablon email autoamtyczny. | Określa szablon wg którego będzie utworzony mail automatyczny |
-| MailDoKontrahenta | `Soneta.Core.RodzajWysylki` | bazodanowe, enum | Mail do kontrahenta. | Określa, czy mail zostanie wysłany do kontrahenta. |
-| MailDoProwadzacego | `Soneta.Core.RodzajWysylki` | bazodanowe, enum | Mail do prowadzącego. | Określa, czy mail zostanie wysłany do prowadzącego. |
-| MailDoWykonujacego | `Soneta.Core.RodzajWysylki` | bazodanowe, enum | Mail do wykonującego. | Określa, czy mail zostanie wysłany do wykonującego. |
+| MailDoKontrahenta | `Soneta.Core.RodzajWysylki` (enum) | bazodanowe | Mail do kontrahenta. | Określa, czy mail zostanie wysłany do kontrahenta. |
+| MailDoProwadzacego | `Soneta.Core.RodzajWysylki` (enum) | bazodanowe | Mail do prowadzącego. | Określa, czy mail zostanie wysłany do prowadzącego. |
+| MailDoWykonujacego | `Soneta.Core.RodzajWysylki` (enum) | bazodanowe | Mail do wykonującego. | Określa, czy mail zostanie wysłany do wykonującego. |
 | MailManualTemplate | `Soneta.CRM.SzablonEmail` | bazodanowe | Szablon mail na żądanie. | Określa szablon wg którego będzie utworzony mail na żądanie. |
 | MailPrzyUtworzeniu | `bool` | bazodanowe | Mail przy utworzeniu. | Określa, czy mail zostanie wysłany przy utworzeniu. |
 | MailPrzyZamknieciu | `bool` | bazodanowe | Mail przy zamknięciu. | Określa, czy mail zostanie wysłany przy zamknięciu. |
 | MailPrzyZmianie | `bool` | bazodanowe | Mail przy zmianie. | Określa, czy mail zostanie wysłany przy zmianie. |
-| Nadrzedne | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.DefZadaniaRelacja>` |  |  |  |
+| Nadrzedne | `SubTable<Soneta.Zadania.Budzetowanie.DefZadaniaRelacja>` | podlista |  |  |
 | NadrzedneNiePrzenos | `bool` | bazodanowe |  | Nie przenoś informacji z zadania nadrzędnego. |
 | NameCode | `string` |  |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa definicji zadania |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
 | NetDodawanie | `bool` | bazodanowe | Dodawanie w pulpicie kontrahenta | Możliwość dodawania zadań przez kontrahentów w pulpicie kontrahenta |
-| NetDostep | `Soneta.Zadania.NetDostep` | bazodanowe, enum | Dostęp w pulpicie kontrahenta | Możliwość dostępu kontrahentów do zadań w pulpicie kontrahenta. |
-| NetModul | `Soneta.Core.ModulyNet` | bazodanowe, enum | Moduł pulpitu kontrahenta | Dla jakiego modułu pulpitu kontrahenta definicja jest widoczna |
-| NeutralName | `string` |  |  |  |
+| NetDostep | `Soneta.Zadania.NetDostep` (enum) | bazodanowe | Dostęp w pulpicie kontrahenta | Możliwość dostępu kontrahentów do zadań w pulpicie kontrahenta. |
+| NetModul | `Soneta.Core.ModulyNet` (enum) | bazodanowe | Moduł pulpitu kontrahenta | Dla jakiego modułu pulpitu kontrahenta definicja jest widoczna |
+| NeutralName | `string` | tylko-odczyt |  |  |
 | NieWymagajCech | `bool` | bazodanowe |  | Określ, czy nie sprawdzać wymagalności cech aktywności. |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji zadań |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji zadań |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
@@ -92,45 +96,45 @@ Implementuje interfejsy: `IRightsSource`, `IManagedRowDefinion`, `ISysNotificati
 | ObslugaCRU | `bool` | bazodanowe | Obsługa CRU | Określa, czy definicja zadania jest przeznaczona do obsługi Centralnego Rejestru Umów (CRU). |
 | OknoPotwierdzenia | `bool` | bazodanowe | Okno potwierdzenia email | Określa, czy przy wysyłce pojawi się okno potwierdzenia. |
 | OpisHTML | `bool` | bazodanowe | Opis w postaci HTML. | Określa, czy opis będzie w postaci HTML. |
-| PlugIns | `Soneta.Business.SubTable` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.DefZadaniaRelacja>` |  |  |  |
+| PlugIns | `SubTable` | podlista |  |  |
+| Podrzedne | `SubTable<Soneta.Zadania.Budzetowanie.DefZadaniaRelacja>` | podlista |  |  |
 | PokazKomunikat | `bool` | bazodanowe |  | Decyduje o pokazywaniu komunikatu o kontrahencie podczas jego ustawianiu na dokument CRM. |
 | PowiazCzasWykonania | `bool` | bazodanowe |  | Powiąż czas wykonania z rozpoczęciem i zakończeniem. |
 | Powiazane | `Soneta.Zadania.DefZadania` | bazodanowe | Zadanie powiązane | Przy zamknięciu zadania generuje automatycznie nowe zadanie o zadanej definicji |
-| Priorytety | `Soneta.Business.LpSubTable<Soneta.Zadania.PriorytetZadania>` |  |  |  |
-| Przypomnienie | `Soneta.Types.Time` | bazodanowe | Przypomnienie | Czas przypomnienia o zadaniu |
-| PrzypomnienieWg | `Soneta.Core.PrzypomnienieWg` | bazodanowe, enum |  |  |
-| Rodzaj | `Soneta.Core.RodzajZadania` | bazodanowe, enum | Rodzaj zadania | Rodzaj definicji zadania. Może być zadanie lub zdarzenie. |
+| Priorytety | `LpSubTable<Soneta.Zadania.PriorytetZadania>` | podlista |  |  |
+| Przypomnienie | `Time` | bazodanowe | Przypomnienie | Czas przypomnienia o zadaniu |
+| PrzypomnienieWg | `Soneta.Core.PrzypomnienieWg` (enum) | bazodanowe |  |  |
+| Rodzaj | `Soneta.Core.RodzajZadania` (enum) | bazodanowe | Rodzaj zadania | Rodzaj definicji zadania. Może być zadanie lub zdarzenie. |
 | RodzajAdresu | `Soneta.Core.SlownikElem` | bazodanowe | Rodzaj adresu | Rodzaj adresu e-mail. |
-| Role | `Soneta.Business.App.Role` |  |  |  |
+| Role | `App.Role` |  |  |  |
 | RoleGuid | `System.Guid` | bazodanowe |  | Domyślna rola dla której przypisane jest zadanie. |
 | RoleName | `string` |  | Rola |  |
-| RowType | `System.Type` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RowType | `System.Type` | tylko-odczyt |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Stany | `Soneta.Business.LpSubTable<Soneta.Zadania.StanZadania>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Stany | `LpSubTable<Soneta.Zadania.StanZadania>` | podlista |  |  |
 | StoperAuto | `bool` | bazodanowe |  | Automatycznie uruchamiaj stoper. |
 | StoperDostepny | `bool` | bazodanowe |  | Udostępnij funkcje stopera. |
 | StoperWTle | `bool` | bazodanowe |  | Pozwól na działanie stopera w tle po zamknięciu formatki. |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji zadania wykorzystywana do wyszukiwania definicji oraz numeracji zadań CRM. |
 | Synchronizowana | `bool` | bazodanowe | Synchronizacja z kalendarzami Google | Określa czy zadania definicji mają być synchronizowane z kalendarzami Google. |
-| SysNotifications | `Soneta.Business.SubTable<Soneta.Business.Db.Notifications.SysNotification>` |  |  |  |
+| SysNotifications | `SubTable<Db.Notifications.SysNotification>` | podlista |  |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
-| Typy | `Soneta.Business.LpSubTable<Soneta.Zadania.TypZadania>` |  |  |  |
-| UprawnieniaNaAktywnosciach | `bool` |  |  |  |
-| Uprawnienie | `Soneta.Business.App.Entitle` |  |  |  |
+| Typy | `LpSubTable<Soneta.Zadania.TypZadania>` | podlista |  |  |
+| UprawnieniaNaAktywnosciach | `bool` | tylko-odczyt |  |  |
+| Uprawnienie | `App.Entitle` |  |  |  |
 | UseTaskMailingSystem | `bool` | bazodanowe | Wysyłka za pomocą tasku | Określa, czy mail zostanie wysłany własnym taskiem wysyłkowym czy mechanizmem wbudowanym. |
-| WFDefinition | `Soneta.Workflow.Config.WFDefinitionExtend` |  |  |  |
-| WartoscDokCRM | `Soneta.Core.WartoscDokCRM` | bazodanowe, enum | Wartość na dokumencie CRM. | Określa, rodzaj wartości na dokumencie CRM. |
-| WfEngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WfEngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
-| WysylkaNaAdres | `Soneta.Core.WysylkaNaAdres` | bazodanowe, enum | Adresy do wysyłki | Określa adresy do wysyłki. |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
-| XmlNET | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika w pulpicie kontrahenta. |  |
+| WFDefinition | `Soneta.Workflow.Config.WFDefinitionExtend` | tylko-odczyt |  |  |
+| WartoscDokCRM | `Soneta.Core.WartoscDokCRM` (enum) | bazodanowe | Wartość na dokumencie CRM. | Określa, rodzaj wartości na dokumencie CRM. |
+| WfEngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| WfEngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+| WysylkaNaAdres | `Soneta.Core.WysylkaNaAdres` (enum) | bazodanowe | Adresy do wysyłki | Określa adresy do wysyłki. |
+| Xml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
+| XmlNET | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika w pulpicie kontrahenta. |  |
 
 ## Enumy
 

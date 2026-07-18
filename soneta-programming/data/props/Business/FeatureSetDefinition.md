@@ -5,53 +5,57 @@ Opis: Definiuje zestawy pól (grupy cech) wyświetlane jako zakładki na formula
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 11
+- podlisty: 4
+- subrowy: 1
+- razem: 36
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllowUserMode | `bool` |  |  |  |
+| AllowUserMode | `bool` | tylko-odczyt |  |  |
 | Automatic | `bool` | bazodanowe | Automatyczna | Grupa automatyczna  |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  | Algorytm (C#) ustalania widoczności zestawu pól dla obiektu |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  | Algorytm (C#) ustalania widoczności zestawu pól dla obiektu |
 | CodeActive | `bool` | bazodanowe | Algorytm włączony | Określa, czy algorytm wyliczania widoczności jest aktywny |
 | ConfigurationKey | `string` | bazodanowe | Klucz | Określa klucz wyboru konfiguracji |
-| ConfigurationKeyObj | `Soneta.Business.UI.IConfigurationKey` |  |  |  |
-| ConverSets | `string` |  | Zestawy przykrywane |  |
-| ConveredBySets | `string` |  | Zestawy przykrywające |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| ConfigurationKeyObj | `UI.IConfigurationKey` |  |  |  |
+| ConverSets | `string` | tylko-odczyt | Zestawy przykrywane |  |
+| ConveredBySets | `string` | tylko-odczyt | Zestawy przykrywające |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | Description | `string` | bazodanowe | Opis | Opis objaśniający zastosowanie zestawu pól |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| FeatureFilter | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha filtrująca | Cecha aktywująca działanie zestawu |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| FeatureFilter | `FeatureDefinition` | bazodanowe | Cecha filtrująca | Cecha aktywująca działanie zestawu |
 | FeatureFilterValue | `string` | bazodanowe | Wartość filtrująca | Wartość cechy aktywująca działanie zestawu |
-| FeatureSetDefinitionItems | `Soneta.Business.LpSubTable<Soneta.Business.FeatureSetDefinitionItem>` |  |  |  |
+| FeatureSetDefinitionItems | `LpSubTable<FeatureSetDefinitionItem>` | podlista |  |  |
 | GeneralPageHidden | `bool` | bazodanowe | Ukryj 'Ogólne' | Gdy widoczna pierwsza zakładka określa, czy ma być ukryta zakładka 'Ogólne' |
 | GeneralPageVisible | `bool` |  |  |  |
-| HostDefinition | `Soneta.Business.UI.IConfigurationKey` | bazodanowe | Definicja obiektu | Definicja obiektu aktywująca działanie zestawu |
-| HostName | `string` | bazodanowe | Typ danych | Typ danych, którego dotyczy definicja |
-| HostRowType | `System.Type` |  |  |  |
+| HostDefinition | `UI.IConfigurationKey` | bazodanowe | Definicja obiektu | Definicja obiektu aktywująca działanie zestawu |
+| HostName | `string` | bazodanowe, tylko-odczyt | Typ danych | Typ danych, którego dotyczy definicja |
+| HostRowType | `System.Type` | tylko-odczyt |  |  |
 | Independent | `bool` | bazodanowe | Niezależny od innych | Określa zestaw, którego pola bezwarunkowo muszą znajdować się na formularzu |
 | Locked | `bool` | bazodanowe | Blokada | Określa, czy definicja jest aktualnie zablokowana |
 | Name | `string` | bazodanowe | Nazwa | Nazwa cechy |
-| NameWithCondition | `string` |  |  |  |
-| NonVisibilityCondition | `bool` |  |  |  |
+| NameWithCondition | `string` | tylko-odczyt |  |  |
+| NonVisibilityCondition | `bool` | tylko-odczyt |  |  |
 | Priority | `int` | bazodanowe |  | Priorytet zestawu pól, uwzględniany przy kolejności wyświetlania |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | StorageContext | `Soneta.Tools.IStorageContext` |  |  |  |
 | StorageContextName | `string` | bazodanowe | Kontekst konfiguracji | Kontekst konfiguracji aktywujący działanie zestawu |
-| Target | `Soneta.Business.Db.FeatureSetDefinitionTargets` | bazodanowe, enum | Zakładka | Określe miejsce, w którym zestaw pól jest uwzględniany |
+| Target | `Db.FeatureSetDefinitionTargets` (enum) | bazodanowe | Zakładka | Określe miejsce, w którym zestaw pól jest uwzględniany |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### FeatureSetDefinitionTargets (`Soneta.Business.Db.FeatureSetDefinitionTargets`)
+### FeatureSetDefinitionTargets (`Db.FeatureSetDefinitionTargets`)
 - `None` = 0 — Wszystkie
 - `AdditionalPage` = 1 — Zakładka Dodatkowe
 - `GeneralPage` = 2 — Zakładka Ogólne

@@ -6,13 +6,17 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IAuthorised`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 3
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Locked | `bool` | bazodanowe | Zablokowana | Określa czy grupa użytkowników jest zablokowana |
-| Members | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.UserGroupMember>` |  |  |  |
+| Members | `SubTable<Db.Permissions.UserGroupMember>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa | Określa nazwę grupy użytkowników |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
-| UserGroupMembers | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.UserGroupMember>` |  |  |  |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
+| UserGroupMembers | `SubTable<Db.Permissions.UserGroupMember>` | podlista |  |  |

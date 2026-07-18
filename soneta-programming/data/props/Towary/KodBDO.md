@@ -4,15 +4,19 @@ Opis: Słownik kodów klasyfikacji odpadów zgodnych z rejestrem BDO (Baza danyc
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ID_BDO | `string` | bazodanowe |  | ID w systemie BDO |
 | Kod | `string` | bazodanowe |  |  |
-| MaPodrzedne | `bool` |  |  |  |
-| Nadrzedny | `Soneta.Towary.KodBDO` |  |  |  |
+| MaPodrzedne | `bool` | tylko-odczyt |  |  |
+| Nadrzedny | `Soneta.Towary.KodBDO` | tylko-odczyt |  |  |
 | Niebezpieczny | `bool` | bazodanowe |  | Określa czy odpad jest niebezpieczny |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Podrzedne | `System.Collections.Generic.IEnumerable<Soneta.Towary.KodBDO>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Podrzedne | `System.Collections.Generic.IEnumerable<Soneta.Towary.KodBDO>` | podlista |  |  |

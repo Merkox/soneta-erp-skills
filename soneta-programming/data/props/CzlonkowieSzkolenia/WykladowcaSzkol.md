@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IOceniający`, `ITaskUser`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 10
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Doswiadczenie | `Soneta.Business.MemoText` | bazodanowe | Doświadczenie zawodowe | Doświadczenie zawodowe. |
+| Doswiadczenie | `MemoText` | bazodanowe, podlista | Doświadczenie zawodowe | Doświadczenie zawodowe. |
 | Egzaminator | `bool` | bazodanowe | Egzaminator |  |
-| EtapyRekrutacji | `Soneta.Business.SubTable<Soneta.HR.EtapRekrutacji>` |  |  |  |
+| EtapyRekrutacji | `SubTable<Soneta.HR.EtapRekrutacji>` | podlista |  |  |
 | Imie | `string` | bazodanowe | Imie pracownika | Imie pracownika. |
 | Kod | `string` | bazodanowe |  | Kod wykładowcy. |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
 | Nazwisko | `string` | bazodanowe | Nazwisko pracownika | Nazwa pracownika. |
-| Oceniający | `Soneta.Business.SubTable` |  |  |  |
+| Oceniający | `SubTable` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisana jest sala. |
-| OfertyPracy | `Soneta.Business.SubTable` |  |  |  |
+| OfertyPracy | `SubTable` | podlista |  |  |
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Rekrutacje | `Soneta.Business.SubTable<Soneta.HR.Rekrutacja>` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
+| Rekrutacje | `SubTable<Soneta.HR.Rekrutacja>` | podlista |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
 | TytulNaukowy | `string` | bazodanowe | Tytul naukowy | Tytul naukowy. |
-| View | `Soneta.Business.View` |  |  |  |
-| Wakaty | `Soneta.Business.SubTable` |  |  |  |
+| View | `View` | podlista |  |  |
+| Wakaty | `SubTable` | podlista |  |  |
 | Wizytator | `bool` | bazodanowe | Wizytator |  |
-| Zajecia | `Soneta.Business.View` |  |  |  |
-| ZajeciaWykladowcy | `Soneta.Business.SubTable` |  |  |  |
-| ZgloszSygnalisty | `Soneta.Business.SubTable<Soneta.Kadry.ZgloszenieSygnalisty>` |  |  |  |
+| Zajecia | `View` | podlista |  |  |
+| ZajeciaWykladowcy | `SubTable` | podlista |  |  |
+| ZgloszSygnalisty | `SubTable<Soneta.Kadry.ZgloszenieSygnalisty>` | podlista |  |  |

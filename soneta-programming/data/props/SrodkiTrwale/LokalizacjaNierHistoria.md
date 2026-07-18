@@ -4,19 +4,24 @@ Tytuł: Historia lokalizacji nieruchomości
 Opis: Element szczegółowy lokalizacji nieruchomości (LokalizacjaNier). Przechowuje historyczne dane o lokalizacji nieruchomości, w tym podmiot płatności, okres rozliczeń podatku od nieruchomości oraz przedmioty opodatkowania obowiązujące w danym okresie.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Lokalizacja` → `LokalizacjaNier`
+Historia: Tak — zapis historyczny tabeli `LokalizacjaNier`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe | Aktualność | Data aktualności |
-| ChangeInfoIdent | `string` |  |  |  |
-| ElementyPrzedmiotuOpodatkowania | `Soneta.Business.LpSubTable<Soneta.SrodkiTrwale.PrzedmiotOp>` |  |  |  |
-| Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe, guided-parent |  | Lokalizacja nieruchomości |
-| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczen` | bazodanowe, enum | Okres rozliczeń | Okres rozliczeń |
+| Aktualnosc | `FromTo` | bazodanowe, podlista | Aktualność | Data aktualności |
+| ChangeInfoIdent | `string` | tylko-odczyt |  |  |
+| ElementyPrzedmiotuOpodatkowania | `LpSubTable<Soneta.SrodkiTrwale.PrzedmiotOp>` | podlista |  |  |
+| Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe, tylko-odczyt, guided-parent |  | Lokalizacja nieruchomości |
+| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczen` (enum) | bazodanowe | Okres rozliczeń | Okres rozliczeń |
 | Opis | `string` | bazodanowe |  | Opis |
-| Parent | `Soneta.Business.Row` |  |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
 | PodmiotPlatnosci | `Soneta.CRM.Kontrahent` | bazodanowe |  | Podmiot płatności |
 
 ## Enumy

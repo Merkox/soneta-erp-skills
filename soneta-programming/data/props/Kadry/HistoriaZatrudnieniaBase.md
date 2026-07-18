@@ -6,51 +6,55 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`
 
-- pola bazodanowe: 25
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 9
+- subrowy: 2
+- razem: 40
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres1 | `string` | bazodanowe |  |  |
 | Adres2 | `string` | bazodanowe |  |  |
 | AgencjaPracyTyczasowej | `bool` | bazodanowe |  |  |
-| DataDostarczeniaZaswiadczenia | `Soneta.Types.Date` | bazodanowe | Data dostarczenia zaswiadczenia |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| DataDostarczeniaZaswiadczenia | `Date` | bazodanowe | Data dostarczenia zaswiadczenia |  |
+| EfektywnyOkres | `FromTo` | bazodanowe, podlista |  |  |
 | GrupaStanowisk | `Soneta.HR.GrupaStanowisk` | bazodanowe |  |  |
-| Informacja | `string` |  |  |  |
+| Informacja | `string` | tylko-odczyt |  |  |
 | Informacja1 | `string` | bazodanowe |  |  |
 | Informacja2 | `string` | bazodanowe |  |  |
 | KodWykonywanegoZawodu | `int` | bazodanowe |  |  |
 | Korekta | `Soneta.Kadry.StazPracy` | bazodanowe |  |  |
-| KorygowanyOkres | `Soneta.Types.Periods` |  |  |  |
-| ManagedState | `Soneta.Core.ManagedRowStates` | enum |  |  |
+| KorygowanyOkres | `Periods` | tylko-odczyt |  |  |
+| ManagedState | `Soneta.Core.ManagedRowStates` (enum) | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
 | ObszarFunkcjonalny | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresStaz | `Soneta.Kadry.StazPracy` |  |  |  |
-| OkresyNiewliczane | `Soneta.Business.FromToSubTable<Soneta.Kadry.OkresNiewliczany>` |  |  |  |
-| OkresyPracyTymczasowej | `Soneta.Business.SubTable<Soneta.Kadry.OkresWykonywaniaPracyTymczasowej>` |  |  |  |
-| Podstawy | `Soneta.Business.SubTable<Soneta.Kadry.PodstawaStazu>` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RodzajDokumentu | `Soneta.Kadry.RodzajDokumentu` | bazodanowe, enum |  |  |
-| Staz | `Soneta.Kadry.StazPracyPracownika` | bazodanowe |  |  |
-| Staz.Podstawy | `Soneta.Business.SubTable` |  |  |  |
-| Staz.RodzajPodstawy | `Soneta.Kadry.RodzajPodstawyStażuPracy` | enum |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresStaz | `Soneta.Kadry.StazPracy` | tylko-odczyt |  |  |
+| OkresyNiewliczane | `FromToSubTable<Soneta.Kadry.OkresNiewliczany>` | podlista |  |  |
+| OkresyPracyTymczasowej | `SubTable<Soneta.Kadry.OkresWykonywaniaPracyTymczasowej>` | podlista |  |  |
+| Podstawy | `SubTable<Soneta.Kadry.PodstawaStazu>` | podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RodzajDokumentu | `Soneta.Kadry.RodzajDokumentu` (enum) | bazodanowe |  |  |
+| Staz | `Soneta.Kadry.StazPracyPracownika` (subrow) | bazodanowe |  |  |
+| Staz.Podstawy | `SubTable` | podlista |  |  |
+| Staz.RodzajPodstawy | `Soneta.Kadry.RodzajPodstawyStażuPracy` (enum) | tylko-odczyt |  |  |
 | Staz.Staz | `Soneta.Kadry.StazPracy` | bazodanowe |  |  |
-| StazEfektywnegoOkresu | `Soneta.Kadry.StazPracy` |  |  |  |
-| Szkola | `Soneta.Kadry.TypSzkoły` | bazodanowe, enum |  |  |
+| StazEfektywnegoOkresu | `Soneta.Kadry.StazPracy` | tylko-odczyt |  |  |
+| Szkola | `Soneta.Kadry.TypSzkoły` (enum) | bazodanowe |  |  |
 | SzkolaStaz | `Soneta.Kadry.StazPracy` | bazodanowe |  |  |
 | TyUb | `Soneta.Kadry.TytulUbezpieczenia` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypHistoriiZatrudnienia` | bazodanowe, enum |  |  |
-| Wyksztalcenie | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.WyksztalceniePracownika` | bazodanowe | Wykształcenie |  |
+| Typ | `Soneta.Kadry.TypHistoriiZatrudnienia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wyksztalcenie | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.WyksztalceniePracownika` (subrow) | bazodanowe | Wykształcenie |  |
 | Wyksztalcenie.Kierunek | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Kierunek |  |
 | Wyksztalcenie.Poziom | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomWyksztalcenia` | bazodanowe | Poziom |  |
 | Wyksztalcenie.TytulStopien | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.TytulZawodowyStopienNaukowy` | bazodanowe | Tytuł/stopień |  |
-| Wyksztalcenie.WgKierunek | `Soneta.Business.Key` |  |  |  |
-| Wyksztalcenie.WgPoziom | `Soneta.Business.Key` |  |  |  |
-| Wyksztalcenie.WgTytulStopien | `Soneta.Business.Key` |  |  |  |
-| ZawszeIlościowo | `bool` |  |  |  |
+| Wyksztalcenie.WgKierunek | `Key` | podlista |  |  |
+| Wyksztalcenie.WgPoziom | `Key` | podlista |  |  |
+| Wyksztalcenie.WgTytulStopien | `Key` | podlista |  |  |
+| ZawszeIlościowo | `bool` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

@@ -6,13 +6,17 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWebOperator`, `ITaskUser`
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 27
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 3
+- subrowy: 0
+- razem: 30
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokumentacja | `bool` | bazodanowe |  | Aktywna zakładka dokumentacji panelu meldunkowego. |
-| FiltrCechyDefinicja | `Soneta.Business.FeatureDefinition` | bazodanowe | Filtr definicji cechy | Filtr definicji cechy panelu meldunkowego dla użytkownika. |
+| FiltrCechyDefinicja | `FeatureDefinition` | bazodanowe | Filtr definicji cechy | Filtr definicji cechy panelu meldunkowego dla użytkownika. |
 | FiltrCechyWartosc | `string` | bazodanowe | Filtr wartości cechy | Filtr wartości cechy panelu meldunkowego dla użytkownika. |
 | FiltrDefinicjiOperacji | `Soneta.ProdukcjaPro.ProDefinicjaOperacji` | bazodanowe | Filtr definicji operacji | Filtr definicji operacji panelu meldunkowego dla użytkownika. |
 | FiltrDefinicjiOperacjiEdycja | `bool` | bazodanowe | Edycja filtru definicji operacji | Edycja filtru definicji operacji panelu meldunkowego dla użytkownika. |
@@ -25,8 +29,8 @@ Implementuje interfejsy: `IWebOperator`, `ITaskUser`
 | FiltrWydzialuEdycja | `bool` | bazodanowe | Edycja filtru wydziału | Edycja filtru wydziału panelu meldunkowego dla użytkownika. |
 | Kod | `string` | bazodanowe |  | Kod użytkownika panelu meldunkowego. |
 | Nazwa | `string` | bazodanowe |  | Nazwa użytkownika panelu meldunkowego. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis użytkownika panelu meldunkowego. |
-| PoświadczeniaOdbioru | `Soneta.Business.SubTable<Soneta.Core.PoświadczenieOdbioru>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis użytkownika panelu meldunkowego. |
+| PoświadczeniaOdbioru | `SubTable<Soneta.Core.PoświadczenieOdbioru>` | podlista |  |  |
 | Raportowanie | `bool` | bazodanowe |  | Aktywna zakładka raportowania panelu meldunkowego. |
 | RaportowanieWJednostce | `bool` | bazodanowe |  | Aktywne pole jednostki na ekranie raportowania panelu meldunkowego. |
 | Realizacja | `bool` | bazodanowe |  | Aktywna zakładka realizacji panelu meldunkowego. |
@@ -37,10 +41,10 @@ Implementuje interfejsy: `IWebOperator`, `ITaskUser`
 | RealizacjaZmianaIlosciMeldunku | `bool` | bazodanowe | Zmiana ilości meldunku | Zmiana ilości meldunku panelu meldunkowego. |
 | Rejestracja | `bool` | bazodanowe |  | Aktywna zakładka rejestracji panelu meldunkowego. |
 | RejestracjaRaportuj | `bool` | bazodanowe | Rejestracja raportuj | Aktywny przycisk Raportuj na zakładce rejestracji panelu meldunkowego. |
-| TypZalacznika | `Soneta.ProdukcjaPro.ProTypZalacznika` | bazodanowe, enum | Typ załącznika | Typ załącznika panelu meldunkowego. |
-| WyborDostaw | `Soneta.ProdukcjaPro.ProWyborDostaw` | bazodanowe, enum | Wybór dostaw | Wybór dostaw na ekranie raportowania panelu meldunkowego. |
+| TypZalacznika | `Soneta.ProdukcjaPro.ProTypZalacznika` (enum) | bazodanowe | Typ załącznika | Typ załącznika panelu meldunkowego. |
+| WyborDostaw | `Soneta.ProdukcjaPro.ProWyborDostaw` (enum) | bazodanowe | Wybór dostaw | Wybór dostaw na ekranie raportowania panelu meldunkowego. |
 | WyborOperacji | `bool` | bazodanowe | Wybór operacji | Wybór operacji na ekranie raportowania panelu meldunkowego. |
-| ZgloszSygnalisty | `Soneta.Business.SubTable<Soneta.Kadry.ZgloszenieSygnalisty>` |  |  |  |
+| ZgloszSygnalisty | `SubTable<Soneta.Kadry.ZgloszenieSygnalisty>` | podlista |  |  |
 
 ## Enumy
 

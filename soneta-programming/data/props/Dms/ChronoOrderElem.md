@@ -6,26 +6,30 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`, `IDmsArchInfoHost`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 1
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ArchInfos | `Soneta.Business.SubTable<Soneta.Workflow.Dms.IK.DmsArchInfo>` |  |  |  |
-| Attachment | `Soneta.Business.Db.Attachment` | bazodanowe | Załącznik | Załącznik |
+| ArchInfos | `SubTable<Soneta.Workflow.Dms.IK.DmsArchInfo>` | podlista |  |  |
+| Attachment | `Db.Attachment` | bazodanowe | Załącznik | Załącznik |
 | ChronoOrder | `Soneta.Workflow.Dms.IK.ChronoOrder` | bazodanowe | Skład | Skład |
-| DataType | `Soneta.Workflow.Dms.IK.DataTypeEnum` | bazodanowe, enum | Typ przechowywanych danych | Typ przechowywanych danych w składzie |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis |
-| Document | `Soneta.Workflow.Dms.IK.Interfaces.IChronoOrderHost` | bazodanowe, iface-ref | Host | Host |
-| Name | `string` | bazodanowe | Nazwa | Nazwa składu |
-| Number | `Soneta.Core.NumerDokumentu` | bazodanowe | Numer | Numer dokumentu |
+| DataType | `Soneta.Workflow.Dms.IK.DataTypeEnum` (enum) | bazodanowe | Typ przechowywanych danych | Typ przechowywanych danych w składzie |
+| Description | `MemoText` | bazodanowe, podlista | Opis | Opis |
+| Document | `Soneta.Workflow.Dms.IK.Interfaces.IChronoOrderHost` | bazodanowe, tylko-odczyt, iface-ref | Host | Host |
+| Name | `string` | bazodanowe, tylko-odczyt | Nazwa | Nazwa składu |
+| Number | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe | Numer | Numer dokumentu |
 | Number.Numer | `int` | bazodanowe |  |  |
 | Number.NumerPelny | `string` |  |  |  |
-| Number.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Number.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Number.Symbol | `string` | bazodanowe |  |  |
-| Number.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Number.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| StateType | `Soneta.Workflow.Dms.IK.ChronoOrderElemState` | bazodanowe, enum | Status | Status dokumentu |
+| Number.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Number.WgSymboluDokumentu | `Key` | podlista |  |  |
+| StateType | `Soneta.Workflow.Dms.IK.ChronoOrderElemState` (enum) | bazodanowe | Status | Status dokumentu |
 
 ## Relacje interfejsowe
 

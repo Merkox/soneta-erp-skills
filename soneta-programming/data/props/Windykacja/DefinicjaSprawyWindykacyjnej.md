@@ -6,17 +6,21 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie definicji. Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |
-| DependentWfDefinition | `Soneta.Business.IDependentWfDefinition` |  |  |  |
+| DependentWfDefinition | `IDependentWfDefinition` | tylko-odczyt |  |  |
 | Domyslny | `bool` | bazodanowe | Domyślna |  |
-| Etapy | `Soneta.Business.LpSubTable<Soneta.Windykacja.EtapDefinicjiWindykacji>` |  |  |  |
+| Etapy | `LpSubTable<Soneta.Windykacja.EtapDefinicjiWindykacji>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  | Pełna nazwa definicji dokumentu wykorzystywana do wyszukiwania deifnicji. |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |

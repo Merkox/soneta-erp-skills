@@ -5,15 +5,19 @@ Opis: Element szczegółowy akordu (IAkord). Próg w progresywnym systemie akord
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Akord` → `IAkord`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akord | `Soneta.Kadry.IAkord` | bazodanowe, guided-parent, iface-ref |  |  |
+| Akord | `Soneta.Kadry.IAkord` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 | Prog | `double` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.DoubleCy` | bazodanowe |  |  |
-| Zerowy | `bool` | bazodanowe |  |  |
+| Wartosc | `DoubleCy` | bazodanowe |  |  |
+| Zerowy | `bool` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

@@ -5,20 +5,24 @@ Opis: Element szczegółowy struktury organizacyjnej (StrukturaOrganizacyjna). D
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DozwolonePowiazania | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Struktura | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe |  |  |
+| Struktura | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe, tylko-odczyt |  |  |
 | TypZrodlaPowiazania | `string` | bazodanowe | Typ obiektu źródła | Określa typ obiektu źródła powiązania |
-| TypZrodlaPowiazaniaTypWiersza | `System.Type` |  |  |  |
+| TypZrodlaPowiazaniaTypWiersza | `System.Type` | tylko-odczyt |  |  |
 | UkryjNaglowek | `bool` | bazodanowe |  |  |
 | Warunek1 | `bool` | bazodanowe |  |  |
 | Warunek2 | `bool` | bazodanowe |  |  |
 | Warunek3 | `bool` | bazodanowe |  |  |
 | Warunek4 | `bool` | bazodanowe |  |  |
 | Warunek5 | `bool` | bazodanowe |  |  |
-| ZrodloUprawnien | `bool` |  | Żródło uprawnień | Określa czy definicja elementu jest źródłem uprawnień |
+| ZrodloUprawnien | `bool` | tylko-odczyt | Żródło uprawnień | Określa czy definicja elementu jest źródłem uprawnień |

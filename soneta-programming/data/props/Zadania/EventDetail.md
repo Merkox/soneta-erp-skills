@@ -5,26 +5,30 @@ Opis: Szczegóły zdarzenia komunikacyjnego (e-mail, SMS) powiązanego z zadanie
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 7
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DW | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| EventType | `Soneta.Zadania.EventType` | bazodanowe, enum |  |  |
-| From | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| DW | `MemoText` | bazodanowe, podlista |  |  |
+| EventType | `Soneta.Zadania.EventType` (enum) | bazodanowe |  |  |
+| From | `MemoText` | bazodanowe, podlista |  |  |
 | IsSent | `bool` | bazodanowe |  |  |
-| Kontrahenci | `Soneta.CRM.Kontrahent[]` |  |  |  |
+| Kontrahenci | `Soneta.CRM.Kontrahent[]` | podlista |  |  |
 | MailAccount | `Soneta.CRM.Config.KontoPocztowe` | bazodanowe |  |  |
-| Participants | `Soneta.Business.SubTable<Soneta.Zadania.EventParticipant>` |  |  |  |
+| Participants | `SubTable<Soneta.Zadania.EventParticipant>` | podlista |  |  |
 | PhoneNo | `string` | bazodanowe |  |  |
 | ReadConfirmation | `bool` | bazodanowe |  |  |
-| SmsRecipientsDisplay | `string` |  |  |  |
+| SmsRecipientsDisplay | `string` | tylko-odczyt |  |  |
 | SmsTemplate | `Soneta.CRM.SzablonSms` | bazodanowe |  |  |
-| TaskEvent | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
-| To | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UDW | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UczestnicyOsoby | `Soneta.CRM.KontaktOsoba[]` |  |  |  |
+| TaskEvent | `Soneta.Zadania.Zadanie` | bazodanowe, tylko-odczyt |  |  |
+| To | `MemoText` | bazodanowe, podlista |  |  |
+| UDW | `MemoText` | bazodanowe, podlista |  |  |
+| UczestnicyOsoby | `Soneta.CRM.KontaktOsoba[]` | podlista |  |  |
 
 ## Enumy
 

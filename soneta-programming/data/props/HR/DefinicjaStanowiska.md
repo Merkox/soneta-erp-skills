@@ -4,78 +4,60 @@ Tytuł: Definicje stanowisk
 Opis: Słownik stanowisk pracy w organizacji. Określa nazwę, funkcję, specjalność oraz powiązania z kalendarzem pracy, grupą zaszeregowania i kodem wykonywanego zawodu.
 Tabela konfiguracyjna: Tak
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `DefinicjaStanowiskaHist`
 Implementuje interfejsy: `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 28
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 22
+- subrowy: 0
+- razem: 38
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BadaniaLekarskie | `Soneta.Business.SubTable<Soneta.HR.BadaniaLekarskieDefinicjiStanowiska>` |  |  |  |
+| BadaniaLekarskie | `SubTable<Soneta.HR.BadaniaLekarskieDefinicjiStanowiska>` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| DefinicjaFunkcji | `Soneta.HR.DefinicjaFunkcji` | bazodanowe |  |  |
-| DefinicjeCzynnikowSzkodliwych | `Soneta.Business.SubTable<Soneta.HR.CzynnikSzkodliwyDefinicjiStanowiska>` |  |  |  |
+| DefinicjeCzynnikowSzkodliwych | `SubTable<Soneta.HR.CzynnikSzkodliwyDefinicjiStanowiska>` | podlista |  |  |
 | DefinicjeCzynnikowSzkodliwychGotowe | `bool` | bazodanowe |  |  |
-| DefinicjeDokumentow | `Soneta.Business.SubTable<Soneta.HR.DokumentDefinicjiStanowiska>` |  |  |  |
-| Funkcja | `string` | bazodanowe |  |  |
-| FunkcjaPelna | `string` | bazodanowe |  |  |
-| Grupa | `Soneta.Kadry.GrupaZaszeregowania` | bazodanowe |  |  |
-| GrupyZaszeregowania | `Soneta.Business.SubTable<Soneta.HR.GrupaZaszeregowaniaDefinicjiStanowiska>` |  |  |  |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.HR.DefinicjaStanowiskaHist>` |  |  |  |
-| InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` | bazodanowe, enum |  |  |
-| Kalendarz | `Soneta.Kalend.Kalendarz` | bazodanowe |  |  |
-| Kandydatury | `Soneta.Business.SubTable<Soneta.HR.Rekrutacja>` |  |  |  |
-| KartyOpisuStanowiska | `Soneta.Business.SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` |  |  |  |
-| KodPracyWSzczWarunkach | `Soneta.Kadry.KodPracyWSzególnychWarunkachCharakterze` | bazodanowe |  |  |
-| KodWykonywanegoZawodu | `Soneta.Kadry.KodWykonywanegoZawodu` | bazodanowe |  |  |
-| KodWymiany | `string` | bazodanowe |  |  |
-| Last | `Soneta.HR.DefinicjaStanowiskaHist` |  |  |  |
+| DefinicjeDokumentow | `SubTable<Soneta.HR.DokumentDefinicjiStanowiska>` | podlista |  |  |
+| GrupyZaszeregowania | `SubTable<Soneta.HR.GrupaZaszeregowaniaDefinicjiStanowiska>` | podlista |  |  |
+| Historia | `HistorySubTable<Soneta.HR.DefinicjaStanowiskaHist>` | podlista |  |  |
+| Kalendarz | `Soneta.Kalend.Kalendarz` | bazodanowe, tylko-odczyt |  |  |
+| Kandydatury | `SubTable<Soneta.HR.Rekrutacja>` | podlista |  |  |
+| KartyOpisuStanowiska | `SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` | podlista |  |  |
+| Last | `Soneta.HR.DefinicjaStanowiskaHist` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NieNadpisujKalendarza | `bool` | bazodanowe |  |  |
-| ObszaryOdpowiedzialnosci | `Soneta.Business.SubTable<Soneta.HR.ZKL.OpisStanowiska.Odpowiedzialnosci.ObszarOdpowiedzialnosciStanowiska>` |  |  |  |
+| ObszaryOdpowiedzialnosci | `SubTable<Soneta.HR.ZKL.OpisStanowiska.Odpowiedzialnosci.ObszarOdpowiedzialnosciStanowiska>` | podlista |  |  |
 | ObszaryOdpowiedzialnosciGotowe | `bool` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
-| OpisStanowiskaZeSkierowaniaNaBad | `string` | bazodanowe |  |  |
-| Powiazania | `Soneta.Business.SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefinicjiStanowisk>` |  |  |  |
-| PowiazaniaZkl | `Soneta.Business.SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefStanSlownikiZkl>` |  |  |  |
-| ProfileKompetencjiMerytorycznych | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiMerytorycznych>` |  |  |  |
-| ProfileKompetencjiUniwersalnych | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiUniwersalnych>` |  |  |  |
-| ProfileKwalifikacyjne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.ProfilKwalifikacyjny>` |  |  |  |
-| ProfileSzkolenIUprawnien | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.SzkoleniaIUprawnienia.ProfilSzkolenIUprawnien>` |  |  |  |
-| ProfileZadaniowe | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Zadaniowy.ProfilZadaniowy>` |  |  |  |
-| Specjalosc | `string` | bazodanowe |  |  |
-| Stanowisko | `string` | bazodanowe |  |  |
-| StanowiskoPelne | `string` | bazodanowe |  |  |
-| SzkoleniaBHP | `Soneta.Business.SubTable<Soneta.HR.SzkolenieBHPDefinicjiStanowiska>` |  |  |  |
-| TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.HR.UprawnienieDefinicjiStanowiska>` |  |  |  |
-| Wakaty | `Soneta.Business.SubTable<Soneta.HR2.RekrutacjaWakat>` |  |  |  |
-| WspolpracaWewnetrznaJednostki | `Soneta.Business.SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.WspolpracaWewnetrznaJednostkiDefStan>` |  |  |  |
-| Wydziały | `Soneta.Business.SubTable<Soneta.HR.WydziałDefinicjiStanowiska>` |  |  |  |
+| Powiazania | `SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefinicjiStanowisk>` | podlista |  |  |
+| PowiazaniaZkl | `SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefStanSlownikiZkl>` | podlista |  |  |
+| ProfileKompetencjiMerytorycznych | `SubTable<Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiMerytorycznych>` | podlista |  |  |
+| ProfileKompetencjiUniwersalnych | `SubTable<Soneta.HR.ZKL.Profile.Kompetencje.ProfilKompetencjiUniwersalnych>` | podlista |  |  |
+| ProfileKwalifikacyjne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.ProfilKwalifikacyjny>` | podlista |  |  |
+| ProfileSzkolenIUprawnien | `SubTable<Soneta.HR.ZKL.Profile.SzkoleniaIUprawnienia.ProfilSzkolenIUprawnien>` | podlista |  |  |
+| ProfileZadaniowe | `SubTable<Soneta.HR.ZKL.Profile.Zadaniowy.ProfilZadaniowy>` | podlista |  |  |
+| SzkoleniaBHP | `SubTable<Soneta.HR.SzkolenieBHPDefinicjiStanowiska>` | podlista |  |  |
+| Uprawnienia | `SubTable<Soneta.HR.UprawnienieDefinicjiStanowiska>` | podlista |  |  |
+| Wakaty | `SubTable<Soneta.HR2.RekrutacjaWakat>` | podlista |  |  |
+| WspolpracaWewnetrznaJednostki | `SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.WspolpracaWewnetrznaJednostkiDefStan>` | podlista |  |  |
+| Wydziały | `SubTable<Soneta.HR.WydziałDefinicjiStanowiska>` | podlista |  |  |
 | WysilekGotowe | `bool` | bazodanowe |  |  |
-| WysilekSubTable | `Soneta.Business.SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefStanSlownikiZkl>` |  |  |  |
-| Zaszeregowanie | `Soneta.Kadry.Zaszeregowanie` | bazodanowe |  |  |
+| WysilekSubTable | `SubTable<Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieDefStanSlownikiZkl>` | podlista |  |  |
 | Zaszeregowanie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Zaszeregowanie.Godzinowe | `bool` |  |  |  |
-| Zaszeregowanie.Miesięczne | `bool` |  |  |  |
-| Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| Zaszeregowanie.Stawka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | enum |  |  |
-| Zaszeregowanie.WgElement | `Soneta.Business.Key` |  |  |  |
+| Zaszeregowanie.Godzinowe | `bool` | tylko-odczyt |  |  |
+| Zaszeregowanie.Miesięczne | `bool` | tylko-odczyt |  |  |
+| Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` (enum) | bazodanowe |  |  |
+| Zaszeregowanie.Stawka | `Currency` | bazodanowe |  |  |
+| Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) |  |  |  |
+| Zaszeregowanie.WgElement | `Key` | podlista |  |  |
 | Zaszeregowanie.WskaznikKrotnosc | `double` | bazodanowe |  |  |
 | Zaszeregowanie.WskaznikNazwa | `string` | bazodanowe |  |  |
-| Zaszeregowanie.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Zaszeregowanie.Wymiar | `Fraction` | bazodanowe |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
-
-### InterpretacjaKalendarza (`Soneta.Kadry.InterpretacjaKalendarza`)
-- `WgPlanu` = 0
-- `WgObecnosci` = 1 — Wg obecności
-- `WgZestawien` = 2 — Wg zestawień
 
 ### RodzajStawkiZaszeregowania (`Soneta.Kadry.RodzajStawkiZaszeregowania`)
 - `Godzinowa` = 0 — Za godzinę

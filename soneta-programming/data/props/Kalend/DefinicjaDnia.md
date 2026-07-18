@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoKoloruElementu`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 2
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,19 +19,19 @@ Implementuje interfejsy: `IŹródłoKoloruElementu`
 | Blokada | `bool` | bazodanowe |  |  |
 | ForeColor | `int` |  |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| Kolory | `Soneta.Business.SubTable<Soneta.Kalend.KolorElementu>` |  |  |  |
+| Kolory | `SubTable<Soneta.Kalend.KolorElementu>` | podlista |  |  |
 | NadgodzinySW | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Net | `Soneta.Kalend.DefinicjaDniaNet` | bazodanowe |  |  |
+| Net | `Soneta.Kalend.DefinicjaDniaNet` (subrow) | bazodanowe |  |  |
 | Net.WidocznaWNet | `bool` | bazodanowe |  | Czy definicja jest dostępna z poziomu pulpitów |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaDnia>` |  |  |  |
-| TolerancjaWe | `Soneta.Types.Time` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypDnia` | bazodanowe, enum |  |  |
-| WejścieDo | `Soneta.Types.Time` |  |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaDnia>` | podlista |  |  |
+| TolerancjaWe | `Time` | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypDnia` (enum) | bazodanowe |  |  |
+| WejścieDo | `Time` |  |  |  |
 
 ## Enumy
 

@@ -5,39 +5,43 @@ Opis: Element szczegółowy raportu ewidencji ŚP (RaportESP) reprezentujący po
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `WyciagBankowy` → `RaportESP`
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 10
+- podlisty: 2
+- subrowy: 0
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataOperacji | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataSprawdzeniaBL | `Soneta.Types.Date` | bazodanowe | Data sprawdzenia w Wykazie |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataOperacji | `Date` | bazodanowe |  |  |
+| DataSprawdzeniaBL | `Date` | bazodanowe | Data sprawdzenia w Wykazie |  |
 | Handlowa | `bool` | bazodanowe |  | Czy operacja bankowa dotyczy operacji zakwalifikowanej jako handlowa |
-| Hash | `string` | bazodanowe |  | SHA-1 wyliczony dla operacji przez mechanizm importowy |
-| IdentyfikacjaPodmiotu | `Soneta.Kasa.SposóbIdentyfikacjiPodmiotu` | bazodanowe, enum |  |  |
+| Hash | `string` | bazodanowe, tylko-odczyt |  | SHA-1 wyliczony dla operacji przez mechanizm importowy |
+| IdentyfikacjaPodmiotu | `Soneta.Kasa.SposóbIdentyfikacjiPodmiotu` (enum) | bazodanowe, tylko-odczyt |  |  |
 | IdentyfikatorZapytania | `string` | bazodanowe | Identyfikator zapytania |  |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaRaportu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaVAT | `Soneta.Types.Currency` |  |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaRaportu | `Currency` | bazodanowe |  |  |
+| KwotaVAT | `Currency` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| MetodaWeryfikacji | `Soneta.Core.MetodaWeryfikacjiBialaLista` | bazodanowe, enum | Metoda weryfikacji |  |
-| Mpp | `Soneta.Kasa.OperacjaBankowa.WartosciMpp` |  |  |  |
+| MetodaWeryfikacji | `Soneta.Core.MetodaWeryfikacjiBialaLista` (enum) | bazodanowe | Metoda weryfikacji |  |
+| Mpp | `Soneta.Kasa.OperacjaBankowa.WartosciMpp` | tylko-odczyt |  |  |
 | NumerRachunku | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
 | Podmiot | `string` | bazodanowe |  |  |
-| Przychód | `Soneta.Types.Currency` |  |  |  |
+| Przychód | `Currency` | tylko-odczyt |  |  |
 | RachunekWirtualny | `string` | bazodanowe |  |  |
-| Rozchód | `Soneta.Types.Currency` |  |  |  |
-| SplitPayment | `bool` |  |  |  |
-| Stan | `Soneta.Kasa.StanOperacjiBankowej` | bazodanowe, enum |  |  |
-| StatusBL | `Soneta.Core.StatusBialaLista` | bazodanowe, enum | Status w Wykazie |  |
-| Tekst | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WeryfikacjaBL | `Soneta.Kasa.OperacjaBankowa.WeryfikacjaBialaLista` |  |  |  |
-| WyciagBankowy | `Soneta.Kasa.RaportESP` | bazodanowe, guided-parent |  |  |
-| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe |  |  |
+| Rozchód | `Currency` | tylko-odczyt |  |  |
+| SplitPayment | `bool` | tylko-odczyt |  |  |
+| Stan | `Soneta.Kasa.StanOperacjiBankowej` (enum) | bazodanowe |  |  |
+| StatusBL | `Soneta.Core.StatusBialaLista` (enum) | bazodanowe | Status w Wykazie |  |
+| Tekst | `MemoText` | bazodanowe, podlista |  |  |
+| WeryfikacjaBL | `Soneta.Kasa.OperacjaBankowa.WeryfikacjaBialaLista` | tylko-odczyt |  |  |
+| WyciagBankowy | `Soneta.Kasa.RaportESP` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe, tylko-odczyt |  |  |
 | ZaplataPodmiot | `Soneta.Kasa.IPodmiotKasowy` | iface-ref |  |  |
 | ZaplataRozliczana | `bool` |  |  |  |
 | Zwrot | `bool` | bazodanowe |  | Czy z tej operacji bankowej ma powstać zapłata oznaczona jako zwrot |

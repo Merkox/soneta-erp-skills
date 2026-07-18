@@ -6,19 +6,23 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoRekrutacji`, `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| KartyOpisuStanowiska | `Soneta.Business.SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| KartyOpisuStanowiska | `SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` | podlista |  |  |
 | Odpowiedzialny | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| OfertyPracy | `Soneta.Business.SubTable<Soneta.HR2.OfertaPracy>` |  |  |  |
-| PlanowanaDataZatrudnienia | `Soneta.Types.Date` | bazodanowe |  | Planowana data zatrudniania pracowników |
-| Stan | `Soneta.HR2.StanZgłoszonegoWakatu` | bazodanowe, enum |  |  |
-| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| OfertyPracy | `SubTable<Soneta.HR2.OfertaPracy>` | podlista |  |  |
+| PlanowanaDataZatrudnienia | `Date` | bazodanowe |  | Planowana data zatrudniania pracowników |
+| Stan | `Soneta.HR2.StanZgłoszonegoWakatu` (enum) | bazodanowe |  |  |
+| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |
 | Zapotrzebowanie | `int` | bazodanowe |  |  |
 | Zatrudnieni | `int` | bazodanowe |  |  |
 

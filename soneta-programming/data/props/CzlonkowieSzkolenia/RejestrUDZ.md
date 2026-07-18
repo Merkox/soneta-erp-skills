@@ -5,21 +5,25 @@ Opis: Rejestr ustawicznego doskonalenia zawodowego (UDZ) członków organizacji.
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data. |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data końcowa | Data końcowa. |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data początkowa | Data początkowa. |
+| Data | `Date` | bazodanowe | Data | Data. |
+| DataDo | `Date` | bazodanowe | Data końcowa | Data końcowa. |
+| DataOd | `Date` | bazodanowe | Data początkowa | Data początkowa. |
 | LGodzin | `int` | bazodanowe | Liczba godzin | Liczba godzin. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis. |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis. |
 | Organizator | `string` | bazodanowe | Organizator | Organizator. |
-| Rodzaj | `Soneta.CzlonkowieSzkolenia.RodzajDoskonalenia` | bazodanowe, enum | Rodzaj doskonalenia | Rodzaj doskonalenia |
+| Rodzaj | `Soneta.CzlonkowieSzkolenia.RodzajDoskonalenia` (enum) | bazodanowe | Rodzaj doskonalenia | Rodzaj doskonalenia |
 | Rok | `int` | bazodanowe | Rok | Rok. |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypCertyfikatu` | bazodanowe, enum | Typ certyfikatu | Typ certyfikatu. |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypCertyfikatu` (enum) | bazodanowe | Typ certyfikatu | Typ certyfikatu. |
 | Uczestnik | `Soneta.CzlonkowieSzkolenia.UczestnikBase` | bazodanowe |  |  |
 
 ## Enumy

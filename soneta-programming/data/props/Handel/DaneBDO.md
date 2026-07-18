@@ -4,17 +4,20 @@ Tytuł: Dane dokumentów BDO
 Opis: Dane BDO (Baza Danych o Odpadach) powiązane z dokumentem handlowym. Zawiera informacje o transporcie odpadów, pochodzeniu i statusie dokumentu w systemie BDO.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataTransportu | `System.DateTime` | bazodanowe | Data transportu | Planowana data transportu |
-| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument handlowy |  |
-| ID_BDO | `System.Guid` | bazodanowe | Id nadane przez system BDO |  |
+| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt | Dokument handlowy |  |
 | NrRejestracyjnyPojazdu | `string` | bazodanowe | Numer rejestracyjny środka transportu |  |
-| Pochodzenie | `Soneta.Handel.PochodzenieBDO` | bazodanowe, enum | Pochodzenie odpadu |  |
-| StatusDokumentu | `Soneta.Handel.BDOStatus` | bazodanowe, enum | Status dokumentu w systemie BDO |  |
+| Pochodzenie | `Soneta.Handel.PochodzenieBDO` (enum) | bazodanowe | Pochodzenie odpadu |  |
+| StatusDokumentu | `Soneta.Handel.BDOStatus` (enum) | bazodanowe | Status dokumentu w systemie BDO |  |
 
 ## Enumy
 

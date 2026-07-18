@@ -5,29 +5,33 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje złączenie (JO
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 2
+- subrowy: 2
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BuildMode | `Soneta.BI.JoinBuildMode` | bazodanowe, enum | Tryb tworzenia |  |
-| ConditionText | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| BuildMode | `Soneta.BI.JoinBuildMode` (enum) | bazodanowe | Tryb tworzenia |  |
+| ConditionText | `MemoText` | bazodanowe, podlista |  |  |
 | LeftAlias | `string` | bazodanowe | Alias lewej tabeli |  |
-| LeftField | `Soneta.BI.FieldProxy` | bazodanowe | Lewe pole złączenia |  |
-| LeftField.Definition | `Soneta.BI.FieldDefinition` | bazodanowe | Definicja pola |  |
-| LeftField.FieldDefinition | `Soneta.BI.Interfaces.IFieldDefinition` |  |  |  |
-| LeftField.GroupBy | `Soneta.BI.ModelGroupBy` |  |  |  |
-| LeftField.Join | `Soneta.BI.ModelJoin` |  |  |  |
-| LeftField.Name | `string` | bazodanowe | Nazwa pola |  |
-| LeftField.OrderBy | `Soneta.BI.ModelOrderBy` |  |  |  |
-| LeftField.Param | `Soneta.BI.ReportParam` |  |  |  |
-| LeftField.WgDefinition | `Soneta.Business.Key` |  |  |  |
-| LeftTable | `Soneta.BI.Interfaces.ITableSource` |  |  |  |
-| Model | `Soneta.BI.DataModel` | bazodanowe | Model danych |  |
+| LeftField | `Soneta.BI.FieldProxy` (subrow) | bazodanowe | Lewe pole złączenia |  |
+| LeftField.Definition | `Soneta.BI.FieldDefinition` | bazodanowe, tylko-odczyt | Definicja pola |  |
+| LeftField.FieldDefinition | `Soneta.BI.Interfaces.IFieldDefinition` | tylko-odczyt |  |  |
+| LeftField.GroupBy | `Soneta.BI.ModelGroupBy` | tylko-odczyt |  |  |
+| LeftField.Join | `Soneta.BI.ModelJoin` | tylko-odczyt |  |  |
+| LeftField.Name | `string` | bazodanowe, tylko-odczyt | Nazwa pola |  |
+| LeftField.OrderBy | `Soneta.BI.ModelOrderBy` | tylko-odczyt |  |  |
+| LeftField.Param | `Soneta.BI.ReportParam` | tylko-odczyt |  |  |
+| LeftField.WgDefinition | `Key` | podlista |  |  |
+| LeftTable | `Soneta.BI.Interfaces.ITableSource` | tylko-odczyt |  |  |
+| Model | `Soneta.BI.DataModel` | bazodanowe, tylko-odczyt | Model danych |  |
 | RightAlias | `string` | bazodanowe | Alias prawej tabeli |  |
-| RightField | `Soneta.BI.FieldProxy` | bazodanowe | Prawe pole złączenia |  |
-| RightTable | `Soneta.BI.Interfaces.ITableSource` |  |  |  |
-| Type | `Soneta.BI.JoinType` | bazodanowe, enum | Typ złączenia |  |
+| RightField | `Soneta.BI.FieldProxy` (subrow) | bazodanowe | Prawe pole złączenia |  |
+| RightTable | `Soneta.BI.Interfaces.ITableSource` | tylko-odczyt |  |  |
+| Type | `Soneta.BI.JoinType` (enum) | bazodanowe | Typ złączenia |  |
 
 ## Enumy
 

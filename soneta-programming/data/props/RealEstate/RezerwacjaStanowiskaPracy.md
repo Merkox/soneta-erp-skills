@@ -5,17 +5,21 @@ Opis: Rejestr rezerwacji stanowisk pracy przez pracowników. Umożliwia planowan
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelRezerwacji | `Soneta.RealEstate.Models.Database.CelRezerwacji` | bazodanowe | Cel rezerwacji | Cel rezerwacji stanowiska |
-| DataModyfikacji | `System.DateTime` | bazodanowe | Data modyfikacji | Data i godzina modyfikacji |
-| DataRezerwacji | `System.DateTime` | bazodanowe | Data rezerwacji | Data i godzina rezerwacji |
-| JednostkaOrganizacyjna | `Soneta.Kadry.Wydzial` |  | Jednostka organizacyjna |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres | Okres rezerwacji |
-| Osoba | `Soneta.Business.IWykonujacy` | bazodanowe | Stanowisko pracy dla danej osoby | Osoba dla której przypisano stanowisko pracy |
-| Rezerwujacy | `Soneta.Business.IWykonujacy` | bazodanowe | Rezerwujacy | Osoba rezerwująca stanowisko pracy |
-| RoomAndLocation | `string` |  |  |  |
-| StanowiskoPracy | `Soneta.RealEstate.Models.Database.StanowiskoPracy` | bazodanowe | Stanowisko pracy | Stanowisko pracy |
+| DataModyfikacji | `System.DateTime` | bazodanowe, tylko-odczyt | Data modyfikacji | Data i godzina modyfikacji |
+| DataRezerwacji | `System.DateTime` | bazodanowe, tylko-odczyt | Data rezerwacji | Data i godzina rezerwacji |
+| JednostkaOrganizacyjna | `Soneta.Kadry.Wydzial` | tylko-odczyt | Jednostka organizacyjna |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres | Okres rezerwacji |
+| Osoba | `IWykonujacy` | bazodanowe | Stanowisko pracy dla danej osoby | Osoba dla której przypisano stanowisko pracy |
+| Rezerwujacy | `IWykonujacy` | bazodanowe | Rezerwujacy | Osoba rezerwująca stanowisko pracy |
+| RoomAndLocation | `string` | tylko-odczyt |  |  |
+| StanowiskoPracy | `Soneta.RealEstate.Models.Database.StanowiskoPracy` | bazodanowe, tylko-odczyt | Stanowisko pracy | Stanowisko pracy |

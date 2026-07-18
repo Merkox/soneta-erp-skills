@@ -5,14 +5,18 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe | Opis | Opis centrum kosztów. |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Symbol | `string` |  |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Symbol | `string` | tylko-odczyt |  |  |
 | Zablokowane | `bool` | bazodanowe |  |  |

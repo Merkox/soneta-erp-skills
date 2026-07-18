@@ -5,28 +5,32 @@ Opis: Plik systemowy przechowywany w bazie danych, taki jak szablon wydruku, skr
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 1
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BaseFile | `Soneta.Business.Db.SystemFile` | bazodanowe |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| CodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| FileType | `Soneta.Business.Db.SystemFileTypes` | bazodanowe, enum |  |  |
-| ImplementationType | `System.Type` |  |  |  |
+| BaseFile | `Db.SystemFile` | bazodanowe |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| CodeEditorSource | `Compiler.ICodeEditorSource` |  |  |  |
+| FileType | `Db.SystemFileTypes` (enum) | bazodanowe, tylko-odczyt |  |  |
+| ImplementationType | `System.Type` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowane |  |
 | Name | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### SystemFileTypes (`Soneta.Business.Db.SystemFileTypes`)
+### SystemFileTypes (`Db.SystemFileTypes`)
 - `DxSnippet` = 1
 - `Snippet` = 2

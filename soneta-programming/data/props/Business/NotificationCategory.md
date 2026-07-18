@@ -5,12 +5,16 @@ Opis: Kategoria grupująca powiadomienia systemowe. Określa nazwę, opis i ikon
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
-| IconItem | `Soneta.Business.IconLookupTools.IconItem` |  | Ikona |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis |  |
+| IconItem | `IconLookupTools.IconItem` |  | Ikona |  |
 | IconName | `string` | bazodanowe | Ikona | Nazwa wyświetlanej ikony |
 | Name | `string` | bazodanowe | Nazwa |  |

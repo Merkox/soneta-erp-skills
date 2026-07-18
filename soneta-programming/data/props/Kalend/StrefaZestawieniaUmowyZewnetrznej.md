@@ -5,13 +5,17 @@ Opis: Element szczegółowy zestawienia umowy zewnętrznej (ZestawienieUmowyZewn
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieUmowyZewnetrznej`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
+| Czas | `Time` | bazodanowe |  |  |
 | Ilosc | `double` | bazodanowe |  |  |
-| Stawka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Zestawienie | `Soneta.Kalend.ZestawienieUmowyZewnetrznej` | bazodanowe, guided-parent |  |  |
+| Stawka | `Currency` | bazodanowe |  |  |
+| Wartosc | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Zestawienie | `Soneta.Kalend.ZestawienieUmowyZewnetrznej` | bazodanowe, tylko-odczyt, guided-parent |  |  |

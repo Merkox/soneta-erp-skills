@@ -6,52 +6,56 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IPozycjaZestawieniaRoot`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 23
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 10
+- pola tylko-odczyt: 9
+- podlisty: 7
+- subrowy: 1
+- razem: 41
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Blokada zestawienia |
 | BlokadaDodKolumn | `bool` | bazodanowe | Blokada dodawania kolumn | Blokada możliwości dodawania kolumn |
 | BlokadaDodPozycji | `bool` | bazodanowe | Blokada dodawania pozycji | Blokada możliwości dodawania pozycji |
-| ClassName | `string` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| DekretyZamkniecia | `Soneta.Ksiega.DekretyZamknieciaOpcja` | bazodanowe, enum |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| DekretyZamkniecia | `Soneta.Ksiega.DekretyZamknieciaOpcja` (enum) | bazodanowe |  |  |
 | DlaPulpituKB | `bool` | bazodanowe | Prezentuj zapisane wyniki w Pulpicie Klienta Biura Rachunkowego |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| GeneratedCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| HasCachedCode | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
-| Kolumny | `Soneta.Business.SubTable<Soneta.Ksiega.KolumnaZestKS>` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| GeneratedCode | `MemoText` | bazodanowe, podlista |  |  |
+| HasCachedCode | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| Kolumny | `SubTable<Soneta.Ksiega.KolumnaZestKS>` | podlista |  |  |
 | LiczSumyZWyrazenia | `bool` | bazodanowe | Sumy liczone są z wyrażenia |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Numeracja | `string` | bazodanowe |  |  |
-| OchronaWl | `bool` | bazodanowe |  |  |
+| OchronaWl | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
-| Poziom1 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom10 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom2 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom3 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom4 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom5 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom6 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom7 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom8 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Poziom9 | `Soneta.Ksiega.TypNumeracji` | enum |  |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaZestKS>` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Poziom1 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom10 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom2 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom3 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom4 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom5 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom6 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom7 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom8 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Poziom9 | `Soneta.Ksiega.TypNumeracji` (enum) |  |  |  |
+| Pozycje | `SubTable<Soneta.Ksiega.PozycjaZestKS>` | podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SubPozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaZestKS>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SubPozycje | `SubTable<Soneta.Ksiega.PozycjaZestKS>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| TypDefinicji | `Soneta.Ksiega.TypDefinicjiZestawienia` | bazodanowe, enum |  |  |
-| TypJednostki | `Soneta.Ksiega.TypJednostkiKsiegowy` | bazodanowe, enum |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
-| Wyniki | `Soneta.Business.SubTable<Soneta.Ksiega.WynikZestKS>` |  |  |  |
+| TypDefinicji | `Soneta.Ksiega.TypDefinicjiZestawienia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypJednostki | `Soneta.Ksiega.TypJednostkiKsiegowy` (enum) | bazodanowe |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| Wyniki | `SubTable<Soneta.Ksiega.WynikZestKS>` | podlista |  |  |
 
 ## Enumy
 

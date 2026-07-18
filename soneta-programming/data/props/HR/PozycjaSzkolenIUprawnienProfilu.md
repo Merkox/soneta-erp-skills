@@ -5,21 +5,25 @@ Opis: Zawiera szkolenia i uprawnienia wykorzystane na  profilu szkoleń. Wspiera
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CelOpis | `Soneta.Business.MemoText` | bazodanowe | Cel/Opis |  |
-| Definicja | `Soneta.Business.Row` |  |  |  |
-| Grupa | `string` |  |  |  |
-| Kategoria | `string` |  |  |  |
-| Nazwa | `string` |  |  |  |
+| CelOpis | `MemoText` | bazodanowe, podlista | Cel/Opis |  |
+| Definicja | `Row` | tylko-odczyt |  |  |
+| Grupa | `string` | tylko-odczyt |  |  |
+| Kategoria | `string` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | PozycjaKsuGuid | `System.Guid` | bazodanowe | Identyfikator pozycji KSU |  |
-| PozycjaKsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` | bazodanowe, enum | Typ pozycji KSU |  |
-| Profil | `Soneta.HR.ZKL.Profile.SzkoleniaIUprawnienia.ProfilSzkolenIUprawnien` | bazodanowe |  |  |
-| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` | bazodanowe, enum | Rodzaj wymagania |  |
-| Symbol | `string` |  |  |  |
+| PozycjaKsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` (enum) | bazodanowe | Typ pozycji KSU |  |
+| Profil | `Soneta.HR.ZKL.Profile.SzkoleniaIUprawnienia.ProfilSzkolenIUprawnien` | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` (enum) | bazodanowe | Rodzaj wymagania |  |
+| Symbol | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,11 +5,15 @@ Opis: Token jednorazowego użytku oparty o JWT. Przechowuje identyfikator, zawar
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ExpirationDate | `System.DateTime` | bazodanowe | Data ważności | Data ważności tokena. |
+| ExpirationDate | `System.DateTime` | bazodanowe, tylko-odczyt | Data ważności | Data ważności tokena. |
 | Jti | `string` | bazodanowe | Identyfikator tokena | Identyfikator tokena tworzony na podstawie JWT |
-| Token | `Soneta.Business.MemoText` | bazodanowe | Token jednorazowy | Zawartość token w postaci base64. |
+| Token | `MemoText` | bazodanowe, podlista | Token jednorazowy | Zawartość token w postaci base64. |

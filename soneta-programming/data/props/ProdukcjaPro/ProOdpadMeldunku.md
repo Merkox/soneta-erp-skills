@@ -5,40 +5,44 @@ Opis: Element szczegółowy odpadu meldunku (ProMeldunek). Rejestruje odpad pows
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe: 26
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 25
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CenaPlanowana | `Soneta.Types.DoubleCy` | bazodanowe | Cena planowana | Cena planowana odpadu meldunku. |
-| CenaPrzyjecia | `Soneta.Types.DoubleCy` | bazodanowe | Cena przyjęcia | Cena przyjęcia odpadu meldunku. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość odpadu meldunku. |
-| IloscDoRealizacji | `Soneta.Types.Amount` | bazodanowe | Ilość do realizacji | Ilość do realizacji odpadu meldunku. |
-| IloscDoRealizacjiPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość do realizacji przeliczona | Ilość do realizacji przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
+| CenaPlanowana | `DoubleCy` | bazodanowe | Cena planowana | Cena planowana odpadu meldunku. |
+| CenaPrzyjecia | `DoubleCy` | bazodanowe | Cena przyjęcia | Cena przyjęcia odpadu meldunku. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość odpadu meldunku. |
+| IloscDoRealizacji | `Amount` | bazodanowe | Ilość do realizacji | Ilość do realizacji odpadu meldunku. |
+| IloscDoRealizacjiPrzeliczona | `Amount` | bazodanowe | Ilość do realizacji przeliczona | Ilość do realizacji przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa odpadu meldunku. |
 | IloscJednostkowaPlanowana | `double` | bazodanowe | Ilość jednostkowa planowana | Ilość jednostkowa planowana odpadu meldunku. |
-| IloscPlanowana | `Soneta.Types.Amount` | bazodanowe | Ilość planowana | Ilość planowana odpadu meldunku. |
-| IloscPlanowanaPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość planowana przeliczona | Ilość przeliczona planowana na podstawową jednostkę miary dla odpadu meldunku. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
-| IloscZrealizowana | `Soneta.Types.Amount` | bazodanowe | Ilość zrealizowana | Ilość zrealizowana odpadu meldunku. |
-| IloscZrealizowanaPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość zrealizowana przeliczona | Ilość zrealizowana przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
+| IloscPlanowana | `Amount` | bazodanowe | Ilość planowana | Ilość planowana odpadu meldunku. |
+| IloscPlanowanaPrzeliczona | `Amount` | bazodanowe | Ilość planowana przeliczona | Ilość przeliczona planowana na podstawową jednostkę miary dla odpadu meldunku. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
+| IloscZrealizowana | `Amount` | bazodanowe | Ilość zrealizowana | Ilość zrealizowana odpadu meldunku. |
+| IloscZrealizowanaPrzeliczona | `Amount` | bazodanowe | Ilość zrealizowana przeliczona | Ilość zrealizowana przeliczona na podstawową jednostkę miary dla odpadu meldunku. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa odpadu meldunku. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe |  | Magazyn odpadu meldunku. |
 | Material | `Soneta.ProdukcjaPro.ProMaterialMeldunku` | bazodanowe | Materiał | Materiał odpadu meldunku. |
 | Meldunek | `Soneta.ProdukcjaPro.ProMeldunek` | bazodanowe, guided-parent |  | Meldunek dla odpadu meldunku. |
-| NarzutPlanowany | `Soneta.Types.Percent` | bazodanowe | Narzut planowany | Narzut planowany odpadu meldunku |
+| NarzutPlanowany | `Percent` | bazodanowe | Narzut planowany | Narzut planowany odpadu meldunku |
 | OdpadOperacjiZlecenia | `Soneta.ProdukcjaPro.ProOdpadOperacjiZlecenia` | bazodanowe | Odpad operacji zlecenia | Odpad operacji zlecenia dla odpadu meldunku. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis odpadu meldunku. |
-| Rozliczenia | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProRozliczenieOdpadu>` |  |  |  |
-| RozliczenieIlosciowe | `Soneta.ProdukcjaPro.ProRozliczenieIlosciowe` | enum | Rozliczenie ilościowe | Rozliczenie ilościowe odpadu meldunku. |
-| RozliczenieWartosciowe | `bool` |  | Rozliczenie wartościowe | Rozliczenie wartościowe odpadu meldunku. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis odpadu meldunku. |
+| Rozliczenia | `SubTable<Soneta.ProdukcjaPro.ProRozliczenieOdpadu>` | podlista |  |  |
+| RozliczenieIlosciowe | `Soneta.ProdukcjaPro.ProRozliczenieIlosciowe` (enum) | tylko-odczyt | Rozliczenie ilościowe | Rozliczenie ilościowe odpadu meldunku. |
+| RozliczenieWartosciowe | `bool` | tylko-odczyt | Rozliczenie wartościowe | Rozliczenie wartościowe odpadu meldunku. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar odpadu meldunku. |
-| UdzialWKalkulacji | `Soneta.ProdukcjaPro.ProUdzialWKalkulacji` | bazodanowe, enum | Udział w kalkulacji | Udział w kalkulacji odpadu meldunku. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość odpadu meldunku. |
-| WartoscPlanowana | `Soneta.Types.Currency` | bazodanowe | Wartość planowana | Wartość planowana odpadu meldunku. |
-| WartoscPrzyjecia | `Soneta.Types.Currency` | bazodanowe | Wartość przyjęcia | Wartość przyjęcia odpadu meldunku. |
-| WartoscZrealizowana | `Soneta.Types.Currency` | bazodanowe | Wartość zrealizowana | Wartość zrealizowana odpadu meldunku. |
-| Wspolczynnik | `Soneta.Types.Fraction` | bazodanowe | Współczynnik | Współczynnik odpadu meldunku. |
+| UdzialWKalkulacji | `Soneta.ProdukcjaPro.ProUdzialWKalkulacji` (enum) | bazodanowe | Udział w kalkulacji | Udział w kalkulacji odpadu meldunku. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość odpadu meldunku. |
+| WartoscPlanowana | `Currency` | bazodanowe | Wartość planowana | Wartość planowana odpadu meldunku. |
+| WartoscPrzyjecia | `Currency` | bazodanowe | Wartość przyjęcia | Wartość przyjęcia odpadu meldunku. |
+| WartoscZrealizowana | `Currency` | bazodanowe | Wartość zrealizowana | Wartość zrealizowana odpadu meldunku. |
+| Wspolczynnik | `Fraction` | bazodanowe | Współczynnik | Współczynnik odpadu meldunku. |
 
 ## Enumy
 

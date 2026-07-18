@@ -5,17 +5,21 @@ Opis: Rejestr badań technicznych pojazdów floty firmowej. Przechowuje dane o d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Flaw | `Soneta.Vehicles.Enums.FlawType` | bazodanowe, enum | Usterka |  |
+| Flaw | `Soneta.Vehicles.Enums.FlawType` (enum) | bazodanowe | Usterka |  |
 | FleetEvent | `Soneta.Zadania.Zadanie` | bazodanowe | Zdarzenie |  |
-| InspectionDate | `Soneta.Types.Date` | bazodanowe | Data wykonania badania |  |
+| InspectionDate | `Date` | bazodanowe | Data wykonania badania |  |
 | IsPositive | `bool` | bazodanowe | Pozytywny wynik badania |  |
-| ValidityDate | `Soneta.Types.Date` | bazodanowe | Data ważności badania |  |
-| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe |  |  |
+| ValidityDate | `Date` | bazodanowe | Data ważności badania |  |
+| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

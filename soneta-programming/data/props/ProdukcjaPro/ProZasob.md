@@ -6,25 +6,29 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 6
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Zablokowanie zasobu. |
 | BlokadaRejestracji | `bool` | bazodanowe | Blokada rejestracji | Zablokowanie rejestracji czasów prac dla zasobu. |
 | DefinicjaAkordu | `Soneta.Kadry.DefinicjaAkordu` | bazodanowe | Definicja akordu | Definicja akordu dla zasobu. |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Ilosc | `int` | bazodanowe | Ilość | Ilość zasobu. |
 | Kod | `string` | bazodanowe |  | Kod zasobu. |
 | Nazwa | `string` | bazodanowe |  | Nazwa zasobu. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis zasobu. |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| RelacjePozycjiKompetencji | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobPozycjaKompetencji>` |  |  |  |
-| RelacjeUrzadzen | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobUrzadzenie>` |  |  |  |
-| Rodzaj | `Soneta.ProdukcjaPro.ProRodzajZasobu` | bazodanowe, enum | Rodzaj zasobu | Rodzaj zasobu. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis zasobu. |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| RelacjePozycjiKompetencji | `LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobPozycjaKompetencji>` | podlista |  |  |
+| RelacjeUrzadzen | `LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobUrzadzenie>` | podlista |  |  |
+| Rodzaj | `Soneta.ProdukcjaPro.ProRodzajZasobu` (enum) | bazodanowe | Rodzaj zasobu | Rodzaj zasobu. |
 | Stawka | `Soneta.ProdukcjaPro.ProStawka` | bazodanowe |  | Stawka zasobu. |
-| Wariantowosci | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProWariantowoscZasobu>` |  |  |  |
+| Wariantowosci | `LpSubTable<Soneta.ProdukcjaPro.ProWariantowoscZasobu>` | podlista |  |  |
 | Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | bazodanowe | Wydział | Wydział zasobu. |
 
 ## Enumy

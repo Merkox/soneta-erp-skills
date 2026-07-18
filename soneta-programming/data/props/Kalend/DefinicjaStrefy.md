@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoKoloruElementu`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 2
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BackColor | `int` |  |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | ForeColor | `int` |  |  |  |
-| KierunekMagazynuNadgodzin | `Soneta.Kalend.KierunekMagazynuNadgodzin` | enum |  |  |
+| KierunekMagazynuNadgodzin | `Soneta.Kalend.KierunekMagazynuNadgodzin` (enum) | tylko-odczyt |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| Kolory | `Soneta.Business.SubTable<Soneta.Kalend.KolorElementu>` |  |  |  |
+| Kolory | `SubTable<Soneta.Kalend.KolorElementu>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Net | `Soneta.Kalend.DefinicjaStrefyNet` | bazodanowe |  |  |
+| Net | `Soneta.Kalend.DefinicjaStrefyNet` (subrow) | bazodanowe |  |  |
 | Net.WidocznaWNet | `bool` | bazodanowe |  | Czy definicja jest dostępna z poziomu pulpitów |
 | OznaczaNieobecnosc | `bool` | bazodanowe |  |  |
-| PodstawaNadgodzin | `Soneta.Kalend.TypPodstawyNadgodzin` | bazodanowe, enum |  | Określa sposób uwzględniania czasu pracy w podstawie nadgodzin |
-| Postojowe | `Soneta.Kalend.TypPostojowego` | bazodanowe, enum |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
+| PodstawaNadgodzin | `Soneta.Kalend.TypPodstawyNadgodzin` (enum) | bazodanowe |  | Określa sposób uwzględniania czasu pracy w podstawie nadgodzin |
+| Postojowe | `Soneta.Kalend.TypPostojowego` (enum) | bazodanowe |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
 | PracaZdalna | `bool` | bazodanowe |  |  |
-| Przestój | `bool` |  |  |  |
+| Przestój | `bool` | tylko-odczyt |  |  |
 | Rozliczana | `bool` | bazodanowe |  |  |
-| Rozliczenie | `Soneta.Kalend.TypRozliczenia` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kalend.TypStrefy` | bazodanowe, enum |  | Informacja o sposobie wpływania na dobowy czas pracy |
+| Rozliczenie | `Soneta.Kalend.TypRozliczenia` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypStrefy` (enum) | bazodanowe |  | Informacja o sposobie wpływania na dobowy czas pracy |
 | Ukryta | `bool` | bazodanowe |  | Definicja niedostępna dla operatora definiującego dzień |
 | Wchodzi | `bool` | bazodanowe |  | Uwzględniania w dobowym planie pracy. Strefy z flagą praca nie mogą na siebie nachodzić i są uwzględniane podczas importu RCP |
-| Wspolczynnik | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Wspolczynnik | `Percent` | bazodanowe |  |  |
 
 ## Enumy
 

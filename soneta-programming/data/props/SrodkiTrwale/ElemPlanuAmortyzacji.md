@@ -5,14 +5,18 @@ Opis: Element szczegółowy środka trwałego (SrodekTrwalyBase). Zawiera harmon
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data planowanej amortyzacji |
-| Miesiac | `Soneta.Types.YearMonth` |  | Miesiąc planowanej amortyzacji |  |
-| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, guided-parent |  |  |
-| WartoscBilansowa | `Soneta.Types.Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa |
-| WartoscPodatkowa | `Soneta.Types.Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa |
+| Data | `Date` | bazodanowe, tylko-odczyt |  | Data planowanej amortyzacji |
+| Miesiac | `YearMonth` |  | Miesiąc planowanej amortyzacji |  |
+| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| WartoscBilansowa | `Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa |
+| WartoscPodatkowa | `Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa |
 | ZrodloFinansowania | `Soneta.Core.ZrodloFinansowania` | bazodanowe | Źródło finansowania |  |

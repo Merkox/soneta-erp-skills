@@ -12,12 +12,17 @@ fallback dla tabel spoza wygenerowanego zestawu (świeży dodatek, nowsza kompil
 
 **Jak znaleźć tabelę:**
 1. Otwórz [`../data/props/INDEX.md`](../data/props/INDEX.md) i wyszukaj `RowType` (np. `DokumentHandlowy`).
-   INDEX grupuje tabele wg modułu (z opisem modułu) i podaje ścieżkę pliku, `Tabela`, `Konfig`, `Guided`.
+   INDEX grupuje tabele wg modułu (z opisem modułu); kolumny:
+   `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik`.
 2. Otwórz plik `data/props/<Moduł>/<RowType>.md` — to dokładnie ten sam markdown,
-   który wypisałby skaner na żywo (nagłówek z nazwą tabeli, `Tytuł`/`Opis` tabeli, guided i interfejsami,
-   tabela `Pole | Typ | Rodzaj | Tytuł | Opis`, sekcje `## Relacje interfejsowe` i `## Enumy`).
+   który wypisałby skaner na żywo (nagłówek z nazwą tabeli, `Tytuł`/`Opis`, `Guided`, `Historyczna`/`Historia`,
+   interfejsami; rozłączne statystyki; tabela `Pole | Typ | Rodzaj | Tytuł | Opis`; sekcje
+   `## Relacje interfejsowe` i `## Enumy`).
 
-Znaczenie nagłówka, kolumny `Rodzaj` i sekcji relacji interfejsowych — patrz sekcje niżej
+Dodatkowo [`../data/props/Interfaces.md`](../data/props/Interfaces.md) — lista wszystkich interfejsów
+(`[TableInfo(Interfaces=...)]`) z tabelami je implementującymi (relacje interfejsowe w jednym miejscu).
+
+Znaczenie nagłówka, kolumny `Rodzaj`/`Typ` i sekcji relacji interfejsowych — patrz sekcje niżej
 (opis jest wspólny dla danych wygenerowanych i wyjścia skanera).
 
 ## Regeneracja danych po zmianie programu/wersji
@@ -32,10 +37,11 @@ dotnet script ~/.claude/skills/soneta-programming/scripts/export-props-all.csx \
 
 Przykład (macOS/Linux): `-- ~/d/dev/bin/Debug ~/.claude/skills/soneta-programming/data/props`.
 Skrypt buduje kompilację Roslyn **raz** i iteruje po wszystkich realnych tabelach
-(`*Row` mające parę `*Table` i `*Record`), zapisując plik na tabelę oraz `INDEX.md`.
-Cały program (~1200 tabel) eksportuje się w kilka sekund — nieporównanie szybciej niż
-1200 osobnych wywołań `scan-props.csx`. Logika skanowania pojedynczej tabeli jest
-identyczna z `scan-props.csx`, więc wynik jest bit-w-bit taki sam (zweryfikowane diffem).
+(`*Row` mające parę `*Table` i `*Record`), zapisując plik na tabelę, `INDEX.md` (z kolumną
+`Historia`) oraz `Interfaces.md` (interfejs → tabele). Cały program (~1200 tabel) eksportuje
+się w kilka sekund — nieporównanie szybciej niż 1200 osobnych wywołań `scan-props.csx`. Logika
+skanowania pojedynczej tabeli jest identyczna z `scan-props.csx`, więc wynik jest bit-w-bit taki
+sam (zweryfikowane diffem — obie ścieżki dają identyczny markdown).
 
 Po regeneracji sprawdź w `INDEX.md`, czy liczba tabel/modułów odpowiada oczekiwaniu,
 i zacommituj zmiany w `data/props/` razem z opisem wersji, z której pochodzą.
@@ -150,18 +156,21 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`, `IKontrahentRef`
 
-- pola bazodanowe: 128
-- pola kalkulowane (z klas biznesowych): 388
+- pola bazodanowe (zapisywalne): 96
+- pola kalkulowane (zapisywalne): 12
+- pola tylko-odczyt: 40
+- podlisty: 60
+- subrowy: 8
+- razem: 216
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Brutto | `decimal` | bazodanowe | Brutto | Wartość brutto dokumentu |
 | DataDokumentu | `System.DateTime` | bazodanowe | Data dokumentu |  |
 | Kontrahent | `Soneta.Kontrahenci.Kontrahent` | bazodanowe, iface-ref | Kontrahent |  |
-| Netto | `decimal` | bazodanowe | Netto |  |
-| Numer | `string` | bazodanowe | Numer |  |
-| Stan | `Soneta.Handel.StanDokumentuHandlowego` | bazodanowe, enum | Stan | Określa stan dokumentu (w buforze, zatwierdzony…) |
-| SaldoWaluta | `decimal` |  | Saldo w walucie |  |
+| Pozycje | `…DokumentHandlowy.PozycjeSubTable` | podlista |  |  |
+| Stan | `Soneta.Handel.StanDokumentuHandlowego` (enum) | bazodanowe | Stan | Określa stan dokumentu… |
+| SaldoWaluta | `Waluta` | tylko-odczyt | Saldo w walucie |  |
 | ...  | ... | ... | ... | ... |
 
 ## Relacje interfejsowe
@@ -186,12 +195,28 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 
 Kolumna `Rodzaj` jest kombinacją znaczników rozdzielonych przecinkami:
 - `bazodanowe` — pole rekordu (`*Record`); brak znacznika = property kalkulowana klasy biznesowej.
+- `tylko-odczyt` — property bez publicznego settera (nie ustawisz jej kodem/importem XML).
+- `podlista` — typ kolekcyjny/posiadany: tablica, `Key`, `View`, `SubTable`, dowolny `IEnumerable`
+  (poza `string`; wyjątek `Periods`). Elementy dodaje się, nie ustawia wprost.
 - `guided-parent` — pole z `[ColumnInfo(GuidedRelation=…)]` trzymające referencję do nadrzędnej
   tabeli w drzewie obiektów guided.
 - `iface-ref` — typ pola jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=…)]` innej tabeli;
-  konkretne tabele docelowe są wymienione w sekcji `## Relacje interfejsowe` pod tabelą pól.
-- `enum` — typ pola jest enumem (także `Nullable<enum>`); dozwolone wartości wraz z ich
-  wartością całkowitą i tytułami wymienione w sekcji `## Enumy` pod tabelą pól.
+  konkretne tabele docelowe są wymienione w sekcji `## Relacje interfejsowe` pod tabelą pól
+  (globalny wykaz: [`../data/props/Interfaces.md`](../data/props/Interfaces.md)).
+
+Kolumna `Typ` niesie sufiksy:
+- `(enum)` — typ jest enumem (także `Nullable<enum>`); dozwolone wartości w sekcji `## Enumy` niżej.
+- `(subrow)` — osadzony kontener rekordowy (pole `*Record`, rozwijane rekurencyjnie w polach `X.Y`).
+
+Prefiksy `Soneta.Business.` i `Soneta.Types.` są w typie skracane (`Soneta.Business.Key` → `Key`).
+Pola oznaczone `[Obsolete]` są pomijane.
+
+**Statystyki** pod nagłówkiem są rozłączne (każde pole w jednej kategorii; sumują się do `razem`):
+`bazodanowe (zapisywalne)`, `kalkulowane (zapisywalne)`, `tylko-odczyt`, `podlisty`, `subrowy`
+(priorytet: subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane).
+
+**Historia** (nagłówek + kolumna INDEX): `Historyczna: … w tabeli H` (obiekt wersjonowany,
+`IRowWithHistory`) lub `Historia: … tabeli P` (rekord historyczny obiektu P, `IHistory`).
 
 ## Kody wyjścia
 

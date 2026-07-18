@@ -4,20 +4,24 @@ Tytuł: Informacja systemowa
 Opis: Przechowuje systemowe informacje konfiguracyjne identyfikowane unikalnym kluczem. Zawiera parametry wewnętrzne systemu, takie jak numery wersji i ustawienia globalne.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Ident | `Soneta.Business.Db.SysInfoIdentifier` | bazodanowe, enum |  |  |
+| Data | `MemoText` | bazodanowe, podlista |  |  |
+| Ident | `Db.SysInfoIdentifier` (enum) | bazodanowe |  |  |
 | Value | `string` | bazodanowe |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### SysInfoIdentifier (`Soneta.Business.Db.SysInfoIdentifier`)
+### SysInfoIdentifier (`Db.SysInfoIdentifier`)
 - `Version` = 1
 - `Name` = 2
 - `Description1` = 3

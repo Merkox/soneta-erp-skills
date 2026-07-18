@@ -5,16 +5,20 @@ Opis: Definicja kręgu kosztów służy do kontroli zamknięcia kręgu księgowa
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nieaktywny | `bool` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Ksiega.PozycjaDefKregu>` |  |  |  |
+| Pozycje | `LpSubTable<Soneta.Ksiega.PozycjaDefKregu>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

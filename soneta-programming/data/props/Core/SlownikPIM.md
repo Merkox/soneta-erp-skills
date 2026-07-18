@@ -3,19 +3,23 @@ Nazwa tabeli: `SlownikiPIM`
 Opis: Pola dodatkowe przypisane do Hosta. Dzięki szabloną można użyć wartości np. do tłumaczeń cech, nazw, kodów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cecha | `Soneta.Business.FeatureDefinition` | bazodanowe |  |  |
-| Host | `Soneta.Business.ISlownikPIMHost` | bazodanowe | Obiekt głowny | Obiekt do którego przypisane jest pole we wskazanym szablonie |
+| Cecha | `FeatureDefinition` | bazodanowe |  |  |
+| Host | `ISlownikPIMHost` | bazodanowe, tylko-odczyt | Obiekt głowny | Obiekt do którego przypisane jest pole we wskazanym szablonie |
 | Jezyk | `string` | bazodanowe |  |  |
 | Pole | `string` | bazodanowe |  |  |
 | Szablon | `Soneta.Core.PIM.SzablonSlownikaPIM` | bazodanowe |  |  |
-| Typ | `Soneta.Core.PIM.SlownikPIM.TypWartosciSlownikPIM` | enum |  |  |
+| Typ | `Soneta.Core.PIM.SlownikPIM.TypWartosciSlownikPIM` (enum) | tylko-odczyt |  |  |
 | Wartosc | `string` | bazodanowe | Wartość |  |
-| WartoscOryginalna | `string` |  |  |  |
+| WartoscOryginalna | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

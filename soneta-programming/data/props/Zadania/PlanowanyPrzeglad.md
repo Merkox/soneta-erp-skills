@@ -5,22 +5,26 @@ Opis: Harmonogram przeglądów urządzeń serwisowych. Definiuje planowany termi
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 2
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  |  |  |
-| AnulowaniePowod | `Soneta.Business.MemoText` | bazodanowe | Powód anulowania | Powód anulowania przeglądu |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| AnulowaniePowod | `MemoText` | bazodanowe, podlista | Powód anulowania | Powód anulowania przeglądu |
 | Anulowany | `bool` | bazodanowe | Anulowany | Czy przegląd został anulowany |
-| Description | `string` |  |  |  |
-| End | `System.DateTime` |  |  |  |
+| Description | `string` | tylko-odczyt |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa przeglądu. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis przeglądu |
-| Resource | `object` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| Start | `System.DateTime` |  |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe | Data przeglądu | Planowana data przeglądu |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis przeglądu |
+| Resource | `object` | tylko-odczyt |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
+| Termin | `Date` | bazodanowe | Data przeglądu | Planowana data przeglądu |
 | Text | `string` |  |  |  |
 | Urzadzenie | `Soneta.Zadania.Urzadzenie` | bazodanowe | Urządzenie, którego dotyczy przegląd | Urządzenie, którego dotyczy przegląd |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe | Zadanie | Zadanie które jest efektem realizacji tego przeglądu |

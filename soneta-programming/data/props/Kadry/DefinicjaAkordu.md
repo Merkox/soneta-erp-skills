@@ -6,32 +6,36 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IAkord`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 5
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akordy | `Soneta.Business.SubTable<Soneta.Kadry.Akord>` |  |  |  |
-| Algorytm | `Soneta.Kadry.AlgorytmAkordu` | bazodanowe |  |  |
+| Akordy | `SubTable<Soneta.Kadry.Akord>` | podlista |  |  |
+| Algorytm | `Soneta.Kadry.AlgorytmAkordu` (subrow) | bazodanowe |  |  |
 | Algorytm.DefinicjaStrefy | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
 | Algorytm.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | Algorytm.PomniejszaCzas | `bool` | bazodanowe |  |  |
-| Algorytm.Progi | `Soneta.Business.SubTable` |  |  |  |
+| Algorytm.Progi | `SubTable` | podlista |  |  |
 | Algorytm.Progresywny | `bool` | bazodanowe |  |  |
 | Algorytm.PropDoStawki | `bool` | bazodanowe |  |  |
-| Algorytm.Rozliczenie | `Soneta.Kadry.OkresRozliczeniaAkordu` | bazodanowe, enum |  |  |
-| Algorytm.Typ | `Soneta.Kadry.TypAlgorytmuAkordu` | enum | Typ |  |
-| Algorytm.Wartosc | `Soneta.Types.DoubleCy` |  |  |  |
+| Algorytm.Rozliczenie | `Soneta.Kadry.OkresRozliczeniaAkordu` (enum) | bazodanowe |  |  |
+| Algorytm.Typ | `Soneta.Kadry.TypAlgorytmuAkordu` (enum) | tylko-odczyt | Typ |  |
+| Algorytm.Wartosc | `DoubleCy` |  |  |  |
 | Algorytm.WgCzasu | `bool` | bazodanowe |  |  |
-| Algorytm.WgDefinicjaStrefy | `Soneta.Business.Key` |  |  |  |
-| Algorytm.WgElement | `Soneta.Business.Key` |  |  |  |
+| Algorytm.WgDefinicjaStrefy | `Key` | podlista |  |  |
+| Algorytm.WgElement | `Key` | podlista |  |  |
 | Algorytm.WgProgu | `bool` | bazodanowe |  |  |
 | Algorytm.Wspolczynnik | `double` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | Jednostka | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Progi | `Soneta.Business.SubTable<Soneta.Kadry.ProgAkordu>` |  |  |  |
-| Typ | `Soneta.Kadry.TypAkordu` | bazodanowe, enum |  |  |
+| Progi | `SubTable<Soneta.Kadry.ProgAkordu>` | podlista |  |  |
+| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

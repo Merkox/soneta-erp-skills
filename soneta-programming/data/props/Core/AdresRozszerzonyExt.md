@@ -5,13 +5,17 @@ Opis: Element szczegółowy adresu (AdresExt). Przechowuje rozszerzone dane adre
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `AdresExt`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 1
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AdresRozszerzony | `Soneta.Core.AdresRozszerzony` | bazodanowe |  |  |
-| AdresRozszerzony.AdresRozszerzonyExt | `Soneta.Core.AdresRozszerzonyExt` |  |  |  |
+| AdresRozszerzony | `Soneta.Core.AdresRozszerzony` (subrow) | bazodanowe |  |  |
+| AdresRozszerzony.AdresRozszerzonyExt | `Soneta.Core.AdresRozszerzonyExt` | tylko-odczyt |  |  |
 | AdresRozszerzony.Departament | `string` | bazodanowe | Departament | Departament |
 | AdresRozszerzony.Dzielnica | `string` | bazodanowe | Dzielnica | Dzielnica |
 | AdresRozszerzony.NazwaBudynku | `string` | bazodanowe | NazwaBudynku | NazwaBudynku |
@@ -19,4 +23,4 @@ Guided: child — nadrzędna przez pole `Host` → `AdresExt`
 | AdresRozszerzony.Prowincja | `string` | bazodanowe | Prowincja | Prowincja |
 | AdresRozszerzony.SkrytkaPocztowa | `string` | bazodanowe | SkrytkaPocztowa | SkrytkaPocztowa |
 | AdresRozszerzony.Wydzial | `string` | bazodanowe | Wydzial | Wydzial |
-| Host | `Soneta.Core.AdresExt` | bazodanowe, guided-parent |  |  |
+| Host | `Soneta.Core.AdresExt` | bazodanowe, tylko-odczyt, guided-parent |  |  |

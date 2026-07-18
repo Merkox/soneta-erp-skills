@@ -4,30 +4,34 @@ Opis: Definicja promocji okresowej (przeceny) obowiązującej w określonym prze
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cel | `Soneta.Towary.CelPrzecenyOkresowej` | bazodanowe, enum |  |  |
+| Cel | `Soneta.Towary.CelPrzecenyOkresowej` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Cena | `Soneta.Towary.DefinicjaCeny` | bazodanowe | Cena przeceniana |  |
-| GrupaKontrahentow | `Soneta.Business.FeatureDefinition` | bazodanowe | Nazwa cechy grupującej | Określa dla jakiej grupy kontrahentów jest promocja grupowa. |
+| GrupaKontrahentow | `FeatureDefinition` | bazodanowe | Nazwa cechy grupującej | Określa dla jakiej grupy kontrahentów jest promocja grupowa. |
 | GrupaKontrahentowWartosc | `string` | bazodanowe | Wartość cechy grupującej | Określa dla jakiej grupy kontrahentów jest promocja grupowa. |
-| IsVisibleGrupaKontrahentów | `bool` |  |  |  |
-| IsVisibleKontrahent | `bool` |  |  |  |
-| Kierunek | `Soneta.Towary.KierunekCeny` | bazodanowe, enum | Kierunek ceny |  |
+| IsVisibleGrupaKontrahentów | `bool` | tylko-odczyt |  |  |
+| IsVisibleKontrahent | `bool` | tylko-odczyt |  |  |
+| Kierunek | `Soneta.Towary.KierunekCeny` (enum) | bazodanowe | Kierunek ceny |  |
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  | Określa dla jakiego kontrahenta jest promocja indywidualna. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe | Magazyn, którego dotyczy przecena |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa przeceny okresowej (promocji). |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Okres obowiązywania przeceny okresowej. |
+| Okres | `FromTo` | bazodanowe, podlista |  | Okres obowiązywania przeceny okresowej. |
 | Priorytet | `int` | bazodanowe | Priorytet | Określa priorytet ważności promocji - jedynie w przypadku przeceny dla grup. |
-| PrzecenyTowarow | `Soneta.Business.SubTable<Soneta.Towary.PrzecenaOkresowaTowaru>` |  |  |  |
+| PrzecenyTowarow | `SubTable<Soneta.Towary.PrzecenaOkresowaTowaru>` | podlista |  |  |
 | Rabatowana | `bool` | bazodanowe |  | Wskazuje na to, czy promocja podlega rabatowaniu. |
-| SchematyGratisowDlaTowaruWPrzecenie | `Soneta.Business.SubTable<Soneta.Towary.PrzecenaOkresowaTowaruSchematGratisow>` |  |  |  |
-| Stan | `Soneta.Towary.StanPrzeceny` | enum |  |  |
-| StanWGOkresu | `Soneta.Towary.StanWgOkresu` | enum |  |  |
-| Stosowanie | `Soneta.Towary.StosowaniePrzeceny` | bazodanowe, enum | Stosowanie przeceny okresowej | Stosowawnie przeceny okresowej. |
-| Typ | `Soneta.Towary.TypPrzecenyOkresowej` | bazodanowe, enum |  | Wskazuje na typ danej promocji okresowej, ważne przy ewentualnym ustalaniu priorytetów w przypadku zachodzących na siebie okresów promocji. |
+| SchematyGratisowDlaTowaruWPrzecenie | `SubTable<Soneta.Towary.PrzecenaOkresowaTowaruSchematGratisow>` | podlista |  |  |
+| Stan | `Soneta.Towary.StanPrzeceny` (enum) |  |  |  |
+| StanWGOkresu | `Soneta.Towary.StanWgOkresu` (enum) | tylko-odczyt |  |  |
+| Stosowanie | `Soneta.Towary.StosowaniePrzeceny` (enum) | bazodanowe | Stosowanie przeceny okresowej | Stosowawnie przeceny okresowej. |
+| Typ | `Soneta.Towary.TypPrzecenyOkresowej` (enum) | bazodanowe |  | Wskazuje na typ danej promocji okresowej, ważne przy ewentualnym ustalaniu priorytetów w przypadku zachodzących na siebie okresów promocji. |
 | Zatwierdzona | `bool` | bazodanowe |  | Wskazuje na to, czy promocja jest zatwierdzona. |
 
 ## Enumy

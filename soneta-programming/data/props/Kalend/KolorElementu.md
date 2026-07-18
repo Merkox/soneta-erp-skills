@@ -5,15 +5,19 @@ Opis: Element szczegółowy źródła koloru (IŹródłoKoloruElementu). Konfigu
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zrodlo` → `IŹródłoKoloruElementu`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BackColor | `int` | bazodanowe | Kolor tła |  |
 | ForeColor | `int` | bazodanowe | Kolor czcionki |  |
-| Typ | `Soneta.Kalend.TypKoloruElementu` | bazodanowe, enum |  |  |
-| Zrodlo | `Soneta.Kalend.IŹródłoKoloruElementu` | bazodanowe, guided-parent, iface-ref |  |  |
+| Typ | `Soneta.Kalend.TypKoloruElementu` (enum) | bazodanowe |  |  |
+| Zrodlo | `Soneta.Kalend.IŹródłoKoloruElementu` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

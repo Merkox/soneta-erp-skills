@@ -5,15 +5,19 @@ Opis: Słownik kategorii osób w kontekście RODO (np. pracownicy, klienci, kont
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa kategorii | Nazwa kategorii |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis kategorii | Opis kategorii |
-| Typ | `Soneta.Core.GIODO.TypKategoriiOsob` | bazodanowe, enum | Typ kategorii osób | Typ kategorii osób |
+| Opis | `MemoText` | bazodanowe, podlista | Opis kategorii | Opis kategorii |
+| Typ | `Soneta.Core.GIODO.TypKategoriiOsob` (enum) | bazodanowe | Typ kategorii osób | Typ kategorii osób |
 
 ## Enumy
 

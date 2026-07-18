@@ -5,16 +5,20 @@ Opis: Zawiera kryteria analityczne służące do szczegółowego grupowania wart
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| KryteriumSyntetyczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumSyntetyczne` | bazodanowe | Kryterium syntetyczne |  |
-| Nazwa | `string` |  |  |  |
+| KryteriumSyntetyczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumSyntetyczne` | bazodanowe, tylko-odczyt | Kryterium syntetyczne |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | PozycjaKonfiguratora | `Soneta.HR.IPozycjaKonfiguratora` | bazodanowe, iface-ref | Pozycja konfiguratora |  |
 | Slownik | `Soneta.HR.IZklSlownik` |  |  |  |
-| SlownikType | `string` | bazodanowe |  |  |
+| SlownikType | `string` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

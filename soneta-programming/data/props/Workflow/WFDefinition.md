@@ -6,69 +6,73 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IWFDefinition`, `ICodeFileHost`, `IWfPlugInReferenceHost`, `ISysNotificationReference`, `IWizardReferenceHost`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 26
+- pola bazodanowe (zapisywalne): 21
+- pola kalkulowane (zapisywalne): 6
+- pola tylko-odczyt: 13
+- podlisty: 15
+- subrowy: 3
+- razem: 58
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ConfigClass | `string` | bazodanowe | Klasa do zapisu konfiguracji | Klasa z definicją obiektu przechowującego statyczną konfigrację. |
-| DataCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| DataCode | `MemoText` | bazodanowe, podlista |  |  |
 | DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Definicja zarządcy | Definicja rekordu zarządzającego procesem. |
 | DbTupleInterface | `string` | bazodanowe | Definicja interfejsu zarządcy | Interfejs rekordu zarządzającego procesem. |
-| DefinitionType | `Soneta.Business.Db.DefinitionTypeEnum` | bazodanowe, enum | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
 | DependentEngine | `bool` | bazodanowe | Jednozakładkowy zależny |  |
 | DependentStandard | `bool` |  |  |  |
 | Description | `string` | bazodanowe | Opis | Opis definicji |
-| EditType | `Soneta.Workflow.Enums.EditTypeEnum` | bazodanowe, enum | Typ definicji | Określa typ definicji workflow |
-| EditTypeExt | `Soneta.Workflow.Enums.EditTypeEnum` | enum |  |  |
-| EditorMode | `string` |  |  |  |
-| EngineClassName | `string` |  |  |  |
-| EngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| EngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Kod algorytmu metody Engine | Kod engine |
-| FeautureDefs | `Soneta.Business.SubTable` |  |  |  |
-| Files | `Soneta.Business.SubTable<Soneta.Core.CodeFile>` |  |  |  |
+| EditType | `Soneta.Workflow.Enums.EditTypeEnum` (enum) | bazodanowe | Typ definicji | Określa typ definicji workflow |
+| EditTypeExt | `Soneta.Workflow.Enums.EditTypeEnum` (enum) |  |  |  |
+| EditorMode | `string` | tylko-odczyt |  |  |
+| EngineClassName | `string` | tylko-odczyt |  |  |
+| EngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| EngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Kod algorytmu metody Engine | Kod engine |
+| FeautureDefs | `SubTable` | podlista |  |  |
+| Files | `SubTable<Soneta.Core.CodeFile>` | podlista |  |  |
 | FirstParentType | `string` |  |  |  |
-| FirstParentTypeModuleName | `string` |  |  |  |
+| FirstParentTypeModuleName | `string` | tylko-odczyt |  |  |
 | HideTaskNameInTransitionComboBox | `bool` |  | Ukryj nazwę zadania docelowego dla tranzycji | Określa czy w sekcjach z wyborem tranzycji w procesie będzie ukryta nazwa kolejnego zadania |
-| Host | `Soneta.Business.IWFDefinitionHost` | bazodanowe, iface-ref |  |  |
-| InterfaceMode | `Soneta.Business.Db.TaskInterfaceModeEnum` | bazodanowe, enum | Tryb wyboru ścieżki | Tryb wybór ścieżki w procesie |
+| Host | `IWFDefinitionHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| InterfaceMode | `Db.TaskInterfaceModeEnum` (enum) | bazodanowe | Tryb wyboru ścieżki | Tryb wybór ścieżki w procesie |
 | IsDeployed | `bool` | bazodanowe | Tryb wdrożenia | Określa tryb modelowania/wdrożenia |
 | IsDiagramEditedInHtml | `bool` | bazodanowe | Diagram edytowany w HTML | Określa czy diagram jest edytowany w wersji HTML |
-| ItemDescriptionRels | `Soneta.Business.SubTable<Soneta.Workflow.Config.WFItemDescriptionRel>` |  |  |  |
-| ItemDescriptions | `Soneta.Business.SubTable<Soneta.Workflow.Config.WFItemDescription>` |  |  |  |
+| ItemDescriptionRels | `SubTable<Soneta.Workflow.Config.WFItemDescriptionRel>` | podlista |  |  |
+| ItemDescriptions | `SubTable<Soneta.Workflow.Config.WFItemDescription>` | podlista |  |  |
 | Locked | `bool` | bazodanowe | Definicja zablokowana | Określa czy definicja jest zablokowana |
 | Name | `string` | bazodanowe | Nazwa | Nazwa definicji |
-| Namespace | `string` |  |  |  |
-| NotificationCategory | `Soneta.Business.NotificationCategory` | bazodanowe | Notification Category | Kategoria powiadomienia |
-| Numerator | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Określa sposób numerowania definicji |
+| Namespace | `string` | tylko-odczyt |  |  |
+| NotificationCategory | `NotificationCategory` | bazodanowe | Notification Category | Kategoria powiadomienia |
+| Numerator | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Określa sposób numerowania definicji |
 | Numerator.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numerator.PodczasZapisu | `bool` |  |  |  |
 | Numerator.Separator | `string` | bazodanowe |  |  |
 | Numerator.Wzor | `string` | bazodanowe |  |  |
-| PlugIns | `Soneta.Business.SubTable<Soneta.Workflow.Config.WfPlugInReference>` |  |  |  |
-| PrevVersionGuid | `System.Guid` | bazodanowe | Guid wersji definicji procesu | Określa Guid wersji definicji procesu (do jakiego szablonu należy) |
-| ProcessRoles | `Soneta.Business.LpSubTable<Soneta.Workflow.Config.WFProcessRole>` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PlugIns | `SubTable<Soneta.Workflow.Config.WfPlugInReference>` | podlista |  |  |
+| PrevVersionGuid | `System.Guid` | bazodanowe, tylko-odczyt | Guid wersji definicji procesu | Określa Guid wersji definicji procesu (do jakiego szablonu należy) |
+| ProcessRoles | `LpSubTable<Soneta.Workflow.Config.WFProcessRole>` | podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SerializedDiagram | `Soneta.Business.MemoText` | bazodanowe | Serializowane dane diagramu | Określa serializowane dane diagramu |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SerializedDiagram | `MemoText` | bazodanowe, podlista | Serializowane dane diagramu | Określa serializowane dane diagramu |
 | SingleWorkflowInstance | `bool` | bazodanowe | Pojedyncza instancja procesu | Określa czy definicja workflow pozwala na wiele instancji procesu |
-| StartTaskDefinitionTableName | `string` |  |  |  |
-| StartTaskWizardDefinition | `Soneta.Business.Db.Wizard.WizardDefinition` |  |  |  |
-| StartTaskWizardStepsTableNames | `System.Collections.Generic.IEnumerable<string>` |  |  |  |
+| StartTaskDefinitionTableName | `string` | tylko-odczyt |  |  |
+| StartTaskWizardDefinition | `Db.Wizard.WizardDefinition` | tylko-odczyt |  |  |
+| StartTaskWizardStepsTableNames | `System.Collections.Generic.IEnumerable<string>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji |
-| TaskDefs | `Soneta.Business.SubTable<Soneta.Business.Db.TaskDefinition>` |  | Powiązane definicje zadań | Zwraca listę definicji zadań powiązanych z definicją procesu Workflow |
-| TaskNameInTransitionVisibility | `Soneta.Business.Db.TaskNameVisibility` | bazodanowe, enum | Widoczność nazwy zadania docelowego dla tranzycji | Określa czy w sekcjach z wyborem tranzycji w procesie będzie widoczna nazwa kolejnego zadania |
-| Transitions | `Soneta.Business.SubTable<Soneta.Workflow.Config.WFTransition>` |  |  |  |
-| Version | `Soneta.Workflow.Config.WFDefVersion` | bazodanowe | Wersja definicji procesu | Określa wersję definicji procesu |
-| Version.IsEmpty | `bool` |  |  |  |
-| Version.Major | `int` | bazodanowe | Wersja główna | Określa wersję główną |
-| Version.Minor | `int` | bazodanowe | Wersja mała | Określa wersję małą |
-| VersionAsString | `string` |  |  |  |
-| WFWorkflows | `Soneta.Business.SubTable<Soneta.Workflow.WFWorkflow>` |  |  |  |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
+| TaskDefs | `SubTable<Db.TaskDefinition>` | podlista | Powiązane definicje zadań | Zwraca listę definicji zadań powiązanych z definicją procesu Workflow |
+| TaskNameInTransitionVisibility | `Db.TaskNameVisibility` (enum) | bazodanowe | Widoczność nazwy zadania docelowego dla tranzycji | Określa czy w sekcjach z wyborem tranzycji w procesie będzie widoczna nazwa kolejnego zadania |
+| Transitions | `SubTable<Soneta.Workflow.Config.WFTransition>` | podlista |  |  |
+| Version | `Soneta.Workflow.Config.WFDefVersion` (subrow) | bazodanowe | Wersja definicji procesu | Określa wersję definicji procesu |
+| Version.IsEmpty | `bool` | tylko-odczyt |  |  |
+| Version.Major | `int` | bazodanowe, tylko-odczyt | Wersja główna | Określa wersję główną |
+| Version.Minor | `int` | bazodanowe, tylko-odczyt | Wersja mała | Określa wersję małą |
+| VersionAsString | `string` | tylko-odczyt |  |  |
+| WFWorkflows | `SubTable<Soneta.Workflow.WFWorkflow>` | podlista |  |  |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
 
 ## Relacje interfejsowe
 
@@ -83,18 +87,18 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### DefinitionTypeEnum (`Soneta.Business.Db.DefinitionTypeEnum`)
+### DefinitionTypeEnum (`Db.DefinitionTypeEnum`)
 - `Standard` = 0 — Wielozakładkowy
 - `Engine` = 1 — Jednozakładkowy
 - `None` = 2 — Brak
 
-### TaskInterfaceModeEnum (`Soneta.Business.Db.TaskInterfaceModeEnum`)
+### TaskInterfaceModeEnum (`Db.TaskInterfaceModeEnum`)
 - `Default` = 0 — Domyślny
 - `SelectMode` = 1 — Lista
 - `WizardMode` = 2 — Przyciski (Zapisz i zamknij)
 - `WizardModeSave` = 3 — Przyciski (Zapisz)
 
-### TaskNameVisibility (`Soneta.Business.Db.TaskNameVisibility`)
+### TaskNameVisibility (`Db.TaskNameVisibility`)
 - `None` = 0
 - `ConversionShow` = 1 — Pokazuj - Wartość ustawiana TYLKO podczas konwersji procesu
 - `ClientShow` = 2 — Pokazuj - Wartość ustawiana TYLKO przez klienta z interfejsu

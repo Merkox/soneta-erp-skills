@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IRightsSource`
 
-- pola bazodanowe: 50
-- pola kalkulowane (z klas biznesowych): 23
+- pola bazodanowe (zapisywalne): 40
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 14
+- podlisty: 12
+- subrowy: 3
+- razem: 72
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -16,74 +20,73 @@ Implementuje interfejsy: `IElementSlownika`, `IRightsSource`
 | AutoRozliczanieWgPrzelewow | `bool` | bazodanowe |  | Automatyczne rozliczanie wypłat wg przelewów po imporcie wyciągów. |
 | AutomatyczneRozliczanie | `bool` | bazodanowe |  |  |
 | BankOnline | `Soneta.Kasa.BankowoscElektroniczna.SerwisBankowy` | bazodanowe |  | Webserwis obsługujący tą ewidencję |
-| BankOnlineConfig | `Soneta.Business.MemoText` | bazodanowe |  | Konfiguracja bankowości online |
+| BankOnlineConfig | `MemoText` | bazodanowe, podlista |  | Konfiguracja bankowości online |
 | Blokada | `bool` | bazodanowe |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  | Algorytm (C#) wyliczenia numeru rachunku |
-| CodeBinder | `Soneta.Business.Compiler.ICodeEditorSource` |  |  | Kod algorytmu rachunków wirtualnych |
+| Code | `MemoText` | bazodanowe, podlista |  | Algorytm (C#) wyliczenia numeru rachunku |
+| CodeBinder | `Compiler.ICodeEditorSource` |  |  | Kod algorytmu rachunków wirtualnych |
 | CtxOddziałFirmy | `Soneta.Core.OddzialFirmy` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu dla raportów SP |
 | DefinicjaED | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu w ewidencji dokumentów |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Domyslny | `bool` | bazodanowe |  |  |
 | EksportPrzelewow | `Soneta.Kasa.FormatWymianyElektronicznej` | bazodanowe |  |  |
 | EksportPrzelewowWal | `Soneta.Kasa.FormatWymianyElektronicznej` | bazodanowe |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
-| Elixir | `Soneta.Kasa.ElixirInfo` | bazodanowe |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
+| Elixir | `Soneta.Kasa.ElixirInfo` (subrow) | bazodanowe |  |  |
 | Elixir.Kierunek | `string` | bazodanowe |  |  |
 | Elixir.Numer | `string` | bazodanowe |  |  |
 | FiltrImportu | `string` | bazodanowe |  |  |
-| FiltrImportuExt | `Soneta.Business.MemoText` | bazodanowe |  | Pole dla konfiguracji robionej przez Soneta.Banki v2 |
-| FiltrImportuWB | `Soneta.Kasa.ImportWyciagowBankowychFilterBase` |  |  |  |
+| FiltrImportuExt | `MemoText` | bazodanowe, podlista |  | Pole dla konfiguracji robionej przez Soneta.Banki v2 |
+| FiltrImportuWB | `Soneta.Kasa.ImportWyciagowBankowychFilterBase` | tylko-odczyt |  |  |
 | FiltrImportuWBInfo | `Soneta.Kasa.ImportWyciagowBankowychFilterInfo` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| IdentyfikacjaWgPolaPodmiot | `Soneta.Kasa.IdentyfikacjaWgPolaPodmiot` | bazodanowe, enum |  | Sposób wykorzystania tabeli identyfikacji podmiotów |
-| ImportWyciagow | `Soneta.Kasa.FormatWymianyElektronicznej` |  |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| IdentyfikacjaWgPolaPodmiot | `Soneta.Kasa.IdentyfikacjaWgPolaPodmiot` (enum) | bazodanowe |  | Sposób wykorzystania tabeli identyfikacji podmiotów |
 | KSeFOpis | `string` | bazodanowe |  | Opis rachunku KSeF |
-| Karta | `Soneta.Kasa.KartaPlatnicza` | bazodanowe |  |  |
+| Karta | `Soneta.Kasa.KartaPlatnicza` (subrow) | bazodanowe |  |  |
 | Karta.Nazwa | `string` | bazodanowe |  |  |
 | Karta.Numer | `string` | bazodanowe |  |  |
-| Karta.WaznaDo | `Soneta.Types.YearMonth` | bazodanowe |  |  |
+| Karta.WaznaDo | `YearMonth` | bazodanowe |  |  |
 | KasowanieOperacji | `bool` | bazodanowe |  | Czy z wyciągu można kasować operacje bankowe. |
 | MagazynWalut | `bool` | bazodanowe |  |  |
-| MethodName | `string` |  |  | Nazwa metody lub właściwości w generowanym kodzie algorytmu. |
-| Nadrzędne | `Soneta.Business.SubTable<Soneta.Kasa.SubEwidencjaSP>` |  |  |  |
+| MethodName | `string` | tylko-odczyt |  | Nazwa metody lub właściwości w generowanym kodzie algorytmu. |
+| Nadrzędne | `SubTable<Soneta.Kasa.SubEwidencjaSP>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NiestandardowyFiltrImportu | `Soneta.Business.MemoText` | bazodanowe |  | Filtr importu utworzony za pomocą kreatora |
+| NiestandardowyFiltrImportu | `MemoText` | bazodanowe, podlista |  | Filtr importu utworzony za pomocą kreatora |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| OkresRaportow | `Soneta.Kasa.OkresRaportuESP` | bazodanowe, enum |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
-| Podrzędne | `Soneta.Business.SubTable<Soneta.Kasa.SubEwidencjaSP>` |  |  |  |
-| PowiazaneRachunkiRozliczeniowe | `Soneta.Business.SubTable<Soneta.Kasa.EwidencjaSP>` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
+| OkresRaportow | `Soneta.Kasa.OkresRaportuESP` (enum) | bazodanowe |  |  |
+| Operator | `App.Operator` | bazodanowe, tylko-odczyt |  |  |
+| Podrzędne | `SubTable<Soneta.Kasa.SubEwidencjaSP>` | podlista |  |  |
+| PowiazaneRachunkiRozliczeniowe | `SubTable<Soneta.Kasa.EwidencjaSP>` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
 | PowiazanyRachunekVAT | `Soneta.Kasa.EwidencjaSP` | bazodanowe | Powiązany rachunek VAT |  |
-| ProcesorWyciaguKod | `Soneta.Business.MemoText` | bazodanowe |  | Kod obróbki wyciągów |
+| ProcesorWyciaguKod | `MemoText` | bazodanowe, podlista |  | Kod obróbki wyciągów |
 | ProcesorWyciaguWlaczony | `bool` | bazodanowe |  | Włącznik kodu obróbki wyciagów |
-| Rachunek | `Soneta.Kasa.RachunekBankowy` |  |  |  |
+| Rachunek | `Soneta.Kasa.RachunekBankowy` | tylko-odczyt |  |  |
 | RachunekVAT | `bool` | bazodanowe | Rachunek VAT |  |
-| RachunkiWirtualne | `Soneta.Kasa.TypRachunkówWirtualnych` | bazodanowe, enum |  |  |
-| RodzajRaportow | `Soneta.Kasa.RodzajRaportuESP` | bazodanowe, enum |  |  |
-| RozliczenieWyplatMW | `Soneta.Kasa.MagazynWalut` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RachunkiWirtualne | `Soneta.Kasa.TypRachunkówWirtualnych` (enum) | bazodanowe |  |  |
+| RodzajRaportow | `Soneta.Kasa.RodzajRaportuESP` (enum) | bazodanowe |  |  |
+| RozliczenieWyplatMW | `Soneta.Kasa.MagazynWalut` (enum) | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SaldoBO | `Soneta.Types.Currency` | bazodanowe |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SaldoBO | `Currency` | bazodanowe |  |  |
 | ScisleRozliczanieMPP | `bool` | bazodanowe | Ścisłe rozliczanie MPP | Ścisłe rozliczanie dokumentów MPP po imporcie wyciągów |
-| Segment | `string` |  |  |  |
-| SposobZaplaty | `Soneta.Kasa.SposobZaplaty` |  |  |  |
+| Segment | `string` | tylko-odczyt |  |  |
+| SposobZaplaty | `Soneta.Kasa.SposobZaplaty` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| SymbolWaluty | `string` |  |  |  |
+| SymbolWaluty | `string` | tylko-odczyt |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypEwidencjiSP` | bazodanowe, enum |  |  |
-| TypDanych | `Soneta.Kasa.TypDanychESP` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kasa.TypEwidencjiSP` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypDanych | `Soneta.Kasa.TypDanychESP` (enum) | bazodanowe |  |  |
 | UjemneStanyWKasie | `bool` | bazodanowe |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
-| Zero | `Soneta.Types.Currency` |  |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| Zero | `Currency` | tylko-odczyt |  |  |
 
 ## Enumy
 

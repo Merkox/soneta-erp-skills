@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 12
+- podlisty: 3
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AktywneElementy | `System.Collections.Generic.IEnumerable<Soneta.Place.WypElement>` |  |  |  |
+| AktywneElementy | `System.Collections.Generic.IEnumerable<Soneta.Place.WypElement>` | podlista |  |  |
 | BilansOtwarcia | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| Kapital | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Miesiąc | `Soneta.Types.YearMonth` |  |  |  |
-| Odsetki | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Pozostaje | `Soneta.Types.Currency` |  |  |  |
-| PozostajeKapitał | `Soneta.Types.Currency` |  |  |  |
-| PozostajeOdsetki | `Soneta.Types.Currency` |  |  |  |
-| Pozyczka | `Soneta.Kadry.Pozyczka` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
-| Razem | `Soneta.Types.Currency` |  |  |  |
-| RazemKapitał | `Soneta.Types.Currency` |  |  |  |
-| RazemOdsetki | `Soneta.Types.Currency` |  |  |  |
-| RazemSpłaty | `Soneta.Types.Currency` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| Kapital | `Currency` | bazodanowe |  |  |
+| Miesiąc | `YearMonth` |  |  |  |
+| Odsetki | `Currency` | bazodanowe |  |  |
+| Pozostaje | `Currency` | tylko-odczyt |  |  |
+| PozostajeKapitał | `Currency` | tylko-odczyt |  |  |
+| PozostajeOdsetki | `Currency` | tylko-odczyt |  |  |
+| Pozyczka | `Soneta.Kadry.Pozyczka` | bazodanowe, tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| Razem | `Currency` | tylko-odczyt |  |  |
+| RazemKapitał | `Currency` | tylko-odczyt |  |  |
+| RazemOdsetki | `Currency` | tylko-odczyt |  |  |
+| RazemSpłaty | `Currency` | tylko-odczyt |  |  |
 | Splacajacy | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| SpłacającyInfo | `Soneta.Kadry.Pracownik` |  |  |  |
-| Spłaty | `Soneta.Business.View` |  |  |  |
-| Stan | `Soneta.Kadry.StanSpłat` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Currency` |  |  |  |
+| SpłacającyInfo | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| Spłaty | `View` | podlista |  |  |
+| Stan | `Soneta.Kadry.StanSpłat` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wartosc | `Currency` | tylko-odczyt |  |  |
 | Zyrant | `Soneta.Kadry.Pracownik` | bazodanowe | Żyrant |  |
 
 ## Enumy

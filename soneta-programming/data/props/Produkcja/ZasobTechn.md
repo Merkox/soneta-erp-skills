@@ -4,17 +4,21 @@ Tytuł: Zasoby wzorcowe lub rzeczywiste przypisane do obiektów produkcyjnych
 Opis: Przypisanie zasobu produkcyjnego (wzorcowego lub rzeczywistego) do technologii lub operacji. Określa typ zasobu, wymaganą ilość oraz powiązanie z zasobem wzorcowym, co pozwala definiować wymagania sprzętowe i osobowe dla poszczególnych etapów procesu produkcyjnego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Blokada | `bool` |  |  | Określa zablokowanie rekordu. Zablokowane rekordy nie będą wyświetlane na listach wyboru. |
+| Blokada | `bool` | tylko-odczyt |  | Określa zablokowanie rekordu. Zablokowane rekordy nie będą wyświetlane na listach wyboru. |
 | Host | `Soneta.Produkcja.IZasobTechHost` | bazodanowe, iface-ref |  |  |
 | Ilosc | `int` | bazodanowe | Ilość |  |
 | ProdZasob | `Soneta.Produkcja.IProdZasob` | bazodanowe, iface-ref |  |  |
 | Technologia | `Soneta.Produkcja.Technologia` | bazodanowe |  |  |
-| Typ | `Soneta.Produkcja.TypZasobuTechn` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Produkcja.TypZasobuTechn` (enum) | bazodanowe, tylko-odczyt |  |  |
 | ZasobTechnWzorcowy | `Soneta.Produkcja.ZasobTechn` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

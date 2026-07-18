@@ -5,26 +5,28 @@ Opis: Element szczegółowy dyskusji (Discussion). Powiązanie dyskusji z dowoln
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 12
+- podlisty: 1
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DeletionDate | `System.DateTime` | bazodanowe | Data usunięcia |  |
 | Discussion | `Soneta.Core.Conversation.Discussion` | bazodanowe |  |  |
-| IsRemoved | `bool` |  |  |  |
-| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyLike | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| NotificationMessage | `Soneta.Business.Notifications.Models.NotificationMessage` |  |  |  |
-| Original | `Soneta.Business.Row` |  |  |  |
-| PendingUpdate | `bool` |  |  |  |
-| Reference | `Soneta.Core.Conversation.WeakTableReference` | bazodanowe |  |  |
-| Reference.ByReference | `Soneta.Business.Key` |  |  |  |
-| Reference.Description | `string` | bazodanowe | Opis | Opis host dyskusji. |
-| Reference.RefGuid | `System.Guid` | bazodanowe | Identyfikator | Identyfikator rekordu |
-| Reference.RefTable | `string` | bazodanowe | Nazwa | Nazwa tabeli |
-| Reference.Row | `Soneta.Business.GuidedRow` |  |  |  |
-| TextValue | `string` |  |  |  |
+| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyLike | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| NotificationMessage | `Notifications.Models.NotificationMessage` |  |  |  |
+| Original | `Row` | tylko-odczyt |  |  |
+| PendingUpdate | `bool` | tylko-odczyt |  |  |
+| Reference | `Soneta.Core.Conversation.WeakTableReference` (subrow) | bazodanowe |  |  |
+| Reference.ByReference | `Key` | podlista |  |  |
+| Reference.Description | `string` | bazodanowe, tylko-odczyt | Opis | Opis host dyskusji. |
+| Reference.RefGuid | `System.Guid` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator rekordu |
+| Reference.RefTable | `string` | bazodanowe, tylko-odczyt | Nazwa | Nazwa tabeli |
+| Reference.Row | `GuidedRow` | tylko-odczyt |  |  |
+| TextValue | `string` | tylko-odczyt |  |  |

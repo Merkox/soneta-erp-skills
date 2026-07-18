@@ -5,32 +5,36 @@ Opis: Komunikat (powiadomienie) wysłany kanałem dystrybucji. Zawiera temat, tr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 5
+- podlisty: 2
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Category | `Soneta.Core.Conversation.ThreadCategory` | bazodanowe | Kategoria |  |
-| Channel | `Soneta.Core.NoticeChannel` | bazodanowe |  |  |
-| Chips | `string` |  |  |  |
+| Channel | `Soneta.Core.NoticeChannel` | bazodanowe, tylko-odczyt |  |  |
+| Chips | `string` | tylko-odczyt |  |  |
 | CreationTime | `System.DateTime` | bazodanowe | Czas utworzenia | Czas utworzenia powiadomienia. |
-| Info | `string` |  |  |  |
+| Info | `string` | tylko-odczyt |  |  |
 | IsLocked | `bool` | bazodanowe |  |  |
-| LackOfSpecifiedNonServiceChannel | `bool` |  |  |  |
-| Msg | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| NumberOfLikes | `int` |  |  |  |
-| Receipts | `Soneta.Business.SubTable<Soneta.Core.NoticeReceipt>` |  |  |  |
-| RecipientGroup | `Soneta.Business.NoticeRecipientGroup` | bazodanowe, enum |  |  |
-| Sender | `Soneta.Business.INoticeRecipient` | bazodanowe, iface-ref | Wysyłający | Wysyłający powiadomienie. |
+| LackOfSpecifiedNonServiceChannel | `bool` | tylko-odczyt |  |  |
+| Msg | `MemoText` | bazodanowe, podlista |  |  |
+| NumberOfLikes | `int` | tylko-odczyt |  |  |
+| Receipts | `SubTable<Soneta.Core.NoticeReceipt>` | podlista |  |  |
+| RecipientGroup | `NoticeRecipientGroup` (enum) | bazodanowe |  |  |
+| Sender | `INoticeRecipient` | bazodanowe, iface-ref | Wysyłający | Wysyłający powiadomienie. |
 | SourceId | `string` | bazodanowe |  |  |
 | Subject | `string` | bazodanowe |  |  |
 | Summary | `string` | bazodanowe |  |  |
 | ValidFrom | `System.DateTime` | bazodanowe |  |  |
-| ValidFromDate | `Soneta.Types.Date` |  |  |  |
-| ValidFromTime | `Soneta.Types.Time` |  |  |  |
+| ValidFromDate | `Date` |  |  |  |
+| ValidFromTime | `Time` |  |  |  |
 | ValidTo | `System.DateTime` | bazodanowe |  |  |
-| ValidToDate | `Soneta.Types.Date` |  |  |  |
-| ValidToTime | `Soneta.Types.Time` |  |  |  |
+| ValidToDate | `Date` |  |  |  |
+| ValidToTime | `Time` |  |  |  |
 
 ## Relacje interfejsowe
 
@@ -45,7 +49,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### NoticeRecipientGroup (`Soneta.Business.NoticeRecipientGroup`)
+### NoticeRecipientGroup (`NoticeRecipientGroup`)
 - `AllGroups` = 0 — Wszyscy
 - `Operators` = 1 — Operatorzy
 - `Employees` = 2 — Pracownicy

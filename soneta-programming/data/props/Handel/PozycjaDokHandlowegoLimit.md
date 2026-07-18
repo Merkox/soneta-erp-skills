@@ -5,13 +5,17 @@ Opis: Definicja limitu ilościowego dla pozycji dokumentu handlowego (umowy cykl
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaCeny | `Soneta.Towary.DefinicjaCeny` | bazodanowe | Definicja ceny |  |
-| HostName | `string` |  |  |  |
-| Hosts | `Soneta.Business.SubTable<Soneta.Handel.PozycjaDokHandlowegoLimitHost>` |  |  |  |
+| HostName | `string` | tylko-odczyt |  |  |
+| Hosts | `SubTable<Soneta.Handel.PozycjaDokHandlowegoLimitHost>` | podlista |  |  |
 | Limit | `Soneta.Towary.Quantity` | bazodanowe | Limit |  |
 | Nazwa | `string` | bazodanowe | Nazwa |  |

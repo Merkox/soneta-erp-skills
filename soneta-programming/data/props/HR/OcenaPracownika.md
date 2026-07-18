@@ -6,17 +6,21 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IOcenaPracownika`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| ElementyOceny | `Soneta.Business.SubTable<Soneta.HR.ElementOcenyPracownika>` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| ElementyOceny | `SubTable<Soneta.HR.ElementOcenyPracownika>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisLinia | `string` | tylko-odczyt |  |  |
+| OpisPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Termin | `Date` | bazodanowe |  |  |

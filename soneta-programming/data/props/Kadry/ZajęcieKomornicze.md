@@ -4,40 +4,44 @@ Tytuł: Zajęcia wynagrodzeń
 Opis: Zajęcie komornicze wynagrodzenia pracownika. Rejestruje numer sprawy, rodzaj zajęcia (alimentacyjne, niealimentacyjne), element płacowy do potrącenia, kwotę spłaty, priorytet oraz dane rachunku komornika.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `ZajęcieKomorniczeHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 7
+- podlisty: 8
+- subrowy: 1
+- razem: 28
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Anulowane | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataSplaty | `Soneta.Types.Date` | bazodanowe | Data spłaty |  |
+| Anulowane | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataSplaty | `Date` | bazodanowe | Data spłaty |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` |  |  |  |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.Kadry.ZajęcieKomorniczeHistoria>` |  |  |  |
-| Korekty | `Soneta.Business.SubTable<Soneta.Kadry.KorektaZajęciaKomorniczego>` |  |  |  |
-| Kwota | `Soneta.Types.Currency` |  |  |  |
-| Last | `Soneta.Kadry.ZajęcieKomorniczeHistoria` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` | podlista |  |  |
+| Historia | `HistorySubTable<Soneta.Kadry.ZajęcieKomorniczeHistoria>` | podlista |  |  |
+| Korekty | `SubTable<Soneta.Kadry.KorektaZajęciaKomorniczego>` | podlista |  |  |
+| Last | `Soneta.Kadry.ZajęcieKomorniczeHistoria` | tylko-odczyt |  |  |
 | NumerSprawy | `string` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Okres | `FromTo` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | OpisPrzelewu | `string` | bazodanowe |  |  |
-| Pozostało | `Soneta.Types.Currency` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Pozostało | `Currency` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kadry.RodzajeZajęciaWynagrodzenia` | bazodanowe, enum |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Kadry.RodzajeZajęciaWynagrodzenia` (enum) | bazodanowe |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` (subrow) | bazodanowe |  |  |
 | Rozliczenie.Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
 | Rozliczenie.RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
-| Rozliczenie.WgOdbiorca | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgRachunekOdbiorcy | `Soneta.Business.Key` |  |  |  |
-| Splacono | `Soneta.Types.Currency` | bazodanowe | Spłacono |  |
+| Rozliczenie.WgOdbiorca | `Key` | podlista |  |  |
+| Rozliczenie.WgRachunekOdbiorcy | `Key` | podlista |  |  |
+| Splacono | `Currency` | bazodanowe, tylko-odczyt | Spłacono |  |
 | SplataZakonczona | `bool` | bazodanowe | Spłata zakończona |  |
-| Stan | `Soneta.Kadry.ZajęcieKomornicze.StanyZajęciaWynagrodzenia` | enum |  |  |
-| SąAktywneElementy | `bool` |  |  |  |
+| Stan | `Soneta.Kadry.ZajęcieKomornicze.StanyZajęciaWynagrodzenia` (enum) | tylko-odczyt |  |  |
+| SąAktywneElementy | `bool` | tylko-odczyt |  |  |
 | _Element | `Soneta.Place.DefinicjaElementu` |  |  |  |
 | _Komornik | `Soneta.CRM.Kontrahent` |  |  |  |
 

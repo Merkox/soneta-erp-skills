@@ -5,23 +5,27 @@ Opis: Grupa kont definiuje nazwany zbiór kont księgowych w ramach okresu obrac
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| FunkcjaGrupyBudzetujacej | `Soneta.Ksiega.FunkcjaGrupyBudzetujacej` | enum |  | Funkcja grupy budżetującej |
+| FunkcjaGrupyBudzetujacej | `Soneta.Ksiega.FunkcjaGrupyBudzetujacej` (enum) |  |  | Funkcja grupy budżetującej |
 | Nieaktywna | `bool` | bazodanowe |  |  |
-| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  |  |
-| OkresGrupyBudzetujacej | `Soneta.Ksiega.OkresGrupyBudzetujacej` | enum |  | Okres grupy budżetującej |
+| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  |  |
+| OkresGrupyBudzetujacej | `Soneta.Ksiega.OkresGrupyBudzetujacej` (enum) |  |  | Okres grupy budżetującej |
 | Opis | `string` | bazodanowe |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Ksiega.PozGrupyKont>` |  |  |  |
-| Rozszerzenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| StronaGrupyBudzetujacejPlan | `Soneta.Ksiega.StronaGrupyBudzetujacej` | enum |  | Strona pozycji budżetującej - plan |
-| StronaGrupyBudzetujacejWykonanie | `Soneta.Ksiega.StronaGrupyBudzetujacej` | enum |  | Strona pozycji budżetującej - Wykonanie |
+| Pozycje | `LpSubTable<Soneta.Ksiega.PozGrupyKont>` | podlista |  |  |
+| Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
+| StronaGrupyBudzetujacejPlan | `Soneta.Ksiega.StronaGrupyBudzetujacej` (enum) |  |  | Strona pozycji budżetującej - plan |
+| StronaGrupyBudzetujacejWykonanie | `Soneta.Ksiega.StronaGrupyBudzetujacej` (enum) |  |  | Strona pozycji budżetującej - Wykonanie |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypGrupyKont` | bazodanowe, enum |  | Typ grupy kont |
-| WeryfikacjaGrupyBudzetujacej | `Soneta.Types.VerifierType` | enum |  | Weryfikacja grupy budżetującej |
+| Typ | `Soneta.Ksiega.TypGrupyKont` (enum) | bazodanowe, tylko-odczyt |  | Typ grupy kont |
+| WeryfikacjaGrupyBudzetujacej | `VerifierType` (enum) |  |  | Weryfikacja grupy budżetującej |
 
 ## Enumy
 
@@ -45,7 +49,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Synchronizująca` = 1 — Synchronizująca
 - `Budżetująca` = 2 — Budżetująca
 
-### VerifierType (`Soneta.Types.VerifierType`)
+### VerifierType (`VerifierType`)
 - `Error` = 0 — Błąd
 - `Warning` = 1 — Ostrzeżenie
 - `Information` = 2 — Informacja

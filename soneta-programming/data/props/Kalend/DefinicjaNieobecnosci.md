@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoKoloruElementu`
 
-- pola bazodanowe: 33
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 33
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 42
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,40 +22,39 @@ Implementuje interfejsy: `IŹródłoKoloruElementu`
 | ElementZbieg | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | GenerujPowiadomienieDoZ15 | `bool` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| KodRGA | `Soneta.Kadry.KodRGA` | bazodanowe, enum |  |  |
+| KodRGA | `Soneta.Kadry.KodRGA` (enum) | bazodanowe |  |  |
 | KodRSA | `Soneta.Place.KodRSA` | bazodanowe |  |  |
-| Kolory | `Soneta.Business.SubTable<Soneta.Kalend.KolorElementu>` |  |  |  |
+| Kolory | `SubTable<Soneta.Kalend.KolorElementu>` | podlista |  |  |
 | Limit | `Soneta.Kalend.DefinicjaLimitu` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NeutralName | `string` |  |  |  |
+| NeutralName | `string` | tylko-odczyt |  |  |
 | NieobecnoscPomniejszaOkresRJR | `bool` | bazodanowe |  |  |
-| PFRON | `Soneta.Kalend.WpływaNaPFRON` | bazodanowe, enum |  |  |
+| PFRON | `Soneta.Kalend.WpływaNaPFRON` (enum) | bazodanowe |  |  |
 | Planowana | `bool` | bazodanowe |  |  |
-| PomnOkresSzWarunkiSzCharakter | `Soneta.Kalend.PomnOkresSzWarunkiSzCharakter` | bazodanowe, enum |  |  |
+| PomnOkresSzWarunkiSzCharakter | `Soneta.Kalend.PomnOkresSzWarunkiSzCharakter` (enum) | bazodanowe |  |  |
 | PomniejszaCzasPracy | `bool` |  |  |  |
 | PomniejszaCzasPracyUmowy | `bool` | bazodanowe |  |  |
 | PomniejszaLimitUrlopu | `bool` | bazodanowe |  |  |
-| PomniejszaLimitUrlopu2023 | `Soneta.Kalend.PomniejszaLimitUrlopu` | bazodanowe, enum |  |  |
+| PomniejszaLimitUrlopu2023 | `Soneta.Kalend.PomniejszaLimitUrlopu` (enum) | bazodanowe |  |  |
 | PomniejszaLimitUrlopuTymczasowy | `bool` | bazodanowe |  |  |
-| PomniejszaStaz | `bool` |  |  |  |
-| PomniejszaStazPracy | `Soneta.Kalend.PomniejszeniaStażuPracy` | bazodanowe, enum |  |  |
+| PomniejszaStazPracy | `Soneta.Kalend.PomniejszeniaStażuPracy` (enum) | bazodanowe |  |  |
 | PomniejszaWynagrodzenie | `bool` | bazodanowe |  |  |
-| PrzerwaSzWarunkiSzCharakter | `bool` |  |  |  |
-| Przyczyna | `Soneta.Kalend.PrzyczynaNieobecnosci` | bazodanowe, enum |  |  |
-| Rozliczenie | `Soneta.Kalend.RozliczenieNieobecnosci` | bazodanowe, enum |  |  |
-| SOD | `Soneta.Kalend.WpływaNaSOD` | bazodanowe, enum | SODiR (WE) |  |
-| SOD2010 | `Soneta.Kalend.WpływaNaSOD` | enum | SODiR (ustawa i WE) |  |
-| SODUstawa | `Soneta.Kalend.WpływaNaSOD` | bazodanowe, enum | SODiR (ustawa) |  |
+| PrzerwaSzWarunkiSzCharakter | `bool` | tylko-odczyt |  |  |
+| Przyczyna | `Soneta.Kalend.PrzyczynaNieobecnosci` (enum) | bazodanowe |  |  |
+| Rozliczenie | `Soneta.Kalend.RozliczenieNieobecnosci` (enum) | bazodanowe |  |  |
+| SOD | `Soneta.Kalend.WpływaNaSOD` (enum) | bazodanowe | SODiR (WE) |  |
+| SOD2010 | `Soneta.Kalend.WpływaNaSOD` (enum) | tylko-odczyt | SODiR (ustawa i WE) |  |
+| SODUstawa | `Soneta.Kalend.WpływaNaSOD` (enum) | bazodanowe | SODiR (ustawa) |  |
 | Skrot | `string` | bazodanowe |  |  |
-| SposobPomniejszania | `Soneta.Kalend.SposobyPomniejszania` | bazodanowe, enum |  |  |
-| SposóbPomniejszaniaLimituUrlopu | `Soneta.Kalend.SposobyPomniejszaniaLimituUrlopu` | enum |  |  |
-| Typ | `Soneta.Kalend.TypNieobecnosci` | bazodanowe, enum |  |  |
-| TypDni | `Soneta.Kalend.TypyDni` | enum |  |  |
-| TypOkresu | `Soneta.Kalend.TypOkresuNieobecności` | bazodanowe, enum |  |  |
+| SposobPomniejszania | `Soneta.Kalend.SposobyPomniejszania` (enum) | bazodanowe |  |  |
+| SposóbPomniejszaniaLimituUrlopu | `Soneta.Kalend.SposobyPomniejszaniaLimituUrlopu` (enum) | tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypNieobecnosci` (enum) | bazodanowe |  |  |
+| TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
+| TypOkresu | `Soneta.Kalend.TypOkresuNieobecności` (enum) | bazodanowe |  |  |
 | UrlopNaDni | `bool` | bazodanowe |  |  |
 | Weryfikuj | `bool` | bazodanowe |  |  |
 | WniosekUrlopowy | `bool` | bazodanowe |  |  |
-| WymaganeUbezpieczenie | `Soneta.Place.WymaganeUbezpieczenie` | enum |  |  |
+| WymaganeUbezpieczenie | `Soneta.Place.WymaganeUbezpieczenie` (enum) | tylko-odczyt |  |  |
 | ZawieszenieSkladkiFP | `bool` |  | Zawieszenie składki na FP |  |
 | ZawieszenieSkladkiFPMies | `int` | bazodanowe | Zawieszenie składki na FP (mies.) |  |
 

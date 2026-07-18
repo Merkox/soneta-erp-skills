@@ -5,23 +5,27 @@ Opis: Element szczegółowy pracownika (Pracownik). Okresowe zestawienie czasu p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 11
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Nadgodziny100 | `Soneta.Types.Time` |  |  |  |
-| Nadgodziny50 | `Soneta.Types.Time` |  |  |  |
-| NadgodzinySW | `Soneta.Types.Time` |  |  |  |
-| NocCzas | `Soneta.Types.Time` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PracaCzas | `Soneta.Types.Time` |  |  |  |
+| Nadgodziny100 | `Time` |  |  |  |
+| Nadgodziny50 | `Time` |  |  |  |
+| NadgodzinySW | `Time` |  |  |  |
+| NocCzas | `Time` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PracaCzas | `Time` |  |  |  |
 | PracaDni | `int` | bazodanowe |  |  |
-| PracaWNormie | `Soneta.Types.Time` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| PrzerwaNaKarmienie | `Soneta.Types.Time` |  |  |  |
-| PrzestójEkonomiczny | `Soneta.Types.Time` |  |  |  |
-| PrzestójKP | `Soneta.Types.Time` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaZestawienia>` |  |  |  |
-| SwietaCzas | `Soneta.Types.Time` |  |  |  |
-| WolneCzas | `Soneta.Types.Time` |  |  |  |
+| PracaWNormie | `Time` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| PrzerwaNaKarmienie | `Time` |  |  |  |
+| PrzestójEkonomiczny | `Time` |  |  |  |
+| PrzestójKP | `Time` |  |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaZestawienia>` | podlista |  |  |
+| SwietaCzas | `Time` |  |  |  |
+| WolneCzas | `Time` |  |  |  |

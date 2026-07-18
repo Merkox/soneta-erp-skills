@@ -5,32 +5,36 @@ Opis: Element szczegółowy zadania (Zadanie). Przypisuje zasób (np. urządzeni
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zadanie` → `Zadanie`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 7
+- podlisty: 3
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  | Całodzienne |  |
-| CzasDo | `Soneta.Types.Time` | bazodanowe | Godzina zakończenia rezerwacji | Godzina zakończenia rezerwacji. |
-| CzasOd | `Soneta.Types.Time` | bazodanowe | Godzina rozpoczęcia rezerwacji | Godzina rozpoczęcia rezerwacji. |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia rezerwacji | Data zakończenia rezerwacji. |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczÄ™cia rezerwacji | Data rozpoczÄ™cia rezerwacji. |
-| Description | `string` |  |  |  |
+| AllDayEvent | `bool` | tylko-odczyt | Całodzienne |  |
+| CzasDo | `Time` | bazodanowe | Godzina zakończenia rezerwacji | Godzina zakończenia rezerwacji. |
+| CzasOd | `Time` | bazodanowe | Godzina rozpoczęcia rezerwacji | Godzina rozpoczęcia rezerwacji. |
+| DataDo | `Date` | bazodanowe | Data zakończenia rezerwacji | Data zakończenia rezerwacji. |
+| DataOd | `Date` | bazodanowe | Data rozpoczÄ™cia rezerwacji | Data rozpoczÄ™cia rezerwacji. |
+| Description | `string` | tylko-odczyt |  |  |
 | End | `System.DateTime` |  |  |  |
-| KodZasobu | `string` |  |  |  |
-| NazwaZasobu | `string` |  | Nazwa |  |
-| NieruchomosciUzyte | `Soneta.Business.SubTable` |  |  |  |
+| KodZasobu | `string` | tylko-odczyt |  |  |
+| NazwaZasobu | `string` | tylko-odczyt | Nazwa |  |
+| NieruchomosciUzyte | `SubTable` | podlista |  |  |
 | Projekt | `Soneta.Zadania.Projekt` | bazodanowe |  | Projekt, do którego jest przypisany zasób |
-| Resource | `object` |  |  |  |
+| Resource | `object` | tylko-odczyt |  |  |
 | Rezerwowany | `bool` | bazodanowe | Rezerwowany | Wskazuje, czy zasÃ³b ma byÄ‡ rezerwowany. |
-| SchedulerInterval | `Soneta.Types.Interval` |  |  |  |
+| SchedulerInterval | `Interval` |  |  |  |
 | SchedulerResource | `Soneta.Core.IZasobCRM` | iface-ref |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
 | Start | `System.DateTime` |  |  |  |
 | Text | `string` |  |  |  |
-| TypZasobu | `string` |  |  |  |
-| UrzadzeniaUzyte | `Soneta.Business.SubTable<Soneta.Zadania.UrzadzenieUzyte>` |  |  |  |
-| UsedVehicles | `Soneta.Business.SubTable` |  |  |  |
+| TypZasobu | `string` | tylko-odczyt |  |  |
+| UrzadzeniaUzyte | `SubTable<Soneta.Zadania.UrzadzenieUzyte>` | podlista |  |  |
+| UsedVehicles | `SubTable` | podlista |  |  |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe, guided-parent |  | Zadanie, do którego jest przypisany zasób |
 | Zasob | `Soneta.Core.IZasobCRM` | bazodanowe, iface-ref |  |  |
 

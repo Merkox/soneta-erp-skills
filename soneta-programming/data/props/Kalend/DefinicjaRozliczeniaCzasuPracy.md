@@ -5,25 +5,29 @@ Opis: Konfigurowalna definicja dokumentu rozliczenia czasu pracy. Określa rodza
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | DoRozliczenia | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe | Do rozliczenia |  |
-| IsZlecenie | `bool` |  |  |  |
+| IsZlecenie | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajeRozliczeńCzasuPracy` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajeRozliczeńCzasuPracy` (enum) | bazodanowe |  |  |
 | Rozliczenie | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe | Rozliczenie |  |
 | Seria | `bool` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Weryfikatory | `Soneta.Business.SubTable<Soneta.Kalend.WeryfikatorRozliczeniaCzasuPracy>` |  |  |  |
+| Weryfikatory | `SubTable<Soneta.Kalend.WeryfikatorRozliczeniaCzasuPracy>` | podlista |  |  |
 | ZgodneDoRozliczenia | `bool` | bazodanowe |  |  |
 | ZgodneRozliczenie | `bool` | bazodanowe |  |  |
 | Zlecenie | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe | Zlecenie |  |

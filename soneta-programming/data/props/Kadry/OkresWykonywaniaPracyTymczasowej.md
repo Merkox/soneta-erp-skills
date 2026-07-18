@@ -5,11 +5,15 @@ Opis: Element szczegółowy historii zatrudnienia (HistoriaZatrudnieniaBase). Re
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zatrudnienie` → `HistoriaZatrudnieniaBase`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Pracodawca | `Soneta.CRM.Kontrahent` | bazodanowe | Pracodawca użytkownik |  |
-| Zatrudnienie | `Soneta.Kadry.HistoriaZatrudnieniaBase` | bazodanowe, guided-parent |  |  |
+| Zatrudnienie | `Soneta.Kadry.HistoriaZatrudnieniaBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |

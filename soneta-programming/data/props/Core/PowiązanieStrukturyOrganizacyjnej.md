@@ -5,17 +5,21 @@ Opis: Element szczegółowy źródła powiązania (IŹródłoPowiązaniaStruktur
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zrodlo` → `IŹródłoPowiązaniaStrukturyOrganizacyjnej`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 3
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Element | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
-| IsReadOnlyEfektywnyOkres | `bool` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresEx | `Soneta.Types.FromTo` |  |  |  |
-| Zrodlo | `Soneta.Business.IŹródłoPowiązaniaStrukturyOrganizacyjnej` | bazodanowe, guided-parent, iface-ref |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
+| Element | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe, tylko-odczyt |  |  |
+| IsReadOnlyEfektywnyOkres | `bool` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresEx | `FromTo` | podlista |  |  |
+| Zrodlo | `IŹródłoPowiązaniaStrukturyOrganizacyjnej` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

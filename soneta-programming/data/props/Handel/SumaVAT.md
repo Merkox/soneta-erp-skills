@@ -5,33 +5,37 @@ Opis: Element szczegółowy dokumentu handlowego (DokumentHandlowy). Przechowuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentHandlowy`
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 9
+- podlisty: 1
+- subrowy: 3
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaStawki | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Definicja stawki VAT |
-| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, guided-parent |  | Dokument, do którego przypisana jest stawka VAT |
-| Stawka | `Soneta.Core.StawkaVat` | bazodanowe |  | Typ stawki VAT |
+| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt, guided-parent |  | Dokument, do którego przypisana jest stawka VAT |
+| Stawka | `Soneta.Core.StawkaVat` (subrow) | bazodanowe |  | Typ stawki VAT |
 | Stawka.Kraj | `Soneta.Core.KrajTbl` | bazodanowe |  |  |
 | Stawka.Obnizona | `bool` | bazodanowe |  |  |
-| Stawka.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Stawka.Status | `Soneta.Core.StatusStawkiVat` | bazodanowe, enum |  |  |
-| Stawka.WgKraj | `Soneta.Business.Key` |  |  |  |
-| Stawka.WymagaSWW | `bool` |  |  |  |
-| Stawka.Zrodlowa | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Suma | `Soneta.Handel.BruttoNetto` | bazodanowe |  | Kwoty netto, VAT i brutto. |
+| Stawka.Procent | `Percent` | bazodanowe |  |  |
+| Stawka.Status | `Soneta.Core.StatusStawkiVat` (enum) | bazodanowe |  |  |
+| Stawka.WgKraj | `Key` | podlista |  |  |
+| Stawka.WymagaSWW | `bool` | tylko-odczyt |  |  |
+| Stawka.Zrodlowa | `Percent` | bazodanowe |  |  |
+| Suma | `Soneta.Handel.BruttoNetto` (subrow) | bazodanowe |  | Kwoty netto, VAT i brutto. |
 | Suma.Brutto | `decimal` | bazodanowe |  | Wartość brutto. |
-| Suma.BruttoCy | `Soneta.Types.Currency` |  |  | Wartość brutto wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
-| Suma.JestZero | `bool` |  |  |  |
+| Suma.BruttoCy | `Currency` | tylko-odczyt |  | Wartość brutto wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
+| Suma.JestZero | `bool` | tylko-odczyt |  |  |
 | Suma.Netto | `decimal` | bazodanowe |  | Wartość netto. |
-| Suma.NettoCy | `Soneta.Types.Currency` |  |  | Wartość netto wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
+| Suma.NettoCy | `Currency` | tylko-odczyt |  | Wartość netto wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
 | Suma.VAT | `decimal` | bazodanowe |  | Kwota podatku VAT. |
-| Suma.VATCy | `Soneta.Types.Currency` |  |  | Wartość podatku VAT wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
-| SumaCy | `Soneta.Handel.BruttoNettoCy` | bazodanowe |  | Kwoty w walucie netto, VAT i brutto. |
-| SumaCy.BruttoCy | `Soneta.Types.Currency` | bazodanowe |  | Kwota brutto. |
-| SumaCy.NettoCy | `Soneta.Types.Currency` | bazodanowe |  | Kwota netto. |
-| SumaCy.VatCy | `Soneta.Types.Currency` | bazodanowe |  | Kwota podatku VAT. |
+| Suma.VATCy | `Currency` | tylko-odczyt |  | Wartość podatku VAT wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
+| SumaCy | `Soneta.Handel.BruttoNettoCy` (subrow) | bazodanowe |  | Kwoty w walucie netto, VAT i brutto. |
+| SumaCy.BruttoCy | `Currency` | bazodanowe, tylko-odczyt |  | Kwota brutto. |
+| SumaCy.NettoCy | `Currency` | bazodanowe, tylko-odczyt |  | Kwota netto. |
+| SumaCy.VatCy | `Currency` | bazodanowe, tylko-odczyt |  | Kwota podatku VAT. |
 
 ## Enumy
 

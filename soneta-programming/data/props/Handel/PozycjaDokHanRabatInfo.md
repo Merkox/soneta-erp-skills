@@ -5,17 +5,21 @@ Opis: Element szczegółowy pozycji dokumentu handlowego (PozycjaDokHandlowego).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaDokHandlowego`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Business.IPozycjaDokHandlowegoRabatInfoHost` | bazodanowe |  |  |
+| Host | `IPozycjaDokHandlowegoRabatInfoHost` | bazodanowe, tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, guided-parent |  | Pozycja dokumentu handlowego. |
-| Rabat | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Handel.RodzajNaliczeniaCenyRabatu` | bazodanowe, enum | Rodzaj naliczenia rabatu |  |
-| Sposob | `Soneta.Towary.WliczanieRabatu` | bazodanowe, enum | Sposób naliczenia rabatu |  |
+| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, tylko-odczyt, guided-parent |  | Pozycja dokumentu handlowego. |
+| Rabat | `Percent` | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Handel.RodzajNaliczeniaCenyRabatu` (enum) | bazodanowe, tylko-odczyt | Rodzaj naliczenia rabatu |  |
+| Sposob | `Soneta.Towary.WliczanieRabatu` (enum) | bazodanowe, tylko-odczyt | Sposób naliczenia rabatu |  |
 
 ## Enumy
 

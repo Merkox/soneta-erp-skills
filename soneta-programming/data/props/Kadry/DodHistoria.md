@@ -4,31 +4,36 @@ Tytuł: Historie dodatków
 Opis: Element szczegółowy dodatku (Dodatek). Wersja historyczna dodatku do wynagrodzenia rejestrująca element płacowy, okres obowiązywania, podstawę, ułamek, czas i dane rozliczeniowe (odbiorca, rachunek) w kolejnych okresach aktualności.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dodatek` → `Dodatek`
+Historia: Tak — zapis historyczny tabeli `Dodatek`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 5
+- podlisty: 5
+- subrowy: 1
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| CzasText | `string` |  |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| Czas | `Time` | bazodanowe |  |  |
+| CzasText | `string` | tylko-odczyt |  |  |
 | Dni | `int` | bazodanowe |  |  |
-| Dodatek | `Soneta.Kadry.Dodatek` | bazodanowe, guided-parent |  |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
+| Dodatek | `Soneta.Kadry.Dodatek` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| Podstawa | `Soneta.Types.Currency` | bazodanowe |  |  |
-| PodstawaText | `string` |  |  |  |
-| Procent | `Soneta.Types.Percent` |  |  |  |
-| ProcentText | `string` |  |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
+| Podstawa | `Currency` | bazodanowe |  |  |
+| PodstawaText | `string` | tylko-odczyt |  |  |
+| Procent | `Percent` |  |  |  |
+| ProcentText | `string` | tylko-odczyt |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` (subrow) | bazodanowe |  |  |
 | Rozliczenie.Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
 | Rozliczenie.RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
-| Rozliczenie.WgOdbiorca | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgRachunekOdbiorcy | `Soneta.Business.Key` |  |  |  |
-| Ulamek | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Rozliczenie.WgOdbiorca | `Key` | podlista |  |  |
+| Rozliczenie.WgRachunekOdbiorcy | `Key` | podlista |  |  |
+| Ulamek | `Fraction` | bazodanowe |  |  |
 | Wspolczynnik | `decimal` |  | Współczynnik |  |
 
 ## Relacje interfejsowe

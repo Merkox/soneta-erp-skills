@@ -4,8 +4,12 @@ Tytuł: Powiązanie osoby produkcyjnej z kompetancjami
 Opis: Powiązanie osoby produkcyjnej (wzorcowej lub rzeczywistej) z kompetencją ze słownika. Umożliwia ewidencjonowanie kwalifikacji i uprawnień pracowników produkcyjnych, co jest wykorzystywane przy przydzielaniu operacji wymagających określonych umiejętności.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

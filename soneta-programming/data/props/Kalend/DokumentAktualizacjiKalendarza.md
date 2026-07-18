@@ -6,45 +6,49 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IDokumentAktualizacjiKalendarza`, `IDokument`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 21
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 13
+- podlisty: 11
+- subrowy: 2
+- razem: 35
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZatwierdzenia | `System.DateTime` | bazodanowe |  |  |
-| Definicja | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza` | bazodanowe |  |  |
-| DniKalendarzaHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` |  |  |  |
-| DniPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienPracyHistoria>` |  |  |  |
-| ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | bazodanowe, iface-ref |  |  |
-| Kalkulator | `Soneta.Kalend.KalkulatorDokumentuAktualizacji` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataZatwierdzenia | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| Definicja | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza` | bazodanowe, tylko-odczyt |  |  |
+| DniKalendarzaHistorie | `SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` | podlista |  |  |
+| DniPracyHistorie | `SubTable<Soneta.Kalend.DzienPracyHistoria>` | podlista |  |  |
+| ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Kalkulator | `Soneta.Kalend.KalkulatorDokumentuAktualizacji` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| ObiektyDoPlanowania | `Soneta.Business.SubTable<Soneta.Kalend.ObiektAktualizacjiKalendarza>` |  |  |  |
-| ObiektyPozycjiCzasu | `System.Collections.Generic.IEnumerable<Soneta.Kalend.PozycjaObiektuAktualizacjiCzasu>` |  |  |  |
-| ObiektyPozycjiPlanowania | `System.Collections.Generic.IEnumerable<Soneta.Kalend.PozycjaObiektuAktualizacjiKalendarza>` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| ObiektyDoPlanowania | `SubTable<Soneta.Kalend.ObiektAktualizacjiKalendarza>` | podlista |  |  |
+| ObiektyPozycjiCzasu | `System.Collections.Generic.IEnumerable<Soneta.Kalend.PozycjaObiektuAktualizacjiCzasu>` | podlista |  |  |
+| ObiektyPozycjiPlanowania | `System.Collections.Generic.IEnumerable<Soneta.Kalend.PozycjaObiektuAktualizacjiKalendarza>` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Odpowiedzialny | `Soneta.Kalend.IOdpowiedzialnyZaDAK` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Powiazanie | `Soneta.Kalend.PowiązanieDokumentu` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Powiazanie | `Soneta.Kalend.PowiązanieDokumentu` (subrow) | bazodanowe |  |  |
 | Powiazanie.ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | iface-ref |  |  |
 | Powiazanie.ElementStrukturyOrganizacyjnej | `Soneta.Core.ElementStrukturyOrganizacyjnej` |  |  |  |
-| Powiazanie.IsValid | `bool` |  |  |  |
-| Powiazanie.WgStrukturaFirmy | `bool` |  |  |  |
-| Powiazanie.WgStrukturaOrganizacyjna | `bool` |  |  |  |
-| PowiązaniaStrOrg | `Soneta.Business.SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` |  |  |  |
-| PozycjeCzas | `Soneta.Business.SubTable<Soneta.Kalend.PozycjaAktualizacjiCzasu>` |  |  |  |
-| PozycjePlan | `Soneta.Business.SubTable<Soneta.Kalend.PozycjaAktualizacjiKalendarza>` |  |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` | bazodanowe, enum |  |  |
+| Powiazanie.IsValid | `bool` | tylko-odczyt |  |  |
+| Powiazanie.WgStrukturaFirmy | `bool` | tylko-odczyt |  |  |
+| Powiazanie.WgStrukturaOrganizacyjna | `bool` | tylko-odczyt |  |  |
+| PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
+| PozycjeCzas | `SubTable<Soneta.Kalend.PozycjaAktualizacjiCzasu>` | podlista |  |  |
+| PozycjePlan | `SubTable<Soneta.Kalend.PozycjaAktualizacjiKalendarza>` | podlista |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Stan | `Soneta.Kalend.StanyDokumentuAktulizacjiKalendarza` | bazodanowe, enum |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` |  |  |  |
+| Stan | `Soneta.Kalend.StanyDokumentuAktulizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | tylko-odczyt |  |  |
 | Zrodlo | `Soneta.Kalend.IZrodloPlanu` | iface-ref |  |  |
 
 ## Relacje interfejsowe

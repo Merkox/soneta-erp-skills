@@ -5,14 +5,18 @@ Opis: Element szczegółowy definicji rozliczenia czasu pracy (DefinicjaRozlicze
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjaRozliczeniaCzasuPracy | `Soneta.Kalend.DefinicjaRozliczeniaCzasuPracy` | bazodanowe |  |  |
-| DefinicjaWeryfikatora | `Soneta.Kalend.DefinicjaWeryfikatoraRozliczeniaCzasuPracy` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypWeryfikacjiRozliczeniaCzasuPracy` | bazodanowe, enum |  |  |
+| DefinicjaRozliczeniaCzasuPracy | `Soneta.Kalend.DefinicjaRozliczeniaCzasuPracy` | bazodanowe, tylko-odczyt |  |  |
+| DefinicjaWeryfikatora | `Soneta.Kalend.DefinicjaWeryfikatoraRozliczeniaCzasuPracy` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypWeryfikacjiRozliczeniaCzasuPracy` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

@@ -6,23 +6,27 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDiscussionItem`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 3
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Action | `Soneta.Core.Conversation.DiscussionUpdateFieldAction` | bazodanowe, enum | Rodzaj aktualizacji |  |
-| AssignedUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Powiązany użytkownik |  |
-| Author | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Autor |  |
-| Date | `System.DateTime` | bazodanowe | Data aktualizacji |  |
-| Discussion | `Soneta.Core.Conversation.Discussion` | bazodanowe |  |  |
-| DiscussionItem | `Soneta.Core.Conversation.IDiscussionItem` | bazodanowe, iface-ref |  |  |
-| Field | `Soneta.Core.Conversation.DiscussionUpdateField` | bazodanowe, enum | Pole |  |
-| ItemUpdates | `Soneta.Business.SubTable<Soneta.Core.Conversation.DiscussionUpdate>` |  |  |  |
-| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| Likes | `Soneta.Business.SubTable<Soneta.Core.Conversation.DiscussionReaction>` |  |  |  |
-| NotificationMessage | `Soneta.Business.Notifications.Models.NotificationMessage` |  |  |  |
-| Value | `Soneta.Business.MemoText` | bazodanowe | Treść |  |
+| Action | `Soneta.Core.Conversation.DiscussionUpdateFieldAction` (enum) | bazodanowe, tylko-odczyt | Rodzaj aktualizacji |  |
+| AssignedUser | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref | Powiązany użytkownik |  |
+| Author | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref | Autor |  |
+| Date | `System.DateTime` | bazodanowe, tylko-odczyt | Data aktualizacji |  |
+| Discussion | `Soneta.Core.Conversation.Discussion` | bazodanowe, tylko-odczyt |  |  |
+| DiscussionItem | `Soneta.Core.Conversation.IDiscussionItem` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Field | `Soneta.Core.Conversation.DiscussionUpdateField` (enum) | bazodanowe, tylko-odczyt | Pole |  |
+| ItemUpdates | `SubTable<Soneta.Core.Conversation.DiscussionUpdate>` | podlista |  |  |
+| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| Likes | `SubTable<Soneta.Core.Conversation.DiscussionReaction>` | podlista |  |  |
+| NotificationMessage | `Notifications.Models.NotificationMessage` |  |  |  |
+| Value | `MemoText` | bazodanowe, podlista | Treść |  |
 
 ## Relacje interfejsowe
 

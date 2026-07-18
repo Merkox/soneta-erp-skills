@@ -5,39 +5,43 @@ Opis: Definicja pojedynczego kryterium oceny (kompetencji, zachowania, zadania).
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 12
+- podlisty: 4
+- subrowy: 2
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Kategoria | `Soneta.Oceny.KategoriaElementuOceny` | bazodanowe |  |  |
-| Miara | `Soneta.Oceny.MiaraElementuOceny` | bazodanowe |  |  |
-| Miara.IsWgSkali | `bool` |  |  |  |
-| Miara.IsWgWartosci | `bool` |  |  |  |
-| Miara.IsWgWartosci0 | `bool` |  |  |  |
-| Miara.IsWgWartosci2 | `bool` |  |  |  |
-| Miara.IsWgWykonania | `bool` |  |  |  |
-| Miara.IsWgWykonania0 | `bool` |  |  |  |
-| Miara.IsWgWykonania2 | `bool` |  |  |  |
-| Miara.Kryterium | `Soneta.Oceny.IKryteriumOceny` |  |  |  |
+| Miara | `Soneta.Oceny.MiaraElementuOceny` (subrow) | bazodanowe |  |  |
+| Miara.IsWgSkali | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci0 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci2 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania0 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania2 | `bool` | tylko-odczyt |  |  |
+| Miara.Kryterium | `Soneta.Oceny.IKryteriumOceny` | tylko-odczyt |  |  |
 | Miara.Skala | `Soneta.Oceny.SkalaOcen` | bazodanowe |  |  |
-| Miara.SposobAgregacji | `Soneta.Oceny.SposobyAgregacji` | bazodanowe, enum | Sposób agregacji |  |
-| Miara.WgSkala | `Soneta.Business.Key` |  |  |  |
-| Miara.WgZakres | `Soneta.Business.Key` |  |  |  |
+| Miara.SposobAgregacji | `Soneta.Oceny.SposobyAgregacji` (enum) | bazodanowe | Sposób agregacji |  |
+| Miara.WgSkala | `Key` | podlista |  |  |
+| Miara.WgZakres | `Key` | podlista |  |  |
 | Miara.Zakres | `Soneta.Oceny.ZakresWartości` | bazodanowe |  |  |
-| Miara.Zdefiniowana | `bool` |  |  |  |
+| Miara.Zdefiniowana | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaUI | `string` |  | Nazwa |  |
-| NazwaWyswietlana | `string` | bazodanowe | Nazwa wyświetlana |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisJendaLinia | `string` |  |  |  |
-| PozycjaDokumentu | `Soneta.Oceny.PozycjaDokumentuInfo` | bazodanowe |  |  |
+| NazwaWyswietlana | `string` | bazodanowe, tylko-odczyt | Nazwa wyświetlana |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisJendaLinia | `string` | tylko-odczyt |  |  |
+| PozycjaDokumentu | `Soneta.Oceny.PozycjaDokumentuInfo` (subrow) | bazodanowe |  |  |
 | PozycjaDokumentu.Sekcja | `Soneta.Oceny.DefinicjaSekcjiDokumentu` | bazodanowe |  |  |
-| PozycjaDokumentu.WgSekcja | `Soneta.Business.Key` |  |  |  |
+| PozycjaDokumentu.WgSekcja | `Key` | podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
 | PrzeznaczonyDla | `Soneta.Oceny.TableRef` |  |  |  |
-| Rodzaj | `Soneta.Oceny.RodzajeElementuOceny` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Oceny.RodzajeElementuOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | RodzajZrodla | `string` | bazodanowe |  |  |
 
 ## Enumy

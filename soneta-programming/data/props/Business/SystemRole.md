@@ -6,39 +6,43 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IEntitle`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 11
+- subrowy: 0
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CompatibleWithVersion | `bool` |  |  |  |
-| ConnectedRoles | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.ISystemRole>` |  |  |  |
-| CurrentRole | `Soneta.Business.App.Role` |  |  |  |
-| Destiny | `Soneta.Business.Db.SystemRoleDestiny` | bazodanowe, enum | Przeznaczenie |  |
-| Entitles | `Soneta.Business.SubTable<Soneta.Business.Db.EntitleRef>` |  |  |  |
-| Generation | `int` | bazodanowe | Generacja |  |
-| History | `Soneta.Business.Internal.SchemaHistory` |  |  |  |
-| IsSystem | `bool` | bazodanowe | Systemowa |  |
-| LegacyRole | `Soneta.Business.App.Role` |  |  |  |
-| LicModules | `Soneta.Business.Licence.LicencjaProgramu[]` |  |  |  |
+| CompatibleWithVersion | `bool` | tylko-odczyt |  |  |
+| ConnectedRoles | `System.Collections.Generic.IEnumerable<Db.ISystemRole>` | podlista |  |  |
+| CurrentRole | `App.Role` | tylko-odczyt |  |  |
+| Destiny | `Db.SystemRoleDestiny` (enum) | bazodanowe | Przeznaczenie |  |
+| Entitles | `SubTable<Db.EntitleRef>` | podlista |  |  |
+| Generation | `int` | bazodanowe, tylko-odczyt | Generacja |  |
+| History | `Internal.SchemaHistory` |  |  |  |
+| IsSystem | `bool` | bazodanowe, tylko-odczyt | Systemowa |  |
+| LegacyRole | `App.Role` | tylko-odczyt |  |  |
+| LicModules | `Licence.LicencjaProgramu[]` | podlista |  |  |
 | Locked | `bool` | bazodanowe | Blokada |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa roli |
-| Parents | `Soneta.Business.SubTable<Soneta.Business.Db.SystemRoleRef>` |  |  |  |
-| ParentsRoles | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.ISystemRole>` |  |  |  |
+| Parents | `SubTable<Db.SystemRoleRef>` | podlista |  |  |
+| ParentsRoles | `System.Collections.Generic.IEnumerable<Db.ISystemRole>` | podlista |  |  |
 | Partial | `bool` | bazodanowe | Cząstkowa |  |
-| Powiazane | `Soneta.Business.SubTable<Soneta.Business.Db.SystemRoleRef>` |  |  |  |
-| RelatedRoleCategory | `Soneta.Business.SubTable<Soneta.Business.Db.CatRolRelation>` |  |  |  |
-| Rights | `Soneta.Business.SubTable<Soneta.Business.Db.Right>` |  |  |  |
-| Role | `Soneta.Business.App.Role` |  |  |  |
-| RoleText | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WszystkieNadrzędne | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.ISystemRole>` |  |  |  |
-| WszystkiePowiązane | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.ISystemRole>` |  |  |  |
+| Powiazane | `SubTable<Db.SystemRoleRef>` | podlista |  |  |
+| RelatedRoleCategory | `SubTable<Db.CatRolRelation>` | podlista |  |  |
+| Rights | `SubTable<Db.Right>` | podlista |  |  |
+| Role | `App.Role` | tylko-odczyt |  |  |
+| RoleText | `MemoText` | bazodanowe, podlista |  |  |
+| WszystkieNadrzędne | `System.Collections.Generic.IEnumerable<Db.ISystemRole>` | podlista |  |  |
+| WszystkiePowiązane | `System.Collections.Generic.IEnumerable<Db.ISystemRole>` | podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### SystemRoleDestiny (`Soneta.Business.Db.SystemRoleDestiny`)
+### SystemRoleDestiny (`Db.SystemRoleDestiny`)
 - `Neutral` = 0 — Neutralna
 - `Forms` = 1 — Dla operatorów
 - `Net` = 2 — Dla pulpitów

@@ -5,17 +5,21 @@ Opis: Element szczegółowy akordu (Akord). Okresowe zestawienie rozliczenia ako
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Akord` → `Akord`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akord | `Soneta.Kadry.Akord` | bazodanowe, guided-parent |  |  |
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
+| Akord | `Soneta.Kadry.Akord` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Czas | `Time` | bazodanowe |  |  |
 | Ilosc | `double` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypAkordu` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wartosc | `Currency` | bazodanowe |  |  |
 
 ## Enumy
 

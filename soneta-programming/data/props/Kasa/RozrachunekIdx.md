@@ -4,33 +4,37 @@ Tytuł: Rozrachunki
 Opis: Indeks rozrachunków umożliwiający szybkie wyszukiwanie i filtrowanie płatności i zapłat wg różnych kryteriów. Przechowuje zagregowane informacje o stanie rozliczenia dokumentu, kwotach do rozliczenia, terminach oraz datach księgowania, wspierając analizy należności i zobowiązań.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 20
+- podlisty: 0
+- subrowy: 0
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataKsiegowania | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataOstatniegoKsi | `Soneta.Types.Date` | bazodanowe |  | Data ostatniego rozliczenia księgowego |
-| DataPierwszego | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataPierwszegoKsi | `Soneta.Types.Date` | bazodanowe |  | Data pierwszego rozliczenia księgowego |
-| DataRozliczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DoRozliczenia | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Dokument | `Soneta.Kasa.IRozliczalny` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataKsiegowania | `Date` | bazodanowe |  |  |
+| DataOstatniegoKsi | `Date` | bazodanowe, tylko-odczyt |  | Data ostatniego rozliczenia księgowego |
+| DataPierwszego | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataPierwszegoKsi | `Date` | bazodanowe, tylko-odczyt |  | Data pierwszego rozliczenia księgowego |
+| DataRozliczenia | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DoRozliczenia | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Dokument | `Soneta.Kasa.IRozliczalny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | bazodanowe | Ewidencja SP |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaRozliczona | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Numer | `string` | bazodanowe |  |  |
-| Opis | `string` | bazodanowe |  |  |
-| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| PrzeterminowanoDni | `int` |  |  |  |
-| StanNoty | `Soneta.Kasa.PlatnoscStanNoty` | enum |  |  |
-| SymbolKontaKsi | `string` | bazodanowe |  | Oznaczenie konta księgowania |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| TerminPlanowany | `Soneta.Types.Date` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypRozrachunku` | bazodanowe, enum |  |  |
-| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` |  |  |  |
-| Zwrot | `bool` | bazodanowe |  |  |
+| Kwota | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaRozliczona | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Numer | `string` | bazodanowe, tylko-odczyt |  |  |
+| Opis | `string` | bazodanowe, tylko-odczyt |  |  |
+| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| PrzeterminowanoDni | `int` | tylko-odczyt |  |  |
+| StanNoty | `Soneta.Kasa.PlatnoscStanNoty` (enum) | tylko-odczyt |  |  |
+| SymbolKontaKsi | `string` | bazodanowe, tylko-odczyt |  | Oznaczenie konta księgowania |
+| Termin | `Date` | bazodanowe, tylko-odczyt |  |  |
+| TerminPlanowany | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypRozrachunku` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` | tylko-odczyt |  |  |
+| Zwrot | `bool` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

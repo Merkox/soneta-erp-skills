@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |
-| DomyślnaNumeracja | `string` |  |  |  |
-| Dostepnosc | `Soneta.Core.DostepnoscTeczki` | bazodanowe, enum | Dostepność teczki | Określa typ dostepności teczki. |
+| DomyślnaNumeracja | `string` | tylko-odczyt |  |  |
+| Dostepnosc | `Soneta.Core.DostepnoscTeczki` (enum) | bazodanowe | Dostepność teczki | Określa typ dostepności teczki. |
 | FormularzUzytkownika | `bool` | bazodanowe | Formularz użytkownika | Formularz użytkownika. |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa definicji. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| Stany | `Soneta.Business.LpSubTable<Soneta.Core.StanTeczki>` |  |  |  |
+| Stany | `LpSubTable<Soneta.Core.StanTeczki>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji, wykorzystywana do wyszukiwania definicji oraz numeracji teczek. |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| TypDokumentu | `System.Type` |  |  |  |
-| XmlForm | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| TypDokumentu | `System.Type` | tylko-odczyt |  |  |
+| XmlForm | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 
 ## Enumy
 

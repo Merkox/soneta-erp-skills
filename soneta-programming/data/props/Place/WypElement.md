@@ -5,282 +5,270 @@ Opis: Element szczegółowy wypłaty (Wyplata). Reprezentuje pojedynczy naliczon
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 106
-- pola kalkulowane (z klas biznesowych): 165
+- pola bazodanowe (zapisywalne): 74
+- pola kalkulowane (zapisywalne): 10
+- pola tylko-odczyt: 140
+- podlisty: 12
+- subrowy: 19
+- razem: 255
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Alimenty | `Soneta.Place.PodstawyZajęciaKomorniczego` | enum |  |  |
-| BazaZrodla | `Soneta.Place.IBazaZrodlaWyplaty` | bazodanowe, iface-ref |  |  |
-| CentrumKosztow | `Soneta.Core.CentrumKosztow` |  |  |  |
-| Czas | `Soneta.Types.Time` |  |  | Suma czasów znajdujących się w składnikach wypłaty. Zwraca rzeczywisty czas pracy użyty do wyliczenia wartości elementu wypłaty. |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataKursu | `Soneta.Types.Date` |  |  |  |
+| Alimenty | `Soneta.Place.PodstawyZajęciaKomorniczego` (enum) | tylko-odczyt |  |  |
+| BazaZrodla | `Soneta.Place.IBazaZrodlaWyplaty` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| CentrumKosztow | `Soneta.Core.CentrumKosztow` | tylko-odczyt |  |  |
+| Czas | `Time` | tylko-odczyt |  | Suma czasów znajdujących się w składnikach wypłaty. Zwraca rzeczywisty czas pracy użyty do wyliczenia wartości elementu wypłaty. |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataKursu | `Date` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| DefinicjaStawki | `Soneta.Core.DefinicjaStawkiVat` |  |  |  |
-| Dni | `int` |  |  | Suma dni znajdujących się w składnikach wypłaty. Zwraca rzeczywistą ilość dni użytą do wyliczenia wartości elementu wypłaty. |
-| DoOpodatkowania | `decimal` |  |  |  |
-| DoOpodatkowania_2021 | `decimal` |  |  |  |
-| DoWypłaty | `decimal` |  |  |  |
-| Elementy | `Soneta.Place.WypElement.ItElementy` |  |  |  |
-| InnePowiązania | `Soneta.Place.IPowiązanieWypłaty[]` |  |  |  |
-| KodRSA | `Soneta.Place.KodRSA` |  |  |  |
-| Komornik | `Soneta.Place.PodstawyZajęciaKomorniczego` | enum |  |  |
+| DefinicjaStawki | `Soneta.Core.DefinicjaStawkiVat` | tylko-odczyt |  |  |
+| Dni | `int` | tylko-odczyt |  | Suma dni znajdujących się w składnikach wypłaty. Zwraca rzeczywistą ilość dni użytą do wyliczenia wartości elementu wypłaty. |
+| DoOpodatkowania | `decimal` | tylko-odczyt |  |  |
+| DoOpodatkowania_2021 | `decimal` | tylko-odczyt |  |  |
+| DoWypłaty | `decimal` | tylko-odczyt |  |  |
+| Elementy | `Soneta.Place.WypElement.ItElementy` | tylko-odczyt |  |  |
+| InnePowiązania | `Soneta.Place.IPowiązanieWypłaty[]` | podlista |  |  |
+| KodRSA | `Soneta.Place.KodRSA` | tylko-odczyt |  |  |
+| Komornik | `Soneta.Place.PodstawyZajęciaKomorniczego` (enum) | tylko-odczyt |  |  |
 | Korekta | `bool` | bazodanowe | Wartość | Określa, czy element wypłaty jest zmodyfikowany ręcznie przez operatora. |
-| KorektaWgZasadZUS | `bool` |  |  |  |
+| KorektaWgZasadZUS | `bool` | tylko-odczyt |  |  |
 | KorektaWyrokTK | `bool` | bazodanowe | Korekta TK | Korekta wynagrodzenia lub zasiłku z tytułu wyroku Trybunału Konstytucyjnego z dnia 24 czerwca 2008 r., sygn. akt SK 16/06 (Dz. U. nr 119, poz. 771). |
-| Korygowany | `bool` |  |  |  |
-| Koryguj | `bool` |  |  |  |
-| Korygujący | `bool` |  |  |  |
-| KosztyUzyskaniaPrzychodu | `Soneta.Place.KosztyUzyskaniaPrzychoduFirma` | bazodanowe |  |  |
-| KosztyUzyskaniaPrzychodu.Kategoria | `Soneta.Place.KsięgowanieListyWorker.Kategoria` | enum |  |  |
-| KosztyUzyskaniaPrzychodu.Narzuty | `decimal` |  |  |  |
-| KosztyUzyskaniaPrzychodu.StanowiPodstawęKUP | `bool` |  |  |  |
-| KosztyUzyskaniaPrzychodu.WNaturze | `decimal` |  |  |  |
-| KosztyUzyskaniaPrzychodu.WartośćKUP | `decimal` |  |  |  |
-| KosztyUzyskaniaPrzychodu.WartośćNKUP | `decimal` |  |  |  |
-| MiesiacDeklaracji | `Soneta.Types.YearMonth` |  |  |  |
-| MiesiacZUS | `Soneta.Types.YearMonth` |  | Miesiąc ZUS |  |
-| MiesiacZUSDzien | `Soneta.Types.Date` | bazodanowe | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
-| NaliczKorekte | `Soneta.Place.NaliczKorektęElementu` | bazodanowe, enum | Nalicz korektę | Określa, czy należy dla elementu naliczać element korygujący. |
-| NaliczaćPodatekRyczałtowy | `bool` |  |  |  |
+| Korygowany | `bool` | tylko-odczyt |  |  |
+| Koryguj | `bool` | tylko-odczyt |  |  |
+| Korygujący | `bool` | tylko-odczyt |  |  |
+| KosztyUzyskaniaPrzychodu | `Soneta.Place.KosztyUzyskaniaPrzychoduFirma` (subrow) | bazodanowe |  |  |
+| MiesiacDeklaracji | `YearMonth` | tylko-odczyt |  |  |
+| MiesiacZUS | `YearMonth` | tylko-odczyt | Miesiąc ZUS |  |
+| MiesiacZUSDzien | `Date` | bazodanowe, tylko-odczyt | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
+| NaliczKorekte | `Soneta.Place.NaliczKorektęElementu` (enum) | bazodanowe, tylko-odczyt | Nalicz korektę | Określa, czy należy dla elementu naliczać element korygujący. |
+| NaliczaćPodatekRyczałtowy | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Netto | `decimal` |  |  |  |
-| NettoOpodat | `decimal` |  | Netto (opodatkowane) |  |
-| NiePodlegaOpodatkowaniu | `decimal` |  |  |  |
-| NiePodlegaOpodatkowaniuBezPPK | `decimal` |  |  |  |
-| NiePodlegaOpodatkowaniuBezPPK_2021 | `decimal` |  |  |  |
-| NiePodlegaOpodatkowaniu_2021 | `decimal` |  |  |  |
-| Niestorno | `bool` |  |  |  |
-| Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | iface-ref |  |  |
-| OdchyłkiRazem | `decimal` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresListy | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OpisPrzelewu | `string` |  |  |  |
-| Pierwotny | `Soneta.Place.WypElement` |  |  |  |
-| Pit26 | `bool` |  |  |  |
-| Pit26DoUkończenia26Roku | `bool` |  |  |  |
-| PitUlgaEmeryt | `bool` |  |  |  |
-| Podatek | `bool` |  |  | Podatek rozliczany na PIT8AR lub na PIT8C |
-| Podatki | `Soneta.Place.Podatki` | bazodanowe |  |  |
+| Netto | `decimal` | tylko-odczyt |  |  |
+| NettoOpodat | `decimal` | tylko-odczyt | Netto (opodatkowane) |  |
+| NiePodlegaOpodatkowaniu | `decimal` | tylko-odczyt |  |  |
+| NiePodlegaOpodatkowaniu_2021 | `decimal` | tylko-odczyt |  |  |
+| Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | tylko-odczyt, iface-ref |  |  |
+| OdchyłkiRazem | `decimal` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresListy | `FromTo` | bazodanowe, podlista |  |  |
+| OpisPrzelewu | `string` | tylko-odczyt |  |  |
+| Pierwotny | `Soneta.Place.WypElement` | tylko-odczyt |  |  |
+| Pit26 | `bool` | tylko-odczyt |  |  |
+| Pit26DoUkończenia26Roku | `bool` | tylko-odczyt |  |  |
+| PitUlgaEmeryt | `bool` | tylko-odczyt |  |  |
+| Podatek | `bool` | tylko-odczyt |  | Podatek rozliczany na PIT8AR lub na PIT8C |
+| Podatki | `Soneta.Place.Podatki` (subrow) | bazodanowe |  |  |
 | Podatki.Brutto50 | `decimal` | bazodanowe |  |  |
 | Podatki.BudzetTyUb | `Soneta.Kadry.TytulUbezpieczenia` | bazodanowe |  |  |
-| Podatki.BudżetZUS | `decimal` |  |  |  |
-| Podatki.Chorobowa | `Soneta.Place.SkladkaZUS` | bazodanowe |  |  |
-| Podatki.ChorobowaBudzet | `Soneta.Place.SkladkaZUSBudżet` | bazodanowe |  |  |
-| Podatki.Emerytalna | `Soneta.Place.SkladkaZUS` | bazodanowe |  |  |
+| Podatki.BudżetZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki.Chorobowa | `Soneta.Place.SkladkaZUS` (subrow) | bazodanowe |  |  |
+| Podatki.ChorobowaBudzet | `Soneta.Place.SkladkaZUSBudżet` (subrow) | bazodanowe |  |  |
+| Podatki.Emerytalna | `Soneta.Place.SkladkaZUS` (subrow) | bazodanowe |  |  |
 | Podatki.Emerytalna.Firma | `decimal` | bazodanowe |  |  |
-| Podatki.Emerytalna.JestMinus | `bool` |  |  | Informuje, czy składka pracownika lub firmy jest ujemna. |
+| Podatki.Emerytalna.JestMinus | `bool` | tylko-odczyt |  | Informuje, czy składka pracownika lub firmy jest ujemna. |
 | Podatki.Emerytalna.Podstawa | `decimal` | bazodanowe |  |  |
 | Podatki.Emerytalna.Prac | `decimal` | bazodanowe |  |  |
-| Podatki.Emerytalna.Składka | `decimal` |  |  |  |
-| Podatki.EmerytalnaBudzet | `Soneta.Place.SkladkaZUSBudżet` | bazodanowe |  |  |
-| Podatki.EmerytalnaBudzet.JestMinus | `bool` |  |  | Informuje, czy składka jest ujemna. |
+| Podatki.Emerytalna.Składka | `decimal` | tylko-odczyt |  |  |
+| Podatki.EmerytalnaBudzet | `Soneta.Place.SkladkaZUSBudżet` (subrow) | bazodanowe |  |  |
+| Podatki.EmerytalnaBudzet.JestMinus | `bool` | tylko-odczyt |  | Informuje, czy składka jest ujemna. |
 | Podatki.EmerytalnaBudzet.Podstawa | `decimal` | bazodanowe |  |  |
 | Podatki.EmerytalnaBudzet.Skladka | `decimal` | bazodanowe |  |  |
-| Podatki.FEP | `Soneta.Place.SkladkaZUSFirma` | bazodanowe |  |  |
-| Podatki.FGSP | `Soneta.Place.SkladkaZUSFirma` | bazodanowe |  |  |
-| Podatki.FP | `Soneta.Place.SkladkaZUSFirma` | bazodanowe |  |  |
-| Podatki.FP.JestMinus | `bool` |  |  | Informuje, czy składka jest ujemna. |
+| Podatki.FEP | `Soneta.Place.SkladkaZUSFirma` (subrow) | bazodanowe |  |  |
+| Podatki.FGSP | `Soneta.Place.SkladkaZUSFirma` (subrow) | bazodanowe |  |  |
+| Podatki.FP | `Soneta.Place.SkladkaZUSFirma` (subrow) | bazodanowe |  |  |
+| Podatki.FP.JestMinus | `bool` | tylko-odczyt |  | Informuje, czy składka jest ujemna. |
 | Podatki.FP.Podstawa | `decimal` | bazodanowe |  |  |
 | Podatki.FP.Skladka | `decimal` | bazodanowe |  |  |
-| Podatki.FirmaZUS | `decimal` |  |  |  |
-| Podatki.JestMinus | `bool` |  |  | Informuje, że są podatki lub składki o wartości ujemnej. |
+| Podatki.FirmaZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki.JestMinus | `bool` | tylko-odczyt |  | Informuje, że są podatki lub składki o wartości ujemnej. |
 | Podatki.Korekta | `bool` | bazodanowe |  |  |
 | Podatki.Koszty | `decimal` | bazodanowe |  |  |
 | Podatki.Koszty50 | `decimal` | bazodanowe |  |  |
-| Podatki.KosztyPIT | `decimal` |  |  |  |
-| Podatki.KosztyRazem | `decimal` |  |  |  |
-| Podatki.KosztyZUS | `decimal` |  |  |  |
-| Podatki.KosztyZUS26 | `decimal` |  |  |  |
+| Podatki.KosztyPIT | `decimal` | tylko-odczyt |  |  |
+| Podatki.KosztyRazem | `decimal` | tylko-odczyt |  |  |
+| Podatki.KosztyZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki.KosztyZUS26 | `decimal` | tylko-odczyt |  |  |
 | Podatki.KosztyZUSNieodlicz | `decimal` | bazodanowe |  | Suma składek ZUS niepomniejszających podstawy opodatkowania |
 | Podatki.KosztyZUSPomn | `decimal` | bazodanowe |  |  |
-| Podatki.KosztyZUSPomnKosztow | `decimal` |  |  |  |
-| Podatki.KosztyZdrow26 | `decimal` |  |  |  |
-| Podatki.KosztyZdrowPomn | `decimal` |  |  |  |
+| Podatki.KosztyZUSPomnKosztow | `decimal` | tylko-odczyt |  |  |
+| Podatki.KosztyZdrow26 | `decimal` | tylko-odczyt |  |  |
+| Podatki.KosztyZdrowPomn | `decimal` | tylko-odczyt |  |  |
 | Podatki.NalFIS | `decimal` | bazodanowe |  |  |
-| Podatki.Narzuty | `decimal` |  |  |  |
-| Podatki.OdliczoneZdrowotne | `decimal` |  |  |  |
+| Podatki.Narzuty | `decimal` | tylko-odczyt |  |  |
 | Podatki.OrgTyUb | `Soneta.Kadry.TytulUbezpieczenia` | bazodanowe |  |  |
-| Podatki.PPK | `Soneta.Place.SkładkaPPK` | bazodanowe |  |  |
+| Podatki.PPK | `Soneta.Place.SkładkaPPK` (subrow) | bazodanowe |  |  |
 | Podatki.PPK.DodPracodawcy | `decimal` | bazodanowe |  |  |
 | Podatki.PPK.DodPracownika | `decimal` | bazodanowe |  |  |
-| Podatki.PPK.JestMinus | `bool` |  |  | Informuje, czy składka pracownika lub firmy jest ujemna. |
+| Podatki.PPK.JestMinus | `bool` | tylko-odczyt |  | Informuje, czy składka pracownika lub firmy jest ujemna. |
 | Podatki.PPK.PodstPracodawcy | `decimal` | bazodanowe |  |  |
 | Podatki.PPK.PodstPracownika | `decimal` | bazodanowe |  |  |
 | Podatki.PPK.Podstawa | `decimal` | bazodanowe |  |  |
-| Podatki.PPK.Pracodawcy | `decimal` |  |  |  |
+| Podatki.PPK.Pracodawcy | `decimal` | tylko-odczyt |  |  |
 | Podatki.PPK.PracodawcyDoPodatku | `decimal` | bazodanowe |  |  |
-| Podatki.PPK.Pracownika | `decimal` |  |  |  |
-| Podatki.PPK.Składka | `decimal` |  |  |  |
-| Podatki.PakietMobilności | `bool` |  |  |  |
-| Podatki.PakietMobilnościPomniejszenieFIS | `decimal` |  |  |  |
-| Podatki.PakietMobilnościPomniejszenieZUS | `decimal` |  |  |  |
-| Podatki.PakietMobilnościWartośćDiet | `decimal` |  |  |  |
+| Podatki.PPK.Pracownika | `decimal` | tylko-odczyt |  |  |
+| Podatki.PPK.Składka | `decimal` | tylko-odczyt |  |  |
+| Podatki.PakietMobilności | `bool` | tylko-odczyt |  |  |
+| Podatki.PakietMobilnościPomniejszenieFIS | `decimal` | tylko-odczyt |  |  |
+| Podatki.PakietMobilnościPomniejszenieZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki.PakietMobilnościWartośćDiet | `decimal` | tylko-odczyt |  |  |
 | Podatki.PodstawaFIS | `decimal` | bazodanowe |  |  |
 | Podatki.PodstawaZUS | `decimal` | bazodanowe |  |  |
 | Podatki.PomnKosztyZUS | `decimal` |  |  |  |
-| Podatki.PomnKosztyZUSPomn | `decimal` |  |  |  |
+| Podatki.PomnKosztyZUSPomn | `decimal` | tylko-odczyt |  |  |
 | Podatki.PomniejszenieFIS | `decimal` | bazodanowe |  |  |
-| Podatki.PomniejszeniePodstawyFIS | `bool` |  |  |  |
+| Podatki.PomniejszeniePodstawyFIS | `bool` | tylko-odczyt |  |  |
 | Podatki.PomniejszenieZUS | `decimal` | bazodanowe |  |  |
-| Podatki.ProcentFIS | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Podatki.ProcentFIS | `Percent` | bazodanowe, tylko-odczyt |  |  |
 | Podatki.Przychod26 | `decimal` | bazodanowe |  |  |
-| Podatki.Przychod26BezPPK | `decimal` |  |  |  |
-| Podatki.Przychod26Ulgi | `decimal` |  |  |  |
+| Podatki.Przychod26BezPPK | `decimal` | tylko-odczyt |  |  |
+| Podatki.Przychod26Ulgi | `decimal` | tylko-odczyt |  |  |
 | Podatki.Przychod50 | `decimal` | bazodanowe |  |  |
-| Podatki.Rentowa | `Soneta.Place.SkladkaZUS` | bazodanowe |  |  |
-| Podatki.RentowaBudzet | `Soneta.Place.SkladkaZUSBudżet` | bazodanowe |  |  |
+| Podatki.Rentowa | `Soneta.Place.SkladkaZUS` (subrow) | bazodanowe |  |  |
+| Podatki.RentowaBudzet | `Soneta.Place.SkladkaZUSBudżet` (subrow) | bazodanowe |  |  |
 | Podatki.TyUb | `Soneta.Kadry.TytulUbezpieczenia` | bazodanowe |  |  |
-| Podatki.TypKosztowUzyskaniaPrzychodu | `Soneta.Place.TypKosztowUzyskaniaPrzychodu` | enum |  |  |
-| Podatki.TypPomniejszeniaFIS | `Soneta.Place.TypPomniejszeniaFIS` | enum |  | Sposób pomniejszania zaliczki podatku od zdrowotnego z uzwględnieniem ryczałtu. |
-| Podatki.UjemneKwoty | `string` |  |  |  |
+| Podatki.TypKosztowUzyskaniaPrzychodu | `Soneta.Place.TypKosztowUzyskaniaPrzychodu` (enum) | tylko-odczyt |  |  |
+| Podatki.TypPomniejszeniaFIS | `Soneta.Place.TypPomniejszeniaFIS` (enum) | tylko-odczyt |  | Sposób pomniejszania zaliczki podatku od zdrowotnego z uzwględnieniem ryczałtu. |
+| Podatki.UjemneKwoty | `string` | tylko-odczyt |  |  |
 | Podatki.Ulga | `decimal` | bazodanowe |  |  |
 | Podatki.UlgaDuzaRodzina | `decimal` | bazodanowe |  |  |
 | Podatki.UlgaEmeryt | `decimal` | bazodanowe |  |  |
 | Podatki.UlgaKlasaSrednia | `decimal` | bazodanowe |  |  |
 | Podatki.UlgaZagranica | `decimal` | bazodanowe |  |  |
-| Podatki.VAT | `Soneta.Place.PodatekVAT` | bazodanowe |  |  |
+| Podatki.VAT | `Soneta.Place.PodatekVAT` (subrow) | bazodanowe |  |  |
 | Podatki.VAT.DefinicjaStawki | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Definicja stawki VAT opisująca rodzaj stawki 22%, 7%, itp |
 | Podatki.VAT.Podatek | `decimal` | bazodanowe |  |  |
 | Podatki.VAT.Podstawa | `decimal` | bazodanowe |  |  |
-| Podatki.VAT.Stawka | `Soneta.Core.StawkaVat` | bazodanowe |  | Typ stawki VAT |
+| Podatki.VAT.Stawka | `Soneta.Core.StawkaVat` (subrow) | bazodanowe |  | Typ stawki VAT |
 | Podatki.VAT.Stawka.Kraj | `Soneta.Core.KrajTbl` | bazodanowe |  |  |
 | Podatki.VAT.Stawka.Obnizona | `bool` | bazodanowe |  |  |
-| Podatki.VAT.Stawka.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Podatki.VAT.Stawka.Status | `Soneta.Core.StatusStawkiVat` | bazodanowe, enum |  |  |
-| Podatki.VAT.Stawka.WgKraj | `Soneta.Business.Key` |  |  |  |
-| Podatki.VAT.Stawka.WymagaSWW | `bool` |  |  |  |
-| Podatki.VAT.Stawka.Zrodlowa | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Podatki.VAT.WgDefinicjaStawki | `Soneta.Business.Key` |  |  |  |
-| Podatki.WyliczonyPrzychód50 | `decimal` |  |  |  |
-| Podatki.Wypadkowa | `Soneta.Place.SkladkaZUS` | bazodanowe |  |  |
-| Podatki.WypadkowaBudzet | `Soneta.Place.SkladkaZUSBudżet` | bazodanowe |  |  |
-| Podatki.ZUS | `decimal` |  |  |  |
+| Podatki.VAT.Stawka.Procent | `Percent` | bazodanowe |  |  |
+| Podatki.VAT.Stawka.Status | `Soneta.Core.StatusStawkiVat` (enum) | bazodanowe |  |  |
+| Podatki.VAT.Stawka.WgKraj | `Key` | podlista |  |  |
+| Podatki.VAT.Stawka.WymagaSWW | `bool` | tylko-odczyt |  |  |
+| Podatki.VAT.Stawka.Zrodlowa | `Percent` | bazodanowe |  |  |
+| Podatki.VAT.WgDefinicjaStawki | `Key` | podlista |  |  |
+| Podatki.WyliczonyPrzychód50 | `decimal` | tylko-odczyt |  |  |
+| Podatki.Wypadkowa | `Soneta.Place.SkladkaZUS` (subrow) | bazodanowe |  |  |
+| Podatki.WypadkowaBudzet | `Soneta.Place.SkladkaZUSBudżet` (subrow) | bazodanowe |  |  |
+| Podatki.ZUS | `decimal` | tylko-odczyt |  |  |
 | Podatki.ZalFIS | `decimal` | bazodanowe |  |  |
 | Podatki.ZalFISDoplata | `decimal` | bazodanowe |  |  |
 | Podatki.ZalFISKorekta | `decimal` | bazodanowe |  |  |
 | Podatki.ZalFISPL | `decimal` | bazodanowe |  |  |
 | Podatki.Zaniechanie | `decimal` | bazodanowe |  |  |
-| Podatki.Zdrowotna | `Soneta.Place.SkladkaZUS` | bazodanowe |  |  |
-| Podatki.ZdrowotnaBudzet | `Soneta.Place.SkladkaZUSBudżet` | bazodanowe |  |  |
+| Podatki.Zdrowotna | `Soneta.Place.SkladkaZUS` (subrow) | bazodanowe |  |  |
+| Podatki.ZdrowotnaBudzet | `Soneta.Place.SkladkaZUSBudżet` (subrow) | bazodanowe |  |  |
 | Podatki.ZdrowotneDoOdliczenia | `decimal` | bazodanowe |  | Składka na NFZ do odliczenia od zaliczki podatku |
 | Podatki.ZdrowotneDoOdliczenia26 | `decimal` | bazodanowe |  | Składka 26 latka na NFZ do odliczenia od zaliczki podatku |
-| Podatki.ZdrowotneFaktycznieOdliczone | `decimal` |  | Zdrowotne odliczone | Składka na NFZ faktycznie odliczenia od zaliczki podatku |
-| Podatki.ZdrowotneNieodliczane | `decimal` |  |  | Składka na NFZ nieodliczana od zaliczki podatku |
-| Podatki2021 | `Soneta.Place.Podatki2021` | bazodanowe |  |  |
+| Podatki.ZdrowotneFaktycznieOdliczone | `decimal` | tylko-odczyt | Zdrowotne odliczone | Składka na NFZ faktycznie odliczenia od zaliczki podatku |
+| Podatki.ZdrowotneNieodliczane | `decimal` | tylko-odczyt |  | Składka na NFZ nieodliczana od zaliczki podatku |
+| Podatki2021 | `Soneta.Place.Podatki2021` (subrow) | bazodanowe |  |  |
 | Podatki2021.Brutto50 | `decimal` | bazodanowe |  |  |
-| Podatki2021.BudzetTyUb | `Soneta.Kadry.TytulUbezpieczenia` |  |  |  |
-| Podatki2021.BudżetZUS | `decimal` |  |  |  |
-| Podatki2021.Chorobowa | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.ChorobowaBudzet | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.Emerytalna | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.EmerytalnaBudzet | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.FEP | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.FGSP | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.FP | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.FirmaZUS | `decimal` |  |  |  |
+| Podatki2021.BudzetTyUb | `Soneta.Kadry.TytulUbezpieczenia` | tylko-odczyt |  |  |
+| Podatki2021.BudżetZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.Chorobowa | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.ChorobowaBudzet | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.Emerytalna | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.EmerytalnaBudzet | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.FEP | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.FGSP | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.FP | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.FirmaZUS | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.Koszty | `decimal` | bazodanowe |  |  |
 | Podatki2021.Koszty50 | `decimal` | bazodanowe |  |  |
-| Podatki2021.KosztyPIT | `decimal` |  |  |  |
-| Podatki2021.KosztyRazem | `decimal` |  |  |  |
+| Podatki2021.KosztyPIT | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.KosztyRazem | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.KosztyZUS | `decimal` | bazodanowe |  |  |
-| Podatki2021.KosztyZUS26 | `decimal` |  |  |  |
+| Podatki2021.KosztyZUS26 | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.KosztyZUSNieodlicz | `decimal` | bazodanowe |  |  |
 | Podatki2021.KosztyZUSPomn | `decimal` | bazodanowe |  |  |
-| Podatki2021.KosztyZUSPomnKosztow | `decimal` |  |  |  |
-| Podatki2021.KosztyZdrow26 | `decimal` |  |  |  |
+| Podatki2021.KosztyZUSPomnKosztow | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.KosztyZdrow26 | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.NalFIS | `decimal` | bazodanowe |  |  |
-| Podatki2021.Narzuty | `decimal` |  |  |  |
-| Podatki2021.OdliczoneZdrowotne | `decimal` |  |  |  |
-| Podatki2021.OrgTyUb | `Soneta.Kadry.TytulUbezpieczenia` |  |  |  |
-| Podatki2021.PPK | `Soneta.Place.ISkładkaPPK` |  |  |  |
-| Podatki2021.PakietMobilnościPomniejszenieFIS | `decimal` |  |  |  |
-| Podatki2021.PakietMobilnościPomniejszenieZUS | `decimal` |  |  |  |
-| Podatki2021.PakietMobilnościWartośćDiet | `decimal` |  |  |  |
+| Podatki2021.Narzuty | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.OrgTyUb | `Soneta.Kadry.TytulUbezpieczenia` | tylko-odczyt |  |  |
+| Podatki2021.PPK | `Soneta.Place.ISkładkaPPK` | tylko-odczyt |  |  |
+| Podatki2021.PakietMobilnościPomniejszenieFIS | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.PakietMobilnościPomniejszenieZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.PakietMobilnościWartośćDiet | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.PodstawaFIS | `decimal` | bazodanowe |  |  |
 | Podatki2021.PodstawaZUS | `decimal` |  |  |  |
 | Podatki2021.PomnKosztyZUS | `decimal` |  |  |  |
-| Podatki2021.PomnKosztyZUSPomn | `decimal` |  |  |  |
+| Podatki2021.PomnKosztyZUSPomn | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.PomniejszenieFIS | `decimal` | bazodanowe |  |  |
-| Podatki2021.PomniejszeniePodstawyFIS | `bool` |  |  |  |
-| Podatki2021.PomniejszenieZUS | `decimal` |  |  |  |
-| Podatki2021.ProcentFIS | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Podatki2021.PomniejszeniePodstawyFIS | `bool` | tylko-odczyt |  |  |
+| Podatki2021.PomniejszenieZUS | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.ProcentFIS | `Percent` | bazodanowe, tylko-odczyt |  |  |
 | Podatki2021.Przychod26 | `decimal` | bazodanowe |  |  |
-| Podatki2021.Przychod26BezPPK | `decimal` |  |  |  |
-| Podatki2021.Przychod26Ulgi | `decimal` |  |  |  |
+| Podatki2021.Przychod26BezPPK | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.Przychod26Ulgi | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.Przychod50 | `decimal` | bazodanowe |  |  |
-| Podatki2021.Puste | `bool` |  |  |  |
-| Podatki2021.Rentowa | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.RentowaBudzet | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.TyUb | `Soneta.Kadry.TytulUbezpieczenia` |  |  |  |
-| Podatki2021.TypKosztowUzyskaniaPrzychodu | `Soneta.Place.TypKosztowUzyskaniaPrzychodu` | enum |  |  |
-| Podatki2021.TypPomniejszeniaFIS | `Soneta.Place.TypPomniejszeniaFIS` | enum |  | Sposób pomniejszania zaliczki podatku od zdrowotnego z uzwględnieniem ryczałtu. |
+| Podatki2021.Puste | `bool` | tylko-odczyt |  |  |
+| Podatki2021.Rentowa | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.RentowaBudzet | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.TyUb | `Soneta.Kadry.TytulUbezpieczenia` | tylko-odczyt |  |  |
+| Podatki2021.TypKosztowUzyskaniaPrzychodu | `Soneta.Place.TypKosztowUzyskaniaPrzychodu` (enum) | tylko-odczyt |  |  |
+| Podatki2021.TypPomniejszeniaFIS | `Soneta.Place.TypPomniejszeniaFIS` (enum) | tylko-odczyt |  | Sposób pomniejszania zaliczki podatku od zdrowotnego z uzwględnieniem ryczałtu. |
 | Podatki2021.Ulga | `decimal` | bazodanowe |  |  |
 | Podatki2021.UlgaDuzaRodzina | `decimal` |  |  |  |
 | Podatki2021.UlgaEmeryt | `decimal` |  |  |  |
 | Podatki2021.UlgaKlasaSrednia | `decimal` |  |  |  |
 | Podatki2021.UlgaZagranica | `decimal` |  |  |  |
-| Podatki2021.VAT | `Soneta.Place.PodatekVAT` |  |  |  |
-| Podatki2021.WyliczonyPrzychód50 | `decimal` |  |  |  |
-| Podatki2021.Wypadkowa | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.WypadkowaBudzet | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.ZUS | `decimal` |  |  |  |
+| Podatki2021.VAT | `Soneta.Place.PodatekVAT` | tylko-odczyt |  |  |
+| Podatki2021.WyliczonyPrzychód50 | `decimal` | tylko-odczyt |  |  |
+| Podatki2021.Wypadkowa | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.WypadkowaBudzet | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.ZUS | `decimal` | tylko-odczyt |  |  |
 | Podatki2021.ZalFIS | `decimal` | bazodanowe |  |  |
 | Podatki2021.ZalFISDoplata | `decimal` |  |  |  |
 | Podatki2021.ZalFISKorekta | `decimal` |  |  |  |
 | Podatki2021.ZalFISPL | `decimal` |  |  |  |
 | Podatki2021.Zaniechanie | `decimal` | bazodanowe |  |  |
-| Podatki2021.Zdrowotna | `Soneta.Place.ISkładka` |  |  |  |
-| Podatki2021.ZdrowotnaBudzet | `Soneta.Place.ISkładka` |  |  |  |
+| Podatki2021.Zdrowotna | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
+| Podatki2021.ZdrowotnaBudzet | `Soneta.Place.ISkładka` | tylko-odczyt |  |  |
 | Podatki2021.ZdrowotneDoOdliczenia | `decimal` | bazodanowe |  |  |
 | Podatki2021.ZdrowotneDoOdliczenia26 | `decimal` | bazodanowe |  |  |
-| Podatki2021.ZdrowotneFaktycznieOdliczone | `decimal` |  | Zdrowotne odliczone | Składka na NFZ faktycznie odliczenia od zaliczki podatku |
-| Podatki2021.ZdrowotneNieodliczane | `decimal` |  |  | Składka na NFZ nieodliczana od zaliczki podatku |
-| PodlegaKorekcie | `bool` |  |  |  |
-| PodlegaVAT | `bool` |  |  |  |
-| PodstawaFIS | `bool` |  |  |  |
-| PodstawaZUS | `bool` |  |  |  |
-| PodstawaZdrow | `bool` |  |  |  |
-| PomniejszeniePodstawyFIS | `bool` |  |  |  |
-| Powiązanie | `Soneta.Place.IPowiązanieWypłaty` | iface-ref |  |  |
-| Pozostałe | `Soneta.Place.PodstawyZajęciaKomorniczego` | enum |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| PriorytetŹródła | `int` |  |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` |  |  |  |
-| RodzajSkladki | `Soneta.Place.RodzajSkladki` | bazodanowe, enum | Rodzaj składki |  |
-| RodzajSkładkiInfo | `string` |  | Rodzaj składki |  |
-| RodzajZrodla | `Soneta.Place.RodzajŹródłaWypłaty` | bazodanowe, enum |  |  |
-| RozliczenieStorna | `bool` |  |  |  |
-| Seria | `string` |  |  |  |
-| Skladniki | `Soneta.Business.SubTable<Soneta.Place.WypSkladnik>` |  |  |  |
-| SkładnikGłówny | `Soneta.Place.WypSkladnikGłówny` |  |  |  |
-| SkładnikiKorygowane | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` |  |  |  |
-| SkładnikiKorygujące | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` |  |  |  |
-| SkładnikiPowiązane | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` |  |  |  |
-| StanStorna | `Soneta.Place.StanStornaElementu` | bazodanowe, enum |  |  |
-| StanStornaEx | `Soneta.Place.StanStornaElementu` | enum |  |  |
-| Storno | `Soneta.Place.StornoElementu` |  |  |  |
-| Stornowane | `Soneta.Business.SubTable<Soneta.Place.StornoElementu>` |  |  |  |
-| Stornujące | `Soneta.Business.SubTable<Soneta.Place.StornoElementu>` |  |  |  |
-| TypKosztowUzyskaniaPrzychodu | `Soneta.Place.TypKosztowUzyskaniaPrzychodu` | enum |  | Sposób naliczania kosztów uzyskania z uzwględnieniem ryczałtu. |
-| TypPomniejszeniaFIS | `Soneta.Place.TypPomniejszeniaFIS` | enum |  | Sposób pomniejszania zaliczki podatku od zdrowotnego z uzwględnieniem ryczałtu. |
+| Podatki2021.ZdrowotneFaktycznieOdliczone | `decimal` | tylko-odczyt | Zdrowotne odliczone | Składka na NFZ faktycznie odliczenia od zaliczki podatku |
+| Podatki2021.ZdrowotneNieodliczane | `decimal` | tylko-odczyt |  | Składka na NFZ nieodliczana od zaliczki podatku |
+| PodlegaKorekcie | `bool` | tylko-odczyt |  |  |
+| PodstawaFIS | `bool` | tylko-odczyt |  |  |
+| PodstawaZUS | `bool` | tylko-odczyt |  |  |
+| PodstawaZdrow | `bool` | tylko-odczyt |  |  |
+| Powiązanie | `Soneta.Place.IPowiązanieWypłaty` | tylko-odczyt, iface-ref |  |  |
+| Pozostałe | `Soneta.Place.PodstawyZajęciaKomorniczego` (enum) | tylko-odczyt |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| PriorytetŹródła | `int` | tylko-odczyt |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | tylko-odczyt |  |  |
+| RodzajSkladki | `Soneta.Place.RodzajSkladki` (enum) | bazodanowe | Rodzaj składki |  |
+| RodzajSkładkiInfo | `string` | tylko-odczyt | Rodzaj składki |  |
+| RodzajZrodla | `Soneta.Place.RodzajŹródłaWypłaty` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RozliczenieStorna | `bool` | tylko-odczyt |  |  |
+| Seria | `string` | tylko-odczyt |  |  |
+| Skladniki | `SubTable<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| SkładnikGłówny | `Soneta.Place.WypSkladnikGłówny` | tylko-odczyt |  |  |
+| SkładnikiKorygowane | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| SkładnikiKorygujące | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| SkładnikiPowiązane | `System.Collections.Generic.IEnumerable<Soneta.Place.WypSkladnik>` | podlista |  |  |
+| StanStorna | `Soneta.Place.StanStornaElementu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| StanStornaEx | `Soneta.Place.StanStornaElementu` (enum) | tylko-odczyt |  |  |
+| Storno | `Soneta.Place.StornoElementu` | tylko-odczyt |  |  |
+| Stornowane | `SubTable<Soneta.Place.StornoElementu>` | podlista |  |  |
+| Stornujące | `SubTable<Soneta.Place.StornoElementu>` | podlista |  |  |
 | Wartosc | `decimal` | bazodanowe | Wartość |  |
-| WartośćNominalna | `decimal` |  |  |  |
-| WorkerKosztyUzyskaniaPrzychodu | `Soneta.Place.KosztyUzyskaniaPrzychoduWorker` |  |  |  |
+| WartośćNominalna | `decimal` | tylko-odczyt |  |  |
+| WorkerKosztyUzyskaniaPrzychodu | `Soneta.Place.KosztyUzyskaniaPrzychoduWorker` | tylko-odczyt |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
 | Wyplata | `Soneta.Place.Wyplata` | bazodanowe |  |  |
-| Wystornowany | `bool` | bazodanowe |  | Do elementu naliczono element stornujący. Mógł on zostać już usunięty. |
-| ZaliczkaLubPodatek | `bool` |  |  |  |
-| ZaliczkaPodatku | `bool` |  |  | Zaliczka podatku rozliczana na PIT4R |
-| ZapisObliczen | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ZasiłekBudżet | `bool` |  |  |  |
-| ZasiłekRSA | `bool` |  |  |  |
-| ZasiłekZus | `bool` |  |  |  |
-| Zatwierdzony | `bool` |  |  |  |
-| _KodRSA | `Soneta.Place.KodRSA` |  |  |  |
+| Wystornowany | `bool` | bazodanowe, tylko-odczyt |  | Do elementu naliczono element stornujący. Mógł on zostać już usunięty. |
+| ZaliczkaLubPodatek | `bool` | tylko-odczyt |  |  |
+| ZaliczkaPodatku | `bool` | tylko-odczyt |  | Zaliczka podatku rozliczana na PIT4R |
+| ZapisObliczen | `MemoText` | bazodanowe, podlista |  |  |
+| ZasiłekBudżet | `bool` | tylko-odczyt |  |  |
+| ZasiłekZus | `bool` | tylko-odczyt |  |  |
+| Zatwierdzony | `bool` | tylko-odczyt |  |  |
+| _KodRSA | `Soneta.Place.KodRSA` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 
@@ -303,14 +291,6 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Zwolniona` = 2
 - `NiePodlega` = 3
 - `Brak` = 4
-
-### Kategoria (`Soneta.Place.KsięgowanieListyWorker.Kategoria`)
-- `Zasadnicze` = 0 — Zasadnicze
-- `Umowy` = 1
-- `Inne` = 2
-- `Zasiłek` = 3
-- `DodatkiNetto` = 4
-- `PotrąceniaNetto` = 5
 
 ### NaliczKorektęElementu (`Soneta.Place.NaliczKorektęElementu`)
 - `Domyślnie` = 0

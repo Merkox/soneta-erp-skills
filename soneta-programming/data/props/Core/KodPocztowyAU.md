@@ -4,21 +4,25 @@ Tytuł: Tabela z kodami pocztowymi oraz odpowiadającymi im województwami
 Opis: Rozszerzony słownik kodów pocztowych z pełną strukturą administracyjną (województwo, powiat, gmina, miejscowość, ulica) oraz identyfikatorami terytorium TERYT. Wykorzystywany do walidacji i automatycznego uzupełniania adresów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Gmina | `string` | bazodanowe |  |  |
-| IdMiejscowosci | `string` | bazodanowe | ID miejscowości | Identyfikator miejscowości |
-| IdTerytorium | `string` | bazodanowe | ID terytorium | Identyfikator terytorium |
-| IdUlicy | `string` | bazodanowe | ID ulicy | Identyfikator ulicy |
+| IdMiejscowosci | `string` | bazodanowe, tylko-odczyt | ID miejscowości | Identyfikator miejscowości |
+| IdTerytorium | `string` | bazodanowe, tylko-odczyt | ID terytorium | Identyfikator terytorium |
+| IdUlicy | `string` | bazodanowe, tylko-odczyt | ID ulicy | Identyfikator ulicy |
 | KodPocztowy | `string` | bazodanowe | Kod pocztowy |  |
 | Miejscowosc | `string` | bazodanowe | Miejscowość |  |
 | Powiat | `string` | bazodanowe |  |  |
-| StanNa | `Soneta.Types.Date` | bazodanowe | Stan na | Data dodania lub modyfikacji rekordu |
+| StanNa | `Date` | bazodanowe, tylko-odczyt | Stan na | Data dodania lub modyfikacji rekordu |
 | Ulica | `string` | bazodanowe |  |  |
-| Wojewodztwo | `Soneta.Core.Wojewodztwa` | bazodanowe, enum | Województwo |  |
+| Wojewodztwo | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe | Województwo |  |
 
 ## Enumy
 

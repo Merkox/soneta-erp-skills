@@ -6,31 +6,35 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`, `IOceniany`, `IŹródłoOceny`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 5
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresSzkolenia | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresSzkolenia | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Budzet | `Soneta.HR.BudżetSzkoleń` | bazodanowe |  |  |
-| Cena | `Soneta.Types.Currency` | bazodanowe |  |  |
-| CenaOdOsoby | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Cena | `Currency` | bazodanowe |  |  |
+| CenaOdOsoby | `Currency` | bazodanowe |  |  |
 | Definicja | `Soneta.HR.DefinicjaSzkolenia` | bazodanowe |  |  |
 | Dostawca | `Soneta.HR.DostawcaSzkoleń` | bazodanowe |  |  |
 | Etap | `Soneta.HR.EtapRealizacjiSzkolenia` | bazodanowe |  |  |
 | KorektaKosztu | `bool` | bazodanowe |  |  |
-| Koszt | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Lokalizacja | `Soneta.HR.TypLokalizacjiSzkolenia` | bazodanowe, enum |  |  |
-| Nazwa | `string` |  |  |  |
-| Oceniani | `Soneta.Business.SubTable<Soneta.Oceny.OcenaOceniany>` |  |  |  |
+| Koszt | `Currency` | bazodanowe |  |  |
+| Lokalizacja | `Soneta.HR.TypLokalizacjiSzkolenia` (enum) | bazodanowe |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Oceniani | `SubTable<Soneta.Oceny.OcenaOceniany>` | podlista |  |  |
 | Oferta | `Soneta.HR.OfertaSzkolenia` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Osoba | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |
-| PowiązaneOceny | `Soneta.Business.SubTable<Soneta.Oceny.OcenaRealizacja>` |  |  |  |
+| PowiązaneOceny | `SubTable<Soneta.Oceny.OcenaRealizacja>` | podlista |  |  |
 | Tytul | `string` | bazodanowe | Tytuł |  |
-| Uczestnicy | `Soneta.Business.SubTable<Soneta.HR.WniosekOSzkolenie>` |  |  |  |
+| Uczestnicy | `SubTable<Soneta.HR.WniosekOSzkolenie>` | podlista |  |  |
 | Wewnetrzne | `bool` | bazodanowe | Szkolenie wewnętrzne |  |
 
 ## Enumy

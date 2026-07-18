@@ -5,42 +5,46 @@ Opis: Element szczegółowy środka trwałego (SrodekTrwalyBase). Reprezentuje p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
 
-- pola bazodanowe: 29
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 27
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| AmortyzacjaMc | `Soneta.Types.Currency` | bazodanowe |  | Amortyzacja miesięczna |
-| AmortyzacjaNar | `Soneta.Types.Currency` | bazodanowe |  | Amortyzacja narastająco |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data raty |
-| Kierunek | `Soneta.SrodkiTrwale.KierunekRaty` | bazodanowe, enum |  | Kierunek raty |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| AmortyzacjaMc | `Currency` | bazodanowe |  | Amortyzacja miesięczna |
+| AmortyzacjaNar | `Currency` | bazodanowe |  | Amortyzacja narastająco |
+| Data | `Date` | bazodanowe |  | Data raty |
+| Kierunek | `Soneta.SrodkiTrwale.KierunekRaty` (enum) | bazodanowe |  | Kierunek raty |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa raty |
 | Miesiac | `int` | bazodanowe |  | Miesiąc raty |
 | NumerRaty | `int` | bazodanowe |  | Numer raty |
 | Obrot | `Soneta.SrodkiTrwale.ObrotST` | bazodanowe |  | Obrót |
-| PrawoDoUzytkowaniaBoP | `Soneta.Types.Currency` | bazodanowe |  | Prawo do użytkowania BoP |
-| PrawoDoUzytkowaniaEoP | `Soneta.Types.Currency` | bazodanowe |  | Prawo do użytkowania EoP |
+| PrawoDoUzytkowaniaBoP | `Currency` | bazodanowe |  | Prawo do użytkowania BoP |
+| PrawoDoUzytkowaniaEoP | `Currency` | bazodanowe |  | Prawo do użytkowania EoP |
 | RecznaEdycja | `bool` | bazodanowe |  | Czy edytowana ręcznie |
-| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, guided-parent |  |  |
+| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | SrodekTrwalyLeasing | `Soneta.SrodkiTrwale.SrodekTrwalyLeasing` | bazodanowe |  | Środek trwały Leasing |
-| SzacowanaWartoscOplatyPLN | `Soneta.Types.Currency` | bazodanowe |  | Szacowana wartość opłaty w PLN |
-| WartoscBilansowa | `Soneta.Types.Currency` | bazodanowe |  | Wartość bilansowa |
-| WartoscNKUP | `Soneta.Types.Currency` | bazodanowe | Wartość Nkup | Wartość NKUP |
-| WartoscOplaty | `Soneta.Types.Currency` | bazodanowe |  | Wartość opłaty |
-| WartoscOplatyPLN | `Soneta.Types.Currency` | bazodanowe |  | Wartość opłaty w PLN |
-| WartoscPodatkowa | `Soneta.Types.Currency` | bazodanowe |  | Wartość podatkowa |
-| WartoscRazem | `Soneta.Types.Currency` | bazodanowe |  | Wartość razem |
-| WartoscVAT | `Soneta.Types.Currency` | bazodanowe |  | Wartość VAT |
-| WartoscVATKUP | `Soneta.Types.Currency` | bazodanowe | VAT KUP | Wartość VAT KUP |
-| WartoscVATNKUP | `Soneta.Types.Currency` | bazodanowe | VAT NKUP | Wartość VAT NKUP |
+| SzacowanaWartoscOplatyPLN | `Currency` | bazodanowe |  | Szacowana wartość opłaty w PLN |
+| WartoscBilansowa | `Currency` | bazodanowe |  | Wartość bilansowa |
+| WartoscNKUP | `Currency` | bazodanowe | Wartość Nkup | Wartość NKUP |
+| WartoscOplaty | `Currency` | bazodanowe |  | Wartość opłaty |
+| WartoscOplatyPLN | `Currency` | bazodanowe |  | Wartość opłaty w PLN |
+| WartoscPodatkowa | `Currency` | bazodanowe |  | Wartość podatkowa |
+| WartoscRazem | `Currency` | bazodanowe |  | Wartość razem |
+| WartoscVAT | `Currency` | bazodanowe |  | Wartość VAT |
+| WartoscVATKUP | `Currency` | bazodanowe | VAT KUP | Wartość VAT KUP |
+| WartoscVATNKUP | `Currency` | bazodanowe | VAT NKUP | Wartość VAT NKUP |
 | WspolczynnikDyskonta | `double` | bazodanowe | Współczynnik dyskonta | Współczynnik dyskonta |
-| WspolczynnikDyskontaStr | `string` |  |  |  |
-| WygenerowaneObroty | `bool` |  |  |  |
+| WspolczynnikDyskontaStr | `string` | tylko-odczyt |  |  |
+| WygenerowaneObroty | `bool` | tylko-odczyt |  |  |
 | Zaplacona | `bool` | bazodanowe |  | Czy rata została zapłacona |
-| ZdyskontowanaOplata | `Soneta.Types.Currency` | bazodanowe |  | Zdyskontowana opłata |
-| ZobowiazanieBoP | `Soneta.Types.Currency` | bazodanowe |  | Zobowiazanie BoP |
-| ZobowiazanieEoP | `Soneta.Types.Currency` | bazodanowe |  | Zobowiazanie EoP |
+| ZdyskontowanaOplata | `Currency` | bazodanowe |  | Zdyskontowana opłata |
+| ZobowiazanieBoP | `Currency` | bazodanowe |  | Zobowiazanie BoP |
+| ZobowiazanieEoP | `Currency` | bazodanowe |  | Zobowiazanie EoP |
 
 ## Enumy
 

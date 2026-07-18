@@ -5,8 +5,12 @@ Opis: Element szczegółowy schematu opakowań/gratisów (SchemOpakowan). Przypi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `SchematOpakowan` → `SchemOpakowan`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,7 +19,7 @@ Guided: child — nadrzędna przez pole `SchematOpakowan` → `SchemOpakowan`
 | Ilosc | `Soneta.Towary.Quantity` | bazodanowe | Ilość | Ilość towaru. |
 | RabatKaucji | `bool` | bazodanowe |  | Określa, czy pozycja o rodzaju systemu kaucyjnego Plastik, Metal lub Szkło utworzona przy użyciu schematu ma podlegać rabatowaniu. |
 | SchematOpakowan | `Soneta.Towary.SchemOpakowan` | bazodanowe, guided-parent |  | Alternatywny schemat dla towaru. |
-| StawkaVatDlaOpakowania | `Soneta.Towary.StawkaVatDlaOpakowania` | bazodanowe, enum | Stawka VAT na opakowaniu | Stawka VAT na opakowaniu. |
+| StawkaVatDlaOpakowania | `Soneta.Towary.StawkaVatDlaOpakowania` (enum) | bazodanowe | Stawka VAT na opakowaniu | Stawka VAT na opakowaniu. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar do którego przypisany jest alternatywny schemat. |
 
 ## Enumy

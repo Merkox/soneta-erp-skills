@@ -5,12 +5,16 @@ Opis: Zakres czasowy i filtrujący dla procesu utrwalania listy. Powiązany z de
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Date | `System.DateTime` | bazodanowe | Data utrwalania | Data i godzina rozpoczęcia utrwalania. |
-| Definition | `Soneta.BI.SerializationViewDefinition` | bazodanowe |  | Definicja utrwalania listy dla danego zakresu |
-| FilterText | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Name | `string` | bazodanowe | Nazwa zakresu |  |
+| Date | `System.DateTime` | bazodanowe, tylko-odczyt | Data utrwalania | Data i godzina rozpoczęcia utrwalania. |
+| Definition | `Soneta.BI.SerializationViewDefinition` | bazodanowe, tylko-odczyt |  | Definicja utrwalania listy dla danego zakresu |
+| FilterText | `MemoText` | bazodanowe, podlista |  |  |
+| Name | `string` | bazodanowe, tylko-odczyt | Nazwa zakresu |  |

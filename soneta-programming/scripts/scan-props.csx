@@ -141,9 +141,10 @@ string guidedParentType = null;
 if (!isGuidedRoot)
     (guidedParentField, guidedParentType) = FindGuidedParent(foundRecord, rowClass);
 
-// Klucz: nazwa pola z notacją kropkową dla subrowów; Wartość: (typ, symbol typu, czyBazodanowe, tytuł, opis).
-// Symbol typu (Sym) niesie informację potrzebną do rozpoznania enuma (TypeKind.Enum, także pod Nullable<>).
-var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)>(StringComparer.Ordinal);
+// Klucz: nazwa pola z notacją kropkową dla subrowów; Wartość: (typ, symbol typu, czyBazodanowe,
+// czyTylkoOdczyt, tytuł, opis). Symbol typu (Sym) niesie informację potrzebną do rozpoznania
+// enuma (TypeKind.Enum, także pod Nullable<>). ReadOnly = property biznesowa bez publicznego settera.
+var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, bool ReadOnly, bool IsSubRow, string Caption, string Description)>(StringComparer.Ordinal);
 
 var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 ScanRecord(foundRecord, "", visited, merged, topLevelClasses);
@@ -168,6 +169,22 @@ if (!string.IsNullOrEmpty(tableTypeName))
         Console.WriteLine("Guided: root");
     else if (guidedParentField != null)
         Console.WriteLine($"Guided: child — nadrzędna przez pole `{guidedParentField}` → `{guidedParentType}`");
+    // Wersjonowanie historią: tabela historyczna (IRowWithHistory) trzyma wersje w tabeli-historii,
+    // tabela-historia (IHistory) to pojedynczy zapis historyczny obiektu nadrzędnego (guided-parent).
+    if (mainBusinessClass != null)
+    {
+        if (mainBusinessClass.AllInterfaces.Any(i => i.Name == "IRowWithHistory"))
+        {
+            var histType = FindHistoryType(mainBusinessClass);
+            Console.WriteLine(histType != null
+                ? $"Historyczna: Tak — wersje (historia) w tabeli `{histType}`"
+                : "Historyczna: Tak");
+        }
+        if (mainBusinessClass.AllInterfaces.Any(i => i.Name == "IHistory"))
+            Console.WriteLine(guidedParentType != null
+                ? $"Historia: Tak — zapis historyczny tabeli `{guidedParentType}`"
+                : "Historia: Tak");
+    }
     var thisInterfaces = nestedTableCls != null ? GetTableInterfaces(nestedTableCls).ToList() : new System.Collections.Generic.List<string>();
     if (thisInterfaces.Count > 0)
         Console.WriteLine($"Implementuje interfejsy: {string.Join(", ", thisInterfaces.Select(i => "`" + i + "`"))}");
@@ -200,10 +217,23 @@ foreach (var asmRef in compilation.References)
 foreach (var list in interfaceImpls.Values)
     list.Sort(StringComparer.Ordinal);
 Console.WriteLine();
-var dbCount = merged.Values.Count(v => v.IsDb);
-var calcCount = merged.Count - dbCount;
-Console.WriteLine($"- pola bazodanowe: {dbCount}");
-Console.WriteLine($"- pola kalkulowane (z klas biznesowych): {calcCount}");
+// Rozłączny rozkład wg roli (każde pole w dokładnie jednej kategorii; sumują się do całości).
+// Priorytet: subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane (zapisywalne).
+int subRowCount = 0, subListCount = 0, readOnlyCount = 0, dbCount = 0, calcCount = 0;
+foreach (var v in merged.Values)
+{
+    if (v.IsSubRow) subRowCount++;
+    else if (IsSubListType(v.Sym)) subListCount++;
+    else if (v.ReadOnly) readOnlyCount++;
+    else if (v.IsDb) dbCount++;
+    else calcCount++;
+}
+Console.WriteLine($"- pola bazodanowe (zapisywalne): {dbCount}");
+Console.WriteLine($"- pola kalkulowane (zapisywalne): {calcCount}");
+Console.WriteLine($"- pola tylko-odczyt: {readOnlyCount}");
+Console.WriteLine($"- podlisty: {subListCount}");
+Console.WriteLine($"- subrowy: {subRowCount}");
+Console.WriteLine($"- razem: {merged.Count}");
 Console.WriteLine();
 Console.WriteLine("| Pole | Typ | Rodzaj | Tytuł | Opis |");
 Console.WriteLine("|------|-----|--------|-------|------|");
@@ -212,23 +242,28 @@ var interfaceFields = new System.Collections.Generic.List<(string Field, string 
 var enumsUsed = new SortedDictionary<string, INamedTypeSymbol>(StringComparer.Ordinal);
 foreach (var kv in merged)
 {
-    var rodzaj = kv.Value.IsDb ? "bazodanowe" : "";
-    if (guidedParentField != null && kv.Key == guidedParentField)
-        rodzaj = string.IsNullOrEmpty(rodzaj) ? "guided-parent" : rodzaj + ", guided-parent";
+    var isSubRow = kv.Value.IsSubRow;
+    var isSubList = !isSubRow && IsSubListType(kv.Value.Sym);
+    var tags = new System.Collections.Generic.List<string>();
+    if (kv.Value.IsDb) tags.Add("bazodanowe");
+    // Znacznik roli, gdy pola nie ustawia się wprost: subrow → `(subrow)` w typie; kolekcja/
+    // podlista → `podlista`; pozostałe get-only → `tylko-odczyt`.
+    if (isSubList) tags.Add("podlista");
+    else if (kv.Value.ReadOnly && !isSubRow) tags.Add("tylko-odczyt");
+    if (guidedParentField != null && kv.Key == guidedParentField) tags.Add("guided-parent");
     var shortType = ShortTypeName(kv.Value.Type);
     if (shortType.StartsWith("I") && shortType.Length > 1 && char.IsUpper(shortType[1])
         && interfaceImpls.TryGetValue(shortType, out var impls))
     {
-        rodzaj = string.IsNullOrEmpty(rodzaj) ? "iface-ref" : rodzaj + ", iface-ref";
+        tags.Add("iface-ref");
         interfaceFields.Add((kv.Key, shortType, impls));
     }
+    // Enum/subrow: sygnalizowane w kolumnie `Typ` (sufiks „(enum)"/„(subrow)"), nie w `Rodzaj`.
     var en = AsEnum(kv.Value.Sym);
-    if (en != null)
-    {
-        rodzaj = string.IsNullOrEmpty(rodzaj) ? "enum" : rodzaj + ", enum";
-        enumsUsed[en.ToDisplayString()] = en;
-    }
-    Console.WriteLine($"| {kv.Key} | `{kv.Value.Type}` | {rodzaj} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
+    if (en != null) enumsUsed[en.ToDisplayString()] = en;
+    var typeSuffix = en != null ? " (enum)" : (isSubRow ? " (subrow)" : "");
+    var typeCol = "`" + PrettyType(kv.Value.Type) + "`" + typeSuffix;
+    Console.WriteLine($"| {kv.Key} | {typeCol} | {string.Join(", ", tags)} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
 }
 
 if (interfaceFields.Count > 0)
@@ -256,7 +291,7 @@ if (enumsUsed.Count > 0)
     foreach (var en in enumsUsed.Values)
     {
         Console.WriteLine();
-        Console.WriteLine($"### {en.Name} (`{en.ToDisplayString()}`)");
+        Console.WriteLine($"### {en.Name} (`{PrettyType(en.ToDisplayString())}`)");
         foreach (var (name, value, caption) in GetEnumMembers(en))
             Console.WriteLine(string.IsNullOrEmpty(caption) ? $"- `{name}` = {value}" : $"- `{name}` = {value} — {EscapeCell(caption)}");
     }
@@ -272,11 +307,54 @@ static string ShortTypeName(string fullName)
     return dot >= 0 ? fullName.Substring(dot + 1) : fullName;
 }
 
+// Skraca zbędne prefiksy przestrzeni nazw w wyświetlanym typie (także w argumentach generycznych):
+// `Soneta.Business.` i `Soneta.Types.` → puste (np. `Soneta.Business.Key` → `Key`, `Soneta.Types.DoubleCy` → `DoubleCy`).
+static string PrettyType(string t) =>
+    string.IsNullOrEmpty(t) ? t : t.Replace("Soneta.Business.", "").Replace("Soneta.Types.", "");
+
+// Dla tabeli historycznej (IRowWithHistory) — nazwa typu rekordu historii: pierwsze property
+// (także indekser), którego typ jest klasą implementującą `IHistory` (np. `Pracownik` → `PracHistoria`).
+static string FindHistoryType(INamedTypeSymbol bizCls)
+{
+    if (bizCls == null) return null;
+    foreach (var p in EnumerateInheritedProperties(bizCls))
+    {
+        if (p.DeclaredAccessibility != Accessibility.Public) continue;
+        if (p.Type is INamedTypeSymbol pt && pt.TypeKind == TypeKind.Class
+            && pt.AllInterfaces.Any(i => i.Name == "IHistory"))
+            return pt.Name;
+    }
+    return null;
+}
+
+// Pole/property oznaczone [Obsolete] — pomijamy w wyniku (przestarzałe, nie używać).
+static bool IsObsolete(ISymbol s) =>
+    s.GetAttributes().Any(a => a.AttributeClass?.Name is "ObsoleteAttribute" or "Obsolete");
+
+// Property jest tylko-do-odczytu, gdy nie ma settera albo setter nie jest publiczny
+// (z perspektywy kodu/importu XML nie da się jej ustawić).
+static bool IsReadOnlyProp(IPropertySymbol p) =>
+    p.SetMethod == null || p.SetMethod.DeclaredAccessibility != Accessibility.Public;
+
+// „Podlista" — typ kolekcyjny/posiadany: tablica, `Key`, `View`, `SubTable` oraz dowolny typ
+// implementujący `IEnumerable` (List<T>, kolekcje) — poza `string`. Takie pola oznaczamy
+// `podlista` zamiast `tylko-odczyt` (nie ustawia się ich wprost — dodaje się elementy).
+static bool IsSubListType(ITypeSymbol type)
+{
+    if (type is IArrayTypeSymbol) return true;
+    if (type is not INamedTypeSymbol n) return false;
+    if (n.SpecialType == SpecialType.System_String) return false;
+    // Wyjątki — typy „wartościowe" mimo IEnumerable (nie są podlistą, ustawia się je wprost).
+    if (n.Name is "Periods") return false;
+    if (n.Name is "Key" or "View") return true;
+    return n.AllInterfaces.Any(i => i.Name == "IEnumerable");
+}
+
 static void ScanRecord(
     INamedTypeSymbol record,
     string prefix,
     HashSet<INamedTypeSymbol> visited,
-    SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)> merged,
+    SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, bool ReadOnly, bool IsSubRow, string Caption, string Description)> merged,
     Dictionary<string, INamedTypeSymbol> topLevelClasses)
 {
     if (record == null) return;
@@ -284,7 +362,7 @@ static void ScanRecord(
 
     var fields = record.GetMembers()
         .OfType<IFieldSymbol>()
-        .Where(f => f.DeclaredAccessibility == Accessibility.Public)
+        .Where(f => f.DeclaredAccessibility == Accessibility.Public && !IsObsolete(f))
         .ToList();
 
     var encMod = record.ContainingType;
@@ -296,14 +374,19 @@ static void ScanRecord(
     topLevelClasses.TryGetValue(baseName, out bizCls);
     var rowFallback = encMod?.GetTypeMembers(baseName + "Row").FirstOrDefault();
 
-    // 1. Pola rekordu → bazodanowe.
+    // 1. Pola rekordu → bazodanowe (zapisywalne — read-only rozstrzyga property biznesowa w kroku 2).
+    // Subrow = pole rekordowe typu `*Record` (osadzony kontener, po którym rekurujemy w kroku 4);
+    // to NIE to samo co `Key`/`SubTable` (choć te też bywają read-only).
     foreach (var f in fields)
     {
         var key = prefix + f.Name;
+        var isSub = f.Type is INamedTypeSymbol nt && nt.TypeKind == TypeKind.Class && nt.Name.EndsWith("Record");
         merged[key] = (
             f.Type.ToDisplayString(),
             f.Type,
             true,
+            false,
+            isSub,
             GetAttributeFirstString(f, "CaptionAttribute"),
             GetAttributeFirstString(f, "DescriptionAttribute"));
     }
@@ -322,6 +405,8 @@ static void ScanRecord(
         {
             if (p.DeclaredAccessibility != Accessibility.Public || p.IsStatic || p.IsIndexer || p.GetMethod == null)
                 continue;
+            // Property z [Obsolete] pomijamy; jeśli nadpisywała pole rekordowe (krok 1) — usuwamy je.
+            if (IsObsolete(p)) { merged.Remove(prefix + p.Name); seen.Add(p.Name); continue; }
             if (!seen.Add(p.Name)) continue;
             // Pomijamy property infrastrukturalne, o ile nie pokrywają się z bazodanowym polem
             // rekordu (krok 1) — te zostają nietknięte.
@@ -330,18 +415,21 @@ static void ScanRecord(
             var typeStr = p.Type.ToDisplayString();
             var caption = GetAttributeFirstString(p, "CaptionAttribute");
             var description = GetAttributeFirstString(p, "DescriptionAttribute");
+            var readOnly = IsReadOnlyProp(p);
             if (merged.TryGetValue(key, out var existing))
             {
                 merged[key] = (
                     typeStr,
                     p.Type,
                     existing.IsDb,
+                    readOnly,
+                    existing.IsSubRow,
                     !string.IsNullOrEmpty(caption) ? caption : existing.Caption,
                     !string.IsNullOrEmpty(description) ? description : existing.Description);
             }
             else
             {
-                merged[key] = (typeStr, p.Type, false, caption, description);
+                merged[key] = (typeStr, p.Type, false, readOnly, false, caption, description);
             }
         }
     }
@@ -366,7 +454,7 @@ static void ScanRecord(
             var description = !string.IsNullOrEmpty(entry.Description)
                 ? entry.Description
                 : GetAttributeFirstString(member, "DescriptionAttribute");
-            merged[key] = (entry.Type, entry.Sym, entry.IsDb, caption, description);
+            merged[key] = (entry.Type, entry.Sym, entry.IsDb, entry.ReadOnly, entry.IsSubRow, caption, description);
         }
     }
 

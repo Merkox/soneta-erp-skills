@@ -5,22 +5,25 @@ Opis: Element szczegółowy hosta dokumentów CRM (IDocumentHostCRM). Łączy do
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IDocumentHostCRM`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzyZadaniePoprawne | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` |  |  |  |
+| CzyZadaniePoprawne | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
 | Dokument | `Soneta.Core.IDokumentCRM` | bazodanowe, iface-ref |  |  |
 | Domyslny | `bool` | bazodanowe |  |  |
 | Host | `Soneta.Zadania.IDocumentHostCRM` | bazodanowe, guided-parent, iface-ref |  |  |
-| KopiowanieDokCRM | `Soneta.Core.KopiowanieDokCRM` | bazodanowe, enum |  |  |
+| KopiowanieDokCRM | `Soneta.Core.KopiowanieDokCRM` (enum) | bazodanowe |  |  |
 | PozycjaDokHandl | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  |  |
-| RodzajDokCRM | `Soneta.Zadania.RodzajDokCRM` | bazodanowe, enum |  |  |
-| SumowanieWartosci | `Soneta.Core.SumowanieWartosciCRM` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Currency` |  |  |  |
-| Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
+| RodzajDokCRM | `Soneta.Zadania.RodzajDokCRM` (enum) | bazodanowe |  |  |
+| SumowanieWartosci | `Soneta.Core.SumowanieWartosciCRM` (enum) | bazodanowe |  |  |
+| Wartosc | `Currency` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

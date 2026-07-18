@@ -6,22 +6,26 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 5
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Określa czy region jest zablokowany. |
 | Kod | `string` | bazodanowe |  |  |
-| Kontrahenci | `Soneta.Business.SubTable<Soneta.CRM.Kontrahent>` |  |  |  |
+| Kontrahenci | `SubTable<Soneta.CRM.Kontrahent>` | podlista |  |  |
 | Nadrzedny | `Soneta.CRM.Region` | bazodanowe | Nadrzędny |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Obszary | `Soneta.Business.SubTable<Soneta.CRM.RegionObszar>` |  |  |  |
-| Opiekun | `Soneta.Business.App.Operator` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| PlanySprzedazowe | `Soneta.Business.SubTable` |  |  |  |
-| Podregiony | `Soneta.Business.SubTable<Soneta.CRM.Region>` |  |  |  |
-| Rodzaj | `Soneta.CRM.Enums.RegionTypeEnum` | bazodanowe, enum |  |  |
+| Obszary | `SubTable<Soneta.CRM.RegionObszar>` | podlista |  |  |
+| Opiekun | `App.Operator` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| PlanySprzedazowe | `SubTable` | podlista |  |  |
+| Podregiony | `SubTable<Soneta.CRM.Region>` | podlista |  |  |
+| Rodzaj | `Soneta.CRM.Enums.RegionTypeEnum` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

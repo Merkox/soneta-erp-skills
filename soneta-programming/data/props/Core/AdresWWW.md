@@ -5,14 +5,18 @@ Opis: Element szczegółowy hosta adresów WWW (IAdresyWWWHost). Przechowuje adr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zapis` → `IAdresyWWWHost`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `string` | bazodanowe | Adres WWW | Adres WWW skojarzony z danym zapisem. |
 | Domyslny | `bool` | bazodanowe | Domyślny | Czy dany adres WWW jest domyślny dla danego zapisu. |
-| Zapis | `Soneta.Core.IAdresyWWWHost` | bazodanowe, guided-parent, iface-ref |  | Zapis, do którego przypisany jest dany adres WWW |
+| Zapis | `Soneta.Core.IAdresyWWWHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  | Zapis, do którego przypisany jest dany adres WWW |
 
 ## Relacje interfejsowe
 

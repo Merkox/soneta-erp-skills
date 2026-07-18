@@ -5,31 +5,35 @@ Opis: Szablon budżetu projektu określający źródła danych planowania i real
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` |  |  |  |
-| AnyBudgetsLinked | `bool` |  |  |  |
-| BillingMethod | `Soneta.Core.SposobRozliczania` | bazodanowe, enum | Sposób rozliczania |  |
+| AnyBudgetsLinked | `bool` | tylko-odczyt |  |  |
+| BillingMethod | `Soneta.Core.SposobRozliczania` (enum) | bazodanowe | Sposób rozliczania |  |
 | BudgetParametersUnlocked | `bool` | bazodanowe | Możliwa modyfikacja parametrów budżetu |  |
-| BudgetPeriods | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.BudgetPeriod>` |  |  |  |
+| BudgetPeriods | `SubTable<Soneta.Zadania.Budzetowanie.BudgetPeriod>` | podlista |  |  |
 | CentralVersionSupport | `bool` | bazodanowe | Obsługa centralnych wersji planów | Określa, czy wersje planów budżetów mogą być zarządzane centralnie. |
 | Domyslna | `bool` |  |  |  |
-| IsExtendedBudgeting | `bool` |  |  |  |
+| IsExtendedBudgeting | `bool` | tylko-odczyt |  |  |
 | ItemPermissions | `bool` | bazodanowe | Uprawnienia do pozycji |  |
 | ListLayoutsDistinguisher | `string` | bazodanowe | Wyróżnik układów list | Generuje unikalną nazwę listy na podstawie zadanych elementów składowych |
 | Locked | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje budżetów nie będą wyświetlane w liście wyboru. |
 | Name | `string` | bazodanowe | Nazwa | Pełna nazwa definicji budżetów. |
 | Nazwa | `string` |  |  |  |
 | OngoingSaves | `bool` | bazodanowe | Zapis pozycji budżetu na bieżąco | Jeśli możliwe, sesja zostanie zapisana najszybciej jak to możliwe. |
-| PeriodType | `Soneta.Core.TypOkresu` | bazodanowe, enum | Typ okresu budżetu |  |
-| PlanVariants | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.PlanVariant>` |  |  |  |
-| PlanningDataSource | `Soneta.Core.BudgetDataSource` | bazodanowe, enum | Źródło danych dla planowania budżetu |  |
-| ProjectBudgets | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.BudzetProjektu>` |  |  |  |
-| RealizationDataSource | `Soneta.Core.BudgetDataSource` | bazodanowe, enum | Źródło danych dla realizacji budżetu |  |
-| SettlementVariant | `Soneta.Core.SettlementVariant` | bazodanowe, enum | Wariant rozliczania | Wariant rozliczania. |
+| PeriodType | `Soneta.Core.TypOkresu` (enum) | bazodanowe | Typ okresu budżetu |  |
+| PlanVariants | `SubTable<Soneta.Zadania.Budzetowanie.PlanVariant>` | podlista |  |  |
+| PlanningDataSource | `Soneta.Core.BudgetDataSource` (enum) | bazodanowe | Źródło danych dla planowania budżetu |  |
+| ProjectBudgets | `SubTable<Soneta.Zadania.Budzetowanie.BudzetProjektu>` | podlista |  |  |
+| RealizationDataSource | `Soneta.Core.BudgetDataSource` (enum) | bazodanowe | Źródło danych dla realizacji budżetu |  |
+| SettlementVariant | `Soneta.Core.SettlementVariant` (enum) | bazodanowe | Wariant rozliczania | Wariant rozliczania. |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji budżetów. |
 
 ## Enumy

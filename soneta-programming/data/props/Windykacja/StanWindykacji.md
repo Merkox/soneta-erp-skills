@@ -5,30 +5,34 @@ Opis: Słownik stanów (etapów) windykacji definiujący możliwe kroki w proces
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 1
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AutomatycznePrzejscie | `bool` | bazodanowe | Przejdź do kolejnego etapu |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  | Algorytm (C#) akcji |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  | Algorytm (C#) akcji |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Windykacja.RodzajŹródłaWindykacji` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Windykacja.RodzajŹródłaWindykacji` (enum) | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Termin | `int` | bazodanowe | Czas trwania |  |
-| Typ | `Soneta.Kasa.TypRozrachunku` | bazodanowe, enum |  |  |
-| TypEtapu | `Soneta.Kasa.TypEtapu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kasa.TypRozrachunku` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypEtapu | `Soneta.Kasa.TypEtapu` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

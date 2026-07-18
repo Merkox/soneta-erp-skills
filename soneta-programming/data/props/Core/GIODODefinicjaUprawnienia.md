@@ -6,15 +6,19 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 1
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Definicja zablokowana |
 | Domyslny | `bool` | bazodanowe |  |  |
-| NeutralName | `string` |  |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| NeutralName | `string` | tylko-odczyt |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
@@ -22,5 +26,5 @@ Implementuje interfejsy: `IRightsSource`
 | OsobaKontakowa | `bool` | bazodanowe |  |  |
 | Pracownik | `bool` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Uprawnienie | Treść uprawnienia |
+| Tresc | `MemoText` | bazodanowe, podlista | Uprawnienie | Treść uprawnienia |
 | Uprawnienie | `string` | bazodanowe | Uprawnienie | Nazwa uprawnienia |

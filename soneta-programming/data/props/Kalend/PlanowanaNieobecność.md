@@ -5,18 +5,22 @@ Opis: Planowana nieobecność pracownika (np. urlop zaplanowany z wyprzedzeniem)
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
 | IlośćDni | `int` |  |  |  |
-| Nieobecności | `Soneta.Business.View` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Stan | `Soneta.Kalend.StanPlanowanejNieobecności` | bazodanowe, enum |  |  |
-| TypDni | `Soneta.Kalend.TypyDni` | enum |  |  |
+| Nieobecności | `View` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Stan | `Soneta.Kalend.StanPlanowanejNieobecności` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
 
 ## Enumy
 

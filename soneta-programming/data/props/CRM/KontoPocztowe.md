@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 29
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 1
+- razem: 38
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AccountType | `Soneta.CRM.AuthProviderType` | bazodanowe, enum | Typ dostawcy | Typ dostawcy autoryzacji |
+| AccountType | `Soneta.CRM.AuthProviderType` (enum) | bazodanowe, tylko-odczyt | Typ dostawcy | Typ dostawcy autoryzacji |
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla konta pocztowego. |
 | AuthProvider | `Soneta.CRM.Config.AuthProvider` | bazodanowe | Dostawca Autoryzacji | Dostawca Autoryzacji |
 | Blokada | `bool` | bazodanowe | Blokada | Określa czy konto jest zablokowane. |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora konta pocztowego | Kod klasy kalkulatora dla konta pocztowego. |
-| DataOd | `Soneta.Types.Date` | bazodanowe |  | Określa datę, od której należy ściągać wiadomości. |
-| Foldery | `Soneta.Business.SubTable<Soneta.CRM.Config.FolderPocztowy>` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Kod kalkulatora konta pocztowego | Kod klasy kalkulatora dla konta pocztowego. |
+| DataOd | `Date` | bazodanowe |  | Określa datę, od której należy ściągać wiadomości. |
+| Foldery | `SubTable<Soneta.CRM.Config.FolderPocztowy>` | podlista |  |  |
 | Haslo | `string` | bazodanowe | Hasło | Hasło użytkownika. |
 | IMAPEncryption | `bool` | bazodanowe | SSL/TLS | Określa czy używane jest szyfrowanie SSL/TLS. |
 | IMAPPort | `int` | bazodanowe | Port | Numer portu dla protokołu IMAP. |
 | IMAPServer | `string` | bazodanowe | Serwer | Nazwa serwera IMAP. |
-| IsSource | `bool` |  |  |  |
+| IsSource | `bool` | tylko-odczyt |  |  |
 | Login | `string` | bazodanowe | Login | Login użytkownika. |
 | MarkAsSeen | `bool` | bazodanowe | Ściągane wiadomości oznaczaj jako przeczytane | Określa czy system powinien automatycznie oznaczać ściągane wiadomości jako przeczytane na serwerze. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa użytkownika (adres e-mail). |
 | NazwaNadawcy | `string` | bazodanowe | Nazwa nadawcy | Nazwa, która pojawi się w polu OD. |
 | PobierajZalaczniki | `bool` | bazodanowe |  | Określa czy pobierać załączniki do wiadomości. |
 | ReceiveTimeout | `int` | bazodanowe | Czas oczekiwania na odpowiedź z serwera | Określa czas oczekiwania na odpowiedź z serwera w sekudach. |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SMTPEncryption | `bool` | bazodanowe | SSL/TLS | Określa czy używane jest szyfrowanie SSL/TLS. |
 | SMTPPort | `int` | bazodanowe | Port | Numer portu dla protokołu SMTP. |
 | SMTPServer | `string` | bazodanowe | Serwer | Nazwa serwera SMTP. |
@@ -47,7 +51,7 @@ Implementuje interfejsy: `IRightsSource`
 | Token | `Soneta.CRM.Config.AuthToken` | bazodanowe | Token | Token |
 | TylkoTekst | `bool` | bazodanowe | Tylko tekst | Określa czy treść wiadomości ma być zapisywana jako czysty tekst. |
 | UploadSentMail | `bool` | bazodanowe | Po udanej wysyłce wiadomości zapisz ją w folderze wiadomości wysłanych na serwerze |  |
-| Wiadomosci | `Soneta.Business.SubTable<Soneta.CRM.WiadomoscEmail>` |  |  |  |
+| Wiadomosci | `SubTable<Soneta.CRM.WiadomoscEmail>` | podlista |  |  |
 | ZamienZKL | `bool` | bazodanowe | Zamień znaki końca linii | Określa czy znaki końca linii mają zostać zamienione. |
 
 ## Enumy

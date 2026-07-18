@@ -5,14 +5,18 @@ Opis: Element szczegółowy hosta zarządzanego wiersza (IManagedRowInfoHost). P
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ManagedRow` → `IManagedRowInfoHost`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ManagedRow | `Soneta.Core.IManagedRowInfoHost` | bazodanowe, guided-parent, iface-ref |  |  |
-| ManagedState | `Soneta.Core.ManagedRowStates` | bazodanowe, enum |  |  |
-| Metryka | `Soneta.Business.LpSubTable<Soneta.Core.ManagedRowMetrics>` |  |  |  |
+| ManagedRow | `Soneta.Core.IManagedRowInfoHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| ManagedState | `Soneta.Core.ManagedRowStates` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Metryka | `LpSubTable<Soneta.Core.ManagedRowMetrics>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

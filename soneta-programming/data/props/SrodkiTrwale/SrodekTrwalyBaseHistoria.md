@@ -4,49 +4,54 @@ Tytuł: Ewidencja środków trwałych oraz wartości niematerialnych i prawnych 
 Opis: Element szczegółowy środka trwałego (SrodekTrwalyBase). Rejestruje historyczne zmiany parametrów środka trwałego, takich jak klasyfikacja KRŚT, miejsce użytkowania, osoba odpowiedzialna, parametry amortyzacji bilansowej i podatkowej oraz dane MSR i JPK.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
+Historia: Tak — zapis historyczny tabeli `SrodekTrwalyBase`
 
-- pola bazodanowe: 45
-- pola kalkulowane (z klas biznesowych): 20
+- pola bazodanowe (zapisywalne): 35
+- pola kalkulowane (zapisywalne): 14
+- pola tylko-odczyt: 9
+- podlisty: 4
+- subrowy: 3
+- razem: 65
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| AktualnoscKUP | `Soneta.Types.FromTo` | bazodanowe |  | Aktualność KUP |
-| Bilansowa | `Soneta.SrodkiTrwale.ParametryAmortyzacji` | bazodanowe |  | Parametry amortyzacji bilansowej |
-| Bilansowa.Metoda | `Soneta.SrodkiTrwale.MetodaAmortyzacji` | bazodanowe, enum |  | Metoda amortyzacji środka trwałego |
-| Bilansowa.Proporcja | `double` |  |  |  |
-| Bilansowa.Stawka | `Soneta.Types.Percent` | bazodanowe |  | Stawka amortyzacji środka trwałego |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| AktualnoscKUP | `FromTo` | bazodanowe, podlista |  | Aktualność KUP |
+| Bilansowa | `Soneta.SrodkiTrwale.ParametryAmortyzacji` (subrow) | bazodanowe |  | Parametry amortyzacji bilansowej |
+| Bilansowa.Metoda | `Soneta.SrodkiTrwale.MetodaAmortyzacji` (enum) | bazodanowe |  | Metoda amortyzacji środka trwałego |
+| Bilansowa.Proporcja | `double` | tylko-odczyt |  |  |
+| Bilansowa.Stawka | `Percent` | bazodanowe |  | Stawka amortyzacji środka trwałego |
 | Bilansowa.WgProporcji | `bool` | bazodanowe | Wg proporcji | Amortyzacja Liniowa liczona wg proporcji |
 | Bilansowa.Wspolczynnik | `decimal` | bazodanowe | Współczynnik | Współczynnik amortyzacji środka trwałego |
 | Bilansowa.ZmianaOkresuUzytecznosci | `bool` | bazodanowe | Zmiana okresu użyteczności | Zmiana okresu użyteczności |
 | CentrumKosztow | `Soneta.Core.CentrumKosztow` | bazodanowe | Centrum kosztów | Centrum kosztów środka trwałego |
-| CzestotliwoscOdpisu | `string` |  | Częstotliwość odpisu |  |
+| CzestotliwoscOdpisu | `string` | tylko-odczyt | Częstotliwość odpisu |  |
 | CzyKorektaWartosciPodatkowych | `bool` | bazodanowe |  | Korekta wartości podatkowych |
 | CzyKwotaOdpisowAmortyzacyjnych | `bool` | bazodanowe |  | E_16 Czy kwota odpisów amortyzacyjnych przy zmianie formy opodatkowania |
-| DataWyceny | `Soneta.Types.Date` | bazodanowe |  | Data wyceny wartości rynkowej środka trwałego |
-| Dokumenty | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.DokumentST>` |  |  |  |
-| Elementy | `Soneta.Business.LpSubTable<Soneta.SrodkiTrwale.ElementPodatkuOdNieruch>` |  |  |  |
+| DataWyceny | `Date` | bazodanowe |  | Data wyceny wartości rynkowej środka trwałego |
+| Dokumenty | `SubTable<Soneta.SrodkiTrwale.DokumentST>` | podlista |  |  |
+| Elementy | `LpSubTable<Soneta.SrodkiTrwale.ElementPodatkuOdNieruch>` | podlista |  |  |
 | Ilosc | `double` | bazodanowe | Ilość |  |
 | JednostkaMiary | `Soneta.Towary.Jednostka` | bazodanowe | Jm. |  |
 | KRST | `Soneta.SrodkiTrwale.RodzajST` | bazodanowe | KRŚT | Rodzaj środka trwałego według KRŚT |
 | Kategoria | `Soneta.SrodkiTrwale.KategoriaST` | bazodanowe | Kategoria | Kategoria środka trwałego |
-| KwotaOdpisowAmortyzacyjnych | `Soneta.Types.Currency` | bazodanowe |  | E_16 Kwota odpisów amortyzacyjnych przy zmianie formy opodatkowania |
+| KwotaOdpisowAmortyzacyjnych | `Currency` | bazodanowe |  | E_16 Kwota odpisów amortyzacyjnych przy zmianie formy opodatkowania |
 | Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe |  | Nazwa lokalizacji do podatku od nieruchomości |
-| MetodaAmortyzacji | `string` |  | Metoda amortyzacji |  |
+| MetodaAmortyzacji | `string` | tylko-odczyt | Metoda amortyzacji |  |
 | MetodaInnaJPK | `bool` | bazodanowe |  | Metoda Inna (JPK) |
-| MetodaWRMSR | `Soneta.SrodkiTrwale.MetodaObliczeniaWartosciMSR` | bazodanowe, enum |  | Metoda obliczenia wartości rezydualnej MSR |
+| MetodaWRMSR | `Soneta.SrodkiTrwale.MetodaObliczeniaWartosciMSR` (enum) | bazodanowe, tylko-odczyt |  | Metoda obliczenia wartości rezydualnej MSR |
 | MiejsceUzytkowania | `Soneta.SrodkiTrwale.MiejsceUzytkowania` | bazodanowe | Miejsce użytkowania | Miejsce użytkowania środeka trwałego |
 | Nazwisko | `string` | bazodanowe |  | Nazwisko osoby odpowiedzialnej za środek trwały |
-| OdpisyBiezaceZRokuPodatkowegoNKUP | `Soneta.Types.Currency` | bazodanowe |  | E_18 – Odpisy bieżące z roku podatkowego NKUP |
-| OdpisyRazem | `Soneta.Types.Currency` | bazodanowe |  | E_23 - Zaktualizowana kwota odpisów amortyzacyjnych rachunkowa z Rozporządzenia |
-| OdpisyRazemKUP | `Soneta.Types.Currency` | bazodanowe |  | E_14 - Zaktualizowana kwota odpisów amortyzacyjnych podatkowa z Rozporządzenia |
+| OdpisyBiezaceZRokuPodatkowegoNKUP | `Currency` | bazodanowe |  | E_18 – Odpisy bieżące z roku podatkowego NKUP |
+| OdpisyRazem | `Currency` | bazodanowe |  | E_23 - Zaktualizowana kwota odpisów amortyzacyjnych rachunkowa z Rozporządzenia |
+| OdpisyRazemKUP | `Currency` | bazodanowe |  | E_14 - Zaktualizowana kwota odpisów amortyzacyjnych podatkowa z Rozporządzenia |
 | Odpowiedzialny | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik odpowiedzialny za środek trwały |
 | OkresObrachunkowy | `Soneta.Ksiega.OkresObrachunkowy` |  |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| Podatkowa | `Soneta.SrodkiTrwale.ParametryAmortyzacji` | bazodanowe |  | Parametry amortyzacji podatkowej |
+| Parent | `Row` | tylko-odczyt |  |  |
+| Podatkowa | `Soneta.SrodkiTrwale.ParametryAmortyzacji` (subrow) | bazodanowe |  | Parametry amortyzacji podatkowej |
 | Pozabilansowy | `bool` | bazodanowe |  | Środek bilansowy/pozabilansowy |
 | Reklasyfikacja | `bool` |  |  |  |
-| Sezonowosc | `Soneta.SrodkiTrwale.Sezonowosc` | bazodanowe | Sezonowość | Sezonowość środka trwałego |
+| Sezonowosc | `Soneta.SrodkiTrwale.Sezonowosc` (subrow) | bazodanowe | Sezonowość | Sezonowość środka trwałego |
 | Sezonowosc.M1 | `bool` |  |  | Miesiąc |
 | Sezonowosc.M10 | `bool` |  |  | Miesiąc |
 | Sezonowosc.M11 | `bool` |  |  | Miesiąc |
@@ -60,21 +65,21 @@ Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
 | Sezonowosc.M8 | `bool` |  |  | Miesiąc |
 | Sezonowosc.M9 | `bool` |  |  | Miesiąc |
 | Sezonowosc.Proporcjonalnie | `bool` | bazodanowe |  | Proporcjonalnie do liczby okresów lub 1/12 |
-| Sezonowosc.Rodzaj | `Soneta.SrodkiTrwale.RodzajSezonowosci` | bazodanowe, enum |  | Rodzaj sezonowości |
+| Sezonowosc.Rodzaj | `Soneta.SrodkiTrwale.RodzajSezonowosci` (enum) | bazodanowe |  | Rodzaj sezonowości |
 | Sezonowosc.Wartosc | `string` | bazodanowe |  |  |
-| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, guided-parent |  |  |
-| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` | bazodanowe, enum |  | Typ środka trwałego |
-| UlgaInwestycyjna | `Soneta.Types.Currency` | bazodanowe |  | Wartość zaliczona do ulgi inwestycyjnej |
-| UlgaInwestycyjna30 | `Soneta.Types.Currency` | bazodanowe |  | Wartość 30% ulgi inwestycyjnej w pierwszym roku użytkowania |
-| WartoscPoczatkowaKUP | `Soneta.Types.Currency` | bazodanowe |  | E_12 – Wartość początkowa KUP |
-| WartoscRynkowa | `Soneta.Types.Currency` | bazodanowe | Wartość rynkowa |  |
-| WartoscWRMSR | `Soneta.Types.Currency` | bazodanowe |  | Wartość rezydualna MSR |
-| WspolczynnikWRMSR | `Soneta.Types.Percent` | bazodanowe |  | Wartość współczynnika obliczenia wartości rezydualnej MSR |
+| Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt |  | Typ środka trwałego |
+| UlgaInwestycyjna | `Currency` | bazodanowe |  | Wartość zaliczona do ulgi inwestycyjnej |
+| UlgaInwestycyjna30 | `Currency` | bazodanowe |  | Wartość 30% ulgi inwestycyjnej w pierwszym roku użytkowania |
+| WartoscPoczatkowaKUP | `Currency` | bazodanowe |  | E_12 – Wartość początkowa KUP |
+| WartoscRynkowa | `Currency` | bazodanowe | Wartość rynkowa |  |
+| WartoscWRMSR | `Currency` | bazodanowe, tylko-odczyt |  | Wartość rezydualna MSR |
+| WspolczynnikWRMSR | `Percent` | bazodanowe, tylko-odczyt |  | Wartość współczynnika obliczenia wartości rezydualnej MSR |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka Organizacyjna |  |
-| ZaktualizowanaWartoscPoczatkowa | `Soneta.Types.Currency` | bazodanowe |  | E_22 - Zaktualizowana wartość początkowa rachunkowa z Rozporządzenia |
-| ZaktualizowanaWartoscPoczatkowaKUP | `Soneta.Types.Currency` | bazodanowe |  | E_13 - Zaktualizowana wartość początkowa podatkowa z Rozporządzenia |
+| ZaktualizowanaWartoscPoczatkowa | `Currency` | bazodanowe |  | E_22 - Zaktualizowana wartość początkowa rachunkowa z Rozporządzenia |
+| ZaktualizowanaWartoscPoczatkowaKUP | `Currency` | bazodanowe |  | E_13 - Zaktualizowana wartość początkowa podatkowa z Rozporządzenia |
 | Zestaw | `Soneta.SrodkiTrwale.ZestawST` | bazodanowe |  | Zestaw, do którego należy środek trwały |
-| ZmianaWartosciPoczatkowejKUP | `Soneta.Types.Currency` | bazodanowe |  | E_15 – Zmiana wartości początkowej KUP |
+| ZmianaWartosciPoczatkowejKUP | `Currency` | bazodanowe |  | E_15 – Zmiana wartości początkowej KUP |
 
 ## Enumy
 

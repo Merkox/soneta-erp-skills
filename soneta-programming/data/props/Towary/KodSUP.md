@@ -4,16 +4,20 @@ Opis: Słownik kodów SUP (Single Use Plastics) klasyfikujących opakowania jedn
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Jednostka | `Soneta.Towary.Jednostka` |  | Jednostka |  |
+| Jednostka | `Soneta.Towary.Jednostka` | tylko-odczyt | Jednostka |  |
 | Kod | `string` | bazodanowe |  |  |
 | Material | `string` | bazodanowe | Materiał |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Towary.RodzajOpakowaniaSprawozdanieBDO` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Towary.RodzajOpakowaniaSprawozdanieBDO` (enum) | bazodanowe |  |  |
 | Waga | `Soneta.Towary.Quantity` | bazodanowe | Waga domyślna w gramach |  |
 
 ## Enumy

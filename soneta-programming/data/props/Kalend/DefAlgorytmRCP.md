@@ -5,19 +5,23 @@ Opis: Konfigurowalna definicja algorytmu przetwarzania danych z czytnika RCP. Ok
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | Interfejsy | `string` | bazodanowe | Interfejsy | Interfejsy jakie implementuje klasa tupla (z namespace) oddzielone przecinkiem |
 | KlasaBazowa | `string` | bazodanowe | Klasa bazowa | Klasa bazowa po której dziedziczy klasa tupla (z namespace), która musi dziedziczyć po DbTuple |
 | Nazwa | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |

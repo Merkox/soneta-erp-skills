@@ -6,23 +6,27 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `ITemplate`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 4
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| DO | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DW | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| DO | `MemoText` | bazodanowe, podlista |  |  |
+| DW | `MemoText` | bazodanowe, podlista |  |  |
 | Domyslny | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisany jest szablon. |
 | PotwOdczytania | `bool` | bazodanowe | Potwierdzenie odczytania wiadomości | Określa czy mamy otrzymać potwierdzenie odczytania wiadomości. |
 | Temat | `string` | bazodanowe |  |  |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Treść |  |
-| Typ | `Soneta.CRM.TypDlaSzablonuEmail` | bazodanowe, enum |  | Określa typ, dla którego szablon jest dostępny |
+| Tresc | `MemoText` | bazodanowe, podlista | Treść |  |
+| Typ | `Soneta.CRM.TypDlaSzablonuEmail` (enum) | bazodanowe |  | Określa typ, dla którego szablon jest dostępny |
 | TypDanych | `string` | bazodanowe |  |  |
-| UDW | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| UDW | `MemoText` | bazodanowe, podlista |  |  |
 | UstawTypMetatagu | `bool` |  |  |  |
 
 ## Enumy

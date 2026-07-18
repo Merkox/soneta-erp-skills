@@ -5,18 +5,22 @@ Opis: Element słownika systemowego. Przechowuje hierarchiczne listy wartości d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Category | `string` | bazodanowe | Nazwa słownika | Nazwa słownika, do którego należy dany element. |
-| Children | `Soneta.Business.SubTable<Soneta.Business.Db.DictionaryItem>` |  |  |  |
-| DataContext | `Soneta.Business.App.IOddzialFirmy` | bazodanowe, iface-ref |  | Oddział firmy będący kontekstem wyboru danych ze słownika. |
+| Category | `string` | bazodanowe, tylko-odczyt | Nazwa słownika | Nazwa słownika, do którego należy dany element. |
+| Children | `SubTable<Db.DictionaryItem>` | podlista |  |  |
+| DataContext | `App.IOddzialFirmy` | bazodanowe, iface-ref |  | Oddział firmy będący kontekstem wyboru danych ze słownika. |
 | Description | `string` | bazodanowe | Opis | Szczegółówy opis grupy. |
-| IsDictionaryStructure | `bool` |  |  |  |
+| IsDictionaryStructure | `bool` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  | Określa kolejność występowania elementów w słowniku. |
-| Parent | `Soneta.Business.Db.DictionaryItem` | bazodanowe |  | Określa nadrzędny obiekt słownikowy |
+| Parent | `Db.DictionaryItem` | bazodanowe |  | Określa nadrzędny obiekt słownikowy |
 | Path | `string` |  |  |  |
 | Value | `string` | bazodanowe | Wartość | Tekst będący pojedynczym elementem słownika. |
 

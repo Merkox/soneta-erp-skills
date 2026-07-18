@@ -5,20 +5,24 @@ Opis: Element szczegółowy definicji krotki (DbTupleDefinition). Rozszerzenie p
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DbTupleDefinition` → `DbTupleDefinition`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, guided-parent |  |  |
-| DefinicjaProcesu | `Soneta.Business.IDependentWfDefinition` | bazodanowe |  |  |
+| DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| DefinicjaProcesu | `IDependentWfDefinition` | bazodanowe |  |  |
 | DodawanyNaDokumentach | `bool` | bazodanowe |  |  |
 | DodawanyNaWnioskach | `bool` | bazodanowe |  |  |
-| FolderPath | `Soneta.Kadry.PracDbTupleDefinitionExt.FolderPathsExt` | enum |  |  |
+| FolderPath | `Soneta.Kadry.PracDbTupleDefinitionExt.FolderPathsExt` (enum) |  |  |  |
 | Katalog | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
 | PoswiadczenieOdbioru | `Soneta.Core.DefinicjaPoświadczeniaOdbioru` | bazodanowe |  |  |
 | UstawKatalog | `bool` | bazodanowe |  |  |
-| ZapisDoDokumentow | `Soneta.Kadry.RodzajZapisuDoDokumentów` | bazodanowe, enum |  |  |
+| ZapisDoDokumentow | `Soneta.Kadry.RodzajZapisuDoDokumentów` (enum) | bazodanowe |  |  |
 | ZmianaKatalogu | `bool` | bazodanowe |  |  |
 
 ## Enumy

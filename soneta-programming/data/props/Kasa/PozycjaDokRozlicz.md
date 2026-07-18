@@ -5,27 +5,31 @@ Opis: Element szczegółowy dokumentu rozliczeniowego (DokRozliczBase). Reprezen
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokRozliczBase`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZaplaty | `Soneta.Types.Date` | bazodanowe |  |  |
-| DokRozliczany | `Soneta.Kasa.IRozliczalny` | iface-ref |  |  |
-| Dokument | `Soneta.Kasa.DokRozliczBase` | bazodanowe, guided-parent |  |  |
-| Kwota1 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota2 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota3 | `Soneta.Types.Currency` | bazodanowe |  |  |
+| DataDokumentu | `Date` | bazodanowe |  |  |
+| DataZaplaty | `Date` | bazodanowe |  |  |
+| DokRozliczany | `Soneta.Kasa.IRozliczalny` | tylko-odczyt, iface-ref |  |  |
+| Dokument | `Soneta.Kasa.DokRozliczBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Kwota1 | `Currency` | bazodanowe |  |  |
+| Kwota2 | `Currency` | bazodanowe |  |  |
+| Kwota3 | `Currency` | bazodanowe |  |  |
 | NumerDokumentu | `string` | bazodanowe |  |  |
-| NumerEwidencji | `string` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| NumerEwidencji | `string` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Platnosc | `Soneta.Kasa.IRozliczalny` | bazodanowe, iface-ref |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Platnosc | `Soneta.Kasa.IRozliczalny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
 | Rozliczenie | `Soneta.Kasa.RozliczenieSP` | bazodanowe |  |  |
-| TerminZaplaty | `Soneta.Types.Date` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
+| TerminZaplaty | `Date` | bazodanowe |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Utworzone | `bool` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

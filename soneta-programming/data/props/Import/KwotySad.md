@@ -5,29 +5,33 @@ Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Przechowuje kwot
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akcyza | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Clo | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DataNotowania | `Soneta.Types.Date` | bazodanowe |  | Data notowania |
-| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, guided-parent |  |  |
-| KosztOpakowan | `Soneta.Types.Currency` | bazodanowe |  | Koszty opakowań w walucie systemowej |
-| KosztOpakowanW | `Soneta.Types.Currency` | bazodanowe |  | Koszty opakowań w walucie |
-| KosztTransportuKrajowego | `Soneta.Types.Currency` | bazodanowe |  | Koszt transportu krajowego |
-| KosztTransportuZagranicznego | `Soneta.Types.Currency` | bazodanowe |  | Koszty transportu zagranicznego w walucie systemowej |
-| KosztTransportuZagranicznegoW | `Soneta.Types.Currency` | bazodanowe |  | Koszty transportu zagranicznego w walucie |
-| KosztUbezpieczen | `Soneta.Types.Currency` | bazodanowe |  | Koszty ubezpieczeń w walucie systemowej |
-| KosztUbezpieczenW | `Soneta.Types.Currency` | bazodanowe |  | Koszty ubezpieczeń w walucie |
+| Akcyza | `Currency` | bazodanowe |  |  |
+| Clo | `Currency` | bazodanowe |  |  |
+| DataNotowania | `Date` | bazodanowe |  | Data notowania |
+| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| KosztOpakowan | `Currency` | bazodanowe |  | Koszty opakowań w walucie systemowej |
+| KosztOpakowanW | `Currency` | bazodanowe |  | Koszty opakowań w walucie |
+| KosztTransportuKrajowego | `Currency` | bazodanowe |  | Koszt transportu krajowego |
+| KosztTransportuZagranicznego | `Currency` | bazodanowe |  | Koszty transportu zagranicznego w walucie systemowej |
+| KosztTransportuZagranicznegoW | `Currency` | bazodanowe |  | Koszty transportu zagranicznego w walucie |
+| KosztUbezpieczen | `Currency` | bazodanowe |  | Koszty ubezpieczeń w walucie systemowej |
+| KosztUbezpieczenW | `Currency` | bazodanowe |  | Koszty ubezpieczeń w walucie |
 | Kurs | `double` | bazodanowe |  | Kurs waluty |
-| OplataManipulacyjna | `Soneta.Types.Currency` | bazodanowe |  | Opłata manipulacyjna |
-| PodstawaVAT | `Soneta.Types.Currency` |  |  |  |
-| Proforma | `Soneta.Types.Currency` | bazodanowe |  |  |
+| OplataManipulacyjna | `Currency` | bazodanowe |  | Opłata manipulacyjna |
+| PodstawaVAT | `Currency` | tylko-odczyt |  |  |
+| Proforma | `Currency` | bazodanowe |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  | Tabela kursowa |
-| Vat | `Soneta.Types.Currency` | bazodanowe |  |  |
-| WartoscCelna | `Soneta.Types.Currency` |  |  |  |
-| WartoscFaktury | `Soneta.Types.Currency` | bazodanowe |  | Wartość faktury w walucie systemowej |
-| WartoscFakturyW | `Soneta.Types.Currency` | bazodanowe |  | Wartość faktury w walucie |
-| WartoscTowaru | `Soneta.Types.Currency` |  |  |  |
+| Vat | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| WartoscCelna | `Currency` | tylko-odczyt |  |  |
+| WartoscFaktury | `Currency` | bazodanowe |  | Wartość faktury w walucie systemowej |
+| WartoscFakturyW | `Currency` | bazodanowe |  | Wartość faktury w walucie |
+| WartoscTowaru | `Currency` | tylko-odczyt |  |  |

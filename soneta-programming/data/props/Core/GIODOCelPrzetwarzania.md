@@ -5,12 +5,16 @@ Opis: Słownik celów przetwarzania danych osobowych zgodnie z RODO. Każdy cel 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis celu |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis celu |
 | PodstawaPrawna | `string` | bazodanowe | Podstawa prawna | Podstawa prawna przetwarzania |

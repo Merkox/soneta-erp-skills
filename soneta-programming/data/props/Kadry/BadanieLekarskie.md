@@ -6,28 +6,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 1
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data wykonania |  |
-| DataDofinansowania | `Soneta.Types.Date` | bazodanowe | Data dofinansowania |  |
+| Data | `Date` | bazodanowe | Data wykonania |  |
+| DataDofinansowania | `Date` | bazodanowe | Data dofinansowania |  |
 | Definicja | `Soneta.Kadry.DefinicjaBadaniaLekarskiego` | bazodanowe |  |  |
-| Informacja | `string` |  |  |  |
+| Informacja | `string` | tylko-odczyt |  |  |
 | KwotaDofinansowania | `decimal` | bazodanowe | Kwota dofinansowania |  |
-| ManagedState | `Soneta.Core.ManagedRowStates` | enum |  |  |
-| Następne | `Soneta.Kadry.BadanieLekarskie` |  |  |  |
-| NastępneDefinicja | `Soneta.Kadry.DefinicjaBadaniaLekarskiego` |  |  |  |
-| NastępneTermin | `Soneta.Types.Date` |  | Termin następnego badania |  |
-| Nazwa | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| ManagedState | `Soneta.Core.ManagedRowStates` (enum) | tylko-odczyt |  |  |
+| Następne | `Soneta.Kadry.BadanieLekarskie` | tylko-odczyt |  |  |
+| NastępneDefinicja | `Soneta.Kadry.DefinicjaBadaniaLekarskiego` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | PracaWOkularach | `bool` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| WazneDo | `Soneta.Types.Date` | bazodanowe | Ważne do |  |
-| Wykonane | `bool` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| WazneDo | `Date` | bazodanowe | Ważne do |  |
+| Wykonane | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

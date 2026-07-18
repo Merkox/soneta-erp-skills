@@ -5,31 +5,34 @@ Opis: Element szczegółowy dyskusji (Discussion). Uczestnik dyskusji z określo
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 15
+- podlisty: 0
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Approved | `bool` |  |  |  |
-| Avatar | `Soneta.Business.NamedStream` |  |  |  |
-| DeletionDate | `System.DateTime` | bazodanowe | Data usunięcia |  |
+| Approved | `bool` | tylko-odczyt |  |  |
+| Avatar | `NamedStream` |  |  |  |
 | Discussion | `Soneta.Core.Conversation.Discussion` | bazodanowe |  |  |
-| HasReview | `bool` |  |  |  |
-| IsNotRemoved | `bool` |  |  |  |
-| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyLike | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| NotificationMessage | `Soneta.Business.Notifications.Models.NotificationMessage` |  |  |  |
-| Original | `Soneta.Business.Row` |  |  |  |
-| PendingUpdate | `bool` |  |  |  |
-| Person | `Soneta.Business.IOwner` | bazodanowe | Użytkownik | Użytkownik dyskusji |
-| PersonKind | `Soneta.Core.Conversation.PersonKind` | bazodanowe, enum | Rodzaj użytkownika | Rodzaj użytkownika dyskusji |
-| PersonState | `Soneta.Core.Conversation.DiscussionUserState` | bazodanowe, enum | Satus | Status użytkownika dyskusji |
-| PersonStateIcon | `string` |  |  |  |
-| Rejected | `bool` |  |  |  |
-| TextValue | `string` |  |  |  |
+| HasReview | `bool` | tylko-odczyt |  |  |
+| IsNotRemoved | `bool` | tylko-odczyt |  |  |
+| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyLike | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| NotificationMessage | `Notifications.Models.NotificationMessage` |  |  |  |
+| Original | `Row` | tylko-odczyt |  |  |
+| PendingUpdate | `bool` | tylko-odczyt |  |  |
+| Person | `IOwner` | bazodanowe, tylko-odczyt | Użytkownik | Użytkownik dyskusji |
+| PersonKind | `Soneta.Core.Conversation.PersonKind` (enum) | bazodanowe, tylko-odczyt | Rodzaj użytkownika | Rodzaj użytkownika dyskusji |
+| PersonState | `Soneta.Core.Conversation.DiscussionUserState` (enum) | bazodanowe | Satus | Status użytkownika dyskusji |
+| PersonStateIcon | `string` | tylko-odczyt |  |  |
+| Rejected | `bool` | tylko-odczyt |  |  |
+| TextValue | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

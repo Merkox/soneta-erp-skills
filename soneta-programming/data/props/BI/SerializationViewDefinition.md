@@ -5,16 +5,20 @@ Opis: Definicja utrwalania widoku listy do tabeli BI. Określa tabelę źródło
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Description | `string` | bazodanowe | Opis | Opis objaśniający zawartość definicji utrwalania listy |
-| FolderPath | `string` | bazodanowe | Ścieżka | Ścieżka do folderu źródłowego |
-| Name | `string` | bazodanowe | Nazwa | Nazwa definicji utrwalania listy |
-| Ranges | `Soneta.Business.SubTable<Soneta.BI.SerializationViewRange>` |  |  |  |
-| SortOrder | `string` | bazodanowe | Sortowanie |  |
-| TableDefinition | `Soneta.BI.TableDefinition` | bazodanowe | Definicja tabeli | Definicja tabeli docelowej |
-| TableSource | `string` | bazodanowe | Tabela źródłowa | Nazwa tabeli źródłowej |
-| ViewInfoTypeName | `string` | bazodanowe | Typ widoku | Typ widoku definiującego listę |
+| FolderPath | `string` | bazodanowe, tylko-odczyt | Ścieżka | Ścieżka do folderu źródłowego |
+| Name | `string` | bazodanowe, tylko-odczyt | Nazwa | Nazwa definicji utrwalania listy |
+| Ranges | `SubTable<Soneta.BI.SerializationViewRange>` | podlista |  |  |
+| SortOrder | `string` | bazodanowe, tylko-odczyt | Sortowanie |  |
+| TableDefinition | `Soneta.BI.TableDefinition` | bazodanowe, tylko-odczyt | Definicja tabeli | Definicja tabeli docelowej |
+| TableSource | `string` | bazodanowe, tylko-odczyt | Tabela źródłowa | Nazwa tabeli źródłowej |
+| ViewInfoTypeName | `string` | bazodanowe, tylko-odczyt | Typ widoku | Typ widoku definiującego listę |

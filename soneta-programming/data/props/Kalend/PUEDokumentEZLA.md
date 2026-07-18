@@ -6,48 +6,52 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Raport` → `PUERaportNieobecnosci`
 Implementuje interfejsy: `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 23
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 8
+- subrowy: 0
+- razem: 37
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzyAnulowane | `string` | bazodanowe |  |  |
-| DataUrodzeniaOsoby | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataWystawienia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZus | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZwolnieniaDo | `Soneta.Types.Date` | bazodanowe |  |  |
-| DniKalendarzaHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` |  |  |  |
-| DniPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienPracyHistoria>` |  |  |  |
+| DataUrodzeniaOsoby | `Date` | bazodanowe |  |  |
+| DataWystawienia | `Date` | bazodanowe |  |  |
+| DataZus | `Date` | bazodanowe |  |  |
+| DataZwolnieniaDo | `Date` | bazodanowe |  |  |
+| DniKalendarzaHistorie | `SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` | podlista |  |  |
+| DniPracyHistorie | `SubTable<Soneta.Kalend.DzienPracyHistoria>` | podlista |  |  |
 | EdytowanoNb | `bool` | bazodanowe |  |  |
-| KodChoroby | `string` |  |  |  |
+| KodChoroby | `string` | tylko-odczyt |  |  |
 | KodChorobyA | `string` | bazodanowe |  |  |
 | KodChorobyB | `string` | bazodanowe |  |  |
 | KodChorobyC | `string` | bazodanowe |  |  |
 | KodChorobyD | `string` | bazodanowe |  |  |
 | KodChorobyE | `string` | bazodanowe |  |  |
 | KodPokrewienstwa | `string` | bazodanowe |  |  |
-| KodyChoroby | `string` |  |  |  |
-| Kontynuacja | `bool` |  |  |  |
+| KodyChoroby | `string` | tylko-odczyt |  |  |
+| Kontynuacja | `bool` | tylko-odczyt |  |  |
 | MiejsceUbezpieczenia | `string` | bazodanowe |  |  |
 | Numer | `string` | bazodanowe |  |  |
-| OkresSkroconyEzlaK | `Soneta.Types.FromTo` |  |  |  |
-| OkresWSzpitalu | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresWSzpitaluTxt | `string` |  |  |  |
-| OkresZwolnienia | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| OkresSkroconyEzlaK | `FromTo` | podlista |  |  |
+| OkresWSzpitalu | `FromTo` | bazodanowe, podlista |  |  |
+| OkresWSzpitaluTxt | `string` | tylko-odczyt |  |  |
+| OkresZwolnienia | `FromTo` | bazodanowe, podlista |  |  |
 | PoprzedniImport | `bool` | bazodanowe |  |  |
-| Raport | `Soneta.Kalend.PUERaportNieobecnosci` | bazodanowe, guided-parent |  |  |
+| Raport | `Soneta.Kalend.PUERaportNieobecnosci` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| SeriaNumer | `string` |  |  |  |
-| Stan | `Soneta.Kalend.PUEStan` | bazodanowe, enum |  |  |
-| StatusEZLA | `Soneta.Kalend.PUEStatusEZLA` | bazodanowe, enum |  |  |
+| SeriaNumer | `string` | tylko-odczyt |  |  |
+| Stan | `Soneta.Kalend.PUEStan` (enum) | bazodanowe |  |  |
+| StatusEZLA | `Soneta.Kalend.PUEStatusEZLA` (enum) | bazodanowe |  |  |
 | UbIdentyfikator | `string` | bazodanowe |  |  |
-| UbIdentyfikatorTyp | `Soneta.Kalend.PUEIdentyfikatorTyp` | bazodanowe, enum |  |  |
+| UbIdentyfikatorTyp | `Soneta.Kalend.PUEIdentyfikatorTyp` (enum) | bazodanowe |  |  |
 | UbImie | `string` | bazodanowe |  |  |
 | UbNazwisko | `string` | bazodanowe |  |  |
 | WskazaniaLekarskie | `string` | bazodanowe |  |  |
-| ZapisDzialan | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Zrodlo | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ZrodloEzlaK | `Soneta.Business.MemoText` |  |  |  |
+| ZapisDzialan | `MemoText` | bazodanowe, podlista |  |  |
+| Zrodlo | `MemoText` | bazodanowe, podlista |  |  |
+| ZrodloEzlaK | `MemoText` | podlista |  |  |
 
 ## Enumy
 

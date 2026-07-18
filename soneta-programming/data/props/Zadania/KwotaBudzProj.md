@@ -5,23 +5,27 @@ Opis: Zapis kwotowy i ilościowy na pozycji budżetu projektu. Rejestruje planow
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BudzetProjektu | `Soneta.Zadania.Budzetowanie.BudzetProjektu` | bazodanowe |  | Budzet projektu, z którym powiązana jest kwota |
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data wprowadzenia kwoty. |
+| Data | `Date` | bazodanowe | Data | Data wprowadzenia kwoty. |
 | EtapBudzetu | `Soneta.Core.IEtapBudzetu` | bazodanowe |  |  |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość |  |
+| Ilosc | `Amount` | bazodanowe | Ilość |  |
 | Korekta | `bool` | bazodanowe | Korekta |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe | Kwota |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe | Operator |  |
-| PoczatekOkresu | `Soneta.Types.Date` | bazodanowe | Data | Początek okresu. |
+| Kwota | `Currency` | bazodanowe | Kwota |  |
+| Operator | `App.Operator` | bazodanowe | Operator |  |
+| PoczatekOkresu | `Date` | bazodanowe | Data | Początek okresu. |
 | PozycjaBudzProj | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | bazodanowe |  | Pozycja budżetu projektu, z którą powiązane jest kwota |
-| RodzajKwotyBudzProj | `Soneta.Zadania.Budzetowanie.RodzajKwotyBudzProj` | bazodanowe, enum |  |  |
+| RodzajKwotyBudzProj | `Soneta.Zadania.Budzetowanie.RodzajKwotyBudzProj` (enum) | bazodanowe |  |  |
 | Uwagi | `string` | bazodanowe | Uwagi |  |
-| WersjaPlanu | `Soneta.Zadania.Budzetowanie.WersjaPlanu` | bazodanowe |  | Wersja planu |
+| WersjaPlanu | `Soneta.Zadania.Budzetowanie.WersjaPlanu` | bazodanowe, tylko-odczyt |  | Wersja planu |
 
 ## Enumy
 

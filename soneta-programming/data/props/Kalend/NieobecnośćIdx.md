@@ -3,17 +3,21 @@ Nazwa tabeli: `NieobecnosciIdx`
 Opis: Indeks nieobecności umożliwiający szybkie wyszukiwanie nieobecności pracownika po okresie i definicji. Tabela pomocnicza łącząca nieobecność z pracownikiem i definicją nieobecności w celu optymalizacji zapytań.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
-| Nieobecnosc | `Soneta.Kalend.Nieobecnosc` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` |  |  |  |
-| Zrodlo | `Soneta.Kalend.IZrodloNieobecnosci` | bazodanowe, iface-ref |  |  |
+| Nieobecnosc | `Soneta.Kalend.Nieobecnosc` | bazodanowe, tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | tylko-odczyt |  |  |
+| Zrodlo | `Soneta.Kalend.IZrodloNieobecnosci` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

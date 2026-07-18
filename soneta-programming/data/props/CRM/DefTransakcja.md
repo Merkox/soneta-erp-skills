@@ -6,55 +6,59 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 20
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 10
+- podlisty: 10
+- subrowy: 2
+- razem: 44
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla transakcji. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla transakcji | Kod klasy kalkulatora dla transakcji. |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Uruchom procesy |  |
-| DataType | `System.Type` |  |  |  |
-| DefinedTypeName | `string` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla transakcji | Kod klasy kalkulatora dla transakcji. |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Uruchom procesy |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefinedTypeName | `string` | tylko-odczyt |  |  |
 | Domyslna | `bool` | bazodanowe | Domyślna | Domyślna definicja transakcji. |
 | FormularzUzytkownika | `bool` |  |  |  |
 | InicjujNazwe | `bool` | bazodanowe | Inicjuje nazwę transakcji | Określa, czy transakcja ma zainicjowaną nazwę z definicji. |
-| IsEnabled | `bool` |  |  |  |
-| IsSource | `bool` |  |  |  |
+| IsEnabled | `bool` | tylko-odczyt |  |  |
+| IsSource | `bool` | tylko-odczyt |  |  |
 | KanbanColor | `string` | bazodanowe | Kolor | Kolor na tablicy Kanban. |
-| Key | `string` |  |  |  |
-| NamePrefix | `string` |  |  |  |
+| Key | `string` | tylko-odczyt |  |  |
+| NamePrefix | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa definicji transakcji. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji transakcji. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji transakcji. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
 | OpisHTML | `bool` | bazodanowe | Opis w postaci HTML. | Określa, czy opis będzie w postaci HTML. |
-| PlugIns | `Soneta.Business.SubTable` |  |  |  |
+| PlugIns | `SubTable` | podlista |  |  |
 | PokazKomunikat | `bool` | bazodanowe |  | Decyduje o pokazywaniu komunikatu o kontrahencie podczas jego ustawianiu na dokument CRM. |
-| Priorytety | `Soneta.Business.LpSubTable<Soneta.CRM.Config.PriorytetTransakcja>` |  |  |  |
-| RodzajFormularza | `Soneta.CRM.RodzajFormularzaCrm` | bazodanowe, enum | Rodzaj formularza | Rodzaj formularza. |
+| Priorytety | `LpSubTable<Soneta.CRM.Config.PriorytetTransakcja>` | podlista |  |  |
+| RodzajFormularza | `Soneta.CRM.RodzajFormularzaCrm` (enum) | bazodanowe | Rodzaj formularza | Rodzaj formularza. |
 | RoleGuid | `System.Guid` | bazodanowe |  | Domyślna rola do której przypisana zostanie transakcja. |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| StanyTransakcji | `Soneta.Business.LpSubTable<Soneta.CRM.Config.StanTransakcji>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| StanyTransakcji | `LpSubTable<Soneta.CRM.Config.StanTransakcji>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji transakcji wykorzystywana do wyszukiwania definicji oraz numeracji transakcji CRM. |
-| SysNotifications | `Soneta.Business.SubTable<Soneta.Business.Db.Notifications.SysNotification>` |  |  |  |
-| TableName | `string` |  |  |  |
-| Temperatury | `Soneta.Business.LpSubTable<Soneta.CRM.Config.TemperaturaTransakcji>` |  |  |  |
-| TypeFullName | `string` |  |  |  |
-| WFDefinition | `Soneta.Business.IWFDefinition` | iface-ref |  |  |
-| WfEngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WfEngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
-| XmlForm | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| SysNotifications | `SubTable<Db.Notifications.SysNotification>` | podlista |  |  |
+| TableName | `string` | tylko-odczyt |  |  |
+| Temperatury | `LpSubTable<Soneta.CRM.Config.TemperaturaTransakcji>` | podlista |  |  |
+| TypeFullName | `string` | tylko-odczyt |  |  |
+| WFDefinition | `IWFDefinition` | tylko-odczyt, iface-ref |  |  |
+| WfEngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| WfEngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+| XmlForm | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 
 ## Relacje interfejsowe
 

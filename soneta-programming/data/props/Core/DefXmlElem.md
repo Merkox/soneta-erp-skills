@@ -5,34 +5,38 @@ Opis: Element szczegółowy definicji XML (DefXmlNag). Reprezentuje pojedynczy e
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 5
+- podlisty: 7
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BazowyLp | `int` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Pozostały kod | Pozostały kod. |
-| CodeExport | `Soneta.Business.MemoText` | bazodanowe | Kod eksportu | Kod dla eksportu. |
-| CodeImport | `Soneta.Business.MemoText` | bazodanowe | Kod importu | Kod dla importu. |
-| CodeVisible | `Soneta.Business.MemoText` | bazodanowe | Kod widoczności | Kod widoczności elementu. |
-| DefXmlElemCode | `string` |  |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Pozostały kod | Pozostały kod. |
+| CodeExport | `MemoText` | bazodanowe, podlista | Kod eksportu | Kod dla eksportu. |
+| CodeImport | `MemoText` | bazodanowe, podlista | Kod importu | Kod dla importu. |
+| CodeVisible | `MemoText` | bazodanowe, podlista | Kod widoczności | Kod widoczności elementu. |
+| DefXmlElemCode | `string` | tylko-odczyt |  |  |
 | DefXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe |  | Definicja XML, z którą powiązany jest element |
 | Definicja | `Soneta.Core.DefXmlNag` |  |  |  |
 | DlugoscDanych | `int` | bazodanowe | Długość danych | Określa dozwoloną długość danych. |
 | Element | `string` | bazodanowe | Nazwa elementu | Nazwa elementu. |
-| FullClassName | `string` |  |  |  |
-| HasPodrzedne | `bool` |  |  |  |
+| FullClassName | `string` | tylko-odczyt |  |  |
+| HasPodrzedne | `bool` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Nadrzedny | `Soneta.Core.DefXmlElem` | bazodanowe | Nadrzędny | Określa nadrzędny element. |
-| OcrBusinessMappingElements | `Soneta.Business.SubTable` |  |  |  |
-| Opcjonalne | `Soneta.Core.OpcjonalnoscDefXmlElem` | bazodanowe, enum | Pole opcjonalne | Określa czy pole jest opcjonalne. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis elementu definicji. |
-| Path | `string` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Core.DefXmlElem>` |  |  |  |
-| RowType | `System.Type` |  |  |  |
-| Specjalne | `Soneta.Core.PoleSpecjalne` | bazodanowe, enum | Przeznaczenie elementu | Określa specjalne przeznaczenie danego elementu. |
+| OcrBusinessMappingElements | `SubTable` | podlista |  |  |
+| Opcjonalne | `Soneta.Core.OpcjonalnoscDefXmlElem` (enum) | bazodanowe | Pole opcjonalne | Określa czy pole jest opcjonalne. |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis elementu definicji. |
+| Path | `string` | tylko-odczyt |  |  |
+| Podrzedne | `SubTable<Soneta.Core.DefXmlElem>` | podlista |  |  |
+| RowType | `System.Type` | tylko-odczyt |  |  |
+| Specjalne | `Soneta.Core.PoleSpecjalne` (enum) | bazodanowe | Przeznaczenie elementu | Określa specjalne przeznaczenie danego elementu. |
 | TableName | `string` | bazodanowe | Tabela danych | Klasa obiektu. |
-| Type | `Soneta.Core.ElementType` | bazodanowe, enum | Typ | Określa typ obiektu tworzonego przy przekształcaniu elementu. |
+| Type | `Soneta.Core.ElementType` (enum) | bazodanowe | Typ | Określa typ obiektu tworzonego przy przekształcaniu elementu. |
 
 ## Enumy
 

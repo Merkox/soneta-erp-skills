@@ -5,10 +5,14 @@ Opis: Element szczegółowy wzoru oceny (WzorOcenyPracownika). Wiąże konkretne
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wzor` → `WzorOcenyPracownika`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.HR.DefElementuOcenyPracownika` | bazodanowe |  |  |
-| Wzor | `Soneta.HR.WzorOcenyPracownika` | bazodanowe, guided-parent | Wzór |  |
+| Wzor | `Soneta.HR.WzorOcenyPracownika` | bazodanowe, tylko-odczyt, guided-parent | Wzór |  |

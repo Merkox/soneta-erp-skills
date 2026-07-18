@@ -6,31 +6,33 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 6
+- podlisty: 7
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu rozliczenia |
+| Data | `Date` | bazodanowe |  | Data dokumentu rozliczenia |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu rozliczenia |
-| DoRozliczenia | `decimal` | bazodanowe |  | Do rozliczenia |
-| DoRozliczeniaOldValue | `decimal` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| KorektaKosztow | `decimal` | bazodanowe |  | Korekta kosztów |
-| KorektaKosztowOldValue | `decimal` |  |  |  |
-| Koszty | `Soneta.Business.SubTable<Soneta.Samochodowka.KosztEP>` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| DoRozliczenia | `decimal` | bazodanowe, tylko-odczyt |  | Do rozliczenia |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| KorektaKosztow | `decimal` | bazodanowe, tylko-odczyt |  | Korekta kosztów |
+| Koszty | `SubTable<Soneta.Samochodowka.KosztEP>` | podlista |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| Przejazdy | `Soneta.Business.SubTable<Soneta.Samochodowka.Przejazd>` |  |  |  |
-| RozliczeniaPojazdow | `Soneta.Samochodowka.RozliczenieEPPojazdu[]` |  |  |  |
-| WartoscKosztow | `decimal` | bazodanowe |  | Wartość kosztów |
-| WartoscPrzejazdow | `decimal` | bazodanowe |  | Wartość przejazdów |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| Przejazdy | `SubTable<Soneta.Samochodowka.Przejazd>` | podlista |  |  |
+| RozliczeniaPojazdow | `Soneta.Samochodowka.RozliczenieEPPojazdu[]` | podlista |  |  |
+| WartoscKosztow | `decimal` | bazodanowe, tylko-odczyt |  | Wartość kosztów |
+| WartoscPrzejazdow | `decimal` | bazodanowe, tylko-odczyt |  | Wartość przejazdów |
 | Zatwierdzony | `bool` |  |  |  |

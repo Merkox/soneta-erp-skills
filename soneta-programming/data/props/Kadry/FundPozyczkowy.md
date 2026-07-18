@@ -6,19 +6,23 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 8
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Kadry.DefinicjaFunduszuPozyczkowego` | bazodanowe |  |  |
-| Dopłaty | `Soneta.Business.ListWithView` |  |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| ElementySkładki | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pozyczki | `Soneta.Business.SubTable<Soneta.Kadry.Pozyczka>` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RazemElementy | `Soneta.Business.ListWithView` |  |  |  |
-| SaldoBO | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Zapłaty | `Soneta.Business.View` |  |  |  |
-| ZmianyWkładu | `Soneta.Business.SubTable<Soneta.Kadry.ZmianaWkładuFunduszuPozyczkowego>` |  |  |  |
+| Definicja | `Soneta.Kadry.DefinicjaFunduszuPozyczkowego` | bazodanowe, tylko-odczyt |  |  |
+| Dopłaty | `ListWithView` | podlista |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| ElementySkładki | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pozyczki | `SubTable<Soneta.Kadry.Pozyczka>` | podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RazemElementy | `ListWithView` | podlista |  |  |
+| SaldoBO | `Currency` | bazodanowe |  |  |
+| Zapłaty | `View` | podlista |  |  |
+| ZmianyWkładu | `SubTable<Soneta.Kadry.ZmianaWkładuFunduszuPozyczkowego>` | podlista |  |  |

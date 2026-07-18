@@ -5,30 +5,34 @@ Opis: Element szczegółowy pracownika (Pracownik). Dzień RCP pracownika — za
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 7
+- podlisty: 5
+- subrowy: 1
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Bledy | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Bledy | `MemoText` | bazodanowe, podlista |  |  |
 | BlokadaStref | `bool` |  |  |  |
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DzienTygodnia | `Soneta.Kadry.Config.WeekDays` | enum |  |  |
-| GetStrefyOrg | `System.Collections.Generic.List<Soneta.Kalend.PracaZdalnaRCP.StrefaDoRCP>` |  |  |  |
-| KolorRCP | `System.Drawing.Color` |  |  |  |
-| KolorRCPFont | `System.Drawing.Color` |  |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DzienTygodnia | `Soneta.Kadry.Config.WeekDays` (enum) | tylko-odczyt |  |  |
+| GetStrefyOrg | `System.Collections.Generic.List<Soneta.Kalend.PracaZdalnaRCP.StrefaDoRCP>` | podlista |  |  |
+| KolorRCP | `System.Drawing.Color` | tylko-odczyt |  |  |
+| KolorRCPFont | `System.Drawing.Color` | tylko-odczyt |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | RcpOK | `bool` | bazodanowe |  | Informacja o stanie rekordu po imporcie z RCP |
-| StanRCP | `Soneta.Kalend.StanWeryfikacjiRCP` | bazodanowe, enum |  | Informacja o stanie weryfikacji rekordu z RCP |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaRCP>` |  |  |  |
-| StrefyOrg | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| StanRCP | `Soneta.Kalend.StanWeryfikacjiRCP` (enum) | bazodanowe |  | Informacja o stanie weryfikacji rekordu z RCP |
+| Strefy | `SubTable<Soneta.Kalend.StrefaRCP>` | podlista |  |  |
+| StrefyOrg | `MemoText` | bazodanowe, podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
 
 ## Enumy
 

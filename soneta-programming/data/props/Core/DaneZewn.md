@@ -4,15 +4,19 @@ Tytuł: Dane z systemów zewnętrznych
 Opis: Dane pobrane lub wysłane do systemu zewnętrznego. Przechowuje surowe dane (XML/JSON), kategorię, datę, typ tabeli docelowej, system zewnętrzny i dodatkowe informacje.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dane | `Soneta.Business.MemoText` | bazodanowe | Dane zewnętrzne | Dane zewnętrzne |
+| Dane | `MemoText` | bazodanowe, podlista | Dane zewnętrzne | Dane zewnętrzne |
 | Data | `System.DateTime` | bazodanowe | Data | Data |
 | Info | `string` | bazodanowe | Info | Dodatkowe informacje |
-| Kategoria | `Soneta.Core.KategoriaDanychZewn` | bazodanowe, enum | KategoriaDanychZewn | Kategoria danych zewnętrznych |
+| Kategoria | `Soneta.Core.KategoriaDanychZewn` (enum) | bazodanowe | KategoriaDanychZewn | Kategoria danych zewnętrznych |
 | SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe | System zewnętrzny | Wskazanie na system zewnętrzny |
 | Tabela | `string` | bazodanowe | Typ obiektu programu | Typ obiektu programu |
 

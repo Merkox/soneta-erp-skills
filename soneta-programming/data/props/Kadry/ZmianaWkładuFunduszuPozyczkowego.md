@@ -6,22 +6,26 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 2
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data wykonania operacji |
+| Data | `Date` | bazodanowe |  | Data wykonania operacji |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| Fundusz | `Soneta.Kadry.FundPozyczkowy` | bazodanowe |  |  |
-| Kierunek | `Soneta.Kadry.KierunekZmianyWkładuFunduszuPożyczkowego` | bazodanowe, enum |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota dopłaty/wypłaty |
-| KwotaDopłaty | `Soneta.Types.Currency` |  |  |  |
-| KwotaWycofania | `Soneta.Types.Currency` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis informacji o zmianie wkładu funduszu pożyczkowego |
-| Rozliczone | `bool` |  |  |  |
-| Spłacona | `bool` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| Fundusz | `Soneta.Kadry.FundPozyczkowy` | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Kadry.KierunekZmianyWkładuFunduszuPożyczkowego` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kwota | `Currency` | bazodanowe |  | Kwota dopłaty/wypłaty |
+| KwotaDopłaty | `Currency` | tylko-odczyt |  |  |
+| KwotaWycofania | `Currency` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis informacji o zmianie wkładu funduszu pożyczkowego |
+| Rozliczone | `bool` | tylko-odczyt |  |  |
+| Spłacona | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

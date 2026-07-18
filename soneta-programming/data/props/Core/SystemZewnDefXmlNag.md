@@ -4,13 +4,17 @@ Tytuł: Powiązanie systemu zewnętrznego z defnicją XML
 Opis: Powiązanie systemu zewnętrznego z definicją XML określające, które definicje komunikatów są dostępne dla danego systemu. Zawiera referencję do definicji XML oraz ustawienia pobierania i aktualizacji danych.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe | Definicja |  |
-| Get | `Soneta.Core.GetRestriction` | bazodanowe, enum | Pobieranie |  |
+| Get | `Soneta.Core.GetRestriction` (enum) | bazodanowe | Pobieranie |  |
 | SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe |  |  |
 | Update | `bool` | bazodanowe | Aktualizacja |  |
 

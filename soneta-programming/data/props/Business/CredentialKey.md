@@ -5,15 +5,19 @@ Opis: Klucz uwierzytelniania dwuskładnikowego (MFA) przypisany do operatora. Pr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Key | `string` | bazodanowe | Klucz | Aktualny klucz rejestracji uwierzytelniania dwuskładnikowego. |
 | Name | `string` | bazodanowe | Nazwa | Nazwa opisowa klucza. |
-| Operator | `Soneta.Business.IMfaOperator` | bazodanowe, iface-ref |  | Operator upoważniony do wykonywania operacji dla wygenerowanego tokena. |
-| Type | `Soneta.Types.MfaType` | bazodanowe, enum | Typ | Określa przeznaczenie klucza. |
+| Operator | `IMfaOperator` | bazodanowe, iface-ref |  | Operator upoważniony do wykonywania operacji dla wygenerowanego tokena. |
+| Type | `MfaType` (enum) | bazodanowe | Typ | Określa przeznaczenie klucza. |
 
 ## Relacje interfejsowe
 
@@ -28,7 +32,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### MfaType (`Soneta.Types.MfaType`)
+### MfaType (`MfaType`)
 - `None` = 0 — Brak
 - `Totp` = 1 — Uwierzytelnianie oparte o kody czasowe TOTP
 - `Fido` = 2 — Uwierzytelnianie oparte o FIDO2

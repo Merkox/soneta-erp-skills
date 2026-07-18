@@ -5,11 +5,15 @@ Opis: Słownik rodzajów silników pojazdów na potrzeby rozliczeń środowiskow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Opis | `string` | bazodanowe |  | Opis rodzaju silnika |
-| Paliwa | `Soneta.Business.SubTable<Soneta.Samochodowka.EkoPaliwoSilnika>` |  |  |  |
-| Symbol | `string` | bazodanowe |  | Symbol silnika |
+| Opis | `string` | bazodanowe, tylko-odczyt |  | Opis rodzaju silnika |
+| Paliwa | `SubTable<Soneta.Samochodowka.EkoPaliwoSilnika>` | podlista |  |  |
+| Symbol | `string` | bazodanowe, tylko-odczyt |  | Symbol silnika |

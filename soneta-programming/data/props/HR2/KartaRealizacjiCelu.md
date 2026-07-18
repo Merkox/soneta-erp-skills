@@ -5,11 +5,15 @@ Opis: Karta realizacji celów okresowych pracownika na określony dzień. Grupuj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Realizacje | `Soneta.Business.SubTable<Soneta.HR2.RealizacjaCelu>` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Realizacje | `SubTable<Soneta.HR2.RealizacjaCelu>` | podlista |  |  |

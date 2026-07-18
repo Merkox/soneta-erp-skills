@@ -5,15 +5,19 @@ Opis: Konfigurowalna definicja czytnika rejestracji czasu pracy (RCP). Określa 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Format | `string` | bazodanowe |  |  |
 | KatalogImport | `string` | bazodanowe |  |  |
 | KatalogKopia | `string` | bazodanowe |  |  |
-| KodyZdarzenRCP | `Soneta.Business.SubTable<Soneta.Kalend.KodZdarzeniaRCP>` |  |  |  |
+| KodyZdarzenRCP | `SubTable<Soneta.Kalend.KodZdarzeniaRCP>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | RozszerzenieNazwyPliku | `string` | bazodanowe |  |  |
 | Sciezka | `string` | bazodanowe |  | Ścieżka do programu obsługującego import z RCP |

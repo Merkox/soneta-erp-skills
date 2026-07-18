@@ -5,19 +5,23 @@ Opis: Konfigurowalna definicja grafiku pracy. Określa zakres godzinowy dnia (od
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 3
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| DzienDo | `Soneta.Types.Time` | bazodanowe |  |  |
-| DzienOd | `Soneta.Types.Time` | bazodanowe |  |  |
+| DzienDo | `Time` | bazodanowe |  |  |
+| DzienOd | `Time` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Xml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |

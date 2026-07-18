@@ -5,11 +5,15 @@ Opis: Element szczegółowy raportu webowego (WebReport). Przypisuje rolę upraw
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Report` → `WebReport`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Report | `Soneta.Web.Business.App.WebReport` | bazodanowe, guided-parent |  | Raport do którego przypisano rolę |
-| Role | `Soneta.Business.App.Role` |  |  |  |
-| RoleGuid | `System.Guid` | bazodanowe |  |  |
+| Report | `Soneta.Web.Business.App.WebReport` | bazodanowe, tylko-odczyt, guided-parent |  | Raport do którego przypisano rolę |
+| Role | `App.Role` | tylko-odczyt |  |  |
+| RoleGuid | `System.Guid` | bazodanowe, tylko-odczyt |  |  |

@@ -5,13 +5,17 @@ Opis: Element szczegółowy paczki przelewów (PaczkaPrzelewow). Wiąże pojedyn
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Paczka` → `PaczkaPrzelewow`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  |  |
-| Paczka | `Soneta.Kasa.PaczkaPrzelewow` | bazodanowe, guided-parent |  |  |
+| Paczka | `Soneta.Kasa.PaczkaPrzelewow` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | PowodAnulowania | `string` | bazodanowe |  | Powód anulowania |
-| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe | Przelew |  |
-| ZobowiazaniaIWplaty | `Soneta.Business.MemoText` | bazodanowe |  | Zobowiązania i wpłaty |
+| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe, tylko-odczyt | Przelew |  |
+| ZobowiazaniaIWplaty | `MemoText` | bazodanowe, podlista |  | Zobowiązania i wpłaty |

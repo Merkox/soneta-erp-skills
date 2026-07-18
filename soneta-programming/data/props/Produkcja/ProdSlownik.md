@@ -5,17 +5,21 @@ Opis: Konfigurowalna definicja słownika produkcyjnego przechowującego listy wa
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie słownika. Zablokowane słowniki nie będą wyświetlane na listach wyboru. |
 | Kod | `string` | bazodanowe |  | Kod, skrócona nazwa słownika. |
 | Nazwa | `string` | bazodanowe | Nazwa słownika | Pełna nazwa słownika. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis słownika. |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Produkcja.ProdPozSlownika>` |  |  |  |
-| Typ | `Soneta.Produkcja.TypSlownika` | bazodanowe, enum |  | Określa typ danych słownika (alfanumeryczny, numeryczny). |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis słownika. |
+| Pozycje | `LpSubTable<Soneta.Produkcja.ProdPozSlownika>` | podlista |  |  |
+| Typ | `Soneta.Produkcja.TypSlownika` (enum) | bazodanowe |  | Określa typ danych słownika (alfanumeryczny, numeryczny). |
 
 ## Enumy
 

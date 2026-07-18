@@ -5,27 +5,31 @@ Opis: Słownik definicji operacji produkcyjnych stanowiących wzorce dla operacj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 6
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Zablokowanie definicji operacji. |
-| Czas | `Soneta.Types.TimeSec` | bazodanowe |  | Czas definicji operacji. |
-| CzasMiedzyoperacyjny | `Soneta.Types.TimeSec` | bazodanowe | Czas międzyoperacyjny | Czas międzyoperacyjny definicji operacji. |
+| Czas | `TimeSec` | bazodanowe |  | Czas definicji operacji. |
+| CzasMiedzyoperacyjny | `TimeSec` | bazodanowe | Czas międzyoperacyjny | Czas międzyoperacyjny definicji operacji. |
 | DefinicjaMeldunku | `Soneta.ProdukcjaPro.ProDefinicjaMeldunku` | bazodanowe | Definicja meldunku | Definicja meldunku dla definicji operacji. |
-| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaOperacjiTechnologii` |  |  | Kalkulacja definicji operacji. |
+| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaOperacjiTechnologii` | tylko-odczyt |  | Kalkulacja definicji operacji. |
 | Kod | `string` | bazodanowe |  | Kod definicji operacji. |
-| Materialy | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii>` |  | Materiały | Materiały definicji operacji. |
+| Materialy | `SubTable<Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii>` | podlista | Materiały | Materiały definicji operacji. |
 | Nazwa | `string` | bazodanowe |  | Nazwa definicji operacji. |
-| Odpady | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiTechnologii>` |  |  | Odpady definicji operacji. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis definicji operacji. |
-| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` | bazodanowe, enum | Sposób wyceny | Sposób wyceny definicji operacji. |
+| Odpady | `SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiTechnologii>` | podlista |  | Odpady definicji operacji. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis definicji operacji. |
+| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` (enum) | bazodanowe | Sposób wyceny | Sposób wyceny definicji operacji. |
 | TowarMeldowany | `Soneta.ProdukcjaPro.IProTowarMeldowany` |  | Towar meldowany | Towar meldowany definicji operacji. |
-| Uslugi | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProUslugaOperacjiTechnologii>` |  | Usługi | Usługi definicji operacji. |
+| Uslugi | `SubTable<Soneta.ProdukcjaPro.ProUslugaOperacjiTechnologii>` | podlista | Usługi | Usługi definicji operacji. |
 | Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | bazodanowe | Wydział | Wydział definicji operacji. |
-| Wyroby | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiTechnologii>` |  |  | Wyroby definicji operacji. |
-| Zasoby | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiTechnologii>` |  |  | Zasoby definicji operacji. |
+| Wyroby | `SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiTechnologii>` | podlista |  | Wyroby definicji operacji. |
+| Zasoby | `SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiTechnologii>` | podlista |  | Zasoby definicji operacji. |
 
 ## Enumy
 

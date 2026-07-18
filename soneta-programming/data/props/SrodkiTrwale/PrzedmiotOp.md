@@ -5,20 +5,24 @@ Opis: Element szczegółowy historii lokalizacji nieruchomości (LokalizacjaNier
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Historia` → `LokalizacjaNierHistoria`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.SrodkiTrwale.TypAlgorytmuStawki` | bazodanowe, enum |  | Typ algorytmu stawki opodatkowania |
-| Historia | `Soneta.SrodkiTrwale.LokalizacjaNierHistoria` | bazodanowe, guided-parent |  |  |
+| Algorytm | `Soneta.SrodkiTrwale.TypAlgorytmuStawki` (enum) | bazodanowe |  | Typ algorytmu stawki opodatkowania |
+| Historia | `Soneta.SrodkiTrwale.LokalizacjaNierHistoria` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe |  | Lokalizacja |
 | Lp | `int` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  | Opis |
 | RodzajPrzedmiotuOpodatkowania | `Soneta.SrodkiTrwale.RodzajPO` | bazodanowe |  | Przedmiot Opodatkowania |
 | Stawka | `decimal` | bazodanowe |  | Stawka opodatkowania |
-| Systemowe | `bool` | bazodanowe |  | Domyślny przedmiot opatkowania |
-| Typ | `Soneta.SrodkiTrwale.TypNieruchomosci` | bazodanowe, enum |  | Nieruchomość |
+| Systemowe | `bool` | bazodanowe, tylko-odczyt |  | Domyślny przedmiot opatkowania |
+| Typ | `Soneta.SrodkiTrwale.TypNieruchomosci` (enum) | bazodanowe |  | Nieruchomość |
 
 ## Enumy
 

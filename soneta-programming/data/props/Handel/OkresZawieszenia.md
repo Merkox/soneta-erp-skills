@@ -5,13 +5,17 @@ Opis: Element szczegółowy dokumentu handlowego (DokumentHandlowy). Przechowuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentHandlowy`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Do | `Soneta.Types.Date` |  |  |  |
-| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, guided-parent |  | Dokument, który zawieszono w tym okresie. |
+| Do | `Date` |  |  |  |
+| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt, guided-parent |  | Dokument, który zawieszono w tym okresie. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa okresu zawieszenia na dokumencie handlowym. |
-| Od | `Soneta.Types.Date` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Okres zawieszenia dokumentu handlowego. |
+| Od | `Date` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  | Okres zawieszenia dokumentu handlowego. |

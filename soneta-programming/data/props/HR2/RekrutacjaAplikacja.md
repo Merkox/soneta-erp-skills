@@ -6,18 +6,22 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoRekrutacji`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Oferta | `Soneta.HR2.OfertaPracy` | bazodanowe |  | Oferta pracy na podstawie której aplikacja została wprowadzona do systemu |
-| PlanowanaDataZatrudnienia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Stan | `Soneta.HR2.StanAplikacji` | bazodanowe, enum |  |  |
-| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| PlanowanaDataZatrudnienia | `Date` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Stan | `Soneta.HR2.StanAplikacji` (enum) | bazodanowe |  |  |
+| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |
 
 ## Enumy
 

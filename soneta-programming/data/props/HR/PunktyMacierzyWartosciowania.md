@@ -4,26 +4,30 @@ Tytuł: Punkty macierzy kryteriów wartościowania
 Opis: Tabela przechowuje punktację macierzy wartościowania. Umożliwia obliczenia i porównania wartościowania stanowisk.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 10
+- podlisty: 0
+- subrowy: 1
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AnalityczneIdent | `System.Guid` | bazodanowe |  |  |
-| AnalityczneNazwa | `string` | bazodanowe |  |  |
+| AnalityczneIdent | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| AnalityczneNazwa | `string` | bazodanowe, tylko-odczyt |  |  |
 | KryteriumAnalityczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumAnalityczne` |  |  |  |
-| Macierz | `Soneta.HR.ZKL.Wartosciowanie.Macierze.MacierzWartosciowania` | bazodanowe | Macierz wartościowania |  |
-| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` | bazodanowe | Pozycja słownika |  |
-| Pozycja.Ident | `System.Guid` | bazodanowe | Identyfikator pozycji słownika |  |
-| Pozycja.Nazwa | `string` | bazodanowe | Nazwa pozycji |  |
-| Pozycja.Opis | `string` | bazodanowe | Opis pozycji |  |
-| Pozycja.Opis2 | `string` | bazodanowe | Opis2 pozycji |  |
+| Macierz | `Soneta.HR.ZKL.Wartosciowanie.Macierze.MacierzWartosciowania` | bazodanowe, tylko-odczyt | Macierz wartościowania |  |
+| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` (subrow) | bazodanowe | Pozycja słownika |  |
+| Pozycja.Ident | `System.Guid` | bazodanowe, tylko-odczyt | Identyfikator pozycji słownika |  |
+| Pozycja.Nazwa | `string` | bazodanowe, tylko-odczyt | Nazwa pozycji |  |
+| Pozycja.Opis | `string` | bazodanowe, tylko-odczyt | Opis pozycji |  |
+| Pozycja.Opis2 | `string` | bazodanowe, tylko-odczyt | Opis2 pozycji |  |
 | Pozycja.PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
-| Pozycja.Slownik | `string` | bazodanowe | Nazwa słownika |  |
-| Pozycja.Typ | `string` | bazodanowe | Typ pozycji, tabela słownika |  |
+| Pozycja.Slownik | `string` | bazodanowe, tylko-odczyt | Nazwa słownika |  |
+| Pozycja.Typ | `string` | bazodanowe, tylko-odczyt | Typ pozycji, tabela słownika |  |
 | PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
 | Punkty | `int` | bazodanowe |  |  |
-| SyntetyczneNazwa | `string` | bazodanowe |  |  |
+| SyntetyczneNazwa | `string` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

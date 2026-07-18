@@ -6,80 +6,83 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 48
-- pola kalkulowane (z klas biznesowych): 21
+- pola bazodanowe (zapisywalne): 35
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 12
+- podlisty: 6
+- subrowy: 11
+- razem: 68
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AkceptujPromocje | `bool` | bazodanowe |  | Określa, czy definicja ceny dopuszcza stosowanie promocji. |
 | AktualizujPrzychodem | `bool` | bazodanowe |  | Określa, czy dana cena ma być automatycznie aktualizowana po wprowadzeniu dokumentu przychodowego. |
-| Algorytm | `Soneta.Towary.AlgorytmCeny` | bazodanowe |  | Określa współczynnik uwzględniany w wyliczanej cenie |
+| Algorytm | `Soneta.Towary.AlgorytmCeny` (subrow) | bazodanowe |  | Określa współczynnik uwzględniany w wyliczanej cenie |
 | Algorytm.CechaBazowa | `string` | bazodanowe |  | Cecha towaru, która jest podstawą wyliczania ceny |
 | Algorytm.CenaBazowa | `Soneta.Towary.DefinicjaCeny` | bazodanowe |  | Definicja ceny, która jest podstawą wyliczania |
-| Algorytm.Definicja | `Soneta.Towary.DefinicjaCeny` |  |  |  |
+| Algorytm.Definicja | `Soneta.Towary.DefinicjaCeny` | tylko-odczyt |  |  |
 | Algorytm.Delta | `double` | bazodanowe |  | O ile pomniejszyć kwotę 100, po zaokrągleniu. |
 | Algorytm.Dokladnosc | `double` | bazodanowe |  | Dokladność z jaką należy zaokrąglić kwotą 100. |
-| Algorytm.LiczonyOdBrutto | `bool` |  |  | Określa czy cena jest liczona od cenhy bazowej wg brutto. |
-| Algorytm.LiczonyOdNetto | `bool` |  |  | Określa czy cena jest liczona od cenhy bazowej wg netto. |
-| Algorytm.NazwaMetody | `string` |  |  |  |
-| Algorytm.PrzykładZaokrąglenia | `string` |  |  |  |
-| Algorytm.Typ | `Soneta.Towary.TypAlgorytmuCeny` | bazodanowe, enum |  | Określa sposób utworzenia algorytmu wyliczania ceny |
+| Algorytm.LiczonyOdBrutto | `bool` | tylko-odczyt |  | Określa czy cena jest liczona od cenhy bazowej wg brutto. |
+| Algorytm.LiczonyOdNetto | `bool` | tylko-odczyt |  | Określa czy cena jest liczona od cenhy bazowej wg netto. |
+| Algorytm.NazwaMetody | `string` | tylko-odczyt |  |  |
+| Algorytm.PrzykładZaokrąglenia | `string` | tylko-odczyt |  |  |
+| Algorytm.Typ | `Soneta.Towary.TypAlgorytmuCeny` (enum) | bazodanowe |  | Określa sposób utworzenia algorytmu wyliczania ceny |
 | Algorytm.Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  | Określa walutę, w której ma być wyrażona cena. |
-| Algorytm.WgCenaBazowa | `Soneta.Business.Key` |  |  |  |
-| Algorytm.WgWaluta | `Soneta.Business.Key` |  |  |  |
-| Algorytm.Wspolczynnik | `Soneta.Towary.WspolczynnikCeny` | bazodanowe |  | Określa współczynnik uwzględniany w wyliczanej cenie |
-| Algorytm.Wspolczynnik.Algorytm | `Soneta.Towary.AlgorytmCeny` |  |  |  |
-| Algorytm.Wspolczynnik.Opis | `string` |  |  |  |
-| Algorytm.Wspolczynnik.Typ | `Soneta.Towary.TypWspółczynnikaCeny` | bazodanowe, enum |  | Określa rodzaj współczynnika |
+| Algorytm.WgCenaBazowa | `Key` | podlista |  |  |
+| Algorytm.WgWaluta | `Key` | podlista |  |  |
+| Algorytm.Wspolczynnik | `Soneta.Towary.WspolczynnikCeny` (subrow) | bazodanowe |  | Określa współczynnik uwzględniany w wyliczanej cenie |
+| Algorytm.Wspolczynnik.Algorytm | `Soneta.Towary.AlgorytmCeny` | tylko-odczyt |  |  |
+| Algorytm.Wspolczynnik.Opis | `string` | tylko-odczyt |  |  |
+| Algorytm.Wspolczynnik.Typ | `Soneta.Towary.TypWspółczynnikaCeny` (enum) | bazodanowe |  | Określa rodzaj współczynnika |
 | Algorytm.Wspolczynnik.Wartosc | `string` | bazodanowe |  | W zależności od rodzaju współczynnika przyjmuje wartość, cechę lub właściwość będącą współczynnikiem |
-| Algorytm.Wspolczynnik.Znak | `Soneta.Towary.ZnakWspółczynnika` | bazodanowe, enum |  | Określa sposób uwzglęcnienia współczynnika w cenie towaru |
+| Algorytm.Wspolczynnik.Znak | `Soneta.Towary.ZnakWspółczynnika` (enum) | bazodanowe |  | Określa sposób uwzglęcnienia współczynnika w cenie towaru |
 | Algorytm.Wyrażenie | `string` |  |  |  |
 | Algorytm.ZalezyOdDokumentu | `bool` | bazodanowe |  | Wyliczenie ceny możliwe jest tylko na dokumencie. Nie można wykorzystać ceny w cenniku |
 | Algorytm.Zaokraglenie | `bool` | bazodanowe |  | Pozwala na automatyczne zaokrąglanie ceny wg podanych reguł. |
 | Blokada | `bool` | bazodanowe |  | Określa cenę, która nie jest już używana przez program. |
-| CenaOdbiorcy | `bool` | bazodanowe |  | Określa sposób wyliczania ceny kontrahenta. |
 | CenyOkresowe | `bool` | bazodanowe | Ceny okresowe | Określa, czy definicja ceny dopuszcza cena okresowe. |
 | DodawanaDoTowaru | `bool` | bazodanowe |  | Cena będzie dodawana i zapamiętana w towarze. |
-| DomyslnaMarza | `Soneta.Types.Percent` | bazodanowe | Marża % | Proponowany narzut dla nowych cen |
-| DomyslnyNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut % | Proponowany narzut dla nowych cen |
-| Indywidualna | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa sposób wyliczania ceny indywidualnej. |
-| Indywidualna.Grupa | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Definicja grupy kontrahenta, dokumentu, itp biorącej udział w naliczania rabatu. |
-| Indywidualna.GrupaTowarowa | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Definicja grupy towarowej biorącej udział w naliczania rabatu. |
-| Indywidualna.Lokalizacja | `string` |  |  |  |
-| Indywidualna.OpisRodzaju | `string` |  |  | Tekstowy opis działania rabatu. |
-| Indywidualna.Rodzaj | `Soneta.Towary.RodzajRabatu` | bazodanowe, enum |  | Określa rodzaj naliczanego rabatu. |
-| Indywidualna.WgGrupa | `Soneta.Business.Key` |  |  |  |
-| Indywidualna.WgGrupaTowarowa | `Soneta.Business.Key` |  |  |  |
-| Indywidualna.Wliczaj | `Soneta.Towary.WliczanieRabatu` | bazodanowe, enum |  | Określa sposób wpływania ratabu na pozycję dokumentu handlowego. |
-| Indywidualna.WymaganaGrupa | `bool` |  |  | Określa, czy wymagane jest wypełnienie pola grupy towarowej. |
-| Indywidualna.WymaganaGrupaTowarowa | `bool` |  |  | Określa, czy wymagane jest wypełnienie pola grupy towarowej. |
-| Indywidualna2 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa drugi sposób wyliczania ceny indywidualnej. |
-| Indywidualna3 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa trzeci sposób wyliczania ceny indywidualnej. |
+| DomyslnaMarza | `Percent` | bazodanowe | Marża % | Proponowany narzut dla nowych cen |
+| DomyslnyNarzut | `Percent` | bazodanowe | Narzut % | Proponowany narzut dla nowych cen |
+| Indywidualna | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa sposób wyliczania ceny indywidualnej. |
+| Indywidualna.Grupa | `FeatureDefinition` | bazodanowe |  | Definicja grupy kontrahenta, dokumentu, itp biorącej udział w naliczania rabatu. |
+| Indywidualna.GrupaTowarowa | `FeatureDefinition` | bazodanowe |  | Definicja grupy towarowej biorącej udział w naliczania rabatu. |
+| Indywidualna.Lokalizacja | `string` | tylko-odczyt |  |  |
+| Indywidualna.OpisRodzaju | `string` | tylko-odczyt |  | Tekstowy opis działania rabatu. |
+| Indywidualna.Rodzaj | `Soneta.Towary.RodzajRabatu` (enum) | bazodanowe |  | Określa rodzaj naliczanego rabatu. |
+| Indywidualna.WgGrupa | `Key` | podlista |  |  |
+| Indywidualna.WgGrupaTowarowa | `Key` | podlista |  |  |
+| Indywidualna.Wliczaj | `Soneta.Towary.WliczanieRabatu` (enum) | bazodanowe |  | Określa sposób wpływania ratabu na pozycję dokumentu handlowego. |
+| Indywidualna.WymaganaGrupa | `bool` | tylko-odczyt |  | Określa, czy wymagane jest wypełnienie pola grupy towarowej. |
+| Indywidualna.WymaganaGrupaTowarowa | `bool` | tylko-odczyt |  | Określa, czy wymagane jest wypełnienie pola grupy towarowej. |
+| Indywidualna2 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa drugi sposób wyliczania ceny indywidualnej. |
+| Indywidualna3 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa trzeci sposób wyliczania ceny indywidualnej. |
 | IndywidualnaRabatowana | `bool` | bazodanowe |  | Określa, czy cena indywidualna będzie rabatowana. |
-| InfoCenaRabat | `Soneta.Handel.InfoCenaRabat` | bazodanowe, enum | Informacje o cenie i rabacie | Określa, czy system powinien zapisywać informacje o naliczonej cenie i rabacie pozycji dokumentu handlowego. |
+| InfoCenaRabat | `Soneta.Handel.InfoCenaRabat` (enum) | bazodanowe | Informacje o cenie i rabacie | Określa, czy system powinien zapisywać informacje o naliczonej cenie i rabacie pozycji dokumentu handlowego. |
 | KGO | `bool` | bazodanowe | Obsługa KGO | Określa, czy definicja ceny obsługuje stawki KGO. |
-| Kierunek | `Soneta.Towary.KierunekCeny` | bazodanowe, enum | Kierunek ceny |  |
+| Kierunek | `Soneta.Towary.KierunekCeny` (enum) | bazodanowe | Kierunek ceny |  |
 | KierunekBrak | `bool` |  |  |  |
 | KierunekPrzychod | `bool` |  |  |  |
 | KierunekRozchod | `bool` |  |  |  |
-| Metoda | `Soneta.Business.MemoText` | bazodanowe |  | Algorytm wyliczenia ceny |
+| Metoda | `MemoText` | bazodanowe, podlista |  | Algorytm wyliczenia ceny |
 | Nazwa | `string` | bazodanowe |  | Nazwa ceny |
-| PodmiotCeny | `Soneta.Towary.PodmiotCeny` | bazodanowe, enum |  | Określa sposób wyliczania ceny kontrahenta. |
+| PodmiotCeny | `Soneta.Towary.PodmiotCeny` (enum) | bazodanowe |  | Określa sposób wyliczania ceny kontrahenta. |
 | Priorytet | `int` | bazodanowe |  | Priorytet określający kolejność wyliczania cen towaru. |
 | ProgiIlosciowe | `bool` | bazodanowe | Progi ilościowe | Określa, czy definicja ceny dopuszcza progi ilościowe. |
-| Przeliczaj | `bool` |  |  | Określa, czy cena jest automatycznie przeliczana. |
-| Rabat1 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa pierwszy rodzaj naliczanego rabatu. |
-| Rabat2 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa drugi rodzaj naliczanego rabatu. |
-| Rabat3 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa trzeci rodzaj naliczanego rabatu. |
-| Rabat4 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa czwarty rodzaj naliczanego rabatu. |
-| Rabat5 | `Soneta.Towary.AlgorytmRabatu` | bazodanowe |  | Określa piąty rodzaj naliczanego rabatu. |
-| RabatTerminPlatnosci | `Soneta.Towary.WliczanieRabatuZaTerminPlatnosci` | bazodanowe, enum | Rabat za wcześniejszy termin płatności | Określa sposób naliczania rabatu za wcześniejszy termin płatności. |
+| Przeliczaj | `bool` | tylko-odczyt |  | Określa, czy cena jest automatycznie przeliczana. |
+| Rabat1 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa pierwszy rodzaj naliczanego rabatu. |
+| Rabat2 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa drugi rodzaj naliczanego rabatu. |
+| Rabat3 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa trzeci rodzaj naliczanego rabatu. |
+| Rabat4 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa czwarty rodzaj naliczanego rabatu. |
+| Rabat5 | `Soneta.Towary.AlgorytmRabatu` (subrow) | bazodanowe |  | Określa piąty rodzaj naliczanego rabatu. |
+| RabatTerminPlatnosci | `Soneta.Towary.WliczanieRabatuZaTerminPlatnosci` (enum) | bazodanowe | Rabat za wcześniejszy termin płatności | Określa sposób naliczania rabatu za wcześniejszy termin płatności. |
 | RabatujPromocje | `bool` | bazodanowe |  | Określa, czy definicja ceny dopuszcza rabatowanie przeceny. |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 
 ## Enumy
 

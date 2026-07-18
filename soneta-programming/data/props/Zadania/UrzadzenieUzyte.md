@@ -4,23 +4,27 @@ Tytuł: Urządzenia wykorzystane
 Opis: Rejestracja użycia urządzenia w ramach zlecenia serwisowego lub wypożyczenia. Przechowuje stan zadania, datę zamknięcia oraz powiązanie z dokumentem rozliczeniowym i zasobem CRM.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 7
+- podlisty: 0
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  |  |  |
-| CzasZamkniecia | `Soneta.Types.Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
-| Description | `string` |  |  |  |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| CzasZamkniecia | `Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
+| Description | `string` | tylko-odczyt |  |  |
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  | Dokument rozliczający. |
-| End | `System.DateTime` |  |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
 | Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja rozliczająca. |
-| Resource | `object` |  |  |  |
-| Rozliczone | `bool` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
+| Resource | `object` | tylko-odczyt |  |  |
+| Rozliczone | `bool` | tylko-odczyt |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
 | StanZadania | `Soneta.Zadania.StanZadania` | bazodanowe |  | Stan projektu. |
-| Start | `System.DateTime` |  |  |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
 | Text | `string` |  |  |  |
 | Urzadzenie | `Soneta.Zadania.Urzadzenie` | bazodanowe |  |  |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |

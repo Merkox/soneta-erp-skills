@@ -5,24 +5,28 @@ Opis: Rejestr zgłoszeń awaryjnych na zasobach produkcyjnych. Przechowuje kod i
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataZgloszenia | `System.DateTime` | bazodanowe | Data zgłoszenia | Data zgłoszenia awarii. |
 | IdentyfikatorZadania | `System.Guid` | bazodanowe | Identyfikator zadania | Identyfikator zadania powiązanego z awarią. |
 | Kod | `string` | bazodanowe |  | Kod, skrócona nazwa zgłoszonej awarii. |
-| NumerZadania | `string` |  | Numer zlecenia | Numer zlecenia serwisowego. |
+| NumerZadania | `string` | tylko-odczyt | Numer zlecenia | Numer zlecenia serwisowego. |
 | Operacja | `Soneta.Produkcja.Operacja` | bazodanowe |  | Operacja na której wystąpiła awaria. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Określa operatora, który zgłosił awarię. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis awarii. |
-| Priorytet | `Soneta.Produkcja.PriorytetAwarii` | bazodanowe, enum |  | Określa piorytet zgłoszenia (niski, normalny, wysoki). |
+| Operator | `App.Operator` | bazodanowe |  | Określa operatora, który zgłosił awarię. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis awarii. |
+| Priorytet | `Soneta.Produkcja.PriorytetAwarii` (enum) | bazodanowe |  | Określa piorytet zgłoszenia (niski, normalny, wysoki). |
 | ProdOsoba | `Soneta.Produkcja.ProdOsoba` | bazodanowe | Osoba | Określa osobę rzeczywsitą, która zgłosiła awarię. |
 | ProdZasob | `Soneta.Produkcja.ProdZasob` | bazodanowe | Zasób | Zasób rzeczywisty na którym wystąpiła awaria. |
-| Stan | `Soneta.Produkcja.StanAwarii` | bazodanowe, enum |  | Określa stan awarii (nowa, przekazana, zakończona). |
-| StanZadania | `string` |  | Stan zlecenia | Stan zlecenia serwisowego. |
-| Zglaszajacy | `string` |  | Zgłaszający | Określa pracownika, który zgłosił awarię. |
+| Stan | `Soneta.Produkcja.StanAwarii` (enum) | bazodanowe |  | Określa stan awarii (nowa, przekazana, zakończona). |
+| StanZadania | `string` | tylko-odczyt | Stan zlecenia | Stan zlecenia serwisowego. |
+| Zglaszajacy | `string` | tylko-odczyt | Zgłaszający | Określa pracownika, który zgłosił awarię. |
 
 ## Enumy
 

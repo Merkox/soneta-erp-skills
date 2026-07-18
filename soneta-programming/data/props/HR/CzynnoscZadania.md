@@ -5,11 +5,15 @@ Opis: Opisuje czynności składowe realizowane w ramach zadania. Pozwala na szcz
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Opis | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Zadanie | `Soneta.HR.ZKL.Slowniki.Zadania.ZadanieZkl` | bazodanowe | Zadanie czynności |  |
+| Zadanie | `Soneta.HR.ZKL.Slowniki.Zadania.ZadanieZkl` | bazodanowe, tylko-odczyt | Zadanie czynności |  |

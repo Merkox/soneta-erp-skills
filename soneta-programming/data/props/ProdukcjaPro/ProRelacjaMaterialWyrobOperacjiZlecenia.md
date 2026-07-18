@@ -5,15 +5,19 @@ Opis: Element szczegółowy materiału operacji zlecenia (ProMaterialOperacjiZle
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Material` → `ProMaterialOperacjiZlecenia`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość relacji materiał wyrób operacji zlecenia. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość relacji materiał wyrób operacji zlecenia. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa dla relacji materiał wyrób operacji zlecenia. |
 | Material | `Soneta.ProdukcjaPro.ProMaterialOperacjiZlecenia` | bazodanowe, guided-parent | Materiał | Materiał dla relacji materiał wyrób operacji zlecenia. |
-| Typ | `Soneta.ProdukcjaPro.ProTypRelacjiMaterialWyrob` | bazodanowe, enum |  | Typ relacji materiał wyrób operacji technologii. |
+| Typ | `Soneta.ProdukcjaPro.ProTypRelacjiMaterialWyrob` (enum) | bazodanowe |  | Typ relacji materiał wyrób operacji technologii. |
 | Wyrob | `Soneta.ProdukcjaPro.ProWyrobOperacjiZlecenia` | bazodanowe | Wyrób | Wyrób dla relacji materiał wyrób operacji zlecenia. |
 
 ## Enumy

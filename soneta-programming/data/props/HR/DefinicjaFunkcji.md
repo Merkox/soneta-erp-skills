@@ -5,8 +5,12 @@ Opis: Słownik funkcji pełnionych przez pracowników w organizacji. Pozwala odd
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,6 +19,6 @@ Guided: root
 | FunkcjaPelna | `string` | bazodanowe |  |  |
 | KodWymiany | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisLinia | `string` |  |  |  |
-| OpisPierwszaLinia | `string` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisLinia | `string` | tylko-odczyt |  |  |
+| OpisPierwszaLinia | `string` | tylko-odczyt |  |  |

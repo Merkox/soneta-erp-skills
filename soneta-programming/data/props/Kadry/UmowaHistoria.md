@@ -4,93 +4,97 @@ Tytuł: Umowy
 Opis: Element szczegółowy umowy (Umowa). Wersja historyczna umowy cywilnoprawnej rejestrująca zmiany wartości, ubezpieczeń, kodu zawodu, kalendarza i ulg podatkowych w kolejnych okresach aktualności.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `Umowa`
+Historia: Tak — zapis historyczny tabeli `Umowa`
 
-- pola bazodanowe: 44
-- pola kalkulowane (z klas biznesowych): 45
+- pola bazodanowe (zapisywalne): 32
+- pola kalkulowane (zapisywalne): 13
+- pola tylko-odczyt: 28
+- podlisty: 7
+- subrowy: 8
+- razem: 88
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
 | BilansOtwarcia | `bool` |  |  |  |
-| Brutto | `Soneta.Types.Currency` |  |  |  |
-| BruttoSłownie | `string` |  | Słownie |  |
-| BruttoSłownieUpr | `string` |  | Słownie |  |
-| DataSplatyBO | `Soneta.Types.Date` |  |  |  |
+| Brutto | `Currency` | tylko-odczyt |  |  |
+| BruttoSłownie | `string` | tylko-odczyt | Słownie |  |
+| BruttoSłownieUpr | `string` | tylko-odczyt | Słownie |  |
+| DataSplatyBO | `Date` |  |  |  |
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` |  |  |  |
+| DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` | tylko-odczyt |  |  |
 | DochodPodstawowy | `bool` | bazodanowe |  |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
 | IndywidualnyKalendarz | `bool` | bazodanowe |  |  |
-| InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` | bazodanowe, enum |  |  |
-| IsVisibleUstawKwoteBO | `bool` |  |  |  |
-| IsVisibleWłączBO | `bool` |  |  |  |
+| InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` (enum) | bazodanowe |  |  |
+| IsVisibleUstawKwoteBO | `bool` | tylko-odczyt |  |  |
+| IsVisibleWłączBO | `bool` | tylko-odczyt |  |  |
 | Kalendarz | `Soneta.Kalend.Kalendarz` | bazodanowe |  | Domyślny kalendarz umowy |
 | KodWykonywanegoZawodu | `Soneta.Kadry.KodWykonywanegoZawodu` | bazodanowe |  |  |
-| KwotaSplaconaBO | `Soneta.Types.Currency` |  |  |  |
-| Oddział | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Okres | `Soneta.Types.FromTo` |  |  |  |
-| OpisAktualizacji | `Soneta.Business.MemoText` | bazodanowe | Opis aktualizacji | Opis aktualizacji zapisu |
+| KwotaSplaconaBO | `Currency` |  |  |  |
+| Oddział | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| OpisAktualizacji | `MemoText` | bazodanowe, podlista | Opis aktualizacji | Opis aktualizacji zapisu |
 | PakietMobilnosci | `bool` | bazodanowe |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
 | PotracenieCalkowite | `bool` | bazodanowe |  |  |
-| PowodAktualizacji | `string` | bazodanowe | Powód aktualizacji | Opis powodu aktualizacji zapisu |
-| SprawdźUbezpieczenie | `Soneta.Kadry.UmowaHistoria.SprawdźUbezpieczenieResult` | enum |  |  |
+| PowodAktualizacji | `string` | bazodanowe, tylko-odczyt | Powód aktualizacji | Opis powodu aktualizacji zapisu |
+| SprawdźUbezpieczenie | `Soneta.Kadry.UmowaHistoria.SprawdźUbezpieczenieResult` (enum) | tylko-odczyt |  |  |
 | Stanowisko | `string` | bazodanowe |  |  |
-| Słownie | `string` |  |  |  |
-| SłownieUpr | `string` |  | Słownie |  |
-| TypWartosci | `Soneta.Kadry.TypWartosciUmowy` | enum |  |  |
-| Ubezpieczenia | `Soneta.Kadry.Ubezpieczenia` | bazodanowe |  |  |
-| Ubezpieczenia.Chorobowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Ubezpieczenia.Emerytalne | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Ubezpieczenia.Emerytalne.Do | `Soneta.Types.Date` | bazodanowe |  |  |
+| Słownie | `string` | tylko-odczyt |  |  |
+| SłownieUpr | `string` | tylko-odczyt | Słownie |  |
+| TypWartosci | `Soneta.Kadry.TypWartosciUmowy` (enum) |  |  |  |
+| Ubezpieczenia | `Soneta.Kadry.Ubezpieczenia` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Chorobowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Emerytalne | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Emerytalne.Do | `Date` | bazodanowe |  |  |
 | Ubezpieczenia.Emerytalne.Dobrowolne | `bool` |  |  |  |
-| Ubezpieczenia.Emerytalne.DobrowolneOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Emerytalne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` | enum |  |  |
+| Ubezpieczenia.Emerytalne.DobrowolneOd | `Date` |  |  |  |
+| Ubezpieczenia.Emerytalne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` (enum) |  |  |  |
 | Ubezpieczenia.Emerytalne.Obowiazkowe | `bool` |  |  |  |
-| Ubezpieczenia.Emerytalne.ObowiazkoweOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Emerytalne.ObowiązujeOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Emerytalne.Od | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ubezpieczenia.Emerytalne.Okres | `Soneta.Types.FromTo` |  |  |  |
+| Ubezpieczenia.Emerytalne.ObowiazkoweOd | `Date` | tylko-odczyt |  |  |
+| Ubezpieczenia.Emerytalne.ObowiązujeOd | `Date` | tylko-odczyt |  |  |
+| Ubezpieczenia.Emerytalne.Od | `Date` | bazodanowe |  |  |
+| Ubezpieczenia.Emerytalne.Okres | `FromTo` | podlista |  |  |
 | Ubezpieczenia.Emerytalne.Przyczyna | `Soneta.Kadry.Wyrejestrowanie` | bazodanowe |  |  |
-| Ubezpieczenia.Emerytalne.Typ | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Ubezpieczenia.Emerytalne.UbezpieczenieOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Emerytalne.Ubezpieczony | `bool` |  |  |  |
+| Ubezpieczenia.Emerytalne.Typ | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Ubezpieczenia.Emerytalne.UbezpieczenieOd | `Date` | tylko-odczyt |  |  |
+| Ubezpieczenia.Emerytalne.Ubezpieczony | `bool` | tylko-odczyt |  |  |
 | Ubezpieczenia.Emerytalne.Wyrejestrowany | `bool` |  |  |  |
-| Ubezpieczenia.Historia | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Ubezpieczenia.Host | `Soneta.Kadry.IUbezpieczenieHost` |  |  |  |
-| Ubezpieczenia.Kontynuacja | `Soneta.Kadry.KontynuacjaUbezpieczenia` | bazodanowe |  |  |
-| Ubezpieczenia.Kontynuacja.OdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ubezpieczenia.Kontynuacja.Tyub | `int` |  |  |  |
+| Ubezpieczenia.Historia | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Ubezpieczenia.Host | `Soneta.Kadry.IUbezpieczenieHost` | tylko-odczyt |  |  |
+| Ubezpieczenia.Kontynuacja | `Soneta.Kadry.KontynuacjaUbezpieczenia` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Kontynuacja.OdDnia | `Date` | bazodanowe |  |  |
+| Ubezpieczenia.Kontynuacja.Tyub | `int` | tylko-odczyt |  |  |
 | Ubezpieczenia.Kontynuacja.Tyub4 | `Soneta.Kadry.TytulUbezpieczenia4` | bazodanowe | Tytuł ubezpieczenia |  |
-| Ubezpieczenia.Kontynuacja.WgTyub4 | `Soneta.Business.Key` |  |  |  |
-| Ubezpieczenia.ObowiazkoweOd | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ubezpieczenia.PrawoEmRent | `int` |  |  |  |
-| Ubezpieczenia.Rentowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Ubezpieczenia.StopienNiepelnosp | `int` |  |  |  |
-| Ubezpieczenia.Tyub | `Soneta.Kadry.TytulUbezpieczenia` |  |  |  |
+| Ubezpieczenia.Kontynuacja.WgTyub4 | `Key` | podlista |  |  |
+| Ubezpieczenia.ObowiazkoweOd | `Date` | bazodanowe |  |  |
+| Ubezpieczenia.PrawoEmRent | `int` | tylko-odczyt |  |  |
+| Ubezpieczenia.Rentowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.StopienNiepelnosp | `int` | tylko-odczyt |  |  |
+| Ubezpieczenia.Tyub | `Soneta.Kadry.TytulUbezpieczenia` | tylko-odczyt |  |  |
 | Ubezpieczenia.Tyub4 | `Soneta.Kadry.TytulUbezpieczenia4` | bazodanowe | Tytuł ubezpieczenia |  |
-| Ubezpieczenia.Ubezpieczony | `bool` |  |  |  |
-| Ubezpieczenia.WgTyub4 | `Soneta.Business.Key` |  |  |  |
-| Ubezpieczenia.Wypadkowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Ubezpieczenia.Zdrowotne | `Soneta.Kadry.Zdrowotne` | bazodanowe |  |  |
-| Ubezpieczenia.Zdrowotne.Do | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ubezpieczenia.Zdrowotne.Dobrowolne | `bool` |  |  |  |
-| Ubezpieczenia.Zdrowotne.DobrowolneOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Zdrowotne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` | enum |  |  |
-| Ubezpieczenia.Zdrowotne.Obowiazkowe | `bool` |  |  |  |
-| Ubezpieczenia.Zdrowotne.ObowiazkoweOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Zdrowotne.ObowiązujeOd | `Soneta.Types.Date` |  |  |  |
-| Ubezpieczenia.Zdrowotne.Od | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ubezpieczenia.Zdrowotne.Okres | `Soneta.Types.FromTo` |  |  |  |
+| Ubezpieczenia.Ubezpieczony | `bool` | tylko-odczyt |  |  |
+| Ubezpieczenia.WgTyub4 | `Key` | podlista |  |  |
+| Ubezpieczenia.Wypadkowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Zdrowotne | `Soneta.Kadry.Zdrowotne` (subrow) | bazodanowe |  |  |
+| Ubezpieczenia.Zdrowotne.Do | `Date` | bazodanowe |  |  |
+| Ubezpieczenia.Zdrowotne.Dobrowolne | `bool` | tylko-odczyt |  |  |
+| Ubezpieczenia.Zdrowotne.DobrowolneOd | `Date` |  |  |  |
+| Ubezpieczenia.Zdrowotne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` (enum) |  |  |  |
+| Ubezpieczenia.Zdrowotne.Obowiazkowe | `bool` | tylko-odczyt |  |  |
+| Ubezpieczenia.Zdrowotne.ObowiazkoweOd | `Date` |  |  |  |
+| Ubezpieczenia.Zdrowotne.ObowiązujeOd | `Date` | tylko-odczyt |  |  |
+| Ubezpieczenia.Zdrowotne.Od | `Date` | bazodanowe |  |  |
+| Ubezpieczenia.Zdrowotne.Okres | `FromTo` | podlista |  |  |
 | Ubezpieczenia.Zdrowotne.Przyczyna | `Soneta.Kadry.Wyrejestrowanie` | bazodanowe |  |  |
 | Ubezpieczenia.Zdrowotne.Skladka | `decimal` | bazodanowe |  |  |
-| Ubezpieczenia.Zdrowotne.Typ | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Ubezpieczenia.Zdrowotne.Ubezpieczony | `bool` |  |  |  |
+| Ubezpieczenia.Zdrowotne.Typ | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Ubezpieczenia.Zdrowotne.Ubezpieczony | `bool` | tylko-odczyt |  |  |
 | Ubezpieczenia.Zdrowotne.Wyrejestrowany | `bool` |  |  |  |
-| Umowa | `Soneta.Kadry.Umowa` | bazodanowe, guided-parent |  |  |
-| UmowaUlgi | `Soneta.Kadry.UmowaUlgiInfo` | bazodanowe |  |  |
-| UmowaUlgi.Pit26 | `Soneta.Kadry.NaliczajPit26` | bazodanowe, enum |  |  |
-| UmowaUlgi.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` | bazodanowe, enum |  |  |
+| Umowa | `Soneta.Kadry.Umowa` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| UmowaUlgi | `Soneta.Kadry.UmowaUlgiInfo` (subrow) | bazodanowe |  |  |
+| UmowaUlgi.Pit26 | `Soneta.Kadry.NaliczajPit26` (enum) | bazodanowe |  |  |
+| UmowaUlgi.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` (enum) | bazodanowe |  |  |
 | UmowaUlgi.UlgaDuzaRodzina | `bool` | bazodanowe |  |  |
 | UmowaUlgi.UlgaEmeryt | `bool` | bazodanowe |  |  |
 | UmowaUlgi.UlgaMnoznik | `decimal` | bazodanowe |  |  |
@@ -98,7 +102,7 @@ Guided: child — nadrzędna przez pole `Umowa` → `Umowa`
 | UmowaUlgi.UlgaZagranicaDo | `int` | bazodanowe |  |  |
 | UmowaUlgi.UlgaZagranicaOd | `int` | bazodanowe |  |  |
 | UmowaUlgi.UmowaKwotaWolna | `bool` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Wartosc | `Currency` | bazodanowe |  |  |
 
 ## Enumy
 

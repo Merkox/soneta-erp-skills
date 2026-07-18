@@ -4,36 +4,40 @@ Tytuł: Nieruchomości wykorzystane
 Opis: Rejestr wykorzystania nieruchomości w ramach zadań CRM, np. wynajem pomieszczeń czy rezerwacje. Przechowuje dane o okresie użytkowania, powierzchni wynajmowanej, stawkach oraz powiązanych dokumentach handlowych rozliczających użycie obiektu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 11
+- podlisty: 0
+- subrowy: 0
+- razem: 28
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  |  |  |
-| CzasOtwarcia | `Soneta.Types.Time` | bazodanowe | Godzina otwarcia | Godzina otwarcia. |
-| CzasZamkniecia | `Soneta.Types.Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
-| DataOtwarcia | `Soneta.Types.Date` | bazodanowe | Data otwarcia | Data otwarcia. |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
-| Description | `string` |  |  |  |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| CzasOtwarcia | `Time` | bazodanowe | Godzina otwarcia | Godzina otwarcia. |
+| CzasZamkniecia | `Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
+| DataOtwarcia | `Date` | bazodanowe | Data otwarcia | Data otwarcia. |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
+| Description | `string` | tylko-odczyt |  |  |
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  | Dokument rozliczający. |
-| End | `System.DateTime` |  |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
 | Ilosc | `double` | bazodanowe | Ilość |  |
 | Nieruchomosc | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe |  |  |
-| PowierzchniaDostepna | `double` |  |  |  |
+| PowierzchniaDostepna | `double` | tylko-odczyt |  |  |
 | PowierzchniaWynajmowana | `double` | bazodanowe | Powierzchnia wynajmowana |  |
 | Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja rozliczająca. |
-| Price | `Soneta.Types.Currency` |  |  |  |
-| Resource | `object` |  |  |  |
-| Rozliczone | `bool` |  |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| SettlementType | `Soneta.RealEstate.Enums.SettlementType` | enum |  |  |
-| SettlementUnit | `Soneta.Towary.Jednostka` |  |  |  |
+| Price | `Currency` | tylko-odczyt |  |  |
+| Resource | `object` | tylko-odczyt |  |  |
+| Rozliczone | `bool` | tylko-odczyt |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| SettlementType | `Soneta.RealEstate.Enums.SettlementType` (enum) | tylko-odczyt |  |  |
+| SettlementUnit | `Soneta.Towary.Jednostka` | tylko-odczyt |  |  |
 | StanZadania | `Soneta.Zadania.StanZadania` | bazodanowe |  | Stan projektu. |
-| Start | `System.DateTime` |  |  |  |
-| Stawka | `Soneta.Types.Currency` | bazodanowe | Stawka |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
+| Stawka | `Currency` | bazodanowe | Stawka |  |
 | Text | `string` |  |  |  |
 | Usluga | `Soneta.Towary.Towar` | bazodanowe | Usługa |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
+| Wartosc | `Currency` | bazodanowe | Wartość |  |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
 | Zakonczenie | `System.DateTime` |  |  |  |
 | ZasobCRM | `Soneta.Zadania.ZasobCRM` | bazodanowe | Zasób CRM | Zasoby CRM powiązane z nieruchomościami. |

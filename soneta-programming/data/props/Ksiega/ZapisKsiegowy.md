@@ -6,72 +6,76 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dekret` → `DekretBase`
 Implementuje interfejsy: `IElementKsiegowalny`
 
-- pola bazodanowe: 26
-- pola kalkulowane (z klas biznesowych): 35
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 7
+- pola tylko-odczyt: 38
+- podlisty: 8
+- subrowy: 0
+- razem: 61
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataPodatkowa | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataRozliczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Dekret | `Soneta.Ksiega.DekretBase` | bazodanowe, guided-parent |  |  |
-| DoRozliczeniaKwotyOperacji | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaKwotyZapisu | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaMa | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaMaOperacji | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaSaldo | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaSaldoOperacji | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaWinien | `Soneta.Types.Currency` |  |  |  |
-| DoRozliczeniaWinienOperacji | `Soneta.Types.Currency` |  |  |  |
+| Bufor | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataPodatkowa | `Date` | bazodanowe |  |  |
+| DataRozliczenia | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe, tylko-odczyt |  |  |
+| Dekret | `Soneta.Ksiega.DekretBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| DoRozliczeniaKwotyOperacji | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaKwotyZapisu | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaMa | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaMaOperacji | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaSaldo | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaSaldoOperacji | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaWinien | `Currency` | tylko-odczyt |  |  |
+| DoRozliczeniaWinienOperacji | `Currency` | tylko-odczyt |  |  |
 | ElementKsiegowalny | `Soneta.Core.IElementKsiegowalny` | bazodanowe, iface-ref |  | Element księgowalny zapisu |
 | ElementSlownika | `Soneta.Core.IElementSlownika` | iface-ref |  |  |
-| Grupa | `int` | bazodanowe |  |  |
-| Kod | `string` |  |  |  |
-| KolumnaRyczałt | `Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy.KolumnaKPiRRyczałt` | enum |  |  |
+| Grupa | `int` | bazodanowe, tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KolumnaRyczałt | `Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy.KolumnaKPiRRyczałt` (enum) |  |  |  |
 | Konto | `Soneta.Ksiega.KontoBase` | bazodanowe |  |  |
 | Kurs | `double` | bazodanowe |  |  |
-| KwotaOperacji | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaOperacjiRozliczenia | `Soneta.Types.Currency` |  |  |  |
-| KwotaZapisu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaZapisuRozliczenia | `Soneta.Types.Currency` |  |  |  |
+| KwotaOperacji | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaOperacjiRozliczenia | `Currency` | tylko-odczyt |  |  |
+| KwotaZapisu | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaZapisuRozliczenia | `Currency` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| LpKonta | `int` | bazodanowe |  |  |
-| Ma | `Soneta.Types.Currency` |  |  |  |
-| MaOperacji | `Soneta.Types.Currency` |  |  |  |
-| NazwaElementuKsiegowalnego | `string` |  |  |  |
-| Numer | `string` |  |  |  |
-| NumerDokumentu | `string` | bazodanowe |  |  |
-| NumerEwidencji | `string` | bazodanowe |  |  |
-| OK | `bool` |  |  | Określa poprawność zapisu |
-| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  | Okres obrachunkowy |
+| LpKonta | `int` | bazodanowe, tylko-odczyt |  |  |
+| Ma | `Currency` |  |  |  |
+| MaOperacji | `Currency` |  |  |  |
+| NazwaElementuKsiegowalnego | `string` | tylko-odczyt |  |  |
+| Numer | `string` | tylko-odczyt |  |  |
+| NumerDokumentu | `string` | bazodanowe, tylko-odczyt |  |  |
+| NumerEwidencji | `string` | bazodanowe, tylko-odczyt |  |  |
+| OK | `bool` | tylko-odczyt |  | Określa poprawność zapisu |
+| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  | Okres obrachunkowy |
 | Opis | `string` | bazodanowe |  |  |
-| OpisAnalityczny | `System.Collections.Generic.List<Soneta.Ksiega.ElemOpisuAnalitycznego>` |  |  |  |
-| OpisBledu | `string` |  |  |  |
-| OpisyAnalityczne | `Soneta.Business.SubTable<Soneta.Ksiega.ElemOpisuAnalZapRel>` |  |  |  |
-| OpisyPowiazane | `Soneta.Business.SubTable<Soneta.Ksiega.ElemOpisuAnalitycznego>` |  |  |  |
+| OpisAnalityczny | `System.Collections.Generic.List<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
+| OpisBledu | `string` | tylko-odczyt |  |  |
+| OpisyAnalityczne | `SubTable<Soneta.Ksiega.ElemOpisuAnalZapRel>` | podlista |  |  |
+| OpisyPowiazane | `SubTable<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
 | PowiazanieExcel | `string` |  |  |  |
-| Rozliczenia | `System.Collections.IList` |  |  |  |
-| RozliczeniaMa | `Soneta.Business.SubTable<Soneta.Ksiega.RozliczenieKS>` |  |  |  |
-| RozliczeniaWinien | `Soneta.Business.SubTable<Soneta.Ksiega.RozliczenieKS>` |  |  |  |
-| RozliczonaKwotaOperacji | `Soneta.Types.Currency` | bazodanowe |  |  |
-| RozliczonaKwotaZapisu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Saldo | `Soneta.Types.Currency` |  |  |  |
-| Seria | `string` |  |  |  |
-| StanRozliczenia | `Soneta.Kasa.StanRozliczenia` | enum |  |  |
-| Strona | `Soneta.Core.StronaKsiegowania` | bazodanowe, enum |  |  |
-| StronaRozliczenia | `Soneta.Core.StronaKsiegowania` | enum |  |  |
-| Typ | `Soneta.Ksiega.TypZapisu` | bazodanowe, enum |  |  |
-| TypDziennika | `Soneta.Ksiega.TypDziennika` | bazodanowe, enum |  |  |
-| TypWgKonta | `Soneta.Ksiega.TypZapisuWgKonta` | bazodanowe, enum |  |  |
-| Winien | `Soneta.Types.Currency` |  |  |  |
-| WinienOperacji | `Soneta.Types.Currency` |  |  |  |
-| Zaksiegowany | `bool` |  |  |  |
+| Rozliczenia | `System.Collections.IList` | podlista |  |  |
+| RozliczeniaMa | `SubTable<Soneta.Ksiega.RozliczenieKS>` | podlista |  |  |
+| RozliczeniaWinien | `SubTable<Soneta.Ksiega.RozliczenieKS>` | podlista |  |  |
+| RozliczonaKwotaOperacji | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| RozliczonaKwotaZapisu | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Saldo | `Currency` | tylko-odczyt |  |  |
+| Seria | `string` | tylko-odczyt |  |  |
+| StanRozliczenia | `Soneta.Kasa.StanRozliczenia` (enum) | tylko-odczyt |  |  |
+| Strona | `Soneta.Core.StronaKsiegowania` (enum) | bazodanowe, tylko-odczyt |  |  |
+| StronaRozliczenia | `Soneta.Core.StronaKsiegowania` (enum) | tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypZapisu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypDziennika | `Soneta.Ksiega.TypDziennika` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypWgKonta | `Soneta.Ksiega.TypZapisuWgKonta` (enum) | bazodanowe |  |  |
+| Winien | `Currency` |  |  |  |
+| WinienOperacji | `Currency` |  |  |  |
+| Zaksiegowany | `bool` | tylko-odczyt |  |  |
 | ZapisGlowny | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe |  |  |
-| ZapisZamkniecia | `bool` | bazodanowe | Zapis zamknięcia |  |
-| ZapisyKsiegowe | `Soneta.Business.SubTable<Soneta.Ksiega.ZapisKsiegowy>` |  |  |  |
-| ZapisyPomocnicze | `Soneta.Business.SubTable<Soneta.Ksiega.ZapisKsiegowy>` |  |  |  |
+| ZapisZamkniecia | `bool` | bazodanowe, tylko-odczyt | Zapis zamknięcia |  |
+| ZapisyKsiegowe | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
+| ZapisyPomocnicze | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

@@ -5,14 +5,18 @@ Opis: Element szczegółowy definicji transakcji CRM (PriorytetTransakcja). Defi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany nie będą wyświetlane w liście wyboru. |
-| Definicja | `Soneta.CRM.Config.DefTransakcja` | bazodanowe |  | Definicja transakcji, do której jest przypisany jest priorytet |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.CRM.Config.DefTransakcja` | bazodanowe, tylko-odczyt |  | Definicja transakcji, do której jest przypisany jest priorytet |
+| Kod | `string` | tylko-odczyt |  |  |
 | Kolor | `string` | bazodanowe | Kolor | Kolor dla priorytetu |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa priorytetu w ramach transakcji. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa priorytetu transakcji |

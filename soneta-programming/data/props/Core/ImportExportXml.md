@@ -4,27 +4,30 @@ Tytuł: Importy, eksporty XML
 Opis: Rejestr operacji importu i eksportu XML. Przechowuje informację o wykonanej operacji: obiekt źródłowy, wykorzystaną definicję XML, ścieżkę pliku, rodzaj operacji (import/eksport), przetworzony dokument XML oraz wynik walidacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe | Definicja wykorzystana do importu/eksportu. |  |
-| FormattedXml | `string` |  |  |  |
-| Host | `Soneta.Core.IImportExportXmlHost` | bazodanowe | Obiekt, którego dotyczy import/eksport |  |
+| FormattedXml | `string` | tylko-odczyt |  |  |
 | Parent | `Soneta.Core.IImportExportHost` | bazodanowe | Obiekt, którego dotyczy import/eksport |  |
 | Plik | `string` | bazodanowe | Plik importu/eksportu |  |
-| Rodzaj | `Soneta.Core.RodzajOperacji` | bazodanowe, enum | Rodzaj operacji | Rodzaj operacji. |
-| Selektor | `Soneta.Core.SelektorDefXml` | bazodanowe, enum | Selektor | Selektor definicji. |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Przetworzony dokument XML |  |
-| XmlValidated | `Soneta.Business.ThreeStateBoolean` | bazodanowe, enum |  |  |
-| ZgodnyPlikXML | `string` |  | Zgodny plik XML |  |
+| Rodzaj | `Soneta.Core.RodzajOperacji` (enum) | bazodanowe | Rodzaj operacji | Rodzaj operacji. |
+| Selektor | `Soneta.Core.SelektorDefXml` (enum) | bazodanowe | Selektor | Selektor definicji. |
+| Xml | `MemoText` | bazodanowe, podlista | Przetworzony dokument XML |  |
+| XmlValidated | `ThreeStateBoolean` (enum) | bazodanowe |  |  |
+| ZgodnyPlikXML | `string` | tylko-odczyt | Zgodny plik XML |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### ThreeStateBoolean (`Soneta.Business.ThreeStateBoolean`)
+### ThreeStateBoolean (`ThreeStateBoolean`)
 - `Default` = 0
 - `True` = 1
 - `False` = 2

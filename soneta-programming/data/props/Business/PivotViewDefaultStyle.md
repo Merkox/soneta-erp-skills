@@ -5,12 +5,16 @@ Opis: Domyślny układ tabeli przestawnej dla operatora i lokalizacji. Wskazuje,
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `PivotView` → `PivotView`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | IndividualGuid | `System.Guid` | bazodanowe | Identyfikator użytkownika |  |
 | Location | `string` | bazodanowe | Lokalizacja tabeli przestawnej |  |
-| PivotView | `Soneta.Business.Db.PivotView` | bazodanowe, guided-parent |  |  |
-| Style | `Soneta.Business.Db.PivotViewStyle` | bazodanowe | Układ | Układ tabeli przestawnej |
+| PivotView | `Db.PivotView` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Style | `Db.PivotViewStyle` | bazodanowe | Układ | Układ tabeli przestawnej |

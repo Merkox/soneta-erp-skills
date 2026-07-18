@@ -6,17 +6,21 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IManagedRowDefinion`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Cykliczne | `bool` | bazodanowe |  |  |
-| Kreatory | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
+| Kreatory | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
 | NastepneDefinicja | `Soneta.Kadry.DefinicjaBadaniaLekarskiego` | bazodanowe |  |  |
 | NastepneTermin | `int` | bazodanowe |  |  |
-| NastepneTerminOd | `Soneta.Kadry.SposóbWyliczaniaTerminu` | bazodanowe, enum |  |  |
+| NastepneTerminOd | `Soneta.Kadry.SposóbWyliczaniaTerminu` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
 

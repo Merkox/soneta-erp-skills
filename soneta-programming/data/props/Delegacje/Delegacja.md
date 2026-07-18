@@ -6,68 +6,71 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 29
+- pola bazodanowe (zapisywalne): 18
+- pola kalkulowane (zapisywalne): 6
+- pola tylko-odczyt: 20
+- podlisty: 11
+- subrowy: 1
+- razem: 56
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Cel | `Soneta.Business.MemoText` | bazodanowe |  | Cel delegacji. |
-| Data | `Soneta.Types.Date` |  |  |  |
-| DataKursu | `Soneta.Types.Date` | bazodanowe |  | Data kursu do tabeli kursowej. |
-| DataNum | `Soneta.Types.Date` |  |  |  |
-| DataOgloszeniaKursu | `Soneta.Types.Date` |  |  |  |
-| DataRozliczenia | `Soneta.Types.Date` | bazodanowe |  | Data rozliczenia delegacji. |
-| DataRozpoczeciaPlanowana | `Soneta.Types.DateShortTime` | bazodanowe |  | Planowany czas rozpoczęcia delegacji. |
-| DataRozpoczeciaPlanowanaDate | `Soneta.Types.Date` |  |  |  |
-| DataRozpoczeciaPlanowanaTime | `Soneta.Types.Time` |  |  |  |
-| DataRozpoczeciaWgEtapow | `Soneta.Types.DateShortTime` | bazodanowe |  | Data rozpoczecia delegacji (pierwszego etapu). |
-| DataWystawienia | `Soneta.Types.Date` | bazodanowe |  | Data wystawienia dokumentu delegacji PWS |
-| DataZakonczeniaPlanowana | `Soneta.Types.DateShortTime` | bazodanowe |  | Planowany czas zakończenia delegacji. |
-| DataZakonczeniaPlanowanaDate | `Soneta.Types.Date` |  |  |  |
-| DataZakonczeniaPlanowanaTime | `Soneta.Types.Time` |  |  |  |
-| DataZakonczeniaWgEtapow | `Soneta.Types.DateShortTime` | bazodanowe |  | Data zakonczenia delegacji (ostatniego etapu). |
+| Cel | `MemoText` | bazodanowe, podlista |  | Cel delegacji. |
+| Data | `Date` | tylko-odczyt |  |  |
+| DataKursu | `Date` | bazodanowe |  | Data kursu do tabeli kursowej. |
+| DataOgloszeniaKursu | `Date` | tylko-odczyt |  |  |
+| DataRozliczenia | `Date` | bazodanowe |  | Data rozliczenia delegacji. |
+| DataRozpoczeciaPlanowana | `DateShortTime` | bazodanowe |  | Planowany czas rozpoczęcia delegacji. |
+| DataRozpoczeciaPlanowanaDate | `Date` |  |  |  |
+| DataRozpoczeciaPlanowanaTime | `Time` |  |  |  |
+| DataRozpoczeciaWgEtapow | `DateShortTime` | bazodanowe, tylko-odczyt |  | Data rozpoczecia delegacji (pierwszego etapu). |
+| DataWystawienia | `Date` | bazodanowe |  | Data wystawienia dokumentu delegacji PWS |
+| DataZakonczeniaPlanowana | `DateShortTime` | bazodanowe |  | Planowany czas zakończenia delegacji. |
+| DataZakonczeniaPlanowanaDate | `Date` |  |  |  |
+| DataZakonczeniaPlanowanaTime | `Time` |  |  |  |
+| DataZakonczeniaWgEtapow | `DateShortTime` | bazodanowe, tylko-odczyt |  | Data zakonczenia delegacji (ostatniego etapu). |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu |
 | Delegowany | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Podmiot, dla rozliczenia którego wystawiono dokument PWS. |
-| Delegowany_Kod | `string` |  |  |  |
-| Etapy | `Soneta.Business.SubTable<Soneta.Delegacje.EtapDelegacji>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| Extension | `Soneta.Business.MemoText` | bazodanowe |  | Rozszerzenie dla pól wirtualnych |
-| IsWebUser | `bool` |  |  |  |
+| Delegowany_Kod | `string` | tylko-odczyt |  |  |
+| Etapy | `SubTable<Soneta.Delegacje.EtapDelegacji>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Extension | `MemoText` | bazodanowe, podlista |  | Rozszerzenie dla pól wirtualnych |
+| IsWebUser | `bool` | tylko-odczyt |  |  |
 | JestCiagla | `bool` | bazodanowe |  | Czy system ma pilnować aby początek kolejnego etapu pokrywał się z końcem poprzedniego. |
 | KonsolidujPlatnosci | `bool` | bazodanowe |  | Włącza konsolidację płatności wyrażonych w tej samej walucie. |
 | KrajDocelowy | `Soneta.Delegacje.KrajDelegacji` | bazodanowe |  | Kraj docelowy etapu delegacji. |
 | KurierDyplomatyczny | `bool` | bazodanowe |  | Delegacja kuriera dyplomatycznego - dieta zwiększona o 25%. |
-| Naliczenia | `Soneta.Business.SubTable<Soneta.Delegacje.NaliczenieDelegacji>` |  |  |  |
+| Naliczenia | `SubTable<Soneta.Delegacje.NaliczenieDelegacji>` | podlista |  |  |
 | NtfPrzepisywanieWniosku | `bool` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu delegacji PWS |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu delegacji PWS |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerProceduryISO | `string` | bazodanowe |  | Numer procedury ISO |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  | Numer procedury ISO |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
-| Opis | `string` |  |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| OpisAnalitycznyBufor | `bool` |  |  |  |
-| PageVisible | `bool` |  |  |  |
-| Platnosci | `Soneta.Business.SubTable` |  |  |  |
-| Podmiot | `Soneta.Core.IPodmiot` | iface-ref |  |  |
+| Opis | `string` | tylko-odczyt |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| OpisAnalitycznyBufor | `bool` | tylko-odczyt |  |  |
+| PageVisible | `bool` | tylko-odczyt |  |  |
+| Platnosci | `SubTable` | podlista |  |  |
+| Podmiot | `Soneta.Core.IPodmiot` | tylko-odczyt, iface-ref |  |  |
 | Seria | `string` | bazodanowe |  | Seria dokumentu delegacji |
 | SrodekTransportu | `string` | bazodanowe |  | Domyślny środek transportu. |
-| StanDokumentuPozwalaNaBuforowanieOA | `bool` |  |  |  |
-| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` |  |  |  |
-| StatusDelegacji | `Soneta.Delegacje.StatusDelegacji` | bazodanowe, enum |  | Status delegacji. |
+| StanDokumentuPozwalaNaBuforowanieOA | `bool` | tylko-odczyt |  |  |
+| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` | tylko-odczyt |  |  |
+| StatusDelegacji | `Soneta.Delegacje.StatusDelegacji` (enum) | bazodanowe, tylko-odczyt |  | Status delegacji. |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  | Tabela kursowa do rozliczenia delegacji. |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  | Uwagi do delegacji |
-| WidokAktywny | `bool` |  |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
-| Wniosek | `Soneta.Kadry.WniosekUrlopowy` | bazodanowe |  | Źródłowy wniosek urlopowy |
-| ZakupyWalut | `Soneta.Business.LpSubTable<Soneta.Delegacje.ZakupWalutDoDelegacji>` |  |  |  |
-| Zaliczki | `Soneta.Business.LpSubTable<Soneta.Delegacje.ZaliczkaDelegacji>` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  | Uwagi do delegacji |
+| WidokAktywny | `bool` | tylko-odczyt |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| Wniosek | `Soneta.Kadry.WniosekUrlopowy` | bazodanowe, tylko-odczyt |  | Źródłowy wniosek urlopowy |
+| ZakupyWalut | `LpSubTable<Soneta.Delegacje.ZakupWalutDoDelegacji>` | podlista |  |  |
+| Zaliczki | `LpSubTable<Soneta.Delegacje.ZaliczkaDelegacji>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

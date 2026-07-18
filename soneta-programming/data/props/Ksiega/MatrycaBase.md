@@ -5,32 +5,36 @@ Opis: Matryca dokumentu lub zapłaty definiuje szablon automatycznego uzupełnia
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 5
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Blokada matrycy. |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| Ext | `Soneta.Ksiega.MatrycaExtender` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| Ext | `Soneta.Ksiega.MatrycaExtender` | tylko-odczyt |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
 | Opis | `string` | bazodanowe |  |  |
-| PodmiotyMatrycy | `Soneta.Business.SubTable<Soneta.Ksiega.MatrycaPodmiot>` |  |  |  |
-| Rozszerzenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PodmiotyMatrycy | `SubTable<Soneta.Ksiega.MatrycaPodmiot>` | podlista |  |  |
+| Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
 | UserCodeEnabled | `bool` | bazodanowe |  | Włączanie kodu operatora |
-| UserCodeMethod | `Soneta.Business.MemoText` | bazodanowe |  | Kod operatora uzupełniający działanie matrycy |
-| Wielooddzialowosc | `bool` |  |  |  |
+| UserCodeMethod | `MemoText` | bazodanowe, podlista |  | Kod operatora uzupełniający działanie matrycy |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

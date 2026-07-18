@@ -5,11 +5,15 @@ Opis: Zawiera listę powiązań szablonów załączników do definicji eksportu 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny dla definicji | Aktywny dla definicji |
 | DefinicjaXmlNagGuid | `System.Guid` | bazodanowe | Identyfikator definicji komunikatu KSeF | Identyfikator definicji komunikatu KSeF |
-| SzablonZalacznika | `Soneta.Core.KSeFSzablonZalacznika` | bazodanowe |  |  |
+| SzablonZalacznika | `Soneta.Core.KSeFSzablonZalacznika` | bazodanowe, tylko-odczyt |  |  |

@@ -5,62 +5,66 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDeklaracja`, `IDokumentPlatny`, `IDokumentKsiegowalny`, `IBazaZrodlaWyplaty`, `IEmailElement`, `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 31
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 23
+- podlisty: 15
+- subrowy: 1
+- razem: 51
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AktywnaEDeklaracja | `Soneta.Deklaracje.EDeklaracja` |  |  |  |
-| Anulowany | `bool` |  |  |  |
-| Bloki | `Soneta.Deklaracje.Deklaracja.BlokiIdx` |  |  |  |
+| AktywnaEDeklaracja | `Soneta.Deklaracje.EDeklaracja` | tylko-odczyt |  |  |
+| Anulowany | `bool` | tylko-odczyt |  |  |
+| Bloki | `Soneta.Deklaracje.Deklaracja.BlokiIdx` | podlista |  |  |
 | Bufor | `bool` | bazodanowe |  |  |
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataRozliczenia | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataRozliczenia | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Deklaracja | `Soneta.Deklaracje.Deklaracja` | bazodanowe |  |  |
-| DeklaracjaKorygowana | `Soneta.Deklaracje.Deklaracja` |  |  |  |
-| DeklaracjaKorygująca | `Soneta.Deklaracje.Deklaracja` |  |  |  |
-| Deklaracje | `Soneta.Business.SubTable<Soneta.Deklaracje.Deklaracja>` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| EDeklaracje | `Soneta.Business.SubTable<Soneta.Deklaracje.EDeklaracja>` |  |  |  |
-| ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | bazodanowe, iface-ref |  |  |
-| ElementStrukturyFirmyType | `System.Type` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
+| Deklaracja | `Soneta.Deklaracje.Deklaracja` | bazodanowe, tylko-odczyt |  |  |
+| DeklaracjaKorygowana | `Soneta.Deklaracje.Deklaracja` | tylko-odczyt |  |  |
+| DeklaracjaKorygująca | `Soneta.Deklaracje.Deklaracja` | tylko-odczyt |  |  |
+| Deklaracje | `SubTable<Soneta.Deklaracje.Deklaracja>` | podlista |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| EDeklaracje | `SubTable<Soneta.Deklaracje.EDeklaracja>` | podlista |  |  |
+| ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| ElementStrukturyFirmyType | `System.Type` | tylko-odczyt |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NazwaPola | `string` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| NazwaPola | `string` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Oddział | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresNaliczania | `Soneta.Types.FromTo` |  |  |  |
-| OkresWażności | `Soneta.Types.FromTo` |  |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| Ostrzeżenie | `bool` |  |  |  |
-| PlanSplat | `bool` |  |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| Pola | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Poprawna | `bool` | bazodanowe |  |  |
-| Poprzednia | `Soneta.Deklaracje.Deklaracja` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| PrivateData | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Oddział | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresNaliczania | `FromTo` | podlista |  |  |
+| OkresWażności | `FromTo` | podlista |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| Ostrzeżenie | `bool` | tylko-odczyt |  |  |
+| PlanSplat | `bool` | tylko-odczyt |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Pola | `MemoText` | bazodanowe, podlista |  |  |
+| Poprawna | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Poprzednia | `Soneta.Deklaracje.Deklaracja` | tylko-odczyt |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| PrivateData | `MemoText` | bazodanowe, podlista |  |  |
 | Rok | `int` |  | Za rok |  |
-| RokMiesiac | `Soneta.Types.YearMonth` |  | Za miesiąc |  |
-| Symbol | `string` |  |  |  |
-| Tekst | `string` |  |  |  |
-| TekstPrywatny | `string` |  |  |  |
-| Typ | `Soneta.Deklaracje.TypDeklaracji` | bazodanowe, enum |  |  |
-| Wariant | `int` |  |  |  |
-| Wersja | `Soneta.Deklaracje.WersjaDeklaracji` | bazodanowe, enum |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable` |  |  |  |
+| RokMiesiac | `YearMonth` |  | Za miesiąc |  |
+| Symbol | `string` | tylko-odczyt |  |  |
+| Tekst | `string` | tylko-odczyt |  |  |
+| TekstPrywatny | `string` | tylko-odczyt |  |  |
+| Typ | `Soneta.Deklaracje.TypDeklaracji` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wariant | `int` | tylko-odczyt |  |  |
+| Wersja | `Soneta.Deklaracje.WersjaDeklaracji` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WiadomosciPowiazane | `SubTable` | podlista |  |  |
 | Zatwierdzona | `bool` |  |  |  |
-| Zrodlo | `Soneta.Kadry.IZrodloDeklaracji` | bazodanowe, iface-ref |  |  |
+| Zrodlo | `Soneta.Kadry.IZrodloDeklaracji` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

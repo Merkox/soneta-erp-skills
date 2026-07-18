@@ -5,54 +5,58 @@ Opis: Plik Jednolitego Pliku Kontrolnego (JPK) generowany i wysyłany do adminis
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 33
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 28
+- podlisty: 10
+- subrowy: 0
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AuthInfo | `Soneta.Business.MemoText` | bazodanowe |  | Informacja o podpisie nieautoryzowanym |
-| BramkaJPK | `Soneta.Core.BramkaJPKFile` | bazodanowe, enum | Bramka JPK | Bramka pliku JPK |
-| CelZlozenia | `string` |  |  |  |
-| Czas | `Soneta.Types.Time` | bazodanowe |  | Czas generowania |
-| CzyCIT | `bool` |  |  |  |
-| CzyJPKKRPD | `bool` |  |  |  |
-| CzyJPKVAT | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data generowania |
-| DefinicjaXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe | Definicja |  |
-| DeklaracjaVAT7 | `Soneta.Core.IDeklaracja` | bazodanowe, iface-ref | Deklaracja | Deklaracja VAT7 |
-| DekretyZamkniecia | `bool` | bazodanowe | Uwzględniaj dekrety zamknięcia |  |
-| DziennikBufor | `bool` | bazodanowe | Eksportuj zapisy w buforze |  |
+| AuthInfo | `MemoText` | bazodanowe, podlista |  | Informacja o podpisie nieautoryzowanym |
+| BramkaJPK | `Soneta.Core.BramkaJPKFile` (enum) | bazodanowe, tylko-odczyt | Bramka JPK | Bramka pliku JPK |
+| CelZlozenia | `string` | tylko-odczyt |  |  |
+| Czas | `Time` | bazodanowe, tylko-odczyt |  | Czas generowania |
+| CzyCIT | `bool` | tylko-odczyt |  |  |
+| CzyJPKKRPD | `bool` | tylko-odczyt |  |  |
+| CzyJPKVAT | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  | Data generowania |
+| DefinicjaXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe, tylko-odczyt | Definicja |  |
+| DeklaracjaVAT7 | `Soneta.Core.IDeklaracja` | bazodanowe, tylko-odczyt, iface-ref | Deklaracja | Deklaracja VAT7 |
+| DekretyZamkniecia | `bool` | bazodanowe, tylko-odczyt | Uwzględniaj dekrety zamknięcia |  |
+| DziennikBufor | `bool` | bazodanowe, tylko-odczyt | Eksportuj zapisy w buforze |  |
 | FormCode | `string` | bazodanowe | Kod formularza | Kod formularza JPK |
 | FormSchemaVer | `string` | bazodanowe | Wersja wzorca | Wersja wzorca formularza JPK |
 | FormSysCode | `string` | bazodanowe | Kod systemowy | Kod systemowy formularza JPK |
-| InitUpload | `Soneta.Business.MemoText` | bazodanowe |  | Odpowiedź na żądanie otwarcia sesji wysyłania danych |
-| InitUploadXml | `Soneta.Business.MemoText` | bazodanowe |  | Żądanie otwarcia sesji wysyłania danych |
-| LokalizacjaPliku | `Soneta.Core.LokalizacjaJPK` | bazodanowe, enum | Lokalizacja pliku | Wskazuje miejsce oraz sposób przechowywania pliku JPK |
-| MetaData | `Soneta.Business.MemoText` | bazodanowe |  | Plik metadanych (paczka wysyłki) w bazie danych |
-| Metadane | `string` | bazodanowe | Ścieżka do pliku metadanych (paczka wysyłki) |  |
-| Nadrzedne | `Soneta.Business.SubTable<Soneta.Core.JednolityPKRel>` |  |  |  |
-| NumerKorekty | `int` | bazodanowe |  | Numer korekty |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Okres za który wygenerowano JPK |
-| OkresObrachunkowy | `string` | bazodanowe | Okres obrachunkowy |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Dodatkowy opis |
-| Plik | `string` | bazodanowe | Ścieżka do pliku JPK |  |
-| PlikBinarny | `Soneta.Business.MemoBin` | bazodanowe | Zawartość pliku | Zawartość pliku JPK w bazie danych |
-| PlikBinarnyEnc | `Soneta.Business.MemoBin` | bazodanowe | Zaszyfrowana zawartość pliku | Zawartość pliku JPK przygotowanego do wysyłki |
-| PlikNazwa | `string` |  |  |  |
-| PlikNazwaHtml | `string` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Core.JednolityPKRel>` |  |  |  |
-| ProcessingError | `Soneta.Business.MemoText` | bazodanowe |  | Błąd przetwarzania danych |
-| Rodzaj | `Soneta.Core.SlownikElem` | bazodanowe | Rodzaj | Rodzaj |
-| StatusJPK | `Soneta.Core.StatusPlikuJPK` | bazodanowe, enum | Status JPK | Status pliku JPK |
-| Storage | `Soneta.Core.JednolityPK.JPKStorage` |  |  |  |
-| TrybGenerowania | `Soneta.Core.TrybGenerowaniaJPK` | bazodanowe, enum | Tryb generowania | Tryb generowania pliku JPK |
-| TrybPodpisu | `Soneta.Core.TrybPodpisuJPK` | bazodanowe, enum | Tryb podpisu | Tryb podpisu pliku JPK |
-| UPO | `Soneta.Business.MemoText` | bazodanowe |  | Urzędowe potwierdzenie odbioru |
-| Wielooddzialowosc | `bool` |  |  |  |
-| WynikZestawieniaRPD | `string` | bazodanowe | Wynik zestawienia RPD |  |
-| ZakresDanych | `Soneta.Core.ZakresDanychJPK` | bazodanowe, enum | Zakres danych | Zakres generowanych danych |
-| ZrodloJPK | `Soneta.Core.ZrodloPlikuJPK` | bazodanowe, enum | Źródło JPK | Źródło pliku JPK |
+| InitUpload | `MemoText` | bazodanowe, podlista |  | Odpowiedź na żądanie otwarcia sesji wysyłania danych |
+| InitUploadXml | `MemoText` | bazodanowe, podlista |  | Żądanie otwarcia sesji wysyłania danych |
+| LokalizacjaPliku | `Soneta.Core.LokalizacjaJPK` (enum) | bazodanowe, tylko-odczyt | Lokalizacja pliku | Wskazuje miejsce oraz sposób przechowywania pliku JPK |
+| MetaData | `MemoText` | bazodanowe, podlista |  | Plik metadanych (paczka wysyłki) w bazie danych |
+| Metadane | `string` | bazodanowe, tylko-odczyt | Ścieżka do pliku metadanych (paczka wysyłki) |  |
+| Nadrzedne | `SubTable<Soneta.Core.JednolityPKRel>` | podlista |  |  |
+| NumerKorekty | `int` | bazodanowe, tylko-odczyt |  | Numer korekty |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt | Oddział firmy | Oddział firmy |
+| Okres | `FromTo` | bazodanowe, podlista |  | Okres za który wygenerowano JPK |
+| OkresObrachunkowy | `string` | bazodanowe, tylko-odczyt | Okres obrachunkowy |  |
+| Opis | `MemoText` | bazodanowe, podlista |  | Dodatkowy opis |
+| Plik | `string` | bazodanowe, tylko-odczyt | Ścieżka do pliku JPK |  |
+| PlikBinarny | `MemoBin` | bazodanowe | Zawartość pliku | Zawartość pliku JPK w bazie danych |
+| PlikBinarnyEnc | `MemoBin` | bazodanowe | Zaszyfrowana zawartość pliku | Zawartość pliku JPK przygotowanego do wysyłki |
+| PlikNazwa | `string` | tylko-odczyt |  |  |
+| PlikNazwaHtml | `string` | tylko-odczyt |  |  |
+| Podrzedne | `SubTable<Soneta.Core.JednolityPKRel>` | podlista |  |  |
+| ProcessingError | `MemoText` | bazodanowe, podlista |  | Błąd przetwarzania danych |
+| Rodzaj | `Soneta.Core.SlownikElem` | bazodanowe, tylko-odczyt | Rodzaj | Rodzaj |
+| StatusJPK | `Soneta.Core.StatusPlikuJPK` (enum) | bazodanowe, tylko-odczyt | Status JPK | Status pliku JPK |
+| Storage | `Soneta.Core.JednolityPK.JPKStorage` | tylko-odczyt |  |  |
+| TrybGenerowania | `Soneta.Core.TrybGenerowaniaJPK` (enum) | bazodanowe, tylko-odczyt | Tryb generowania | Tryb generowania pliku JPK |
+| TrybPodpisu | `Soneta.Core.TrybPodpisuJPK` (enum) | bazodanowe, tylko-odczyt | Tryb podpisu | Tryb podpisu pliku JPK |
+| UPO | `MemoText` | bazodanowe, podlista |  | Urzędowe potwierdzenie odbioru |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| WynikZestawieniaRPD | `string` | bazodanowe, tylko-odczyt | Wynik zestawienia RPD |  |
+| ZakresDanych | `Soneta.Core.ZakresDanychJPK` (enum) | bazodanowe, tylko-odczyt | Zakres danych | Zakres generowanych danych |
+| ZrodloJPK | `Soneta.Core.ZrodloPlikuJPK` (enum) | bazodanowe, tylko-odczyt | Źródło JPK | Źródło pliku JPK |
 
 ## Relacje interfejsowe
 

@@ -5,21 +5,25 @@ Opis: Element szczegółowy definicji zadania (DefZadania). Definiuje możliwy s
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy zadanie w tym stanie jest aktywne (otwarte). |
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany dokumentów nie będą wyświetlane w liście wyboru. |
-| Definicja | `Soneta.Zadania.DefZadania` | bazodanowe |  | Definicja zadania, do której jest przypisany ten stan |
-| Ident | `int` | bazodanowe | Identyfikator | Identyfikator stanu na definicji zadania. Wykorzystywany w relacji do zadania. |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.Zadania.DefZadania` | bazodanowe, tylko-odczyt |  | Definicja zadania, do której jest przypisany ten stan |
+| Ident | `int` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator stanu na definicji zadania. Wykorzystywany w relacji do zadania. |
+| Kod | `string` | tylko-odczyt |  |  |
 | Kolor | `string` | bazodanowe | Kolor | Kolor dla stanu |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa stanu realizacji w ramach zadania. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa stanu realizacji zadania |
-| Stany | `Soneta.Business.SubTable<Soneta.Zadania.AvaliableState>` |  |  |  |
-| Typ | `Soneta.Zadania.TaskStateType` | bazodanowe, enum | Typ stanu zadania |  |
+| Stany | `SubTable<Soneta.Zadania.AvaliableState>` | podlista |  |  |
+| Typ | `Soneta.Zadania.TaskStateType` (enum) | bazodanowe | Typ stanu zadania |  |
 
 ## Enumy
 

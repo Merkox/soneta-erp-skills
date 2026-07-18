@@ -5,21 +5,25 @@ Opis: Dodatkowy koszt technologii produkcyjnej przypisany do technologii, operac
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktywnosc | `Soneta.Produkcja.Aktywnosc` | bazodanowe, enum | Aktywność | Sposób wyznaczanie aktywności dla kosztu. |
-| Aktywny | `bool` |  |  | Określa aktywność kosztu. |
-| CechaAktywnosc | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha aktywności | Definicja cechy algorytmicznej, służąca do wyliczenia aktywności. |
-| CechaWartosc | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha wartości | Definicja cechy algorytmicznej, służąca do wyliczenia wartości. |
+| Aktywnosc | `Soneta.Produkcja.Aktywnosc` (enum) | bazodanowe | Aktywność | Sposób wyznaczanie aktywności dla kosztu. |
+| Aktywny | `bool` | tylko-odczyt |  | Określa aktywność kosztu. |
+| CechaAktywnosc | `FeatureDefinition` | bazodanowe | Cecha aktywności | Definicja cechy algorytmicznej, służąca do wyliczenia aktywności. |
+| CechaWartosc | `FeatureDefinition` | bazodanowe | Cecha wartości | Definicja cechy algorytmicznej, służąca do wyliczenia wartości. |
 | Host | `Soneta.Produkcja.IKosztTechnHost` | bazodanowe, iface-ref |  |  |
 | Produkt | `Soneta.Produkcja.PozycjaTechn` | bazodanowe |  | Produkt do którego przypisany jest koszt. |
-| RodzajWartosci | `Soneta.Produkcja.RodzajWartosciKosztu` | bazodanowe, enum | Rodzaj wartości | Określa sposób wyznaczania wartości. |
+| RodzajWartosci | `Soneta.Produkcja.RodzajWartosciKosztu` (enum) | bazodanowe | Rodzaj wartości | Określa sposób wyznaczania wartości. |
 | Technologia | `Soneta.Produkcja.Technologia` | bazodanowe |  | Określa technologię dla danego kosztu. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe | Towar | Towar przypisany do kosztu. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość wg ostatniej ceny zakupu w PLN. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość wg ostatniej ceny zakupu w PLN. |
 
 ## Relacje interfejsowe
 

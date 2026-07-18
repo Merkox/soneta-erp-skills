@@ -5,15 +5,19 @@ Opis: Element szczegółowy definicji zestawu danych (DataSetDefinition). Defini
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DataSet | `Soneta.BI.DataSetDefinition` | bazodanowe | Definicja zestawu danych |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| DataSet | `Soneta.BI.DataSetDefinition` | bazodanowe, tylko-odczyt | Definicja zestawu danych |  |
 | DatabasesCode | `string` |  | Nazwy baz danych | Kod definiujący nazwy baz danych |
 | GenerateCode | `string` |  | Kod algorytmu metody Generate | Kod algorytmu generowania rekordów |
-| Info | `string` |  |  |  |
+| Info | `string` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | ParamCode | `string` |  | Kod paremetrów generatora | Kod parametrów generowania rekordów |

@@ -4,17 +4,21 @@ Tytuł: Statusy VAT
 Opis: Historia weryfikacji statusu VAT kontrahenta. Rejestruje wyniki sprawdzeń aktywności numeru VAT (np. w rejestrze podatników), wraz z datą, identyfikatorem zapytania i informacją zwrotną.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.Date` | bazodanowe | Data aktualności |  |
+| Aktualnosc | `Date` | bazodanowe | Data aktualności |  |
 | Data | `System.DateTime` | bazodanowe | Data sprawdzenia |  |
 | IdentyfikatorZapytania | `string` | bazodanowe | Identyfikator zapytania |  |
 | Informacja | `string` | bazodanowe | Informacja |  |
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| StatusNumeru | `Soneta.CRM.StatusNumeruVAT` | bazodanowe, enum |  |  |
+| StatusNumeru | `Soneta.CRM.StatusNumeruVAT` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

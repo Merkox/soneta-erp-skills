@@ -5,27 +5,31 @@ Opis: Słownik algorytmów naliczania opłat za usługi nieruchomości. Definiuj
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 2
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytm | `bool` |  |  |  |
-| AlgorytmUslugi | `Soneta.RealEstate.AlgorytmUslugi` | bazodanowe |  | Algorytm dla definicji algorytmu usługi nieruchomości |
+| AlgorytmUslugi | `Soneta.RealEstate.AlgorytmUslugi` (subrow) | bazodanowe |  | Algorytm dla definicji algorytmu usługi nieruchomości |
 | AlgorytmUslugi.Aktywny | `bool` | bazodanowe |  |  |
-| AlgorytmUslugi.Kod | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| AlgorytmUslugi.Kod | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje algorytmu usługi nieruchomości nie będą wyświetlane w liście wyboru. |
-| ClassName | `string` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| KodAlgorytmu | `Soneta.Business.MemoText` |  |  |  |
-| Namespace | `object` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| KodAlgorytmu | `MemoText` | podlista |  |  |
+| Namespace | `object` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa algorytmu usługi nieruchomości |
 | Opis | `string` | bazodanowe | Opis | Opis definicji algorytmu usługi nieruchomości |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |

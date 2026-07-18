@@ -4,22 +4,26 @@ Tytuł: eDeklaracja
 Opis: Elektroniczna wersja deklaracji przeznaczona do transmisji do urzędu skarbowego. Przechowuje dokument XML, podpis elektroniczny, status wysyłki oraz urzędowe potwierdzenie odbioru (UPO). Śledzi cykl życia eDeklaracji od utworzenia przez podpisanie do potwierdzenia odbioru.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 5
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Deklaracja | `Soneta.Deklaracje.IEDeklaracjaHost` | bazodanowe |  | Deklaracja przeznaczona do transmisji |
-| Dokument | `Soneta.Business.MemoText` | bazodanowe |  | Dokument eDeklaracji |
-| DokumentPodpisany | `Soneta.Business.MemoBin` | bazodanowe |  | Podpisany dokument eDeklaracji |
-| DokumentPodpisanyStr | `Soneta.Business.MemoText` |  |  | Tekstowa prezentacja podpisanego dokumentu |
-| ETransmisje | `Soneta.Business.SubTable<Soneta.Deklaracje.ETransmisja>` |  |  |  |
-| FormatPodpisu | `Soneta.Deklaracje.FormatEPodpisu` | bazodanowe, enum |  |  |
-| NazwaPodmiotuPrzyjmujacego | `string` |  |  |  |
-| OkresDeklaracji | `Soneta.Types.FromTo` | bazodanowe |  | Okres deklaracji |
-| Potwierdzenie | `Soneta.Business.MemoText` | bazodanowe |  | Urzędowe potwierdzenie odbioru |
-| StatusEDeklaracji | `Soneta.Deklaracje.StatusEDeklaracji` | bazodanowe, enum | Status | Status eDeklaracji |
-| TypDeklaracji | `Soneta.Deklaracje.TypDeklaracji` | bazodanowe, enum |  | Typ deklaracji |
+| Deklaracja | `Soneta.Deklaracje.IEDeklaracjaHost` | bazodanowe, tylko-odczyt |  | Deklaracja przeznaczona do transmisji |
+| Dokument | `MemoText` | bazodanowe, podlista |  | Dokument eDeklaracji |
+| DokumentPodpisany | `MemoBin` | bazodanowe, tylko-odczyt |  | Podpisany dokument eDeklaracji |
+| DokumentPodpisanyStr | `MemoText` | podlista |  | Tekstowa prezentacja podpisanego dokumentu |
+| ETransmisje | `SubTable<Soneta.Deklaracje.ETransmisja>` | podlista |  |  |
+| FormatPodpisu | `Soneta.Deklaracje.FormatEPodpisu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| NazwaPodmiotuPrzyjmujacego | `string` | tylko-odczyt |  |  |
+| OkresDeklaracji | `FromTo` | bazodanowe, podlista |  | Okres deklaracji |
+| Potwierdzenie | `MemoText` | bazodanowe, podlista |  | Urzędowe potwierdzenie odbioru |
+| StatusEDeklaracji | `Soneta.Deklaracje.StatusEDeklaracji` (enum) | bazodanowe, tylko-odczyt | Status | Status eDeklaracji |
+| TypDeklaracji | `Soneta.Deklaracje.TypDeklaracji` (enum) | bazodanowe, tylko-odczyt |  | Typ deklaracji |
 
 ## Enumy
 

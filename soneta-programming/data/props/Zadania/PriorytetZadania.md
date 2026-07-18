@@ -5,15 +5,19 @@ Opis: Element szczegółowy definicji zadania (DefZadania). Definiuje priorytet 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany dokumentów nie będą wyświetlane w liście wyboru. |
-| Definicja | `Soneta.Zadania.DefZadania` | bazodanowe |  | Definicja zadania, do której jest przypisana waga |
-| Ident | `int` | bazodanowe | Identyfikator | Identyfikator priorytetu na definicji zadania. Wykorzystywany w relacji do zadania. |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.Zadania.DefZadania` | bazodanowe, tylko-odczyt |  | Definicja zadania, do której jest przypisana waga |
+| Ident | `int` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator priorytetu na definicji zadania. Wykorzystywany w relacji do zadania. |
+| Kod | `string` | tylko-odczyt |  |  |
 | Kolor | `string` | bazodanowe | Kolor | Kolor dla priorytetu |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa priorytetu w ramach zadania. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa priorytetu zadania |

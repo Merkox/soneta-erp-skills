@@ -4,23 +4,27 @@ Opis: Informacja o linku HTTP udostępniającym dokument na zewnątrz. Przechowu
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anonimowy | `bool` | bazodanowe |  |  |
 | Anulowany | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data generowania |
-| Dokument | `Soneta.Business.IGuidedRow` | bazodanowe | Dokument | Udostępniany dokument |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
-| Parametry | `string` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  | Data generowania |
+| Dokument | `IGuidedRow` | bazodanowe, tylko-odczyt | Dokument | Udostępniany dokument |
+| Operator | `App.Operator` | bazodanowe |  |  |
+| Parametry | `string` | bazodanowe, tylko-odczyt |  |  |
 | RoleGuid | `System.Guid` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  | Termin ważności |
+| Termin | `Date` | bazodanowe |  | Termin ważności |
 | TylkoRaz | `bool` | bazodanowe |  |  |
-| WebOperator | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref |  |  |
-| WorkerName | `string` | bazodanowe |  |  |
-| Wykonany | `bool` | bazodanowe |  |  |
+| WebOperator | `IWebOperator` | bazodanowe, iface-ref |  |  |
+| WorkerName | `string` | bazodanowe, tylko-odczyt |  |  |
+| Wykonany | `bool` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

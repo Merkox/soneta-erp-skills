@@ -5,17 +5,21 @@ Opis: Element szczegółowy grupy kont (GrupaKont). Wskazuje konkretne konto ksi
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Grupa` → `GrupaKont`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Grupa | `Soneta.Ksiega.GrupaKont` | bazodanowe, guided-parent |  | Grupa kont |
+| Grupa | `Soneta.Ksiega.GrupaKont` | bazodanowe, tylko-odczyt, guided-parent |  | Grupa kont |
 | Konto | `Soneta.Ksiega.KontoBase` | bazodanowe |  | Konto |
 | Lp | `int` | bazodanowe |  |  |
-| Rozszerzenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypGrupyKont` | enum |  |  |
-| TypPozycjiBudzetujacej | `Soneta.Ksiega.TypPozycjiBudzetujacej` | enum |  | Typ pozycji budżetującej |
+| Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
+| Typ | `Soneta.Ksiega.TypGrupyKont` (enum) | tylko-odczyt |  |  |
+| TypPozycjiBudzetujacej | `Soneta.Ksiega.TypPozycjiBudzetujacej` (enum) |  |  | Typ pozycji budżetującej |
 
 ## Enumy
 

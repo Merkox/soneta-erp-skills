@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IDiscussionPlugInHost`, `IRightsSource`
 
-- pola bazodanowe: 35
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 29
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 9
+- podlisty: 6
+- subrowy: 3
+- razem: 48
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowDraft | `bool` | bazodanowe |  | Określa czy komentarze można zapisywać jako draft |
 | ConfigClass | `string` | bazodanowe | Klasa do zapisu konfiguracji | Klasa z definicją obiektu przechowującego statyczną konfigrację. |
-| ConfigTypeFullName | `string` |  |  |  |
-| DataType | `System.Type` |  |  |  |
-| Display | `Soneta.Core.Conversation.Display` | bazodanowe | Wyświetlanie segmentów formularza | Wyświetlanie segmentów formularza |
+| ConfigTypeFullName | `string` | tylko-odczyt |  |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| Display | `Soneta.Core.Conversation.Display` (subrow) | bazodanowe | Wyświetlanie segmentów formularza | Wyświetlanie segmentów formularza |
 | Display.Attachments | `bool` | bazodanowe | Segment załączników | Segment załączników |
 | Display.ExtendedUserRight | `bool` | bazodanowe | Rozszerzone prawo przypisanego użytkownika |  |
 | Display.History | `bool` | bazodanowe | Segment zmian | Segment zmian |
@@ -26,41 +30,39 @@ Implementuje interfejsy: `IDiscussionPlugInHost`, `IRightsSource`
 | Display.ShowEditAttachmentButton | `bool` | bazodanowe | Przycisk edytuj segmentu załączników | Przycisk edytuj segmentu załączników |
 | Display.ShowOpenAttachmentButton | `bool` | bazodanowe | Przycisk otwórz segmentu załączników | Przycisk otwórz segmentu załączników |
 | Display.ShowSaveAttachmentButton | `bool` | bazodanowe | Przycisk zapisu segmentu załączników | Przycisk zapisu segmentu załączników |
-| Display.UserRightType | `Soneta.Core.Conversation.DiscussionRightType` | bazodanowe, enum | Typ prawa przypisanego użytkownika |  |
+| Display.UserRightType | `Soneta.Core.Conversation.DiscussionRightType` (enum) | bazodanowe | Typ prawa przypisanego użytkownika |  |
 | Display.Users | `bool` | bazodanowe | Segment użytkowników | Segment użytkowników |
-| DomyślnaNumeracja | `string` |  |  |  |
-| EngineClassName | `string` |  |  |  |
-| EngineCode | `Soneta.Business.MemoText` | bazodanowe | Kod silnika | Kod silnika wykonania procesu |
+| DomyślnaNumeracja | `string` | tylko-odczyt |  |  |
+| EngineClassName | `string` | tylko-odczyt |  |  |
+| EngineCode | `MemoText` | bazodanowe, podlista | Kod silnika | Kod silnika wykonania procesu |
 | HideOnForm | `bool` | bazodanowe |  | Określa czy dyskusja ma być widoczna w zakładce - dla obiektów posiadających własne formularze dyskusji |
-| IsReadOnlyIsSingleThreadMode | `bool` |  |  |  |
-| IsSupportDefinition | `bool` |  |  |  |
-| IsVisibleIsSingleThreadMode | `bool` |  |  |  |
+| IsReadOnlyIsSingleThreadMode | `bool` | tylko-odczyt |  |  |
+| IsSupportDefinition | `bool` | tylko-odczyt |  |  |
+| IsVisibleIsSingleThreadMode | `bool` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje dyskusji nie będą wyświetlane w liście wyboru. |
 | Name | `string` | bazodanowe | Nazwa | Pełna nazwa definicji dyskusji. |
-| NotificationScope | `Soneta.Core.Conversation.Notification` | bazodanowe | Powiadomienia dla prowadzonych konwersacji | Powiadomienia dla prowadzonych konwersacji |
 | NotificationScope.Email | `bool` | bazodanowe | Powiadomienie email | Powiadomienie email |
 | NotificationScope.System | `bool` | bazodanowe | Powiadomienie systemowe | Powiadomienie systemowe |
-| NotificationScopeType | `Soneta.Core.Conversation.NotificationScopeType` | bazodanowe, enum | Zakres powiadomień konwersacji | Zakres powiadomień konwersacji |
-| Numbering | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji dyskusji. |
+| Numbering | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji dyskusji. |
 | Numbering.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numbering.PodczasZapisu | `bool` |  |  |  |
 | Numbering.Separator | `string` | bazodanowe |  |  |
 | Numbering.Wzor | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` |  |  |  |
-| ObjTable | `Soneta.Business.Table` |  |  |  |
-| PlugIns | `Soneta.Business.LpSubTable<Soneta.Core.Conversation.DiscussionPlugInRef>` |  |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` | podlista |  |  |
+| ObjTable | `Table` | podlista |  |  |
+| PlugIns | `LpSubTable<Soneta.Core.Conversation.DiscussionPlugInRef>` | podlista |  |  |
 | Private | `bool` | bazodanowe | Prywatna |  |
 | ReadOnlyHostClassNames | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji dyskusji. |
 | TableName | `string` | bazodanowe | Tabela danych | Wyświetlenie definicji na odpowiednich typach obiektów biznesowych. |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| TypDokumentu | `System.Type` |  |  |  |
-| WidoczneCechy | `Soneta.Business.MemoText` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| TypDokumentu | `System.Type` | tylko-odczyt |  |  |
+| WidoczneCechy | `MemoText` | podlista |  |  |
 
 ## Enumy
 
@@ -70,13 +72,6 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Full` = 0 — Pełne prawo
 - `ReadOnly` = 1 — Tylko do odczytu
 - `CommentOnly` = 2 — Dodawanie wątków i komentowanie
-
-### NotificationScopeType (`Soneta.Core.Conversation.NotificationScopeType`)
-- `AllUsers` = 0 — Wszyscy użytkownicy dyskusji (recenzenci + uczestnicy)
-- `ReviewersAndMentions` = 1 — Recenzenci i osoby wspomniane w konwersacji
-- `OnlyReviewers` = 2 — Tylko recenzenci
-- `OnlyParticipants` = 3 — Tylko uczestnicy
-- `OnlyMentions` = 4 — Tylko osoby wspomniane w konwersacji
 
 ### TypDokumentu (`Soneta.Core.TypDokumentu`)
 - `Niezdefiniowany` = 0

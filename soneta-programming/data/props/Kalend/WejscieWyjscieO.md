@@ -5,24 +5,28 @@ Opis: Element szczegółowy pracownika (Pracownik). Oryginalne (niemodyfikowane)
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.IRcpAddress` | bazodanowe |  |  |
 | CzytnikRCP | `Soneta.Kalend.CzytnikRCP` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataEdytowana | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataEdytowana | `Date` | bazodanowe |  |  |
 | DefinicjaZdarzenia | `Soneta.Kalend.DefinicjaZdarzeniaRCP` | bazodanowe |  |  |
-| Godzina | `Soneta.Types.Time` | bazodanowe |  |  |
-| GodzinaEdytowana | `Soneta.Types.Time` | bazodanowe |  |  |
+| Godzina | `Time` | bazodanowe |  |  |
+| GodzinaEdytowana | `Time` | bazodanowe |  |  |
 | Operacja | `int` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| TrybPracy | `Soneta.Core.Enums.RcpWorkMode` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kalend.TypWejsciaWyjscia` | bazodanowe, enum |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| TrybPracy | `Soneta.Core.Enums.RcpWorkMode` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypWejsciaWyjscia` (enum) | bazodanowe |  |  |
 | Uwagi | `string` | bazodanowe |  |  |
-| WeWyI | `Soneta.Business.SubTable<Soneta.Kalend.WejscieWyjscieI>` |  |  |  |
+| WeWyI | `SubTable<Soneta.Kalend.WejscieWyjscieI>` | podlista |  |  |
 
 ## Enumy
 

@@ -5,15 +5,19 @@ Opis: Rejestr odczytów liczników (przebiegów) pojazdów z datą i osobą reje
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Date | `Soneta.Types.Date` |  |  |  |
+| Date | `Date` |  |  |  |
 | DateTime | `System.DateTime` | bazodanowe | Data odczytu | Data odczytu |
-| LastReading | `Soneta.Vehicles.VehicleReading` |  |  |  |
-| Performer | `Soneta.Business.IWykonujacy` | bazodanowe | Rejestrujący |  |
-| Time | `Soneta.Types.Time` |  |  |  |
+| LastReading | `Soneta.Vehicles.VehicleReading` | tylko-odczyt |  |  |
+| Performer | `IWykonujacy` | bazodanowe | Rejestrujący |  |
+| Time | `Time` |  |  |  |
 | Value | `int` | bazodanowe | Wartość | Odczyt licznika |
-| Vehicle | `Soneta.Vehicles.Vehicle` | bazodanowe |  |  |
+| Vehicle | `Soneta.Vehicles.Vehicle` | bazodanowe, tylko-odczyt |  |  |

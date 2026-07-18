@@ -6,28 +6,32 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `ISchematPodziałowy`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 1
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa projektu | Krótka nazwa definicji podzielnika. |
 | Opis | `string` | bazodanowe | Opis | Dokładny opis definicji podzielnika. |
-| PlacementKind | `Soneta.Ksiega.Podzielniki.SchematPodz.ActionPlacement` | enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PlacementKind | `Soneta.Ksiega.Podzielniki.SchematPodz.ActionPlacement` (enum) |  |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SchematClassName | `string` |  |  |  |
-| SchematCode | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla schematu | Kod klasy kalkulatora dla schematu. |
-| SchematPodzElems | `Soneta.Business.SubTable<Soneta.Ksiega.Podzielniki.SchematPodzElem>` |  |  |  |
-| TableName | `string` | bazodanowe | Klasa | Klasa obiektu. |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SchematClassName | `string` | tylko-odczyt |  |  |
+| SchematCode | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla schematu | Kod klasy kalkulatora dla schematu. |
+| SchematPodzElems | `SubTable<Soneta.Ksiega.Podzielniki.SchematPodzElem>` | podlista |  |  |
+| TableName | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa obiektu. |
 | _IsVisible | `string` |  |  |  |
 
 ## Enumy

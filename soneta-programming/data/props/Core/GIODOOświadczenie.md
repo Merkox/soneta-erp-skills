@@ -5,31 +5,35 @@ Opis: Oświadczenie RODO (zgoda na przetwarzanie danych) złożone przez osobę.
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 5
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data oświadczenia. |
-| DataWycofaniaZgody | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Core.GIODODefinicjaOświadczenia` | bazodanowe | Definicja | Definicja oświadczenia. |
-| Host | `Soneta.Core.IGIODOOświadczenieHost` | bazodanowe, iface-ref | Składający oświadczenie | Zapis, do którego przypisano informacja o oświadczeniu |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe | Data | Data oświadczenia. |
+| DataWycofaniaZgody | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Definicja | `Soneta.Core.GIODODefinicjaOświadczenia` | bazodanowe, tylko-odczyt | Definicja | Definicja oświadczenia. |
+| Host | `Soneta.Core.IGIODOOświadczenieHost` | bazodanowe, tylko-odczyt, iface-ref | Składający oświadczenie | Zapis, do którego przypisano informacja o oświadczeniu |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Okres, na który udzielono zgodę |
+| Okres | `FromTo` | bazodanowe, podlista |  | Okres, na który udzielono zgodę |
 | Oswiadczenie | `bool` | bazodanowe | Oświadczenie | Oświadczenie. |
-| Rodzaj | `Soneta.Core.RodzajeOświadczeńGIODO` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Core.RodzajeOświadczeńGIODO` (enum) | bazodanowe, tylko-odczyt |  |  |
 | SposobPozyskania | `string` | bazodanowe | Sposób pozyskania | Sposób pozyskania oświadczenia |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Oświadczenie | Treść oświadczenia |
-| WycofaneZgody | `Soneta.Business.SubTable<Soneta.Core.GIODOOświadczenie>` |  |  |  |
-| WycofanieZgody | `Soneta.Core.GIODOOświadczenie` | bazodanowe |  |  |
+| Tresc | `MemoText` | bazodanowe, podlista | Oświadczenie | Treść oświadczenia |
+| WycofaneZgody | `SubTable<Soneta.Core.GIODOOświadczenie>` | podlista |  |  |
+| WycofanieZgody | `Soneta.Core.GIODOOświadczenie` | bazodanowe, tylko-odczyt |  |  |
 | Zatwierdzone | `bool` |  |  |  |
 
 ## Relacje interfejsowe

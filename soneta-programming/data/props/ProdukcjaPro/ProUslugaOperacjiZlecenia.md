@@ -5,27 +5,31 @@ Opis: Element szczegółowy operacji zlecenia (ProOperacjaZlecenia). Definiuje u
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cena | `Soneta.Types.DoubleCy` | bazodanowe |  | Cena usługi operacji zlecenia. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość usługi operacji zlecenia. |
-| IloscDoZameldowania | `Soneta.Types.Amount` | bazodanowe | Ilość do zameldowania | Ilość do zameldowania usługi operacji zlecenia. |
-| IloscDoZameldowaniaPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość do zameldowania przeliczona | Ilość do zameldowania przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
+| Cena | `DoubleCy` | bazodanowe |  | Cena usługi operacji zlecenia. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość usługi operacji zlecenia. |
+| IloscDoZameldowania | `Amount` | bazodanowe | Ilość do zameldowania | Ilość do zameldowania usługi operacji zlecenia. |
+| IloscDoZameldowaniaPrzeliczona | `Amount` | bazodanowe | Ilość do zameldowania przeliczona | Ilość do zameldowania przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa usługi operacji zlecenia. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
-| IloscZameldowana | `Soneta.Types.Amount` | bazodanowe | Ilość zameldowana | Ilość zameldowana usługi operacji zlecenia. |
-| IloscZameldowanaPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość zameldowana przeliczona | Ilość zameldowana przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
+| IloscZameldowana | `Amount` | bazodanowe | Ilość zameldowana | Ilość zameldowana usługi operacji zlecenia. |
+| IloscZameldowanaPrzeliczona | `Amount` | bazodanowe | Ilość zameldowana przeliczona | Ilość zameldowana przeliczona na podstawową jednostkę miary dla usługi operacji zlecenia. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa usługi operacji zlecenia. |
-| Narzut | `Soneta.Types.Percent` | bazodanowe |  | Narzut usługi operacji zlecenia. |
+| Narzut | `Percent` | bazodanowe |  | Narzut usługi operacji zlecenia. |
 | Operacja | `Soneta.ProdukcjaPro.ProOperacjaZlecenia` | bazodanowe, guided-parent |  | Operacja dla usługi operacji zlecenia. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis usługi operacji zlecenia. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis usługi operacji zlecenia. |
 | PochodziZMeldunku | `bool` | bazodanowe | Pochodzi z meldunku | Usługa operacji zlecenia pochodzi z usługi meldunku. |
 | PominWKalkulacji | `bool` | bazodanowe | Pomiń w kalkulacji | Pomijanie w kalkulacji usługi operacji zlecenia. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar usługi operacji zlecenia. |
 | UslugaOperacjiTechnologii | `Soneta.ProdukcjaPro.ProUslugaOperacjiTechnologii` | bazodanowe | Usługa operacji technologii | Usługa operacji technologii dla usługi operacji zlecenia. |
-| UslugiMeldunkow | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProUslugaMeldunku>` |  |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość usługi operacji zlecenia. |
-| WartoscZameldowana | `Soneta.Types.Currency` | bazodanowe | Wartość zameldowana | Wartość zameldowana usługi operacji zlecenia. |
+| UslugiMeldunkow | `SubTable<Soneta.ProdukcjaPro.ProUslugaMeldunku>` | podlista |  |  |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość usługi operacji zlecenia. |
+| WartoscZameldowana | `Currency` | bazodanowe | Wartość zameldowana | Wartość zameldowana usługi operacji zlecenia. |

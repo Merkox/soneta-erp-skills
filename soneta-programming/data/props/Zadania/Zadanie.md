@@ -6,78 +6,81 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `ITimeTrack`, `IElementSlownika`, `IEmailElement`, `IDocumentHostCRM`, `IManagedRowInfoHost`, `IToDoItemHost`
 
-- pola bazodanowe: 64
-- pola kalkulowane (z klas biznesowych): 107
+- pola bazodanowe (zapisywalne): 56
+- pola kalkulowane (zapisywalne): 33
+- pola tylko-odczyt: 49
+- podlisty: 26
+- subrowy: 2
+- razem: 166
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ActivityRecordSequence | `Soneta.Core.RecordSequence` |  |  |  |
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy zadanie w tym stanie jest aktywne (otwarte). |
-| AllDayEvent | `bool` |  |  |  |
-| Appearance | `Soneta.Business.DataAppearance` |  |  |  |
-| Areas | `Soneta.Business.SubTable` |  |  |  |
-| Avatar | `Soneta.Business.Conversation.Interfaces.IAvatar` |  |  |  |
+| ActivityRecordSequence | `Soneta.Core.RecordSequence` | tylko-odczyt |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| Aktywny | `bool` | bazodanowe, tylko-odczyt | Aktywny | Wskazuje, czy zadanie w tym stanie jest aktywne (otwarte). |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| Appearance | `DataAppearance` | tylko-odczyt |  |  |
+| Areas | `SubTable` | podlista |  |  |
+| Avatar | `Conversation.Interfaces.IAvatar` | tylko-odczyt |  |  |
 | Calodzienne | `bool` |  |  |  |
-| Color | `Soneta.Zadania.GoogleEventColor` | bazodanowe, enum | Kolor | Określa kolor w kalendarzu Google |
-| Contractor | `string` |  |  |  |
-| CzasDo | `Soneta.Types.TimeSec` | bazodanowe | Godzina zakończenia | Planowana godzina zakończenia zadania |
-| CzasDo1 | `Soneta.Types.Time` |  |  |  |
-| CzasDoWypozyczenia | `Soneta.Types.Time` |  |  |  |
-| CzasOd | `Soneta.Types.TimeSec` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia zadania |
-| CzasOd1 | `Soneta.Types.Time` |  |  |  |
-| CzasPlanowany | `Soneta.Types.Time` | bazodanowe | Planowany czas wykonania zadania | Planowany czas wykonania zadania |
-| CzasPlanowanyZadan | `Soneta.Types.Time` |  | Czas planowany zadań | Planowany czas wykonywanych zadań |
-| CzasPozostalyOffset | `Soneta.Types.Time` | bazodanowe |  | Offset czasu wykonania zadania dodany ręcznie |
-| CzasPozostalyZadan | `Soneta.Types.Time` |  | Czas pozostały zadań | Pozostały czas wykonywanych zadań |
-| CzasTrwaniaZadania | `Soneta.Types.Time` |  |  |  |
-| CzasWykonania | `Soneta.Types.TimeSec` | bazodanowe | Czas wykonania | Czas wykonania. |
-| CzasWykonaniaOPZ | `Soneta.Types.Time` |  |  |  |
-| CzasWykonaniaZadan | `Soneta.Types.Time` |  | Czas wykonania zadań | Łączny czas wykonania zadań |
-| CzasZamkniecia | `Soneta.Types.Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia zadania. |
-| CzyZadanieOperatora | `bool` |  |  |  |
-| CzyZamykane | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` |  |  |  |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Planowana data zakończenia zadania |
-| DataDoWypozyczenia | `Soneta.Types.Date` |  |  |  |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia zadania |
-| DataSourceParent | `int?` |  |  |  |
-| DataZakonczenia | `Soneta.Types.Date` | bazodanowe | Data zakończenia zadania | Rzeczywista data zakończenia zadania |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia | Data zamknięcia zadania. |
+| Color | `Soneta.Zadania.GoogleEventColor` (enum) | bazodanowe | Kolor | Określa kolor w kalendarzu Google |
+| Contractor | `string` | tylko-odczyt |  |  |
+| CzasDo | `TimeSec` | bazodanowe | Godzina zakończenia | Planowana godzina zakończenia zadania |
+| CzasDo1 | `Time` |  |  |  |
+| CzasDoWypozyczenia | `Time` | tylko-odczyt |  |  |
+| CzasOd | `TimeSec` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia zadania |
+| CzasOd1 | `Time` |  |  |  |
+| CzasPlanowany | `Time` | bazodanowe | Planowany czas wykonania zadania | Planowany czas wykonania zadania |
+| CzasPlanowanyZadan | `Time` |  | Czas planowany zadań | Planowany czas wykonywanych zadań |
+| CzasPozostalyOffset | `Time` | bazodanowe |  | Offset czasu wykonania zadania dodany ręcznie |
+| CzasPozostalyZadan | `Time` |  | Czas pozostały zadań | Pozostały czas wykonywanych zadań |
+| CzasTrwaniaZadania | `Time` | tylko-odczyt |  |  |
+| CzasWykonania | `TimeSec` | bazodanowe | Czas wykonania | Czas wykonania. |
+| CzasWykonaniaZadan | `Time` | tylko-odczyt | Czas wykonania zadań | Łączny czas wykonania zadań |
+| CzasZamkniecia | `Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia zadania. |
+| CzyZadanieOperatora | `bool` | tylko-odczyt |  |  |
+| CzyZamykane | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
+| DataDo | `Date` | bazodanowe | Data zakończenia | Planowana data zakończenia zadania |
+| DataDoWypozyczenia | `Date` | tylko-odczyt |  |  |
+| DataOd | `Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia zadania |
+| DataSourceParent | `int?` | tylko-odczyt |  |  |
+| DataZakonczenia | `Date` | bazodanowe | Data zakończenia zadania | Rzeczywista data zakończenia zadania |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia | Data zamknięcia zadania. |
 | Definicja | `Soneta.Zadania.DefZadania` | bazodanowe |  | Definicja zadania. |
-| DefinitionSymbol | `string` |  |  |  |
-| DefinitionType | `System.Type` |  |  |  |
-| Description | `string` |  |  |  |
+| DefinitionSymbol | `string` | tylko-odczyt |  |  |
+| DefinitionType | `System.Type` | tylko-odczyt |  |  |
+| Description | `string` | tylko-odczyt |  |  |
 | DoWykonania | `bool` | bazodanowe |  |  |
-| DokCRMCzesci | `Soneta.Zadania.DokumentCRM` |  |  |  |
-| DokCRMHan | `Soneta.Zadania.DokumentCRM` |  |  |  |
-| DokCRMUslugi | `Soneta.Zadania.DokumentCRM` |  |  |  |
+| DokCRMCzesci | `Soneta.Zadania.DokumentCRM` | tylko-odczyt |  |  |
+| DokCRMHan | `Soneta.Zadania.DokumentCRM` | tylko-odczyt |  |  |
+| DokCRMUslugi | `Soneta.Zadania.DokumentCRM` | tylko-odczyt |  |  |
 | DokHanCzesci | `Soneta.Handel.DokumentHandlowy` |  |  |  |
 | DokHanCzesciPozycja | `Soneta.Handel.PozycjaDokHandlowego` |  |  |  |
 | DokHanHan | `Soneta.Handel.DokumentHandlowy` |  |  |  |
 | DokHanHanPozycja | `Soneta.Handel.PozycjaDokHandlowego` |  |  |  |
 | DokHanUslugi | `Soneta.Handel.DokumentHandlowy` |  |  |  |
 | DokHanUslugiPozycja | `Soneta.Handel.PozycjaDokHandlowego` |  |  |  |
-| DokumentyCRM | `Soneta.Business.SubTable<Soneta.Zadania.DokumentCRM>` |  |  |  |
+| DokumentyCRM | `SubTable<Soneta.Zadania.DokumentCRM>` | podlista |  |  |
 | Dzial | `string` | bazodanowe | Dział | Dział |
 | ETag | `string` | bazodanowe | Etag | Umożliwia weryfikację stanu zadania podczas synchronizacji |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | End | `System.DateTime` |  |  |  |
 | EntitleGuid | `System.Guid` | bazodanowe |  | Uprawnienie dla którego przypisane jest zadanie. |
 | EtapProjektu | `Soneta.Zadania.EtapProjektu` | bazodanowe |  |  |
 | GoogleEventID | `string` | bazodanowe | Identyfikator | Identyfikator w kalendarzu Google. |
-| HistoriaZadania | `Soneta.Business.SubTable<Soneta.Zadania.HistZadania>` |  |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
-| IconName | `string` |  |  |  |
-| IloscUrzadzen | `int` |  |  |  |
+| HistoriaZadania | `SubTable<Soneta.Zadania.HistZadania>` | podlista |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
+| IconName | `string` | tylko-odczyt |  |  |
+| IloscUrzadzen | `int` | tylko-odczyt |  |  |
 | IsCopy | `bool` |  |  |  |
-| IsNotZadanieOPZ | `bool` |  |  |  |
-| IsZadanieFromOPZ | `bool` |  |  |  |
-| IsZadanieOPZ | `bool` |  |  |  |
+| IsNotZadanieOPZ | `bool` | tylko-odczyt |  |  |
+| IsZadanieFromOPZ | `bool` | tylko-odczyt |  |  |
+| IsZadanieOPZ | `bool` | tylko-odczyt |  |  |
 | Kampania | `Soneta.Zadania.Kampania` | bazodanowe |  | Kampania, z którą powiązane jest zadanie |
-| KanbanRecordSequence | `Soneta.Core.RecordSequence` |  |  |  |
-| KanbanSequence | `int` |  |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| KanbanRecordSequence | `Soneta.Core.RecordSequence` | tylko-odczyt |  |  |
+| KanbanSequence | `int` | tylko-odczyt |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
@@ -86,99 +89,95 @@ Implementuje interfejsy: `ITimeTrack`, `IElementSlownika`, `IEmailElement`, `IDo
 | KontaktTelKom | `string` |  |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  | Kontrahent, którego dotyczy zadanie. |
 | Korespondencja | `Soneta.Zadania.Korespondencja` | bazodanowe |  | Korespondencja, z którą powiązane jest zdarzenie |
-| Koszt | `Soneta.Types.Currency` | bazodanowe | Koszt | Szacowany koszt zadania |
-| KosztRach | `Soneta.Types.Currency` |  |  |  |
+| Koszt | `Currency` | bazodanowe | Koszt | Szacowany koszt zadania |
+| KosztRach | `Currency` | tylko-odczyt |  |  |
 | Lead | `Soneta.CRM.Lead` | bazodanowe |  | Lead, do którego przyporządkowane jest zadanie. |
 | Lokalizacja | `Soneta.CRM.Lokalizacja` | bazodanowe | Lokalizacja zadania | Lokalizacja zadania. |
 | MailId | `string` | bazodanowe |  |  |
-| MailTo | `string` |  |  |  |
-| MyActivityRecordSequence | `Soneta.Core.RecordSequence` |  |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| MyActivityRecordSequence | `Soneta.Core.RecordSequence` | tylko-odczyt |  |  |
 | Nadrzedne | `Soneta.Zadania.Zadanie` | bazodanowe | Zadanie nadrzędne | Zadanie główne (dla zadań grupowych) lub zadanie poprzedzające. |
-| Nagrania | `Soneta.Business.SubTable<Soneta.Zadania.Cti.Models.RecordEvent>` |  |  |  |
-| Name | `string` |  |  |  |
+| Nagrania | `SubTable<Soneta.Zadania.Cti.Models.RecordEvent>` | podlista |  |  |
+| Name | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Krótka nazwa zadania lub zdarzenia, na podstawie której będzie można go wyszukiwać |
-| NieruchomosciUzyte | `Soneta.Business.SubTable` |  |  |  |
-| NotificationMessage | `Soneta.Business.Notifications.Models.NotificationMessage` |  |  |  |
-| NotificationParamsProvider | `Soneta.Business.Notifications.NotificationParamsProvider<Soneta.Zadania.Zadanie>` |  |  |  |
-| NotificationRowParamsProvider | `Soneta.Business.Notifications.NotificationParamsProvider` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| NieruchomosciUzyte | `SubTable` | podlista |  |  |
+| NotificationMessage | `Notifications.Models.NotificationMessage` |  |  |  |
+| NotificationRowParamsProvider | `Notifications.NotificationParamsProvider` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerKorespondencji | `string` |  | Numer korespondencji |  |
-| NumerPelny | `string` |  |  |  |
-| NumerProjektu | `string` |  | Numer projektu |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| NumerKorespondencji | `string` | tylko-odczyt | Numer korespondencji |  |
+| NumerPelny | `string` | tylko-odczyt |  |  |
+| NumerProjektu | `string` | tylko-odczyt | Numer projektu |  |
 | OddzialFirmy | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisana jest aktywność. |
-| Okres | `Soneta.Types.FromTo` |  |  |  |
-| Operator | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis zadania | Dokładny opis zadania lub zdarzenia |
-| OpisTxt | `string` |  |  |  |
-| PlanowanePrzeglady | `Soneta.Business.SubTable<Soneta.Zadania.PlanowanyPrzeglad>` |  |  |  |
-| PlanowanyCzasOPZ | `Soneta.Types.Time` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable<Soneta.Ksiega.PowiazanieKontaBase>` |  |  |  |
-| Poziom | `int` |  |  |  |
-| PozostalyCzasOPZ | `Soneta.Types.Time` |  |  |  |
+| Okres | `FromTo` | podlista |  |  |
+| Operator | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis zadania | Dokładny opis zadania lub zdarzenia |
+| OpisTxt | `string` | tylko-odczyt |  |  |
+| PlanowanePrzeglady | `SubTable<Soneta.Zadania.PlanowanyPrzeglad>` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable<Soneta.Ksiega.PowiazanieKontaBase>` | podlista |  |  |
+| Poziom | `int` | tylko-odczyt |  |  |
 | PracownikOPZ | `Soneta.Kadry.Pracownik` | bazodanowe | Pracownik OPZ | Pracownik wykonujący zadanie OPZ |
-| Priority | `string` |  |  |  |
+| Priority | `string` | tylko-odczyt |  |  |
 | PriorytetIdent | `int` | bazodanowe | Priorytet | Priorytet zadania. Relacja do property Ident w liście priorytetów powiązanych z definicją zadania. |
 | PriorytetZadania | `Soneta.Zadania.PriorytetZadania` | bazodanowe |  | Priorytet projektu. |
 | Projekt | `Soneta.Zadania.Projekt` | bazodanowe |  | Projekt, z którym powiązane jest zadanie |
-| Prowadzacy | `Soneta.Business.App.Operator` | bazodanowe | Zlecający | Osoba zlecająca zadanie |
+| Prowadzacy | `App.Operator` | bazodanowe | Zlecający | Osoba zlecająca zadanie |
 | Przedstawiciel | `Soneta.CRM.KontaktOsoba` | bazodanowe | Przedstawiciel | Osoba odpowiedzialna za wykonanie zadania ze strony kontrahenta |
 | Przeglad | `Soneta.Zadania.PlanowanyPrzeglad` |  |  |  |
-| Przychod | `Soneta.Types.Currency` | bazodanowe | Przychód | Szacowany przychód zadania |
-| PrzychodRach | `Soneta.Types.Currency` |  |  |  |
-| Przypomnienie | `Soneta.Types.Time` | bazodanowe | Przypomnienie | Czas przypomnienia o zadaniu |
-| PrzypomnienieWg | `Soneta.Core.PrzypomnienieWg` | bazodanowe, enum |  |  |
+| Przychod | `Currency` | bazodanowe | Przychód | Szacowany przychód zadania |
+| PrzychodRach | `Currency` | tylko-odczyt |  |  |
+| Przypomnienie | `Time` | bazodanowe | Przypomnienie | Czas przypomnienia o zadaniu |
+| PrzypomnienieWg | `Soneta.Core.PrzypomnienieWg` (enum) | bazodanowe |  |  |
 | Przypomnij | `bool` |  |  |  |
-| Rodzaj | `Soneta.Core.RodzajZadania` | bazodanowe, enum | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
-| Role | `Soneta.Business.App.Role` |  |  |  |
+| Rodzaj | `Soneta.Core.RodzajZadania` (enum) | bazodanowe, tylko-odczyt | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
+| Role | `App.Role` |  |  |  |
 | RoleGuid | `System.Guid` | bazodanowe |  | Rola dla której przypisane jest zadanie. |
-| SchedulerInterval | `Soneta.Types.Interval` |  |  |  |
+| SchedulerInterval | `Interval` |  |  |  |
 | Sequence | `int` |  |  |  |
 | Seria | `string` | bazodanowe | Seria | Seria aktywności. |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
 | StanIdent | `int` | bazodanowe | Stan | Stan zadania. Relacja do property Ident w liście stanów powiązanych z definicją zadania. |
-| StanLeada | `Soneta.CRM.Config.StanLeada` | bazodanowe |  | Stan leada |
 | StanTransakcji | `Soneta.CRM.Config.StanTransakcji` | bazodanowe |  | Stan transakcji |
 | StanZadania | `Soneta.Zadania.StanZadania` | bazodanowe |  | Stan projektu. |
 | Start | `System.DateTime` |  |  |  |
-| StopperIsRunning | `string` |  |  |  |
+| StopperIsRunning | `string` | tylko-odczyt |  |  |
 | Synced | `bool` | bazodanowe | Zsynchronizowane | Określa czy zadanie zostało poprawnie zsynchronizowane z kalendarzem Google |
-| TaskState | `string` |  |  |  |
+| TaskState | `string` | tylko-odczyt |  |  |
 | Text | `string` |  |  |  |
-| TimeTrackList | `Soneta.Business.SubTable<Soneta.Core.TimeTrack>` |  |  |  |
-| ToDoItems | `Soneta.Business.SubTable<Soneta.Core.ToDoItem>` |  |  |  |
+| TimeTrackList | `SubTable<Soneta.Core.TimeTrack>` | podlista |  |  |
+| ToDoItems | `SubTable<Soneta.Core.ToDoItem>` | podlista |  |  |
 | Transakcja | `Soneta.CRM.Transakcja` | bazodanowe |  | Transakcja, do której przyporządkowane jest zadanie. |
-| TypNadrzednego | `Soneta.Core.TypZadaniaNadrzednego` | bazodanowe, enum | Typ zadania nadrzędnego | Rodzaj zadania nadrzędnego: główne (dla zadań grupowych) lub poprzedzające. |
+| TypNadrzednego | `Soneta.Core.TypZadaniaNadrzednego` (enum) | bazodanowe | Typ zadania nadrzędnego | Rodzaj zadania nadrzędnego: główne (dla zadań grupowych) lub poprzedzające. |
 | TypZadania | `Soneta.Zadania.TypZadania` | bazodanowe |  | Typ zadania |
-| UprawnieniaNaAktywnosciach | `bool` |  |  |  |
-| Uprawnienie | `Soneta.Business.App.Entitle` |  |  |  |
-| UrzadzeniaUzyte | `Soneta.Business.SubTable<Soneta.Zadania.UrzadzenieUzyte>` |  |  |  |
+| UprawnieniaNaAktywnosciach | `bool` | tylko-odczyt |  |  |
+| Uprawnienie | `App.Entitle` |  |  |  |
+| UrzadzeniaUzyte | `SubTable<Soneta.Zadania.UrzadzenieUzyte>` | podlista |  |  |
 | Urzadzenie | `Soneta.Zadania.Urzadzenie` |  |  |  |
-| UsedVehicles | `Soneta.Business.SubTable` |  |  |  |
+| UsedVehicles | `SubTable` | podlista |  |  |
 | Usluga | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe | Usługa |  |
-| UslugiZdarzen | `Soneta.Business.SubTable` |  |  |  |
-| UsunieteZKalendarzaGoogle | `bool` |  | Usunięte z kalendarza Google |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi | Uwagi dotyczące zadania wpisywane przez operatora wykonującego zadanie. |
+| UslugiZdarzen | `SubTable` | podlista |  |  |
+| UsunieteZKalendarzaGoogle | `bool` | tylko-odczyt | Usunięte z kalendarza Google |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi | Uwagi dotyczące zadania wpisywane przez operatora wykonującego zadanie. |
 | WartoscWyliczana | `bool` | bazodanowe | Wartość wyliczana | Zakładane wartości wyliczane na podstawie listy produktów |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Wykonujacy | `Soneta.Business.App.Operator` | bazodanowe | Operator | Osoba wykonująca zadanie |
-| WykonujacyOPZ | `Soneta.Business.IWykonujacy` |  |  |  |
-| ZachowanieDat | `Soneta.Core.TaskDateDependency` | bazodanowe, enum | Zachowanie dat | Określa zależności pomiędzy datami rozpoczęcia i zakończenia zadań podrzędnych względem zadania nadrzędnego |
-| ZadaniaGrupowe | `Soneta.Business.View` |  |  |  |
-| ZadaniaPodmiotu | `Soneta.Business.SubTable<Soneta.Zadania.Podmioty_Zadania.PodmiotZadanie>` |  |  |  |
-| ZadaniaPodrzedne | `Soneta.Business.View` |  |  |  |
-| ZadaniaPowiazane | `Soneta.Business.View` |  |  |  |
-| ZadaniaPowiazanePodrzednego | `Soneta.Business.View` |  |  |  |
-| ZadaniaWykonujacego | `Soneta.Business.SubTable<Soneta.Zadania.PracaZdalna.ZadaniaDnia.Models.ZadanieDnia>` |  |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Wykonujacy | `App.Operator` | bazodanowe | Operator | Osoba wykonująca zadanie |
+| WykonujacyOPZ | `IWykonujacy` |  |  |  |
+| ZachowanieDat | `Soneta.Core.TaskDateDependency` (enum) | bazodanowe | Zachowanie dat | Określa zależności pomiędzy datami rozpoczęcia i zakończenia zadań podrzędnych względem zadania nadrzędnego |
+| ZadaniaGrupowe | `View` | podlista |  |  |
+| ZadaniaPodmiotu | `SubTable<Soneta.Zadania.Podmioty_Zadania.PodmiotZadanie>` | podlista |  |  |
+| ZadaniaPodrzedne | `View` | podlista |  |  |
+| ZadaniaPowiazane | `View` | podlista |  |  |
+| ZadaniaPowiazanePodrzednego | `View` | podlista |  |  |
+| ZadaniaWykonujacego | `SubTable<Soneta.Zadania.PracaZdalna.ZadaniaDnia.Models.ZadanieDnia>` | podlista |  |  |
 | ZadanieDlaRoli | `bool` |  |  |  |
 | ZadanieDlaUprawnienia | `bool` |  |  |  |
 | ZadanieNadrzedneContext | `Soneta.Zadania.Zadanie` |  |  |  |
-| ZasobyCRM | `Soneta.Business.SubTable<Soneta.Zadania.ZasobCRM>` |  |  |  |
+| ZasobyCRM | `SubTable<Soneta.Zadania.ZasobCRM>` | podlista |  |  |
 | Zespol | `string` |  |  |  |
 | dateStart | `System.DateTime` |  |  |  |
 | dateStop | `System.DateTime` |  |  |  |

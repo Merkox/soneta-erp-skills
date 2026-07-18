@@ -5,17 +5,21 @@ Opis: Element szczegółowy bilansu otwarcia PIT (BilansOtwarciaPIT). Przechowuj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `BilansOtwarciaPIT`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dochód | `decimal` |  |  |  |
-| Dokument | `Soneta.Place.BilansOtwarciaPIT` | bazodanowe, guided-parent |  |  |
+| Dochód | `decimal` | tylko-odczyt |  |  |
+| Dokument | `Soneta.Place.BilansOtwarciaPIT` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Koszty | `decimal` | bazodanowe | Koszty |  |
 | Koszty50 | `decimal` | bazodanowe | Koszty 50% |  |
-| Pit26 | `bool` | bazodanowe | Przychód do 26 lat |  |
-| PozycjaPIT | `Soneta.Place.PozycjaPIT` | bazodanowe |  |  |
+| Pit26 | `bool` | bazodanowe, tylko-odczyt | Przychód do 26 lat |  |
+| PozycjaPIT | `Soneta.Place.PozycjaPIT` | bazodanowe, tylko-odczyt |  |  |
 | Przychod | `decimal` | bazodanowe | Przychód |  |
 | Przychod50 | `decimal` | bazodanowe | Przychód 50% |  |
 | Zaliczka | `decimal` | bazodanowe | Zaliczka PIT |  |

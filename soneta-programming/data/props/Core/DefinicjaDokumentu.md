@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IDefinicjaDokumentuOA`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 3
+- subrowy: 1
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | DlaPulpituKB | `bool` | bazodanowe |  |  |
-| DodatkowyNaglowekDefinicja | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| DodatkowyNaglowekDefinicja | `MemoText` | bazodanowe, podlista |  |  |
 | Domyslna | `bool` | bazodanowe |  |  |
-| DomyślnaNumeracja | `string` |  |  |  |
-| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` |  |  |  |
-| MozliwaNumeracjaZeZrodla | `bool` |  |  |  |
+| DomyślnaNumeracja | `string` | tylko-odczyt |  |  |
+| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` | tylko-odczyt |  |  |
+| MozliwaNumeracjaZeZrodla | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NumerDokumentuZeZrodla | `bool` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| NumeracjaAutomatyczna | `bool` |  |  |  |
+| NumeracjaAutomatyczna | `bool` | tylko-odczyt |  |  |
 | ProceduraISO | `Soneta.Core.IsoProcedura` | bazodanowe |  | Procedura ISO, która zostanie wykorzystana do numeracji dokumentów danego typu |
-| RodzajeKomunikatow | `Soneta.Business.LpSubTable<Soneta.Core.RodzajKomunikatuHost>` |  |  |  |
-| Rozszerzenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| RodzajeKomunikatow | `LpSubTable<Soneta.Core.RodzajKomunikatuHost>` | podlista |  |  |
+| Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
 | SchematPodzialowy | `Soneta.Core.ISchematPodziałowy` | bazodanowe, iface-ref |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
-| TypDokumentu | `System.Type` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypDokumentu | `System.Type` | tylko-odczyt |  |  |
 | TypDokumentuVAT | `Soneta.Core.ProceduraVAT` | bazodanowe | Typ dokumentu VAT (JPK) | Procedura VAT określająca typ dokumentu |
 | ZawszePrzeliczajOpisAnalityczny | `bool` | bazodanowe |  |  |
 

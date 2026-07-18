@@ -5,15 +5,19 @@ Opis: Wzorcowe (abstrakcyjne) zasoby produkcyjne definiujące kategorie maszyn, 
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IProdZasob`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie zasobu. Zablokowane zasoby nie będą wyświetlane na listach wyboru. |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa zasobu wzorcowego. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis zasobu wzorcowego. |
-| RelacjeZasobu | `Soneta.Business.SubTable<Soneta.Produkcja.ProdZasobRelacja>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis zasobu wzorcowego. |
+| RelacjeZasobu | `SubTable<Soneta.Produkcja.ProdZasobRelacja>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol, skrócona nazwa zasobu. |
-| Wzorcowy | `bool` |  |  | Określa czy zasób jest wzorcowy. |
-| ZasobyProdukcyjne | `Soneta.Business.SubTable<Soneta.Produkcja.ProdZasobRelacja>` |  |  |  |
+| Wzorcowy | `bool` | tylko-odczyt |  | Określa czy zasób jest wzorcowy. |
+| ZasobyProdukcyjne | `SubTable<Soneta.Produkcja.ProdZasobRelacja>` | podlista |  |  |

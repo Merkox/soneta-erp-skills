@@ -5,12 +5,16 @@ Opis: Element szczegółowy definicji dokumentu dodatkowego (DbTupleDefinition).
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DbTupleDefinition` → `DbTupleDefinition`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BaseClassWarning | `string` |  |  |  |
-| DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, guided-parent |  |  |
-| DefinicjaProcesu | `Soneta.Business.IDependentWfDefinition` | bazodanowe |  |  |
+| BaseClassWarning | `string` | tylko-odczyt |  |  |
+| DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| DefinicjaProcesu | `IDependentWfDefinition` | bazodanowe |  |  |
 | DodawanyNaDokumentach | `bool` |  |  |  |

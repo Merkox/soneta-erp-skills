@@ -5,23 +5,27 @@ Opis: Definicja obszaru merytorycznego w module BI. Obszary tworzą hierarchiczn
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Appearances | `Soneta.Business.SubTable<Soneta.BI.AnalysisAreaAppearance>` |  |  |  |
-| AreaColor | `Soneta.Business.UI.PastelColorPaletteBase` | enum |  |  |
-| AreaPath | `string` |  |  |  |
+| Appearances | `SubTable<Soneta.BI.AnalysisAreaAppearance>` | podlista |  |  |
+| AreaColor | `UI.PastelColorPaletteBase` (enum) | tylko-odczyt |  |  |
+| AreaPath | `string` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| Parent | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe | Definicja nadrzędna |  |
-| Subareas | `Soneta.Business.SubTable<Soneta.BI.AnalysisAreaDefinition>` |  |  |  |
+| Parent | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe, tylko-odczyt | Definicja nadrzędna |  |
+| Subareas | `SubTable<Soneta.BI.AnalysisAreaDefinition>` | podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### PastelColorPaletteBase (`Soneta.Business.UI.PastelColorPaletteBase`)
+### PastelColorPaletteBase (`UI.PastelColorPaletteBase`)
 - `Green` = 0 — Zielony
 - `ForestGreen` = 1 — Zielony leśny
 - `Lime` = 2 — Limonkowy

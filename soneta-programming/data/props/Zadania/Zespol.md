@@ -5,10 +5,14 @@ Opis: Konfiguracja ról systemowych widocznych jako zespoły w aktywnościach OP
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 1
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Role | `Soneta.Business.App.Role` |  |  |  |
-| RoleGuid | `System.Guid` | bazodanowe |  | Rola która jest zespołem w aktywnościach OPZ. |
+| Role | `App.Role` |  |  |  |
+| RoleGuid | `System.Guid` | bazodanowe, tylko-odczyt |  | Rola która jest zespołem w aktywnościach OPZ. |

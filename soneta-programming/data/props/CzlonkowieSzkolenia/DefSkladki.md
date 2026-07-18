@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 2
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` |  |  |  |
+| Algorytm | `MemoText` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie definicji. Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |
-| ClassName | `string` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
 | DefinicjaEwidencji | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Informacja o miejscu umieszczenia dokumentu w ewidencji księgowej (sposobie księgowania). |
 | GeneracjaPlatnosci | `bool` | bazodanowe |  | Określa czy dokument generuje płatności. |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | KsiegowanieKasowe | `bool` | bazodanowe |  | Określa czy dokument ma być księgowany metodą kasową, a nie memoriałową. |
-| NaliczanieProporcjonalne | `Soneta.CzlonkowieSzkolenia.NaliczanieProporcjonalne` | bazodanowe, enum |  |  |
+| NaliczanieProporcjonalne | `Soneta.CzlonkowieSzkolenia.NaliczanieProporcjonalne` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  | Pełna nazwa definicji dokumentu wykorzystywana do wyszukiwania deifnicji. |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  | Schemat numeracji dla definicji składki. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  | Schemat numeracji dla definicji składki. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| OkresNaliczania | `Soneta.CzlonkowieSzkolenia.OkresDoNaliczania` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| OkresNaliczania | `Soneta.CzlonkowieSzkolenia.OkresDoNaliczania` (enum) | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Skladka | `Soneta.Types.Currency` | bazodanowe |  | Wielkość naliczanej składki. |
-| SkladkaAlgorytm | `Soneta.Business.MemoText` | bazodanowe |  | Kod wyliczania stawki. |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Skladka | `Currency` | bazodanowe |  | Wielkość naliczanej składki. |
+| SkladkaAlgorytm | `MemoText` | bazodanowe, podlista |  | Kod wyliczania stawki. |
 | SkladkaDeklarowana | `bool` | bazodanowe |  | Określan czy używać stawki deklarowanej. |
 | SkladkaWyliczana | `bool` | bazodanowe |  | Określa czy stawka jest wyliczana algorytmem. |
 | Symbol | `string` | bazodanowe |  | Skrótowa nazwa definicji dokumentu wykorzystywana do wyszukiwania definicji. |

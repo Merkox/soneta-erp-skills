@@ -5,29 +5,33 @@ Opis: Słownik grup zaszeregowania pracowników określający typ stawki, zakres
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 1
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | bazodanowe, enum |  |  |
+| TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) | bazodanowe |  |  |
 | UwzgledniajWymiar | `bool` | bazodanowe |  |  |
-| ZakresDo | `Soneta.Types.Currency` | bazodanowe |  |  |
-| ZakresOd | `Soneta.Types.Currency` | bazodanowe |  |  |
+| ZakresDo | `Currency` | bazodanowe |  |  |
+| ZakresOd | `Currency` | bazodanowe |  |  |
 | ZakresOstrzezenie | `bool` | bazodanowe |  |  |
-| Zaszeregowanie | `Soneta.Kadry.Zaszeregowanie` | bazodanowe |  |  |
+| Zaszeregowanie | `Soneta.Kadry.Zaszeregowanie` (subrow) | bazodanowe |  |  |
 | Zaszeregowanie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Zaszeregowanie.Godzinowe | `bool` |  |  |  |
-| Zaszeregowanie.Miesięczne | `bool` |  |  |  |
-| Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| Zaszeregowanie.Stawka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | enum |  |  |
-| Zaszeregowanie.WgElement | `Soneta.Business.Key` |  |  |  |
+| Zaszeregowanie.Godzinowe | `bool` | tylko-odczyt |  |  |
+| Zaszeregowanie.Miesięczne | `bool` | tylko-odczyt |  |  |
+| Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` (enum) | bazodanowe |  |  |
+| Zaszeregowanie.Stawka | `Currency` | bazodanowe |  |  |
+| Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) |  |  |  |
+| Zaszeregowanie.WgElement | `Key` | podlista |  |  |
 | Zaszeregowanie.WskaznikKrotnosc | `double` | bazodanowe |  |  |
 | Zaszeregowanie.WskaznikNazwa | `string` | bazodanowe |  |  |
-| Zaszeregowanie.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Zaszeregowanie.Wymiar | `Fraction` | bazodanowe |  |  |
 
 ## Enumy
 

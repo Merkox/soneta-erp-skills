@@ -5,14 +5,18 @@ Opis: Słownik zewnętrzny mapujący obiekty z systemów zewnętrznych na elemen
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadrzedny | `Soneta.Core.SlownikZewn` | bazodanowe |  | Nadrzędny słownik zewnętrzny |
 | Nazwa | `string` | bazodanowe |  | Nazwa słownika zewnętrznego |
 | Parametry | `string` | bazodanowe |  | Dodatkowe parametry |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Core.SlownikZewn>` |  |  |  |
+| Podrzedne | `SubTable<Soneta.Core.SlownikZewn>` | podlista |  |  |
 | Rodzaj | `string` | bazodanowe |  | Rodzaj słownika zewnętrznego |
 | ZapisZewn | `string` | bazodanowe | Obiekt z systemu zewnętrznego | Wskazanie na obiekt z systemu zewnętrzenego |

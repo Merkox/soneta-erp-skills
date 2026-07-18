@@ -5,17 +5,21 @@ Opis: Tabela umożliwia ewidencjonowanie w profilu kompetencji merytorycznych za
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| Kompetencje | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kompetencje.PozycjaProfiluKompetencjiMerytorycznych>` |  |  |  |
+| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
+| Kompetencje | `SubTable<Soneta.HR.ZKL.Profile.Kompetencje.PozycjaProfiluKompetencjiMerytorycznych>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa profilu |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres obowiązywania |  |
-| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` | bazodanowe, enum |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres obowiązywania |  |
+| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi |  |
 
 ## Enumy
 

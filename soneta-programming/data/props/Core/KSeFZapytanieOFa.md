@@ -5,8 +5,12 @@ Opis: Zapytanie o faktury wysłane do Krajowego Systemu e-Faktur. Zawiera parame
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 22
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -16,21 +20,20 @@ Guided: root
 | DataDoOffset | `string` | bazodanowe |  |  |
 | DataOd | `System.DateTime` | bazodanowe |  |  |
 | DataOdOffset | `string` | bazodanowe |  |  |
-| DataZapytaniaDo | `System.DateTime` |  |  |  |
-| DataZapytaniaOd | `System.DateTime` |  |  |  |
-| KontekstAutentykacji | `Soneta.Core.Enums.TypKontekstuAutentykacjiKSeF` | bazodanowe, enum | Kontekst autentykacji | Kontekst autentykacji |
-| LiczbaFakturPominietych | `int` |  | Liczba faktur pominiętych |  |
-| LiczbaFakturZaimportowanych | `int` |  | Liczba faktur zaimportowanych |  |
-| Okres | `Soneta.Types.FromTo` |  |  |  |
+| DataZapytaniaDo | `System.DateTime` | tylko-odczyt |  |  |
+| DataZapytaniaOd | `System.DateTime` | tylko-odczyt |  |  |
+| KontekstAutentykacji | `Soneta.Core.Enums.TypKontekstuAutentykacjiKSeF` (enum) | bazodanowe | Kontekst autentykacji | Kontekst autentykacji |
+| LiczbaFakturPominietych | `int` | tylko-odczyt | Liczba faktur pominiętych |  |
+| LiczbaFakturZaimportowanych | `int` | tylko-odczyt | Liczba faktur zaimportowanych |  |
+| Okres | `FromTo` | podlista |  |  |
 | Parts | `Soneta.Core.KSeFPartList` | bazodanowe | Pakiety |  |
-| PobieranieSamofakturowania | `Soneta.Core.Enums.PobieranieSamofakturowania` | bazodanowe, enum | Uwzględniaj samofakturowanie | Uwzględnianie faktur samofakturowania |
-| PobraneWszystkie | `bool` |  | Pobrano wszystkie pakiety |  |
-| PowiazanySystem | `Soneta.Core.SystemZewnPlatformaEDI` |  |  |  |
-| RodzajDokumentu | `Soneta.Core.RodzajDokumentuKSeFZapytanieOFa` | bazodanowe, enum | Rodzaj dokumentu | Rodzaj dokumentu |
-| RodzajKonta | `Soneta.Core.Enums.RodzajKonta` | bazodanowe, enum | Rodzaj konta | Rodzaj konta KSeF |
-| StatusZapytania | `Soneta.Core.StatusZapytania` | enum |  |  |
+| PobieranieSamofakturowania | `Soneta.Core.Enums.PobieranieSamofakturowania` (enum) | bazodanowe | Uwzględniaj samofakturowanie | Uwzględnianie faktur samofakturowania |
+| PobraneWszystkie | `bool` | tylko-odczyt | Pobrano wszystkie pakiety |  |
+| RodzajDokumentu | `Soneta.Core.RodzajDokumentuKSeFZapytanieOFa` (enum) | bazodanowe | Rodzaj dokumentu | Rodzaj dokumentu |
+| RodzajKonta | `Soneta.Core.Enums.RodzajKonta` (enum) | bazodanowe | Rodzaj konta | Rodzaj konta KSeF |
+| StatusZapytania | `Soneta.Core.StatusZapytania` (enum) | tylko-odczyt |  |  |
 | TokenKSeF | `Soneta.Core.SysZewToken` | bazodanowe | Token KSeF | Token KSeF |
-| TypPodmiotu | `Soneta.Core.Enums.PodmiotTworzeniaZapytaniaKSeF` | bazodanowe, enum | Typ podmiotu zapytania | Typ podmiotu zapytania |
+| TypPodmiotu | `Soneta.Core.Enums.PodmiotTworzeniaZapytaniaKSeF` (enum) | bazodanowe | Typ podmiotu zapytania | Typ podmiotu zapytania |
 | WartoscKontekstuAutentykacji | `string` | bazodanowe | Wartość kontekstu autentykacji | Wartość kontekstu autentykacji |
 | elementReferenceNumber | `string` | bazodanowe |  | Numer referencyjny elementu |
 | numberOfElements | `int` | bazodanowe | Ilość dokumentów | Ilość dokumentów |

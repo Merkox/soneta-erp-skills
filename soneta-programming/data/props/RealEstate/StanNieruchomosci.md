@@ -5,15 +5,19 @@ Opis: Element szczegółowy typu nieruchomości (TypNieruchomosc). Definiuje mo�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy nieruchomośś w tym stanie jest aktywne. |
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany nieruchomości nie będą wyświetlane w liście wyboru. |
-| Ident | `int` | bazodanowe | Identyfikator | Identyfikator stanu na definicji nieruchomości. Wykorzystywany w relacji do nieruchomości. |
-| Kod | `string` |  |  |  |
+| Ident | `int` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator stanu na definicji nieruchomości. Wykorzystywany w relacji do nieruchomości. |
+| Kod | `string` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa stanu w ramach nieruchomości. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa stanu realizacji nieruchomości |
-| TypNieruchomosc | `Soneta.RealEstate.Models.Database.Config.TypNieruchomosc` | bazodanowe |  | Definicja nieruchomości, do którego jest przypisany ten stan |
+| TypNieruchomosc | `Soneta.RealEstate.Models.Database.Config.TypNieruchomosc` | bazodanowe, tylko-odczyt |  | Definicja nieruchomości, do którego jest przypisany ten stan |

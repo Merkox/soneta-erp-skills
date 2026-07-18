@@ -6,41 +6,45 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IZakresDefinicji`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 7
+- subrowy: 2
+- razem: 30
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | CentrumKosztow | `Soneta.Core.CentrumKosztow` | bazodanowe |  |  |
-| DefinicjeElementow | `Soneta.Business.SubTable<Soneta.Place.DefinicjaElementu>` |  |  |  |
+| DefinicjeElementow | `SubTable<Soneta.Place.DefinicjaElementu>` | podlista |  |  |
 | JendostkaOrganizacyjna | `Soneta.Kadry.Wydzial` |  |  |  |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Oprocentowanie | `Soneta.Kadry.OprocentowaniePozyczki` | bazodanowe |  |  |
+| Oprocentowanie | `Soneta.Kadry.OprocentowaniePozyczki` (subrow) | bazodanowe |  |  |
 | Oprocentowanie.Ilosc | `int` | bazodanowe |  |  |
 | Oprocentowanie.OdsetkiZaOdroczenie | `bool` | bazodanowe |  |  |
-| Oprocentowanie.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Oprocentowanie.Sposob | `Soneta.Kadry.SposóbSpłatyOdsetek` | bazodanowe, enum |  |  |
-| Oprocentowanie.Typ | `Soneta.Kadry.TypOprocentowania` | bazodanowe, enum |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieWplatWyplat` | bazodanowe |  |  |
+| Oprocentowanie.Procent | `Percent` | bazodanowe |  |  |
+| Oprocentowanie.Sposob | `Soneta.Kadry.SposóbSpłatyOdsetek` (enum) | bazodanowe |  |  |
+| Oprocentowanie.Typ | `Soneta.Kadry.TypOprocentowania` (enum) | bazodanowe |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieWplatWyplat` (subrow) | bazodanowe |  |  |
 | Rozliczenie.DefinicjaWplaty | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu wpłaty gotówkowej do funduszu |
 | Rozliczenie.DefinicjaWylaty | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu wypłaty gotówkowej z funduszu |
 | Rozliczenie.Kasa | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  | Kasa, w oparciu o którą realizowane są rozliczenia gotówkowe z funduszu |
 | Rozliczenie.Konto | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  | Kasa, w oparciu o którą realizowane są rozliczenia gotówkowe z funduszu |
 | Rozliczenie.OrganizacjaZarzadzajaca | `Soneta.CRM.Kontrahent` | bazodanowe |  | Kontrahenci funduszy pożyszkowych |
-| Rozliczenie.WgDefinicjaWplaty | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgDefinicjaWylaty | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgKasa | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgKonto | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgOrganizacjaZarzadzajaca | `Soneta.Business.Key` |  |  |  |
+| Rozliczenie.WgDefinicjaWplaty | `Key` | podlista |  |  |
+| Rozliczenie.WgDefinicjaWylaty | `Key` | podlista |  |  |
+| Rozliczenie.WgKasa | `Key` | podlista |  |  |
+| Rozliczenie.WgKonto | `Key` | podlista |  |  |
+| Rozliczenie.WgOrganizacjaZarzadzajaca | `Key` | podlista |  |  |
 | Skladka | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| SplataRoznicy | `Soneta.Kadry.SplataRoznicyZ` | bazodanowe, enum |  |  |
+| SplataRoznicy | `Soneta.Kadry.SplataRoznicyZ` (enum) | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
 | Wpisowe | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | WycofanieWkladu | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Wydziały | `Soneta.Business.SubTable<Soneta.Kadry.WydziałDefFundPozy>` |  |  |  |
-| Zyranci | `Soneta.Kadry.RodzajeŻyrantów` | bazodanowe, enum |  |  |
+| Wydziały | `SubTable<Soneta.Kadry.WydziałDefFundPozy>` | podlista |  |  |
+| Zyranci | `Soneta.Kadry.RodzajeŻyrantów` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

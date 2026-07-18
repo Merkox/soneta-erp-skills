@@ -5,17 +5,21 @@ Opis: Raport nieobecności importowany z platformy PUE ZUS. Przechowuje datę wy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresEmail | `string` | bazodanowe |  |  |
-| DataWygenerowania | `Soneta.Types.Date` | bazodanowe |  |  |
-| DokumentyEZLA | `Soneta.Business.SubTable<Soneta.Kalend.PUEDokumentEZLA>` |  |  |  |
+| DataWygenerowania | `Date` | bazodanowe |  |  |
+| DokumentyEZLA | `SubTable<Soneta.Kalend.PUEDokumentEZLA>` | podlista |  |  |
 | LiczbaDokumentowEzla | `int` | bazodanowe |  |  |
 | LiczbaDokumentowEzlaK | `int` | bazodanowe |  |  |
 | PlatnikNazwaSkrocona | `string` | bazodanowe |  |  |
 | PlatnikNip | `string` | bazodanowe |  |  |
 | TypRaportu | `string` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |

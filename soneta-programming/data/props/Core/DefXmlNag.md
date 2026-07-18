@@ -5,46 +5,50 @@ Opis: Definicja szablonu importu/eksportu XML (komunikatów, e-deklaracji, plik�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 12
+- podlisty: 6
+- subrowy: 1
+- razem: 35
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BOM | `bool` | bazodanowe | Znacznik BOM | Określa czy dodawać znacznik BOM w eksportowanym pliku. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |
-| ClassName | `string` |  |  |  |
-| DefXmlElemRoot | `Soneta.Core.DefXmlElem` |  |  |  |
-| DefXmlNagCode | `string` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefsXmlElem | `Soneta.Business.SubTable<Soneta.Core.DefXmlElem>` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefXmlElemRoot | `Soneta.Core.DefXmlElem` | tylko-odczyt |  |  |
+| DefXmlNagCode | `string` | tylko-odczyt |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefsXmlElem | `SubTable<Soneta.Core.DefXmlElem>` | podlista |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | ExpandInteger | `int` | bazodanowe |  | Pole liczbowe do wykorzystania per rodzaj definicji. |
 | ExpandInteger2 | `int` | bazodanowe |  | Pole liczbowe do wykorzystania per rodzaj definicji. |
-| Format | `Soneta.Core.FormatDefXml` | bazodanowe, enum | Formatowanie pliku | Określa sposób formatowania pliku. |
-| Info | `Soneta.Core.ImportExportInfo` |  |  |  |
+| Format | `Soneta.Core.FormatDefXml` (enum) | bazodanowe | Formatowanie pliku | Określa sposób formatowania pliku. |
+| Info | `Soneta.Core.ImportExportInfo` | tylko-odczyt |  |  |
 | KodowanieZnakow | `int` | bazodanowe | Kodowanie znaków | Określa sposób kodowania znaków (strona kodowa). |
-| KodowanieZnakowName | `string` |  |  |  |
+| KodowanieZnakowName | `string` | tylko-odczyt |  |  |
 | LocalXSD | `string` | bazodanowe | Scieżka do pliku XSD |  |
 | Nazwa | `string` | bazodanowe | Nazwa definicji | Krótka nazwa definicji XML. |
-| OcrBusMappings | `Soneta.Business.SubTable` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis definicji. |
+| OcrBusMappings | `SubTable` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis definicji. |
 | PlikSzablonu | `string` | bazodanowe | Plik szabolnu |  |
-| Rodzaj | `Soneta.Core.RodzajDefXml` | bazodanowe, enum |  |  |
-| RodzajZrodlaDanych | `Soneta.Core.RodzajZrodlaDanychDefXml` | bazodanowe, enum | Rodzaj źródła danych | Określa rodzaj źródła danych. |
-| RootRowCount | `int` |  |  |  |
-| Row | `Soneta.Core.DefXmlNag` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Core.RodzajDefXml` (enum) | bazodanowe |  |  |
+| RodzajZrodlaDanych | `Soneta.Core.RodzajZrodlaDanychDefXml` (enum) | bazodanowe | Rodzaj źródła danych | Określa rodzaj źródła danych. |
+| RootRowCount | `int` | tylko-odczyt |  |  |
+| Row | `Soneta.Core.DefXmlNag` | tylko-odczyt |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Selektor | `Soneta.Core.SelektorDefXml` | bazodanowe, enum | Selektor definicji | Selektor definicji. |
-| SprawozdzaniaKS | `Soneta.Business.SubTable` |  |  |  |
-| Standard | `Soneta.Core.StandardDefXml` | bazodanowe, enum |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Selektor | `Soneta.Core.SelektorDefXml` (enum) | bazodanowe, tylko-odczyt | Selektor definicji | Selektor definicji. |
+| SprawozdzaniaKS | `SubTable` | podlista |  |  |
+| Standard | `Soneta.Core.StandardDefXml` (enum) | bazodanowe |  |  |
 | TableName | `string` | bazodanowe | Tabela danych | Klasa obiektu. |
-| UseStandardForm | `bool` |  |  |  |
-| XMLTempate | `string` |  |  |  |
+| UseStandardForm | `bool` | tylko-odczyt |  |  |
+| XMLTempate | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

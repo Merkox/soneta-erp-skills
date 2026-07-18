@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `ITemplate`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,8 +19,8 @@ Implementuje interfejsy: `ITemplate`
 | Domyslna | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Odbiorca | `string` | bazodanowe |  |  |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Treść |  |
-| Typ | `Soneta.CRM.TypDlaSzablonu` | bazodanowe, enum | Typ |  |
+| Tresc | `MemoText` | bazodanowe, podlista | Treść |  |
+| Typ | `Soneta.CRM.TypDlaSzablonu` (enum) | bazodanowe | Typ |  |
 
 ## Enumy
 

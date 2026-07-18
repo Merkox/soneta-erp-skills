@@ -4,40 +4,45 @@ Tytuł: Historia pojazdów
 Opis: Element szczegółowy pojazdu (Pojazd). Przechowuje historyczne wersje danych pojazdu z okresu ich aktualności, w tym dane rejestracyjne, techniczne, własnościowe i przypisanie dysponenta. Umożliwia śledzenie zmian parametrów pojazdu w czasie.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historia: Tak
 
-- pola bazodanowe: 34
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 28
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 8
+- podlisty: 5
+- subrowy: 0
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
 | Color | `string` | bazodanowe | Kolor |  |
 | Department | `Soneta.Kadry.Wydzial` | bazodanowe | Dział |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis pojazdu |  |
-| Dictionary | `string` |  |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis pojazdu |  |
+| Dictionary | `string` | tylko-odczyt |  |  |
 | Dysponent | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Dysponent pojazdu |
 | Emmision | `string` | bazodanowe | Norma emisji CO2 |  |
 | EngineCapacity | `double` | bazodanowe | Pojemność silnika |  |
-| FirstRegDate | `Soneta.Types.Date` | bazodanowe | Data pierwszej rejestracji |  |
-| FirstRegistrationDate | `Soneta.Types.Date` | bazodanowe | Data pierwszej rejestracji |  |
+| FirstRegDate | `Date` | bazodanowe | Data pierwszej rejestracji |  |
+| FirstRegistrationDate | `Date` | bazodanowe | Data pierwszej rejestracji |  |
 | FuelCardNo | `string` | bazodanowe | Numer karty paliwowej |  |
-| HistHost | `Soneta.Business.Db.HistHost` | enum |  |  |
-| IsReasonRequired | `bool` |  |  |  |
+| HistHost | `Db.HistHost` (enum) | tylko-odczyt |  |  |
+| IsReasonRequired | `bool` | tylko-odczyt |  |  |
 | Limit | `double` | bazodanowe | Roczny limit kilometrów |  |
 | Marka | `string` | bazodanowe |  | Marka pojadu |
 | Name | `string` | bazodanowe | Nazwa | Nazwa pojazdu |
 | NrRejestracyjny | `string` | bazodanowe |  | Numer rejestracyjny pojazdu |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisAktualizacji | `Soneta.Business.MemoText` | bazodanowe | Opis aktualizacji | Opis aktualizacji zapisu |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisAktualizacji | `MemoText` | bazodanowe, podlista | Opis aktualizacji | Opis aktualizacji zapisu |
 | Owner | `Soneta.CRM.Kontrahent` | bazodanowe | Właściciel |  |
-| Paliwa | `Soneta.Business.SubTable<Soneta.Samochodowka.PaliwoPojazdu>` |  |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
+| Paliwa | `SubTable<Soneta.Samochodowka.PaliwoPojazdu>` | podlista |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
 | Power | `double` | bazodanowe | Moc silnika |  |
-| PowodAktualizacji | `string` | bazodanowe | Powód aktualizacji | Opis powodu aktualizacji zapisu |
+| PowodAktualizacji | `string` | bazodanowe, tylko-odczyt | Powód aktualizacji | Opis powodu aktualizacji zapisu |
 | ProductionYear | `int` | bazodanowe | Rok produkcji |  |
-| PurchaseDate | `Soneta.Types.Date` | bazodanowe | Data zakupu |  |
+| PurchaseDate | `Date` | bazodanowe | Data zakupu |  |
 | PurchaseDocument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument zakupu |  |
-| Rodzaj | `Soneta.Samochodowka.RodzajPojazdu` | bazodanowe, enum |  | Rodzaj pojazdu |
+| Rodzaj | `Soneta.Samochodowka.RodzajPojazdu` (enum) | bazodanowe |  | Rodzaj pojazdu |
 | RodzajSilnika | `Soneta.Samochodowka.EkoRodzajSilnika` | bazodanowe |  | Rodzaj silnika z pojeździe |
 | Seats | `int` | bazodanowe | Liczba miejsc |  |
 | Service | `Soneta.CRM.Kontrahent` | bazodanowe | Serwisant |  |
@@ -45,13 +50,13 @@ Guided: root
 | UpdateDescription | `string` |  |  |  |
 | UpdateReason | `string` |  |  |  |
 | VIN | `string` | bazodanowe | VIN |  |
-| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe |  |  |
-| VehicleBase | `Soneta.Vehicles.Vehicle` |  |  |  |
-| VehicleBrand | `Soneta.Business.Db.DictionaryItem` |  |  |  |
+| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt |  |  |
+| VehicleBase | `Soneta.Vehicles.Vehicle` | tylko-odczyt |  |  |
+| VehicleBrand | `Db.DictionaryItem` | tylko-odczyt |  |  |
 | VehicleModel | `string` | bazodanowe | Model pojazdu |  |
 | VehicleState | `Soneta.Vehicles.Models.Database.Config.VehicleState` | bazodanowe | Stan pojazdu |  |
 | VehicleType | `Soneta.Vehicles.Models.Database.Config.VehicleType` | bazodanowe | Typ pojazdu |  |
-| WarrantyDate | `Soneta.Types.Date` | bazodanowe | Data gwarancji |  |
+| WarrantyDate | `Date` | bazodanowe | Data gwarancji |  |
 | Wycofany | `bool` | bazodanowe |  |  |
 
 ## Relacje interfejsowe
@@ -67,7 +72,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### HistHost (`Soneta.Business.Db.HistHost`)
+### HistHost (`Db.HistHost`)
 - `PracHistorie` = 1 — Pracownicy
 - `UmowaHistorie` = 2 — Umowy
 - `NieruchomosciHis` = 3 — Nieruchomości

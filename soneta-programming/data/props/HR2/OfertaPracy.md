@@ -5,37 +5,41 @@ Opis: Ogłoszenie o pracę publikowane na potrzeby rekrutacji. Zawiera dane stan
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IŹródłoRekrutacji`, `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 4
+- subrowy: 1
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataPoziomuWynagrodzenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataWycofania | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataWystawienia | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataPoziomuWynagrodzenia | `Date` | bazodanowe |  |  |
+| DataWycofania | `Date` | bazodanowe |  |  |
+| DataWystawienia | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
 | EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
-| KartyOpisuStanowiska | `Soneta.Business.SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` |  |  |  |
+| KartyOpisuStanowiska | `SubTable<Soneta.HR2.KartaOpisuStanowiskaBase>` | podlista |  |  |
 | NazwaStanowiska | `string` | bazodanowe |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerReferencyjny | `string` | bazodanowe |  |  |
 | Odpowiedzialny | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| Oferty | `Soneta.Business.SubTable<Soneta.HR2.RekrutacjaAplikacja>` |  |  |  |
-| PlanowanaDataWycofania | `Soneta.Types.Date` | bazodanowe |  |  |
-| ProponowaneWynagrodzenieBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Oferty | `SubTable<Soneta.HR2.RekrutacjaAplikacja>` | podlista |  |  |
+| PlanowanaDataWycofania | `Date` | bazodanowe |  |  |
+| ProponowaneWynagrodzenieBrutto | `Currency` | bazodanowe |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Stan | `Soneta.HR2.StanOfertyPracy` | bazodanowe, enum |  |  |
-| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| Wakat | `Soneta.HR2.RekrutacjaWakat` | bazodanowe |  |  |
+| Stan | `Soneta.HR2.StanOfertyPracy` (enum) | bazodanowe |  |  |
+| Stanowisko | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
+| Wakat | `Soneta.HR2.RekrutacjaWakat` | bazodanowe, tylko-odczyt |  |  |
 | WidocznoscPoziomuWynagrodzenia | `bool` | bazodanowe |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |
 
 ## Relacje interfejsowe
 

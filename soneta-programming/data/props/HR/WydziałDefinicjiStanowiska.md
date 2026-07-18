@@ -5,12 +5,16 @@ Opis: Element szczegółowy definicji stanowiska (DefinicjaStanowiska). Wskazuje
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaStanowiska` → `DefinicjaStanowiska`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, guided-parent | Definicja stanowiska |  |
-| Ilosc | `Soneta.Types.Fraction` | bazodanowe | Ilość |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt, guided-parent | Definicja stanowiska |  |
+| Ilosc | `Fraction` | bazodanowe | Ilość |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |

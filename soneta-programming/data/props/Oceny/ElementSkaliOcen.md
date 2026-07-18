@@ -5,18 +5,22 @@ Opis: Element szczegółowy skali ocen (ElementSkaliOcen). Reprezentuje pojedync
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisJednaLinia | `string` |  | Opis |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisJednaLinia | `string` | tylko-odczyt | Opis |  |
 | Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| Skala | `Soneta.Oceny.SkalaOcen` | bazodanowe |  |  |
+| Skala | `Soneta.Oceny.SkalaOcen` | bazodanowe, tylko-odczyt |  |  |
 | Skrot | `string` | bazodanowe |  |  |
-| UzasadnieniaOceny | `Soneta.Business.SubTable<Soneta.Oceny.UzasadnienieOceny>` |  |  |  |
+| UzasadnieniaOceny | `SubTable<Soneta.Oceny.UzasadnienieOceny>` | podlista |  |  |
 | Uzasadnienie | `bool` | bazodanowe |  |  |
 | Wartosc | `decimal` | bazodanowe | Wartość |  |
 | WykonanieDo | `decimal` | bazodanowe | Wykonanie do |  |

@@ -5,19 +5,23 @@ Opis: Ewidencja kosztów uzyskania przychodów z tytułu praw autorskich (50% KU
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasPrzepracowany | `Soneta.Types.Time` | bazodanowe | Czas przepracowany |  |
-| CzasPrzepracowanyKorygowany | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| GodzBezKUP50 | `Soneta.Types.Time` | bazodanowe | Godziny bez KUP50 |  |
-| GodzKUP50 | `Soneta.Types.Time` | bazodanowe | Godziny KUP50 |  |
+| CzasPrzepracowany | `Time` | bazodanowe | Czas przepracowany |  |
+| CzasPrzepracowanyKorygowany | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| GodzBezKUP50 | `Time` | bazodanowe | Godziny bez KUP50 |  |
+| GodzKUP50 | `Time` | bazodanowe | Godziny KUP50 |  |
 | Kwota | `decimal` | bazodanowe | Podstawa |  |
-| Miesiąc | `Soneta.Types.YearMonth` |  |  |  |
+| Miesiąc | `YearMonth` |  |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe | Podstawa |  |
-| WspolczynnikKUP50 | `Soneta.Types.Percent` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Procent | `Percent` | bazodanowe | Podstawa |  |
+| WspolczynnikKUP50 | `Percent` | tylko-odczyt |  |  |

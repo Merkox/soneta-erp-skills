@@ -5,13 +5,17 @@ Opis: Wzorcowe (abstrakcyjne) osoby produkcyjne definiujące role i stanowiska w
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IProdOsoba`, `IProdZasob`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Kompetencje | `Soneta.Business.SubTable<Soneta.Produkcja.ProdOsobaKompetencja>` |  |  |  |
+| Kompetencje | `SubTable<Soneta.Produkcja.ProdOsobaKompetencja>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa osoby wzorcowej. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis osoby wzorcowej. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis osoby wzorcowej. |
 | Symbol | `string` | bazodanowe |  | Symbol, skrócona nazwa osoby. |

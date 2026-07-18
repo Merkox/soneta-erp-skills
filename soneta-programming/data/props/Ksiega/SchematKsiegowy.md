@@ -5,55 +5,59 @@ Opis: Schemat księgowy służy do automatycznej predekretacji dokumentów ewide
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 31
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 13
+- pola tylko-odczyt: 10
+- podlisty: 11
+- subrowy: 1
+- razem: 44
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AlgorytmBinder | `Soneta.Business.Compiler.ICodeEditorSource` |  |  | Kod weryfikacji schematu |
+| AlgorytmBinder | `Compiler.ICodeEditorSource` |  |  | Kod weryfikacji schematu |
 | Blokada | `bool` | bazodanowe |  | Blokuje schemat - nie jest używany podczas predekretacji |
-| ClassName | `string` |  |  |  |
-| Data | `Soneta.Business.MemoText` |  |  | Data - tryb zaawansowany |
-| DataP | `Soneta.Ksiega.DataSchematu` | enum |  | Data - tryb podstawowy |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Data | `MemoText` | podlista |  | Data - tryb zaawansowany |
+| DataP | `Soneta.Ksiega.DataSchematu` (enum) |  |  | Data - tryb podstawowy |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu ewidencji |
 | DekretZamkniecia | `bool` |  |  | Dekret zamknięcia |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| DokumentType | `System.Type` |  |  |  |
-| ElementyWarunkuSchematu | `Soneta.Ksiega.SchematKsiegowy.ElementyWarunkuSchematuCollection` |  |  |  |
-| EwidencjaType | `System.Type` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| DokumentType | `System.Type` | tylko-odczyt |  |  |
+| ElementyWarunkuSchematu | `Soneta.Ksiega.SchematKsiegowy.ElementyWarunkuSchematuCollection` | podlista |  |  |
+| EwidencjaType | `System.Type` | tylko-odczyt |  |  |
 | Firma | `Soneta.Core.OddzialFirmy` | bazodanowe | Firma | Przypisanie schematu do firmy |
 | GrupowanieZapisow | `bool` |  |  | Grupowanie zapisów na dekrecie |
-| Kod | `Soneta.Business.MemoText` |  |  | Kod |
-| KodWeryfikacji | `Soneta.Business.MemoText` |  |  |  |
+| Kod | `MemoText` | podlista |  | Kod |
+| KodWeryfikacji | `MemoText` | podlista |  |  |
 | KolejnoscZapisówWgLpPozycji | `bool` |  |  | Kolejność zapisów wg lp. pozycji |
-| KwotaOperacjiGospodarczej | `Soneta.Business.MemoText` |  |  | Kwota operacji gospodarczej - tryb zaawansowany |
-| KwotaOperacjiGospodarczejP | `Soneta.Core.KwotaOperacjiGospodarczej` | enum |  | Kwota operacji gospodarczej |
+| KwotaOperacjiGospodarczej | `MemoText` | podlista |  | Kwota operacji gospodarczej - tryb zaawansowany |
+| KwotaOperacjiGospodarczejP | `Soneta.Core.KwotaOperacjiGospodarczej` (enum) |  |  | Kwota operacji gospodarczej |
 | Nazwa | `string` | bazodanowe |  |  |
-| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  | Okres obrachunkowy schematu |
+| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  | Okres obrachunkowy schematu |
 | OkresWywolania | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  | Okres obrachunkowy schematu do wywołania |
-| Opis | `Soneta.Business.MemoText` |  |  | Opis - tryb zaawansowany |
+| Opis | `MemoText` | podlista |  | Opis - tryb zaawansowany |
 | OpisP1 | `string` |  |  | Opis1 - tryb podstawowy |
-| OpisP2 | `Soneta.Ksiega.OpisSchematu` | enum |  | Opis2 - tryb podstawowy |
-| OpisP3 | `Soneta.Ksiega.OpisSchematu` | enum |  | Opis3 - tryb podstawowy |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Ksiega.PozycjaSchematuKsiegowego>` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| OpisP2 | `Soneta.Ksiega.OpisSchematu` (enum) |  |  | Opis2 - tryb podstawowy |
+| OpisP3 | `Soneta.Ksiega.OpisSchematu` (enum) |  |  | Opis3 - tryb podstawowy |
+| Pozycje | `LpSubTable<Soneta.Ksiega.PozycjaSchematuKsiegowego>` | podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SchematBaseType | `System.Type` |  |  |  |
-| SchematBaseTypeName | `string` |  |  |  |
-| TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` | bazodanowe, enum |  | Tryb edycji schematu |
-| TypDziennikaSchematu | `Soneta.Ksiega.TypDziennikaSchematuKsiegowego` | enum |  |  |
-| TypEwidencji | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu ewidencji schematu |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SchematBaseType | `System.Type` | tylko-odczyt |  |  |
+| SchematBaseTypeName | `string` | tylko-odczyt |  |  |
+| TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` (enum) | bazodanowe |  | Tryb edycji schematu |
+| TypDziennikaSchematu | `Soneta.Ksiega.TypDziennikaSchematuKsiegowego` (enum) |  |  |  |
+| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ewidencji schematu |
 | UsunPusty | `bool` |  |  | Usuwanie pustych dekretów |
-| Warunek | `Soneta.Business.MemoText` |  |  | Warunek - tryb zaawansowany |
+| Warunek | `MemoText` | podlista |  | Warunek - tryb zaawansowany |
 | WeryfikowacSchemat | `bool` |  |  |  |
 | WyjatkiKontP | `string` |  |  | Wyjątki kont |
-| text | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| text | `MemoText` | bazodanowe, podlista |  |  |
 
 ## Enumy
 

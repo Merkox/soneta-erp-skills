@@ -4,8 +4,12 @@ Tytuł: Subskrypcje
 Opis: Subskrypcja powiadomień o zmianach w obiekcie. ŝączy subskrybenta (identyfikowanego GUID-em i tabelą) z obserwowanym zasobem (również GUID i tabela), umożliwiając automatyczne powiadamianie o aktualizacjach.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

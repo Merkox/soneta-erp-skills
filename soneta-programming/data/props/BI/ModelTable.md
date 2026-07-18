@@ -5,16 +5,20 @@ Opis: Element szczegółowy modelu danych (DataModel). Wskazuje tabelę źródł
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 1
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  |  |
-| Model | `Soneta.BI.DataModel` | bazodanowe | Model danych |  |
-| Proxy | `Soneta.BI.TableProxy` | bazodanowe | Tabela źródłowa |  |
-| Proxy.TableName | `string` | bazodanowe | Nazwa tabeli źródłowej |  |
-| Proxy.TableObject | `Soneta.BI.DataModel` | bazodanowe | Tabela źródłowa |  |
-| Proxy.TableSource | `Soneta.BI.Interfaces.ITableSource` |  |  |  |
-| Proxy.WgTableObject | `Soneta.Business.Key` |  |  |  |
-| TableSource | `Soneta.BI.Interfaces.ITableSource` |  |  |  |
+| Model | `Soneta.BI.DataModel` | bazodanowe, tylko-odczyt | Model danych |  |
+| Proxy | `Soneta.BI.TableProxy` (subrow) | bazodanowe | Tabela źródłowa |  |
+| Proxy.TableName | `string` | bazodanowe, tylko-odczyt | Nazwa tabeli źródłowej |  |
+| Proxy.TableObject | `Soneta.BI.DataModel` | bazodanowe, tylko-odczyt | Tabela źródłowa |  |
+| Proxy.TableSource | `Soneta.BI.Interfaces.ITableSource` | tylko-odczyt |  |  |
+| Proxy.WgTableObject | `Key` | podlista |  |  |
+| TableSource | `Soneta.BI.Interfaces.ITableSource` | tylko-odczyt |  |  |

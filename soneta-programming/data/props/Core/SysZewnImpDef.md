@@ -4,8 +4,12 @@ Tytuł: Elementy definicji pobierania danych
 Opis: Definicja elementu pobierania danych z systemu zewnętrznego. Określa symbol, tabelę docelową, akcję, priorytet oraz schematy pobierania, aktualizacji i synchronizacji danych między systemami.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

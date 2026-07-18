@@ -5,12 +5,16 @@ Opis: Element szczegółowy nieruchomości (Nieruchomosc). Przechowuje historię
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Nieruchomosc` → `Nieruchomosc`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Element | `Soneta.RealEstate.Models.Database.Nieruchomosc` |  |  |  |
-| Nadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe |  |  |
-| Nieruchomosc | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe, guided-parent |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| Element | `Soneta.RealEstate.Models.Database.Nieruchomosc` | tylko-odczyt |  |  |
+| Nadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe, tylko-odczyt |  |  |
+| Nieruchomosc | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe, tylko-odczyt, guided-parent |  |  |

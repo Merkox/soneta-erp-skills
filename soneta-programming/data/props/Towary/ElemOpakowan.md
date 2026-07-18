@@ -5,13 +5,17 @@ Opis: Element szczegółowy schematu opakowań/gratisów (SchemOpakowan). Defini
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Schemat` → `SchemOpakowan`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CenaBrutto | `Soneta.Types.DoubleCy` | bazodanowe | Cena brutto | Cena brutto gratisu. |
-| CenaNetto | `Soneta.Types.DoubleCy` | bazodanowe | Cena netto | Cena netto gratisu. |
+| CenaBrutto | `DoubleCy` | bazodanowe | Cena brutto | Cena brutto gratisu. |
+| CenaNetto | `DoubleCy` | bazodanowe | Cena netto | Cena netto gratisu. |
 | Ilosc | `Soneta.Towary.Quantity` | bazodanowe |  | Ilość. |
 | IloscMinimalna | `double` | bazodanowe |  | Ilość minimalna towaru dla której są wydawane opakowania. |
 | IloscTowaru | `double` | bazodanowe |  | Ilość towaru dla której są wydawane opakowania. |
@@ -20,4 +24,4 @@ Guided: child — nadrzędna przez pole `Schemat` → `SchemOpakowan`
 | Opakowanie | `Soneta.Towary.Towar` | bazodanowe |  | Towar będący elementem schematu. |
 | Polacz | `bool` | bazodanowe | Połącz | Wymusza wzajemne przeliczanie ceny netto i brutto. |
 | PriorytetGratisu | `int` | bazodanowe | Priorytet gratisu | Priorytet gratisu. |
-| Schemat | `Soneta.Towary.SchemOpakowan` | bazodanowe, guided-parent |  | Schemat, do którego należy ta pozycja |
+| Schemat | `Soneta.Towary.SchemOpakowan` | bazodanowe, tylko-odczyt, guided-parent |  | Schemat, do którego należy ta pozycja |

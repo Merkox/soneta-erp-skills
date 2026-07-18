@@ -5,15 +5,19 @@ Opis: Konfiguracja dostawców autoryzacji dla kont pocztowych i integracji zewn�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 3
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AuthType | `Soneta.CRM.AuthProviderType` | bazodanowe, enum | Typ dostawcy | Typ dostawcy autoryzacji. |
-| ClientId | `Soneta.Business.MemoText` | bazodanowe | Key | Key |
-| ClientSecret | `Soneta.Business.MemoText` | bazodanowe | Secret | Secret |
-| Config | `System.Collections.Generic.Dictionary<string, string>` |  |  |  |
+| AuthType | `Soneta.CRM.AuthProviderType` (enum) | bazodanowe | Typ dostawcy | Typ dostawcy autoryzacji. |
+| ClientId | `MemoText` | bazodanowe, podlista | Key | Key |
+| ClientSecret | `MemoText` | bazodanowe, podlista | Secret | Secret |
+| Config | `System.Collections.Generic.Dictionary<string, string>` | podlista |  |  |
 | ImapEncryption | `bool` | bazodanowe | SSL/TLS | SSL/TLS |
 | ImapPort | `int` | bazodanowe | IMAP Port | IMAP Port |
 | ImapUrl | `string` | bazodanowe | IMAP Url | IMAP Url |

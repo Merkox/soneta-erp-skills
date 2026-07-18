@@ -4,17 +4,21 @@ Tytuł: Terminarz inwentarza
 Opis: Pozycja terminarza inwentaryzacji środków trwałych. Definiuje planowaną datę i nazwę czynności inwentaryzacyjnej oraz rejestruje datę jej faktycznej realizacji, umożliwiając kontrolę harmonogramu spisu z natury.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataPlanowana | `Soneta.Types.Date` | bazodanowe |  | Planowana data realizacji |
-| DataRealizacji | `Soneta.Types.Date` | bazodanowe |  | Data realizacji |
-| Inwentarz | `Soneta.SrodkiTrwale.IInwentarz` | bazodanowe, iface-ref |  | Pozycja inwentarzu |
+| DataPlanowana | `Date` | bazodanowe |  | Planowana data realizacji |
+| DataRealizacji | `Date` | bazodanowe |  | Data realizacji |
+| Inwentarz | `Soneta.SrodkiTrwale.IInwentarz` | bazodanowe, tylko-odczyt, iface-ref |  | Pozycja inwentarzu |
 | Nazwa | `string` | bazodanowe |  | Nazwa pozycji terminarza |
 | Opis | `string` | bazodanowe |  | Opis pozycji terminarza |
-| StatusPozycji | `Soneta.SrodkiTrwale.StatusPozycjiTerminarza` | enum |  |  |
+| StatusPozycji | `Soneta.SrodkiTrwale.StatusPozycjiTerminarza` (enum) | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

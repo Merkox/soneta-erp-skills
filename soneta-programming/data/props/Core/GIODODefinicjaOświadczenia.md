@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 1
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Definicja zablokowana |
 | Cel | `Soneta.Core.GIODOCelPrzetwarzania` | bazodanowe |  |  |
 | Domyslny | `bool` | bazodanowe |  |  |
-| NeutralName | `string` |  |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| NeutralName | `string` | tylko-odczyt |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
@@ -24,11 +28,11 @@ Implementuje interfejsy: `IRightsSource`
 | OsobaKontakowa | `bool` | bazodanowe |  |  |
 | Oswiadczenie | `string` | bazodanowe | Oświadczenie | Nazwa oświadczenia |
 | Pracownik | `bool` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Core.RodzajeOświadczeńGIODO` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Core.RodzajeOświadczeńGIODO` (enum) | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Oświadczenie | Treść oświadczenia |
+| Tresc | `MemoText` | bazodanowe, podlista | Oświadczenie | Treść oświadczenia |
 | Uczestnik | `bool` | bazodanowe |  |  |
-| ZgodyDoWycofania | `Soneta.Business.SubTable<Soneta.Core.GIODOWycofanieOświadczenia>` |  |  |  |
+| ZgodyDoWycofania | `SubTable<Soneta.Core.GIODOWycofanieOświadczenia>` | podlista |  |  |
 
 ## Enumy
 

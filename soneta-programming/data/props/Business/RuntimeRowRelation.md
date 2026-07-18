@@ -4,12 +4,16 @@ Tytuł: Relacje wierszy runtime
 Opis: Powiązanie wiersza dynamicznego (runtime) z rekordem biznesowym. Umożliwia tworzenie relacji między zdarzeniami a obiektami z modułów programu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definition | `Soneta.Business.Runtime.RuntimeFieldDefinition` | bazodanowe | Definicja | Definicja pola dokumentu |
-| Host | `Soneta.Business.IGuidedRow` | bazodanowe | Rekord powiązany | Rekord powiązany |
-| Primary | `bool` | bazodanowe | Podstawowa | Relacja podstawowa |
-| RuntimeRowHost | `Soneta.Business.Runtime.IRuntimeRow` | bazodanowe | Wiersz runtime | Wiersz runtime |
+| Definition | `Runtime.RuntimeFieldDefinition` | bazodanowe, tylko-odczyt | Definicja | Definicja pola dokumentu |
+| Host | `IGuidedRow` | bazodanowe | Rekord powiązany | Rekord powiązany |
+| Primary | `bool` | bazodanowe, tylko-odczyt | Podstawowa | Relacja podstawowa |
+| RuntimeRowHost | `Runtime.IRuntimeRow` | bazodanowe, tylko-odczyt | Wiersz runtime | Wiersz runtime |

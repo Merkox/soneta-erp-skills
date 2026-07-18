@@ -5,13 +5,17 @@ Opis: Element szczegółowy hosta odbiorców (IWFRecipientHost). Definiuje osob�
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Host` → `IWFRecipientHost`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Business.IWFRecipientHost` | bazodanowe, guided-parent, iface-ref | Host | Host powiązany z odbiorcą kroku workflow |
-| TaskUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Odbiorca zadania | Odbiorca zadania powiązany z krokiem workflow |
+| Host | `IWFRecipientHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Host | Host powiązany z odbiorcą kroku workflow |
+| TaskUser | `ITaskUser` | bazodanowe, iface-ref | Odbiorca zadania | Odbiorca zadania powiązany z krokiem workflow |
 
 ## Relacje interfejsowe
 

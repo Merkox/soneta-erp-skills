@@ -5,21 +5,25 @@ Opis: Dane podmiotu trzeciego (np. odbiorca, nabywca, płatnik) w komunikacie KS
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IDaneKontrahentaHost`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dane | `Soneta.Core.Enums.ZrodloDanychAdresowychKSeF` | bazodanowe, enum | Miejsce pobierania danych do KSeF | Miejsce pobierania danych do KSeF |
-| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` |  |  |  |
+| Dane | `Soneta.Core.Enums.ZrodloDanychAdresowychKSeF` (enum) | bazodanowe | Miejsce pobierania danych do KSeF | Miejsce pobierania danych do KSeF |
+| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` | tylko-odczyt |  |  |
 | DodanyAutomatycznie | `bool` | bazodanowe | Dodany automatycznie | Czy dane zostały dodane automatycznie przez system |
 | Edycja | `bool` | bazodanowe | Edycja danych podmiotu trzeciego KSeF | Edycja danych podmiotu trzeciego KSeF |
 | IdentWew | `string` | bazodanowe | Identyfikator wewnętrzny KSeF | Identyfikator wewnętrzny KSeF |
 | KSeFKomunikat | `Soneta.Core.KSeFKomunikat` | bazodanowe |  |  |
 | Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref |  |  |
-| Rola | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola podmiotu trzeciego KSeF | Rola podmiotu trzeciego KSeF |
+| Rola | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola podmiotu trzeciego KSeF | Rola podmiotu trzeciego KSeF |
 | RolaInnaOpis | `string` | bazodanowe | Opis roli innej | Opis roli podmiotu, gdy nie pasuje do żadnej z dostępnych ról |
-| TypIdentWew | `Soneta.Core.Enums.TypIdentyfikatoraWewnetrznegoKSeF` | bazodanowe, enum | Typ identyfikatora wewnętrznego KSeF | Typ identyfikatora wewnętrznego KSeF |
+| TypIdentWew | `Soneta.Core.Enums.TypIdentyfikatoraWewnetrznegoKSeF` (enum) | bazodanowe | Typ identyfikatora wewnętrznego KSeF | Typ identyfikatora wewnętrznego KSeF |
 
 ## Relacje interfejsowe
 

@@ -6,28 +6,32 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHost`, `IGIODOWymianaDanychHost`, `IGIODOOświadczenieHost`, `IEmailElement`, `IOceniany`
 
-- pola bazodanowe: 66
-- pola kalkulowane (z klas biznesowych): 37
+- pola bazodanowe (zapisywalne): 66
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 14
+- podlisty: 21
+- subrowy: 0
+- razem: 103
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresDoKorespondencji | `Soneta.Core.Adres` |  |  |  |
-| AdresZamieszkania | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresDoKorespondencji | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresZamieszkania | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | CertyfikatEUK | `bool` | bazodanowe |  | Okresla czy członek jest jest certyfikowanym ekspertem usług księgowych. |
 | CertyfikatSUPKRIP | `bool` | bazodanowe |  | Okresla czy członek jest jest certyfikowanym specjalista usługowego prowadzenia ksiąg. |
 | CertyfikatUPKR | `bool` | bazodanowe |  | Certyfikat na usługowe prowadzenie ksiąg rachunkowych. |
-| CertyfikatyUczestnika | `Soneta.Business.SubTable` |  |  |  |
-| DataUr | `Soneta.Types.Date` | bazodanowe | Data urodzenia | Data urodzenia. |
-| DyplomData | `Soneta.Types.Date` | bazodanowe |  | Data złożenia przyrzeczenia |
+| CertyfikatyUczestnika | `SubTable` | podlista |  |  |
+| DataUr | `Date` | bazodanowe | Data urodzenia | Data urodzenia. |
+| DyplomData | `Date` | bazodanowe |  | Data złożenia przyrzeczenia |
 | DyplomNiekaralnosc | `bool` | bazodanowe |  | Zaświadczenie o niekaralności. |
 | DyplomPraktyka | `bool` | bazodanowe |  | Praktyka zawodowa. |
 | DyplomPrzyrzeczenie | `bool` | bazodanowe |  | Potwierdzenie złożenia przyrzeczenia. |
-| DyplomStan | `Soneta.CzlonkowieSzkolenia.StanUczestnika` | bazodanowe, enum |  |  |
+| DyplomStan | `Soneta.CzlonkowieSzkolenia.StanUczestnika` (enum) | bazodanowe |  |  |
 | DyplomWyksztalcenie | `bool` | bazodanowe |  | Wykształcenie średnie lub wyższe. |
 | DyplomZwolnionyUDZ | `bool` | bazodanowe |  | Zwolniony z Ustawicznego Szkolenia Zawodowego. |
 | DyplomowanyKS | `bool` | bazodanowe |  | Okresla czy członek jest dyplomowanym ksiegowym. |
-| EUKData | `Soneta.Types.Date` | bazodanowe |  | Data złożenia przyrzeczenia |
+| EUKData | `Date` | bazodanowe |  | Data złożenia przyrzeczenia |
 | EUKNiekaralnosc | `bool` | bazodanowe |  | Zaświadczenie o niekaralności. |
 | EUKPraktyka | `bool` | bazodanowe |  | Praktyka zawodowa. |
 | EUKPrzyrzeczenie | `bool` | bazodanowe |  | Potwierdzenie złożenia przyrzeczenia. |
@@ -35,8 +39,8 @@ Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHos
 | EUKZwolnionyUDZ | `bool` | bazodanowe |  | Zwolniony z Ustawicznego Szkolenia Zawodowego. |
 | EuVAT | `string` | bazodanowe |  |  |
 | Firma | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| GIODOOświadczenia | `Soneta.Business.SubTable<Soneta.Core.GIODOOświadczenie>` |  |  |  |
-| GIODOUdostępnienia | `Soneta.Business.SubTable<Soneta.Core.GIODOWymianaDanych>` |  |  |  |
+| GIODOOświadczenia | `SubTable<Soneta.Core.GIODOOświadczenie>` | podlista |  |  |
+| GIODOUdostępnienia | `SubTable<Soneta.Core.GIODOWymianaDanych>` | podlista |  |  |
 | GodzPosiadaneDK | `double` | bazodanowe | Liczba godzin | Posiadana w roku liczba godzin Dyplomowany Ksiegowy. |
 | GodzPosiadaneEUK | `double` | bazodanowe | Liczba godzin | Posiadana w roku liczba godzin EUK. |
 | GodzPosiadaneSUPKRIP | `double` | bazodanowe | Liczba godzin | Posiadana w roku liczba godzin SUPKRIP. |
@@ -45,74 +49,74 @@ Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHos
 | GodzWymaganeSUPKRIP | `double` | bazodanowe | Liczba godzin | Wymagana w roku liczba godzin SUPKRIP. |
 | Imie | `string` | bazodanowe | Imie uczestnika | Imie uczestnika. |
 | ImieMatki | `string` | bazodanowe | Imie matki uczestnika | Imie matki uczestnika. |
-| ImieNazwisko | `string` |  |  |  |
+| ImieNazwisko | `string` | tylko-odczyt |  |  |
 | ImieOjca | `string` | bazodanowe | Imie ojca uczestnika | Imie ojca uczestnika. |
-| IsReadOnlyAdres | `bool` |  |  |  |
-| IsReadOnlyAdresDoKorespondencji | `bool` |  |  |  |
-| IsReadOnlyAdresZamieszkania | `bool` |  |  |  |
+| IsReadOnlyAdres | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyAdresDoKorespondencji | `bool` | tylko-odczyt |  |  |
+| IsReadOnlyAdresZamieszkania | `bool` | tylko-odczyt |  |  |
 | JednostkaOrg | `string` | bazodanowe | Przynależność do koła | Przynależność do koła. |
-| JestZgloszenie | `bool` |  |  |  |
+| JestZgloszenie | `bool` | tylko-odczyt |  |  |
 | Klub | `string` | bazodanowe | Przynależność do klubu | Przynależność do klubu. |
-| Kluby | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.KlubUcz>` |  |  |  |
-| KlubyUczHist | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.KlubUczHist>` |  |  |  |
+| Kluby | `SubTable<Soneta.CzlonkowieSzkolenia.KlubUcz>` | podlista |  |  |
+| KlubyUczHist | `SubTable<Soneta.CzlonkowieSzkolenia.KlubUczHist>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  | Kod uczestnika. |
 | Komunikator | `string` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` |  |  |  |
+| Kontakt | `Soneta.Core.Kontakt` | tylko-odczyt |  |  |
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| KontrolaAktywna | `bool` |  |  |  |
-| MailTo | `string` |  |  |  |
+| KontrolaAktywna | `bool` | tylko-odczyt |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
 | MiejsceUr | `string` | bazodanowe | Miejsce urodzenia | Miejsce urodzenia. |
 | NIP | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa firmy | Nazwa firmy. |
 | Nazwisko | `string` | bazodanowe | Nazwisko uczestnika | Nazwa uczestnika. |
-| NazwiskoImie | `string` |  |  |  |
+| NazwiskoImie | `string` | tylko-odczyt |  |  |
 | NazwiskoRodowe | `string` | bazodanowe | Nazwisko rodowe | Nazwisko rodowe uczestnika. |
 | NrRewidenta | `string` | bazodanowe | Numer rewidenta | Numer rewidenta. |
 | Numer | `string` | bazodanowe |  | Numer uczestnika. |
-| Oceniani | `Soneta.Business.SubTable` |  |  |  |
+| Oceniani | `SubTable` | podlista |  |  |
 | OczekujacyNaSkreslenie | `bool` | bazodanowe | Oczekujący na skreślenie | Oczekujący na skreślenie |
-| Odczyty | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.OdczytCzlonek>` |  |  |  |
+| Odczyty | `SubTable<Soneta.CzlonkowieSzkolenia.OdczytCzlonek>` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisany jest uczestnik. |
-| OdznaczeniaUczestnika | `Soneta.Business.SubTable` |  |  |  |
+| OdznaczeniaUczestnika | `SubTable` | podlista |  |  |
 | PESEL | `string` | bazodanowe |  |  |
-| Plec | `Soneta.Kadry.PłećOsoby` | bazodanowe, enum |  |  |
-| PotwierdzeniaGIODO | `Soneta.Business.SubTable<Soneta.Core.GIODOZgodny>` |  |  |  |
-| RejestrUDZ | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.RejestrUDZ>` |  |  |  |
-| Rodzaj | `Soneta.CzlonkowieSzkolenia.RodzajCzlonka` | bazodanowe, enum |  |  |
+| Plec | `Soneta.Kadry.PłećOsoby` (enum) | bazodanowe |  |  |
+| PotwierdzeniaGIODO | `SubTable<Soneta.Core.GIODOZgodny>` | podlista |  |  |
+| RejestrUDZ | `SubTable<Soneta.CzlonkowieSzkolenia.RejestrUDZ>` | podlista |  |  |
+| Rodzaj | `Soneta.CzlonkowieSzkolenia.RodzajCzlonka` (enum) | bazodanowe |  |  |
 | RodzajDzialalnosci | `string` | bazodanowe |  |  |
 | RodzajFirmy | `string` | bazodanowe | Rodzaj firmy | Rodzaj firmy. |
 | RokUr | `int` |  |  |  |
-| SUPKRIPData | `Soneta.Types.Date` | bazodanowe |  | Data złożenia przyrzeczenia |
+| SUPKRIPData | `Date` | bazodanowe |  | Data złożenia przyrzeczenia |
 | SUPKRIPNiekaralnosc | `bool` | bazodanowe |  | Zaświadczenie o niekaralności. |
 | SUPKRIPPraktyka | `bool` | bazodanowe |  | Praktyka zawodowa. |
 | SUPKRIPPrzyrzeczenie | `bool` | bazodanowe |  | Potwierdzenie złożenia przyrzeczenia. |
 | SUPKRIPWyksztalcenie | `bool` | bazodanowe |  | Wykształcenie średnie lub wyższe. |
 | SUPKRIPZwolnionyUDZ | `bool` | bazodanowe |  | Zwolniony z Ustawicznego Szkolenia Zawodowego. |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| Skladka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Skladki | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.Skladka>` |  |  |  |
-| Stan | `Soneta.CzlonkowieSzkolenia.StanUczestnika` | bazodanowe, enum |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| Skladka | `Currency` | bazodanowe |  |  |
+| Skladki | `SubTable<Soneta.CzlonkowieSzkolenia.Skladka>` | podlista |  |  |
+| Stan | `Soneta.CzlonkowieSzkolenia.StanUczestnika` (enum) | bazodanowe |  |  |
 | Stanowisko | `string` | bazodanowe | Stanowisko | Stanowisko. |
-| StatusZawodowy | `Soneta.CzlonkowieSzkolenia.StatusZawodowy` | bazodanowe, enum |  |  |
+| StatusZawodowy | `Soneta.CzlonkowieSzkolenia.StatusZawodowy` (enum) | bazodanowe |  |  |
 | Staz | `double` | bazodanowe | Ilość lat w zawodzie | Ilość lat w zawodzie. |
 | Sygnatariusz | `bool` | bazodanowe |  |  |
-| SygnatariuszData | `Soneta.Types.Date` | bazodanowe |  |  |
-| Symbol | `string` |  |  |  |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypUczestnika` | bazodanowe, enum |  |  |
-| TypyDzialalnosci | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.TypDzialalUcz>` |  |  |  |
+| SygnatariuszData | `Date` | bazodanowe |  |  |
+| Symbol | `string` | tylko-odczyt |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypUczestnika` (enum) | bazodanowe |  |  |
+| TypyDzialalnosci | `SubTable<Soneta.CzlonkowieSzkolenia.TypDzialalUcz>` | podlista |  |  |
 | TytulNaukowy | `string` | bazodanowe | Tytul naukowy | Tytul naukowy. |
 | TytulZawodowy | `string` | bazodanowe | Tytul zawodowy | Tytul zawodowy. |
-| TytulyZawodowe | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.TytulZawodUcz>` |  |  |  |
-| UczFunkcje | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.UczFunkcja>` |  |  |  |
-| UczestnikHist | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.UczestnikHist>` |  |  |  |
-| UwagiKontrahenta | `Soneta.Business.MemoText` |  |  |  |
-| View | `Soneta.Business.View` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| WojewodztwoUr | `Soneta.Core.Wojewodztwa` | bazodanowe, enum |  |  |
+| TytulyZawodowe | `SubTable<Soneta.CzlonkowieSzkolenia.TytulZawodUcz>` | podlista |  |  |
+| UczFunkcje | `SubTable<Soneta.CzlonkowieSzkolenia.UczFunkcja>` | podlista |  |  |
+| UczestnikHist | `SubTable<Soneta.CzlonkowieSzkolenia.UczestnikHist>` | podlista |  |  |
+| UwagiKontrahenta | `MemoText` | podlista |  |  |
+| View | `View` | podlista |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| WojewodztwoUr | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe |  |  |
 | Wyksztalcenie | `string` | bazodanowe | Wykształcenie | Wykształcenie. |
-| Wyroznienia | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.Wyroznienie>` |  |  |  |
-| Zajecia | `Soneta.Business.View` |  |  |  |
-| Zgloszenia | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` |  |  |  |
+| Wyroznienia | `SubTable<Soneta.CzlonkowieSzkolenia.Wyroznienie>` | podlista |  |  |
+| Zajecia | `View` | podlista |  |  |
+| Zgloszenia | `SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` | podlista |  |  |
 | ZgodnoscGIODOPotwierdzona | `bool` |  |  |  |
 
 ## Enumy

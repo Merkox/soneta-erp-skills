@@ -4,13 +4,17 @@ Tytuł: Relacje Zadań pracy hybrydowej
 Opis: Powiązania między zadaniami w kontekście pracy hybrydowej. Umożliwia definiowanie zależności (np. poprzedzanie, blokowanie) między zadaniami z kontrolą poprawności łączenia.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| PowiazaneIsEnded | `string` |  |  |  |
-| RelacjaTyp | `Soneta.PracaZdalna.Enums.ZadaniaRelacjaTyp` | bazodanowe, enum |  |  |
+| PowiazaneIsEnded | `string` | tylko-odczyt |  |  |
+| RelacjaTyp | `Soneta.PracaZdalna.Enums.ZadaniaRelacjaTyp` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
 | ZadaniePowiazane | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
 

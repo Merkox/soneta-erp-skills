@@ -6,41 +6,45 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 21
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 7
+- pola tylko-odczyt: 11
+- podlisty: 5
+- subrowy: 2
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BlokadaOkresu | `bool` |  |  |  |
+| BlokadaOkresu | `bool` | tylko-odczyt |  |  |
 | CzescUrlopu | `int` | bazodanowe |  |  |
 | CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` | podlista |  |  |
 | IlośćDni | `int` |  |  |  |
-| IsRozliczona | `bool` |  |  |  |
-| Macierzynski | `Soneta.Kalend.UrlopMacierzyński` | bazodanowe |  |  |
+| IsRozliczona | `bool` | tylko-odczyt |  |  |
+| Macierzynski | `Soneta.Kalend.UrlopMacierzyński` (subrow) | bazodanowe |  |  |
 | Macierzynski.CzescUrlopu | `int` |  |  |  |
 | Macierzynski.CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` |  |  |  |
-| Macierzynski.Limit | `int` |  |  |  |
-| Macierzynski.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` |  |  |  |
-| Macierzynski.PonownieUstalPodstawe | `bool` |  |  |  |
-| Macierzynski.ProcentZasiłku | `Soneta.Types.Percent` |  |  |  |
-| Macierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
+| Macierzynski.Limit | `int` | tylko-odczyt |  |  |
+| Macierzynski.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` | tylko-odczyt |  |  |
+| Macierzynski.PonownieUstalPodstawe | `bool` | tylko-odczyt |  |  |
+| Macierzynski.ProcentZasiłku | `Percent` | tylko-odczyt |  |  |
+| Macierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
 | Macierzynski.ZawieszenieSkladkiFP | `bool` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PonownieUstalPodstawe | `bool` |  |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Rozliczenia | `Soneta.Business.SubTable` |  |  |  |
-| RozliczonyOkres | `Soneta.Types.FromTo` |  |  |  |
-| TypDni | `Soneta.Kalend.TypyDni` | enum |  |  |
-| Wychowawczy | `Soneta.Kalend.UrlopWychowawczy` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PonownieUstalPodstawe | `bool` | tylko-odczyt |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Rozliczenia | `SubTable` | podlista |  |  |
+| RozliczonyOkres | `FromTo` | podlista |  |  |
+| TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
+| Wychowawczy | `Soneta.Kalend.UrlopWychowawczy` (subrow) | bazodanowe |  |  |
 | Wychowawczy.CzescUrlopu | `int` |  |  |  |
 | Wychowawczy.CzlonekRodziny | `Soneta.Kadry.CzlonekRodziny` |  |  |  |
-| Wychowawczy.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` |  |  |  |
+| Wychowawczy.Nieobecnosc | `Soneta.Kalend.INieobecnoscLubZbieg` | tylko-odczyt |  |  |
 | Wychowawczy.ZawieszenieSkladkiFP | `bool` |  |  |  |
-| WymiarEtatu | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| WymiarEtatu | `Fraction` | bazodanowe |  |  |
 | ZawieszenieSkladkiFP | `bool` | bazodanowe |  |  |
 
 ## Enumy

@@ -5,12 +5,16 @@ Opis: Podpis operatora dołączany automatycznie do wysyłanych wiadomości e-ma
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
-| Podpis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Operator | `App.Operator` | bazodanowe |  |  |
+| Podpis | `MemoText` | bazodanowe, podlista |  |  |

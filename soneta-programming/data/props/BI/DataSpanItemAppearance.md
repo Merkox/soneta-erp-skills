@@ -5,13 +5,17 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Ma
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DashboardItem` → `DashboardItemDefinition`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AppearanceItem | `Soneta.BI.AppearanceItemDefinition` | bazodanowe | Kolor |  |
-| DashboardItem | `Soneta.BI.DashboardItemDefinition` | bazodanowe, guided-parent |  |  |
+| DashboardItem | `Soneta.BI.DashboardItemDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | DataSpanItem | `Soneta.BI.DataSpanItemDefinition` | bazodanowe | Przedział danych |  |
-| DataSpanValue | `object` |  |  |  |
+| DataSpanValue | `object` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |

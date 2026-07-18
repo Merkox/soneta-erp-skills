@@ -5,14 +5,18 @@ Opis: Element szczegółowy regionu sprzedażowego (Region). Definiuje obszar ge
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` | bazodanowe |  |  |
-| Adres.AdresExt | `Soneta.Core.AdresExt` |  |  |  |
-| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` |  |  |  |
+| Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |
+| Adres.AdresExt | `Soneta.Core.AdresExt` | tylko-odczyt |  |  |
+| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` | tylko-odczyt |  |  |
 | Adres.Faks | `string` | bazodanowe |  | Numer faksu |
 | Adres.GLN | `string` |  |  |  |
 | Adres.Gmina | `string` | bazodanowe |  | Gmina |
@@ -21,8 +25,8 @@ Guided: root
 | Adres.KodPocztowy | `int` | bazodanowe |  | Kod pocztowy |
 | Adres.KodPocztowyS | `string` |  |  |  |
 | Adres.Kraj | `string` | bazodanowe |  | Kraj |
-| Adres.Linia1 | `string` |  |  |  |
-| Adres.Linia2 | `string` |  |  |  |
+| Adres.Linia1 | `string` | tylko-odczyt |  |  |
+| Adres.Linia2 | `string` | tylko-odczyt |  |  |
 | Adres.Miejscowosc | `string` | bazodanowe | Miejscowość | Miejscowość |
 | Adres.NietypowaLokalizacja | `string` | bazodanowe |  | Nietypowe miejsce lokalizacji |
 | Adres.NrDomu | `string` | bazodanowe |  | Numer domu (bloku) |
@@ -32,9 +36,9 @@ Guided: root
 | Adres.Powiat | `string` | bazodanowe |  | Powiat |
 | Adres.Telefon | `string` | bazodanowe |  | Numer telefonu |
 | Adres.Ulica | `string` | bazodanowe |  | Nazwa ulicy (alei, osiedla) |
-| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` | bazodanowe, enum |  | Województwo |
+| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe |  | Województwo |
 | Adres.ZagranicznyKodPocztowy | `string` | bazodanowe |  | Zagraniczny kod pocztowy |
-| Region | `Soneta.CRM.Region` | bazodanowe |  |  |
+| Region | `Soneta.CRM.Region` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

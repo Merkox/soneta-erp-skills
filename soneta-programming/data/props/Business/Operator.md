@@ -6,42 +6,45 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `ITaskUser`, `IAuthorised`, `INoticeRecipient`, `IMfaOperator`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 6
+- podlisty: 7
+- subrowy: 0
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Credentials | `Soneta.Business.SubTable<Soneta.Business.CredentialKey>` |  |  |  |
-| DBItems | `System.Collections.IList` |  |  |  |
+| Credentials | `SubTable<CredentialKey>` | podlista |  |  |
+| DBItems | `System.Collections.IList` | podlista |  |  |
 | Email | `string` | bazodanowe | Adres e-mail | Określa adres e-mail operatora. |
-| Entitles | `Soneta.Business.SubTable<Soneta.Business.Db.OperatorEntitle>` |  |  |  |
-| Extension | `Soneta.Business.Db.OperatorEx` |  |  |  |
+| Entitles | `SubTable<Db.OperatorEntitle>` | podlista |  |  |
+| Extension | `Db.OperatorEx` | tylko-odczyt |  |  |
 | FullName | `string` | bazodanowe | Nazwa | Imię i nazwisko operatora. |
 | IsAccountLocked | `bool` | bazodanowe | Zablokowany (hasło) | Oznacza operatora zablokowane z powodu wielokrotnego wprowadzania niepoprawnego hasła |
 | IsOperatorNet | `bool` | bazodanowe | Logowaniu multi | Oznacza konto z możliwością do logowania się do wersji multi (HTML/Mobile) |
-| IsSchedulerOperator | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
+| IsSchedulerOperator | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowany | Określa, czy konto jest aktualnie zablokowane. |
 | LoginVisible | `bool` |  |  | Czy operator ma być widoczny na liscie loginów w oknie logowania |
-| MfaMode | `Soneta.Types.MfaMode` | enum |  |  |
+| MfaMode | `MfaMode` (enum) |  |  |  |
 | Name | `string` | bazodanowe | Kod | Unikalny kod operatora wymagany podczas logowania się do bazy. |
-| Nazwa | `string` |  |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | NewPassword | `string` |  |  |  |
-| NoticeRecipientGroup | `Soneta.Business.NoticeRecipientGroup` | enum |  |  |
+| NoticeRecipientGroup | `NoticeRecipientGroup` (enum) | tylko-odczyt |  |  |
 | Password | `string` | bazodanowe |  |  |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
-| PowiązaniaStrOrg | `Soneta.Business.SubTable` |  |  |  |
-| PromptPassword | `string` | bazodanowe | Podpowiedź hasła | Informacja podpowiadająca użytkownikowi jakie ma hasło dostępu. |
-| RecipientDesc | `string` |  |  |  |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
+| PowiązaniaStrOrg | `SubTable` | podlista |  |  |
+| RecipientDesc | `string` | tylko-odczyt |  |  |
 | Trusted | `string` | bazodanowe | Logowanie zintegrowane | Nazwa operatora zintegrowanego, który może się logować na to konto. |
-| UserGroupMembers | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.UserGroupMember>` |  |  |  |
-| UserGroups | `System.Collections.Generic.IEnumerable<Soneta.Business.Db.Permissions.UserGroup>` |  |  |  |
+| UserGroupMembers | `SubTable<Db.Permissions.UserGroupMember>` | podlista |  |  |
+| UserGroups | `System.Collections.Generic.IEnumerable<Db.Permissions.UserGroup>` | podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### NoticeRecipientGroup (`Soneta.Business.NoticeRecipientGroup`)
+### NoticeRecipientGroup (`NoticeRecipientGroup`)
 - `AllGroups` = 0 — Wszyscy
 - `Operators` = 1 — Operatorzy
 - `Employees` = 2 — Pracownicy
@@ -49,7 +52,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Chosen` = 8 — Wybrani
 - `PanelUsers` = 16 — Użytkownicy panelu
 
-### MfaMode (`Soneta.Types.MfaMode`)
+### MfaMode (`MfaMode`)
 - `Unregistered` = 0 — Niezarejestrowana
 - `Registered` = 1 — Zarejestrowana
 - `Verified` = 2 — Potwierdzona

@@ -6,32 +6,36 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 6
+- podlisty: 5
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Arkusze | `Soneta.Business.SubTable<Soneta.Oceny.OcenaArkusz>` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Arkusze | `SubTable<Soneta.Oceny.OcenaArkusz>` | podlista |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Oceny.DefinicjaOceny` | bazodanowe |  |  |
 | ElementStrukturyFirmy | `Soneta.Core.IElementStrukturyFirmy` | bazodanowe, iface-ref |  |  |
 | ElementStrukturyOrganizacyjnej | `Soneta.Core.ElementStrukturyOrganizacyjnej` |  |  |  |
-| Etap | `Soneta.Oceny.EtapyRealizacjiOceny` | bazodanowe, enum |  |  |
-| IsMiesiąc | `bool` |  |  |  |
-| IsRok | `bool` |  |  |  |
+| Etap | `Soneta.Oceny.EtapyRealizacjiOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| IsMiesiąc | `bool` | tylko-odczyt |  |  |
+| IsRok | `bool` | tylko-odczyt |  |  |
 | KwartałNumer | `int` |  |  |  |
 | KwartałRok | `int` |  |  |  |
-| Miesiąc | `Soneta.Types.YearMonth` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Oceniający | `Soneta.Business.SubTable<Soneta.Oceny.OcenaOceniający>` |  |  |  |
-| Oceniani | `Soneta.Business.SubTable<Soneta.Oceny.OcenaOceniany>` |  |  |  |
+| Miesiąc | `YearMonth` |  |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Oceniający | `SubTable<Soneta.Oceny.OcenaOceniający>` | podlista |  |  |
+| Oceniani | `SubTable<Soneta.Oceny.OcenaOceniany>` | podlista |  |  |
 | Odpowiedzialny | `Soneta.Oceny.IOdpowiedzialnyZaOcenę` | bazodanowe, iface-ref |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PowiązaniaStrOrg | `Soneta.Business.SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
 | Rok | `int` |  |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
-| Zrodlo | `Soneta.Oceny.IŹródłoOceny` | bazodanowe, iface-ref |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Zrodlo | `Soneta.Oceny.IŹródłoOceny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

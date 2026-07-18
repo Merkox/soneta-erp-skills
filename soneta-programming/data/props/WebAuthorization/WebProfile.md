@@ -4,8 +4,12 @@ Opis: Element szczegółowy użytkownika webowego (WebUser). Profil przechowuje 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,12 +22,12 @@ Guided: root
 | LastActivityIP | `string` | bazodanowe | Ostatni adres IP | Ostatni adres IP aktywności użytkownika. |
 | MfaMode | `int` | bazodanowe | Stan rejestracji uwierzytelniania dwuskładnikowego | Aktualny stan rejestracji metody uwierzytelniania dwuskładnikowego |
 | NumberOfVisits | `int` | bazodanowe | Ilość wejść | Ilość wejść do aplikacji przez użytkownika. |
-| PasswordHistory | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| PasswordHistory | `MemoText` | bazodanowe, podlista |  |  |
 | PreviousActivityDate | `System.DateTime` | bazodanowe | Poprzednia data aktywności | Poprzednia data aktywności użytkownika. |
 | PreviousActivityIP | `string` | bazodanowe | Poprzedni adres IP | Poprzedni adres IP aktywności użytkownika. |
 | RecentInvalidLogin | `System.DateTime` | bazodanowe | Ostatnie niepoprawne logowanie | Czas ostatniego niepoprawnego logowania. |
-| RecentPasswordChange | `System.DateTime` | bazodanowe | Ostatnia zmiana hasła | Czas ostatniej zmiany hasła przez operatora. |
+| RecentPasswordChange | `System.DateTime` | bazodanowe, tylko-odczyt | Ostatnia zmiana hasła | Czas ostatniej zmiany hasła przez operatora. |
 | Theme | `string` | bazodanowe | Styl | Preferowany styl strony. |
 | UICulture | `string` | bazodanowe | Język | Preferowany kultura (język) interface'u. |
-| UICultureInfo | `System.Globalization.CultureInfo` |  |  |  |
+| UICultureInfo | `System.Globalization.CultureInfo` | tylko-odczyt |  |  |
 | User | `Soneta.Web.Business.App.WebUser` | bazodanowe |  |  |

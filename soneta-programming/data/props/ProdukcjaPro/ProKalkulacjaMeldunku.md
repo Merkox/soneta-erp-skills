@@ -5,59 +5,63 @@ Opis: Element szczegółowy kalkulacji meldunku (ProMeldunek). Zawiera szczegó�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe: 50
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 50
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 51
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| GniazdaNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut gniazd | Narzut gniazd dla kalkulacji meldunku. |
-| GniazdaPlanowane | `Soneta.Types.Currency` | bazodanowe | Gniazda planowane | Gniazda planowane dla kalkulacji meldunku. |
+| GniazdaNarzut | `Percent` | bazodanowe | Narzut gniazd | Narzut gniazd dla kalkulacji meldunku. |
+| GniazdaPlanowane | `Currency` | bazodanowe | Gniazda planowane | Gniazda planowane dla kalkulacji meldunku. |
 | GniazdaPomin | `bool` | bazodanowe | Pomiń gniazda | Pomijanie gniazd dla kalkulacji meldunku. |
-| GniazdaRazem | `Soneta.Types.Currency` | bazodanowe | Gniazda razem | Gniazda razem dla kalkulacji meldunku. |
-| GniazdaWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość gniazd | Wartość gniazd dla kalkulacji meldunku. |
-| KalkulacjaWartosc | `Soneta.Types.Currency` |  | Wartość kalkulacji | Wartość kalkulacji meldunku. |
-| KooperacjeNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut kooperacji | Narzut kooperacji dla kalkulacji meldunku. |
-| KooperacjePlanowane | `Soneta.Types.Currency` | bazodanowe | Kooperacje planowane | Kooperacje planowane dla kalkulacji meldunku. |
+| GniazdaRazem | `Currency` | bazodanowe | Gniazda razem | Gniazda razem dla kalkulacji meldunku. |
+| GniazdaWartosc | `Currency` | bazodanowe | Wartość gniazd | Wartość gniazd dla kalkulacji meldunku. |
+| KalkulacjaWartosc | `Currency` | tylko-odczyt | Wartość kalkulacji | Wartość kalkulacji meldunku. |
+| KooperacjeNarzut | `Percent` | bazodanowe | Narzut kooperacji | Narzut kooperacji dla kalkulacji meldunku. |
+| KooperacjePlanowane | `Currency` | bazodanowe | Kooperacje planowane | Kooperacje planowane dla kalkulacji meldunku. |
 | KooperacjePomin | `bool` | bazodanowe | Pomiń kooperacje | Pomijanie kooperacji dla kalkulacji meldunku. |
-| KooperacjeRazem | `Soneta.Types.Currency` | bazodanowe | Kooperacja razem | Kooperacja razem dla kalkulacji meldunku. |
-| KooperacjeWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość kooperacji | Wartość kooperacji dla kalkulacji meldunku. |
+| KooperacjeRazem | `Currency` | bazodanowe | Kooperacja razem | Kooperacja razem dla kalkulacji meldunku. |
+| KooperacjeWartosc | `Currency` | bazodanowe | Wartość kooperacji | Wartość kooperacji dla kalkulacji meldunku. |
 | Meldunek | `Soneta.ProdukcjaPro.ProMeldunek` | bazodanowe, guided-parent |  | Meldunek dla kalkulacji meldunku. |
-| NarzedziaNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut narzędzi | Narzut narzędzi dla kalkulacji meldunku. |
-| NarzedziaPlanowane | `Soneta.Types.Currency` | bazodanowe | Narzedzia planowane | Narzedzia planowane dla kalkulacji meldunku. |
+| NarzedziaNarzut | `Percent` | bazodanowe | Narzut narzędzi | Narzut narzędzi dla kalkulacji meldunku. |
+| NarzedziaPlanowane | `Currency` | bazodanowe | Narzedzia planowane | Narzedzia planowane dla kalkulacji meldunku. |
 | NarzedziaPomin | `bool` | bazodanowe | Pomiń narzędzia | Pomijanie narzędzi dla kalkulacji meldunku. |
-| NarzedziaRazem | `Soneta.Types.Currency` | bazodanowe | Narzędzia razem | Narzędzia razem dla kalkulacji meldunku. |
-| NarzedziaWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość narzędzi | Wartość narzędzi dla kalkulacji meldunku. |
-| OdpadyNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut odpadów | Narzut odpadów dla kalkulacji meldunku. |
-| OdpadyPlanowane | `Soneta.Types.Currency` | bazodanowe | Odpady planowane | Odpady planowane dla kalkulacji meldunku. |
+| NarzedziaRazem | `Currency` | bazodanowe | Narzędzia razem | Narzędzia razem dla kalkulacji meldunku. |
+| NarzedziaWartosc | `Currency` | bazodanowe | Wartość narzędzi | Wartość narzędzi dla kalkulacji meldunku. |
+| OdpadyNarzut | `Percent` | bazodanowe | Narzut odpadów | Narzut odpadów dla kalkulacji meldunku. |
+| OdpadyPlanowane | `Currency` | bazodanowe | Odpady planowane | Odpady planowane dla kalkulacji meldunku. |
 | OdpadyPomin | `bool` | bazodanowe | Pomiń odpady | Pomijanie odpadów dla kalkulacji meldunku. |
-| OdpadyRazem | `Soneta.Types.Currency` | bazodanowe | Odpady razem | Odpady razem dla kalkulacji meldunku. |
-| OdpadyWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość odpadów | Wartość odpadów dla kalkulacji meldunku. |
-| PolproduktyNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut półproduktów | Narzut półproduktów dla kalkulacji meldunku. |
-| PolproduktyPlanowane | `Soneta.Types.Currency` | bazodanowe | Półprodukty planowane | Półprodukty planowane dla kalkulacji meldunku. |
+| OdpadyRazem | `Currency` | bazodanowe | Odpady razem | Odpady razem dla kalkulacji meldunku. |
+| OdpadyWartosc | `Currency` | bazodanowe | Wartość odpadów | Wartość odpadów dla kalkulacji meldunku. |
+| PolproduktyNarzut | `Percent` | bazodanowe | Narzut półproduktów | Narzut półproduktów dla kalkulacji meldunku. |
+| PolproduktyPlanowane | `Currency` | bazodanowe | Półprodukty planowane | Półprodukty planowane dla kalkulacji meldunku. |
 | PolproduktyPomin | `bool` | bazodanowe | Pomiń półprodukty | Pomijanie półproduktów dla kalkulacji meldunku. |
-| PolproduktyRazem | `Soneta.Types.Currency` | bazodanowe | Półprodukty razem | Półprodukty razem dla kalkulacji meldunku. |
-| PolproduktyWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość półproduktów | Wartość półproduktów dla kalkulacji meldunku. |
-| PrefabrykatyNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut prefabrykatów | Narzut prefabrykatów dla kalkulacji meldunku. |
-| PrefabrykatyPlanowane | `Soneta.Types.Currency` | bazodanowe | Prefabrykaty planowane | Prefabrykaty planowane dla kalkulacji meldunku. |
+| PolproduktyRazem | `Currency` | bazodanowe | Półprodukty razem | Półprodukty razem dla kalkulacji meldunku. |
+| PolproduktyWartosc | `Currency` | bazodanowe | Wartość półproduktów | Wartość półproduktów dla kalkulacji meldunku. |
+| PrefabrykatyNarzut | `Percent` | bazodanowe | Narzut prefabrykatów | Narzut prefabrykatów dla kalkulacji meldunku. |
+| PrefabrykatyPlanowane | `Currency` | bazodanowe | Prefabrykaty planowane | Prefabrykaty planowane dla kalkulacji meldunku. |
 | PrefabrykatyPomin | `bool` | bazodanowe | Pomiń prefabrykaty | Pomijanie prefabrykatów dla kalkulacji meldunku. |
-| PrefabrykatyRazem | `Soneta.Types.Currency` | bazodanowe | Prefabrykaty razem | Prefabrykaty razem dla kalkulacji meldunku. |
-| PrefabrykatyWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość prefabrykatów | Wartość prefabrykatów dla kalkulacji meldunku. |
-| RobociznaNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut robocizny | Narzut robocizny dla kalkulacji meldunku. |
-| RobociznaPlanowana | `Soneta.Types.Currency` | bazodanowe | Robocizna planowana | Robocizna planowana dla kalkulacji meldunku. |
+| PrefabrykatyRazem | `Currency` | bazodanowe | Prefabrykaty razem | Prefabrykaty razem dla kalkulacji meldunku. |
+| PrefabrykatyWartosc | `Currency` | bazodanowe | Wartość prefabrykatów | Wartość prefabrykatów dla kalkulacji meldunku. |
+| RobociznaNarzut | `Percent` | bazodanowe | Narzut robocizny | Narzut robocizny dla kalkulacji meldunku. |
+| RobociznaPlanowana | `Currency` | bazodanowe | Robocizna planowana | Robocizna planowana dla kalkulacji meldunku. |
 | RobociznaPomin | `bool` | bazodanowe | Pomiń robocizne | Pomijanie robocizny dla kalkulacji meldunku. |
-| RobociznaRazem | `Soneta.Types.Currency` | bazodanowe | Robocizna razem | Robocizna razem dla kalkulacji meldunku. |
-| RobociznaWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość robocizny | Wartość robocizny dla kalkulacji meldunku. |
-| SumaNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut sumy | Narzut sumy dla kalkulacji meldunku. |
-| SumaPlanowana | `Soneta.Types.Currency` | bazodanowe | Suma planowana | Suma planowana dla kalkulacji meldunku. |
-| SumaRazem | `Soneta.Types.Currency` | bazodanowe | Suma razem | Suma razem dla kalkulacji meldunku. |
-| SumaWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość sumy | Wartość sumy dla kalkulacji meldunku. |
-| SurowceNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut surowców | Narzut surowców dla kalkulacji meldunku. |
-| SurowcePlanowane | `Soneta.Types.Currency` | bazodanowe | Surowce planowane | Surowce planowane dla kalkulacji meldunku. |
+| RobociznaRazem | `Currency` | bazodanowe | Robocizna razem | Robocizna razem dla kalkulacji meldunku. |
+| RobociznaWartosc | `Currency` | bazodanowe | Wartość robocizny | Wartość robocizny dla kalkulacji meldunku. |
+| SumaNarzut | `Percent` | bazodanowe | Narzut sumy | Narzut sumy dla kalkulacji meldunku. |
+| SumaPlanowana | `Currency` | bazodanowe | Suma planowana | Suma planowana dla kalkulacji meldunku. |
+| SumaRazem | `Currency` | bazodanowe | Suma razem | Suma razem dla kalkulacji meldunku. |
+| SumaWartosc | `Currency` | bazodanowe | Wartość sumy | Wartość sumy dla kalkulacji meldunku. |
+| SurowceNarzut | `Percent` | bazodanowe | Narzut surowców | Narzut surowców dla kalkulacji meldunku. |
+| SurowcePlanowane | `Currency` | bazodanowe | Surowce planowane | Surowce planowane dla kalkulacji meldunku. |
 | SurowcePomin | `bool` | bazodanowe | Pomiń surowce | Pomijanie surowców dla kalkulacji meldunku. |
-| SurowceRazem | `Soneta.Types.Currency` | bazodanowe | Surowce razem | Surowce razem dla kalkulacji meldunku. |
-| SurowceWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość surowców | Wartość surowców dla kalkulacji meldunku. |
-| UslugiNarzut | `Soneta.Types.Percent` | bazodanowe | Narzut usług | Narzut usług dla kalkulacji meldunku. |
-| UslugiPlanowane | `Soneta.Types.Currency` | bazodanowe | Usługi planowane | Usługi planowane dla kalkulacji meldunku. |
+| SurowceRazem | `Currency` | bazodanowe | Surowce razem | Surowce razem dla kalkulacji meldunku. |
+| SurowceWartosc | `Currency` | bazodanowe | Wartość surowców | Wartość surowców dla kalkulacji meldunku. |
+| UslugiNarzut | `Percent` | bazodanowe | Narzut usług | Narzut usług dla kalkulacji meldunku. |
+| UslugiPlanowane | `Currency` | bazodanowe | Usługi planowane | Usługi planowane dla kalkulacji meldunku. |
 | UslugiPomin | `bool` | bazodanowe | Pomiń usługi | Pomijanie usług dla kalkulacji meldunku. |
-| UslugiRazem | `Soneta.Types.Currency` | bazodanowe | Usługi razem | Usługi razem dla kalkulacji meldunku. |
-| UslugiWartosc | `Soneta.Types.Currency` | bazodanowe | Wartość usług | Wartość usług dla kalkulacji meldunku. |
+| UslugiRazem | `Currency` | bazodanowe | Usługi razem | Usługi razem dla kalkulacji meldunku. |
+| UslugiWartosc | `Currency` | bazodanowe | Wartość usług | Wartość usług dla kalkulacji meldunku. |

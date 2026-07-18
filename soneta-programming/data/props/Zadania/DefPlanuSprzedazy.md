@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 5
+- subrowy: 2
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytm | `bool` |  |  |  |
-| AlgorytmPlanu | `Soneta.Zadania.Models.SalesPlans.AlgorytmPlanu` | bazodanowe |  | Algorytm dla definicji algorytmu planu sprzedaży |
+| AlgorytmPlanu | `Soneta.Zadania.Models.SalesPlans.AlgorytmPlanu` (subrow) | bazodanowe |  | Algorytm dla definicji algorytmu planu sprzedaży |
 | AlgorytmPlanu.Aktywny | `bool` | bazodanowe |  |  |
-| AlgorytmPlanu.Kod | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| AlgorytmPlanu.Kod | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje nie będą wyświetlane w liście wyboru. |
 | ChildDefinition | `Soneta.Zadania.Models.SalesPlans.DefPlanuSprzedazy` | bazodanowe | Definicja podrzędnych | Definicja planów podrzędnych generowanych przy utworzeniu planu |
-| ClassName | `string` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
 | DefRealizacjiPlanu | `Soneta.Zadania.Models.SalesPlans.DefRealizacjiPlanu` | bazodanowe |  | Domyślna definicja realizacji planu sprzedaży |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Generuj | `bool` | bazodanowe | Generuj podrzędne | Automatyczne generowanie podrzędnych planów |
-| KodAlgorytmu | `Soneta.Business.MemoText` |  |  |  |
-| Namespace | `object` |  |  |  |
+| KodAlgorytmu | `MemoText` | podlista |  |  |
+| Namespace | `object` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Zadania.Enums.SalePlanType` | bazodanowe, enum |  | Określa typ planu sprzedażowego |
+| Typ | `Soneta.Zadania.Enums.SalePlanType` (enum) | bazodanowe |  | Określa typ planu sprzedażowego |
 
 ## Enumy
 

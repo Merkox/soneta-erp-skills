@@ -4,19 +4,24 @@ Tytuł: Lokalizacja nieruchomości
 Opis: Słownik lokalizacji nieruchomości na potrzeby rozliczania podatku od nieruchomości. Przechowuje nazwę lokalizacji oraz powiązane dane historyczne o podmiotach płatności, okresach rozliczeniowych i przedmiotach opodatkowania.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `LokalizacjaNierHistoria`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Blokada |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.SrodkiTrwale.LokalizacjaNierHistoria>` |  |  |  |
-| Last | `Soneta.SrodkiTrwale.LokalizacjaNierHistoria` |  |  |  |
+| Historia | `HistorySubTable<Soneta.SrodkiTrwale.LokalizacjaNierHistoria>` | podlista |  |  |
+| Last | `Soneta.SrodkiTrwale.LokalizacjaNierHistoria` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa lokalizacji nieruchomości |
-| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczen` | enum |  | Okres rozliczeń |
-| Opis | `string` |  |  | Opis |
-| PodmiotPlatnosci | `Soneta.CRM.Kontrahent` |  |  | Podmiot płatności |
+| OkresRozliczen | `Soneta.SrodkiTrwale.OkresRozliczen` (enum) | tylko-odczyt |  | Okres rozliczeń |
+| Opis | `string` | tylko-odczyt |  | Opis |
+| PodmiotPlatnosci | `Soneta.CRM.Kontrahent` | tylko-odczyt |  | Podmiot płatności |
 
 ## Enumy
 

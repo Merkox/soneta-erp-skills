@@ -5,27 +5,31 @@ Opis: Szablon wersji planu budżetowego. Konfiguruje numerację, rodzaj wersji p
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis wersji planu. |
-| DomyślnaNumeracja | `string` |  |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis wersji planu. |
+| DomyślnaNumeracja | `string` | tylko-odczyt |  |  |
 | LocalManagement | `bool` | bazodanowe | Wersje lokalne powiązane z centralną zarządzane lokalnie |  |
 | Locked | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje wersji planu nie będą wyświetlane w liście wyboru. |
 | Name | `string` | bazodanowe | Nazwa | Pełna nazwa definicji wersji planu. |
-| Numbering | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji wersji planu. |
+| Numbering | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji wersji planu. |
 | Numbering.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numbering.PodczasZapisu | `bool` |  |  |  |
 | Numbering.Separator | `string` | bazodanowe |  |  |
 | Numbering.Wzor | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` |  |  |  |
-| PlanVersionType | `Soneta.Core.PlanVersionType` | bazodanowe, enum | Rodzaj definicji wersji planu | Rodzaj definicji wersji planu. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` | podlista |  |  |
+| PlanVersionType | `Soneta.Core.PlanVersionType` (enum) | bazodanowe, tylko-odczyt | Rodzaj definicji wersji planu | Rodzaj definicji wersji planu. |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji wersji planu. |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| TypDokumentu | `System.Type` |  |  |  |
-| WidoczneCechy | `Soneta.Business.MemoText` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| TypDokumentu | `System.Type` | tylko-odczyt |  |  |
+| WidoczneCechy | `MemoText` | podlista |  |  |
 
 ## Enumy
 

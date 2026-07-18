@@ -5,13 +5,17 @@ Opis: Element szczegółowy hosta danych kontaktowych (IDaneKontaktoweHost). Prz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IDaneKontaktoweHost`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresExt | `Soneta.Core.AdresExt` | bazodanowe | Adres |  |
-| CeleKontaktu | `Soneta.Business.SubTable<Soneta.Core.CelKontaktu>` |  |  |  |
+| CeleKontaktu | `SubTable<Soneta.Core.CelKontaktu>` | podlista |  |  |
 | Domyslny | `bool` | bazodanowe | Domyślny | Określa domyślny kontakt. |
 | Host | `Soneta.Core.IDaneKontaktoweHost` | bazodanowe, guided-parent, iface-ref | Host kontaktu |  |
 | Kontakt | `string` | bazodanowe | Kontakt | Kontakt. |

@@ -5,61 +5,64 @@ Opis: Element szczegółowy historii pracownika (PracHistoria). Rozszerzenie dan
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `PracHistoria`
 
-- pola bazodanowe: 152
-- pola kalkulowane (z klas biznesowych): 30
+- pola bazodanowe (zapisywalne): 120
+- pola kalkulowane (zapisywalne): 11
+- pola tylko-odczyt: 14
+- podlisty: 16
+- subrowy: 18
+- razem: 179
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DodSwiadczeniaZUS | `Soneta.Kadry.DodatkoweŚwiadczeniaZUS` | bazodanowe |  |  |
+| DodSwiadczeniaZUS | `Soneta.Kadry.DodatkoweŚwiadczeniaZUS` (subrow) | bazodanowe |  |  |
 | DodSwiadczeniaZUS.Numer | `string` | bazodanowe |  |  |
 | DodSwiadczeniaZUS.OddzialZUS | `Soneta.CRM.OddziałZUS` | bazodanowe |  |  |
-| DodSwiadczeniaZUS.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| DodSwiadczeniaZUS.Rodzaj | `Soneta.Kadry.RodzajeDodatkowychŚwiadczeńZUS` | bazodanowe, enum |  |  |
-| DodSwiadczeniaZUS.WgOddzialZUS | `Soneta.Business.Key` |  |  |  |
-| Dokument | `Soneta.Kadry.DokumentOsoby` | bazodanowe |  |  |
-| Dokument.DataWaznosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| Dokument.DataWydania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Dokument.Rodzaj | `Soneta.Kadry.KodRodzajuDokumentu` | bazodanowe, enum |  |  |
+| DodSwiadczeniaZUS.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| DodSwiadczeniaZUS.Rodzaj | `Soneta.Kadry.RodzajeDodatkowychŚwiadczeńZUS` (enum) | bazodanowe |  |  |
+| DodSwiadczeniaZUS.WgOddzialZUS | `Key` | podlista |  |  |
+| Dokument | `Soneta.Kadry.DokumentOsoby` (subrow) | bazodanowe |  |  |
+| Dokument.DataWaznosci | `Date` | bazodanowe |  |  |
+| Dokument.DataWydania | `Date` | bazodanowe |  |  |
+| Dokument.Rodzaj | `Soneta.Kadry.KodRodzajuDokumentu` (enum) | bazodanowe |  |  |
 | Dokument.SeriaNumer | `string` | bazodanowe |  |  |
 | Dokument.WydanyPrzez | `string` | bazodanowe |  |  |
-| EmeryturaMundurowa | `Soneta.Kadry.EmeryturaMundurowa` | bazodanowe |  |  |
-| EmeryturaMundurowa.Data | `Soneta.Types.Date` | bazodanowe | Data przyznania |  |
+| EmeryturaMundurowa | `Soneta.Kadry.EmeryturaMundurowa` (subrow) | bazodanowe |  |  |
+| EmeryturaMundurowa.Data | `Date` | bazodanowe | Data przyznania |  |
 | EmeryturaMundurowa.Numer | `string` | bazodanowe |  |  |
 | EmeryturaMundurowa.WydanyPrzez | `string` | bazodanowe |  |  |
 | FunkcjaPelna | `string` | bazodanowe |  |  |
-| Host | `Soneta.Kadry.PracHistoria` | bazodanowe, guided-parent |  |  |
-| InneDane | `Soneta.Kadry.InneDaneHistoryczne` | bazodanowe |  |  |
+| Host | `Soneta.Kadry.PracHistoria` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| InneDane | `Soneta.Kadry.InneDaneHistoryczne` (subrow) | bazodanowe |  |  |
 | InneDane.KierownikDzialu | `Soneta.Kadry.Wydzial` | bazodanowe |  |  |
 | InneDane.KorespondencjaNazwaFirmy | `string` | bazodanowe |  | Nazwa firmy, na którą kierowana jest korespondencja |
-| InneDane.OddzialZUS | `string` |  |  |  |
-| InneDane.WgKierownikDzialu | `Soneta.Business.Key` |  |  |  |
-| InneDane.WgZastepca | `Soneta.Business.Key` |  |  |  |
+| InneDane.WgKierownikDzialu | `Key` | podlista |  |  |
+| InneDane.WgZastepca | `Key` | podlista |  |  |
 | InneDane.Zastepca | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| ObnizenieEtatu | `Soneta.Kadry.ObniżenieWymiaruEtatu` | bazodanowe |  |  |
-| ObnizenieEtatu.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| ObnizenieEtatu.Etat | `Soneta.Kadry.Etat` |  |  |  |
-| ObnizenieEtatu.Info | `Soneta.Kadry.ObniżenieWymiaruEtatuInfo` | bazodanowe, enum |  |  |
-| ObnizenieEtatu.Kalendarz | `Soneta.Kalend.KalendarzBase` | bazodanowe |  |  |
-| ObnizenieEtatu.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| ObnizenieEtatu.Stawka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| ObnizenieEtatu.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| ObnizenieEtatu.WgElement | `Soneta.Business.Key` |  |  |  |
-| ObnizenieEtatu.WgKalendarz | `Soneta.Business.Key` |  |  |  |
-| ObnizenieEtatu.WskaznikKrotnosc | `double` | bazodanowe |  |  |
-| ObnizenieEtatu.WskaznikNazwa | `string` | bazodanowe |  |  |
-| ObnizenieEtatu.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| Obywatelstwo | `Soneta.Kadry.Obywatelstwo` | bazodanowe |  |  |
-| Obywatelstwo.DataZmiany | `Soneta.Types.Date` | bazodanowe |  |  |
-| Obywatelstwo.KartaPobytu | `Soneta.Kadry.KartaPobytu` | bazodanowe |  |  |
-| Obywatelstwo.KartaPobytu.DataWaznosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| Obywatelstwo.KartaPobytu.DataWydania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Obywatelstwo.KartaPobytu.Rodzaj | `Soneta.Kadry.RodzajKartyPobytu` | bazodanowe, enum |  |  |
+| ObnizenieEtatu | `Soneta.Kadry.ObniżenieWymiaruEtatu` (subrow) | bazodanowe |  |  |
+| ObnizenieEtatu.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.Etat | `Soneta.Kadry.Etat` | tylko-odczyt |  |  |
+| ObnizenieEtatu.Info | `Soneta.Kadry.ObniżenieWymiaruEtatuInfo` (enum) | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.Kalendarz | `Soneta.Kalend.KalendarzBase` | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` (enum) | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.Stawka | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.WgElement | `Key` | podlista |  |  |
+| ObnizenieEtatu.WgKalendarz | `Key` | podlista |  |  |
+| ObnizenieEtatu.WskaznikKrotnosc | `double` | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.WskaznikNazwa | `string` | bazodanowe, tylko-odczyt |  |  |
+| ObnizenieEtatu.Wymiar | `Fraction` | bazodanowe, tylko-odczyt |  |  |
+| Obywatelstwo | `Soneta.Kadry.Obywatelstwo` (subrow) | bazodanowe |  |  |
+| Obywatelstwo.DataZmiany | `Date` | bazodanowe |  |  |
+| Obywatelstwo.KartaPobytu | `Soneta.Kadry.KartaPobytu` (subrow) | bazodanowe |  |  |
+| Obywatelstwo.KartaPobytu.DataWaznosci | `Date` | bazodanowe |  |  |
+| Obywatelstwo.KartaPobytu.DataWydania | `Date` | bazodanowe |  |  |
+| Obywatelstwo.KartaPobytu.Rodzaj | `Soneta.Kadry.RodzajKartyPobytu` (enum) | bazodanowe |  |  |
 | Obywatelstwo.KartaPobytu.SeriaNumer | `string` | bazodanowe |  |  |
 | Obywatelstwo.KartaPobytu.WydanyPrzez | `string` | bazodanowe |  |  |
 | Obywatelstwo.KodKraju | `string` | bazodanowe |  | Kod kraju obywatelstwa |
@@ -67,68 +70,66 @@ Guided: child — nadrzędna przez pole `Host` → `PracHistoria`
 | Obywatelstwo.KrajDokumentu | `string` | bazodanowe |  | Kraj |
 | Obywatelstwo.Nazwa | `string` | bazodanowe |  |  |
 | Obywatelstwo.NumerPodatnika | `string` | bazodanowe |  |  |
-| Obywatelstwo.ObywatelstwoPolskie | `bool` |  |  |  |
+| Obywatelstwo.ObywatelstwoPolskie | `bool` | tylko-odczyt |  |  |
 | Obywatelstwo.OgraniczonyObowiazekPodatkowy | `bool` | bazodanowe |  |  |
-| Obywatelstwo.PodstZdrowCudzoziemca | `Soneta.Kadry.PodstZdrowCudzoziemca` | bazodanowe, enum |  |  |
+| Obywatelstwo.PodstZdrowCudzoziemca | `Soneta.Kadry.PodstZdrowCudzoziemca` (enum) | bazodanowe |  |  |
 | Obywatelstwo.PodstawaPrawnaZmiany | `string` | bazodanowe |  |  |
-| Obywatelstwo.RodzajDokumentu | `string` | bazodanowe |  |  |
-| Obywatelstwo.RodzajNumeruPodatnika | `Soneta.Kadry.KodRodzajNumeruPodatnika` | bazodanowe, enum |  |  |
-| Obywatelstwo.ZdrowCudzoziemcaDo | `Soneta.Types.Date` | bazodanowe |  |  |
+| Obywatelstwo.RodzajNumeruPodatnika | `Soneta.Kadry.KodRodzajNumeruPodatnika` (enum) | bazodanowe |  |  |
+| Obywatelstwo.ZdrowCudzoziemcaDo | `Date` | bazodanowe |  |  |
 | Obywatelstwo.ZdrowCudzoziemcaUwagi | `string` | bazodanowe |  |  |
-| Oswiata | `Soneta.Kadry.PracownikOświaty` | bazodanowe |  |  |
-| Oswiata.KartaNauczycielaWymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Oswiata | `Soneta.Kadry.PracownikOświaty` (subrow) | bazodanowe |  |  |
+| Oswiata.KartaNauczycielaWymiar | `Fraction` | bazodanowe |  |  |
 | Oswiata.Nauczyciel | `bool` |  |  |  |
 | Oswiata.NauczycielKartaNauczyciela | `bool` | bazodanowe |  |  |
-| Oswiata.Rodzaj | `Soneta.Kadry.RodzajPracownikaOświaty` | bazodanowe, enum | Rodzaj pracownika oświaty |  |
-| Oswiata.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| Oswiata.WymiarEx | `Soneta.Types.Fraction` |  |  |  |
-| PFRON | `Soneta.Kadry.DanePFRON` | bazodanowe |  |  |
-| PFRON.DataDostarczenia | `Soneta.Types.Date` | bazodanowe |  | Data dostarczenia orzeczenia o stopniu niepełnosprawności |
-| PFRON.DataOrzeczenia | `Soneta.Types.Date` | bazodanowe |  | Data orzeczenia o stopniu niepełnosprawności |
-| PFRON.DataWniosku | `Soneta.Types.Date` | bazodanowe |  |  |
-| PFRON.DataZaswiadczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| PFRON.DataZgloszeniaDoEwidencji | `Soneta.Types.Date` | bazodanowe |  | Data zgłoszenia pracownika do ewidencji zatrudnionych osób niepełnosprawnych PFRON. |
+| Oswiata.Rodzaj | `Soneta.Kadry.RodzajPracownikaOświaty` (enum) | bazodanowe | Rodzaj pracownika oświaty |  |
+| Oswiata.Wymiar | `Fraction` | bazodanowe |  |  |
+| Oswiata.WymiarEx | `Fraction` |  |  |  |
+| PFRON | `Soneta.Kadry.DanePFRON` (subrow) | bazodanowe |  |  |
+| PFRON.DataDostarczenia | `Date` | bazodanowe |  | Data dostarczenia orzeczenia o stopniu niepełnosprawności |
+| PFRON.DataOrzeczenia | `Date` | bazodanowe |  | Data orzeczenia o stopniu niepełnosprawności |
+| PFRON.DataWniosku | `Date` | bazodanowe |  |  |
+| PFRON.DataZaswiadczenia | `Date` | bazodanowe |  |  |
+| PFRON.DataZgloszeniaDoEwidencji | `Date` | bazodanowe |  | Data zgłoszenia pracownika do ewidencji zatrudnionych osób niepełnosprawnych PFRON. |
 | PFRON.DodatkoweDofinansowanieSOD | `bool` | bazodanowe |  |  |
 | PFRON.DzialalnoscNieGospodarcza | `bool` | bazodanowe |  | Pracownik jest zatrudniony u pracodawcy prowadzącego działalność gospodarczą, lecz wykonuje pracę związaną z wyodrębnioną działalnością niebędącą działalnością gospodarczą. |
 | PFRON.EfektZachety | `bool` | bazodanowe |  | Pracownik zatrudniony w warunkach efektu zachęty. |
 | PFRON.Koszty2007 | `decimal` | bazodanowe |  |  |
-| PFRON.MiejsceZamieszkania | `Soneta.Kadry.MiejsceZamieszkania` | bazodanowe, enum |  |  |
+| PFRON.MiejsceZamieszkania | `Soneta.Kadry.MiejsceZamieszkania` (enum) | bazodanowe |  |  |
 | PFRON.NaliczajUrlopDodatkowy | `bool` | bazodanowe |  |  |
-| PFRON.NaliczajUrlopDodatkowyOd | `Soneta.Types.Date` | bazodanowe |  |  |
+| PFRON.NaliczajUrlopDodatkowyOd | `Date` | bazodanowe |  |  |
 | PFRON.NieuprawnionyDoDofinansowaniaWypGot | `bool` | bazodanowe |  | Pracownik nieuprawniony do dofinansowania - wypłata gotówkowa wynagrodzenia. |
 | PFRON.ObnizonyLimitDofinansowania | `bool` | bazodanowe |  |  |
-| PFRON.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PFRON.OkresEpd | `Soneta.Types.FromTo` |  |  |  |
-| PFRON.OkresExt | `Soneta.Types.FromTo` |  |  |  |
-| PFRON.OkresExtOld | `Soneta.Types.FromTo` |  |  |  |
-| PFRON.OrganWydajacyOrzeczenie | `Soneta.Kadry.OrganWydajacyOrzeczenie` | bazodanowe, enum |  | Organ wydający orzeczenie o stopniu niepełnosprawności |
-| PFRON.PomocPubliczna | `Soneta.Kadry.StanowiPomocPubliczną` | bazodanowe, enum |  | Dofinansowanie stanowi pomoc publiczną |
-| PFRON.PoziomWyksztalcenia | `Soneta.Kadry.PoziomWykształcenia` | bazodanowe, enum |  |  |
+| PFRON.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PFRON.OkresEpd | `FromTo` | podlista |  |  |
+| PFRON.OkresExt | `FromTo` | podlista |  |  |
+| PFRON.OkresExtOld | `FromTo` | podlista |  |  |
+| PFRON.OrganWydajacyOrzeczenie | `Soneta.Kadry.OrganWydajacyOrzeczenie` (enum) | bazodanowe |  | Organ wydający orzeczenie o stopniu niepełnosprawności |
+| PFRON.PomocPubliczna | `Soneta.Kadry.StanowiPomocPubliczną` (enum) | bazodanowe |  | Dofinansowanie stanowi pomoc publiczną |
+| PFRON.PoziomWyksztalcenia | `Soneta.Kadry.PoziomWykształcenia` (enum) | bazodanowe |  |  |
 | PFRON.PracownikZwolniony | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| PFRON.SchorzeniaSOD | `System.Collections.Generic.IEnumerable<Soneta.Kadry.SzczególneSchorzeniaSOD>` |  |  |  |
+| PFRON.SchorzeniaSOD | `System.Collections.Generic.IEnumerable<Soneta.Kadry.SzczególneSchorzeniaSOD>` | podlista |  |  |
 | PFRON.StanowiskoZwolnione | `bool` | bazodanowe |  | Stanowisko pracy, na którym został zatrudniony pracownik zostało zwolnione w wyniku zdarzeń określonych w art. 26b ust. 4 pkt 1-4 lub ust. 5 pkt 1-2 ustawy. |
-| PFRON.Stopien | `Soneta.Kadry.StNiepełnosprawności` | bazodanowe, enum |  |  |
-| PFRON.StopienPFRON | `Soneta.Kadry.KodStNiepelnosprawnosciPFRON` | bazodanowe, enum |  |  |
-| PFRON.SzczegolneSchorzenie | `bool` |  | Szczególne schorzenie |  |
-| PFRON.SzczegolneSchorzeniePFRON | `bool` |  |  |  |
-| PFRON.TypSchorzenia | `Soneta.Kadry.SzczegolneSchorzenia` | bazodanowe, enum |  |  |
-| PFRON.TypSchorzenia2SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` | bazodanowe, enum |  |  |
-| PFRON.TypSchorzenia3SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` | bazodanowe, enum |  |  |
-| PFRON.TypSchorzenia4SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` | bazodanowe, enum |  |  |
-| PFRON.TypSchorzeniaSOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` | bazodanowe, enum |  |  |
-| PFRON.WgPracownikZwolniony | `Soneta.Business.Key` |  |  |  |
-| PFRON.WiekEmerytalnyOd | `Soneta.Types.Date` | bazodanowe |  |  |
-| PFRON.WymiarUPodstawowego | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| PFRON.Stopien | `Soneta.Kadry.StNiepełnosprawności` (enum) | bazodanowe |  |  |
+| PFRON.StopienPFRON | `Soneta.Kadry.KodStNiepelnosprawnosciPFRON` (enum) | bazodanowe |  |  |
+| PFRON.SzczegolneSchorzeniePFRON | `bool` | tylko-odczyt |  |  |
+| PFRON.TypSchorzenia | `Soneta.Kadry.SzczegolneSchorzenia` (enum) | bazodanowe |  |  |
+| PFRON.TypSchorzenia2SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` (enum) | bazodanowe |  |  |
+| PFRON.TypSchorzenia3SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` (enum) | bazodanowe |  |  |
+| PFRON.TypSchorzenia4SOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` (enum) | bazodanowe |  |  |
+| PFRON.TypSchorzeniaSOD | `Soneta.Kadry.SzczególneSchorzeniaSOD` (enum) | bazodanowe |  |  |
+| PFRON.WgPracownikZwolniony | `Key` | podlista |  |  |
+| PFRON.WiekEmerytalnyOd | `Date` | bazodanowe |  |  |
+| PFRON.WymiarUPodstawowego | `Fraction` | bazodanowe |  |  |
 | PFRON.WzrostNettoZatrudnienia | `bool` | bazodanowe |  | Zatrudnienie pracownika spowodowało u pracodawcy wykonującego działalność gospodarczą wzrost netto zatrudnienia ogółem i zatrudnienia pracowników niepełnosprawnych. |
 | PFRON.ZgodaNaPrzekazanieDanych | `bool` | bazodanowe |  |  |
-| PIT40 | `Soneta.Kadry.DaneDodatkowePIT40` | bazodanowe |  |  |
+| PIT40 | `Soneta.Kadry.DaneDodatkowePIT40` (subrow) | bazodanowe |  |  |
 | PIT40.KosztyIndywidualne | `bool` | bazodanowe |  |  |
 | PIT40.KosztyKwota | `decimal` | bazodanowe |  |  |
 | PIT40.Naliczaj | `bool` | bazodanowe |  |  |
 | PIT40.ZwrotSwiadczen | `decimal` | bazodanowe | Zwrot świadczeń |  |
-| PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` | bazodanowe |  |  |
+| PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` (subrow) | bazodanowe |  |  |
 | PIT5BO.Koszty | `decimal` | bazodanowe |  |  |
-| PIT5BO.Miesiac | `Soneta.Types.YearMonth` | bazodanowe |  |  |
+| PIT5BO.Miesiac | `YearMonth` | bazodanowe |  |  |
 | PIT5BO.Ograniczenia | `decimal` | bazodanowe |  |  |
 | PIT5BO.Przychod | `decimal` | bazodanowe |  |  |
 | PIT5BO.Reklama | `decimal` | bazodanowe |  |  |
@@ -136,7 +137,7 @@ Guided: child — nadrzędna przez pole `Host` → `PracHistoria`
 | PIT5BO.Spoleczne | `decimal` | bazodanowe |  |  |
 | PIT5BO.ZaliczkaFis | `decimal` | bazodanowe |  |  |
 | PIT5BO.Zdrowotne | `decimal` | bazodanowe |  |  |
-| PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` | bazodanowe |  |  |
+| PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` (subrow) | bazodanowe |  |  |
 | PIT5Inne.Baza2 | `string` | bazodanowe |  | Nazwa drugiej bazy z dochodami |
 | PIT5Inne.Baza2UI | `Soneta.Core.DatabaseLookupItem` |  |  |  |
 | PIT5Inne.Baza3 | `string` | bazodanowe |  | Nazwa trzeciej bazy z dochodami |
@@ -153,45 +154,45 @@ Guided: child — nadrzędna przez pole `Host` → `PracHistoria`
 | PIT5Inne.Baza8UI | `Soneta.Core.DatabaseLookupItem` |  |  |  |
 | PIT5Inne.PodstSkladZdrowBaza | `string` | bazodanowe |  | Podstawa składki zdrowotnej pobierana z innej bazy danych |
 | PIT5Inne.PodstSkladZdrowBazaUI | `Soneta.Core.DatabaseLookupItem` |  |  |  |
-| PIT5Inne.Udzialy2 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w drugiej bazie z dochodami |
-| PIT5Inne.Udzialy3 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w trzeciej bazie z dochodami |
-| PIT5Inne.Udzialy4 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w czwartej bazie z dochodami |
-| PIT5Inne.Udzialy5 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w piątej bazie z dochodami |
-| PIT5Inne.Udzialy6 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w szóstej bazie z dochodami |
-| PIT5Inne.Udzialy7 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w siódmej bazie z dochodami |
-| PIT5Inne.Udzialy8 | `Soneta.Types.Fraction` | bazodanowe |  | Udziały w ósmej bazie z dochodami |
-| Powiadomic | `Soneta.Core.Osoba` | bazodanowe |  |  |
+| PIT5Inne.Udzialy2 | `Fraction` | bazodanowe |  | Udziały w drugiej bazie z dochodami |
+| PIT5Inne.Udzialy3 | `Fraction` | bazodanowe |  | Udziały w trzeciej bazie z dochodami |
+| PIT5Inne.Udzialy4 | `Fraction` | bazodanowe |  | Udziały w czwartej bazie z dochodami |
+| PIT5Inne.Udzialy5 | `Fraction` | bazodanowe |  | Udziały w piątej bazie z dochodami |
+| PIT5Inne.Udzialy6 | `Fraction` | bazodanowe |  | Udziały w szóstej bazie z dochodami |
+| PIT5Inne.Udzialy7 | `Fraction` | bazodanowe |  | Udziały w siódmej bazie z dochodami |
+| PIT5Inne.Udzialy8 | `Fraction` | bazodanowe |  | Udziały w ósmej bazie z dochodami |
+| Powiadomic | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
 | Powiadomic.Adres | `string` | bazodanowe |  |  |
 | Powiadomic.Osoba | `string` | bazodanowe |  |  |
 | Powiadomic.Telefon | `string` | bazodanowe |  |  |
-| StanRodzinny | `Soneta.Kadry.StanRodzinny` | bazodanowe |  |  |
-| StanRodzinny.DataSlubu | `Soneta.Types.Date` | bazodanowe |  |  |
+| StanRodzinny | `Soneta.Kadry.StanRodzinny` (subrow) | bazodanowe |  |  |
+| StanRodzinny.DataSlubu | `Date` | bazodanowe |  |  |
 | StanRodzinny.NrAktuMalzenstwa | `string` | bazodanowe |  |  |
-| StanRodzinny.StanCywilny | `Soneta.Kadry.StanCywilnyPłeć` | bazodanowe, enum |  |  |
+| StanRodzinny.StanCywilny | `Soneta.Kadry.StanCywilnyPłeć` (enum) | bazodanowe |  |  |
 | StanRodzinny.USCMiasto | `string` | bazodanowe |  |  |
 | StanowiskoPelne | `string` | bazodanowe |  |  |
-| Wojsko | `Soneta.Kadry.Wojsko` | bazodanowe |  |  |
-| Wojsko.KategoriaZdrowia | `Soneta.Kadry.KategoriaZdrowia` | bazodanowe, enum |  |  |
+| Wojsko | `Soneta.Kadry.Wojsko` (subrow) | bazodanowe |  |  |
+| Wojsko.KategoriaZdrowia | `Soneta.Kadry.KategoriaZdrowia` (enum) | bazodanowe |  |  |
 | Wojsko.NrKsiazeczki | `string` | bazodanowe |  |  |
 | Wojsko.NrSpecjalnosci | `string` | bazodanowe |  |  |
-| Wojsko.Podlega | `bool` |  |  |  |
+| Wojsko.Podlega | `bool` | tylko-odczyt |  |  |
 | Wojsko.PrzydzialMobilizacyjny | `string` | bazodanowe |  |  |
 | Wojsko.Stopien | `string` | bazodanowe |  |  |
-| Wojsko.Stosunek | `Soneta.Kadry.KodStosDoSluzbyWojskowej` | bazodanowe, enum |  |  |
+| Wojsko.Stosunek | `Soneta.Kadry.KodStosDoSluzbyWojskowej` (enum) | bazodanowe |  |  |
 | Wojsko.WKU | `string` | bazodanowe |  |  |
-| Wyksztalcenie | `Soneta.Kadry.Wyksztalcenie` | bazodanowe |  |  |
-| Wyksztalcenie.Kod | `Soneta.Kadry.KodWyksztalcenia` | bazodanowe, enum |  |  |
+| Wyksztalcenie | `Soneta.Kadry.Wyksztalcenie` (subrow) | bazodanowe |  |  |
+| Wyksztalcenie.Kod | `Soneta.Kadry.KodWyksztalcenia` (enum) | bazodanowe |  |  |
 | Wyksztalcenie.StopienNaukowy | `string` | bazodanowe |  |  |
-| Wyksztalcenie.SymbolSystemuCzasuPracyGUS | `Soneta.Kadry.SymbolSystemuCzasuPracy` | bazodanowe, enum |  |  |
+| Wyksztalcenie.SymbolSystemuCzasuPracyGUS | `Soneta.Kadry.SymbolSystemuCzasuPracy` (enum) | bazodanowe |  |  |
 | Wyksztalcenie.TytulNaukowy | `string` | bazodanowe |  |  |
-| ZUS | `Soneta.Kadry.DaneZUS` | bazodanowe |  |  |
-| ZUS.DataWniosku | `Soneta.Types.Date` | bazodanowe |  |  |
-| ZUS.DataZaswiadczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| ZUS.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| ZUS.OkresEpd | `Soneta.Types.FromTo` |  |  |  |
-| ZUS.OkresExt | `Soneta.Types.FromTo` |  |  |  |
-| ZUS.OkresExtOld | `Soneta.Types.FromTo` |  |  |  |
-| ZUS.Orzeczenie | `Soneta.Kadry.StNiezdolnościDoPracy` | bazodanowe, enum |  |  |
+| ZUS | `Soneta.Kadry.DaneZUS` (subrow) | bazodanowe |  |  |
+| ZUS.DataWniosku | `Date` | bazodanowe |  |  |
+| ZUS.DataZaswiadczenia | `Date` | bazodanowe |  |  |
+| ZUS.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| ZUS.OkresEpd | `FromTo` | podlista |  |  |
+| ZUS.OkresExt | `FromTo` | podlista |  |  |
+| ZUS.OkresExtOld | `FromTo` | podlista |  |  |
+| ZUS.Orzeczenie | `Soneta.Kadry.StNiezdolnościDoPracy` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

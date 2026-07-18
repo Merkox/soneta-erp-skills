@@ -5,16 +5,20 @@ Opis: Element szczegółowy definicji zestawu danych (DataSetDefinition). Defini
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BIFieldType | `Soneta.BI.BIFieldType` | bazodanowe, enum | Typ(BI) |  |
+| BIFieldType | `Soneta.BI.BIFieldType` (enum) | bazodanowe | Typ(BI) |  |
 | BusinessPath | `string` | bazodanowe | Ścieżka biznesowa |  |
 | BusinessTypeName | `string` | bazodanowe | Typ biznesowy |  |
-| DataSet | `Soneta.Business.IRow` | bazodanowe | Definicja zestawu danych |  |
-| FieldType | `Soneta.Data.Schema.FieldType` | bazodanowe, enum | Typ(DB) |  |
+| DataSet | `IRow` | bazodanowe | Definicja zestawu danych |  |
+| FieldType | `Soneta.Data.Schema.FieldType` (enum) | bazodanowe | Typ(DB) |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | SizeType | `System.Windows.Forms.SizeType` |  |  |  |
 | Visible | `bool` |  |  |  |

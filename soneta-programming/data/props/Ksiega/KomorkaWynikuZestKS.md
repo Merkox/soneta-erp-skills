@@ -5,15 +5,19 @@ Opis: Element szczegółowy wyniku zestawienia księgowego (WynikZestKS). Przech
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wynik` → `WynikZestKS`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Color | `System.Drawing.Color` |  |  |  |
-| Info | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Kolumna | `Soneta.Ksiega.KolumnaWynikuZestKS` | bazodanowe |  |  |
-| Korekta | `bool` | bazodanowe |  |  |
-| Pozycja | `Soneta.Ksiega.PozycjaWynikuZestKS` | bazodanowe |  |  |
+| Color | `System.Drawing.Color` | tylko-odczyt |  |  |
+| Info | `MemoText` | bazodanowe, podlista |  |  |
+| Kolumna | `Soneta.Ksiega.KolumnaWynikuZestKS` | bazodanowe, tylko-odczyt |  |  |
+| Korekta | `bool` | bazodanowe, tylko-odczyt |  |  |
+| Pozycja | `Soneta.Ksiega.PozycjaWynikuZestKS` | bazodanowe, tylko-odczyt |  |  |
 | Wartosc | `decimal` | bazodanowe |  |  |
-| Wynik | `Soneta.Ksiega.WynikZestKS` | bazodanowe, guided-parent |  |  |
+| Wynik | `Soneta.Ksiega.WynikZestKS` | bazodanowe, tylko-odczyt, guided-parent |  |  |

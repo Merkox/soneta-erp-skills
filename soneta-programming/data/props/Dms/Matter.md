@@ -6,50 +6,54 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`, `IEmailAttachmentsHolder`, `IEmailElement`, `IDokument`, `IDmsArchInfoHost`
 
-- pola bazodanowe: 25
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 12
+- podlisty: 9
+- subrowy: 2
+- razem: 39
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ArchInfos | `Soneta.Business.SubTable<Soneta.Workflow.Dms.IK.DmsArchInfo>` |  |  |  |
-| ArchiveCategory | `Soneta.Workflow.Dms.Config.ArchiveCategory` | bazodanowe | Kategoria archiwalna | Kategoria archiwalna sprawy |
-| ArchiveCategory.Category | `string` |  | Formatowana nazwa | Formatowana nazwa kategorii archiwalnej |
-| ArchiveCategory.HasDictionary | `bool` |  | Określono słownik | Określono słownik kategorii |
+| ArchInfos | `SubTable<Soneta.Workflow.Dms.IK.DmsArchInfo>` | podlista |  |  |
+| ArchiveCategory | `Soneta.Workflow.Dms.Config.ArchiveCategory` (subrow) | bazodanowe | Kategoria archiwalna | Kategoria archiwalna sprawy |
+| ArchiveCategory.Category | `string` | tylko-odczyt | Formatowana nazwa | Formatowana nazwa kategorii archiwalnej |
+| ArchiveCategory.HasDictionary | `bool` | tylko-odczyt | Określono słownik | Określono słownik kategorii |
 | ArchiveCategory.ImportArchiveCategory | `string` |  |  |  |
 | ArchiveCategory.Period | `int` | bazodanowe | Okres | Opcjonalny okres kategorii archiwalnej dokumentu |
 | ArchiveCategory.Symbol | `Soneta.Ksiega.ElemSlownika` | bazodanowe | Symbol | Symbol kategorii archiwalnej dokumentu |
-| ArchiveCategory.WgSymbol | `Soneta.Business.Key` |  |  |  |
-| ArchivedTerm | `System.DateTime` | bazodanowe | Data i czas archiwizacji | Data i czas archiwizacji sprawy |
-| BasicDocuments | `Soneta.Business.SubTable<Soneta.Workflow.Dms.BasicDocument>` |  |  |  |
-| ChildMatters | `Soneta.Business.SubTable<Soneta.Workflow.Dms.Matter>` |  |  |  |
-| CloseDatetime | `System.DateTime` | bazodanowe | Data i czas zakończenia | Data i czas zakończenia sprawy |
-| Creator | `Soneta.Business.App.Operator` | bazodanowe | Założył | Operator, który założył sprawę |
-| Date | `Soneta.Types.Date` |  | Data | Data sprawy |
-| DcType | `Soneta.Workflow.Enums.DublinCoreEnum` | bazodanowe, enum | Typ opisu | Typ opisu DublinCore |
-| Definition | `Soneta.Workflow.Dms.Config.MatterDefinition` | bazodanowe | Definicja sprawy | Definicja sprawy powiązana ze sprawą |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis sprawy |
+| ArchiveCategory.WgSymbol | `Key` | podlista |  |  |
+| ArchivedTerm | `System.DateTime` | bazodanowe, tylko-odczyt | Data i czas archiwizacji | Data i czas archiwizacji sprawy |
+| BasicDocuments | `SubTable<Soneta.Workflow.Dms.BasicDocument>` | podlista |  |  |
+| ChildMatters | `SubTable<Soneta.Workflow.Dms.Matter>` | podlista |  |  |
+| CloseDatetime | `System.DateTime` | bazodanowe, tylko-odczyt | Data i czas zakończenia | Data i czas zakończenia sprawy |
+| Creator | `App.Operator` | bazodanowe, tylko-odczyt | Założył | Operator, który założył sprawę |
+| Date | `Date` | tylko-odczyt | Data | Data sprawy |
+| DcType | `Soneta.Workflow.Enums.DublinCoreEnum` (enum) | bazodanowe | Typ opisu | Typ opisu DublinCore |
+| Definition | `Soneta.Workflow.Dms.Config.MatterDefinition` | bazodanowe, tylko-odczyt | Definicja sprawy | Definicja sprawy powiązana ze sprawą |
+| Description | `MemoText` | bazodanowe, podlista | Opis | Opis sprawy |
 | Division | `Soneta.Core.OddzialFirmy` | bazodanowe | Odział firmy | Oddział firmy powiązany ze sprawą |
 | Format | `string` | bazodanowe | Format | Format sprawy |
-| HasOrganizationalStructure | `bool` |  |  |  |
-| LastBasicDocDatetime | `System.DateTime` | bazodanowe | Data i czas dodania dokumentu | Data i czas dodania ostatniego dokumentu podstawowego |
-| Leader | `Soneta.Business.App.Operator` | bazodanowe | Prowadzący | Prowadzący sprawę |
-| MatterAccess | `Soneta.Workflow.Enums.AccessEnum` | bazodanowe, enum | Dostęp | Dostęp do sprawy |
-| MatterState | `Soneta.Workflow.Dms.DmsState` | bazodanowe | Status |  |
-| Number | `Soneta.Core.NumerDokumentu` | bazodanowe | Numer | Numer sprawy |
+| HasOrganizationalStructure | `bool` | tylko-odczyt |  |  |
+| LastBasicDocDatetime | `System.DateTime` | bazodanowe, tylko-odczyt | Data i czas dodania dokumentu | Data i czas dodania ostatniego dokumentu podstawowego |
+| Leader | `App.Operator` | bazodanowe | Prowadzący | Prowadzący sprawę |
+| MatterAccess | `Soneta.Workflow.Enums.AccessEnum` (enum) | bazodanowe | Dostęp | Dostęp do sprawy |
+| MatterState | `Soneta.Workflow.Dms.DmsState` | bazodanowe, tylko-odczyt | Status |  |
+| Number | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe | Numer | Numer sprawy |
 | Number.Numer | `int` | bazodanowe |  |  |
 | Number.NumerPelny | `string` |  |  |  |
-| Number.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Number.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Number.Symbol | `string` | bazodanowe |  |  |
-| Number.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Number.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Number.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Number.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Parent | `Soneta.Workflow.Dms.Matter` | bazodanowe | Sprawa nadrzędna | Nadrzędna sprawa |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
-| RegistrationDatetime | `System.DateTime` | bazodanowe | Data i czas rejestracji | Data i czas rejestracji sprawy |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
+| RegistrationDatetime | `System.DateTime` | bazodanowe, tylko-odczyt | Data i czas rejestracji | Data i czas rejestracji sprawy |
 | Series | `string` | bazodanowe | Seria | Seria sprawy |
 | SubstantiveCell | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe | Komórka merytoryczna | Komórka merytoryczna |
 | Title | `string` | bazodanowe | Tytuł | Tytuł sprawy |
 | UnifiedRegisterClass | `Soneta.Workflow.Dms.Config.UnifiedRegisterClass` | bazodanowe | Klasa wykazu akt | Sprawa powiązana z klasą wykazu akt |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
 
 ## Enumy
 

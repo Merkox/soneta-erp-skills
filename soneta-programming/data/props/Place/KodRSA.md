@@ -5,31 +5,35 @@ Opis: Słownik kodów tytułu świadczenia/przerwy stosowanych na deklaracji ZUS
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Budzet | `bool` | bazodanowe |  |  |
 | Chorobowe | `bool` | bazodanowe |  |  |
-| DefinicjeNieobecnosci | `Soneta.Business.SubTable<Soneta.Kalend.DefinicjaNieobecnosci>` |  |  |  |
+| DefinicjeNieobecnosci | `SubTable<Soneta.Kalend.DefinicjaNieobecnosci>` | podlista |  |  |
 | Dodatkowy | `int` | bazodanowe |  |  |
 | Kategoria | `string` | bazodanowe |  |  |
 | Kod | `int` | bazodanowe |  |  |
-| KodText | `string` |  |  |  |
+| KodText | `string` | tylko-odczyt |  |  |
 | Korekta | `int` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| PozycjaRCA | `Soneta.Place.PozycjaRCA` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Place.TypKoduRSA` | bazodanowe, enum |  |  |
+| PozycjaRCA | `Soneta.Place.PozycjaRCA` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Place.TypKoduRSA` (enum) | bazodanowe |  |  |
 | WgOkresu | `bool` | bazodanowe |  |  |
-| WymaganeUbezpieczenie | `Soneta.Place.WymaganeUbezpieczenie` | bazodanowe, enum |  |  |
+| WymaganeUbezpieczenie | `Soneta.Place.WymaganeUbezpieczenie` (enum) | bazodanowe |  |  |
 | Wynagrodzenie | `bool` | bazodanowe |  |  |
 | WynagrodzenieChorobowe | `bool` | bazodanowe |  |  |
 | Wypadkowe | `bool` | bazodanowe |  |  |
-| Wyrównanie | `Soneta.Place.KodRSA` |  |  |  |
+| Wyrównanie | `Soneta.Place.KodRSA` | tylko-odczyt |  |  |
 | ZasilekChorobowy | `bool` | bazodanowe |  |  |
-| ZasiłekRSA | `bool` |  |  |  |
+| ZasiłekRSA | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

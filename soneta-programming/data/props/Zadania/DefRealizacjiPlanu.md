@@ -5,35 +5,39 @@ Opis: Szablon definicji realizacji planu sprzedażowego określający sposób wy
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 7
+- subrowy: 2
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytm | `bool` |  |  |  |
-| AlgorytmPlanu | `Soneta.Zadania.Models.SalesPlans.AlgorytmPlanu` | bazodanowe |  | Algorytm dla definicji algorytmu planu sprzedaży |
+| AlgorytmPlanu | `Soneta.Zadania.Models.SalesPlans.AlgorytmPlanu` (subrow) | bazodanowe |  | Algorytm dla definicji algorytmu planu sprzedaży |
 | AlgorytmPlanu.Aktywny | `bool` | bazodanowe |  |  |
-| AlgorytmPlanu.Kod | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| AlgorytmPlanu.Kod | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje nie będą wyświetlane w liście wyboru. |
-| ClassName | `string` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| KodAlgorytmu | `Soneta.Business.MemoText` |  |  |  |
-| Kontrahenci | `Soneta.Business.SubTable<Soneta.Zadania.Models.SalesPlans.KontrahentRealizacji>` |  |  |  |
-| Namespace | `object` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| KodAlgorytmu | `MemoText` | podlista |  |  |
+| Kontrahenci | `SubTable<Soneta.Zadania.Models.SalesPlans.KontrahentRealizacji>` | podlista |  |  |
+| Namespace | `object` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NettoBrutto | `Soneta.Zadania.Enums.NettoBrutto` | bazodanowe, enum | Netto/Brutto | Określa czy realizacja ma być wyliczana po wartości netto czy brutto |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| NettoBrutto | `Soneta.Zadania.Enums.NettoBrutto` (enum) | bazodanowe | Netto/Brutto | Określa czy realizacja ma być wyliczana po wartości netto czy brutto |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | RolaOpiekun | `Soneta.CRM.Config.RolaOpiekun` | bazodanowe | Rola opiekuna | Określa wg jakiej roli opiekuna ma być wyliczane realizacja planu |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Towary | `Soneta.Business.SubTable<Soneta.Zadania.Models.SalesPlans.TowarRealizacji>` |  |  |  |
+| Towary | `SubTable<Soneta.Zadania.Models.SalesPlans.TowarRealizacji>` | podlista |  |  |
 
 ## Enumy
 

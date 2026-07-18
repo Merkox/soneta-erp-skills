@@ -5,12 +5,16 @@ Opis: Element szczegółowy karty opisu stanowiska (KartaOpisuStanowiskaBase). P
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaOpisuStanowiskaBase`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.HR2.DefinicjaElementuOpisuStanowiska` | bazodanowe |  |  |
-| Karta | `Soneta.HR2.KartaOpisuStanowiskaBase` | bazodanowe, guided-parent |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisJednaLinia | `string` |  |  |  |
+| Karta | `Soneta.HR2.KartaOpisuStanowiskaBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisJednaLinia | `string` | tylko-odczyt |  |  |

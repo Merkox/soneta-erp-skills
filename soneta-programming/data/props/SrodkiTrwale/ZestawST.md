@@ -5,12 +5,16 @@ Opis: Grupowanie środków trwałych w nazwane zestawy do celów ewidencyjnych i
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa zestawu środków trwałych |
 | Opis | `string` | bazodanowe |  | Opis zestawu środków trwałych |
-| SrodkiTrwaleHistoria | `Soneta.Business.SubTable<Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria>` |  |  |  |
+| SrodkiTrwaleHistoria | `SubTable<Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria>` | podlista |  |  |

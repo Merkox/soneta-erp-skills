@@ -5,28 +5,32 @@ Opis: Dokumenty zgłoszeń uczestników na szkolenia. Rejestruje formalne zapisy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 7
+- podlisty: 4
+- subrowy: 1
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data zgłoszenia | Data zgłoszenia na szkolenie. |
+| Data | `Date` | bazodanowe | Data zgłoszenia | Data zgłoszenia na szkolenie. |
 | DefZgloszenia | `Soneta.CzlonkowieSzkolenia.DefZgloszenia` | bazodanowe |  |  |
-| DlaModulow | `bool` |  |  |  |
-| DokumentyHan | `Soneta.Business.View` |  |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
-| JestJednoZgloszenieUczestnik | `bool` |  |  |  |
+| DlaModulow | `bool` | tylko-odczyt |  |  |
+| DokumentyHan | `View` | podlista |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
+| JestJednoZgloszenieUczestnik | `bool` | tylko-odczyt |  |  |
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| MailTo | `string` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy. |
-| Uczestnicy | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` |  |  |  |
+| Uczestnicy | `SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` | podlista |  |  |
 | Zbiorcze | `bool` | bazodanowe | Zgłoszenie zbiorcze | Zgłoszenie zbiorcze. |
-| ZgloszenieUczestnik | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` |  |  |  |
-| ZgloszenieUczestnikRow | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` |  |  |  |
+| ZgloszenieUczestnik | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` | tylko-odczyt |  |  |
+| ZgloszenieUczestnikRow | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` | tylko-odczyt |  |  |

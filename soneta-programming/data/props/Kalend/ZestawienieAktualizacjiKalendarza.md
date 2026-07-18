@@ -5,10 +5,14 @@ Opis: Element szczegółowy definicji aktualizacji kalendarza (DefinicjaAktualiz
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaDokumentu` → `DefinicjaAktualizacjiKalendarza`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjaDokumentu | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza` | bazodanowe, guided-parent |  |  |
+| DefinicjaDokumentu | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | DefinicjaZestawienia | `Soneta.Kalend.DefinicjaZestawieniaCzasu` | bazodanowe |  |  |

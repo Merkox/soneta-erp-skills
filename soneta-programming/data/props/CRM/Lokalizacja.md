@@ -6,36 +6,40 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDaneKontaktoweHost`, `IEmailElement`, `IAdresHost`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 8
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Aktywna | `bool` | bazodanowe | Aktywna | Aktywność lokalizacji. |
-| DokumentyHandlowe | `Soneta.Business.SubTable` |  |  |  |
+| DokumentyHandlowe | `SubTable` | podlista |  |  |
 | Domyslna | `bool` | bazodanowe | Domyślna lokalizacja w ramach kontrahenta | Wskazuje na domyślną lokalizację w ramach kontrahenta. |
 | IdentWewKSeF | `string` | bazodanowe | Identyfikator wewnętrzny KSeF | Identyfikator wewnętrzny KSeF. |
 | Kod | `string` | bazodanowe | Kod | Kod lokalizacji. |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  | Kontrahent, do którego przypisana jest lokalizacja. |
-| MailTo | `string` |  |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa lokalizacji. |
-| Nieruchomosci | `Soneta.Business.SubTable` |  |  |  |
+| Nieruchomosci | `SubTable` | podlista |  |  |
 | OddzialFirmy | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
 | Pole | `string` |  |  |  |
-| RodzajeLokalizacji | `Soneta.Business.SubTable<Soneta.CRM.RodzajLokalizacji>` |  |  |  |
-| RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
-| Urzadzenia | `Soneta.Business.SubTable` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi | Uwagi do lokalizacji. |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
+| RodzajeLokalizacji | `SubTable<Soneta.CRM.RodzajLokalizacji>` | podlista |  |  |
+| RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
+| Urzadzenia | `SubTable` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi | Uwagi do lokalizacji. |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Zadania | `SubTable` | podlista |  |  |
 
 ## Relacje interfejsowe
 

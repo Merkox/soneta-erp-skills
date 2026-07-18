@@ -5,13 +5,17 @@ Opis: Kartoteka osób uczestniczących w procesach produkcyjnych. Przechowuje da
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Zablokowanie osoby. |
-| FiltrCechyDefinicja | `Soneta.Business.FeatureDefinition` | bazodanowe | Filtr definicji cechy | Filtr definicji cechy panelu meldunkowego dla osoby. |
+| FiltrCechyDefinicja | `FeatureDefinition` | bazodanowe | Filtr definicji cechy | Filtr definicji cechy panelu meldunkowego dla osoby. |
 | FiltrCechyWartosc | `string` | bazodanowe | Filtr wartości cechy | Filtr wartości cechy panelu meldunkowego dla osoby. |
 | FiltrDefinicjiOperacji | `Soneta.ProdukcjaPro.ProDefinicjaOperacji` | bazodanowe | Filtr definicji operacji | Filtr definicji operacji panelu meldunkowego dla osoby. |
 | FiltrDefinicjiOperacjiEdycja | `bool` | bazodanowe | Edycja filtru definicji operacji | Edycja filtru definicji operacji panelu meldunkowego dla osoby. |
@@ -25,7 +29,7 @@ Guided: root
 | FiltryPaneluAktywne | `bool` | bazodanowe | Filtry panelu aktywne | Aktywność filtrów panelu meldunkowego dla osoby. |
 | Imie | `string` | bazodanowe | Imię | Imię osoby. |
 | Kod | `string` | bazodanowe |  | Kod osoby. |
-| Nazwa | `string` |  |  | Nazwa osoby produkcyjnej. |
+| Nazwa | `string` | tylko-odczyt |  | Nazwa osoby produkcyjnej. |
 | Nazwisko | `string` | bazodanowe |  | Nazwisko osoby. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis osoby. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis osoby. |
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |

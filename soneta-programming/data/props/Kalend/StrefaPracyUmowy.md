@@ -6,20 +6,24 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienPracyUmowy`
 Implementuje interfejsy: `IRozliczenieNadgodzinHost`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 1
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| CzasRozliczany | `Soneta.Types.Time` | bazodanowe | Czas rozliczany |  |
-| CzasRozliczanyWyliczony | `Soneta.Types.Time` |  | Czas rozliczany |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| CzasRozliczany | `Time` | bazodanowe | Czas rozliczany |  |
+| CzasRozliczanyWyliczony | `Time` |  | Czas rozliczany |  |
 | Czynnosc | `Soneta.Kalend.CzynnoscNaObiekcieDoPlanowania` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
 | DefinicjaNet | `Soneta.Kalend.DefinicjaStrefy` |  |  |  |
-| Dzien | `Soneta.Kalend.DzienPracyUmowy` | bazodanowe, guided-parent |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
+| Dzien | `Soneta.Kalend.DzienPracyUmowy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |

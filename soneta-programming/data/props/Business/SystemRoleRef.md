@@ -5,10 +5,14 @@ Opis: Powiązanie między rolami systemowymi. Umożliwia budowanie hierarchii r�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Role` → `SystemRole`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Connected | `Soneta.Business.Db.SystemRole` | bazodanowe | Powiązana rola |  |
-| Role | `Soneta.Business.Db.SystemRole` | bazodanowe, guided-parent | Rola |  |
+| Connected | `Db.SystemRole` | bazodanowe, tylko-odczyt | Powiązana rola |  |
+| Role | `Db.SystemRole` | bazodanowe, tylko-odczyt, guided-parent | Rola |  |

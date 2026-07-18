@@ -4,15 +4,19 @@ Tytuł: Zgody na odbiór powiadomienia
 Opis: Zgoda odbiorcy na otrzymywanie powiadomień z danego kanału. ŝączy kanał komunikatów z odbiorcą, przechowując status zgody i datę udzielenia lub wycofania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Date | `System.DateTime` | bazodanowe |  |  |
 | NoticeChannel | `Soneta.Core.NoticeChannel` | bazodanowe |  |  |
-| NoticeRecipient | `Soneta.Business.INoticeRecipient` | bazodanowe, iface-ref |  |  |
-| PermissionStatus | `Soneta.Core.NoticePermissionStatus` | bazodanowe, enum |  |  |
+| NoticeRecipient | `INoticeRecipient` | bazodanowe, iface-ref |  |  |
+| PermissionStatus | `Soneta.Core.NoticePermissionStatus` (enum) | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

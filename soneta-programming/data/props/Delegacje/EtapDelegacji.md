@@ -5,37 +5,41 @@ Opis: Element szczegółowy Delegacja (Delegacja). Reprezentuje pojedynczy odcin
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Delegacja` → `Delegacja`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 6
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasTrwania | `Soneta.Types.Time` |  |  |  |
-| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, guided-parent |  | Delegacja, do której należy ten etap |
+| CzasTrwania | `Time` |  |  |  |
+| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, tylko-odczyt, guided-parent |  | Delegacja, do której należy ten etap |
 | DniSzpital | `int` | bazodanowe |  | Liczba dni spędzona na leczeniu szpitalnym (tylko zagraniczna). |
-| DojazdIloscRyczaltow | `decimal` | bazodanowe |  | Ilość ryczałtów na dojazd z dworca do miejsca zakwaterowania (tylko zagraniczna). |
-| EkwiwalentWyzywienie | `Soneta.Types.Currency` | bazodanowe |  | Zbiorcza kwota jaką pracownik otrzymał na wyżywienie (tylko zagraniczna). |
-| EtapKrajowy | `bool` |  |  |  |
+| DojazdIloscRyczaltow | `decimal` | bazodanowe, tylko-odczyt |  | Ilość ryczałtów na dojazd z dworca do miejsca zakwaterowania (tylko zagraniczna). |
+| EkwiwalentWyzywienie | `Currency` | bazodanowe |  | Zbiorcza kwota jaką pracownik otrzymał na wyżywienie (tylko zagraniczna). |
+| EtapKrajowy | `bool` | tylko-odczyt |  |  |
 | GrupujWgKrajow | `bool` | bazodanowe |  | Etap zostanie rozliczony łącznie z innymi etapami do tego samego kraju. |
-| Koszty | `Soneta.Business.LpSubTable<Soneta.Delegacje.KosztDelegacji>` |  |  |  |
+| Koszty | `LpSubTable<Soneta.Delegacje.KosztDelegacji>` | podlista |  |  |
 | Kraj | `Soneta.Delegacje.KrajDelegacji` | bazodanowe |  | Kraj docelowy etapu delegacji. |
-| KrajAsText | `string` |  |  |  |
-| LP | `int` | bazodanowe |  | Liczba porządkowa etapu delegacji. |
+| KrajAsText | `string` | tylko-odczyt |  |  |
+| LP | `int` | bazodanowe, tylko-odczyt |  | Liczba porządkowa etapu delegacji. |
 | LiczbaKolacji | `int` | bazodanowe |  | Liczba kolacji zapewniona przez pracowdawcę (tylko zagraniczna). |
 | LiczbaObiadow | `int` | bazodanowe |  | Liczba obiadów zapewniona przez pracowdawcę (tylko zagraniczna). |
 | LiczbaSniadan | `int` | bazodanowe |  | Liczba śniadań zapewniona przez pracowdawcę (tylko zagraniczna). |
 | MiejscowoscRozpoczecia | `string` | bazodanowe |  | Miejscowość rozpoczęcia etapu delegacji. |
 | MiejscowoscZakonczenia | `string` | bazodanowe |  | Miejscowość zakończenia etapu delegacji. |
-| NaliczenieLP | `int` | bazodanowe |  | Liczba porządkowa naliczenia dla tego etapu delegacji. |
+| NaliczenieLP | `int` | bazodanowe, tylko-odczyt |  | Liczba porządkowa naliczenia dla tego etapu delegacji. |
 | PelneWyzywienie | `bool` | bazodanowe |  | Czy delegowany miał zapewnione pełne wyżywienie. |
-| Rozpoczecie | `Soneta.Types.DateShortTime` | bazodanowe |  | Rozpoczęcie etapu delegacji. |
-| RozpoczecieDate | `Soneta.Types.Date` |  |  |  |
-| RozpoczecieTime | `Soneta.Types.Time` |  |  |  |
-| RyczaltKosztDojazdu | `Soneta.Delegacje.RyczaltDojazdDworzec` | enum |  |  |
+| Rozpoczecie | `DateShortTime` | bazodanowe |  | Rozpoczęcie etapu delegacji. |
+| RozpoczecieDate | `Date` |  |  |  |
+| RozpoczecieTime | `Time` |  |  |  |
+| RyczaltKosztDojazdu | `Soneta.Delegacje.RyczaltDojazdDworzec` (enum) |  |  |  |
 | SrodekTransportu | `string` | bazodanowe |  | Domyślny środek transportu. |
-| Zakonczenie | `Soneta.Types.DateShortTime` | bazodanowe |  | Zakończenie etapu delegacji. |
-| ZakonczenieDate | `Soneta.Types.Date` |  |  |  |
-| ZakonczenieTime | `Soneta.Types.Time` |  |  |  |
+| Zakonczenie | `DateShortTime` | bazodanowe |  | Zakończenie etapu delegacji. |
+| ZakonczenieDate | `Date` |  |  |  |
+| ZakonczenieTime | `Time` |  |  |  |
 
 ## Enumy
 

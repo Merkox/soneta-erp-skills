@@ -4,48 +4,52 @@ Opis: Definicja składnika rozliczenia dla umów zewnętrznych (np. zlecenia z k
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 49
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 42
+- pola kalkulowane (zapisywalne): 9
+- pola tylko-odczyt: 1
+- podlisty: 5
+- subrowy: 6
+- razem: 63
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Edytor | `Soneta.Place.EdytorAlgorytmuRozliczenia` | bazodanowe |  |  |
+| Czas | `Time` | bazodanowe |  |  |
+| Edytor | `Soneta.Place.EdytorAlgorytmuRozliczenia` (subrow) | bazodanowe |  |  |
 | Edytor.Potrącenie | `bool` |  |  |  |
 | GenerujZerowy | `bool` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| Kreator | `Soneta.Place.KreatorAlgorytmuRozliczenia` | bazodanowe |  |  |
+| Kreator | `Soneta.Place.KreatorAlgorytmuRozliczenia` (subrow) | bazodanowe |  |  |
 | Kreator.Cecha | `string` |  |  |  |
-| Kreator.Czas | `Soneta.Place.CzasDefElementu` | bazodanowe |  |  |
-| Kreator.Czas.Czas | `Soneta.Types.Time` |  |  |  |
+| Kreator.Czas | `Soneta.Place.CzasDefElementu` (subrow) | bazodanowe |  |  |
+| Kreator.Czas.Czas | `Time` |  |  |  |
 | Kreator.Czas.Strefa | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
-| Kreator.Czas.Typ | `Soneta.Place.TypCzasuPracy` | bazodanowe, enum |  |  |
-| Kreator.Czas.WgStrefa | `Soneta.Business.Key` |  |  |  |
-| Kreator.Podstawa | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Kreator.Czas.Typ | `Soneta.Place.TypCzasuPracy` (enum) | bazodanowe |  |  |
+| Kreator.Czas.WgStrefa | `Key` | podlista |  |  |
+| Kreator.Podstawa | `Currency` | bazodanowe |  |  |
 | Kreator.PodstawaNazwa | `string` | bazodanowe |  |  |
-| Kreator.PodstawaTyp | `Soneta.Place.TypPodstawyRozliczenia` | bazodanowe, enum |  |  |
-| Kreator.PodstawaZa | `Soneta.Place.PodstawaAlgorytmuZa` | bazodanowe, enum |  |  |
+| Kreator.PodstawaTyp | `Soneta.Place.TypPodstawyRozliczenia` (enum) | bazodanowe |  |  |
+| Kreator.PodstawaZa | `Soneta.Place.PodstawaAlgorytmuZa` (enum) | bazodanowe |  |  |
 | Kreator.Potrącenie | `bool` |  |  |  |
-| Kreator.PrzeliczNa1h | `Soneta.Place.SposobyPrzeliczeniaNa1h` | bazodanowe, enum |  |  |
-| Kreator.SposobProporcjonalnosci | `Soneta.Place.SposobyProporcjonalności` | bazodanowe, enum |  |  |
+| Kreator.PrzeliczNa1h | `Soneta.Place.SposobyPrzeliczeniaNa1h` (enum) | bazodanowe |  |  |
+| Kreator.SposobProporcjonalnosci | `Soneta.Place.SposobyProporcjonalności` (enum) | bazodanowe |  |  |
 | Kreator.Wskaźnik | `string` |  |  |  |
-| Kreator.Wspolczynnik | `Soneta.Place.WspolczynnikDefElementu` | bazodanowe |  |  |
+| Kreator.Wspolczynnik | `Soneta.Place.WspolczynnikDefElementu` (subrow) | bazodanowe |  |  |
 | Kreator.Wspolczynnik.NazwaWskaznika | `string` | bazodanowe |  |  |
 | Kreator.Wspolczynnik.PodstawaStazu | `Soneta.Kadry.DefPodstawyStazu` | bazodanowe |  |  |
-| Kreator.Wspolczynnik.PracaNaDzien | `Soneta.Place.TypPracyNaDzień` | bazodanowe, enum |  |  |
+| Kreator.Wspolczynnik.PracaNaDzien | `Soneta.Place.TypPracyNaDzień` (enum) | bazodanowe |  |  |
 | Kreator.Wspolczynnik.PracaWFirmie | `bool` | bazodanowe |  |  |
-| Kreator.Wspolczynnik.Procent | `Soneta.Types.Percent` |  |  |  |
-| Kreator.Wspolczynnik.Progi | `Soneta.Business.SubTable` |  |  |  |
-| Kreator.Wspolczynnik.Typ | `Soneta.Place.TypWspolczynnikaAlgorytmu` | bazodanowe, enum |  |  |
-| Kreator.Wspolczynnik.Ulamek | `Soneta.Types.Fraction` |  |  |  |
-| Kreator.Wspolczynnik.WgPodstawaStazu | `Soneta.Business.Key` |  |  |  |
-| Kreator.Wspolczynnik.WgStażuPracy | `bool` |  |  |  |
+| Kreator.Wspolczynnik.Procent | `Percent` |  |  |  |
+| Kreator.Wspolczynnik.Progi | `SubTable` | podlista |  |  |
+| Kreator.Wspolczynnik.Typ | `Soneta.Place.TypWspolczynnikaAlgorytmu` (enum) | bazodanowe |  |  |
+| Kreator.Wspolczynnik.Ulamek | `Fraction` |  |  |  |
+| Kreator.Wspolczynnik.WgPodstawaStazu | `Key` | podlista |  |  |
+| Kreator.Wspolczynnik.WgStażuPracy | `bool` | tylko-odczyt |  |  |
 | Kreator.Wspolczynnik.Wskaznik | `bool` | bazodanowe |  |  |
 | Kreator.Wspolczynnik.Wspolczynnik | `decimal` |  |  |  |
-| Kreator.Wynagrodzenia | `Soneta.Place.KreatorAlgorytmuRozliczenia.TypWynagrodzenia` | enum |  |  |
+| Kreator.Wynagrodzenia | `Soneta.Place.KreatorAlgorytmuRozliczenia.TypWynagrodzenia` (enum) |  |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Podstawy | `Soneta.Place.PodstawyAlgorytmuRozliczenia` | bazodanowe |  |  |
+| Podstawy | `Soneta.Place.PodstawyAlgorytmuRozliczenia` (subrow) | bazodanowe |  |  |
 | Podstawy.Czas | `string` | bazodanowe |  |  |
 | Podstawy.Dni | `string` | bazodanowe |  |  |
 | Podstawy.ElCzas | `string` | bazodanowe |  |  |
@@ -64,14 +68,14 @@ Guided: root
 | Podstawy.Wspolczynnik | `string` | bazodanowe |  |  |
 | Potracenie | `bool` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Tekst | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Typ | `Soneta.Place.TypAlgorytmuRozliczenia` | bazodanowe, enum |  |  |
-| Ulamek | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Tekst | `MemoText` | bazodanowe, podlista |  |  |
+| Typ | `Soneta.Place.TypAlgorytmuRozliczenia` (enum) | bazodanowe |  |  |
+| Ulamek | `Fraction` | bazodanowe |  |  |
 
 ## Enumy
 

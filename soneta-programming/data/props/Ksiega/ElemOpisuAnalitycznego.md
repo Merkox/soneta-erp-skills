@@ -5,50 +5,54 @@ Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Reprezentuje poj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 
-- pola bazodanowe: 23
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 15
+- podlisty: 5
+- subrowy: 0
+- razem: 39
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BudzetProjWgKwotyDodatkowej | `bool` | bazodanowe |  |  |
-| BudzetowanieRozszerzone | `bool` |  |  |  |
+| BudzetowanieRozszerzone | `bool` | tylko-odczyt |  |  |
 | CentrumKosztow | `Soneta.Core.CentrumKosztow` | bazodanowe | Centrum kosztów | Centrum kosztów |
-| CzyRelacje | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataOstatniegoRozliczenia | `Soneta.Types.Date` | bazodanowe | Data ostatniego rozliczenia | Data ostatniego rozliczenia |
-| DataOstatniegoRozliczeniaDod | `Soneta.Types.Date` | bazodanowe | Data ostatniego rozliczenia dodatkowego | Data ostatniego rozliczenia dodatkowego |
-| DataPierwszegoRozliczenia | `Soneta.Types.Date` | bazodanowe | Data pierwszego rozliczenia | Data pierwszego rozliczenia |
-| DataPierwszegoRozliczeniaDod | `Soneta.Types.Date` | bazodanowe | Data pierwszego rozliczenia dodatkowego | Data pierwszego rozliczenia dodatkowego |
-| ElementyRozliczajace | `Soneta.Business.SubTable<Soneta.Ksiega.RozliczenieOA>` |  |  |  |
-| ElementyRozliczane | `Soneta.Business.SubTable<Soneta.Ksiega.RozliczenieOA>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, guided-parent |  |  |
+| CzyRelacje | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataOstatniegoRozliczenia | `Date` | bazodanowe | Data ostatniego rozliczenia | Data ostatniego rozliczenia |
+| DataOstatniegoRozliczeniaDod | `Date` | bazodanowe | Data ostatniego rozliczenia dodatkowego | Data ostatniego rozliczenia dodatkowego |
+| DataPierwszegoRozliczenia | `Date` | bazodanowe | Data pierwszego rozliczenia | Data pierwszego rozliczenia |
+| DataPierwszegoRozliczeniaDod | `Date` | bazodanowe | Data pierwszego rozliczenia dodatkowego | Data pierwszego rozliczenia dodatkowego |
+| ElementyRozliczajace | `SubTable<Soneta.Ksiega.RozliczenieOA>` | podlista |  |  |
+| ElementyRozliczane | `SubTable<Soneta.Ksiega.RozliczenieOA>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | IBudzetProjektu | `Soneta.Core.IBudzetProjektu` |  |  |  |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe |  |  |
-| Informacja | `string` |  |  |  |
+| Ilosc | `Amount` | bazodanowe |  |  |
+| Informacja | `string` | tylko-odczyt |  |  |
 | InitKwotaIlosc | `bool` |  |  |  |
-| IsReadOnlyBudget | `bool` |  |  |  |
+| IsReadOnlyBudget | `bool` | tylko-odczyt |  |  |
 | KategoriaBudzetowa | `Soneta.Core.IBudgetCategoryDefinition` | bazodanowe |  | Kategoria budżetu |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaDodatkowa | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaDodatkowa | `Currency` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| ParentSettlements | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ElemOpisuAnalitycznego>` |  |  |  |
-| PlatnoscPowiazana | `Soneta.Kasa.Platnosc` | bazodanowe |  | Powiązana płatność |
+| ParentSettlements | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
+| PlatnoscPowiazana | `Soneta.Kasa.Platnosc` | bazodanowe, tylko-odczyt |  | Powiązana płatność |
 | PozycjaBudzProj | `Soneta.Core.IPozycjaBudzProjRow` | bazodanowe |  | Pozycja budżetu projektu, z którą powiązany jest element |
-| Projekt | `Soneta.Core.IBudzetowany` | iface-ref |  |  |
-| Rodzaj | `Soneta.Core.RodzajOpisuAnalitycznego` | bazodanowe, enum |  |  |
-| RozszerzenieSymbolu | `Soneta.Ksiega.ElemOpisuAnalitycznego.RozszerzenieSymboluOpisu` |  |  |  |
-| RozszerzenieWymiaru | `Soneta.Ksiega.ElemOpisuAnalitycznego.RozszerzenieWymiaruOpisu` |  |  |  |
+| Projekt | `Soneta.Core.IBudzetowany` | tylko-odczyt, iface-ref |  |  |
+| Rodzaj | `Soneta.Core.RodzajOpisuAnalitycznego` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RozszerzenieSymbolu | `Soneta.Ksiega.ElemOpisuAnalitycznego.RozszerzenieSymboluOpisu` | tylko-odczyt |  |  |
+| RozszerzenieWymiaru | `Soneta.Ksiega.ElemOpisuAnalitycznego.RozszerzenieWymiaruOpisu` | tylko-odczyt |  |  |
 | SchematPodz | `Soneta.Ksiega.Podzielniki.SchematPodz` | bazodanowe |  |  |
-| SegmentyBudzetowe | `Soneta.Ksiega.ElemOpisuAnalitycznego.SegmentyBudzetoweCollection` |  |  |  |
-| SegmentyBudzetoweZad | `Soneta.Ksiega.ElemOpisuAnalitycznego.SegmentyBudzetoweCollection` |  |  |  |
-| SubordinateRightsSettlements | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ElemOpisuAnalitycznego>` |  |  |  |
+| SegmentyBudzetowe | `Soneta.Ksiega.ElemOpisuAnalitycznego.SegmentyBudzetoweCollection` | tylko-odczyt |  |  |
+| SegmentyBudzetoweZad | `Soneta.Ksiega.ElemOpisuAnalitycznego.SegmentyBudzetoweCollection` | tylko-odczyt |  |  |
+| SubordinateRightsSettlements | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypOpisuAnalitycznego` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Ksiega.TypOpisuAnalitycznego` (enum) | bazodanowe, tylko-odczyt |  |  |
 | WersjaPlanu | `Soneta.Core.IBudgetPlanVersion` | bazodanowe |  | Wersja planu |
 | Wymiar | `string` | bazodanowe |  |  |
-| ZapisPowiazany | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe |  | Powiązany zapis |
-| ZapisyKsiegowe | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ZapisKsiegowy>` |  |  |  |
-| Zrodlo | `Soneta.Core.IZrodloOpisuAnalitycznego` | bazodanowe, iface-ref |  |  |
+| ZapisPowiazany | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  | Powiązany zapis |
+| ZapisyKsiegowe | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
+| Zrodlo | `Soneta.Core.IZrodloOpisuAnalitycznego` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

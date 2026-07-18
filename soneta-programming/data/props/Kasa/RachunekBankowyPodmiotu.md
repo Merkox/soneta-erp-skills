@@ -6,47 +6,51 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 10
+- podlisty: 4
+- subrowy: 2
+- razem: 37
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| DataSprawdzeniaBL | `Soneta.Types.Date` | bazodanowe | Data sprawdzenia w Wykazie |  |
+| DataSprawdzeniaBL | `Date` | bazodanowe | Data sprawdzenia w Wykazie |  |
 | Domyslne | `bool` |  |  |  |
 | Ewidencja | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
 | IsAdres | `bool` |  |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Nazwa | `string` |  |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | Nazwa1 | `string` | bazodanowe |  | Pierwsza linia informacji do umieszczenia na przelewie |
 | Nazwa2 | `string` | bazodanowe |  | Druga linia informacji do umieszczenia na przelewie |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Przelewy | `Soneta.Business.SubTable<Soneta.Kasa.PrzelewBase>` |  |  |  |
-| Rachunek | `Soneta.Kasa.RachunekBankowy` | bazodanowe |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| Przelewy | `SubTable<Soneta.Kasa.PrzelewBase>` | podlista |  |  |
+| Rachunek | `Soneta.Kasa.RachunekBankowy` (subrow) | bazodanowe |  |  |
 | Rachunek.Bank | `Soneta.Kasa.IBank` | bazodanowe |  |  |
-| Rachunek.Numer | `Soneta.Kasa.NumerRachunku` | bazodanowe |  |  |
+| Rachunek.Numer | `Soneta.Kasa.NumerRachunku` (subrow) | bazodanowe |  |  |
 | Rachunek.Numer.CS | `string` | bazodanowe |  |  |
-| Rachunek.Numer.IBAN | `bool` |  |  |  |
-| Rachunek.Numer.IsEmpty | `bool` |  |  |  |
+| Rachunek.Numer.IBAN | `bool` | tylko-odczyt |  |  |
+| Rachunek.Numer.IsEmpty | `bool` | tylko-odczyt |  |  |
 | Rachunek.Numer.Kierunek | `string` | bazodanowe |  |  |
 | Rachunek.Numer.Kraj | `string` | bazodanowe |  |  |
-| Rachunek.Numer.NRB | `bool` |  |  |  |
+| Rachunek.Numer.NRB | `bool` | tylko-odczyt |  |  |
 | Rachunek.Numer.Numer | `string` | bazodanowe |  |  |
-| Rachunek.Numer.NumerF | `string` |  |  |  |
-| Rachunek.Numer.PKO | `bool` |  |  |  |
+| Rachunek.Numer.NumerF | `string` | tylko-odczyt |  |  |
+| Rachunek.Numer.PKO | `bool` | tylko-odczyt |  |  |
 | Rachunek.Numer.Pełny | `string` |  | Numer rachunku |  |
 | Rachunek.Numer.PełnyNRB | `string` |  | Numer rachunku |  |
-| Rachunek.Numer.SEPA | `bool` |  |  |  |
+| Rachunek.Numer.SEPA | `bool` | tylko-odczyt |  |  |
 | Rachunek.SWIFT | `string` | bazodanowe |  |  |
-| Rachunek.WgBank | `Soneta.Business.Key` |  |  |  |
-| StatusBL | `Soneta.Core.StatusBialaLista` | bazodanowe, enum | Status w Wykazie |  |
-| StatusyBL | `Soneta.Business.SubTable<Soneta.Kasa.HistoriaStatusuBL>` |  |  |  |
-| Typ | `Soneta.Kasa.TypRachunkuBankowego` | bazodanowe, enum |  |  |
+| Rachunek.WgBank | `Key` | podlista |  |  |
+| StatusBL | `Soneta.Core.StatusBialaLista` (enum) | bazodanowe | Status w Wykazie |  |
+| StatusyBL | `SubTable<Soneta.Kasa.HistoriaStatusuBL>` | podlista |  |  |
+| Typ | `Soneta.Kasa.TypRachunkuBankowego` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

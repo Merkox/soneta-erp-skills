@@ -6,76 +6,80 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRuntimeRowDefinition`, `IRightsSource`, `IManagedRowDefinion`, `IWizardReferenceHost`, `ICodeFileHost`, `ISysNotificationHost`, `IWfPlugInReferenceHost`, `IPreviewPageHost`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 33
+- pola bazodanowe (zapisywalne): 24
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 18
+- podlisty: 16
+- subrowy: 3
+- razem: 65
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AttachToBasicDocument | `Soneta.Core.DbTuples.AttachToBasicDokumentType` | bazodanowe, enum | Dodaj do dokumentu podstawowego | Dodaj do nowego dokumentu podstawowego |
+| AttachToBasicDocument | `Soneta.Core.DbTuples.AttachToBasicDokumentType` (enum) | bazodanowe | Dodaj do dokumentu podstawowego | Dodaj do nowego dokumentu podstawowego |
 | Blokada | `bool` | bazodanowe | Blokada | Definicja zablokowana |
-| CalcTypeFullName | `string` |  |  |  |
+| CalcTypeFullName | `string` | tylko-odczyt |  |  |
 | Children | `string` | bazodanowe |  |  |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Uruchom procesy |  |
-| DataType | `System.Type` |  |  |  |
-| DefaultName | `string` |  |  |  |
-| DefinedType | `System.Type` |  |  |  |
-| Dependent | `Soneta.Business.SubTable<Soneta.Core.DbTuples.DbTupleDefinition>` |  |  |  |
-| DokEwidencjaExt | `Soneta.Business.SubTable<Soneta.Core.DbTuples.Processes.DocEwidencjaDbTupleDefExt>` |  |  |  |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Uruchom procesy |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefaultName | `string` | tylko-odczyt |  |  |
+| DefinedType | `System.Type` | tylko-odczyt |  |  |
+| Dependent | `SubTable<Soneta.Core.DbTuples.DbTupleDefinition>` | podlista |  |  |
+| DokEwidencjaExt | `SubTable<Soneta.Core.DbTuples.Processes.DocEwidencjaDbTupleDefExt>` | podlista |  |  |
 | Domyslna | `bool` | bazodanowe | Domyślne | Definicja domyślna |
 | DomyslnaPulpity | `bool` | bazodanowe | Domyślne | Definicja domyślna dla pulpitów |
-| Extension | `Soneta.Core.DbTuples.IDbTupleDefinitionExt` |  |  |  |
-| Fields | `Soneta.Business.LpSubTable<Soneta.Business.Runtime.RuntimeFieldDefinition>` |  |  |  |
-| Files | `Soneta.Business.SubTable<Soneta.Core.CodeFile>` |  |  |  |
-| FolderPath | `Soneta.Core.DbTuples.FolderPaths` | bazodanowe, enum |  |  |
+| Extension | `Soneta.Core.DbTuples.IDbTupleDefinitionExt` | tylko-odczyt |  |  |
+| Fields | `LpSubTable<Runtime.RuntimeFieldDefinition>` | podlista |  |  |
+| Files | `SubTable<Soneta.Core.CodeFile>` | podlista |  |  |
+| FolderPath | `Soneta.Core.DbTuples.FolderPaths` (enum) | bazodanowe |  |  |
 | FormatedName | `string` | bazodanowe | Nazwa formatowana | Nazwa formatowana dokumentu |
-| HasMultiReferenceFields | `bool` |  |  |  |
-| Info | `string` |  |  |  |
+| HasMultiReferenceFields | `bool` | tylko-odczyt |  |  |
+| Info | `string` | tylko-odczyt |  |  |
 | Interfejsy | `string` | bazodanowe | Interfejsy | Interfejsy jakie implementuje klasa tupla (z namespace) oddzielone przecinkiem |
-| IsDbTupleTable | `bool` |  |  |  |
-| IsPageVisible | `bool` |  |  |  |
+| IsDbTupleTable | `bool` | tylko-odczyt |  |  |
+| IsPageVisible | `bool` | tylko-odczyt |  |  |
 | Kategoria | `Soneta.Core.KDokDodatkowego` | bazodanowe | Kategoria |  |
 | KlasaBazowa | `string` | bazodanowe | Klasa bazowa | Klasa bazowa po której dziedziczy klasa tupla (z namespace), która musi dziedziczyć po DbTuple |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | KreatorTabeli | `string` | bazodanowe |  |  |
-| Kreatory | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
-| KreowaneDefinicje | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
-| Master | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Nadrzędna |  |
-| MultiReferenceFields | `System.Collections.Generic.IEnumerable<Soneta.Core.DbTuples.DbTupleFieldDefinition>` |  |  |  |
+| Kreatory | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
+| KreowaneDefinicje | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
+| Master | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, tylko-odczyt | Nadrzędna |  |
+| MultiReferenceFields | `System.Collections.Generic.IEnumerable<Soneta.Core.DbTuples.DbTupleFieldDefinition>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa dokumentu |
-| NazwaTabeli | `string` | bazodanowe | Klasa | Klasa obiektu nadrzędanego |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| NazwaTabeli | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa obiektu nadrzędanego |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| PlugIns | `Soneta.Business.SubTable` |  |  |  |
-| PracownicyExt | `Soneta.Business.SubTable` |  |  |  |
-| ReadOnlyAttachmentEditMode | `Soneta.Business.Db.AttachmentEditMode` | bazodanowe, enum |  |  |
-| ReferenceTable | `Soneta.Business.Table` |  |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PlugIns | `SubTable` | podlista |  |  |
+| PracownicyExt | `SubTable` | podlista |  |  |
+| ReadOnlyAttachmentEditMode | `Db.AttachmentEditMode` (enum) | bazodanowe |  |  |
+| ReferenceTable | `Table` | podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Seria | `bool` | bazodanowe | Seria dokumentu |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol dokumentu |
-| SysNotifications | `Soneta.Business.SubTable<Soneta.Business.Db.Notifications.SysNotification>` |  |  |  |
-| Tools | `Soneta.Business.Runtime.RuntimeRowDefinitionTools` | bazodanowe |  |  |
-| Tools.Algorytm | `string` |  |  |  |
+| SysNotifications | `SubTable<Db.Notifications.SysNotification>` | podlista |  |  |
+| Tools | `Runtime.RuntimeRowDefinitionTools` (subrow) | bazodanowe |  |  |
+| Tools.Algorytm | `string` | tylko-odczyt |  |  |
 | Tools.CalcCode | `string` |  |  |  |
 | Tools.ClassCode | `string` |  |  |  |
-| Tools.ClassName | `string` |  |  |  |
-| Tools.Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Tools.ClassName | `string` | tylko-odczyt |  |  |
+| Tools.Code | `MemoText` | bazodanowe, podlista |  |  |
 | Tools.EngineCode | `string` |  |  |  |
-| Tools.FieldsByName | `System.Collections.Generic.Dictionary<string, Soneta.Business.Runtime.RuntimeFieldDefinition>` |  |  |  |
-| TupleTypeFullName | `string` |  |  |  |
+| Tools.FieldsByName | `System.Collections.Generic.Dictionary<string, Runtime.RuntimeFieldDefinition>` | podlista |  |  |
+| TupleTypeFullName | `string` | tylko-odczyt |  |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
-| Typ | `Soneta.Core.DbTuples.DbTupleDefinitionType` | bazodanowe, enum |  |  |
-| TypeFullName | `string` |  |  |  |
+| Typ | `Soneta.Core.DbTuples.DbTupleDefinitionType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypeFullName | `string` | tylko-odczyt |  |  |
 | Ukryty | `bool` | bazodanowe |  |  |
-| WfDefinition | `Soneta.Business.IWFDefinition` | iface-ref |  |  |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika |  |
+| WfDefinition | `IWFDefinition` | tylko-odczyt, iface-ref |  |  |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+| Xml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika |  |
 
 ## Relacje interfejsowe
 
@@ -90,7 +94,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AttachmentEditMode (`Soneta.Business.Db.AttachmentEditMode`)
+### AttachmentEditMode (`Db.AttachmentEditMode`)
 - `None` = 0
 - `ReadOnly` = 1 — Zabroniona
 - `AllowAdd` = 2

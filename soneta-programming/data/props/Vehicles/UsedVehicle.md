@@ -4,31 +4,35 @@ Tytuł: Pojazdy wykorzystane
 Opis: Rejestr wykorzystania pojazdów w ramach zadań CRM. Przechowuje dane o okresie użytkowania, dokumentach rozliczających, usługach i stawkach, stanowiąc podstawę do rozliczania kosztów eksploatacji floty.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 6
+- podlisty: 0
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  |  |  |
-| CloseDate | `Soneta.Types.Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
-| CloseTime | `Soneta.Types.Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
-| Description | `string` |  |  |  |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| CloseDate | `Date` | bazodanowe | Data zamknięcia | Data zamknięcia. |
+| CloseTime | `Time` | bazodanowe | Godzina zamknięcia | Godzina zamknięcia. |
+| Description | `string` | tylko-odczyt |  |  |
 | Document | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  | Dokument rozliczający. |
-| End | `System.DateTime` |  |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
 | Ending | `System.DateTime` |  |  |  |
-| OpenDate | `Soneta.Types.Date` | bazodanowe | Data otwarcia | Data otwarcia. |
-| OpenTime | `Soneta.Types.Time` | bazodanowe | Godzina otwarcia | Godzina otwarcia. |
+| OpenDate | `Date` | bazodanowe | Data otwarcia | Data otwarcia. |
+| OpenTime | `Time` | bazodanowe | Godzina otwarcia | Godzina otwarcia. |
 | Position | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Pozycja rozliczająca. |
 | Quantity | `double` | bazodanowe | Ilość |  |
-| Rate | `Soneta.Types.Currency` | bazodanowe | Stawka |  |
-| Resource | `object` |  |  |  |
+| Rate | `Currency` | bazodanowe | Stawka |  |
+| Resource | `object` | tylko-odczyt |  |  |
 | ResourceCRM | `Soneta.Zadania.ZasobCRM` | bazodanowe | Zasób CRM | Zasoby CRM powiązane z pojazdami. |
 | Service | `Soneta.Towary.Towar` | bazodanowe | Usługa |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| Start | `System.DateTime` |  |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
 | Starting | `System.DateTime` |  |  |  |
 | Task | `Soneta.Zadania.Zadanie` | bazodanowe |  |  |
 | TaskState | `Soneta.Zadania.StanZadania` | bazodanowe |  | Stan zadania. |
 | Text | `string` |  |  |  |
 | Vehicle | `Soneta.Vehicles.Vehicle` | bazodanowe | Pojazd |  |
-| Worth | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
+| Worth | `Currency` | bazodanowe | Wartość |  |

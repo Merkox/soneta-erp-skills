@@ -6,56 +6,60 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`, `IDokumentPlatny`, `IDokumentCRM`, `IEmailElement`
 
-- pola bazodanowe: 28
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 21
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 11
+- podlisty: 11
+- subrowy: 1
+- razem: 46
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataKursu | `Soneta.Types.Date` | bazodanowe |  | Data do przeliczeń z tabeli kursowej |
+| Data | `Date` | bazodanowe |  |  |
+| DataKursu | `Date` | bazodanowe |  | Data do przeliczeń z tabeli kursowej |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| InternalDesc | `Soneta.Business.MemoText` | bazodanowe |  | Wewnętrzny opis dokumentu do wykorzystania przez poszczególne rodzaje. |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| InternalDesc | `MemoText` | bazodanowe, podlista |  | Wewnętrzny opis dokumentu do wykorzystania przez poszczególne rodzaje. |
 | InternalInt1 | `int` | bazodanowe |  | Wewnętrzne pole INT do wykorzystania przez poszczególne rodzaje. |
-| JestZrodlemStanowWindykacji | `bool` |  |  |  |
-| Kwota1 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota2 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota3 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota4 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kwota5 | `Soneta.Types.Currency` | bazodanowe |  |  |
-| MailTo | `string` |  |  |  |
-| Nadrzedny | `Soneta.Kasa.DokRozliczBase` | bazodanowe |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| JestZrodlemStanowWindykacji | `bool` | tylko-odczyt |  |  |
+| Kwota1 | `Currency` | bazodanowe |  |  |
+| Kwota2 | `Currency` | bazodanowe |  |  |
+| Kwota3 | `Currency` | bazodanowe |  |  |
+| Kwota4 | `Currency` | bazodanowe |  |  |
+| Kwota5 | `Currency` | bazodanowe |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Nadrzedny | `Soneta.Kasa.DokRozliczBase` | bazodanowe, tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerDruku | `string` | bazodanowe |  | Numer druku na którym wystawiony został dokument. |
-| NumerProceduryISO | `string` | bazodanowe |  | Numer procedury ISO |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  | Numer procedury ISO |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy |
 | Opis | `string` | bazodanowe |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
 | Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Kasa.PozycjaDokRozlicz>` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| RachunekBankowy | `Soneta.Kasa.EwidencjaSP` |  |  |  |
+| Pozycje | `SubTable<Soneta.Kasa.PozycjaDokRozlicz>` | podlista |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| RachunekBankowy | `Soneta.Kasa.EwidencjaSP` | tylko-odczyt |  |  |
 | RachunekFirmy | `Soneta.Kasa.RachunekBankowyFirmy` | bazodanowe | Rachunek firmowy | Numer rachunku firmowego skojarzony z dokumentem rozliczeniowym. |
-| RachunekWirtualny | `Soneta.Kasa.RachunekWirtualny` |  |  |  |
-| Rozszerzenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| RachunekWirtualny | `Soneta.Kasa.RachunekWirtualny` | tylko-odczyt |  |  |
+| Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
 | Seria | `string` | bazodanowe |  |  |
 | Stan | `Soneta.Windykacja.StanWindykacji` | bazodanowe |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  | Tabela kursowa do przeliczeń walutowych |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable` |  |  |  |
-| Wielofirmowosc | `bool` |  |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WiadomosciPowiazane | `SubTable` | podlista |  |  |
+| Wielofirmowosc | `bool` | tylko-odczyt |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | Wielowalutowy | `bool` | bazodanowe |  | Czy dokument jest wielowalutowy |
-| Windykacje | `Soneta.Business.SubTable<Soneta.Windykacja.Windykacja>` |  |  |  |
-| ZadaniaCRM | `Soneta.Business.SubTable` |  |  |  |
+| Windykacje | `SubTable<Soneta.Windykacja.Windykacja>` | podlista |  |  |
+| ZadaniaCRM | `SubTable` | podlista |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Relacje interfejsowe

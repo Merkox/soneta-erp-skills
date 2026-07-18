@@ -5,26 +5,30 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiZlecenia` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Awaria | `Soneta.ProdukcjaPro.ProAwaria` |  |  | Pierwsza awaria powiązana z czasem pracy. |
-| Awarie | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProAwaria>` |  |  | Awarie powiązane z czasem pracy. |
-| Context | `Soneta.Business.Context` |  |  |  |
-| Czas | `Soneta.Types.TimeSec` | bazodanowe |  | Czas trwania czasu pracy. |
-| CzasRozpoczecia | `Soneta.Types.TimeSec` |  | Czas rozpoczęcia | Czas rozpoczęcia czasu pracy. |
-| CzasZakonczenia | `Soneta.Types.TimeSec` |  | Czas zakończenia | Czas zakończenia czasu pracy. |
-| DataRozpoczecia | `Soneta.Types.Date` |  | Data rozpoczęcia | Data rozpoczęcia czasu pracy. |
-| DataZakonczenia | `Soneta.Types.Date` |  | Data zakończenia | Data zakończenia czasu pracy. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość czasu pracy. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla czasu pracy. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator czasu pracy. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis czasu pracy. |
+| Awaria | `Soneta.ProdukcjaPro.ProAwaria` | tylko-odczyt |  | Pierwsza awaria powiązana z czasem pracy. |
+| Awarie | `SubTable<Soneta.ProdukcjaPro.ProAwaria>` | podlista |  | Awarie powiązane z czasem pracy. |
+| Context | `Context` | podlista |  |  |
+| Czas | `TimeSec` | bazodanowe |  | Czas trwania czasu pracy. |
+| CzasRozpoczecia | `TimeSec` |  | Czas rozpoczęcia | Czas rozpoczęcia czasu pracy. |
+| CzasZakonczenia | `TimeSec` |  | Czas zakończenia | Czas zakończenia czasu pracy. |
+| DataRozpoczecia | `Date` |  | Data rozpoczęcia | Data rozpoczęcia czasu pracy. |
+| DataZakonczenia | `Date` |  | Data zakończenia | Data zakończenia czasu pracy. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość czasu pracy. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla czasu pracy. |
+| Operator | `App.Operator` | bazodanowe |  | Operator czasu pracy. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis czasu pracy. |
 | Osoba | `Soneta.ProdukcjaPro.ProOsoba` | bazodanowe |  | Osoba czasu pracy. |
 | Rozpoczecie | `System.DateTime` | bazodanowe | Rozpoczęcie | Data i czas rozpoczęcia czasu pracy. |
-| Stan | `Soneta.ProdukcjaPro.ProStanCzasuPracy` | bazodanowe, enum |  | Stan czasu pracy. |
+| Stan | `Soneta.ProdukcjaPro.ProStanCzasuPracy` (enum) | bazodanowe |  | Stan czasu pracy. |
 | Utworzenie | `System.DateTime` | bazodanowe |  | Data i czas utworzenia czasu pracy. |
 | Uzytkownik | `Soneta.ProdukcjaPro.ProUzytkownikPaneluMeldunkowego` | bazodanowe | Użytkownik | Użytkownik panelu meldunkowego czasu pracy. |
 | Zakonczenie | `System.DateTime` | bazodanowe | Zakończenie | Data i czas zakończenia czasu pracy. |

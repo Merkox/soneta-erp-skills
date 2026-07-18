@@ -5,11 +5,15 @@ Opis: Tabela zawiera aspekty kompetencji uniwersalnych, takich jak komunikacja c
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Kompetencja | `Soneta.HR.ZKL.Slowniki.Kompetencje.KompetencjaUniwersalna` | bazodanowe | Kompetencja |  |
+| Kompetencja | `Soneta.HR.ZKL.Slowniki.Kompetencje.KompetencjaUniwersalna` | bazodanowe, tylko-odczyt | Kompetencja |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Poziomy | `System.Collections.Generic.IEnumerable<Soneta.HR.ZKL.Slowniki.Kompetencje.PoziomAspektuUniwersalnego>` |  |  |  |
+| Poziomy | `System.Collections.Generic.IEnumerable<Soneta.HR.ZKL.Slowniki.Kompetencje.PoziomAspektuUniwersalnego>` | podlista |  |  |

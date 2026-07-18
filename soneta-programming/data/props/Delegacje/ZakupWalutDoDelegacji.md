@@ -5,12 +5,16 @@ Opis: Element szczegółowy Delegacja (Delegacja). Rejestruje operację zakupu l
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Delegacja` → `Delegacja`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, guided-parent |  | Pozyskanie walut na delegację. |
-| KosztZakupu | `Soneta.Types.Currency` | bazodanowe |  | Koszt zakupu waluty. |
+| Delegacja | `Soneta.Delegacje.Delegacja` | bazodanowe, tylko-odczyt, guided-parent |  | Pozyskanie walut na delegację. |
+| KosztZakupu | `Currency` | bazodanowe |  | Koszt zakupu waluty. |
 | Lp | `int` | bazodanowe |  | Numer kolejny rekordu pozyskania walut |
-| WalutaZakupiona | `Soneta.Types.Currency` | bazodanowe |  | Waluta zakupiona. |
+| WalutaZakupiona | `Currency` | bazodanowe |  | Waluta zakupiona. |

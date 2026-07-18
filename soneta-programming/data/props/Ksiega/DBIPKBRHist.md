@@ -5,17 +5,21 @@ Opis: Historia zmian statusu okresu rozliczeniowego na potrzeby użytkowników P
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DBItemPKBROkRoz` → `DBItemPKBROkRoz`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DBItemPKBROkRoz | `Soneta.Ksiega.DBItemPKBROkRoz` | bazodanowe, guided-parent |  | Okres rozliczeniowy |
+| DBItemPKBROkRoz | `Soneta.Ksiega.DBItemPKBROkRoz` | bazodanowe, tylko-odczyt, guided-parent |  | Okres rozliczeniowy |
 | DataOperacji | `System.DateTime` | bazodanowe | DataOperacji | DataOperacji |
 | Komentarz | `string` | bazodanowe | Komentarz | Komentarz |
 | Operator | `string` | bazodanowe | Operator | Operator |
-| StatusPo | `Soneta.Ksiega.TaxMonthStatus` | bazodanowe, enum | Status po | Status po |
-| StatusPrzed | `Soneta.Ksiega.TaxMonthStatus` | bazodanowe, enum | Status przed | Status przed |
+| StatusPo | `Soneta.Ksiega.TaxMonthStatus` (enum) | bazodanowe | Status po | Status po |
+| StatusPrzed | `Soneta.Ksiega.TaxMonthStatus` (enum) | bazodanowe | Status przed | Status przed |
 
 ## Enumy
 

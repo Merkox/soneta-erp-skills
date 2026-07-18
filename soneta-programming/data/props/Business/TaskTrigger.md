@@ -6,29 +6,33 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `TaskDefinition` → `TaskDefinition`
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  | Kod metody która zwraca obkiekt do którego utworzona jest definicja zadania. |
-| DataType | `System.Type` |  |  |  |
-| DefinitionType | `Soneta.Business.Db.DefinitionTypeEnum` | bazodanowe, enum | Tryb edycji | Określa tryb edycji definicji workflow |
-| Purpose | `Soneta.Business.Db.TaskTriggerPurpose` | bazodanowe, enum | Przeznaczenie |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  | Kod metody która zwraca obkiekt do którego utworzona jest definicja zadania. |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| Purpose | `Db.TaskTriggerPurpose` (enum) | bazodanowe | Przeznaczenie |  |
 | TableName | `string` | bazodanowe | Klasa | Klasa obiektu nadrzędanego. |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe, guided-parent |  | Definicja zadania, do której jest przypisana klasa |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe, guided-parent |  | Definicja zadania, do której jest przypisana klasa |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### DefinitionTypeEnum (`Soneta.Business.Db.DefinitionTypeEnum`)
+### DefinitionTypeEnum (`Db.DefinitionTypeEnum`)
 - `Standard` = 0 — Wielozakładkowy
 - `Engine` = 1 — Jednozakładkowy
 - `None` = 2 — Brak
 
-### TaskTriggerPurpose (`Soneta.Business.Db.TaskTriggerPurpose`)
+### TaskTriggerPurpose (`Db.TaskTriggerPurpose`)
 - `Uniwersal` = 0 — Uniwersalny
 - `Creator` = 1 — Uruchomienie nowego procesu
 - `Activator` = 2 — Przeliczenie zadania

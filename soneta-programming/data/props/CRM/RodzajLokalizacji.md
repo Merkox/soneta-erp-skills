@@ -4,8 +4,12 @@ Tytuł: Rodzaje lokalizacji
 Opis: Przypisanie rodzaju (typu) do lokalizacji kontrahenta, np. magazyn, biuro, punkt odbioru. Umożliwia klasyfikację lokalizacji według słownikowych rodzajów oraz oznaczenie rodzaju domyślnego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

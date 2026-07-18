@@ -6,23 +6,27 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AC | `bool` | bazodanowe | AC |  |
-| Amount | `Soneta.Types.Currency` | bazodanowe | Składka |  |
+| Amount | `Currency` | bazodanowe | Składka |  |
 | Assistance | `bool` | bazodanowe | Assistance |  |
-| Damages | `Soneta.Business.SubTable<Soneta.Vehicles.DamageEvent>` |  |  |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis polisy |  |
+| Damages | `SubTable<Soneta.Vehicles.DamageEvent>` | podlista |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis polisy |  |
 | Document | `Soneta.Core.IInsuranceDocument` | bazodanowe | Dokument |  |
-| Estimate | `Soneta.Types.Currency` | bazodanowe | Wycena |  |
-| From | `Soneta.Types.Date` | bazodanowe | Rozpoczęcie |  |
+| Estimate | `Currency` | bazodanowe | Wycena |  |
+| From | `Date` | bazodanowe | Rozpoczęcie |  |
 | Insurer | `Soneta.CRM.Kontrahent` | bazodanowe | Ubezpieczyciel |  |
 | NNW | `bool` | bazodanowe | NNW |  |
 | Number | `string` | bazodanowe | Numer polisy |  |
 | OC | `bool` | bazodanowe | OC |  |
-| To | `Soneta.Types.Date` | bazodanowe | Zakończenie |  |
-| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe | Pojazd |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
+| To | `Date` | bazodanowe | Zakończenie |  |
+| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt | Pojazd |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |

@@ -5,8 +5,12 @@ Opis: Definicja pojedynczego elementu opisu stanowiska w ramach kategorii. Okre�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 1
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,11 +19,11 @@ Guided: root
 | Kategoria | `Soneta.HR2.KategoriaElementuOpisuStanowiska` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaUI | `string` |  | Nazwa |  |
-| NazwaWyswietlana | `string` | bazodanowe | Nazwa wyświetlana |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OpisJendaLinia | `string` |  |  |  |
-| PozycjaDokumentu | `Soneta.Oceny.PozycjaDokumentuInfo` | bazodanowe |  |  |
+| NazwaWyswietlana | `string` | bazodanowe, tylko-odczyt | Nazwa wyświetlana |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| OpisJendaLinia | `string` | tylko-odczyt |  |  |
+| PozycjaDokumentu | `Soneta.Oceny.PozycjaDokumentuInfo` (subrow) | bazodanowe |  |  |
 | PozycjaDokumentu.Sekcja | `Soneta.Oceny.DefinicjaSekcjiDokumentu` | bazodanowe |  |  |
-| PozycjaDokumentu.WgSekcja | `Soneta.Business.Key` |  |  |  |
+| PozycjaDokumentu.WgSekcja | `Key` | podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
 | Wielokrotny | `bool` | bazodanowe |  |  |

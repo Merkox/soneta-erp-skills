@@ -5,22 +5,26 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 3
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | DefinicjaSplaty | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| Pozostaje | `Soneta.Types.Currency` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Realizacja | `Soneta.Place.WypElementZaliczka.Realizacja` |  |  |  |
-| Realizacje | `Soneta.Business.SubTable` |  |  |  |
-| Splacono | `Soneta.Types.Currency` | bazodanowe | Spłacono |  |
-| Spłaty | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| Stan | `Soneta.Place.StanZaliczki` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| Pozostaje | `Currency` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Realizacja | `Soneta.Place.WypElementZaliczka.Realizacja` | tylko-odczyt |  |  |
+| Realizacje | `SubTable` | podlista |  |  |
+| Splacono | `Currency` | bazodanowe, tylko-odczyt | Spłacono |  |
+| Spłaty | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| Stan | `Soneta.Place.StanZaliczki` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wartosc | `Currency` | bazodanowe, tylko-odczyt | Wartość |  |
 
 ## Enumy
 

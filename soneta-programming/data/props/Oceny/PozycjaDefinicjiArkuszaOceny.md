@@ -5,17 +5,21 @@ Opis: Element szczegółowy definicji arkusza oceny (PozycjaDefinicjiArkuszaOcen
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaArkusza` → `DefinicjaArkuszaOceny`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
-| DefinicjaArkusza | `Soneta.Oceny.DefinicjaArkuszaOceny` | bazodanowe, guided-parent |  |  |
+| DefinicjaArkusza | `Soneta.Oceny.DefinicjaArkuszaOceny` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | DefinicjaPytaniaNadrzednego | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` |  |  |  |
+| Procent | `Percent` | tylko-odczyt |  |  |
 | PytanieZalezne | `bool` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Waga | `decimal` | bazodanowe |  |  |
 | WartoscPytaniaNadrzednego | `decimal` | bazodanowe |  |  |
 | Wyliczana | `bool` | bazodanowe |  |  |

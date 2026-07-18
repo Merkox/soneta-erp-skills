@@ -5,14 +5,18 @@ Opis: Rejestr źródeł danych wykorzystywanych przez moduł BI do pobierania in
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Name | `string` | bazodanowe | Nazwa |  |
-| TableSources | `System.Collections.Generic.IEnumerable<Soneta.BI.Interfaces.ITableSource>` |  |  |  |
-| Type | `Soneta.BI.DataSourceType` | bazodanowe, enum |  |  |
+| TableSources | `System.Collections.Generic.IEnumerable<Soneta.BI.Interfaces.ITableSource>` | podlista |  |  |
+| Type | `Soneta.BI.DataSourceType` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

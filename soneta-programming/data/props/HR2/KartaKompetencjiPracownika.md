@@ -5,18 +5,22 @@ Opis: Karta kompetencji pracownika tworzona na określoną datę. Dokumentuje ak
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 4
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Kompetencje | `Soneta.Business.SubTable<Soneta.HR2.KompetencjaPracownika>` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RazemElementyOceny | `Soneta.Business.View` |  |  |  |
-| TylkoKompetencje | `Soneta.Business.View` |  |  |  |
-| TylkoZachowania | `Soneta.Business.View` |  |  |  |
-| Zrodlo | `Soneta.Kadry.IŹródłoKartyCharakterystykiPracownika` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| Kompetencje | `SubTable<Soneta.HR2.KompetencjaPracownika>` | podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RazemElementyOceny | `View` | podlista |  |  |
+| TylkoKompetencje | `View` | podlista |  |  |
+| TylkoZachowania | `View` | podlista |  |  |
+| Zrodlo | `Soneta.Kadry.IŹródłoKartyCharakterystykiPracownika` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

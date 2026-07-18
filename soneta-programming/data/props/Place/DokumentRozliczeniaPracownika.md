@@ -5,29 +5,32 @@ Opis: Element szczegółowy dokumentu rozliczenia kontrahenta (DokumentRozliczen
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 4
+- podlisty: 5
+- subrowy: 1
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BaseOkres | `Soneta.Types.FromTo` |  |  |  |
+| BaseOkres | `FromTo` | podlista |  |  |
 | BaseUmowa | `Soneta.Kadry.UmowaZewnetrzna` |  |  |  |
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Dokument | `Soneta.Place.DokumentRozliczeniaKontrahenta` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.ElementRozliczeniaPracownika>` |  |  |  |
+| Dokument | `Soneta.Place.DokumentRozliczeniaKontrahenta` | bazodanowe, tylko-odczyt |  |  |
+| Elementy | `SubTable<Soneta.Place.ElementRozliczeniaPracownika>` | podlista |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerPelny | `string` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe |  |  |
-| WartoscCy | `Soneta.Types.Currency` | bazodanowe |  |  |
+| WartoscCy | `Currency` | bazodanowe, tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |

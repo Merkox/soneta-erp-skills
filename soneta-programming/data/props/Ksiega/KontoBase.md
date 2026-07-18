@@ -5,70 +5,74 @@ Opis: Konto księgowe w planie kont firmy. Przechowuje symbol, nazwę, typ konta
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 31
-- pola kalkulowane (z klas biznesowych): 31
+- pola bazodanowe (zapisywalne): 18
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 34
+- podlisty: 8
+- subrowy: 0
+- razem: 62
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywne | `bool` | bazodanowe |  |  |
-| AktywnoPasywne | `bool` |  |  |  |
-| BOMa | `decimal` | bazodanowe |  |  |
-| BOMaB | `decimal` | bazodanowe |  |  |
-| BOWn | `decimal` | bazodanowe |  |  |
-| BOWnB | `decimal` | bazodanowe |  |  |
-| Bilansowe | `bool` |  |  |  |
-| DefinicjaSlownika | `Soneta.Ksiega.DefinicjaSlownika` |  |  |  |
-| DefinicjeAnalityk | `Soneta.Business.SubTable<Soneta.Ksiega.DefinicjaAnalityki>` |  |  |  |
-| DefinicjeAnalitykSymbol | `string` |  |  |  |
-| DefinicjeAnalitykViewInfo | `Soneta.Business.ViewInfo` |  |  |  |
-| ElementKsiegowalny | `Soneta.Core.TypElementuKsiegowalnego` | bazodanowe, enum |  | Określa jaki typ obiektu w systemie związany jest z księgowaniem na to konto |
-| Firma | `Soneta.Core.OddzialFirmy` | bazodanowe | Firma |  |
-| Grupa | `string` |  |  |  |
+| AktywnoPasywne | `bool` | tylko-odczyt |  |  |
+| BOMa | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| BOMaB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| BOWn | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| BOWnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+| Bilansowe | `bool` | tylko-odczyt |  |  |
+| DefinicjaSlownika | `Soneta.Ksiega.DefinicjaSlownika` | tylko-odczyt |  |  |
+| DefinicjeAnalityk | `SubTable<Soneta.Ksiega.DefinicjaAnalityki>` | podlista |  |  |
+| DefinicjeAnalitykSymbol | `string` | tylko-odczyt |  |  |
+| DefinicjeAnalitykViewInfo | `ViewInfo` | tylko-odczyt |  |  |
+| ElementKsiegowalny | `Soneta.Core.TypElementuKsiegowalnego` (enum) | bazodanowe |  | Określa jaki typ obiektu w systemie związany jest z księgowaniem na to konto |
+| Firma | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt | Firma |  |
+| Grupa | `string` | tylko-odczyt |  |  |
 | IsChangeFromWorker | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
-| Kolumna | `Soneta.EwidencjaVat.NrKolumnyKPiR` | bazodanowe, enum |  | Kolumna w Księdze Przychodów i Rozchodów |
-| KontaWalutowe | `Soneta.Business.SubTable<Soneta.Ksiega.KontoBase>` |  |  |  |
-| KontoWielowalutowe | `Soneta.Ksiega.KontoWielowalutowe` | bazodanowe, enum |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| Kolumna | `Soneta.EwidencjaVat.NrKolumnyKPiR` (enum) | bazodanowe |  | Kolumna w Księdze Przychodów i Rozchodów |
+| KontaWalutowe | `SubTable<Soneta.Ksiega.KontoBase>` | podlista |  |  |
+| KontoWielowalutowe | `Soneta.Ksiega.KontoWielowalutowe` (enum) | bazodanowe |  |  |
 | KontoZwykle | `Soneta.Ksiega.KontoBase` | bazodanowe |  |  |
-| KontrolaSalda | `Soneta.Ksiega.KontrolaSalda` | bazodanowe, enum |  |  |
-| Nadrzedne | `Soneta.Ksiega.KontoBase` | bazodanowe |  | Konto nadrzędne. |
+| KontrolaSalda | `Soneta.Ksiega.KontrolaSalda` (enum) | bazodanowe |  |  |
+| Nadrzedne | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt |  | Konto nadrzędne. |
 | Nazwa | `string` | bazodanowe |  | Nazwa konta. |
-| NazwaPelna | `string` |  |  | Nazwa konta z uwzględnieniem nazw kont nadrzędnych |
-| ObrotyKsiegowe | `Soneta.Business.SubTable<Soneta.Ksiega.ObrotKsiegowyBase>` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
+| NazwaPelna | `string` | tylko-odczyt |  | Nazwa konta z uwzględnieniem nazw kont nadrzędnych |
+| ObrotyKsiegowe | `SubTable<Soneta.Ksiega.ObrotKsiegowyBase>` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt |  |  |
 | OddzialFirmyInitiator | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe |  | Okres obrachunkowy. |
-| PowiazanieKonta | `Soneta.Business.SubTable<Soneta.Ksiega.PowiazanieKontaBase>` |  |  |  |
-| PowiazanieKontaSlownikowe | `Soneta.Ksiega.PowiazanieSlownikowe` |  |  |  |
-| PowiazanieKontaSystemowe | `Soneta.Ksiega.PowiazanieSystemowe` |  |  |  |
-| PozaBilansowe | `bool` |  |  |  |
-| Poziom | `int` | bazodanowe |  | Poziom konta w strukturze planu kont |
-| PozycjeGrupKont | `Soneta.Business.SubTable<Soneta.Ksiega.PozGrupyKont>` |  |  |  |
+| Okres | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  | Okres obrachunkowy. |
+| PowiazanieKonta | `SubTable<Soneta.Ksiega.PowiazanieKontaBase>` | podlista |  |  |
+| PowiazanieKontaSlownikowe | `Soneta.Ksiega.PowiazanieSlownikowe` | tylko-odczyt |  |  |
+| PowiazanieKontaSystemowe | `Soneta.Ksiega.PowiazanieSystemowe` | tylko-odczyt |  |  |
+| PozaBilansowe | `bool` | tylko-odczyt |  |  |
+| Poziom | `int` | bazodanowe, tylko-odczyt |  | Poziom konta w strukturze planu kont |
+| PozycjeGrupKont | `SubTable<Soneta.Ksiega.PozGrupyKont>` | podlista |  |  |
 | PrzyszlySymbol | `string` | bazodanowe |  | Symbol konta w przyszłym okresie. |
-| PrzyszlySymbolUstawiony | `bool` |  |  |  |
-| Rodzaj | `Soneta.Ksiega.RodzajKonta` | bazodanowe, enum |  |  |
-| Rodzaj2 | `Soneta.Ksiega.Rodzaj2Konta` | enum |  |  |
+| PrzyszlySymbolUstawiony | `bool` | tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Ksiega.RodzajKonta` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj2 | `Soneta.Ksiega.Rodzaj2Konta` (enum) | tylko-odczyt |  |  |
 | Rozliczeniowe | `bool` | bazodanowe |  |  |
 | Segment | `string` | bazodanowe |  | Segment konta. |
 | Slownik | `Soneta.Ksiega.DefinicjaSlownika` | bazodanowe |  |  |
-| SlownikGlowny | `Soneta.Ksiega.DefinicjaSlownika` |  |  |  |
-| SlownikPowiazan | `Soneta.Business.SubTable<Soneta.Ksiega.PowiazanieKontaBase>` |  |  |  |
-| SubKonta | `Soneta.Business.SubTable<Soneta.Ksiega.KontoBase>` |  |  |  |
-| Symbol | `string` | bazodanowe |  | Symbol konta. |
-| Symbol2 | `string` | bazodanowe |  | Symbol konta bez myślników. |
-| SymbolNadrzednego | `string` |  |  |  |
-| SymbolPrzyszlegoOkresu | `string` |  |  |  |
-| SymbolWalutyKonta | `string` |  |  |  |
-| SymbolWalutyOperacji | `string` |  |  |  |
-| Syntetyczne | `bool` | bazodanowe |  |  |
+| SlownikGlowny | `Soneta.Ksiega.DefinicjaSlownika` | tylko-odczyt |  |  |
+| SlownikPowiazan | `SubTable<Soneta.Ksiega.PowiazanieKontaBase>` | podlista |  |  |
+| SubKonta | `SubTable<Soneta.Ksiega.KontoBase>` | podlista |  |  |
+| Symbol | `string` | bazodanowe, tylko-odczyt |  | Symbol konta. |
+| Symbol2 | `string` | bazodanowe, tylko-odczyt |  | Symbol konta bez myślników. |
+| SymbolNadrzednego | `string` | tylko-odczyt |  |  |
+| SymbolPrzyszlegoOkresu | `string` | tylko-odczyt |  |  |
+| SymbolWalutyKonta | `string` | tylko-odczyt |  |  |
+| SymbolWalutyOperacji | `string` | tylko-odczyt |  |  |
+| Syntetyczne | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Syntetyka | `Soneta.Ksiega.KontoBase` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypKonta` | bazodanowe, enum |  | Typ konta |
-| Typ2 | `Soneta.Ksiega.Typ2Konta` | enum |  |  |
+| Typ | `Soneta.Ksiega.TypKonta` (enum) | bazodanowe |  | Typ konta |
+| Typ2 | `Soneta.Ksiega.Typ2Konta` (enum) | tylko-odczyt |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
 | WalutaWybrana | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
-| Wynikowe | `bool` |  |  |  |
-| ZabronioneKsiegowanie | `bool` |  |  |  |
-| Zapisy | `Soneta.Business.SubTable<Soneta.Ksiega.ZapisKsiegowy>` |  |  |  |
+| Wynikowe | `bool` | tylko-odczyt |  |  |
+| ZabronioneKsiegowanie | `bool` | tylko-odczyt |  |  |
+| Zapisy | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 | ZnacznikKonta | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta |  |
 | ZnacznikKontaDodatkowy | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta dodatkowy |  |
 | ZnacznikKontaDodatkowyPD | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta dodatkowy PD |  |

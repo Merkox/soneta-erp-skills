@@ -5,35 +5,39 @@ Opis: Definicja procesu oceny okresowej określająca jego parametry organizacyj
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 1
+- podlisty: 6
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Arkusze | `Soneta.Business.SubTable<Soneta.Oceny.ArkuszDefinicjiOceny>` |  |  |  |
+| Arkusze | `SubTable<Soneta.Oceny.ArkuszDefinicjiOceny>` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | CalcCode | `string` |  |  |  |
 | ClassCode | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
 | DefinicjaProcesu | `System.Guid` | bazodanowe |  |  |
-| DependentWfDefinition | `Soneta.Business.IDependentWfDefinition` |  |  |  |
-| Konsolidacyjne | `System.Collections.Generic.IEnumerable<Soneta.Oceny.DefinicjaArkuszaOceny>` |  |  |  |
+| DependentWfDefinition | `IDependentWfDefinition` |  |  |  |
+| Konsolidacyjne | `System.Collections.Generic.IEnumerable<Soneta.Oceny.DefinicjaArkuszaOceny>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Oceny | `Soneta.Business.SubTable<Soneta.Oceny.OcenaRealizacja>` |  |  |  |
-| Okres | `Soneta.Oceny.RodzajeOkresówOceny` | bazodanowe, enum |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Oceny | `SubTable<Soneta.Oceny.OcenaRealizacja>` | podlista |  |  |
+| Okres | `Soneta.Oceny.RodzajeOkresówOceny` (enum) | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | PokazPunktacje | `bool` | bazodanowe |  |  |
 | PrzeznaczonaDla | `Soneta.Oceny.TableRef` |  |  |  |
 | RodzajStruktury | `string` | bazodanowe |  |  |
 | RodzajZrodla | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | StrukturaFirmy | `Soneta.Oceny.TableRef` |  |  |  |
 | StrukturaOrganizacyjna | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | UkrywajOceniajacych | `bool` | bazodanowe |  |  |
 
 ## Enumy

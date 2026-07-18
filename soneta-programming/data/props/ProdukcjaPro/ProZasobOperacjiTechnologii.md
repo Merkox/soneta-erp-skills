@@ -5,32 +5,36 @@ Opis: Element szczegółowy operacji wzorcowej (IProOperacjaWzorcowa). Definiuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `IProOperacjaWzorcowa`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 4
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaRejestracji | `bool` | bazodanowe | Blokada rejestracji | Zablokowanie rejestracji czasów prac dla zasobu operacji technologii. |
 | CzasJednostkowy | `double` | bazodanowe | Czas jednostkowy | Czas jednostkowy zasobu operacji technologii. |
-| CzasTpz | `Soneta.Types.TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy zasobu operacji technologii. |
-| CzasTw | `Soneta.Types.TimeSec` | bazodanowe | Czas tw | Czas wykonania zasobu operacji technologii. |
+| CzasTpz | `TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy zasobu operacji technologii. |
+| CzasTw | `TimeSec` | bazodanowe | Czas tw | Czas wykonania zasobu operacji technologii. |
 | DefinicjaAkordu | `Soneta.Kadry.DefinicjaAkordu` | bazodanowe | Definicja akordu | Definicja akordu zasobu operacji technologii. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość zasobu operacji technologii. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość zasobu operacji technologii. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa zasobu operacji technologii. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa zasobu operacji technologii. |
 | Operacja | `Soneta.ProdukcjaPro.IProOperacjaWzorcowa` | bazodanowe, guided-parent |  | Operacja dla zasobu operacji technologii. |
-| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` |  | Operacja technologii | Operacja technologii dla zasobu operacji technologii. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis zasobu operacji technologii. |
+| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` | tylko-odczyt | Operacja technologii | Operacja technologii dla zasobu operacji technologii. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis zasobu operacji technologii. |
 | PominWKalkulacji | `bool` | bazodanowe | Pomiń w kalkulacji | Pomijanie w kalkulacji zasobu operacji technologii. |
-| RelacjePozycjiKompetencji | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobOperacjiTechnologiiPozycjaKompetencji>` |  |  |  |
-| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` | bazodanowe, enum | Rodzaj zasobu | Rodzaj zasobu operacji technologii. |
+| RelacjePozycjiKompetencji | `LpSubTable<Soneta.ProdukcjaPro.ProRelacjaZasobOperacjiTechnologiiPozycjaKompetencji>` | podlista |  |  |
+| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` (enum) | bazodanowe | Rodzaj zasobu | Rodzaj zasobu operacji technologii. |
 | Stawka | `Soneta.ProdukcjaPro.ProStawka` | bazodanowe |  | Stawka zasobu operacji technologii. |
-| Wariantowosci | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProWariantowoscZasobuOperacjiTechnologii>` |  |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość zasobu operacji technologii. |
-| WartoscStawki | `Soneta.Types.Currency` | bazodanowe | Wartość stawki | Wartość stawki zasobu operacji technologii. |
-| WyborZasobu | `Soneta.ProdukcjaPro.ProWyborZasobu` | bazodanowe, enum | Wybór zasobu | Wybór zasobu dla zasobu operacji technologii. |
+| Wariantowosci | `LpSubTable<Soneta.ProdukcjaPro.ProWariantowoscZasobuOperacjiTechnologii>` | podlista |  |  |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość zasobu operacji technologii. |
+| WartoscStawki | `Currency` | bazodanowe | Wartość stawki | Wartość stawki zasobu operacji technologii. |
+| WyborZasobu | `Soneta.ProdukcjaPro.ProWyborZasobu` (enum) | bazodanowe | Wybór zasobu | Wybór zasobu dla zasobu operacji technologii. |
 | Zasob | `Soneta.ProdukcjaPro.ProZasob` | bazodanowe | Zasób | Zasób dla zasobu operacji technologii. |
-| ZasobyOperacjiZlecen | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiZlecenia>` |  |  |  |
+| ZasobyOperacjiZlecen | `SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiZlecenia>` | podlista |  |  |
 
 ## Enumy
 

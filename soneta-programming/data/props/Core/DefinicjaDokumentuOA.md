@@ -5,35 +5,39 @@ Opis: Element szczegółowy definicji dokumentu (IDefinicjaDokumentuOA). Przecho
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 10
+- podlisty: 3
+- subrowy: 2
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Core.IDefinicjaDokumentuOA` | bazodanowe, iface-ref |  |  |
-| OpisAnalityczny | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` | bazodanowe |  |  |
-| OpisAnalityczny.CategoryDefinitions | `Soneta.Core.IBudgetCategoryDefinition[]` |  |  |  |
-| OpisAnalityczny.DataInicjowania | `Soneta.Core.InicjowanieDatyOpisuAnalitycznego` | bazodanowe, enum |  | Data z jaką będzie inicjowany opis |
+| Host | `Soneta.Core.IDefinicjaDokumentuOA` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| OpisAnalityczny | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` (subrow) | bazodanowe |  |  |
+| OpisAnalityczny.CategoryDefinitions | `Soneta.Core.IBudgetCategoryDefinition[]` | podlista |  |  |
+| OpisAnalityczny.DataInicjowania | `Soneta.Core.InicjowanieDatyOpisuAnalitycznego` (enum) | bazodanowe |  | Data z jaką będzie inicjowany opis |
 | OpisAnalityczny.DefaultCategoryDefinition | `Soneta.Core.IBudgetCategoryDefinition` |  |  |  |
-| OpisAnalityczny.IsExtendedBudgeting | `bool` |  |  |  |
-| OpisAnalityczny.IsReadOnlyDefaultCategoryDefinition | `bool` |  |  |  |
-| OpisAnalityczny.IsReadOnlyPaymentSegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisibleCategorySegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisibleCurrencyInitializeSegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisibleDateSegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisibleEditingSegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisiblePaymentSegment | `bool` |  |  |  |
-| OpisAnalityczny.IsVisibleSegment | `bool` |  |  |  |
-| OpisAnalityczny.Kategorie | `Soneta.Business.MemoText` | bazodanowe |  | Wybrane kategorie budżetu |
-| OpisAnalityczny.Kopiowanie | `Soneta.Core.KopiowanieOpisuAnalitycznego` | bazodanowe |  | Sposób kopiowania opisu analitycznego |
-| OpisAnalityczny.Kopiowanie.Cecha | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Cecha warunkująca kopiowania opisu analitycznego |
+| OpisAnalityczny.IsExtendedBudgeting | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsReadOnlyDefaultCategoryDefinition | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsReadOnlyPaymentSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisibleCategorySegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisibleCurrencyInitializeSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisibleDateSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisibleEditingSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisiblePaymentSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.IsVisibleSegment | `bool` | tylko-odczyt |  |  |
+| OpisAnalityczny.Kategorie | `MemoText` | bazodanowe, podlista |  | Wybrane kategorie budżetu |
+| OpisAnalityczny.Kopiowanie | `Soneta.Core.KopiowanieOpisuAnalitycznego` (subrow) | bazodanowe |  | Sposób kopiowania opisu analitycznego |
+| OpisAnalityczny.Kopiowanie.Cecha | `FeatureDefinition` | bazodanowe |  | Cecha warunkująca kopiowania opisu analitycznego |
 | OpisAnalityczny.Kopiowanie.MaskaWymiaru | `string` | bazodanowe |  | Maska wymiaru |
-| OpisAnalityczny.Kopiowanie.SposobKopiowania | `Soneta.Core.SposobKopiowaniaOpisuAnalitycznego` | bazodanowe, enum |  | Sposób kopiowania opisu analitycznego |
-| OpisAnalityczny.Kopiowanie.WgCecha | `Soneta.Business.Key` |  |  |  |
+| OpisAnalityczny.Kopiowanie.SposobKopiowania | `Soneta.Core.SposobKopiowaniaOpisuAnalitycznego` (enum) | bazodanowe |  | Sposób kopiowania opisu analitycznego |
+| OpisAnalityczny.Kopiowanie.WgCecha | `Key` | podlista |  |  |
 | OpisAnalityczny.KorygowanieRozliczenia | `bool` | bazodanowe |  | Korygowanie rozliczenia budżetu |
-| OpisAnalityczny.KwotaInicjowania | `Soneta.Core.SposobInicjowaniaKwotyOpisuAnalitycznego` | bazodanowe, enum |  | Sposób inicjowania kwoty |
-| OpisAnalityczny.RodzajEdycji | `Soneta.Core.EdycjaOpisuAnalitycznego` | bazodanowe, enum |  | Rodzaj edycji opisu analitycznego |
-| OpisAnalityczny.RodzajPrzeliczania | `Soneta.Core.PrzeliczanieOpisuAnalitycznego` | bazodanowe, enum |  | Rodzaj przeliczania wartości |
+| OpisAnalityczny.KwotaInicjowania | `Soneta.Core.SposobInicjowaniaKwotyOpisuAnalitycznego` (enum) | bazodanowe |  | Sposób inicjowania kwoty |
+| OpisAnalityczny.RodzajEdycji | `Soneta.Core.EdycjaOpisuAnalitycznego` (enum) | bazodanowe |  | Rodzaj edycji opisu analitycznego |
+| OpisAnalityczny.RodzajPrzeliczania | `Soneta.Core.PrzeliczanieOpisuAnalitycznego` (enum) | bazodanowe |  | Rodzaj przeliczania wartości |
 
 ## Relacje interfejsowe
 

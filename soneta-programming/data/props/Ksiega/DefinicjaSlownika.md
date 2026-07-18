@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 7
+- subrowy: 1
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| DictionaryWithAlgorithm | `bool` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| DostepneTabele | `System.Collections.Generic.IList<Soneta.Business.Table>` |  |  |  |
-| Elementy | `Soneta.Business.LpSubTable<Soneta.Ksiega.ElemDefinicjiSlownika>` |  |  |  |
-| ElementySlownika | `Soneta.Business.SubTable<Soneta.Ksiega.ElemSlownika>` |  |  |  |
-| Kod | `string` |  |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| DictionaryWithAlgorithm | `bool` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| DostepneTabele | `System.Collections.Generic.IList<Table>` | podlista |  |  |
+| Elementy | `LpSubTable<Soneta.Ksiega.ElemDefinicjiSlownika>` | podlista |  |  |
+| ElementySlownika | `SubTable<Soneta.Ksiega.ElemSlownika>` | podlista |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SlownikKontrolny | `bool` | bazodanowe |  |  |
-| Tabele | `System.Collections.Generic.IList<Soneta.Business.Table>` |  |  |  |
+| Tabele | `System.Collections.Generic.IList<Table>` | podlista |  |  |
 | tabele | `string` | bazodanowe |  |  |

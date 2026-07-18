@@ -5,28 +5,32 @@ Opis: Definicja elementu wizualizacji (kafelka) na dashboardzie BI. Określa typ
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 5
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Appearance | `Soneta.BI.DashboardItemFieldAppearance` |  |  |  |
-| Appearances | `Soneta.Business.SubTable<Soneta.BI.DashboardItemFieldAppearance>` |  |  |  |
-| ChartParam | `Soneta.BI.ChartParam` |  |  |  |
-| ChartParams | `Soneta.Business.SubTable<Soneta.BI.ChartParam>` |  |  |  |
+| Appearance | `Soneta.BI.DashboardItemFieldAppearance` | tylko-odczyt |  |  |
+| Appearances | `SubTable<Soneta.BI.DashboardItemFieldAppearance>` | podlista |  |  |
+| ChartParam | `Soneta.BI.ChartParam` | tylko-odczyt |  |  |
+| ChartParams | `SubTable<Soneta.BI.ChartParam>` | podlista |  |  |
 | Comment | `string` | bazodanowe | Objaśnienia producenta | Dodatkowe objaśnienia wizualizacji |
-| DataSpanItemAppearances | `Soneta.Business.LpSubTable<Soneta.BI.DataSpanItemAppearance>` |  |  |  |
+| DataSpanItemAppearances | `LpSubTable<Soneta.BI.DataSpanItemAppearance>` | podlista |  |  |
 | Description | `string` | bazodanowe | Opis | Opis elementu wizualizacji |
-| Fields | `Soneta.Business.LpSubTable<Soneta.BI.DashboardItemField>` |  |  |  |
-| ImageName | `string` | bazodanowe |  | Nazwa grafiki |
-| Limit | `int` | bazodanowe | Limit | Określa limit wyświetlanych danych |
-| Model | `Soneta.BI.DataModel` | bazodanowe | Model danych |  |
-| Name | `string` |  |  |  |
+| Fields | `LpSubTable<Soneta.BI.DashboardItemField>` | podlista |  |  |
+| ImageName | `string` | bazodanowe, tylko-odczyt |  | Nazwa grafiki |
+| Limit | `int` | bazodanowe, tylko-odczyt | Limit | Określa limit wyświetlanych danych |
+| Model | `Soneta.BI.DataModel` | bazodanowe, tylko-odczyt | Model danych |  |
+| Name | `string` | tylko-odczyt |  |  |
 | Obsolete | `bool` | bazodanowe | Przestarzały |  |
-| Params | `Soneta.Business.SubTable<Soneta.BI.DashboardItemParam>` |  |  |  |
-| Type | `Soneta.BI.DashboardItemType` | bazodanowe, enum | Typ | Typ elementu wizualizacji |
+| Params | `SubTable<Soneta.BI.DashboardItemParam>` | podlista |  |  |
+| Type | `Soneta.BI.DashboardItemType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ elementu wizualizacji |
 | UnitSymbol | `string` | bazodanowe | Symbol jednostki | Symbol jednostki |
-| Visualization | `Soneta.BI.VisualizationType` | bazodanowe, enum | Wizualizacja | Wizualizacja elementu |
+| Visualization | `Soneta.BI.VisualizationType` (enum) | bazodanowe, tylko-odczyt | Wizualizacja | Wizualizacja elementu |
 
 ## Enumy
 

@@ -4,25 +4,29 @@ Opis: Element szczegółowy kalendarza (KalendarzBase). Pojedynczy dzień w kale
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Kalendarz` → `KalendarzBase`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaDnia` | bazodanowe |  |  |
-| Kalendarz | `Soneta.Kalend.KalendarzBase` | bazodanowe, guided-parent |  |  |
-| OdGodziny | `Soneta.Types.Time` |  | Od |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| RuchomyCzasPracy | `bool` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaKalendarza>` |  |  |  |
-| TolerancjaWe | `Soneta.Types.Time` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` | bazodanowe, enum |  |  |
-| WejścieDo | `Soneta.Types.Time` |  |  |  |
+| Kalendarz | `Soneta.Kalend.KalendarzBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| OdGodziny | `Time` | tylko-odczyt | Od |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| RuchomyCzasPracy | `bool` | tylko-odczyt |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaKalendarza>` | podlista |  |  |
+| TolerancjaWe | `Time` | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WejścieDo | `Time` |  |  |  |
 
 ## Enumy
 

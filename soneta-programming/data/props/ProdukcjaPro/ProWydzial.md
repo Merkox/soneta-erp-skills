@@ -6,24 +6,28 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IElementSlownika`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 31
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 6
+- subrowy: 0
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AlgorytmIlosciMaterial | `Soneta.ProdukcjaPro.ProAlgorytmWyliczaniaIlosci` | bazodanowe, enum | Algorytm ilości materiał | Algorytm wyliczania ilości materiału dla wydziału. |
-| AutomatyczneGenerowanieZapotrzebowan | `Soneta.ProdukcjaPro.ProGenerowanieZapotrzebowan` | bazodanowe, enum | Automatyczne generowanie zapotrzebowań | Parametr automatycznego generowania zapotrzebowań dla wydziału. |
-| AutomatyczneZlecenieMaterial | `Soneta.ProdukcjaPro.ProParametrAutomatycznegoZlecenia` | bazodanowe, enum | Automatyczne generowania zleceń z materiałów | Parametr automatycznego generowania zleceń z materiałów dla wydziału. |
-| AutomatyczneZlecenieWyrob | `Soneta.ProdukcjaPro.ProParametrAutomatycznegoZlecenia` | bazodanowe, enum | Automatyczne generowania zleceń z wyrobów | Parametr automatycznego generowania zleceń z wyrobów dla wydziału. |
+| AlgorytmIlosciMaterial | `Soneta.ProdukcjaPro.ProAlgorytmWyliczaniaIlosci` (enum) | bazodanowe | Algorytm ilości materiał | Algorytm wyliczania ilości materiału dla wydziału. |
+| AutomatyczneGenerowanieZapotrzebowan | `Soneta.ProdukcjaPro.ProGenerowanieZapotrzebowan` (enum) | bazodanowe | Automatyczne generowanie zapotrzebowań | Parametr automatycznego generowania zapotrzebowań dla wydziału. |
+| AutomatyczneZlecenieMaterial | `Soneta.ProdukcjaPro.ProParametrAutomatycznegoZlecenia` (enum) | bazodanowe | Automatyczne generowania zleceń z materiałów | Parametr automatycznego generowania zleceń z materiałów dla wydziału. |
+| AutomatyczneZlecenieWyrob | `Soneta.ProdukcjaPro.ProParametrAutomatycznegoZlecenia` (enum) | bazodanowe | Automatyczne generowania zleceń z wyrobów | Parametr automatycznego generowania zleceń z wyrobów dla wydziału. |
 | Blokada | `bool` | bazodanowe |  | Zablokowanie wydziału. |
-| CechaIlosciMaterial | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha ilości materiał | Cecha wyliczająca ilość materiału dla wydziału. |
+| CechaIlosciMaterial | `FeatureDefinition` | bazodanowe | Cecha ilości materiał | Cecha wyliczająca ilość materiału dla wydziału. |
 | DefinicjaBrakow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja braków | Definicja braków dla wydziału. |
 | DefinicjaOdpadow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja odpadów | Definicja odpadów dla wydziału. |
 | DefinicjaPrzychodow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja przychodów | Definicja przychodów dla wydziału. |
 | DefinicjaRozchodow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja rozchodów | Definicja rozchodów dla wydziału. |
 | DefinicjaZapotrzebowan | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja zapotrzebowań | Definicja zapotrzebowań dla wydziału. |
 | DoRealizacji | `bool` | bazodanowe | Do realizacji | Parametr automatycznej zmiany stanu zlecenia na do realizacji dla wydziału. |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  | Kod wydziału. |
 | MagazynBrakow | `Soneta.Magazyny.Magazyn` | bazodanowe | Magazyn braków | Magazyn braków dla wydziału. |
 | MagazynOdpadow | `Soneta.Magazyny.Magazyn` | bazodanowe | Magazyn odpadów | Magazyn odpadów dla wydziału. |
@@ -33,23 +37,23 @@ Implementuje interfejsy: `IRightsSource`, `IElementSlownika`
 | MagazynSurowcow | `Soneta.Magazyny.Magazyn` | bazodanowe | Magazyn surowców | Magazyn surowców dla wydziału. |
 | MeldunekPrzepiszNarzut | `bool` | bazodanowe | Przepisz narzut na meldunek | Parametr przepisywania narzutu na meldunek (materiały, odpady, koszty dodatkowe) dla wydziału. |
 | Miedzywydzialowosc | `bool` | bazodanowe | Międzywydziałowość | Międzywydziałowość wydziału. |
-| MomentGenerowaniaZapotrzebowan | `Soneta.ProdukcjaPro.ProMomentGenerowania` | bazodanowe, enum | Moment generowania zapotrzebowań | Moment generowania zapotrzebowań dla wydziału. |
+| MomentGenerowaniaZapotrzebowan | `Soneta.ProdukcjaPro.ProMomentGenerowania` (enum) | bazodanowe | Moment generowania zapotrzebowań | Moment generowania zapotrzebowań dla wydziału. |
 | Nazwa | `string` | bazodanowe |  | Nazwa wydziału. |
-| NumeracjaMeldunku | `Soneta.ProdukcjaPro.ProNumeracjaMeldunku` |  |  | Numeracja meldunku. |
-| NumeracjaTechnologii | `Soneta.ProdukcjaPro.ProNumeracjaTechnologii` |  |  | Numeracja technologii. |
-| NumeracjaZlecenia | `Soneta.ProdukcjaPro.ProNumeracjaZlecenia` |  |  | Numeracja zlecenia. |
-| NumeracjeMeldunku | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProNumeracjaMeldunku>` |  |  |  |
-| NumeracjeTechnologii | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProNumeracjaTechnologii>` |  |  |  |
-| NumeracjeZlecenia | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProNumeracjaZlecenia>` |  |  |  |
+| NumeracjaMeldunku | `Soneta.ProdukcjaPro.ProNumeracjaMeldunku` | tylko-odczyt |  | Numeracja meldunku. |
+| NumeracjaTechnologii | `Soneta.ProdukcjaPro.ProNumeracjaTechnologii` | tylko-odczyt |  | Numeracja technologii. |
+| NumeracjaZlecenia | `Soneta.ProdukcjaPro.ProNumeracjaZlecenia` | tylko-odczyt |  | Numeracja zlecenia. |
+| NumeracjeMeldunku | `SubTable<Soneta.ProdukcjaPro.ProNumeracjaMeldunku>` | podlista |  |  |
+| NumeracjeTechnologii | `SubTable<Soneta.ProdukcjaPro.ProNumeracjaTechnologii>` | podlista |  |  |
+| NumeracjeZlecenia | `SubTable<Soneta.ProdukcjaPro.ProNumeracjaZlecenia>` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział | Oddział wydziału. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis wydziału. |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| PozycjaGlowna | `Soneta.ProdukcjaPro.ProParametrPozycjiGlownej` | bazodanowe, enum | Pozycja główna | Parametr pozycji głównej dla wydziału. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis wydziału. |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| PozycjaGlowna | `Soneta.ProdukcjaPro.ProParametrPozycjiGlownej` (enum) | bazodanowe | Pozycja główna | Parametr pozycji głównej dla wydziału. |
 | RozliczFantomowo | `bool` | bazodanowe | Rozlicz fantomowo | Parametr rozliczenia fantomowego dla wydziału. |
-| SymbolMeldunku | `string` |  | Symbol meldunku | Symbol numeracji meldunku. |
-| SymbolTechnologii | `string` |  | Symbol technologii | Symbol numeracji technologii. |
-| SymbolZlecenia | `string` |  | Symbol zlecenia | Symbol numeracji zlecenia. |
-| TowarMeldowany | `Soneta.ProdukcjaPro.ProParametrTowaruMeldowanego` | bazodanowe, enum | Towar meldowany | Parametr towaru meldowanego dla wydziału. |
+| SymbolMeldunku | `string` | tylko-odczyt | Symbol meldunku | Symbol numeracji meldunku. |
+| SymbolTechnologii | `string` | tylko-odczyt | Symbol technologii | Symbol numeracji technologii. |
+| SymbolZlecenia | `string` | tylko-odczyt | Symbol zlecenia | Symbol numeracji zlecenia. |
+| TowarMeldowany | `Soneta.ProdukcjaPro.ProParametrTowaruMeldowanego` (enum) | bazodanowe | Towar meldowany | Parametr towaru meldowanego dla wydziału. |
 | UstawMagazynMaterial | `bool` | bazodanowe | Ustaw magazyn materiał | Parametr ustawiania magazynów wyrobów zgodnie z magazynem materiału dla wydziału. |
 | UstawMagazynWyrob | `bool` | bazodanowe | Ustaw magazyn wyrób | Parametr ustawiania magazynów materiałów zgodnie z magazynem wyrobu dla wydziału. |
 | WiazanieOperacjiTechnologii | `bool` | bazodanowe | Automatyczne wiązanie operacji technologii | Parametr automatycznego wiązania operacji technologii szeregowo dla wydziału. |

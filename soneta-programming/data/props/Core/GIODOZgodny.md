@@ -4,15 +4,19 @@ Opis: Element szczegółowy hosta zgodności GIODO/RODO (IGIODOZgodnyHost). Reje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IGIODOZgodnyHost`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataZmiany | `System.DateTime` | bazodanowe | Data | Data zmiany statusu. |
-| Host | `Soneta.Core.IGIODOZgodnyHost` | bazodanowe, guided-parent, iface-ref |  | Host, do którego przypisany status zgodności |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe | Operator | Operator zmieniający status. |
-| Stan | `Soneta.Core.GIODOStatus` | bazodanowe, enum | Status | Status potwierdzenia. |
+| Host | `Soneta.Core.IGIODOZgodnyHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  | Host, do którego przypisany status zgodności |
+| Operator | `App.Operator` | bazodanowe | Operator | Operator zmieniający status. |
+| Stan | `Soneta.Core.GIODOStatus` (enum) | bazodanowe | Status | Status potwierdzenia. |
 
 ## Relacje interfejsowe
 

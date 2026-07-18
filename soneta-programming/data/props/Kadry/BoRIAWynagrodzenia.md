@@ -5,14 +5,18 @@ Opis: Bilans otwarcia rocznej informacji o zatrudnieniu (RIA) w zakresie wynagro
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
 | EmerytalnoRentowe | `decimal` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | Rok | `int` | bazodanowe |  |  |
 | Wypadkowe | `decimal` | bazodanowe |  |  |
 | ZaOkrZasilkow | `decimal` | bazodanowe |  |  |

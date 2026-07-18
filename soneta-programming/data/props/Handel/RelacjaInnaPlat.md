@@ -3,15 +3,19 @@ Nazwa tabeli: `RelacjeInnaPlat`
 Opis: Powiązanie dokumentu handlowego z inną płatnością (rozliczeniem). Przechowuje typ relacji i kwotę płatności alternatywnej dla dokumentu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument handlowy | Dokument handlowy dla innej płatności |
-| InnaPlatnosc | `Soneta.Kasa.RozliczenieSP` | bazodanowe | Inna płatność | Inna płatność |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Typ | `Soneta.Handel.TypyRelacjiZaliczek` | bazodanowe, enum |  |  |
+| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt | Dokument handlowy | Dokument handlowy dla innej płatności |
+| InnaPlatnosc | `Soneta.Kasa.RozliczenieSP` | bazodanowe, tylko-odczyt | Inna płatność | Inna płatność |
+| Kwota | `Currency` | bazodanowe |  |  |
+| Typ | `Soneta.Handel.TypyRelacjiZaliczek` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

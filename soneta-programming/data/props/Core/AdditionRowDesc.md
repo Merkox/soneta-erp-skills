@@ -5,17 +5,21 @@ Opis: Tabela przechowuje dodatkowe opisy i adnotacje dołączane do wierszy inny
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdditionalDescriptionSource | `Soneta.Core.IAdditionalDescriptionSender` | bazodanowe | Źródło dodatkowej informacji |  |
 | CreatedByWebUserKBN | `bool` | bazodanowe | Czy utworzył WebUserKBN |  |
 | DateTime | `System.DateTime` | bazodanowe | Znacznik czasu |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Treść opisowa |  |
+| Description | `MemoText` | bazodanowe, podlista | Treść opisowa |  |
 | DescriptionItem | `Soneta.Core.IAdditionalDescriptionReceiver` | bazodanowe |  |  |
-| Header | `Soneta.Core.AdditionalDescriptionTitle` | bazodanowe, enum | Wartość identyfikująca typ lub kategorię opisu |  |
+| Header | `Soneta.Core.AdditionalDescriptionTitle` (enum) | bazodanowe | Wartość identyfikująca typ lub kategorię opisu |  |
 | OperatorName | `string` | bazodanowe | Nazwa operatora |  |
 
 ## Enumy

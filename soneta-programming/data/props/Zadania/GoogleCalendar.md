@@ -5,12 +5,16 @@ Opis: Rejestr kalendarzy Google synchronizowanych z zadaniami CRM. Przechowuje i
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CalendarId | `string` | bazodanowe |  |  |
 | NextSyncToken | `string` | bazodanowe |  |  |
-| Operator | `Soneta.Business.App.Operator` |  |  |  |
-| Token | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Operator | `App.Operator` | tylko-odczyt |  |  |
+| Token | `MemoText` | bazodanowe, podlista |  |  |

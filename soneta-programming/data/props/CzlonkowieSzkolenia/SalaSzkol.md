@@ -5,19 +5,23 @@ Opis: Kartoteka sal szkoleniowych dostępnych do prowadzenia zajęć. Przechowuj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 4
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | IloscMiejsc | `int` | bazodanowe | Ilość miejsc | Ilość miejsc w sali. |
 | LaczonaZ | `Soneta.CzlonkowieSzkolenia.SalaSzkol` | bazodanowe | Sala, z którą można połączyć bieżącą salę | Sala, z którą można połączyć bieżącą salę. |
 | Nazwa | `string` | bazodanowe | Nazwa sali | Nazwa sali. |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy do którego przypisana jest sala. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis sali | Dodatkowy opis sali. |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis sali | Dodatkowy opis sali. |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol sali | Symbol sali. |
-| View | `Soneta.Business.View` |  |  |  |
-| Zajecia | `Soneta.Business.View` |  |  |  |
-| ZajeciaSali | `Soneta.Business.SubTable` |  |  |  |
+| View | `View` | podlista |  |  |
+| Zajecia | `View` | podlista |  |  |
+| ZajeciaSali | `SubTable` | podlista |  |  |

@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefPageXml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| DefPageXml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 | DefWypozyczenia | `Soneta.Zadania.DefZadania` | bazodanowe | Domyślna definicja wypożyczenia | Definicja domyślnego wypożyczenia dla urządzeń danego rodzaju. |
 | DefZlecenia | `Soneta.Zadania.DefZadania` | bazodanowe | Domyślna definicja zlecenia | Definicja domyślnego zlecenia dla urządzeń danego rodzaju. |
-| DefinedType | `System.Type` |  |  |  |
+| DefinedType | `System.Type` | tylko-odczyt |  |  |
 | Domyslny | `bool` | bazodanowe | Domyślna | Określa, że jest to domyślny typ urządzenia. |
 | FiltrTowaru | `string` | bazodanowe | Filtr towaru | Filtr wg jakiego wyświetlana jest lista towarów na urządzeniu. |
-| Formularz | `Soneta.Core.RodzajFormularzaUrzadzenia` | bazodanowe, enum | Rodzaj formularza | Określa sposób wyświetlania formularza |
+| Formularz | `Soneta.Core.RodzajFormularzaUrzadzenia` (enum) | bazodanowe | Rodzaj formularza | Określa sposób wyświetlania formularza |
 | Gwarancja | `int` | bazodanowe |  | Gwarancja urządzenia. |
 | LenIdent | `int` | bazodanowe |  | Długość kodu identyfikatora. |
-| Modele | `Soneta.Business.SubTable<Soneta.Zadania.ModelUrz>` |  |  |  |
+| Modele | `SubTable<Soneta.Zadania.ModelUrz>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa rodzaju urządzenia. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
 | PrefixIdent | `string` | bazodanowe | Prefix identyfilatora | Prefix identyfikatora urządzenia. |
 | PrzegladOkres | `int` | bazodanowe |  | Co ile miesięcy przegląd. |
 | Symbol | `string` | bazodanowe | Symbol | Symbol rodzaju urządzenia. |
-| Xml | `Soneta.Business.MemoText` |  |  |  |
+| Xml | `MemoText` | podlista |  |  |
 
 ## Enumy
 

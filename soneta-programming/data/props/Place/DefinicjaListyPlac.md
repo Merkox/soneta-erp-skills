@@ -6,40 +6,44 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaDokumentuOA`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 4
+- podlisty: 4
+- subrowy: 2
+- razem: 32
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktywna | `Soneta.Place.DefinicjaListyPlac` |  |  |  |
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Aktywna | `Soneta.Place.DefinicjaListyPlac` | tylko-odczyt |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | DefinicjaED | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu w ewidencji dokumentów |
-| Definicje | `Soneta.Business.SubTable<Soneta.Place.DefinicjaListyPlac>` |  |  |  |
-| DefinicjeElementow | `Soneta.Business.SubTable<Soneta.Place.DefinicjaElementu>` |  |  |  |
-| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` |  |  |  |
-| KosztyUzyskaniaPrzychodu | `Soneta.Place.NaliczanieKosztówUzyskaniaPrzychodu` | bazodanowe, enum | Definicja |  |
+| Definicje | `SubTable<Soneta.Place.DefinicjaListyPlac>` | podlista |  |  |
+| DefinicjeElementow | `SubTable<Soneta.Place.DefinicjaElementu>` | podlista |  |  |
+| KonfiguracjaOpisuAnalitycznego | `Soneta.Core.KonfiguracjaOpisuAnalitycznego` | tylko-odczyt |  |  |
+| KosztyUzyskaniaPrzychodu | `Soneta.Place.NaliczanieKosztówUzyskaniaPrzychodu` (enum) | bazodanowe, tylko-odczyt | Definicja |  |
 | Nadrzedna | `Soneta.Place.DefinicjaListyPlac` | bazodanowe |  |  |
 | NaliczajKosztyZeStosunkuPracy | `bool` |  |  |  |
 | NaliczajUlgePodatkowa | `bool` |  |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  |  |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
 | PozwalajNaZmianeOpisu | `bool` | bazodanowe |  |  |
 | ProceduraISO | `Soneta.Core.IsoProcedura` | bazodanowe | Definicja |  |
-| Rozliczanie | `Soneta.Place.RozliczanieListPłac` | bazodanowe, enum | Definicja |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rozliczanie | `Soneta.Place.RozliczanieListPłac` (enum) | bazodanowe | Definicja |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SchematPodzialowy | `Soneta.Core.ISchematPodziałowy` | bazodanowe, iface-ref |  |  |
 | Seria | `bool` | bazodanowe | Definicja |  |
 | Symbol | `string` | bazodanowe |  |  |
-| UlgaPodatkowa | `bool` | bazodanowe | Definicja |  |
+| UlgaPodatkowa | `bool` | bazodanowe, tylko-odczyt | Definicja |  |
 | WalutaPlatnosci | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
 | Wydzial | `bool` | bazodanowe | Jednostka organizacyjna |  |
 | ZawszePrzeliczajOpisAnalityczny | `bool` | bazodanowe |  |  |

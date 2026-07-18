@@ -5,29 +5,33 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje parametr filtru
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 1
+- subrowy: 2
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Code | `Soneta.BI.ReportParamCode` | bazodanowe | Algorytm |  |
-| DateSlicerType | `Soneta.BI.DateSlicerType` | bazodanowe, enum | Typ filtru daty |  |
-| Field | `Soneta.BI.FieldProxy` | bazodanowe |  |  |
-| Field.Definition | `Soneta.BI.FieldDefinition` | bazodanowe | Definicja pola |  |
-| Field.FieldDefinition | `Soneta.BI.Interfaces.IFieldDefinition` |  |  |  |
-| Field.GroupBy | `Soneta.BI.ModelGroupBy` |  |  |  |
-| Field.Join | `Soneta.BI.ModelJoin` |  |  |  |
-| Field.Name | `string` | bazodanowe | Nazwa pola |  |
-| Field.OrderBy | `Soneta.BI.ModelOrderBy` |  |  |  |
-| Field.Param | `Soneta.BI.ReportParam` |  |  |  |
-| Field.WgDefinition | `Soneta.Business.Key` |  |  |  |
+| DateSlicerType | `Soneta.BI.DateSlicerType` (enum) | bazodanowe | Typ filtru daty |  |
+| Field | `Soneta.BI.FieldProxy` (subrow) | bazodanowe |  |  |
+| Field.Definition | `Soneta.BI.FieldDefinition` | bazodanowe, tylko-odczyt | Definicja pola |  |
+| Field.FieldDefinition | `Soneta.BI.Interfaces.IFieldDefinition` | tylko-odczyt |  |  |
+| Field.GroupBy | `Soneta.BI.ModelGroupBy` | tylko-odczyt |  |  |
+| Field.Join | `Soneta.BI.ModelJoin` | tylko-odczyt |  |  |
+| Field.Name | `string` | bazodanowe, tylko-odczyt | Nazwa pola |  |
+| Field.OrderBy | `Soneta.BI.ModelOrderBy` | tylko-odczyt |  |  |
+| Field.Param | `Soneta.BI.ReportParam` | tylko-odczyt |  |  |
+| Field.WgDefinition | `Key` | podlista |  |  |
 | IsDateSlicer | `bool` | bazodanowe | Filtr daty |  |
 | IsOptional | `bool` | bazodanowe | Parametr opcjonalny |  |
 | Lp | `int` | bazodanowe |  |  |
-| Model | `Soneta.BI.DataModel` | bazodanowe | Model danych |  |
+| Model | `Soneta.BI.DataModel` | bazodanowe, tylko-odczyt | Model danych |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| RelatedField | `Soneta.BI.FieldProxy` | bazodanowe |  |  |
-| Type | `Soneta.BI.ReportParamType` | bazodanowe, enum | Rodzaj parametru raportu |  |
+| RelatedField | `Soneta.BI.FieldProxy` (subrow) | bazodanowe |  |  |
+| Type | `Soneta.BI.ReportParamType` (enum) | bazodanowe | Rodzaj parametru raportu |  |
 
 ## Enumy
 

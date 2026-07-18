@@ -4,16 +4,20 @@ Tytuł: Rodzaje komunikatów
 Opis: Konfiguracja rodzajów komunikatów EDI przypisanych do definicji dokumentów. Określa rodzaj, kierunek (import/eksport) i zastosowanie komunikatu dla danego typu dokumentu, z liczbą porządkową.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Core.IDefinicjaKomunikatuEDIHost` | bazodanowe, iface-ref | Obiekt, dla którego zdefionowano komunikat |  |
-| Kierunek | `Soneta.Core.RodzajOperacji` | bazodanowe, enum | Kierunek komunikatu | Kierunek definiowanego komunikatu. |
+| Kierunek | `Soneta.Core.RodzajOperacji` (enum) | bazodanowe | Kierunek komunikatu | Kierunek definiowanego komunikatu. |
 | Lp | `int` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Core.RodzajDefXml` | bazodanowe, enum | Rodzaj komunikatu | Rodzaj definiowanego komunikatu. |
-| Zastosowanie | `Soneta.Core.ZastosowanieKomunikatu` | bazodanowe, enum | Zastosowanie komunikatu | Zastosowanie komunikatu. |
+| Rodzaj | `Soneta.Core.RodzajDefXml` (enum) | bazodanowe | Rodzaj komunikatu | Rodzaj definiowanego komunikatu. |
+| Zastosowanie | `Soneta.Core.ZastosowanieKomunikatu` (enum) | bazodanowe | Zastosowanie komunikatu | Zastosowanie komunikatu. |
 
 ## Relacje interfejsowe
 

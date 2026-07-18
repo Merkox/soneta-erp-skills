@@ -5,32 +5,35 @@ Opis: Rejestr wyróżnień, certyfikatów i odznaczeń przyznanych uczestnikom. 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 1
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowane | `bool` | bazodanowe |  | Wyróżnienie anulowane. |
-| Data | `Soneta.Types.Date` | bazodanowe | Data uzyskania | Data uzyskania. |
+| Data | `Date` | bazodanowe | Data uzyskania | Data uzyskania. |
 | DefWyroznienia | `Soneta.CzlonkowieSzkolenia.DefWyroznienia` | bazodanowe |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
 | Nazwa | `string` | bazodanowe | Nazwa wyróżnienia | Nazwa wyróżnienia. |
 | Numer | `string` | bazodanowe | Numer wyróżnienia | Numer wyróżnienia. |
-| NumerAuto | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| NumerAuto | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | NumerAuto.Numer | `int` | bazodanowe |  |  |
 | NumerAuto.NumerPelny | `string` |  |  |  |
-| NumerAuto.Pelny | `string` | bazodanowe | Numer pełny |  |
+| NumerAuto.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | NumerAuto.Symbol | `string` | bazodanowe |  |  |
-| NumerAuto.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerAuto.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| NumerAuto.WgNumeruDokumentu | `Key` | podlista |  |  |
+| NumerAuto.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Podpis1 | `string` | bazodanowe | Podpis 1 |  |
 | Podpis2 | `string` | bazodanowe | Podpis 2 |  |
 | Podpis3 | `string` | bazodanowe | Podpis 3 |  |
-| PokazPodpisy | `bool` |  |  |  |
-| Stan | `Soneta.CzlonkowieSzkolenia.StanWyroznienia` | bazodanowe, enum |  |  |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypWyroznienia` | bazodanowe, enum |  |  |
-| Uczestnik | `Soneta.CzlonkowieSzkolenia.UczestnikBase` | bazodanowe |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi | Dodatkowe uwagi. |
+| PokazPodpisy | `bool` | tylko-odczyt |  |  |
+| Stan | `Soneta.CzlonkowieSzkolenia.StanWyroznienia` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypWyroznienia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi | Dodatkowe uwagi. |
 | Wyrozniony | `Soneta.Core.ITrainee` | bazodanowe |  |  |
 | ZgloszenieUczestnik | `Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik` | bazodanowe |  |  |
 

@@ -4,15 +4,19 @@ Opis: Rejestr odczytów i wykładów organizowanych poza regularnymi szkoleniami
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasDo | `Soneta.Types.Time` | bazodanowe | Godzina zakończenia | Godzina zakończenia. |
-| CzasOd | `Soneta.Types.Time` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia. |
-| Czlonkowie | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.OdczytCzlonek>` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data odczytu | Data odczytu. |
+| CzasDo | `Time` | bazodanowe | Godzina zakończenia | Godzina zakończenia. |
+| CzasOd | `Time` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia. |
+| Czlonkowie | `SubTable<Soneta.CzlonkowieSzkolenia.OdczytCzlonek>` | podlista |  |  |
+| Data | `Date` | bazodanowe | Data odczytu | Data odczytu. |
 | Nazwa | `string` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy |  |
 | Opis | `string` | bazodanowe | Opis | Krótki opis odczytu. |

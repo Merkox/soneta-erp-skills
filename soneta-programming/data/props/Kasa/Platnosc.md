@@ -6,96 +6,100 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 44
-- pola kalkulowane (z klas biznesowych): 41
+- pola bazodanowe (zapisywalne): 36
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 30
+- podlisty: 13
+- subrowy: 1
+- razem: 85
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Automatyczne | `bool` | bazodanowe |  |  |
+| Automatyczne | `bool` | bazodanowe, tylko-odczyt |  |  |
 | BlokadaPrzelewow | `bool` | bazodanowe | Blokada przelewów |  |
 | Bufor | `bool` | bazodanowe |  |  |
-| CzyNaleznosc | `bool` |  |  |  |
-| CzyZobowiazanie | `bool` |  |  |  |
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataRozliczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| DoRozliczenia | `Soneta.Types.Currency` |  |  |  |
-| Dokument | `Soneta.Kasa.IDokumentPlatny` | bazodanowe, iface-ref |  |  |
-| Dokumenty | `Soneta.Business.SubTable<Soneta.Kasa.RozliczenieSP>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
+| CzyNaleznosc | `bool` | tylko-odczyt |  |  |
+| CzyZobowiazanie | `bool` | tylko-odczyt |  |  |
+| DataDokumentu | `Date` | bazodanowe |  |  |
+| DataRozliczenia | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DoRozliczenia | `Currency` | tylko-odczyt |  |  |
+| Dokument | `Soneta.Kasa.IDokumentPlatny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Dokumenty | `SubTable<Soneta.Kasa.RozliczenieSP>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
 | EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
-| HistoriaWindykacji | `Soneta.Business.SubTable<Soneta.Windykacja.Windykacja>` |  |  |  |
-| Info | `int` | bazodanowe |  |  |
+| HistoriaWindykacji | `SubTable<Soneta.Windykacja.Windykacja>` | podlista |  |  |
+| Info | `int` | bazodanowe, tylko-odczyt |  |  |
 | KSeFIlosc | `int` | bazodanowe | Ilość | Podaje się ilość np. dni, od której liczony jest termin płatności za fakturę (np. 14). |
 | KSeFJednostka | `string` | bazodanowe | Jednostka | Podaje się jednostkę czasu, w której liczony jest termin płatności za fakturę (np. dzień, tydzień itp.) |
 | KSeFOpis | `string` | bazodanowe |  | Opis rachunku KSeF |
 | KSeFZdarzeniePoczatkowe | `string` | bazodanowe | Zdarzenie początkowe | Podaje się zdarzenie początkowe, od którego liczony jest termin płatności za fakturę (np. wystawienie faktury). |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` | bazodanowe, enum |  |  |
-| KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` |  |  |  |
-| KorektyPlatnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` | tylko-odczyt |  |  |
+| KorektyPlatnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
 | KsiegujZbiorczo | `bool` | bazodanowe |  |  |
 | Kurs | `double` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaKsiegi | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaMPP | `Soneta.Types.Currency` | bazodanowe | Kwota VAT/MPP |  |
-| KwotaRozliczona | `Soneta.Types.Currency` | bazodanowe |  |  |
-| MozliweMechanizmyMPP | `bool` |  |  |  |
-| NaglowkiRozliczeniaVAT | `Soneta.Business.SubTable` |  |  |  |
-| Należność | `Soneta.Types.Currency` |  |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaKsiegi | `Currency` | bazodanowe |  |  |
+| KwotaMPP | `Currency` | bazodanowe | Kwota VAT/MPP |  |
+| KwotaRozliczona | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| MozliweMechanizmyMPP | `bool` | tylko-odczyt |  |  |
+| NaglowkiRozliczeniaVAT | `SubTable` | podlista |  |  |
+| Należność | `Currency` | tylko-odczyt |  |  |
 | NieWindykowac | `bool` | bazodanowe |  | Wyłącza płatność z procesu windykacji |
 | NumerDokumentu | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| OpisyPowiazane | `Soneta.Business.SubTable` |  |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| OpisyPowiazane | `SubTable` | podlista |  |  |
 | PlatnoscKorygowana | `Soneta.Kasa.Platnosc` | bazodanowe |  | Płatność korygowana |
-| PoTerminie | `Soneta.Types.Currency` |  |  |  |
+| PoTerminie | `Currency` | tylko-odczyt |  |  |
 | Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| PozycjeDokRozlicz | `Soneta.Business.SubTable<Soneta.Kasa.PozycjaDokRozlicz>` |  |  |  |
-| PozycjePrzelewu | `Soneta.Business.SubTable<Soneta.Kasa.PozycjaPrzelewu>` |  |  |  |
+| PozycjeDokRozlicz | `SubTable<Soneta.Kasa.PozycjaDokRozlicz>` | podlista |  |  |
+| PozycjePrzelewu | `SubTable<Soneta.Kasa.PozycjaPrzelewu>` | podlista |  |  |
 | PreliminarzPoz | `Soneta.Kasa.PreliminarzPozycja` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Przelano | `Soneta.Types.Currency` |  |  |  |
+| Przelano | `Currency` | tylko-odczyt |  |  |
 | Rachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
 | RachunekWirtualny | `string` | bazodanowe |  |  |
-| RachunekWirtualnyUI | `string` |  |  |  |
-| RodzajSkladkiZUS | `Soneta.Kasa.RodzajSkladkiZUS` | bazodanowe, enum |  |  |
+| RachunekWirtualnyUI | `string` | tylko-odczyt |  |  |
+| RodzajSkladkiZUS | `Soneta.Kasa.RodzajSkladkiZUS` (enum) | bazodanowe |  |  |
 | Rozliczana | `bool` | bazodanowe |  |  |
-| Rozliczenia | `System.Collections.IList` |  |  |  |
-| RozliczoneDokumenty | `string` |  |  |  |
-| Rozliczono | `bool` |  |  |  |
-| Rozrachunki | `Soneta.Business.SubTable<Soneta.Kasa.RozrachunekIdx>` |  |  |  |
-| SkrocenieTerminu | `Soneta.Types.Date` |  |  |  |
+| Rozliczenia | `System.Collections.IList` | podlista |  |  |
+| RozliczoneDokumenty | `string` | tylko-odczyt |  |  |
+| Rozliczono | `bool` | tylko-odczyt |  |  |
+| Rozrachunki | `SubTable<Soneta.Kasa.RozrachunekIdx>` | podlista |  |  |
+| SkrocenieTerminu | `Date` | tylko-odczyt |  |  |
 | SposobZaplaty | `Soneta.Kasa.SposobZaplaty` | bazodanowe |  |  |
-| SprawaWindykacyjna | `Soneta.Windykacja.SprawaWindykacyjna` |  |  |  |
-| StanNoty | `Soneta.Kasa.PlatnoscStanNoty` | bazodanowe, enum |  | Stan płatności z punktu widzenia naliczania not odsetkowych |
-| StanRozliczenia | `Soneta.Kasa.StanRozliczenia` | enum |  |  |
+| SprawaWindykacyjna | `Soneta.Windykacja.SprawaWindykacyjna` | tylko-odczyt |  |  |
+| StanNoty | `Soneta.Kasa.PlatnoscStanNoty` (enum) | bazodanowe |  | Stan płatności z punktu widzenia naliczania not odsetkowych |
+| StanRozliczenia | `Soneta.Kasa.StanRozliczenia` (enum) | tylko-odczyt |  |  |
 | StornoPlatnosci | `bool` | bazodanowe |  | Storno płatności przez dokument korekty |
-| Słownie | `string` |  |  |  |
+| Słownie | `string` | tylko-odczyt |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
+| Termin | `Date` | bazodanowe |  |  |
 | TerminDni | `int` |  | Termin |  |
-| TerminLiczonyOd | `Soneta.Types.Date` | bazodanowe |  | Data odniesienia do wyliczenia terminu płatności |
-| TerminPlanowany | `Soneta.Types.Date` | bazodanowe |  |  |
+| TerminLiczonyOd | `Date` | bazodanowe, tylko-odczyt |  | Data odniesienia do wyliczenia terminu płatności |
+| TerminPlanowany | `Date` | bazodanowe |  |  |
 | TerminPlanowanyDni | `int` |  | Termin planowany - dni |  |
 | TerminPlanowanyDniOdTerminu | `int` |  | Termin planowany - dni od terminu |  |
-| TerminZleDlugi | `Soneta.Types.Date` |  |  |  |
-| Typ | `Soneta.Kasa.TypRozrachunku` | enum |  |  |
-| TypPrzelewu | `Soneta.Kasa.TypPrzelewu` | bazodanowe, enum |  |  |
-| US | `Soneta.Kasa.OpisPrzelewu.US` |  |  |  |
-| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` |  |  |  |
-| Windykacja | `Soneta.Windykacja.WindykacjaInfo` | bazodanowe |  |  |
-| Windykacja.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| TerminZleDlugi | `Date` | tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypRozrachunku` (enum) | tylko-odczyt |  |  |
+| TypPrzelewu | `Soneta.Kasa.TypPrzelewu` (enum) | bazodanowe |  |  |
+| US | `Soneta.Kasa.OpisPrzelewu.US` | tylko-odczyt |  |  |
+| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` | tylko-odczyt |  |  |
+| Windykacja | `Soneta.Windykacja.WindykacjaInfo` (subrow) | bazodanowe |  |  |
+| Windykacja.Data | `Date` | bazodanowe |  |  |
 | Windykacja.Stan | `Soneta.Windykacja.StanWindykacji` | bazodanowe |  |  |
-| Windykacja.Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| Windykacja.WgStan | `Soneta.Business.Key` |  |  |  |
+| Windykacja.Termin | `Date` | bazodanowe |  |  |
+| Windykacja.WgStan | `Key` | podlista |  |  |
 | WysylajNipWPodmiocieTrzecimKSeF | `bool` | bazodanowe | Czy wysyłać NIP w podmiocie trzecim dla roli płatnika. | Czy wysyłać NIP w podmiocie trzecim dla roli płatnika. |
-| ZUS | `Soneta.Kasa.OpisPrzelewu.ZUS` |  |  |  |
-| ZapisyKsiegowe | `Soneta.Business.SubTable` |  |  |  |
-| Zaplaty | `Soneta.Business.SubTable<Soneta.Kasa.RozliczenieSP>` |  |  |  |
+| ZUS | `Soneta.Kasa.OpisPrzelewu.ZUS` | tylko-odczyt |  |  |
+| ZapisyKsiegowe | `SubTable` | podlista |  |  |
+| Zaplaty | `SubTable<Soneta.Kasa.RozliczenieSP>` | podlista |  |  |
 | Zatwierdzona | `bool` |  |  |  |
-| Zobowiązanie | `Soneta.Types.Currency` |  |  |  |
-| Zrealizowane | `bool` |  |  |  |
+| Zobowiązanie | `Currency` | tylko-odczyt |  |  |
+| Zrealizowane | `bool` | tylko-odczyt |  |  |
 | Zwrot | `bool` |  |  |  |
-| ZwrotInfo | `Soneta.Kasa.InformacjaOZwrocie` | bazodanowe, enum |  |  |
+| ZwrotInfo | `Soneta.Kasa.InformacjaOZwrocie` (enum) | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

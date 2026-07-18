@@ -6,38 +6,41 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRozliczenie`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 10
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 13
+- podlisty: 5
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataKsi | `Soneta.Types.Date` | bazodanowe |  | Data odnośnego rozliczenia księgowego lub MAX w przypadku braku takiego rozliczenia |
-| DataOgraniczeniaNaliczaniaOdsetek | `Soneta.Types.Date` | bazodanowe |  | Górna (do) data ograniczenia naliczania odsetek. |
-| DataOgraniczeniaNaliczaniaOdsetekOd | `Soneta.Types.Date` | bazodanowe |  | Dolna (od) data ograniczenia naliczania odsetek. |
-| Dokument | `Soneta.Kasa.IRozliczalny` | bazodanowe, iface-ref |  |  |
-| EwidencjaRK | `Soneta.Core.DokEwidencji` | bazodanowe |  | Dokument ewidencji różnicy kursowej KPiR. |
-| InnePlatnosci | `Soneta.Business.SubTable` |  |  |  |
-| KwotaDokumentu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaRK | `Soneta.Types.Currency` | bazodanowe |  | Kwota różnicy kursowej KPiR. |
-| KwotaZaplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| NaglowkiRozliczeniaVAT | `Soneta.Business.SubTable` |  |  |  |
-| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataKsi | `Date` | bazodanowe, tylko-odczyt |  | Data odnośnego rozliczenia księgowego lub MAX w przypadku braku takiego rozliczenia |
+| DataOgraniczeniaNaliczaniaOdsetek | `Date` | bazodanowe |  | Górna (do) data ograniczenia naliczania odsetek. |
+| DataOgraniczeniaNaliczaniaOdsetekOd | `Date` | bazodanowe |  | Dolna (od) data ograniczenia naliczania odsetek. |
+| Dokument | `Soneta.Kasa.IRozliczalny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| EwidencjaRK | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  | Dokument ewidencji różnicy kursowej KPiR. |
+| InnePlatnosci | `SubTable` | podlista |  |  |
+| KwotaDokumentu | `Currency` | bazodanowe |  |  |
+| KwotaRK | `Currency` | bazodanowe, tylko-odczyt |  | Kwota różnicy kursowej KPiR. |
+| KwotaZaplaty | `Currency` | bazodanowe |  |  |
+| NaglowkiRozliczeniaVAT | `SubTable` | podlista |  |  |
+| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | PomijajWRKV | `bool` | bazodanowe |  |  |
-| PozycjeDokRozlicz | `Soneta.Business.SubTable<Soneta.Kasa.PozycjaDokRozlicz>` |  |  |  |
-| RozliczeniaKS | `Soneta.Business.SubTable` |  |  |  |
-| RozliczeniaOA | `Soneta.Business.SubTable` |  |  |  |
-| RozliczenieKS | `Soneta.Core.IRozliczenieKS` |  |  |  |
-| RozliczenieSPKS | `Soneta.Core.IRozliczenie` | iface-ref |  |  |
-| RozliczenieSPKS2 | `Soneta.Kasa.IRozliczenieSPKS` |  |  |  |
-| RozniceKursoweSilver | `bool` |  |  |  |
-| StanNoty | `Soneta.Kasa.StanNotyOdsetkowej` | bazodanowe, enum |  |  |
-| StatusRK | `Soneta.Kasa.StatusRoznicyKursowejESP` | bazodanowe, enum |  | Status różnicy kursowej KPiR. |
-| Termin | `Soneta.Types.Date` |  |  |  |
-| TypRK | `Soneta.Kasa.TypRoznicyKursowej` | bazodanowe, enum |  | Typ (kierunek) różnicy kursowej KPiR. |
-| Zaplata | `Soneta.Kasa.IRozliczalny` | bazodanowe, iface-ref |  |  |
-| Zwloka | `int` | bazodanowe |  |  |
+| PozycjeDokRozlicz | `SubTable<Soneta.Kasa.PozycjaDokRozlicz>` | podlista |  |  |
+| RozliczeniaKS | `SubTable` | podlista |  |  |
+| RozliczeniaOA | `SubTable` | podlista |  |  |
+| RozliczenieKS | `Soneta.Core.IRozliczenieKS` | tylko-odczyt |  |  |
+| RozliczenieSPKS2 | `Soneta.Kasa.IRozliczenieSPKS` | tylko-odczyt |  |  |
+| RozniceKursoweSilver | `bool` | tylko-odczyt |  |  |
+| StanNoty | `Soneta.Kasa.StanNotyOdsetkowej` (enum) | bazodanowe |  |  |
+| StatusRK | `Soneta.Kasa.StatusRoznicyKursowejESP` (enum) | bazodanowe, tylko-odczyt |  | Status różnicy kursowej KPiR. |
+| Termin | `Date` | tylko-odczyt |  |  |
+| TypRK | `Soneta.Kasa.TypRoznicyKursowej` (enum) | bazodanowe, tylko-odczyt |  | Typ (kierunek) różnicy kursowej KPiR. |
+| Zaplata | `Soneta.Kasa.IRozliczalny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Zwloka | `int` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 
@@ -48,7 +51,6 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 |------|-----------|------------------------|
 | Dokument | `IRozliczalny` | `Platnosc`, `Zaplata` |
 | Podmiot | `IPodmiotKasowy` | `Bank`, `InstytucjaFinansowaPPK`, `Kontrahent`, `Pracownik`, `UrzadCelny`, `UrzadSkarbowy`, `ZUS` |
-| RozliczenieSPKS | `IRozliczenie` | `RozliczenieKS`, `RozliczenieSP` |
 | Zaplata | `IRozliczalny` | `Platnosc`, `Zaplata` |
 
 ## Enumy

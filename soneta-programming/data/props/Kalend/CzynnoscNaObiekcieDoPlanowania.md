@@ -5,14 +5,18 @@ Opis: Czynność przypisana do obiektu do planowania w określonym okresie. Łą
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Definicja | `Soneta.Kalend.DefinicjaCzynnosciNaObiekcie` | bazodanowe |  |  |
+| Definicja | `Soneta.Kalend.DefinicjaCzynnosciNaObiekcie` | bazodanowe, tylko-odczyt |  |  |
 | ElementStruktury | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
-| Kod | `string` |  |  |  |
-| ObiektDoPlanowania | `Soneta.Kalend.ObiektDoPlanowania` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| ObiektDoPlanowania | `Soneta.Kalend.ObiektDoPlanowania` | bazodanowe, tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |

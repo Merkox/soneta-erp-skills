@@ -5,12 +5,16 @@ Opis: Słownik rodzajów paliw na potrzeby rozliczeń środowiskowych. Zawiera s
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Gestosc | `double` | bazodanowe |  | Gęstość paliwa w kg/l |
-| Nazwa | `string` | bazodanowe |  | Nazwa paliwa |
-| Silniki | `Soneta.Business.SubTable<Soneta.Samochodowka.EkoPaliwoSilnika>` |  |  |  |
-| Symbol | `string` | bazodanowe |  | Symbol paliwa |
+| Gestosc | `double` | bazodanowe, tylko-odczyt |  | Gęstość paliwa w kg/l |
+| Nazwa | `string` | bazodanowe, tylko-odczyt |  | Nazwa paliwa |
+| Silniki | `SubTable<Soneta.Samochodowka.EkoPaliwoSilnika>` | podlista |  |  |
+| Symbol | `string` | bazodanowe, tylko-odczyt |  | Symbol paliwa |

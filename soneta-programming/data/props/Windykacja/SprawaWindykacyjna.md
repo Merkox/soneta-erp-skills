@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`, `IDokumentCRM`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 5
+- subrowy: 1
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AktualnyTask | `Soneta.Business.Db.Task` |  | Aktualne zadanie |  |
-| CzasTrwania | `int` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia |  |
+| AktualnyTask | `Db.Task` | tylko-odczyt | Aktualne zadanie |  |
+| CzasTrwania | `int` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe | Data rozpoczęcia |  |
 | Definicja | `Soneta.Windykacja.DefinicjaSprawyWindykacyjnej` | bazodanowe |  |  |
-| Kod | `string` |  |  |  |
-| Kwota | `Soneta.Types.Currency` |  |  |  |
-| MailTo | `string` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| Kwota | `Currency` | tylko-odczyt |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Windykacja.PozycjaSprawyWindykacyjnej>` |  |  |  |
-| Stan | `Soneta.Kasa.StanSprawyWindykacyjnej` | bazodanowe, enum |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe | Planowany termin zakończenia |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable` |  |  |  |
-| Windykator | `Soneta.Business.App.Operator` | bazodanowe | Windykator |  |
-| ZadaniaCRM | `Soneta.Business.SubTable` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Pozycje | `LpSubTable<Soneta.Windykacja.PozycjaSprawyWindykacyjnej>` | podlista |  |  |
+| Stan | `Soneta.Kasa.StanSprawyWindykacyjnej` (enum) | bazodanowe |  |  |
+| Termin | `Date` | bazodanowe | Planowany termin zakończenia |  |
+| WiadomosciPowiazane | `SubTable` | podlista |  |  |
+| Windykator | `App.Operator` | bazodanowe | Windykator |  |
+| ZadaniaCRM | `SubTable` | podlista |  |  |
 | ZrealizowanyEtap | `Soneta.Windykacja.EtapDefinicjiWindykacji` | bazodanowe | Zrealizowany etap |  |
 
 ## Relacje interfejsowe

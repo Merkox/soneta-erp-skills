@@ -6,52 +6,55 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`, `IRozliczenieWynagrodzeniaHost`, `IBilansOtwarcia`
 
-- pola bazodanowe: 23
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 18
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 14
+- podlisty: 6
+- subrowy: 2
+- razem: 40
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AlgorytmRaty | `Soneta.Kadry.AlgorytmRatyPożyczki` | bazodanowe |  |  |
 | BilansOtwarcia | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data udzielenia pożyczki |
+| Data | `Date` | bazodanowe |  | Data udzielenia pożyczki |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | ElementRaty | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
-| Fundusz | `Soneta.Kadry.FundPozyczkowy` | bazodanowe |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
+| Fundusz | `Soneta.Kadry.FundPozyczkowy` | bazodanowe, tylko-odczyt |  |  |
 | IloscRat | `int` | bazodanowe |  |  |
 | IndywidualnyRachunekBankowy | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
-| IsVisibleWłączBO | `bool` |  |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota udzielonej pożyczki |
-| KwotaRaty | `Soneta.Types.Currency` | bazodanowe |  |  |
+| IsVisibleWłączBO | `bool` | tylko-odczyt |  |  |
+| Kwota | `Currency` | bazodanowe |  | Kwota udzielonej pożyczki |
+| KwotaRaty | `Currency` | bazodanowe |  |  |
 | OdsetkiZaOdroczenie | `bool` | bazodanowe |  |  |
-| OstatniaRata | `Soneta.Kadry.RataPozyczki` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Raty | `Soneta.Business.SubTable<Soneta.Kadry.RataPozyczki>` |  |  |  |
-| RazemElementy | `Soneta.Business.ListWithView` |  |  |  |
-| Realizacja | `Soneta.Place.WypElementPożyczka` |  |  |  |
-| RozliczeniaWynagrodzenia | `Soneta.Business.LpSubTable<Soneta.Place.RozliczenieWynagrodzenia>` |  |  |  |
-| RozliczenieWynagrodzenia | `Soneta.Place.RozliczenieWynagrodzenia` |  |  |  |
-| Splacona | `bool` | bazodanowe |  |  |
-| SplataRoznicy | `Soneta.Kadry.SplataRoznicyZ` | bazodanowe, enum |  |  |
-| SplatyOd | `Soneta.Types.YearMonth` | bazodanowe |  |  |
-| Sposob | `Soneta.Kadry.SposóbSpłatyOdsetek` | bazodanowe, enum |  |  |
-| Spłaty | `Soneta.Business.ListWithView` |  |  |  |
-| Stan | `Soneta.Kadry.StanSpłat` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kadry.TypOprocentowania` | bazodanowe, enum |  |  |
-| Wypłacona | `bool` |  |  |  |
-| Zyrant1 | `Soneta.Core.Osoba` | bazodanowe |  |  |
+| OstatniaRata | `Soneta.Kadry.RataPozyczki` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| Raty | `SubTable<Soneta.Kadry.RataPozyczki>` | podlista |  |  |
+| RazemElementy | `ListWithView` | podlista |  |  |
+| Realizacja | `Soneta.Place.WypElementPożyczka` | tylko-odczyt |  |  |
+| RozliczeniaWynagrodzenia | `LpSubTable<Soneta.Place.RozliczenieWynagrodzenia>` | podlista |  |  |
+| RozliczenieWynagrodzenia | `Soneta.Place.RozliczenieWynagrodzenia` | tylko-odczyt |  |  |
+| Splacona | `bool` | bazodanowe, tylko-odczyt |  |  |
+| SplataRoznicy | `Soneta.Kadry.SplataRoznicyZ` (enum) | bazodanowe |  |  |
+| SplatyOd | `YearMonth` | bazodanowe |  |  |
+| Sposob | `Soneta.Kadry.SposóbSpłatyOdsetek` (enum) | bazodanowe |  |  |
+| Spłaty | `ListWithView` | podlista |  |  |
+| Stan | `Soneta.Kadry.StanSpłat` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypOprocentowania` (enum) | bazodanowe |  |  |
+| Wypłacona | `bool` | tylko-odczyt |  |  |
+| Zyrant1 | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
 | Zyrant1.Adres | `string` | bazodanowe |  |  |
 | Zyrant1.Osoba | `string` | bazodanowe |  |  |
 | Zyrant1.Telefon | `string` | bazodanowe |  |  |
-| Zyrant2 | `Soneta.Core.Osoba` | bazodanowe |  |  |
-| Żyranci | `Soneta.Business.LpSubTable<Soneta.Kadry.ŻyrantPożyczki>` |  |  |  |
-| Żyrant1 | `Soneta.Kadry.Pracownik` |  |  |  |
-| Żyrant2 | `Soneta.Kadry.Pracownik` |  |  |  |
-| Żyrant3 | `Soneta.Kadry.Pracownik` |  |  |  |
-| ŻyrantPożyczki1 | `Soneta.Kadry.ŻyrantPożyczki` |  |  |  |
-| ŻyrantPożyczki2 | `Soneta.Kadry.ŻyrantPożyczki` |  |  |  |
-| ŻyrantPożyczki3 | `Soneta.Kadry.ŻyrantPożyczki` |  |  |  |
+| Zyrant2 | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
+| Żyranci | `LpSubTable<Soneta.Kadry.ŻyrantPożyczki>` | podlista |  |  |
+| Żyrant2 | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| Żyrant3 | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| ŻyrantPożyczki1 | `Soneta.Kadry.ŻyrantPożyczki` | tylko-odczyt |  |  |
+| ŻyrantPożyczki2 | `Soneta.Kadry.ŻyrantPożyczki` | tylko-odczyt |  |  |
+| ŻyrantPożyczki3 | `Soneta.Kadry.ŻyrantPożyczki` | tylko-odczyt |  |  |
 
 ## Enumy
 

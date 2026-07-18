@@ -5,42 +5,46 @@ Opis: Element szczegółowy elementu wypłaty (WypElement). Przechowuje szczegó
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Element` → `WypElement`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 11
+- podlisty: 5
+- subrowy: 0
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` | bazodanowe | Czas |  |
-| DataKursu | `Soneta.Types.Date` |  |  |  |
+| Czas | `Time` | bazodanowe | Czas |  |
+| DataKursu | `Date` | tylko-odczyt |  |  |
 | Dni | `int` | bazodanowe | Dni |  |
 | Element | `Soneta.Place.WypElement` | bazodanowe, guided-parent |  |  |
 | Ilosc | `double` | bazodanowe | Ilość |  |
-| KodRSA | `Soneta.Place.KodRSA` |  |  |  |
+| KodRSA | `Soneta.Place.KodRSA` | tylko-odczyt |  |  |
 | Nieobecnosc | `Soneta.Kalend.Nieobecnosc` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Podstawa1 | `Soneta.Types.DoubleCy` | bazodanowe | Podstawa 1 |  |
-| Podstawa2 | `Soneta.Types.DoubleCy` | bazodanowe | Podstawa 2 |  |
-| Podstawa3 | `Soneta.Types.DoubleCy` | bazodanowe | Podstawa 3 |  |
-| Podstawa4 | `Soneta.Types.DoubleCy` | bazodanowe | Podstawa 4 |  |
-| Podstawa5 | `Soneta.Types.DoubleCy` | bazodanowe | Podstawa 5 |  |
-| PodstawaOkres | `Soneta.Types.FromTo` | bazodanowe | PodstawaOkres |  |
-| Procent | `Soneta.Types.Percent` |  | Procent |  |
-| Rodzaj | `Soneta.Place.RodzajSkładnikaWypłaty` | bazodanowe, enum |  |  |
-| RozliczenieStorna | `bool` |  |  |  |
-| SkładnikiPowiązane | `System.Collections.IList` |  |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
-| SkładnikiPowiązane2 | `System.Collections.IList` |  |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
-| SkładnikiPowiązaneMiesięcznie | `System.Collections.ArrayList` |  |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem co do miesiąca |
-| StanStorna | `Soneta.Place.StanStornaElementu` | bazodanowe, enum |  |  |
-| Ulamek | `Soneta.Types.Fraction` | bazodanowe | Współczynnik |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Podstawa1 | `DoubleCy` | bazodanowe | Podstawa 1 |  |
+| Podstawa2 | `DoubleCy` | bazodanowe | Podstawa 2 |  |
+| Podstawa3 | `DoubleCy` | bazodanowe | Podstawa 3 |  |
+| Podstawa4 | `DoubleCy` | bazodanowe | Podstawa 4 |  |
+| Podstawa5 | `DoubleCy` | bazodanowe | Podstawa 5 |  |
+| PodstawaOkres | `FromTo` | bazodanowe, podlista | PodstawaOkres |  |
+| Procent | `Percent` |  | Procent |  |
+| Rodzaj | `Soneta.Place.RodzajSkładnikaWypłaty` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RozliczenieStorna | `bool` | tylko-odczyt |  |  |
+| SkładnikiPowiązane | `System.Collections.IList` | podlista |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
+| SkładnikiPowiązane2 | `System.Collections.IList` | podlista |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
+| SkładnikiPowiązaneMiesięcznie | `System.Collections.ArrayList` | podlista |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem co do miesiąca |
+| StanStorna | `Soneta.Place.StanStornaElementu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Ulamek | `Fraction` | bazodanowe | Współczynnik |  |
 | Wartosc | `decimal` | bazodanowe | Wartość w PLN |  |
-| WartoscCy | `Soneta.Types.Currency` | bazodanowe | Wartość w walucie |  |
-| WartośćAgregowana | `decimal` |  |  | Zagregowana wartość składnika |
-| WartośćDopełniona | `decimal` |  |  | Wartość składnika dopełniona do pełnego miesiąca |
-| WartośćGodzinyKorygowana | `double` |  |  | Suma wszystkich składników głównych i korygowanych zawierających danych składnik przeliczona na wartość 1 godziny |
-| WartośćKorygowana | `decimal` |  |  | Suma wszystkich składników głównych i korygowanych zawierających danych składnik |
-| WartośćKorygowanaCy | `Soneta.Types.Currency` |  |  | Suma w walucie wszystkich składników głównych i korygowanych zawierających danych składnik |
+| WartoscCy | `Currency` | bazodanowe | Wartość w walucie |  |
+| WartośćAgregowana | `decimal` | tylko-odczyt |  | Zagregowana wartość składnika |
+| WartośćDopełniona | `decimal` | tylko-odczyt |  | Wartość składnika dopełniona do pełnego miesiąca |
+| WartośćGodzinyKorygowana | `double` | tylko-odczyt |  | Suma wszystkich składników głównych i korygowanych zawierających danych składnik przeliczona na wartość 1 godziny |
+| WartośćKorygowana | `decimal` | tylko-odczyt |  | Suma wszystkich składników głównych i korygowanych zawierających danych składnik |
+| WartośćKorygowanaCy | `Currency` | tylko-odczyt |  | Suma w walucie wszystkich składników głównych i korygowanych zawierających danych składnik |
 | Wspolczynnik | `decimal` |  | Współczynnik |  |
-| Zatwierdzony | `bool` |  |  |  |
+| Zatwierdzony | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,34 +5,38 @@ Opis: Element szczegółowy rozliczenia pracownika (DokumentRozliczeniaPracownik
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 9
+- podlisty: 2
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BaseCzas | `Soneta.Types.Time` |  |  |  |
-| BaseData | `Soneta.Types.Date` |  |  |  |
+| BaseCzas | `Time` |  |  |  |
+| BaseData | `Date` |  |  |  |
 | BaseDni | `int` |  |  |  |
 | BaseDokument | `Soneta.Place.DokumentRozliczeniaPracownika` |  |  |  |
-| BaseOkres | `Soneta.Types.FromTo` |  |  |  |
-| BasePodstawa | `Soneta.Types.DoubleCy` |  |  |  |
-| Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Place.DefinicjaElementuRozliczenia` | bazodanowe |  |  |
+| BaseOkres | `FromTo` | podlista |  |  |
+| BasePodstawa | `DoubleCy` |  |  |  |
+| Czas | `Time` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Definicja | `Soneta.Place.DefinicjaElementuRozliczenia` | bazodanowe, tylko-odczyt |  |  |
 | Dni | `int` | bazodanowe |  |  |
-| DodHistoria | `Soneta.Kadry.InformacjeDoRozliczeniaHistoria` |  |  |  |
-| Dokument | `Soneta.Place.DokumentRozliczeniaPracownika` | bazodanowe |  |  |
+| DodHistoria | `Soneta.Kadry.InformacjeDoRozliczeniaHistoria` | tylko-odczyt |  |  |
+| Dokument | `Soneta.Place.DokumentRozliczeniaPracownika` | bazodanowe, tylko-odczyt |  |  |
 | Ilosc | `double` | bazodanowe |  |  |
-| Informacja | `Soneta.Kadry.InformacjaDoRozliczenia` | bazodanowe |  |  |
+| Informacja | `Soneta.Kadry.InformacjaDoRozliczenia` | bazodanowe, tylko-odczyt |  |  |
 | Korekta | `bool` | bazodanowe | Wartość | Określa, czy element rozliczenia jest zmodyfikowany ręcznie przez operatora. |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Podstawa | `Soneta.Types.DoubleCy` | bazodanowe |  |  |
-| Podstawa2 | `Soneta.Types.DoubleCy` | bazodanowe |  |  |
-| Podstawa3 | `Soneta.Types.DoubleCy` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Ulamek | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe |  |  |
-| WartoscCy | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Podstawa | `DoubleCy` | bazodanowe |  |  |
+| Podstawa2 | `DoubleCy` | bazodanowe |  |  |
+| Podstawa3 | `DoubleCy` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| Ulamek | `Fraction` | bazodanowe |  |  |
+| Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe, tylko-odczyt |  |  |
+| WartoscCy | `Currency` | bazodanowe, tylko-odczyt |  |  |
 | Wspolczynnik | `double` | bazodanowe |  |  |
-| Zatwierdzony | `bool` |  |  |  |
+| Zatwierdzony | `bool` | tylko-odczyt |  |  |

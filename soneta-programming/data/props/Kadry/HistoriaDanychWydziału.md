@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wydzial` → `Wydzial`
 Implementuje interfejsy: `IMetrykaWydziałuHost`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
 | Definicja | `Soneta.Kadry.DefinicjaWydziału` | bazodanowe | Kategoria |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
 | Kod | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaPomocnicza | `string` | bazodanowe |  |  |
 | Przyczyna | `string` |  |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, guided-parent |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt, guided-parent |  |  |

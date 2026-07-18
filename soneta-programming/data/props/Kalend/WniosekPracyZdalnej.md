@@ -6,25 +6,29 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 4
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataDecyzji | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Kalend.DefinicjaRodzajuPracyZdalnej` | bazodanowe |  |  |
-| DniKalendarzaHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` |  |  |  |
-| DniPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienPracyHistoria>` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataDecyzji | `Date` | bazodanowe |  |  |
+| Definicja | `Soneta.Kalend.DefinicjaRodzajuPracyZdalnej` | bazodanowe, tylko-odczyt |  |  |
+| DniKalendarzaHistorie | `SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` | podlista |  |  |
+| DniPracyHistorie | `SubTable<Soneta.Kalend.DzienPracyHistoria>` | podlista |  |  |
 | IlośćDni | `int` |  |  |  |
 | Kierownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
 | Lokalizacja | `Soneta.Kadry.LokalizacjaPracyZdalnej` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| SearchKey | `string` |  |  |  |
-| Stan | `Soneta.Kalend.StanyWnioskuPracyZdalnej` | bazodanowe, enum |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| SearchKey | `string` | tylko-odczyt |  |  |
+| Stan | `Soneta.Kalend.StanyWnioskuPracyZdalnej` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

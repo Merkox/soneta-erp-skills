@@ -3,16 +3,20 @@ Nazwa tabeli: `RelacjeZaliczek`
 Opis: Powiązanie dokumentu handlowego z zapłatą zaliczkową. Przechowuje typ relacji zaliczkowej i kwotę przypisaną do dokumentu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument handlowy | Dokument handlowy dla zaliczki |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaRozliczonaDokumentu | `Soneta.Types.Currency` |  |  |  |
-| Typ | `Soneta.Handel.TypyRelacjiZaliczek` | bazodanowe, enum |  |  |
-| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe | Zapłata | Zaplata dla zaliczki |
+| Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt | Dokument handlowy | Dokument handlowy dla zaliczki |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaRozliczonaDokumentu | `Currency` | tylko-odczyt |  |  |
+| Typ | `Soneta.Handel.TypyRelacjiZaliczek` (enum) | bazodanowe |  |  |
+| Zaplata | `Soneta.Kasa.Zaplata` | bazodanowe, tylko-odczyt | Zapłata | Zaplata dla zaliczki |
 
 ## Enumy
 

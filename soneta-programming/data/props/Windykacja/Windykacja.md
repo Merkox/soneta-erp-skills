@@ -4,27 +4,31 @@ Opis: Element szczegółowy należności (IRozliczalny) rejestrujący historię 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `IRozliczalny`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CofanieDoBufora | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DokRozlicz | `Soneta.Business.IRow` | bazodanowe | Dokument rozliczeniowy |  |
-| Dokument | `Soneta.Business.IRow` | bazodanowe, guided-parent |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DokRozlicz | `IRow` | bazodanowe | Dokument rozliczeniowy |  |
+| Dokument | `IRow` | bazodanowe, guided-parent |  |  |
 | Name | `string` |  |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Node | `Soneta.Config.CfgNode` |  |  |  |
-| Notatka | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Node | `Soneta.Config.CfgNode` | tylko-odczyt |  |  |
+| Notatka | `MemoText` | bazodanowe, podlista |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Session | `Soneta.Business.Session` |  |  | Główny obiekt sesji zawierający wszystkie inne obiekty biznesowe. |
-| Sprawa | `Soneta.Business.IRow` | bazodanowe |  |  |
-| Stan | `Soneta.Business.IRow` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypEtapu` | bazodanowe, enum |  |  |
-| Zadanie | `Soneta.Business.IRow` | bazodanowe |  |  |
-| Zrodlo | `Soneta.Business.IRow` | bazodanowe |  |  |
+| Session | `Session` | tylko-odczyt |  | Główny obiekt sesji zawierający wszystkie inne obiekty biznesowe. |
+| Sprawa | `IRow` | bazodanowe |  |  |
+| Stan | `IRow` | bazodanowe |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| Typ | `Soneta.Kasa.TypEtapu` (enum) | bazodanowe |  |  |
+| Zadanie | `IRow` | bazodanowe |  |  |
+| Zrodlo | `IRow` | bazodanowe |  |  |
 
 ## Enumy
 

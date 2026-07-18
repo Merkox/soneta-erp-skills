@@ -4,19 +4,20 @@ Opis: Element szczegółowy towaru (Towar). Definiuje zamiennik towarowy, czyli 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BiezacyTowar | `Soneta.Towary.Towar` |  |  |  |
 | Dwustronny | `bool` | bazodanowe | Dwustronny | Czy zamienniki jest dwustronny. |
-| JednostkaTow | `Soneta.Towary.Jednostka` | bazodanowe | JednostkaTow | Jednostka towaru. |
-| JednostkaZam | `Soneta.Towary.Jednostka` | bazodanowe | JednostkaZam | Jednostka zamiennika. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa zamienników na towarze. |
-| Towar | `Soneta.Towary.Towar` | bazodanowe, guided-parent | Towar | Towar, dla którego zdefiniowany jest zamiennik |
-| Wspolczynnik | `Soneta.Types.Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki zamiennika z jednostki towaru. |
-| WspolczynnikOdwrotny | `Soneta.Types.Fraction` |  |  |  |
-| WspolczynnikWzor | `string` |  | Wzór | Wzór pokazujący sposób przeliczania jednostek. |
+| Towar | `Soneta.Towary.Towar` | bazodanowe, tylko-odczyt, guided-parent | Towar | Towar, dla którego zdefiniowany jest zamiennik |
+| Wspolczynnik | `Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki zamiennika z jednostki towaru. |
+| WspolczynnikWzor | `string` | tylko-odczyt | Wzór | Wzór pokazujący sposób przeliczania jednostek. |
 | Zamiennik | `Soneta.Towary.Towar` | bazodanowe | Zamiennik | Towar, dla którego zdefiniowany jest zamiennik |
 | Zamienniki | `Soneta.Towary.Towar` |  |  |  |

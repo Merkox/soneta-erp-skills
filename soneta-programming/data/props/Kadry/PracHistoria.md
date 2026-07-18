@@ -4,137 +4,141 @@ Tytuł: Historia pracownika
 Opis: Element szczegółowy pracownika (Pracownik). Główny zapis historyczny pracownika zawierający dane osobowe, etatowe, podatkowe, ubezpieczeniowe, zaszeregowanie, kalendarz, bilansy otwarcia nieobecności, ustawienia PPK oraz dane GUS – wersjonowany z zachowaniem okresu aktualności.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
+Historia: Tak — zapis historyczny tabeli `Pracownik`
 Implementuje interfejsy: `IAdresHost`, `IDaneKontaktoweHost`
 
-- pola bazodanowe: 356
-- pola kalkulowane (z klas biznesowych): 182
+- pola bazodanowe (zapisywalne): 289
+- pola kalkulowane (zapisywalne): 48
+- pola tylko-odczyt: 97
+- podlisty: 51
+- subrowy: 51
+- razem: 536
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresDoKorespondencji | `Soneta.Core.Adres` |  |  |  |
-| AdresNaPrzelewach | `Soneta.Kadry.AdresPracownikaNaPrzelewach` | bazodanowe, enum |  |  |
-| AdresZameldowania | `Soneta.Core.Adres` |  |  |  |
-| AdresZamieszkania | `Soneta.Core.Adres` |  |  |  |
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| ChorobowyBO | `Soneta.Kadry.ChorobowyBO` | bazodanowe |  |  |
-| ChorobowyBO.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresDoKorespondencji | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresNaPrzelewach | `Soneta.Kadry.AdresPracownikaNaPrzelewach` (enum) | bazodanowe |  |  |
+| AdresZameldowania | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresZamieszkania | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| ChorobowyBO | `Soneta.Kadry.ChorobowyBO` (subrow) | bazodanowe |  |  |
+| ChorobowyBO.Data | `Date` | bazodanowe |  |  |
 | ChorobowyBO.DniWynagrodzenia | `int` | bazodanowe |  | Liczba dni zwolnienia chorobowego finansowanego ze środków pracodawcy |
 | ChorobowyBO.DniZasilkowe | `int` | bazodanowe |  | Liczba dni zwolnienia wliczana do aktualnego okresu zasiłkowego |
 | ChorobowyBO.DniZwolnienia | `int` | bazodanowe |  | Liczba dni nieprzerwanego (ciągłego) dobrowolnego zwolnienia chorobowego |
-| ChorobowyBO.MiesiacPodstawy | `Soneta.Types.YearMonth` | bazodanowe | Miesiąc podstawy |  |
+| ChorobowyBO.MiesiacPodstawy | `YearMonth` | bazodanowe | Miesiąc podstawy |  |
 | ChorobowyBO.Podstawa | `decimal` | bazodanowe |  |  |
 | ChorobowyBO.PrzedluzenieOZ | `bool` | bazodanowe |  | Okres zasiłkowy został przedłużony o 3 miesiące |
 | ChorobowyBO.ZasilekIloscDni | `int` |  |  |  |
-| ChorobowyBO.ZasilekOdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
+| ChorobowyBO.ZasilekOdDnia | `Date` | bazodanowe |  |  |
 | DefinicjaRCP | `Soneta.Kadry.IDefinicjaRCP` | bazodanowe |  |  |
-| DodSwiadczeniaZUS | `Soneta.Kadry.DodatkoweŚwiadczeniaZUS` |  | Dodatkowe świadczenia ZUS |  |
-| DodatkowyBO | `Soneta.Kadry.DodatkowyBO` | bazodanowe |  |  |
+| DodSwiadczeniaZUS | `Soneta.Kadry.DodatkoweŚwiadczeniaZUS` | tylko-odczyt | Dodatkowe świadczenia ZUS |  |
+| DodatkowyBO | `Soneta.Kadry.DodatkowyBO` (subrow) | bazodanowe |  |  |
 | DodatkowyBO.BezPierwszego | `bool` | bazodanowe |  | Prawo do urlopu w pierwszym miesiącu zatrudnienia pracownik nabył u poprzedniego pracodawcy |
-| DodatkowyBO.Data | `Soneta.Types.Date` |  |  |  |
+| DodatkowyBO.Data | `Date` | tylko-odczyt |  |  |
 | DodatkowyBO.UPoprzednich | `decimal` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców (dni) |
-| DodatkowyBO.Wykorzystany | `Soneta.Types.Time` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
-| Dokument | `Soneta.Kadry.DokumentOsoby` |  |  |  |
-| EmeryturaMundurowa | `Soneta.Kadry.EmeryturaMundurowa` |  |  |  |
-| Etat | `Soneta.Kadry.Etat` | bazodanowe |  |  |
+| DodatkowyBO.Wykorzystany | `Time` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
+| Dokument | `Soneta.Kadry.DokumentOsoby` | tylko-odczyt |  |  |
+| EmeryturaMundurowa | `Soneta.Kadry.EmeryturaMundurowa` | tylko-odczyt |  |  |
+| Etat | `Soneta.Kadry.Etat` (subrow) | bazodanowe |  |  |
 | Etat.BezCieciaOkresu | `bool` | bazodanowe |  |  |
 | Etat.CięcieOkresu | `bool` |  |  |  |
-| Etat.ConfigPoczątekDobyNiedzieledIŚwięta | `Soneta.Types.Time` |  |  |  |
-| Etat.DataPrzejeciaPracownika | `Soneta.Types.Date` | bazodanowe | Data przejęcia | Data przejęcia pracownika w trybie art. 23' K.P. |
-| Etat.DataPrzejeciaPracownikaPIT | `Soneta.Types.Date` |  |  |  |
-| Etat.DataPrzejeciaPracownikaUI | `Soneta.Types.Date` |  |  |  |
-| Etat.DataRozpPracy | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.DataZawarcia | `Soneta.Types.Date` | bazodanowe |  |  |
+| Etat.ConfigPoczątekDobyNiedzieledIŚwięta | `Time` | tylko-odczyt |  |  |
+| Etat.DataPrzejeciaPracownika | `Date` | bazodanowe | Data przejęcia | Data przejęcia pracownika w trybie art. 23' K.P. |
+| Etat.DataPrzejeciaPracownikaPIT | `Date` | tylko-odczyt |  |  |
+| Etat.DataPrzejeciaPracownikaUI | `Date` |  |  |  |
+| Etat.DataRozpPracy | `Date` | bazodanowe |  |  |
+| Etat.DataZawarcia | `Date` | bazodanowe |  |  |
 | Etat.Definicja | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
 | Etat.DefinicjaFunkcji | `Soneta.HR.DefinicjaFunkcji` | bazodanowe |  |  |
 | Etat.DefinicjaFunkcjiInt | `Soneta.HR.DefinicjaFunkcji` |  |  |  |
 | Etat.DefinicjaInt | `Soneta.HR.DefinicjaStanowiska` |  |  |  |
-| Etat.DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` |  |  |  |
+| Etat.DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` | tylko-odczyt |  |  |
 | Etat.EdycjaKategoriiPracownika | `bool` | bazodanowe |  |  |
-| Etat.EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Etat.EfektywnyOkresNaliczania | `Soneta.Types.FromTo` |  |  |  |
+| Etat.EfektywnyOkres | `FromTo` | podlista |  |  |
+| Etat.EfektywnyOkresNaliczania | `FromTo` | podlista |  |  |
 | Etat.FormaOrganizacjiPracy | `Soneta.Kadry.FormaOrganizacjiPracy` | bazodanowe |  |  |
 | Etat.Funkcja | `string` | bazodanowe |  |  |
 | Etat.FunkcjaPełna | `string` |  |  |  |
-| Etat.GodzinyPonadwymiarowe | `Soneta.Types.Time` | bazodanowe |  |  |
+| Etat.GodzinyPonadwymiarowe | `Time` | bazodanowe |  |  |
 | Etat.Grupa | `Soneta.Kadry.GrupaZaszeregowania` | bazodanowe |  |  |
 | Etat.GrupaInt | `Soneta.Kadry.GrupaZaszeregowania` |  |  |  |
-| Etat.InnyPracodawca | `bool` |  |  |  |
-| Etat.InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` | bazodanowe, enum |  |  |
-| Etat.InterpretacjaKalendarzaPozaOkrZatr | `Soneta.Kadry.InterpretacjaKalendarzaPozaOkrZatr` | bazodanowe, enum |  |  |
+| Etat.InnyPracodawca | `bool` | tylko-odczyt |  |  |
+| Etat.InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` (enum) | bazodanowe |  |  |
+| Etat.InterpretacjaKalendarzaPozaOkrZatr | `Soneta.Kadry.InterpretacjaKalendarzaPozaOkrZatr` (enum) | bazodanowe |  |  |
 | Etat.Kalendarz | `Soneta.Kalend.Kalendarz` | bazodanowe |  |  |
 | Etat.KategoriaPracownika | `Soneta.HR.KategoriaPracownika` | bazodanowe |  |  |
 | Etat.KodWykonywanegoZawodu | `int` | bazodanowe |  |  |
 | Etat.KodWykonywanegoZawoduLnk | `Soneta.Kadry.KodWykonywanegoZawodu` |  |  |  |
 | Etat.LimitNadgodzin | `int` | bazodanowe |  |  |
-| Etat.MagazynNadgodzin | `Soneta.Types.YearMonth` | bazodanowe |  |  |
+| Etat.MagazynNadgodzin | `YearMonth` | bazodanowe |  |  |
 | Etat.MiejscaPracyOpis | `string` | bazodanowe |  |  |
 | Etat.MiejscePracy | `string` | bazodanowe |  | Miejsce wykonywania pracy |
-| Etat.NormaDobowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Etat.NormaDobowaTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Etat.NormaTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Etat.NumerUmowy | `int` |  |  |  |
-| Etat.ObnizenieEtatu | `Soneta.Kadry.ObniżenieWymiaruEtatu` |  |  |  |
+| Etat.NormaDobowa | `Time` | bazodanowe |  |  |
+| Etat.NormaDobowaTygodniowa | `Time` | bazodanowe |  |  |
+| Etat.NormaTygodniowa | `Time` | bazodanowe |  |  |
+| Etat.NumerUmowy | `int` | tylko-odczyt |  |  |
+| Etat.ObnizenieEtatu | `Soneta.Kadry.ObniżenieWymiaruEtatu` | tylko-odczyt |  |  |
 | Etat.OddelegowanyDo | `Soneta.Kadry.IKrajDelegacji` | bazodanowe, iface-ref |  |  |
 | Etat.Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Etat.OgraniczeniePrzerwy | `Soneta.Kadry.OgraniczeniePrzerwyCovid` | bazodanowe, enum |  |  |
-| Etat.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Etat.OkresProbny | `Soneta.Kadry.OkresProbny` | bazodanowe |  |  |
-| Etat.OkresProbny.DataZakonczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.OkresProbny.DniUsprawiedliwione | `int` |  |  |  |
-| Etat.OkresProbny.JestOkresProbny | `bool` |  |  |  |
-| Etat.OkresProbny.PlanowanyOkres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Etat.OkresProbny.Przedluzenie | `Soneta.Kadry.OkresPróbnyPodlegaPrzedłużeniu` | bazodanowe, enum |  |  |
-| Etat.OkresProbny.PrzedluzenieUmowy | `bool` |  |  |  |
+| Etat.OgraniczeniePrzerwy | `Soneta.Kadry.OgraniczeniePrzerwyCovid` (enum) | bazodanowe |  |  |
+| Etat.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Etat.OkresProbny | `Soneta.Kadry.OkresProbny` (subrow) | bazodanowe |  |  |
+| Etat.OkresProbny.DataZakonczenia | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Etat.OkresProbny.DniUsprawiedliwione | `int` | tylko-odczyt |  |  |
+| Etat.OkresProbny.JestOkresProbny | `bool` | tylko-odczyt |  |  |
+| Etat.OkresProbny.PlanowanyOkres | `FromTo` | bazodanowe, podlista |  |  |
+| Etat.OkresProbny.Przedluzenie | `Soneta.Kadry.OkresPróbnyPodlegaPrzedłużeniu` (enum) | bazodanowe |  |  |
+| Etat.OkresProbny.PrzedluzenieUmowy | `bool` | tylko-odczyt |  |  |
 | Etat.OkresPrzechowywania | `int` | bazodanowe |  |  |
-| Etat.OkresUmowy | `Soneta.Types.FromTo` |  |  |  |
-| Etat.OkresWypowiedzenia | `Soneta.Kadry.OkresWypowiedzenia` | bazodanowe |  |  |
-| Etat.OkresWypowiedzenia.DataRozwiązaniaUmowy | `Soneta.Types.Date` |  |  |  |
-| Etat.OkresWypowiedzenia.DataZlozenia | `Soneta.Types.Date` | bazodanowe | Data złożenia | Data złożenia wypowiedzenia |
+| Etat.OkresUmowy | `FromTo` | podlista |  |  |
+| Etat.OkresWypowiedzenia | `Soneta.Kadry.OkresWypowiedzenia` (subrow) | bazodanowe |  |  |
+| Etat.OkresWypowiedzenia.DataRozwiązaniaUmowy | `Date` | tylko-odczyt |  |  |
+| Etat.OkresWypowiedzenia.DataZlozenia | `Date` | bazodanowe | Data złożenia | Data złożenia wypowiedzenia |
 | Etat.OkresWypowiedzenia.Dni | `int` | bazodanowe | Dni | Okres wypowiedzenia - dni |
 | Etat.OkresWypowiedzenia.Miesiace | `int` | bazodanowe | Miesiące | Okres wypowiedzenia - miesiące |
 | Etat.OkresWypowiedzenia.Skrocony | `bool` | bazodanowe | Skrócony | Skrócony okres wypowiedzenia |
 | Etat.OkresWypowiedzenia.Tygodnie | `int` | bazodanowe | Tygodnie | Okres wypowiedzenia - tygodnie |
-| Etat.OkresWypowiedzenia.Uplywa | `Soneta.Types.Date` | bazodanowe | Upływa | Data upływu ukresu wypowiedzenia |
-| Etat.OkresWypowiedzenia.ZwolnionyZObowiazkuPracyOd | `Soneta.Types.Date` | bazodanowe | Data zwolnienia z obowiązku pracy | Data zwolnienia z obowiązku pracy |
-| Etat.OkresZatrudnienia | `Soneta.Types.FromTo` |  |  |  |
-| Etat.OkresZatrudnieniaEtat | `Soneta.Types.FromTo` |  |  |  |
-| Etat.OkresZatrudnieniaTymczasowy | `Soneta.Types.FromTo` |  |  |  |
+| Etat.OkresWypowiedzenia.Uplywa | `Date` | bazodanowe | Upływa | Data upływu ukresu wypowiedzenia |
+| Etat.OkresWypowiedzenia.ZwolnionyZObowiazkuPracyOd | `Date` | bazodanowe | Data zwolnienia z obowiązku pracy | Data zwolnienia z obowiązku pracy |
+| Etat.OkresZatrudnienia | `FromTo` | podlista |  |  |
+| Etat.OkresZatrudnieniaEtat | `FromTo` | podlista |  |  |
+| Etat.OkresZatrudnieniaTymczasowy | `FromTo` | podlista |  |  |
 | Etat.PakietMobilnosci | `bool` | bazodanowe |  |  |
 | Etat.PodatekZaGranica | `bool` | bazodanowe |  |  |
-| Etat.Podstawa | `Soneta.Kadry.StosPracyNaPodstawie` | bazodanowe, enum |  |  |
+| Etat.Podstawa | `Soneta.Kadry.StosPracyNaPodstawie` (enum) | bazodanowe |  |  |
 | Etat.PoprzedniPracodawca | `string` | bazodanowe |  |  |
 | Etat.PoprzedniPracodawcaUI | `string` |  |  |  |
-| Etat.Postojowe | `Soneta.Kadry.WynagrodzeniePostojowe` | bazodanowe |  |  |
-| Etat.Postojowe.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Etat.Postojowe | `Soneta.Kadry.WynagrodzeniePostojowe` (subrow) | bazodanowe |  |  |
+| Etat.Postojowe.Procent | `Percent` | bazodanowe |  |  |
 | Etat.Postojowe.Standardowe | `bool` |  |  |  |
-| Etat.PowiązanyOkresZatrudnienia | `Soneta.Types.FromTo` |  |  |  |
+| Etat.PowiązanyOkresZatrudnienia | `FromTo` | podlista |  |  |
 | Etat.PracownikNiepelnosprawnyZgodaNaPrace8h | `bool` | bazodanowe |  |  |
 | Etat.PracownikNiepelnosprawnyZgodaNaPraceNadgodziny | `bool` | bazodanowe |  |  |
 | Etat.PracownikNiepelnosprawnyZgodaNaPraceWPorzeNocnej | `bool` | bazodanowe |  |  |
-| Etat.PracownikTymczasowy | `bool` |  |  |  |
-| Etat.PracownikZaGranicą | `bool` |  |  |  |
+| Etat.PracownikTymczasowy | `bool` | tylko-odczyt |  |  |
+| Etat.PracownikZaGranicą | `bool` | tylko-odczyt |  |  |
 | Etat.PracownikZwolniony | `bool` | bazodanowe |  |  |
-| Etat.ProcentMinimalnego | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Etat.ProcentMinimalnegoDoDnia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Przedłużenia | `Soneta.Types.Periods` |  |  |  |
+| Etat.ProcentMinimalnego | `Percent` | bazodanowe |  |  |
+| Etat.ProcentMinimalnegoDoDnia | `Date` | bazodanowe |  |  |
+| Etat.Przedłużenia | `Periods` | tylko-odczyt |  |  |
 | Etat.PrzejetyPrzezInnego | `bool` | bazodanowe | Przekazany | Pracownik przejęty przez innego pracodawcę w trybie art. 23' K.P. |
 | Etat.PrzeliczeniePodstawyZasilku | `bool` | bazodanowe |  |  |
 | Etat.PrzerwaDodatkowaNiep | `bool` | bazodanowe |  |  |
 | Etat.PrzerwaNiewliczana | `bool` | bazodanowe |  |  |
-| Etat.PrzyczynaRozwUmowy | `string` |  |  |  |
 | Etat.PrzyczynaZawUmowy | `string` |  |  |  |
 | Etat.RodzajPracy | `string` | bazodanowe |  | Rodzaj wykonywanej pracy |
-| Etat.RodzajPrzejecia | `Soneta.Kadry.RodzajePrzejęciaPrzedsiębiorstwa` | enum | Rodzaj przejęcia |  |
-| Etat.RodzajPrzejeciaUI | `Soneta.Kadry.RodzajePrzejęciaPrzedsiębiorstwa` | enum |  |  |
-| Etat.RodzajZatrudnienia | `Soneta.Kadry.RodzajZatrudnienia` | bazodanowe, enum |  |  |
-| Etat.RozwiazanieUmowy | `Soneta.Kadry.RozwiazanieUmowy` | bazodanowe |  |  |
-| Etat.RozwiazanieUmowy.Inicjatywa | `Soneta.Kadry.KodInicjatywyZwolnienia` | bazodanowe, enum |  |  |
-| Etat.RozwiazanieUmowy.KodZwolnienia | `Soneta.Kadry.KodZwolnienia` | bazodanowe, enum |  |  |
-| Etat.RozwiazanieUmowy.PodstawaPrawna | `Soneta.Kadry.KodPodstawyPrawnejZwolnienia` | bazodanowe, enum |  |  |
+| Etat.RodzajPrzejecia | `Soneta.Kadry.RodzajePrzejęciaPrzedsiębiorstwa` (enum) |  | Rodzaj przejęcia |  |
+| Etat.RodzajPrzejeciaUI | `Soneta.Kadry.RodzajePrzejęciaPrzedsiębiorstwa` (enum) |  |  |  |
+| Etat.RodzajZatrudnienia | `Soneta.Kadry.RodzajZatrudnienia` (enum) | bazodanowe |  |  |
+| Etat.RozwiazanieUmowy | `Soneta.Kadry.RozwiazanieUmowy` (subrow) | bazodanowe |  |  |
+| Etat.RozwiazanieUmowy.Inicjatywa | `Soneta.Kadry.KodInicjatywyZwolnienia` (enum) | bazodanowe |  |  |
+| Etat.RozwiazanieUmowy.KodZwolnienia | `Soneta.Kadry.KodZwolnienia` (enum) | bazodanowe |  |  |
+| Etat.RozwiazanieUmowy.PodstawaPrawna | `Soneta.Kadry.KodPodstawyPrawnejZwolnienia` (enum) | bazodanowe |  |  |
 | Etat.RozwiazanieUmowy.PrzyczynaRozwUmowy | `Soneta.Kadry.PrzyczynaRozwUmowy` | bazodanowe |  |  |
 | Etat.RozwiazanieUmowy.PrzyczynaRozwUmowyOpis | `string` | bazodanowe |  |  |
-| Etat.RozwiazanieUmowy.WgPrzyczynaRozwUmowy | `Soneta.Business.Key` |  |  |  |
+| Etat.RozwiazanieUmowy.WgPrzyczynaRozwUmowy | `Key` | podlista |  |  |
 | Etat.RozwiazanieUmowy.ZaOdszkodowaniem | `bool` | bazodanowe |  |  |
 | Etat.Seria | `string` | bazodanowe |  |  |
 | Etat.Specjalosc | `string` | bazodanowe |  |  |
@@ -145,236 +149,236 @@ Implementuje interfejsy: `IAdresHost`, `IDaneKontaktoweHost`
 | Etat.StdNorma | `bool` |  |  |  |
 | Etat.StdProcentMinimalnego | `bool` |  |  |  |
 | Etat.StdWspolczynnikLimitu | `bool` |  |  |  |
-| Etat.SystemCzasuPracy | `Soneta.Kadry.SystemCzasuPracy` | bazodanowe, enum |  |  |
-| Etat.TerminPrzechowywania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| Etat.TypUmowy | `Soneta.Kadry.TypUmowyOPrace` | bazodanowe, enum |  |  |
-| Etat.Ubezpieczenia | `Soneta.Kadry.Ubezpieczenia` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Chorobowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Emerytalne | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Emerytalne.Do | `Soneta.Types.Date` | bazodanowe |  |  |
+| Etat.SystemCzasuPracy | `Soneta.Kadry.SystemCzasuPracy` (enum) | bazodanowe |  |  |
+| Etat.TerminPrzechowywania | `Date` | bazodanowe |  |  |
+| Etat.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) | bazodanowe |  |  |
+| Etat.TypUmowy | `Soneta.Kadry.TypUmowyOPrace` (enum) | bazodanowe |  |  |
+| Etat.Ubezpieczenia | `Soneta.Kadry.Ubezpieczenia` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Chorobowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Emerytalne | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Emerytalne.Do | `Date` | bazodanowe |  |  |
 | Etat.Ubezpieczenia.Emerytalne.Dobrowolne | `bool` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.DobrowolneOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` | enum |  |  |
+| Etat.Ubezpieczenia.Emerytalne.DobrowolneOd | `Date` |  |  |  |
+| Etat.Ubezpieczenia.Emerytalne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` (enum) |  |  |  |
 | Etat.Ubezpieczenia.Emerytalne.Obowiazkowe | `bool` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.ObowiazkoweOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.ObowiązujeOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.Od | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Emerytalne.Okres | `Soneta.Types.FromTo` |  |  |  |
+| Etat.Ubezpieczenia.Emerytalne.ObowiazkoweOd | `Date` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Emerytalne.ObowiązujeOd | `Date` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Emerytalne.Od | `Date` | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Emerytalne.Okres | `FromTo` | podlista |  |  |
 | Etat.Ubezpieczenia.Emerytalne.Przyczyna | `Soneta.Kadry.Wyrejestrowanie` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Emerytalne.Typ | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Etat.Ubezpieczenia.Emerytalne.UbezpieczenieOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Emerytalne.Ubezpieczony | `bool` |  |  |  |
+| Etat.Ubezpieczenia.Emerytalne.Typ | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Emerytalne.UbezpieczenieOd | `Date` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Emerytalne.Ubezpieczony | `bool` | tylko-odczyt |  |  |
 | Etat.Ubezpieczenia.Emerytalne.Wyrejestrowany | `bool` |  |  |  |
-| Etat.Ubezpieczenia.Historia | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Etat.Ubezpieczenia.Host | `Soneta.Kadry.IUbezpieczenieHost` |  |  |  |
-| Etat.Ubezpieczenia.Kontynuacja | `Soneta.Kadry.KontynuacjaUbezpieczenia` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Kontynuacja.OdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Kontynuacja.Tyub | `int` |  |  |  |
+| Etat.Ubezpieczenia.Historia | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Host | `Soneta.Kadry.IUbezpieczenieHost` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Kontynuacja | `Soneta.Kadry.KontynuacjaUbezpieczenia` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Kontynuacja.OdDnia | `Date` | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Kontynuacja.Tyub | `int` | tylko-odczyt |  |  |
 | Etat.Ubezpieczenia.Kontynuacja.Tyub4 | `Soneta.Kadry.TytulUbezpieczenia4` | bazodanowe | Tytuł ubezpieczenia |  |
-| Etat.Ubezpieczenia.Kontynuacja.WgTyub4 | `Soneta.Business.Key` |  |  |  |
-| Etat.Ubezpieczenia.ObowiazkoweOd | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.PrawoEmRent | `int` |  |  |  |
-| Etat.Ubezpieczenia.Rentowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.StopienNiepelnosp | `int` |  |  |  |
-| Etat.Ubezpieczenia.Tyub | `Soneta.Kadry.TytulUbezpieczenia` |  |  |  |
+| Etat.Ubezpieczenia.Kontynuacja.WgTyub4 | `Key` | podlista |  |  |
+| Etat.Ubezpieczenia.ObowiazkoweOd | `Date` | bazodanowe |  |  |
+| Etat.Ubezpieczenia.PrawoEmRent | `int` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Rentowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.StopienNiepelnosp | `int` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Tyub | `Soneta.Kadry.TytulUbezpieczenia` | tylko-odczyt |  |  |
 | Etat.Ubezpieczenia.Tyub4 | `Soneta.Kadry.TytulUbezpieczenia4` | bazodanowe | Tytuł ubezpieczenia |  |
-| Etat.Ubezpieczenia.Ubezpieczony | `bool` |  |  |  |
-| Etat.Ubezpieczenia.WgTyub4 | `Soneta.Business.Key` |  |  |  |
-| Etat.Ubezpieczenia.Wypadkowe | `Soneta.Kadry.Spoleczne` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Zdrowotne | `Soneta.Kadry.Zdrowotne` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Do | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Dobrowolne | `bool` |  |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.DobrowolneOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` | enum |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Obowiazkowe | `bool` |  |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.ObowiazkoweOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.ObowiązujeOd | `Soneta.Types.Date` |  |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Od | `Soneta.Types.Date` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Okres | `Soneta.Types.FromTo` |  |  |  |
+| Etat.Ubezpieczenia.Ubezpieczony | `bool` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.WgTyub4 | `Key` | podlista |  |  |
+| Etat.Ubezpieczenia.Wypadkowe | `Soneta.Kadry.Spoleczne` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Zdrowotne | `Soneta.Kadry.Zdrowotne` (subrow) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Do | `Date` | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Dobrowolne | `bool` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.DobrowolneOd | `Date` |  |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.KodPrzyczyny | `Soneta.Kadry.PrzyczynaWyrejestrowania` (enum) |  |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Obowiazkowe | `bool` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.ObowiazkoweOd | `Date` |  |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.ObowiązujeOd | `Date` | tylko-odczyt |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Od | `Date` | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Okres | `FromTo` | podlista |  |  |
 | Etat.Ubezpieczenia.Zdrowotne.Przyczyna | `Soneta.Kadry.Wyrejestrowanie` | bazodanowe |  |  |
 | Etat.Ubezpieczenia.Zdrowotne.Skladka | `decimal` | bazodanowe |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Typ | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Etat.Ubezpieczenia.Zdrowotne.Ubezpieczony | `bool` |  |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Typ | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Etat.Ubezpieczenia.Zdrowotne.Ubezpieczony | `bool` | tylko-odczyt |  |  |
 | Etat.Ubezpieczenia.Zdrowotne.Wyrejestrowany | `bool` |  |  |  |
-| Etat.UmowaNaCzasOkreślony | `bool` |  |  |  |
-| Etat.UmowaOPrace | `Soneta.Kadry.UmowaOPrace` | bazodanowe |  |  |
+| Etat.UmowaNaCzasOkreślony | `bool` | tylko-odczyt |  |  |
+| Etat.UmowaOPrace | `Soneta.Kadry.UmowaOPrace` (subrow) | bazodanowe |  |  |
 | Etat.UmowaOPrace.OkresWypowiedzenia | `int` | bazodanowe |  |  |
-| Etat.UmowyIPrzedłużenia | `Soneta.Types.Periods` |  |  |  |
-| Etat.WgDefinicja | `Soneta.Business.Key` |  |  |  |
-| Etat.WgDefinicjaFunkcji | `Soneta.Business.Key` |  |  |  |
-| Etat.WgFormaOrganizacjiPracy | `Soneta.Business.Key` |  |  |  |
-| Etat.WgGrupa | `Soneta.Business.Key` |  |  |  |
-| Etat.WgKalendarz | `Soneta.Business.Key` |  |  |  |
-| Etat.WgKategoriaPracownika | `Soneta.Business.Key` |  |  |  |
-| Etat.WgOddelegowanyDo | `Soneta.Business.Key` |  |  |  |
-| Etat.WgOddzial | `Soneta.Business.Key` |  |  |  |
-| Etat.WgWydzial | `Soneta.Business.Key` |  |  |  |
-| Etat.WgZastepstwoZa | `Soneta.Business.Key` |  |  |  |
+| Etat.UmowyIPrzedłużenia | `Periods` | tylko-odczyt |  |  |
+| Etat.WgDefinicja | `Key` | podlista |  |  |
+| Etat.WgDefinicjaFunkcji | `Key` | podlista |  |  |
+| Etat.WgFormaOrganizacjiPracy | `Key` | podlista |  |  |
+| Etat.WgGrupa | `Key` | podlista |  |  |
+| Etat.WgKalendarz | `Key` | podlista |  |  |
+| Etat.WgKategoriaPracownika | `Key` | podlista |  |  |
+| Etat.WgOddelegowanyDo | `Key` | podlista |  |  |
+| Etat.WgOddzial | `Key` | podlista |  |  |
+| Etat.WgWydzial | `Key` | podlista |  |  |
+| Etat.WgZastepstwoZa | `Key` | podlista |  |  |
 | Etat.WieleMiejscPracy | `bool` | bazodanowe |  |  |
 | Etat.WspolczynnikLimitu | `double` | bazodanowe |  |  |
 | Etat.Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Etat.WymNormaDobowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Etat.WymNormaDobowaTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
-| Etat.WymNormaTygodniowa | `Soneta.Types.Time` | bazodanowe |  |  |
+| Etat.WymNormaDobowa | `Time` | bazodanowe |  |  |
+| Etat.WymNormaDobowaTygodniowa | `Time` | bazodanowe |  |  |
+| Etat.WymNormaTygodniowa | `Time` | bazodanowe |  |  |
 | Etat.WymStdNorma | `bool` |  |  |  |
-| Etat.Wymiar | `Soneta.Types.Fraction` |  |  |  |
+| Etat.Wymiar | `Fraction` | tylko-odczyt |  |  |
 | Etat.WynagrodzenieAkordowe | `bool` | bazodanowe |  |  |
-| Etat.Wynajmujący | `Soneta.CRM.Kontrahent` |  |  |  |
-| Etat.ZastepstwoNieobecnyDo | `Soneta.Types.Date` |  |  |  |
+| Etat.Wynajmujący | `Soneta.CRM.Kontrahent` | tylko-odczyt |  |  |
+| Etat.ZastepstwoNieobecnyDo | `Date` | tylko-odczyt |  |  |
 | Etat.ZastepstwoZa | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Etat.Zaszeregowanie | `Soneta.Kadry.Zaszeregowanie` | bazodanowe |  |  |
+| Etat.Zaszeregowanie | `Soneta.Kadry.Zaszeregowanie` (subrow) | bazodanowe |  |  |
 | Etat.Zaszeregowanie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Etat.Zaszeregowanie.Godzinowe | `bool` |  |  |  |
-| Etat.Zaszeregowanie.Miesięczne | `bool` |  |  |  |
-| Etat.Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` | bazodanowe, enum |  |  |
-| Etat.Zaszeregowanie.Stawka | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Etat.Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` | enum |  |  |
-| Etat.Zaszeregowanie.WgElement | `Soneta.Business.Key` |  |  |  |
+| Etat.Zaszeregowanie.Godzinowe | `bool` | tylko-odczyt |  |  |
+| Etat.Zaszeregowanie.Miesięczne | `bool` | tylko-odczyt |  |  |
+| Etat.Zaszeregowanie.RodzajStawki | `Soneta.Kadry.RodzajStawkiZaszeregowania` (enum) | bazodanowe |  |  |
+| Etat.Zaszeregowanie.Stawka | `Currency` | bazodanowe |  |  |
+| Etat.Zaszeregowanie.TypStawki | `Soneta.Kadry.TypStawkiZaszeregowania` (enum) |  |  |  |
+| Etat.Zaszeregowanie.WgElement | `Key` | podlista |  |  |
 | Etat.Zaszeregowanie.WskaznikKrotnosc | `double` | bazodanowe |  |  |
 | Etat.Zaszeregowanie.WskaznikNazwa | `string` | bazodanowe |  |  |
-| Etat.Zaszeregowanie.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| Etat.Zatrudnienie | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Etat.ZawarcieUmowy | `Soneta.Kadry.ZawarcieUmowy` | bazodanowe |  |  |
+| Etat.Zaszeregowanie.Wymiar | `Fraction` | bazodanowe |  |  |
+| Etat.Zatrudnienie | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Etat.ZawarcieUmowy | `Soneta.Kadry.ZawarcieUmowy` (subrow) | bazodanowe |  |  |
 | Etat.ZawarcieUmowy.PrzyczynaZawUmowy | `Soneta.Kadry.PrzyczynaZawUmowy` | bazodanowe |  |  |
 | Etat.ZawarcieUmowy.PrzyczynaZawUmowyOpis | `string` | bazodanowe |  |  |
-| Etat.ZawarcieUmowy.WgPrzyczynaZawUmowy | `Soneta.Business.Key` |  |  |  |
+| Etat.ZawarcieUmowy.WgPrzyczynaZawUmowy | `Key` | podlista |  |  |
 | Etat.ZbiorowyUkladPracy | `bool` | bazodanowe |  | Pracownik objęty układem zbiorowym pracy |
-| Etat.Zwolnienie | `Soneta.Kadry.PracHistoria` |  |  |  |
+| Etat.Zwolnienie | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
-| GUS | `Soneta.Kadry.StatystykaGUS` | bazodanowe |  |  |
+| GUS | `Soneta.Kadry.StatystykaGUS` (subrow) | bazodanowe |  |  |
 | GUS.GlowneMiejscePracy | `bool` | bazodanowe |  |  |
-| GUS.KodWyksztalcenia | `Soneta.Kadry.KodWykształceniaGUS` | bazodanowe, enum |  |  |
+| GUS.KodWyksztalcenia | `Soneta.Kadry.KodWykształceniaGUS` (enum) | bazodanowe |  |  |
 | GUS.PierwszaPraca | `bool` | bazodanowe |  |  |
-| GUS.PopMiejsceZatrudnienia | `Soneta.Kadry.PopMiejsceZatrudnienia` | bazodanowe, enum |  |  |
+| GUS.PopMiejsceZatrudnienia | `Soneta.Kadry.PopMiejsceZatrudnienia` (enum) | bazodanowe |  |  |
 | GUS.PracaWNocy | `bool` | bazodanowe |  |  |
 | GUS.PraceInterwencyjne | `bool` | bazodanowe |  |  |
-| GUS.RodzajZatrudnienia | `Soneta.Kadry.RodzajZatrudnieniaGUS` | bazodanowe, enum |  |  |
+| GUS.RodzajZatrudnienia | `Soneta.Kadry.RodzajZatrudnieniaGUS` (enum) | bazodanowe |  |  |
 | GUS.SezonowyDorywczy | `bool` | bazodanowe |  |  |
 | GUS.StRobotnicze | `bool` | bazodanowe |  |  |
-| GUS.SymbolSystemuCzasuPracyGUS | `Soneta.Kadry.SymbolSystemuCzasuPracy` | bazodanowe, enum |  |  |
-| Identyfikator | `Soneta.Kadry.PracHistoria.IdentyfikatorZUS` |  |  |  |
-| IdentyfikatorPodatkowy | `Soneta.Kadry.IdentyfikatorPodatkowyPracownika` | bazodanowe, enum |  |  |
+| GUS.SymbolSystemuCzasuPracyGUS | `Soneta.Kadry.SymbolSystemuCzasuPracy` (enum) | bazodanowe |  |  |
+| Identyfikator | `Soneta.Kadry.PracHistoria.IdentyfikatorZUS` | tylko-odczyt |  |  |
+| IdentyfikatorPodatkowy | `Soneta.Kadry.IdentyfikatorPodatkowyPracownika` (enum) | bazodanowe |  |  |
 | IloscDzialalnosci | `int` | bazodanowe | Ilość działalności |  |
 | Imie | `string` | bazodanowe |  |  |
 | ImieDrugie | `string` | bazodanowe |  |  |
 | ImieMatki | `string` | bazodanowe |  |  |
 | ImieOjca | `string` | bazodanowe |  |  |
-| InneDane | `Soneta.Kadry.InneDaneHistoryczne` |  |  |  |
-| KasaChorych | `Soneta.Kadry.KasaChorych` | bazodanowe |  |  |
+| InneDane | `Soneta.Kadry.InneDaneHistoryczne` | tylko-odczyt |  |  |
+| KasaChorych | `Soneta.Kadry.KasaChorych` (subrow) | bazodanowe |  |  |
 | KasaChorych.Kod | `string` | bazodanowe |  |  |
-| KasaChorych.Nazwa | `string` |  |  |  |
-| KasaChorych.OdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
-| KombatanckiBO | `Soneta.Kadry.KombatanckiBO` | bazodanowe |  |  |
-| KombatanckiBO.BezPierwszego | `bool` |  |  |  |
-| KombatanckiBO.Data | `Soneta.Types.Date` |  |  |  |
+| KasaChorych.Nazwa | `string` | tylko-odczyt |  |  |
+| KasaChorych.OdDnia | `Date` | bazodanowe |  |  |
+| KombatanckiBO | `Soneta.Kadry.KombatanckiBO` (subrow) | bazodanowe |  |  |
+| KombatanckiBO.BezPierwszego | `bool` | tylko-odczyt |  |  |
+| KombatanckiBO.Data | `Date` | tylko-odczyt |  |  |
 | KombatanckiBO.PrawoDoUrlopu | `bool` | bazodanowe |  | Prawo do urlopu kombatanckiego |
 | KombatanckiBO.UPoprzednich | `decimal` | bazodanowe |  | Limit urlopu kombatanckiego wykorzystanego u poprzednich pracodawców (dni) |
-| KombatanckiBO.Wykorzystany | `Soneta.Types.Time` | bazodanowe |  | Limit urlopu kombatanckiego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
-| Kontakt | `Soneta.Core.Kontakt` |  |  |  |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
-| KontrolaAktywna | `bool` |  |  |  |
+| KombatanckiBO.Wykorzystany | `Time` | bazodanowe |  | Limit urlopu kombatanckiego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
+| Kontakt | `Soneta.Core.Kontakt` | tylko-odczyt |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
+| KontrolaAktywna | `bool` | tylko-odczyt |  |  |
 | NIP | `string` | bazodanowe |  |  |
-| Następny | `Soneta.Kadry.PracHistoria` |  |  |  |
+| Następny | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
 | Nazwisko | `string` | bazodanowe |  |  |
 | NazwiskoRodowe | `string` | bazodanowe |  |  |
 | NazwiskoRodoweMatki | `string` | bazodanowe |  |  |
 | NiePowiekszajWymiaruSkladkiZdrowotnej | `bool` |  | Nie powiększaj podstawy wymiaru składki zdrowotnej, jeżeli remanent końcowy jest wyższy od remanentu początkowego w 2022 r. |  |
-| Nieobecnosci | `Soneta.Kadry.RozliczanieNieobecnosci` | bazodanowe |  |  |
-| Nieobecnosci.OkresZasilkowy | `Soneta.Kadry.OkresZasilkowy` | bazodanowe, enum |  |  |
+| Nieobecnosci | `Soneta.Kadry.RozliczanieNieobecnosci` (subrow) | bazodanowe |  |  |
+| Nieobecnosci.OkresZasilkowy | `Soneta.Kadry.OkresZasilkowy` (enum) | bazodanowe |  |  |
 | Nieobecnosci.PodstawaUrlopu | `int` | bazodanowe |  |  |
 | Nieobecnosci.PodstawaUrlopuZmienne | `int` | bazodanowe |  |  |
 | Nieobecnosci.PodstawaZasilku | `int` | bazodanowe |  |  |
 | Nieobecnosci.StdPodstawaUrlopu | `bool` |  |  |  |
 | Nieobecnosci.StdPodstawaZasilku | `bool` |  |  |  |
 | NumerAkt | `string` | bazodanowe |  |  |
-| Obywatelstwo | `Soneta.Kadry.Obywatelstwo` |  |  |  |
-| OddzialNFZ | `Soneta.Kadry.OddzialNFZ` | bazodanowe |  |  |
+| Obywatelstwo | `Soneta.Kadry.Obywatelstwo` | tylko-odczyt |  |  |
+| OddzialNFZ | `Soneta.Kadry.OddzialNFZ` (subrow) | bazodanowe |  |  |
 | OddzialNFZ.Kod | `string` |  |  |  |
 | OddzialNFZ.KodGminy | `string` | bazodanowe |  |  |
-| OddzialNFZ.Nazwa | `string` |  |  |  |
-| OddzialNFZ.OdDnia | `Soneta.Types.Date` |  |  |  |
+| OddzialNFZ.Nazwa | `string` | tylko-odczyt |  |  |
+| OddzialNFZ.OdDnia | `Date` |  |  |  |
 | OddzialNFZ.Oddział | `Soneta.Kadry.OddzialNFZ.OddziałNFZ` |  |  |  |
-| OdpisOPP | `Soneta.Kadry.OdpisOPP` | bazodanowe |  |  |
+| OdpisOPP | `Soneta.Kadry.OdpisOPP` (subrow) | bazodanowe |  |  |
 | OdpisOPP.Koncowka | `decimal` | bazodanowe |  |  |
-| OdpisOPP.Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| OdpisOPP.Naliczanie | `Soneta.Kadry.NaliczanieOdpisuOPP` | bazodanowe, enum |  |  |
+| OdpisOPP.Kwota | `Currency` | bazodanowe |  |  |
+| OdpisOPP.Naliczanie | `Soneta.Kadry.NaliczanieOdpisuOPP` (enum) | bazodanowe |  |  |
 | OdpisOPP.OpisPrzelewu | `string` | bazodanowe |  |  |
 | OdpisOPP.Organizacja | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| OdpisOPP.WgOrganizacja | `Soneta.Business.Key` |  |  |  |
-| OdpisPPK | `Soneta.Kadry.OdpisPPK` | bazodanowe |  |  |
-| OdpisPPK.BlokadaWplatSklData | `Soneta.Types.Date` | bazodanowe |  |  |
-| OdpisPPK.DataRezygnacji | `Soneta.Types.Date` | bazodanowe |  |  |
-| OdpisPPK.DataWznowienia | `Soneta.Types.Date` | bazodanowe |  |  |
-| OdpisPPK.DataZgloszenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| OdpisPPK.DodPracodawcy | `Soneta.Types.Percent` | bazodanowe |  |  |
-| OdpisPPK.DodPracownika | `Soneta.Types.Percent` | bazodanowe |  |  |
+| OdpisOPP.WgOrganizacja | `Key` | podlista |  |  |
+| OdpisPPK | `Soneta.Kadry.OdpisPPK` (subrow) | bazodanowe |  |  |
+| OdpisPPK.BlokadaWplatSklData | `Date` | bazodanowe |  |  |
+| OdpisPPK.DataRezygnacji | `Date` | bazodanowe |  |  |
+| OdpisPPK.DataWznowienia | `Date` | bazodanowe |  |  |
+| OdpisPPK.DataZgloszenia | `Date` | bazodanowe |  |  |
+| OdpisPPK.DodPracodawcy | `Percent` | bazodanowe |  |  |
+| OdpisPPK.DodPracownika | `Percent` | bazodanowe |  |  |
 | OdpisPPK.EMailDomyslny | `bool` | bazodanowe |  |  |
 | OdpisPPK.Email | `string` |  |  |  |
 | OdpisPPK.ID_KADRY | `string` | bazodanowe |  |  |
 | OdpisPPK.Identyfikator | `string` | bazodanowe |  |  |
-| OdpisPPK.Naliczanie | `bool` |  |  |  |
+| OdpisPPK.Naliczanie | `bool` | tylko-odczyt |  |  |
 | OdpisPPK.NumerRachunku | `string` | bazodanowe |  |  |
-| OdpisPPK.OkresNaliczania | `Soneta.Types.FromTo` |  |  |  |
-| OdpisPPK.PodstPracownika | `Soneta.Types.Percent` | bazodanowe |  |  |
+| OdpisPPK.OkresNaliczania | `FromTo` | podlista |  |  |
+| OdpisPPK.PodstPracownika | `Percent` | bazodanowe |  |  |
 | OdpisPPK.PracownikaZaOkresZawieszenia | `bool` |  |  |  |
-| OdpisPPK.RodzajSkladki | `Soneta.Kadry.RodzajeSkładekPPK` | bazodanowe, enum |  |  |
-| OdpisPPK.RodzajWznowienia | `Soneta.Kadry.RodzajWznowieniaPPK` | bazodanowe, enum |  |  |
-| OdpisPPK.RodzajZgloszenia | `Soneta.Kadry.RodzajZgloszeniaPPK` | bazodanowe, enum |  |  |
+| OdpisPPK.RodzajSkladki | `Soneta.Kadry.RodzajeSkładekPPK` (enum) | bazodanowe, tylko-odczyt |  |  |
+| OdpisPPK.RodzajWznowienia | `Soneta.Kadry.RodzajWznowieniaPPK` (enum) | bazodanowe |  |  |
+| OdpisPPK.RodzajZgloszenia | `Soneta.Kadry.RodzajZgloszeniaPPK` (enum) | bazodanowe |  |  |
 | OdpisPPK.StdDodPracodawcy | `bool` | bazodanowe |  |  |
 | OdpisPPK.StdPodstPracownika | `bool` | bazodanowe |  |  |
 | OdpisPPK.TelefonDomyslny | `bool` | bazodanowe |  |  |
 | OdpisPPK.TelefonKomorkowy | `string` |  |  |  |
-| OdpisPPK.WydziałPPK | `Soneta.Kadry.Wydzial` |  |  |  |
+| OdpisPPK.WydziałPPK | `Soneta.Kadry.Wydzial` | tylko-odczyt |  |  |
 | OdpisPPK.ZgodaEMail | `bool` | bazodanowe |  |  |
 | OdpisPPK.ZgodaTelefon | `bool` | bazodanowe |  |  |
-| OdpisPPK.Zgłoszony | `bool` |  |  |  |
-| OjcowskiBO | `Soneta.Kadry.OjcowskiBO` | bazodanowe |  |  |
-| OjcowskiBO.Data | `Soneta.Types.Date` |  |  |  |
+| OdpisPPK.Zgłoszony | `bool` | tylko-odczyt |  |  |
+| OjcowskiBO | `Soneta.Kadry.OjcowskiBO` (subrow) | bazodanowe |  |  |
+| OjcowskiBO.Data | `Date` | tylko-odczyt |  |  |
 | OjcowskiBO.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
 | OjcowskiBO.UPoprzednich | `int` | bazodanowe |  | Limit urlopu ojcowskiego wykorzystanego u poprzednich pracodawców (dni) |
-| OjcowskiBO.UPoprzednichTygodnie | `int` |  |  |  |
-| OjcowskiBO.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| Opiekunczy188BO | `Soneta.Kadry.Opiekunczy188BO` | bazodanowe |  |  |
-| Opiekunczy188BO.Data | `Soneta.Types.Date` |  |  |  |
-| Opiekunczy188BO.DataWniosku | `Soneta.Types.Date` | bazodanowe |  | Data złożenia wniosku |
-| Opiekunczy188BO.RodzajLimitu | `Soneta.Kadry.RodzajLimituOp188` | bazodanowe, enum |  | Wniosek o urlop na dni/godziny |
+| OjcowskiBO.UPoprzednichTygodnie | `int` | tylko-odczyt |  |  |
+| OjcowskiBO.WgDziecko | `Key` | podlista |  |  |
+| Opiekunczy188BO | `Soneta.Kadry.Opiekunczy188BO` (subrow) | bazodanowe |  |  |
+| Opiekunczy188BO.Data | `Date` | tylko-odczyt |  |  |
+| Opiekunczy188BO.DataWniosku | `Date` | bazodanowe |  | Data złożenia wniosku |
+| Opiekunczy188BO.RodzajLimitu | `Soneta.Kadry.RodzajLimituOp188` (enum) | bazodanowe |  | Wniosek o urlop na dni/godziny |
 | Opiekunczy188BO.UPoprzednich | `int` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców (dni) |
-| Opiekunczy188BO.UPoprzednichGodz | `Soneta.Types.Time` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców (godz.) |
-| OpiekunczyBO | `Soneta.Kadry.OpiekunczyBO` | bazodanowe |  |  |
-| OpiekunczyBO.Data | `Soneta.Types.Date` |  |  |  |
+| Opiekunczy188BO.UPoprzednichGodz | `Time` | bazodanowe |  | Limit urlopu dodatkowego wykorzystanego u poprzednich pracodawców (godz.) |
+| OpiekunczyBO | `Soneta.Kadry.OpiekunczyBO` (subrow) | bazodanowe |  |  |
+| OpiekunczyBO.Data | `Date` | tylko-odczyt |  |  |
 | OpiekunczyBO.Dorosly | `int` | bazodanowe |  | Liczba dni wykorzystanego urlopu opiekuńczego – opieka nad innym członkiem rodziny (maksymalnie 14 dni w roku kalendarzowym) |
 | OpiekunczyBO.Dziecko | `int` | bazodanowe |  | Liczba dni wykorzystanego urlopu opiekuńczego – opieka nad dzieckiem (maksymalnie 60 dni w roku kalendarzowym) |
 | OpiekunczyBO.DzieckoNiepelnosp | `int` | bazodanowe |  | Liczba dni wykorzystanego urlopu opiekuńczego – opieka nad dzieckiem niepełnosprawnym w wieku od 8/14 lat do ukończenia 18 lat (maksymalnie 30 dni w roku) |
 | OpiekunczyBO.InformacjeZaRok | `int` | bazodanowe |  | Informacje aktualne w roku kalendarzowym |
-| OpiekunczyNieplatnyBO | `Soneta.Kadry.OpiekunczyNieplatnyBO` | bazodanowe |  |  |
-| OpiekunczyNieplatnyBO.Data | `Soneta.Types.Date` |  |  |  |
+| OpiekunczyNieplatnyBO | `Soneta.Kadry.OpiekunczyNieplatnyBO` (subrow) | bazodanowe |  |  |
+| OpiekunczyNieplatnyBO.Data | `Date` | tylko-odczyt |  |  |
 | OpiekunczyNieplatnyBO.UPoprzednich | `int` | bazodanowe |  | Limit urlopu opiekuńczego bezpłatnego wykorzystanego u poprzednich pracodawców (dni) |
-| OpisAktualizacji | `Soneta.Business.MemoText` | bazodanowe | Opis aktualizacji | Opis aktualizacji zapisu |
+| OpisAktualizacji | `MemoText` | bazodanowe, podlista | Opis aktualizacji | Opis aktualizacji zapisu |
 | OpisStanowiskaZeSkierowaniaNaBad | `string` | bazodanowe |  |  |
-| Oswiata | `Soneta.Kadry.PracownikOświaty` |  |  |  |
+| Oswiata | `Soneta.Kadry.PracownikOświaty` | tylko-odczyt |  |  |
 | PESEL | `string` | bazodanowe |  |  |
-| PFRON | `Soneta.Kadry.DanePFRON` |  |  |  |
-| PIT40 | `Soneta.Kadry.DaneDodatkowePIT40` |  |  |  |
-| PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` |  |  |  |
-| PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` |  |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| Plec | `Soneta.Kadry.PłećOsoby` | bazodanowe, enum |  |  |
-| Podatki | `Soneta.Kadry.PodatkiInfo` | bazodanowe |  |  |
+| PFRON | `Soneta.Kadry.DanePFRON` | tylko-odczyt |  |  |
+| PIT40 | `Soneta.Kadry.DaneDodatkowePIT40` | tylko-odczyt |  |  |
+| PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` | tylko-odczyt |  |  |
+| PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` | tylko-odczyt |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
+| Plec | `Soneta.Kadry.PłećOsoby` (enum) | bazodanowe |  |  |
+| Podatki | `Soneta.Kadry.PodatkiInfo` (subrow) | bazodanowe |  |  |
 | Podatki.Koszty50Limit | `decimal` | bazodanowe |  |  |
-| Podatki.Koszty50NieNaliczajOd | `Soneta.Types.YearMonth` | bazodanowe |  |  |
-| Podatki.Koszty50NieNaliczajOdDnia | `Soneta.Types.Date` | bazodanowe |  |  |
-| Podatki.Koszty50Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Podatki.Koszty50NieNaliczajOd | `YearMonth` | bazodanowe |  |  |
+| Podatki.Koszty50NieNaliczajOdDnia | `Date` | bazodanowe |  |  |
+| Podatki.Koszty50Procent | `Percent` | bazodanowe |  |  |
 | Podatki.KosztyMnoznik | `decimal` | bazodanowe |  |  |
-| Podatki.KosztyRodzaj | `Soneta.Kadry.RodzajKosztowUzyskania` | bazodanowe, enum |  |  |
+| Podatki.KosztyRodzaj | `Soneta.Kadry.RodzajKosztowUzyskania` (enum) | bazodanowe |  |  |
 | Podatki.NaPITAdresZameldowania | `bool` | bazodanowe |  |  |
-| Podatki.Pit26 | `Soneta.Kadry.NaliczajPit26` | bazodanowe, enum |  |  |
+| Podatki.Pit26 | `Soneta.Kadry.NaliczajPit26` (enum) | bazodanowe |  |  |
 | Podatki.PodwProg2019 | `bool` | bazodanowe |  | Podwyższona zaliczka podatku za okres od października do grudnia 2019 |
-| Podatki.ProgiPodatkowe | `Soneta.Business.SubTable` |  |  |  |
+| Podatki.ProgiPodatkowe | `SubTable` | podlista |  |  |
 | Podatki.RezygnacjaRozp070122 | `bool` | bazodanowe |  |  |
 | Podatki.RezygnacjaRozp070122Umowa | `bool` | bazodanowe |  |  |
-| Podatki.TypProgow | `Soneta.Kadry.TypProgowPodatkowych` | bazodanowe, enum |  |  |
-| Podatki.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` | bazodanowe, enum |  |  |
+| Podatki.TypProgow | `Soneta.Kadry.TypProgowPodatkowych` (enum) | bazodanowe |  |  |
+| Podatki.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` (enum) | bazodanowe |  |  |
 | Podatki.UlgaDuzaRodzina | `bool` | bazodanowe |  |  |
 | Podatki.UlgaEmeryt | `bool` | bazodanowe |  |  |
 | Podatki.UlgaKlasaSrednia | `bool` | bazodanowe |  |  |
@@ -385,101 +389,101 @@ Implementuje interfejsy: `IAdresHost`, `IDaneKontaktoweHost`
 | Podatki.UlgaZagranicaOd | `int` | bazodanowe |  |  |
 | Podatki.UmowaKwotaWolna | `bool` | bazodanowe |  |  |
 | Podatki.UrzadSkarbowy | `Soneta.Core.IPodmiotUI` | bazodanowe |  |  |
-| Podatki.UrzadSkarbowyEx | `Soneta.CRM.UrzadSkarbowy` |  |  |  |
-| Podatki.WgUrzadSkarbowy | `Soneta.Business.Key` |  |  |  |
-| PodatkiBO | `Soneta.Kadry.PodatkiBO` | bazodanowe |  |  |
-| PodatkiBO.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Podatki.UrzadSkarbowyEx | `Soneta.CRM.UrzadSkarbowy` | tylko-odczyt |  |  |
+| Podatki.WgUrzadSkarbowy | `Key` | podlista |  |  |
+| PodatkiBO | `Soneta.Kadry.PodatkiBO` (subrow) | bazodanowe |  |  |
+| PodatkiBO.Data | `Date` | bazodanowe |  |  |
 | PodatkiBO.PrzychodKoszty50 | `decimal` | bazodanowe |  |  |
 | PodatkiBO.PrzychodOpodatkowany | `decimal` | bazodanowe |  |  |
 | PodatkiBO.PrzychodZwolniony | `decimal` | bazodanowe |  |  |
-| PodstawaFGSP | `Soneta.Kadry.PodstawaFGSP` | bazodanowe |  |  |
-| PodstawaFGSP.Naliczaj | `Soneta.Kadry.TypNaliczaniaFGŚP` | bazodanowe, enum |  |  |
-| PodstawaFP | `Soneta.Kadry.PodstawaFP` | bazodanowe |  |  |
-| PodstawaFP.InneDochody | `Soneta.Business.SubTable` |  |  |  |
-| PodstawaFP.Naliczaj | `Soneta.Kadry.TypNaliczaniaFP` | bazodanowe, enum |  |  |
+| PodstawaFGSP | `Soneta.Kadry.PodstawaFGSP` (subrow) | bazodanowe |  |  |
+| PodstawaFGSP.Naliczaj | `Soneta.Kadry.TypNaliczaniaFGŚP` (enum) | bazodanowe |  |  |
+| PodstawaFP | `Soneta.Kadry.PodstawaFP` (subrow) | bazodanowe |  |  |
+| PodstawaFP.InneDochody | `SubTable` | podlista |  |  |
+| PodstawaFP.Naliczaj | `Soneta.Kadry.TypNaliczaniaFP` (enum) | bazodanowe |  |  |
 | PodstawaFP.PozostawalWEwidencjiPup | `bool` | bazodanowe |  |  |
 | PodstawaFP.PozostawalWEwidencjiPupDo30 | `bool` | bazodanowe |  |  |
-| Poprzedni | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Powiadomic | `Soneta.Core.Osoba` |  |  |  |
+| Poprzedni | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Powiadomic | `Soneta.Core.Osoba` | tylko-odczyt |  |  |
 | PowiekszajWymiarSkladkiZdrowotnej | `bool` | bazodanowe |  |  |
-| PowodAktualizacji | `string` | bazodanowe | Powód aktualizacji | Opis powodu aktualizacji zapisu |
-| PracaGornicza | `Soneta.Kadry.PracaGornicza` | bazodanowe |  |  |
+| PowodAktualizacji | `string` | bazodanowe, tylko-odczyt | Powód aktualizacji | Opis powodu aktualizacji zapisu |
+| PracaGornicza | `Soneta.Kadry.PracaGornicza` (subrow) | bazodanowe |  |  |
 | PracaGornicza.Kod | `int` | bazodanowe |  |  |
-| PracaGornicza.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PracaWSzczWarunkach | `Soneta.Kadry.PracaWSzczWarunkach` | bazodanowe |  |  |
+| PracaGornicza.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PracaWSzczWarunkach | `Soneta.Kadry.PracaWSzczWarunkach` (subrow) | bazodanowe |  |  |
 | PracaWSzczWarunkach.Kod | `int` | bazodanowe |  |  |
 | PracaWSzczWarunkach.KodStr | `string` |  |  |  |
-| PracaWSzczWarunkach.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PracaWSzczWarunkach.OkresExt | `Soneta.Types.FromTo` |  |  |  |
+| PracaWSzczWarunkach.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PracaWSzczWarunkach.OkresExt | `FromTo` | podlista |  |  |
 | PracaWSzczWarunkach.Opis | `string` | bazodanowe |  |  |
-| PracaWSzczWarunkach2009 | `Soneta.Kadry.PracaWSzczWarunkach2009` | bazodanowe |  |  |
-| PracaWSzczWarunkach2009.DataWniosku | `Soneta.Types.Date` | bazodanowe | Data wniosku | Data złożenia wniosku o przyznanie emerytury pomostowej |
+| PracaWSzczWarunkach2009 | `Soneta.Kadry.PracaWSzczWarunkach2009` (subrow) | bazodanowe |  |  |
+| PracaWSzczWarunkach2009.DataWniosku | `Date` | bazodanowe | Data wniosku | Data złożenia wniosku o przyznanie emerytury pomostowej |
 | PracaWSzczWarunkach2009.Kod | `Soneta.Kadry.KodPracyWSzególnychWarunkachCharakterze` | bazodanowe |  |  |
-| PracaWSzczWarunkach2009.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PracaWSzczWarunkach2009.WgKod | `Soneta.Business.Key` |  |  |  |
-| PracaZdalna | `Soneta.Kadry.PracZdalna` | bazodanowe |  |  |
+| PracaWSzczWarunkach2009.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| PracaWSzczWarunkach2009.WgKod | `Key` | podlista |  |  |
+| PracaZdalna | `Soneta.Kadry.PracZdalna` (subrow) | bazodanowe |  |  |
 | PracaZdalna.IndywidualnyLimitPZ | `bool` | bazodanowe |  |  |
 | PracaZdalna.LimitPZ | `int` | bazodanowe |  |  |
-| PracaZdalna.ModelPracy | `Soneta.Kadry.ModelPracy` | bazodanowe, enum |  | Model pracy |
+| PracaZdalna.ModelPracy | `Soneta.Kadry.ModelPracy` (enum) | bazodanowe |  | Model pracy |
 | PracaZdalna.OswiadczenieWarunki | `bool` | bazodanowe |  | Spełnia warunki lokalowe i techniczne do wykonywania pracy zdalnej |
-| PracaZdalna.TypLimituPZ | `Soneta.Kalend.TypLimituPracyZdalnej` | bazodanowe, enum |  |  |
-| PracaZdalnaBO | `Soneta.Kadry.PracaZdalnaBO` | bazodanowe |  |  |
-| PracaZdalnaBO.Data | `Soneta.Types.Date` |  |  |  |
+| PracaZdalna.TypLimituPZ | `Soneta.Kalend.TypLimituPracyZdalnej` (enum) | bazodanowe |  |  |
+| PracaZdalnaBO | `Soneta.Kadry.PracaZdalnaBO` (subrow) | bazodanowe |  |  |
+| PracaZdalnaBO.Data | `Date` | tylko-odczyt |  |  |
 | PracaZdalnaBO.OkazjonalnaUPoprzednich | `int` | bazodanowe |  | Ilość dni pracy zdalnej okazjonalnej wykorzystanej u poprzedniego pracodawcy |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| PrawoEmRent | `Soneta.Kadry.PrawoEmRent` | bazodanowe |  |  |
-| PrawoEmRent.DataWniosku | `Soneta.Types.Date` | bazodanowe |  |  |
-| PrawoEmRent.EmeryturaOd | `Soneta.Types.Date` | bazodanowe |  |  |
-| PrawoEmRent.EmeryturaOkres | `Soneta.Types.FromTo` |  |  |  |
-| PrawoEmRent.Kod | `Soneta.Kadry.KodPrawaEmRent` | bazodanowe, enum |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| PrawoEmRent | `Soneta.Kadry.PrawoEmRent` (subrow) | bazodanowe |  |  |
+| PrawoEmRent.DataWniosku | `Date` | bazodanowe |  |  |
+| PrawoEmRent.EmeryturaOd | `Date` | bazodanowe |  |  |
+| PrawoEmRent.EmeryturaOkres | `FromTo` | podlista |  |  |
+| PrawoEmRent.Kod | `Soneta.Kadry.KodPrawaEmRent` (enum) | bazodanowe |  |  |
 | PrawoEmRent.Numer | `string` | bazodanowe |  | Numer emerytury lub renty |
-| PrawoEmRent.OkresExt | `Soneta.Types.FromTo` |  |  |  |
-| PrawoEmRent.RentaOkres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| ProgiPodatkowe | `Soneta.Business.SubTable<Soneta.Kadry.ProgPodatkowy>` |  |  |  |
-| PrzekrPodstSkladek | `Soneta.Kadry.PrzekrPodstSkladek` | bazodanowe |  |  |
-| PrzekrPodstSkladek.Data | `Soneta.Types.Date` | bazodanowe | Data |  |
+| PrawoEmRent.OkresExt | `FromTo` | podlista |  |  |
+| PrawoEmRent.RentaOkres | `FromTo` | bazodanowe, podlista |  |  |
+| ProgiPodatkowe | `SubTable<Soneta.Kadry.ProgPodatkowy>` | podlista |  |  |
+| PrzekrPodstSkladek | `Soneta.Kadry.PrzekrPodstSkladek` (subrow) | bazodanowe |  |  |
+| PrzekrPodstSkladek.Data | `Date` | bazodanowe | Data |  |
 | PrzekrPodstSkladek.InneDochody | `decimal` | bazodanowe |  |  |
 | PrzekrPodstSkladek.Kwota | `decimal` | bazodanowe |  |  |
-| PrzekrPodstSkladek.Przekazal | `Soneta.Kadry.KodPrzekrPodstSkladek` | bazodanowe, enum |  |  |
-| PrzekrPodstSkladek.TypKwoty | `Soneta.Kadry.TypPrzekrPodstSkladek` | bazodanowe, enum |  |  |
+| PrzekrPodstSkladek.Przekazal | `Soneta.Kadry.KodPrzekrPodstSkladek` (enum) | bazodanowe |  |  |
+| PrzekrPodstSkladek.TypKwoty | `Soneta.Kadry.TypPrzekrPodstSkladek` (enum) | bazodanowe |  |  |
 | PrzekrPodstSkladek.ZaRok | `int` | bazodanowe | Za rok |  |
-| RGA | `Soneta.Kadry.DaneDlaRGA` | bazodanowe |  |  |
-| RGA.KodDniowek | `Soneta.Kadry.KodDniowekZjazdowRGA` | bazodanowe, enum |  |  |
-| RGA.KodDruzynyRatowniczej | `Soneta.Kadry.KodDruzynyRatowniczejRGA` | bazodanowe, enum |  |  |
-| RGA.KodOkresu | `Soneta.Kadry.KodOkresuRGA` | bazodanowe, enum |  |  |
+| RGA | `Soneta.Kadry.DaneDlaRGA` (subrow) | bazodanowe |  |  |
+| RGA.KodDniowek | `Soneta.Kadry.KodDniowekZjazdowRGA` (enum) | bazodanowe |  |  |
+| RGA.KodDruzynyRatowniczej | `Soneta.Kadry.KodDruzynyRatowniczejRGA` (enum) | bazodanowe |  |  |
+| RGA.KodOkresu | `Soneta.Kadry.KodOkresuRGA` (enum) | bazodanowe |  |  |
 | RGA.Umieszczaj | `bool` | bazodanowe |  |  |
-| RodzicielskiBO | `Soneta.Kadry.RodzicielskiBO` | bazodanowe |  |  |
-| RodzicielskiBO.Data | `Soneta.Types.Date` |  |  |  |
+| RodzicielskiBO | `Soneta.Kadry.RodzicielskiBO` (subrow) | bazodanowe |  |  |
+| RodzicielskiBO.Data | `Date` | tylko-odczyt |  |  |
 | RodzicielskiBO.UPoprzednich | `int` | bazodanowe |  | Limit urlopu rodzicielskiego wykorzystanego u poprzednich pracodawców (dni) |
-| RodzicielskiBO.UPoprzednichTygodnie | `int` |  |  |  |
-| SilaWyzszaBO | `Soneta.Kadry.SilaWyzszaBO` | bazodanowe |  |  |
-| SilaWyzszaBO.Data | `Soneta.Types.Date` |  |  |  |
+| RodzicielskiBO.UPoprzednichTygodnie | `int` | tylko-odczyt |  |  |
+| SilaWyzszaBO | `Soneta.Kadry.SilaWyzszaBO` (subrow) | bazodanowe |  |  |
+| SilaWyzszaBO.Data | `Date` | tylko-odczyt |  |  |
 | SilaWyzszaBO.UPoprzednich | `int` | bazodanowe |  | Limit zwolnienia z pracy z powodu działania siły wyższej wykorzystanego u poprzednich pracodawców (dni) |
-| SilaWyzszaBO.UPoprzednichGodz | `Soneta.Types.Time` | bazodanowe |  | Limit zwolnienia z pracy z powodu działania siły wyższej wykorzystanego u poprzednich pracodawców (godz.) |
-| StNiezdolnDoPracy | `Soneta.Kadry.StNiezdolnDoPracy` | bazodanowe |  |  |
-| StNiezdolnDoPracy.Kod | `Soneta.Kadry.KodStNiezdolnDoPracy` | bazodanowe, enum |  |  |
-| StNiezdolnDoPracy.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| StPokrewienstwa | `Soneta.Kadry.KodStPokrewienstwa` | bazodanowe, enum |  |  |
-| StanRodzinny | `Soneta.Kadry.StanRodzinny` |  |  |  |
-| StatusStudenta | `Soneta.Kadry.StatusStudenta` | bazodanowe |  |  |
+| SilaWyzszaBO.UPoprzednichGodz | `Time` | bazodanowe |  | Limit zwolnienia z pracy z powodu działania siły wyższej wykorzystanego u poprzednich pracodawców (godz.) |
+| StNiezdolnDoPracy | `Soneta.Kadry.StNiezdolnDoPracy` (subrow) | bazodanowe |  |  |
+| StNiezdolnDoPracy.Kod | `Soneta.Kadry.KodStNiezdolnDoPracy` (enum) | bazodanowe |  |  |
+| StNiezdolnDoPracy.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| StPokrewienstwa | `Soneta.Kadry.KodStPokrewienstwa` (enum) | bazodanowe |  |  |
+| StanRodzinny | `Soneta.Kadry.StanRodzinny` | tylko-odczyt |  |  |
+| StatusStudenta | `Soneta.Kadry.StatusStudenta` (subrow) | bazodanowe |  |  |
 | StatusStudenta.AktualnieStudiuje | `bool` | bazodanowe | Aktualnie studiuje |  |
 | StatusStudenta.NumerLegitymacjiStudenckiej | `string` | bazodanowe | Numer legitymacji studenckiej |  |
-| StatusStudenta.OkresStudiow | `Soneta.Types.FromTo` | bazodanowe | Okres studiów |  |
-| StopienNiepelnosp | `Soneta.Kadry.StopienNiepelnosp` | bazodanowe |  |  |
-| StopienNiepelnosp.DataWniosku | `Soneta.Types.Date` | bazodanowe |  |  |
-| StopienNiepelnosp.DataZaswiadczenia | `Soneta.Types.Date` | bazodanowe |  |  |
-| StopienNiepelnosp.Kod | `Soneta.Kadry.KodStNiepelnosprawnosci` | bazodanowe, enum |  |  |
-| StopienNiepelnosp.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| StopienNiepelnosp.OkresEpd | `Soneta.Types.FromTo` |  |  |  |
-| StopienNiepelnosp.OkresExt | `Soneta.Types.FromTo` |  |  |  |
-| StopienNiepelnosp.OkresExtOld | `Soneta.Types.FromTo` |  |  |  |
-| StopienNiepelnosp.Orzeczenie | `Soneta.Kadry.OrzeczenieStopienNiepelnosp` | bazodanowe, enum |  |  |
-| StopienNiepelnosp.Stopien | `Soneta.Kadry.StNiepełnosprawności` | bazodanowe, enum |  |  |
+| StatusStudenta.OkresStudiow | `FromTo` | bazodanowe, podlista | Okres studiów |  |
+| StopienNiepelnosp | `Soneta.Kadry.StopienNiepelnosp` (subrow) | bazodanowe |  |  |
+| StopienNiepelnosp.DataWniosku | `Date` | bazodanowe |  |  |
+| StopienNiepelnosp.DataZaswiadczenia | `Date` | bazodanowe |  |  |
+| StopienNiepelnosp.Kod | `Soneta.Kadry.KodStNiepelnosprawnosci` (enum) | bazodanowe |  |  |
+| StopienNiepelnosp.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| StopienNiepelnosp.OkresEpd | `FromTo` | podlista |  |  |
+| StopienNiepelnosp.OkresExt | `FromTo` | podlista |  |  |
+| StopienNiepelnosp.OkresExtOld | `FromTo` | podlista |  |  |
+| StopienNiepelnosp.Orzeczenie | `Soneta.Kadry.OrzeczenieStopienNiepelnosp` (enum) | bazodanowe |  |  |
+| StopienNiepelnosp.Stopien | `Soneta.Kadry.StNiepełnosprawności` (enum) | bazodanowe |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
-| Udzialy | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| UmowaUlgi | `Soneta.Kadry.UmowaUlgiInfo` | bazodanowe |  |  |
-| UmowaUlgi.Pit26 | `Soneta.Kadry.NaliczajPit26` | bazodanowe, enum |  |  |
-| UmowaUlgi.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` | bazodanowe, enum |  |  |
+| Udzialy | `Fraction` | bazodanowe |  |  |
+| UmowaUlgi | `Soneta.Kadry.UmowaUlgiInfo` (subrow) | bazodanowe |  |  |
+| UmowaUlgi.Pit26 | `Soneta.Kadry.NaliczajPit26` (enum) | bazodanowe |  |  |
+| UmowaUlgi.UlgaCzesc | `Soneta.Kadry.UlgaPodatkowaCzesc` (enum) | bazodanowe |  |  |
 | UmowaUlgi.UlgaDuzaRodzina | `bool` | bazodanowe |  |  |
 | UmowaUlgi.UlgaEmeryt | `bool` | bazodanowe |  |  |
 | UmowaUlgi.UlgaMnoznik | `decimal` | bazodanowe |  |  |
@@ -489,64 +493,63 @@ Implementuje interfejsy: `IAdresHost`, `IDaneKontaktoweHost`
 | UmowaUlgi.UmowaKwotaWolna | `bool` | bazodanowe |  |  |
 | UmowyDobrowolneChorobowe | `bool` | bazodanowe |  |  |
 | UmowyOskladkowane | `bool` | bazodanowe |  |  |
-| UmowyOskładkowane | `Soneta.Kadry.PracHistoria.UbezpieczenieZleceniobiorcy` | enum |  |  |
+| UmowyOskładkowane | `Soneta.Kadry.PracHistoria.UbezpieczenieZleceniobiorcy` (enum) |  |  |  |
 | UmowyTylkoZdrow | `bool` | bazodanowe |  |  |
-| Urodzony | `Soneta.Kadry.Urodzony` | bazodanowe |  |  |
-| Urodzony.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Urodzony | `Soneta.Kadry.Urodzony` (subrow) | bazodanowe |  |  |
+| Urodzony.Data | `Date` | bazodanowe |  |  |
 | Urodzony.Miejsce | `string` | bazodanowe |  |  |
 | WarunkiZagrozenia | `bool` | bazodanowe |  | Pracownik zatrudniony w warunkach zagrożenia (dla deklaracji ZUS IWA) |
-| WeteranBO | `Soneta.Kadry.WeteranBO` | bazodanowe |  |  |
-| WeteranBO.BezPierwszego | `bool` |  |  |  |
-| WeteranBO.Data | `Soneta.Types.Date` |  |  |  |
-| WeteranBO.NaliczajUrlopWeteranaOd | `Soneta.Types.Date` | bazodanowe |  |  |
+| WeteranBO | `Soneta.Kadry.WeteranBO` (subrow) | bazodanowe |  |  |
+| WeteranBO.BezPierwszego | `bool` | tylko-odczyt |  |  |
+| WeteranBO.Data | `Date` | tylko-odczyt |  |  |
+| WeteranBO.NaliczajUrlopWeteranaOd | `Date` | bazodanowe |  |  |
 | WeteranBO.StatusWeterana | `bool` | bazodanowe |  | Pracownik posiada status weterana lub weterana poszkodowanego |
 | WeteranBO.UPoprzednich | `decimal` | bazodanowe |  | Limit urlopu weterana wykorzystanego u poprzednich pracodawców (dni) |
-| WeteranBO.Wykorzystany | `Soneta.Types.Time` |  |  |  |
-| Wlasciciel | `Soneta.Kadry.WlascicielInfo` | bazodanowe |  |  |
+| WeteranBO.Wykorzystany | `Time` | tylko-odczyt |  |  |
+| Wlasciciel | `Soneta.Kadry.WlascicielInfo` (subrow) | bazodanowe |  |  |
 | Wlasciciel.DeklaracjaOplacaniaSkladek | `bool` | bazodanowe |  |  |
 | Wlasciciel.DochodPoprzedniRok | `decimal` | bazodanowe |  |  |
 | Wlasciciel.DodatkowaDzialalnosc | `bool` |  |  |  |
 | Wlasciciel.DzialalnoscPoprzedniRok | `int` | bazodanowe |  |  |
-| Wlasciciel.FormaOpodatkowania | `Soneta.Kadry.RodzajeFormyOpodatkowania` | bazodanowe, enum |  |  |
+| Wlasciciel.FormaOpodatkowania | `Soneta.Kadry.RodzajeFormyOpodatkowania` (enum) | bazodanowe |  |  |
 | Wlasciciel.IloscDzialalnosci | `int` |  |  |  |
 | Wlasciciel.IndywidualnaDRA | `bool` |  |  |  |
 | Wlasciciel.LiczPlatnosciPIT5 | `bool` | bazodanowe |  |  |
-| Wlasciciel.LimitDochoduPoprzedniRok | `decimal` |  |  |  |
-| Wlasciciel.LimitPrzychoduPoprzedniRok | `decimal` |  |  |  |
+| Wlasciciel.LimitDochoduPoprzedniRok | `decimal` | tylko-odczyt |  |  |
+| Wlasciciel.LimitPrzychoduPoprzedniRok | `decimal` | tylko-odczyt |  |  |
 | Wlasciciel.LiniowyPIT5L | `bool` | bazodanowe |  |  |
 | Wlasciciel.NaDRAUmieszczajREGON | `bool` |  |  |  |
 | Wlasciciel.NiePowiekszajWymiaruSkladkiZdrowotnej | `bool` |  |  |  |
-| Wlasciciel.NumerRachunkuUS | `Soneta.Core.NumerRachunkuUS` |  |  |  |
-| Wlasciciel.NumerRachunkuZUS | `Soneta.Core.NumerRachunkuZUS` |  |  |  |
-| Wlasciciel.ObnizonaPodstawaZUS | `bool` | bazodanowe |  |  |
-| Wlasciciel.PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` |  |  |  |
-| Wlasciciel.PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` |  |  |  |
+| Wlasciciel.NumerRachunkuUS | `Soneta.Core.NumerRachunkuUS` | tylko-odczyt |  |  |
+| Wlasciciel.NumerRachunkuZUS | `Soneta.Core.NumerRachunkuZUS` | tylko-odczyt |  |  |
+| Wlasciciel.PIT5BO | `Soneta.Kadry.BilansOtwarciaPIT5` | tylko-odczyt |  |  |
+| Wlasciciel.PIT5Inne | `Soneta.Kadry.PIT5DochodyInneBazy` | tylko-odczyt |  |  |
 | Wlasciciel.PozostaleFormyDzialalnosci | `bool` | bazodanowe |  |  |
-| Wlasciciel.ProcentWyp | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Wlasciciel.ProcentWyp | `Percent` | bazodanowe |  |  |
 | Wlasciciel.PrzychodPoprzedniRok | `decimal` | bazodanowe |  |  |
-| Wlasciciel.PrzychodRyczaltBiezacyRok | `Soneta.Kadry.PrzychodRyczalt` |  |  |  |
-| Wlasciciel.PrzychodZDzialnosciPoprzedniRok | `Soneta.Kadry.PrzychodZDzialnosci` |  |  |  |
-| Wlasciciel.RodzajObnizeniaPodstawyZUS | `Soneta.Kadry.RodzajeObnizeniaPodstawZUS` | bazodanowe, enum |  |  |
+| Wlasciciel.PrzychodRyczaltBiezacyRok | `Soneta.Kadry.PrzychodRyczalt` | tylko-odczyt |  |  |
+| Wlasciciel.PrzychodZDzialnosciPoprzedniRok | `Soneta.Kadry.PrzychodZDzialnosci` | tylko-odczyt |  |  |
+| Wlasciciel.RodzajObnizeniaPodstawyZUS | `Soneta.Kadry.RodzajeObnizeniaPodstawZUS` (enum) | bazodanowe |  |  |
 | Wlasciciel.StdProcentWyp | `bool` |  |  |  |
-| Wlasciciel.Udzialy | `Soneta.Types.Fraction` |  |  |  |
+| Wlasciciel.Udzialy | `Fraction` |  |  |  |
 | Wlasciciel.WakacjeSkladkowe | `bool` | bazodanowe |  |  |
 | Wlasciciel.ZUSOdPrzychodu | `bool` | bazodanowe |  |  |
 | Wlasciciel.ZmiaForOpodLip2022 | `bool` | bazodanowe |  |  |
 | Wlasciciel.ZmiaForOpodSty2022 | `bool` | bazodanowe |  |  |
 | Wlasciciel.ZwolnienieSkladkaZdrowotna | `bool` | bazodanowe |  |  |
-| Wojsko | `Soneta.Kadry.Wojsko` |  |  |  |
+| Wojsko | `Soneta.Kadry.Wojsko` | tylko-odczyt |  |  |
 | WspolneGospDomowe | `bool` | bazodanowe |  |  |
-| WybranyAdresNaPrzelewach | `Soneta.Core.Adres` |  |  |  |
-| Wyksztalcenie | `Soneta.Kadry.Wyksztalcenie` |  |  |  |
-| WypoczynkowyBO | `Soneta.Kadry.WypoczynkowyBO` | bazodanowe |  |  |
+| WybranyAdresNaPrzelewach | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| Wyksztalcenie | `Soneta.Kadry.Wyksztalcenie` | tylko-odczyt |  |  |
+| WypoczynkowyBO | `Soneta.Kadry.WypoczynkowyBO` (subrow) | bazodanowe |  |  |
 | WypoczynkowyBO.BezPierwszego | `bool` | bazodanowe |  | Prawo do urlopu w pierwszym miesiącu zatrudnienia pracownik nabył u poprzedniego pracodawcy |
-| WypoczynkowyBO.Data | `Soneta.Types.Date` |  |  |  |
+| WypoczynkowyBO.Data | `Date` | tylko-odczyt |  |  |
 | WypoczynkowyBO.NaZadanie | `int` | bazodanowe |  | Liczba dni wykorzystanego urlopu wypoczynkowego 'na żądanie' (maksymalnie 4 dni w roku kalendarzowym) |
 | WypoczynkowyBO.UPoprzednich | `decimal` | bazodanowe |  | Limit urlopu wypoczynkowego wykorzystanego u poprzednich pracodawców (dni) |
-| WypoczynkowyBO.Wykorzystany | `Soneta.Types.Time` | bazodanowe |  | Limit urlopu wypoczynkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
-| ZUS | `Soneta.Kadry.DaneZUS` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
-| ZajecieWynagrodzenia | `Soneta.Kadry.ZajęcieWynagrodzeniaInfo` | bazodanowe |  |  |
+| WypoczynkowyBO.Wykorzystany | `Time` | bazodanowe |  | Limit urlopu wypoczynkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
+| ZUS | `Soneta.Kadry.DaneZUS` | tylko-odczyt |  |  |
+| Zadania | `SubTable` | podlista |  |  |
+| ZajecieWynagrodzenia | `Soneta.Kadry.ZajęcieWynagrodzeniaInfo` (subrow) | bazodanowe |  |  |
 | ZajecieWynagrodzenia.UprawnDoPodwyzszeniaKwotyWolnej | `int` | bazodanowe |  |  |
 | ZgodnoscGIODOPotwierdzona | `bool` |  |  |  |
 

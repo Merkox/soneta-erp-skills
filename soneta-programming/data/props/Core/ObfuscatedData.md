@@ -5,24 +5,28 @@ Opis: Rekord zaciemnionych (zanonimizowanych) danych osobowych. Przechowuje info
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CheckSum | `string` | bazodanowe |  |  |
-| CodedData | `Soneta.Business.MemoBin` | bazodanowe |  |  |
+| CodedData | `MemoBin` | bazodanowe |  |  |
 | DelegatingDateTime | `System.DateTime` | bazodanowe |  |  |
 | DelegatingOperator | `System.Guid` | bazodanowe |  |  |
-| IsRangeDefined | `bool` |  |  |  |
-| ObfuscateStatus | `Soneta.Core.ObfuscateStatus` | bazodanowe, enum |  |  |
-| ObfuscateType | `Soneta.Core.ObfuscateType` | bazodanowe, enum |  |  |
+| IsRangeDefined | `bool` | tylko-odczyt |  |  |
+| ObfuscateStatus | `Soneta.Core.ObfuscateStatus` (enum) | bazodanowe |  |  |
+| ObfuscateType | `Soneta.Core.ObfuscateType` (enum) | bazodanowe, tylko-odczyt |  |  |
 | ObfuscatingDateTime | `System.DateTime` | bazodanowe |  |  |
 | ObfuscatingOperator | `System.Guid` | bazodanowe |  |  |
 | Range | `System.Guid` | bazodanowe | Guid szablonu |  |
 | RangeDefinition | `Soneta.Core.ObfuscateDef` |  |  |  |
-| SubjectGuid | `System.Guid` | bazodanowe | Klucz obcy tabeli obfuskowanej |  |
-| SubjectTable | `string` | bazodanowe | Tabela obiektu obfuskowanego |  |
+| SubjectGuid | `System.Guid` | bazodanowe, tylko-odczyt | Klucz obcy tabeli obfuskowanej |  |
+| SubjectTable | `string` | bazodanowe, tylko-odczyt | Tabela obiektu obfuskowanego |  |
 
 ## Enumy
 

@@ -5,33 +5,37 @@ Opis: Zapisany wynik obliczenia zestawienia księgowego. Przechowuje nazwę, dat
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 10
+- podlisty: 7
+- subrowy: 0
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| CzasModyfikacji | `System.DateTime?` | bazodanowe |  |  |
-| CzasUtworzenia | `System.DateTime` | bazodanowe |  |  |
+| CzasModyfikacji | `System.DateTime?` | bazodanowe, tylko-odczyt |  |  |
+| CzasUtworzenia | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
 | DlaPulpituKB | `bool` | bazodanowe | Pulpit BR |  |
-| Firmy | `string` |  |  |  |
-| InCorrectionMode | `bool` |  |  |  |
-| Kolumny | `Soneta.Business.SubTable<Soneta.Ksiega.KolumnaWynikuZestKS>` |  |  |  |
-| Komorki | `Soneta.Business.SubTable<Soneta.Ksiega.KomorkaWynikuZestKS>` |  |  |  |
-| KorektaReczna | `bool` |  | Wykonana korekta ręczna |  |
+| Firmy | `string` | tylko-odczyt |  |  |
+| InCorrectionMode | `bool` | tylko-odczyt |  |  |
+| Kolumny | `SubTable<Soneta.Ksiega.KolumnaWynikuZestKS>` | podlista |  |  |
+| Komorki | `SubTable<Soneta.Ksiega.KomorkaWynikuZestKS>` | podlista |  |  |
+| KorektaReczna | `bool` | tylko-odczyt | Wykonana korekta ręczna |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaWynikuZestKS>` |  |  |  |
-| PrmBufor | `bool` | bazodanowe |  |  |
-| PrmDekretyZamkniecia | `bool` | bazodanowe |  |  |
-| PrmFirmy | `Soneta.Core.OddzialFirmy[]` |  | Firmy |  |
-| PrmFirmyMemo | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| PrmOkres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| PrmOkresKS | `string` | bazodanowe |  |  |
-| PrmTypObrotu | `Soneta.Ksiega.TypObrotu` | bazodanowe, enum |  |  |
-| XML | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Pozycje | `SubTable<Soneta.Ksiega.PozycjaWynikuZestKS>` | podlista |  |  |
+| PrmBufor | `bool` | bazodanowe, tylko-odczyt |  |  |
+| PrmDekretyZamkniecia | `bool` | bazodanowe, tylko-odczyt |  |  |
+| PrmFirmy | `Soneta.Core.OddzialFirmy[]` | podlista | Firmy |  |
+| PrmFirmyMemo | `MemoText` | bazodanowe, podlista |  |  |
+| PrmOkres | `FromTo` | bazodanowe, podlista |  |  |
+| PrmOkresKS | `string` | bazodanowe, tylko-odczyt |  |  |
+| PrmTypObrotu | `Soneta.Ksiega.TypObrotu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| XML | `MemoText` | bazodanowe, podlista |  |  |
 | Zatwierdzony | `bool` |  |  |  |
-| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe |  |  |
+| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

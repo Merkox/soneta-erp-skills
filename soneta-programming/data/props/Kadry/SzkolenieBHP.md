@@ -5,23 +5,27 @@ Opis: Szkolenie BHP pracownika rejestrujące termin skierowania, datę odbycia, 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 7
+- podlisty: 1
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataExt | `Soneta.Types.Date` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataExt | `Date` | tylko-odczyt |  |  |
 | Definicja | `Soneta.Kadry.DefinicjaSzkoleniaBHP` | bazodanowe |  |  |
-| Następne | `Soneta.Kadry.SzkolenieBHP` |  |  |  |
-| NastępneDefinicja | `Soneta.Kadry.DefinicjaSzkoleniaBHP` |  |  |  |
-| NastępneTermin | `Soneta.Types.Date` |  | Termin następnego szkolenia |  |
-| Nazwa | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Następne | `Soneta.Kadry.SzkolenieBHP` | tylko-odczyt |  |  |
+| NastępneDefinicja | `Soneta.Kadry.DefinicjaSzkoleniaBHP` | tylko-odczyt |  |  |
+| NastępneTermin | `Date` |  | Termin następnego szkolenia |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Osoba | `string` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| WażneDo | `Soneta.Types.Date` |  |  |  |
-| Wykonane | `bool` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| WażneDo | `Date` | tylko-odczyt |  |  |
+| Wykonane | `bool` | tylko-odczyt |  |  |
 | Zakres | `string` | bazodanowe |  |  |

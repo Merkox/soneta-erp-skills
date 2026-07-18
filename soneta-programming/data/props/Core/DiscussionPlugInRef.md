@@ -5,22 +5,26 @@ Opis: Element szczegółowy hosta rozszerzeń dyskusji (IDiscussionPlugInHost). 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Definition` → `IDiscussionPlugInHost`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Attachable | `bool` | bazodanowe |  |  |
-| Config | `Soneta.Core.Conversation.DiscussionPlugInConfig` |  |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Config | `Soneta.Core.Conversation.DiscussionPlugInConfig` | tylko-odczyt |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
 | Configurable | `bool` | bazodanowe |  |  |
-| Definition | `Soneta.Core.Conversation.IDiscussionPlugInHost` | bazodanowe, guided-parent, iface-ref | Rozszerzenie dla |  |
+| Definition | `Soneta.Core.Conversation.IDiscussionPlugInHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Rozszerzenie dla |  |
 | Editable | `bool` | bazodanowe |  |  |
 | Locked | `bool` | bazodanowe |  |  |
-| PlugIn | `Soneta.Core.Conversation.DiscussionPlugIn` | bazodanowe | Rozszerzenie |  |
+| PlugIn | `Soneta.Core.Conversation.DiscussionPlugIn` | bazodanowe, tylko-odczyt | Rozszerzenie |  |
 | Priority | `int` | bazodanowe |  |  |
 | Removable | `bool` | bazodanowe |  |  |
-| Type | `Soneta.Core.Conversation.DiscussionPlugInRefType` | bazodanowe, enum |  |  |
+| Type | `Soneta.Core.Conversation.DiscussionPlugInRefType` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

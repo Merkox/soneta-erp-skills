@@ -5,16 +5,20 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Ws
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BIFieldType | `Soneta.BI.BIFieldType` | enum |  |  |
-| Dimension | `Soneta.Business.UI.AxisDimension` | bazodanowe, enum | Kolejność |  |
+| BIFieldType | `Soneta.BI.BIFieldType` (enum) | tylko-odczyt |  |  |
+| Dimension | `UI.AxisDimension` (enum) | bazodanowe | Kolejność |  |
 | Field | `Soneta.BI.FieldDefinition` | bazodanowe | Pole |  |
-| FieldType | `Soneta.Data.Schema.FieldType` | enum |  |  |
-| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe | Element wizualizacji |  |
+| FieldType | `Soneta.Data.Schema.FieldType` (enum) | tylko-odczyt |  |  |
+| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe, tylko-odczyt | Element wizualizacji |  |
 | Lp | `int` | bazodanowe |  |  |
 | Width | `int` | bazodanowe | Szerokość pola |  |
 
@@ -27,7 +31,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Dimension` = 1 — Wymiar
 - `Measure` = 2 — Miara
 
-### AxisDimension (`Soneta.Business.UI.AxisDimension`)
+### AxisDimension (`UI.AxisDimension`)
 - `Enum` = 0 — Wartościowo
 - `AZ` = 1 — Alfabetycznie
 - `Hash3` = 2 — Testowy hash 3

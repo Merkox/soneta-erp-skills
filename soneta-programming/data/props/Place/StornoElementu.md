@@ -5,21 +5,25 @@ Opis: Element szczegółowy elementu wypłaty (WypElement). Rejestruje operację
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Stornowany` → `WypElement`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Automatyczne | `bool` | bazodanowe |  |  |
-| MiesiacZUS | `Soneta.Types.YearMonth` |  | Miesiąc ZUS |  |
-| MiesiacZUSDzien | `Soneta.Types.Date` | bazodanowe | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RodzajStorna | `Soneta.Place.RodzajStornaElementu` | bazodanowe, enum |  |  |
-| StanStorna | `Soneta.Place.StanStornaElementu` | bazodanowe, enum |  |  |
-| Stornowany | `Soneta.Place.WypElement` | bazodanowe, guided-parent |  |  |
-| Stornujacy | `Soneta.Place.WypElement` | bazodanowe |  |  |
-| ZmianaMiesiącaPIT | `bool` |  |  |  |
-| ZmianaMiesiącaZUS | `bool` |  |  |  |
+| Automatyczne | `bool` | bazodanowe, tylko-odczyt |  |  |
+| MiesiacZUS | `YearMonth` | tylko-odczyt | Miesiąc ZUS |  |
+| MiesiacZUSDzien | `Date` | bazodanowe, tylko-odczyt | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RodzajStorna | `Soneta.Place.RodzajStornaElementu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| StanStorna | `Soneta.Place.StanStornaElementu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Stornowany | `Soneta.Place.WypElement` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Stornujacy | `Soneta.Place.WypElement` | bazodanowe, tylko-odczyt |  |  |
+| ZmianaMiesiącaPIT | `bool` | tylko-odczyt |  |  |
+| ZmianaMiesiącaZUS | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

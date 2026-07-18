@@ -5,8 +5,12 @@ Opis: Rozwiązanie (solution) w środowisku runtime. Grupuje projekty kompilowan
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,7 +18,7 @@ Guided: root
 | CredentialAddress | `string` |  |  |  |
 | Description | `string` | bazodanowe | Opis |  |
 | LocalPath | `string` |  |  |  |
-| Namespace | `string` |  |  |  |
-| Projects | `Soneta.Business.SubTable<Soneta.Business.Compiler.RuntimeProject>` |  |  |  |
+| Namespace | `string` | tylko-odczyt |  |  |
+| Projects | `SubTable<Compiler.RuntimeProject>` | podlista |  |  |
 | RepositoryLocation | `string` |  |  |  |
 | SolutionNamespace | `string` | bazodanowe | Przestrzeń nazw |  |

@@ -6,21 +6,25 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 1
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Kadry.DefinicjaŚwiadczeniaSocjalnego` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` | bazodanowe |  |  |
-| Rozliczenie.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` (subrow) | bazodanowe |  |  |
+| Rozliczenie.Data | `Date` | bazodanowe |  |  |
 | Rozliczenie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Rozliczenie.Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Rozliczenie.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Rozliczenie.Rozliczone | `bool` |  |  |  |
-| Rozliczenie.WgElement | `Soneta.Business.Key` |  |  |  |
+| Rozliczenie.Kwota | `Currency` | bazodanowe |  |  |
+| Rozliczenie.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Rozliczenie.Rozliczone | `bool` | tylko-odczyt |  |  |
+| Rozliczenie.WgElement | `Key` | podlista |  |  |

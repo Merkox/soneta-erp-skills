@@ -5,17 +5,21 @@ Opis: Element szczegółowy dnia pracy (DzienPracy). Rejestracja pojedynczego we
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienPracy`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaZdarzenia | `Soneta.Kalend.DefinicjaZdarzeniaRCP` | bazodanowe |  |  |
-| Dzien | `Soneta.Kalend.DzienPracy` | bazodanowe, guided-parent |  |  |
-| Godzina | `Soneta.Types.Time` | bazodanowe |  |  |
+| Dzien | `Soneta.Kalend.DzienPracy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Godzina | `Time` | bazodanowe |  |  |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa kolejnych wejść wyjść |
 | Operacja | `int` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypWejsciaWyjscia` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kalend.TypWejsciaWyjscia` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

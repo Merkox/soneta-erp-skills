@@ -5,12 +5,16 @@ Opis: Konfigurowalna definicja typu urządzenia użytkowanego. Zawiera symbol, n
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Blokada definicji. Zablokowane definicje urządzeń nie będą wyświetlane w liście wyboru. |
-| DefFormatki | `Soneta.Business.MemoText` | bazodanowe |  | Określa definicję formularza urządzenia w postaci XML. |
+| DefFormatki | `MemoText` | bazodanowe, podlista |  | Określa definicję formularza urządzenia w postaci XML. |
 | Nazwa | `string` | bazodanowe |  | Pełna nazwa definicji urządzenia, wykorzystywana do wyszukiwania definicji. |
 | Symbol | `string` | bazodanowe |  | Skrótowa nazwa definicji urządzenia wykorzystywana do wyszukiwania definicji. |

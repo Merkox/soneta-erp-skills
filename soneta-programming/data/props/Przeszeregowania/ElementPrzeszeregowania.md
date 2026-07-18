@@ -5,29 +5,33 @@ Opis: Element szczegółowy przeszeregowania (Przeszeregowanie). Określa zmian�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przeszeregowanie` → `Przeszeregowanie`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataKwoty | `Soneta.Types.Date` | bazodanowe |  |  |
+| DataKwoty | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | Grupa | `Soneta.Kadry.GrupaZaszeregowania` | bazodanowe |  |  |
 | Krotnosc | `double` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaPrecyzja | `Soneta.Place.PrecyzjaZaokraglenia` | bazodanowe, enum |  |  |
-| KwotaSposob | `Soneta.Place.SposobZaokraglenia` | bazodanowe, enum |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaPrecyzja | `Soneta.Place.PrecyzjaZaokraglenia` (enum) | bazodanowe |  |  |
+| KwotaSposob | `Soneta.Place.SposobZaokraglenia` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| ProcentowaZmianaKwoty | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Przeszeregowanie | `Soneta.Przeszeregowania.Przeszeregowanie` | bazodanowe, guided-parent |  |  |
-| RodzajPrzeszergowania | `Soneta.Przeszeregowania.RodzajPrzeszergowania` | bazodanowe, enum |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| ProcentowaZmianaKwoty | `Percent` | bazodanowe |  |  |
+| Przeszeregowanie | `Soneta.Przeszeregowania.Przeszeregowanie` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| RodzajPrzeszergowania | `Soneta.Przeszeregowania.RodzajPrzeszergowania` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Wskaznik | `string` | bazodanowe |  |  |
 | ZmianaKrotnosci | `double` | bazodanowe |  |  |
-| ZmianaKwoty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| ZmianaProcentu | `Soneta.Types.Percent` | bazodanowe |  |  |
+| ZmianaKwoty | `Currency` | bazodanowe |  |  |
+| ZmianaProcentu | `Percent` | bazodanowe |  |  |
 
 ## Enumy
 

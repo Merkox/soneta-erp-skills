@@ -5,8 +5,12 @@ Opis: Element szczegółowy wyszukania (Wyszukanie). Definiuje pojedyncze kryter
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wyszukanie` → `Wyszukanie`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,6 +22,6 @@ Guided: child — nadrzędna przez pole `Wyszukanie` → `Wyszukanie`
 | Min | `decimal` | bazodanowe |  |  |
 | Waga | `decimal` | bazodanowe |  |  |
 | Wymagany | `bool` | bazodanowe |  |  |
-| Wyszukanie | `Soneta.HR.Wyszukanie` | bazodanowe, guided-parent |  |  |
+| Wyszukanie | `Soneta.HR.Wyszukanie` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | ZMax | `bool` |  |  |  |
 | ZMin | `bool` |  |  |  |

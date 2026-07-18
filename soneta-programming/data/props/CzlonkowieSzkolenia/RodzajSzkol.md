@@ -6,41 +6,45 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 15
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 10
+- subrowy: 0
+- razem: 30
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cel | `Soneta.Business.MemoText` | bazodanowe | Cel szkolenia | Cel szkolenia. |
-| CelCaption | `string` |  |  |  |
+| Cel | `MemoText` | bazodanowe, podlista | Cel szkolenia | Cel szkolenia. |
+| CelCaption | `string` | tylko-odczyt |  |  |
 | Definicja | `Soneta.CzlonkowieSzkolenia.DefRodzajSzkol` | bazodanowe |  | Definicja rodzaju szkolenia. |
 | DrukZakresow | `bool` | bazodanowe |  | Drukuj tylko zakresy. |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | FakturowanieMat | `bool` | bazodanowe |  | Fakturowanie materiałów |
-| Forma | `Soneta.CzlonkowieSzkolenia.FormaSzkolenia` | bazodanowe, enum | Forma szkolenie | Forma szkolenie. |
-| GrupySzkol | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.GrupaSzkol>` |  |  |  |
-| IsCourseGroup | `bool` |  |  |  |
-| IsModuleCourse | `bool` |  |  |  |
-| IsStandardCourse | `bool` |  |  |  |
-| IsUserGroup | `bool` |  |  |  |
+| Forma | `Soneta.CzlonkowieSzkolenia.FormaSzkolenia` (enum) | bazodanowe | Forma szkolenie | Forma szkolenie. |
+| GrupySzkol | `SubTable<Soneta.CzlonkowieSzkolenia.GrupaSzkol>` | podlista |  |  |
+| IsCourseGroup | `bool` | tylko-odczyt |  |  |
+| IsModuleCourse | `bool` | tylko-odczyt |  |  |
+| IsStandardCourse | `bool` | tylko-odczyt |  |  |
+| IsUserGroup | `bool` | tylko-odczyt |  |  |
 | Modulowe | `bool` | bazodanowe |  | Określa, czy szkolenie składa sie z modułów. |
-| Moduly | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.ModulSzkol>` |  |  |  |
+| Moduly | `SubTable<Soneta.CzlonkowieSzkolenia.ModulSzkol>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa szkolenia | Nazwa szkolenia. |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy. |
 | OgraniczPrzedmioty | `bool` | bazodanowe |  | Określa, czy zawęzic listę przedmiotów na grupie szkoleniowej. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis szkolenia | Opis szkolenia. |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Przedmioty | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolPrzedmiot>` |  |  |  |
-| PrzedmiotyBase | `Soneta.CzlonkowieSzkolenia.PrzedmiotSzkol[]` |  |  |  |
-| ShowDistinctions | `bool` |  |  |  |
-| ShowLicenses | `bool` |  |  |  |
-| Stan | `Soneta.CzlonkowieSzkolenia.StanSzkolenia` | bazodanowe, enum | Stan szkolenia | Stan szkolenia. |
+| Opis | `MemoText` | bazodanowe, podlista | Opis szkolenia | Opis szkolenia. |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Przedmioty | `SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolPrzedmiot>` | podlista |  |  |
+| PrzedmiotyBase | `Soneta.CzlonkowieSzkolenia.PrzedmiotSzkol[]` | podlista |  |  |
+| ShowDistinctions | `bool` | tylko-odczyt |  |  |
+| ShowLicenses | `bool` | tylko-odczyt |  |  |
+| Stan | `Soneta.CzlonkowieSzkolenia.StanSzkolenia` (enum) | bazodanowe | Stan szkolenia | Stan szkolenia. |
 | Symbol | `string` | bazodanowe | Symbol szkolenia | Symbol szkolenia. |
-| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` | bazodanowe, enum |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Unijne | `bool` | bazodanowe |  | Określa szkolenie unijne. |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolUprawnienie>` |  |  |  |
+| Uprawnienia | `SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolUprawnienie>` | podlista |  |  |
 | Wpisowe | `bool` | bazodanowe |  | Wpisowe na studia |
-| Wyroznienia | `Soneta.Business.SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolWyroznienie>` |  |  |  |
+| Wyroznienia | `SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolWyroznienie>` | podlista |  |  |
 
 ## Enumy
 

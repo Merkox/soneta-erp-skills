@@ -4,21 +4,25 @@ Tytuł: Rozliczenie opisu analitycznego
 Opis: Rozliczenie opisu analitycznego wiąże element rozliczany z elementem rozliczającym w ramach kontroli budżetowej. Śledzi kwoty, ilości i daty rozliczeń, obsługuje powiązanie z rozliczeniami środków pieniężnych oraz kontrolę przekroczeń budżetu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data rozliczenia | Data rozliczenia |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe |  | Ilosc rozliczana |
-| KategoriaBudzetowa | `Soneta.Core.IBudgetCategoryDefinition` | bazodanowe |  | Kategoria budżetu |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota rozliczana |
-| KwotaDodatkowa | `Soneta.Types.Currency` | bazodanowe |  | Dodatkowa kwota rozliczana |
-| RodzajRozliczenia | `Soneta.Core.SettlementOAKind` | bazodanowe, enum |  | Rodzaj rozliczenia |
-| Rozliczajacy | `Soneta.Ksiega.ElemOpisuAnalitycznego` | bazodanowe | Element rozliczający | Rozliczający element opisu analitycznego. |
-| Rozliczany | `Soneta.Ksiega.ElemOpisuAnalitycznego` | bazodanowe | Element rozliczany | Rozliczany element opisu analityczneg. |
+| Data | `Date` | bazodanowe | Data rozliczenia | Data rozliczenia |
+| Ilosc | `Amount` | bazodanowe |  | Ilosc rozliczana |
+| KategoriaBudzetowa | `Soneta.Core.IBudgetCategoryDefinition` | bazodanowe, tylko-odczyt |  | Kategoria budżetu |
+| Kwota | `Currency` | bazodanowe |  | Kwota rozliczana |
+| KwotaDodatkowa | `Currency` | bazodanowe |  | Dodatkowa kwota rozliczana |
+| RodzajRozliczenia | `Soneta.Core.SettlementOAKind` (enum) | bazodanowe, tylko-odczyt |  | Rodzaj rozliczenia |
+| Rozliczajacy | `Soneta.Ksiega.ElemOpisuAnalitycznego` | bazodanowe, tylko-odczyt | Element rozliczający | Rozliczający element opisu analitycznego. |
+| Rozliczany | `Soneta.Ksiega.ElemOpisuAnalitycznego` | bazodanowe, tylko-odczyt | Element rozliczany | Rozliczany element opisu analityczneg. |
 | RozliczenieSP | `Soneta.Kasa.RozliczenieSP` | bazodanowe | Rozliczenie środków pieniężnych | Rozliczenie środków pieniężnych. |
-| TypRozliczenia | `Soneta.Core.SettlementOAType` | bazodanowe, enum |  | Typ rozliczenia |
+| TypRozliczenia | `Soneta.Core.SettlementOAType` (enum) | bazodanowe, tylko-odczyt |  | Typ rozliczenia |
 
 ## Enumy
 

@@ -4,20 +4,24 @@ Tytuł: Parametry serwisów bankowych
 Opis: Parametry konfiguracyjne serwisu bankowości elektronicznej przypisane do konkretnego operatora. Przechowuje dane uwierzytelniające (certyfikaty, hasła) i ustawienia połączenia niezbędne do autoryzacji operatora w usłudze bankowej online.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 2
+- subrowy: 1
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ClientCert | `Soneta.Kasa.BankowoscElektroniczna.BankOnlineCert` | bazodanowe |  |  |
-| ClientCert.Body | `Soneta.Business.MemoText` | bazodanowe | Certyfikat |  |
-| ClientCert.Issuer | `string` | bazodanowe | Wystawca certyfikatu |  |
-| ClientCert.Name | `string` | bazodanowe | Nazwa certyfikatu |  |
-| ClientCert.Obecnosc | `Soneta.Kasa.BankowoscElektroniczna.ObecnoscCertyfikatu` | enum |  |  |
-| ClientCert.Pass | `string` | bazodanowe | Hasło certyfikatu |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator parametrów |
-| SerwisBankowy | `Soneta.Kasa.BankowoscElektroniczna.SerwisBankowy` | bazodanowe |  | Serwis bankowy |
-| Value | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| ClientCert | `Soneta.Kasa.BankowoscElektroniczna.BankOnlineCert` (subrow) | bazodanowe |  |  |
+| ClientCert.Body | `MemoText` | bazodanowe, podlista | Certyfikat |  |
+| ClientCert.Issuer | `string` | bazodanowe, tylko-odczyt | Wystawca certyfikatu |  |
+| ClientCert.Name | `string` | bazodanowe, tylko-odczyt | Nazwa certyfikatu |  |
+| ClientCert.Obecnosc | `Soneta.Kasa.BankowoscElektroniczna.ObecnoscCertyfikatu` (enum) | tylko-odczyt |  |  |
+| ClientCert.Pass | `string` | bazodanowe, tylko-odczyt | Hasło certyfikatu |  |
+| Operator | `App.Operator` | bazodanowe, tylko-odczyt |  | Operator parametrów |
+| SerwisBankowy | `Soneta.Kasa.BankowoscElektroniczna.SerwisBankowy` | bazodanowe, tylko-odczyt |  | Serwis bankowy |
+| Value | `MemoText` | bazodanowe, podlista |  |  |
 
 ## Enumy
 

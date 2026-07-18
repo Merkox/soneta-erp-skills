@@ -5,14 +5,18 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IDaneKontrahentaHost`
 Implementuje interfejsy: `IDaneKontaktoweHost`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 21
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 8
+- podlisty: 1
+- subrowy: 1
+- razem: 36
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` | bazodanowe |  |  |
-| Adres.AdresExt | `Soneta.Core.AdresExt` |  |  |  |
-| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` |  |  |  |
+| Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |
+| Adres.AdresExt | `Soneta.Core.AdresExt` | tylko-odczyt |  |  |
+| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` | tylko-odczyt |  |  |
 | Adres.Faks | `string` | bazodanowe |  | Numer faksu |
 | Adres.GLN | `string` |  |  |  |
 | Adres.Gmina | `string` | bazodanowe |  | Gmina |
@@ -21,8 +25,8 @@ Implementuje interfejsy: `IDaneKontaktoweHost`
 | Adres.KodPocztowy | `int` | bazodanowe |  | Kod pocztowy |
 | Adres.KodPocztowyS | `string` |  |  |  |
 | Adres.Kraj | `string` | bazodanowe |  | Kraj |
-| Adres.Linia1 | `string` |  |  |  |
-| Adres.Linia2 | `string` |  |  |  |
+| Adres.Linia1 | `string` | tylko-odczyt |  |  |
+| Adres.Linia2 | `string` | tylko-odczyt |  |  |
 | Adres.Miejscowosc | `string` | bazodanowe | Miejscowość | Miejscowość |
 | Adres.NietypowaLokalizacja | `string` | bazodanowe |  | Nietypowe miejsce lokalizacji |
 | Adres.NrDomu | `string` | bazodanowe |  | Numer domu (bloku) |
@@ -32,20 +36,20 @@ Implementuje interfejsy: `IDaneKontaktoweHost`
 | Adres.Powiat | `string` | bazodanowe |  | Powiat |
 | Adres.Telefon | `string` | bazodanowe |  | Numer telefonu |
 | Adres.Ulica | `string` | bazodanowe |  | Nazwa ulicy (alei, osiedla) |
-| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` | bazodanowe, enum |  | Województwo |
+| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe |  | Województwo |
 | Adres.ZagranicznyKodPocztowy | `string` | bazodanowe |  | Zagraniczny kod pocztowy |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
-| Host | `Soneta.Core.IDaneKontrahentaHost` | bazodanowe, guided-parent, iface-ref |  |  |
-| KodKraju | `string` |  |  | Kod kraju kontrahenta wyliczony na podstawie NIP/EuVAT. |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
+| Host | `Soneta.Core.IDaneKontrahentaHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| KodKraju | `string` | tylko-odczyt |  | Kod kraju kontrahenta wyliczony na podstawie NIP/EuVAT. |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
 | NIP | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
 | PodatnikVAT | `bool` | bazodanowe | Podatnik VAT |  |
-| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` | bazodanowe, enum |  |  |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | bazodanowe, enum |  |  |
-| Typ | `int` | bazodanowe |  |  |
+| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | bazodanowe |  |  |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | bazodanowe |  |  |
+| Typ | `int` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

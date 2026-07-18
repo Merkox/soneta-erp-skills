@@ -5,13 +5,17 @@ Opis: Element szczegółowy zestawu barw (AppearanceSetDefinition). Definiuje po
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definition` → `AppearanceSetDefinition`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Color | `int` | bazodanowe | Kolor |  |
 | ColorEditor | `System.Drawing.Color` |  |  |  |
-| Definition | `Soneta.BI.AppearanceSetDefinition` | bazodanowe, guided-parent | Definicja zestawu |  |
+| Definition | `Soneta.BI.AppearanceSetDefinition` | bazodanowe, tylko-odczyt, guided-parent | Definicja zestawu |  |
 | Lp | `int` | bazodanowe |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |

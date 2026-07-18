@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoUzyskaniaUprawnienia`, `IOcenaPracownika`, `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 7
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Budzet | `Soneta.HR.BudżetSzkoleń` | bazodanowe |  |  |
-| DataAnulowania | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataZgloszenia | `Soneta.Types.Date` | bazodanowe | Data zgłoszenia |  |
+| DataAnulowania | `Date` | bazodanowe |  |  |
+| DataZgloszenia | `Date` | bazodanowe | Data zgłoszenia |  |
 | Definicja | `Soneta.HR.DefinicjaSzkolenia` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| ElementyOceny | `Soneta.Business.SubTable<Soneta.HR.ElementOcenyPracownika>` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| ElementyOceny | `SubTable<Soneta.HR.ElementOcenyPracownika>` | podlista |  |  |
 | Etap | `Soneta.HR.EtapRealizacjiSzkolenia` | bazodanowe |  |  |
 | Kierownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
 | KorektaKosztu | `bool` | bazodanowe |  |  |
-| Koszt | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Koszt | `Currency` | bazodanowe |  |  |
 | Ocena | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | Realizacja | `Soneta.HR.RealizacjaSzkolenia` | bazodanowe |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` | bazodanowe |  |  |
-| Rozliczenie.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` (subrow) | bazodanowe |  |  |
+| Rozliczenie.Data | `Date` | bazodanowe |  |  |
 | Rozliczenie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Rozliczenie.Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Rozliczenie.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Rozliczenie.Rozliczone | `bool` |  |  |  |
-| Rozliczenie.WgElement | `Soneta.Business.Key` |  |  |  |
+| Rozliczenie.Kwota | `Currency` | bazodanowe |  |  |
+| Rozliczenie.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Rozliczenie.Rozliczone | `bool` | tylko-odczyt |  |  |
+| Rozliczenie.WgElement | `Key` | podlista |  |  |
 | SkierowanyPrzezZaklad | `bool` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| UkończoneSzkolenia | `Soneta.Business.SubTable<Soneta.HR.UkończoneSzkolenie>` |  |  |  |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.HR.UprawnieniePracownika>` |  |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| UkończoneSzkolenia | `SubTable<Soneta.HR.UkończoneSzkolenie>` | podlista |  |  |
+| Uprawnienia | `SubTable<Soneta.HR.UprawnieniePracownika>` | podlista |  |  |

@@ -5,19 +5,23 @@ Opis: Słownik definicji rodzajów szkoleń określający parametry konfiguracyj
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowane | Określa zablokowanie definicji. |
 | DefWniosku | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Definicja wniosku | Definicja wniosku. |
-| Formularz | `Soneta.CzlonkowieSzkolenia.FormKind` | bazodanowe, enum | Formularz | Rodzaj formularza. |
-| IsFullForm | `bool` |  |  |  |
+| Formularz | `Soneta.CzlonkowieSzkolenia.FormKind` (enum) | bazodanowe | Formularz | Rodzaj formularza. |
+| IsFullForm | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa definicji | Nazwa definicji. |
 | Przedmioty | `bool` | bazodanowe | Przedmioty | Zezwala na dodanie przedmiotów szkolenia. |
 | Symbol | `string` | bazodanowe | Symbol definicji | Symbol definicji. |
-| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` | bazodanowe, enum |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` (enum) | bazodanowe |  |  |
 | Uprawnienia | `bool` | bazodanowe | Uprawnienia | Zezwala na wygenerowanie uprawnień po szkoleniu. |
 | Wyroznienia | `bool` | bazodanowe | Wyrożnienia | Zezwala na wygenerowanie wyróżnień po szkoleniu. |
 

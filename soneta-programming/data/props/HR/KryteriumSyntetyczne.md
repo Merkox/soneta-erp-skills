@@ -5,11 +5,15 @@ Opis: Tabela przechowuje kryteria syntetyczne agregujące wartościowanie stanow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| KryteriaAnalityczne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumAnalityczne>` |  |  |  |
+| KryteriaAnalityczne | `SubTable<Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumAnalityczne>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |

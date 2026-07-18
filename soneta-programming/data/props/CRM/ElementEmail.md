@@ -4,12 +4,16 @@ Tytuł: Elementy powiązane
 Opis: Powiązanie wiadomości e-mail z elementami systemu (kontrahentami, dokumentami, transakcjami). Umożliwia przypisywanie korespondencji do obiektów biznesowych, zarówno ręcznie jak i automatycznie, tworząc spójną historię komunikacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Element | `Soneta.Business.IEmailElement` | bazodanowe, iface-ref | Element powiązany | Element, który powiązany jest z wiadomością |
+| Element | `IEmailElement` | bazodanowe, iface-ref | Element powiązany | Element, który powiązany jest z wiadomością |
 | PowiazanieAutomatyczne | `bool` | bazodanowe | Powiązanie automatyczne | Określa, czy powiązanie zostało utworzone automatycznie |
 | WiadomoscEmail | `Soneta.CRM.WiadomoscEmail` | bazodanowe | Wiadomość email | Wiadomość, do której powiązany jest element |
 

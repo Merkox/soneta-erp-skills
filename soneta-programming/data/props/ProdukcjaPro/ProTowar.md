@@ -5,16 +5,20 @@ Opis: Element szczegółowy towaru (Towar). Rozszerza kartotekę towarową o par
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CenaStala | `Soneta.Types.DoubleCy` | bazodanowe | Cena stała | Cena stała towaru. |
+| CenaStala | `DoubleCy` | bazodanowe | Cena stała | Cena stała towaru. |
 | GenerujZapotrzebowanie | `bool` | bazodanowe | Generuj zapotrzebowanie | Generowanie zapotrzebowania dla towaru. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe, guided-parent |  | Towar. |
-| TypMaterialu | `Soneta.ProdukcjaPro.ProTypMaterialu` | bazodanowe, enum | Typ materiału | Typ materiału dla towaru. |
-| TypWyrobu | `Soneta.ProdukcjaPro.ProTypWyrobu` | bazodanowe, enum | Typ wyrobu | Typ wyrobu dla towaru. |
+| TypMaterialu | `Soneta.ProdukcjaPro.ProTypMaterialu` (enum) | bazodanowe | Typ materiału | Typ materiału dla towaru. |
+| TypWyrobu | `Soneta.ProdukcjaPro.ProTypWyrobu` (enum) | bazodanowe | Typ wyrobu | Typ wyrobu dla towaru. |
 
 ## Enumy
 

@@ -5,14 +5,18 @@ Opis: Rejestr mandatów drogowych przypisanych do pojazdów floty. Przechowuje d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Amount | `Soneta.Types.Currency` | bazodanowe | Kwota | Kwota mandatu |
+| Amount | `Currency` | bazodanowe | Kwota | Kwota mandatu |
 | Date | `System.DateTime` | bazodanowe | Data | Kiedy otrzymano mandat |
-| Driver | `Soneta.Business.IRezerwujacy` | bazodanowe | Kierowca | Kierowca ukarany mandatem |
+| Driver | `IRezerwujacy` | bazodanowe | Kierowca | Kierowca ukarany mandatem |
 | Points | `int` | bazodanowe | Punkty karne | Ilość punktów karnych |
 | Trip | `Soneta.Vehicles.Reservation` | bazodanowe | Przejazd | Przejazd na którym zarejestrowano mandat |
-| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe | Pojazd |  |
+| Vehicle | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt | Pojazd |  |

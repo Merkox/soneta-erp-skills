@@ -5,23 +5,27 @@ Opis: Element szczegółowy strefy pracy (StrefaPracy). Obrót magazynu nadgodzi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `StrefaNadgodziny` → `StrefaPracy`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 0
+- subrowy: 2
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasRozliczany | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Nadgodziny | `Soneta.Kalend.PartiaRN` | bazodanowe |  |  |
-| Nadgodziny.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nadgodziny.CzasExt | `Soneta.Types.Time` |  |  |  |
-| Nadgodziny.Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` | enum |  |  |
-| Nadgodziny.Rozliczany | `Soneta.Types.Time` | bazodanowe |  |  |
-| Nadgodziny.RozliczanyExt | `Soneta.Types.Time` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik, dla którego został naliczony obrót magazynu nadgodzin. |
-| Rozliczenie | `Soneta.Kalend.PartiaRN` | bazodanowe |  |  |
-| StrefaNadgodziny | `Soneta.Kalend.StrefaPracy` | bazodanowe, guided-parent |  |  |
-| StrefaRozliczenie | `Soneta.Kalend.StrefaPracy` | bazodanowe |  |  |
+| CzasRozliczany | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Nadgodziny | `Soneta.Kalend.PartiaRN` (subrow) | bazodanowe |  |  |
+| Nadgodziny.Czas | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Nadgodziny.CzasExt | `Time` | tylko-odczyt |  |  |
+| Nadgodziny.Kierunek | `Soneta.Kalend.KierunekMagazynuNadgodzin` (enum) | tylko-odczyt |  |  |
+| Nadgodziny.Rozliczany | `Time` | bazodanowe, tylko-odczyt |  |  |
+| Nadgodziny.RozliczanyExt | `Time` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  | Pracownik, dla którego został naliczony obrót magazynu nadgodzin. |
+| Rozliczenie | `Soneta.Kalend.PartiaRN` (subrow) | bazodanowe |  |  |
+| StrefaNadgodziny | `Soneta.Kalend.StrefaPracy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| StrefaRozliczenie | `Soneta.Kalend.StrefaPracy` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

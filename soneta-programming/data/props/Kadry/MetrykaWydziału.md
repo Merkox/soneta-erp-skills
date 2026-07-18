@@ -5,16 +5,20 @@ Opis: Element szczegółowy wydziału (Wydzial). Wpis do metryki jednostki organ
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wydzial` → `Wydzial`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data zmiany |  |
-| Host | `Soneta.Kadry.IMetrykaWydziałuHost` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe | Data zmiany |  |
+| Host | `Soneta.Kadry.IMetrykaWydziałuHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | Przyczyna | `string` | bazodanowe | Przyczyna zmiany |  |
-| Rodzaj | `Soneta.Kadry.RodzajMetryki` | bazodanowe, enum | Rodzaj wpisu |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, guided-parent |  |  |
+| Rodzaj | `Soneta.Kadry.RodzajMetryki` (enum) | bazodanowe | Rodzaj wpisu |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 
 ## Relacje interfejsowe
 

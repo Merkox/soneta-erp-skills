@@ -6,36 +6,40 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IDokument`, `IManagedRowInfoHost`, `IPoświadczenieOdbioruHost`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 7
+- subrowy: 2
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BasicDocument | `Soneta.Core.Dms.IBasicDocument` | bazodanowe | Dokument podstawowy | Dokument podstawowy |
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data dokumentu |
-| Definicja | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Definicja | Definicja dokumentu |
-| Fields | `Soneta.Business.Runtime.RuntimeFields` | bazodanowe |  |  |
-| Fields.Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Host | `Soneta.Business.GuidedRow` |  |  |  |
-| IsSignatureRequired | `bool` |  |  |  |
-| ManagedState | `Soneta.Core.ManagedRowStates` | enum |  |  |
+| BasicDocument | `Soneta.Core.Dms.IBasicDocument` | bazodanowe, tylko-odczyt | Dokument podstawowy | Dokument podstawowy |
+| Data | `Date` | bazodanowe | Data | Data dokumentu |
+| Definicja | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, tylko-odczyt | Definicja | Definicja dokumentu |
+| Fields | `Runtime.RuntimeFields` (subrow) | bazodanowe |  |  |
+| Fields.Code | `MemoText` | bazodanowe, podlista |  |  |
+| Host | `GuidedRow` | tylko-odczyt |  |  |
+| IsSignatureRequired | `bool` | tylko-odczyt |  |  |
+| ManagedState | `Soneta.Core.ManagedRowStates` (enum) | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres | Okres zdarzenia |
-| Opis | `string` |  |  |  |
-| PowiązaniaStrOrg | `Soneta.Business.SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` |  |  |  |
-| PoświadczeniaOdbioru | `Soneta.Business.SubTable<Soneta.Core.PoświadczenieOdbioru>` |  |  |  |
-| PoświadczenieOdbioru | `Soneta.Core.PoświadczenieOdbioru` |  |  |  |
-| RelacjaPodstawowa | `Soneta.Business.IGuidedRow` | bazodanowe | Relacja podstawowa | Relacja podstawowa |
-| Relations | `Soneta.Business.SubTable<Soneta.Core.DbTuples.DbTupleRel>` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres | Okres zdarzenia |
+| Opis | `string` | tylko-odczyt |  |  |
+| PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
+| PoświadczeniaOdbioru | `SubTable<Soneta.Core.PoświadczenieOdbioru>` | podlista |  |  |
+| PoświadczenieOdbioru | `Soneta.Core.PoświadczenieOdbioru` | tylko-odczyt |  |  |
+| RelacjaPodstawowa | `IGuidedRow` | bazodanowe | Relacja podstawowa | Relacja podstawowa |
+| Relations | `SubTable<Soneta.Core.DbTuples.DbTupleRel>` | podlista |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe | Termin | Data zdarzenia |
+| Termin | `Date` | bazodanowe | Termin | Data zdarzenia |
 
 ## Enumy
 

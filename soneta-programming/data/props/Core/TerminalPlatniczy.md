@@ -5,8 +5,12 @@ Opis: Konfiguracja terminala płatniczego. Zawiera nazwę, identyfikator termina
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 8
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -22,17 +26,17 @@ Guided: root
 | Port | `string` | bazodanowe |  |  |
 | PortCOM | `string` |  |  |  |
 | PortTCP | `int` |  |  |  |
-| ProtokolTerminala | `Soneta.POS.ProtokolTraminala` | bazodanowe, enum | Protokół |  |
-| RodzajPolaczenia | `Soneta.ProtocolECR_EFT.ECR.RodzajPolaczenia` | enum |  |  |
-| Stanowiska | `Soneta.Business.SubTable<Soneta.Core.TerminalPlatStanowisko>` |  |  |  |
+| ProtokolTerminala | `Soneta.POS.ProtokolTraminala` (enum) | bazodanowe | Protokół |  |
+| RodzajPolaczenia | `Soneta.ProtocolECR_EFT.ECR.RodzajPolaczenia` (enum) |  |  |  |
+| Stanowiska | `SubTable<Soneta.Core.TerminalPlatStanowisko>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| SystemPOS | `Soneta.POS.SystemPos` | bazodanowe, enum | System |  |
-| Szyfrowane | `string` |  |  |  |
-| TerminalProvider | `Soneta.Core.TerminalProvider` | enum |  |  |
+| SystemPOS | `Soneta.POS.SystemPos` (enum) | bazodanowe | System |  |
+| Szyfrowane | `string` | tylko-odczyt |  |  |
+| TerminalProvider | `Soneta.Core.TerminalProvider` (enum) |  |  |  |
 | Timeout | `int` |  |  |  |
-| isCOM | `bool` |  |  |  |
-| isHelper | `bool` |  |  |  |
-| isTCP | `bool` |  |  |  |
+| isCOM | `bool` | tylko-odczyt |  |  |
+| isHelper | `bool` | tylko-odczyt |  |  |
+| isTCP | `bool` | tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -6,13 +6,17 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CtxOddziałFirmy | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Kod | `string` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa miejsca użytkowania srodka trwałego |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  | Opis miejsca użytkowania srodka trwałego |

@@ -5,31 +5,35 @@ Opis: Słownik tytułów ubezpieczenia społecznego i zdrowotnego zgodnych z kla
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CalyOpis | `string` |  |  |  |
-| Chorobowe | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Dotyczy | `Soneta.Kadry.UbezpieczenieDotyczy` | bazodanowe, enum |  |  |
-| Emerytalne | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
+| CalyOpis | `string` | tylko-odczyt |  |  |
+| Chorobowe | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Dotyczy | `Soneta.Kadry.UbezpieczenieDotyczy` (enum) | bazodanowe |  |  |
+| Emerytalne | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
 | Kategoria | `string` | bazodanowe |  |  |
 | Kod | `int` | bazodanowe |  |  |
-| KodText | `string` |  | Kod |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `string` |  | Opis |  |
+| KodText | `string` | tylko-odczyt | Kod |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `string` | tylko-odczyt | Opis |  |
 | Opis1 | `string` | bazodanowe |  |  |
 | Opis2 | `string` | bazodanowe |  |  |
 | Opis3 | `string` | bazodanowe |  |  |
 | Opis4 | `string` | bazodanowe |  |  |
-| OpisS | `string` |  | Opis |  |
-| Platnik | `Soneta.Kadry.PłatnikSkładek` | bazodanowe, enum |  |  |
-| PodmiotPodstawowy | `int` |  |  |  |
-| Rentowe | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Rozszerzenie | `int` |  |  |  |
-| Wypadkowe | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
-| Zdrowotne | `Soneta.Kadry.TypUbezpieczenia` | bazodanowe, enum |  |  |
+| OpisS | `string` | tylko-odczyt | Opis |  |
+| Platnik | `Soneta.Kadry.PłatnikSkładek` (enum) | bazodanowe |  |  |
+| PodmiotPodstawowy | `int` | tylko-odczyt |  |  |
+| Rentowe | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Rozszerzenie | `int` | tylko-odczyt |  |  |
+| Wypadkowe | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
+| Zdrowotne | `Soneta.Kadry.TypUbezpieczenia` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

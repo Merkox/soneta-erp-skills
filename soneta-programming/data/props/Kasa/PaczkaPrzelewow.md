@@ -6,30 +6,34 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 3
+- subrowy: 1
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Kasa.DefinicjaPaczkiPrzelewu` | bazodanowe |  |  |
 | EwidencjaSP | `Soneta.Kasa.RachunekBankowyFirmy` | bazodanowe |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa paczki przelewów. |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Kasa.PozycjaPaczkiPrzelewow>` |  |  |  |
-| StatusPP | `Soneta.Core.StatusPaczkiPrzelewow` | bazodanowe, enum | Status paczki |  |
-| TypPrzelewow | `Soneta.Kasa.TypPrzelewow` | bazodanowe, enum | Typ przelewów |  |
-| WartoscPaczki | `decimal` |  | Wartość paczki |  |
-| ZleceniodawcaLabel | `string` |  |  |  |
+| Pozycje | `LpSubTable<Soneta.Kasa.PozycjaPaczkiPrzelewow>` | podlista |  |  |
+| StatusPP | `Soneta.Core.StatusPaczkiPrzelewow` (enum) | bazodanowe | Status paczki |  |
+| TypPrzelewow | `Soneta.Kasa.TypPrzelewow` (enum) | bazodanowe | Typ przelewów |  |
+| WartoscPaczki | `decimal` | tylko-odczyt | Wartość paczki |  |
+| ZleceniodawcaLabel | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

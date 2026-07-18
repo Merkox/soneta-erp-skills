@@ -6,13 +6,17 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Oddzial` → `OddzialFirmy`
 Implementuje interfejsy: `IMetrykaOddziałuFirmyHost`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Nadrzedny | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, guided-parent |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
+| Nadrzedny | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Przyczyna | `string` |  |  |  |

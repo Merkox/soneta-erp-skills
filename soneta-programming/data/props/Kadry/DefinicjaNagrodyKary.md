@@ -5,16 +5,20 @@ Opis: Słownik definicji nagród i kar pracowniczych. Określa typ (nagroda/kara
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypNagrodyKary` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

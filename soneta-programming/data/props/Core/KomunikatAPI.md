@@ -4,8 +4,12 @@ Tytuł: KomunikatyAPI
 Opis: Rejestr komunikatów wymienianych z systemami zewnętrznymi przez API. Przechowuje identyfikatory dokumentów i komunikatów nadane przez API, typ dokumentu oraz powiązanie z systemem zewnętrznym.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|

@@ -5,21 +5,25 @@ Opis: Definicja zestawu danych biznesowych wykorzystywanego w procesach BI. Zawi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 6
+- subrowy: 1
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CalculateCode | `Soneta.Business.Compiler.ICodeEditorSource` |  | Kod algorytmu metody Calculate | Kod algorytmu kalkulacji kalkulatora rekordu |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Columns | `Soneta.Business.SubTable<Soneta.BI.ColumnDefinition>` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
-| Generators | `Soneta.Business.SubTable<Soneta.BI.DataSetGeneratorDefinition>` |  |  |  |
-| Info | `string` |  |  |  |
+| CalculateCode | `Compiler.ICodeEditorSource` |  | Kod algorytmu metody Calculate | Kod algorytmu kalkulacji kalkulatora rekordu |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| Columns | `SubTable<Soneta.BI.ColumnDefinition>` | podlista |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
+| Generators | `SubTable<Soneta.BI.DataSetGeneratorDefinition>` | podlista |  |  |
+| Info | `string` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Serializer | `Soneta.Business.SubTable<Soneta.BI.SerializationDefinition>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Serializer | `SubTable<Soneta.BI.SerializationDefinition>` | podlista |  |  |

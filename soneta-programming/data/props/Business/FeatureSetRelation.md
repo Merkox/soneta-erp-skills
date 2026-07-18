@@ -5,10 +5,14 @@ Opis: Powiązanie konkretnego obiektu biznesowego z definicją zestawu pól. Umo
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `FeatureSetDefinition` → `FeatureSetDefinition`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| FeatureSetDefinition | `Soneta.Business.FeatureSetDefinition` | bazodanowe, guided-parent | Definicja zestawu pól | Definicja zestawu pól |
-| Host | `Soneta.Business.Db.IFeatureSetRelationHost` | bazodanowe | Obiekt nadrzędny | Obiekt, do którego przypisana jest definicja zestawu pól |
+| FeatureSetDefinition | `FeatureSetDefinition` | bazodanowe, guided-parent | Definicja zestawu pól | Definicja zestawu pól |
+| Host | `Db.IFeatureSetRelationHost` | bazodanowe, tylko-odczyt | Obiekt nadrzędny | Obiekt, do którego przypisana jest definicja zestawu pól |

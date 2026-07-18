@@ -5,54 +5,58 @@ Opis: Element szczegółowy pracownika (Pracownik). Przechowuje indywidualny lim
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 24
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 35
+- podlisty: 2
+- subrowy: 0
+- razem: 43
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Kalend.DefinicjaLimitu` | bazodanowe |  |  |
-| Ekwiwalent | `int` | bazodanowe |  | Ilość dni wypłaconych w ekwiwalencie |
-| EkwiwalentGodz | `Soneta.Types.Time` | bazodanowe |  | Ilość godzin wypłaconych w ekwiwalencie |
-| Godzinowy | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Godziny | `bool` |  |  |  |
-| Korekta | `int` | bazodanowe |  | Korekta wartości limitu ze względu na urlopy bezpłatne trwające dłużej niż 1 miesiąc |
-| KorektaMies | `int` | bazodanowe |  | Korekta długości okresu (ilości miesięcy) ze względu na urlopy bezpłatne trwające dłużej niż 1 miesiąc |
+| Definicja | `Soneta.Kalend.DefinicjaLimitu` | bazodanowe, tylko-odczyt |  |  |
+| Ekwiwalent | `int` | bazodanowe, tylko-odczyt |  | Ilość dni wypłaconych w ekwiwalencie |
+| EkwiwalentGodz | `Time` | bazodanowe, tylko-odczyt |  | Ilość godzin wypłaconych w ekwiwalencie |
+| Godzinowy | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Godziny | `bool` | tylko-odczyt |  |  |
+| Korekta | `int` | bazodanowe, tylko-odczyt |  | Korekta wartości limitu ze względu na urlopy bezpłatne trwające dłużej niż 1 miesiąc |
+| KorektaMies | `int` | bazodanowe, tylko-odczyt |  | Korekta długości okresu (ilości miesięcy) ze względu na urlopy bezpłatne trwające dłużej niż 1 miesiąc |
 | KumulowanyMinus | `bool` | bazodanowe |  |  |
 | KumulowanyPlus | `bool` |  |  |  |
 | Limit | `int` | bazodanowe |  |  |
-| LimitDni | `int` |  |  |  |
-| LimitGodz | `Soneta.Types.Time` | bazodanowe |  | Limit w godzinach wynikający z kodeksu pracy |
-| LimitZależny | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Naliczanie | `Soneta.Kalend.NaliczanieLimitu` | bazodanowe, enum |  |  |
-| NaliczanieJakUrlop | `bool` |  |  |  |
-| Next | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresWażności | `Soneta.Types.FromTo` |  |  |  |
+| LimitDni | `int` | tylko-odczyt |  |  |
+| LimitGodz | `Time` | bazodanowe, tylko-odczyt |  | Limit w godzinach wynikający z kodeksu pracy |
+| LimitZależny | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Naliczanie | `Soneta.Kalend.NaliczanieLimitu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| NaliczanieJakUrlop | `bool` | tylko-odczyt |  |  |
+| Next | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresWażności | `FromTo` | podlista |  |  |
 | PierwszyUrlop | `bool` | bazodanowe |  |  |
-| PodstawaGodz | `decimal` | bazodanowe |  | Limit urlopu po uwzględnieniu wymiaru etatu |
-| Pozostalo | `int` |  |  |  |
-| PozostaloDni | `double` |  | Pozostało dni |  |
-| PozostaloDniLabel | `string` |  |  |  |
-| PozostaloGodz | `Soneta.Types.Time` |  | Pozostało godz. |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| Prev | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Prosty | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Przeniesienie | `int` |  |  |  |
-| PrzeniesienieDni | `double` |  |  |  |
-| PrzeniesienieGodz | `Soneta.Types.Time` |  |  |  |
-| Razem | `int` |  |  |  |
-| RazemGodz | `Soneta.Types.Time` |  |  |  |
-| Typ | `Soneta.Kalend.TypLimituNieobecności` | bazodanowe, enum |  |  |
-| UrlopDni | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| UrlopGodz | `Soneta.Kalend.LimitNieobecnosci` |  |  |  |
-| Wykorzystane | `int` | bazodanowe |  | Ilość wykorzystanych dni urlopu |
-| WykorzystaneGodz | `Soneta.Types.Time` | bazodanowe |  | Ilość wykorzystanych godzin urlopu |
-| WykorzystanyPoprzGodz | `Soneta.Types.Time` | bazodanowe |  | Limit urlopu wypoczynkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
-| ZaleglyDni | `double` |  | Zaległy dni |  |
-| ZaleglyGodz | `Soneta.Types.Time` |  | Zaległy godz |  |
+| PodstawaGodz | `decimal` | bazodanowe, tylko-odczyt |  | Limit urlopu po uwzględnieniu wymiaru etatu |
+| Pozostalo | `int` | tylko-odczyt |  |  |
+| PozostaloDni | `double` | tylko-odczyt | Pozostało dni |  |
+| PozostaloDniLabel | `string` | tylko-odczyt |  |  |
+| PozostaloGodz | `Time` | tylko-odczyt | Pozostało godz. |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Prev | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Prosty | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Przeniesienie | `int` | tylko-odczyt |  |  |
+| PrzeniesienieDni | `double` | tylko-odczyt |  |  |
+| PrzeniesienieGodz | `Time` | tylko-odczyt |  |  |
+| Razem | `int` | tylko-odczyt |  |  |
+| RazemGodz | `Time` | tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypLimituNieobecności` (enum) | bazodanowe, tylko-odczyt |  |  |
+| UrlopDni | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| UrlopGodz | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
+| Wykorzystane | `int` | bazodanowe, tylko-odczyt |  | Ilość wykorzystanych dni urlopu |
+| WykorzystaneGodz | `Time` | bazodanowe, tylko-odczyt |  | Ilość wykorzystanych godzin urlopu |
+| WykorzystanyPoprzGodz | `Time` | bazodanowe, tylko-odczyt |  | Limit urlopu wypoczynkowego wykorzystanego u poprzednich pracodawców przypadający na bieżące zatrudnienie (godz.) |
+| ZaleglyDni | `double` | tylko-odczyt | Zaległy dni |  |
+| ZaleglyGodz | `Time` | tylko-odczyt | Zaległy godz |  |
 | Zmiana | `int` | bazodanowe |  | Zmiana wartości limitu wprowadzona przez użytkownika |
-| ZmianaGodz | `Soneta.Types.Time` | bazodanowe |  | Zmiana wartości limitu/godz wprowadzona przez użytkownika |
+| ZmianaGodz | `Time` | bazodanowe |  | Zmiana wartości limitu/godz wprowadzona przez użytkownika |
 
 ## Enumy
 

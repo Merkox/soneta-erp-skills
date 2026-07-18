@@ -5,22 +5,26 @@ Opis: Element szczegółowy dnia RCP (DzienRCP). Strefa czasowa zarejestrowana p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienRCP`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| CzasRozliczany | `Soneta.Types.Time` | bazodanowe | Czas rozliczany |  |
-| CzasRozliczanyWyliczony | `Soneta.Types.Time` |  | Czas rozliczany |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| CzasRozliczany | `Time` | bazodanowe | Czas rozliczany |  |
+| CzasRozliczanyWyliczony | `Time` |  | Czas rozliczany |  |
 | Definicja | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
 | DefinicjaNet | `Soneta.Kalend.DefinicjaStrefy` |  |  |  |
-| Dzien | `Soneta.Kalend.DzienRCP` | bazodanowe, guided-parent |  |  |
+| Dzien | `Soneta.Kalend.DzienRCP` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| Modyfikacja | `bool` |  |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Rozliczenie | `Soneta.Kalend.ElementRozliczeniaCzasuPracy` | bazodanowe | Rozliczenie |  |
+| Modyfikacja | `bool` | tylko-odczyt |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| Rozliczenie | `Soneta.Kalend.ElementRozliczeniaCzasuPracy` | bazodanowe, tylko-odczyt | Rozliczenie |  |

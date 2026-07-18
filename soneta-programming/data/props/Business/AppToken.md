@@ -5,21 +5,25 @@ Opis: Token aplikacyjny do autoryzacji dostępu API. Przechowuje nazwę, typ, za
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 3
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ExpirationDate | `Soneta.Types.Date` | bazodanowe | Data ważności | Data ważności tokena aplikacyjnego. |
-| IsWebOperator | `bool` |  |  |  |
+| ExpirationDate | `Date` | bazodanowe, tylko-odczyt | Data ważności | Data ważności tokena aplikacyjnego. |
+| IsWebOperator | `bool` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowany | Blokada tokena. |
 | Name | `string` | bazodanowe | Nazwa |  |
-| Operator | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref |  | Operator upoważniony do wykonywania operacji dla wygenerowanego tokena. |
-| Token | `Soneta.Business.MemoText` | bazodanowe | Token aplikacyjny | Zawartość token w postaci base64. |
-| TokenItems | `Soneta.Business.SubTable<Soneta.Business.App.AppTokenItem>` |  |  |  |
-| TokenJson | `string` |  |  |  |
-| TokenRights | `Soneta.Business.SubTable<Soneta.Business.App.AppTokenRight>` |  |  |  |
-| Type | `Soneta.Business.AppTokenType` | bazodanowe, enum | Typ | Określa przeznaczenie tokena. |
+| Operator | `IWebOperator` | bazodanowe, iface-ref |  | Operator upoważniony do wykonywania operacji dla wygenerowanego tokena. |
+| Token | `MemoText` | bazodanowe, podlista | Token aplikacyjny | Zawartość token w postaci base64. |
+| TokenItems | `SubTable<App.AppTokenItem>` | podlista |  |  |
+| TokenJson | `string` | tylko-odczyt |  |  |
+| TokenRights | `SubTable<App.AppTokenRight>` | podlista |  |  |
+| Type | `AppTokenType` (enum) | bazodanowe | Typ | Określa przeznaczenie tokena. |
 
 ## Relacje interfejsowe
 
@@ -34,7 +38,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AppTokenType (`Soneta.Business.AppTokenType`)
+### AppTokenType (`AppTokenType`)
 - `WebApi` = 0 — WebApi
 - `Biometric` = 1 — Biometric
 - `Other` = 2

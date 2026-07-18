@@ -5,31 +5,35 @@ Opis: Rozszerzenie ZKL zapisu historii definicji stanowiska (DefinicjaStanowiska
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaStanowiskaHist` → `DefinicjaStanowiskaHist`
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 7
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CelStanowiska | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DefinicjaStanowiskaHist | `Soneta.HR.DefinicjaStanowiskaHist` | bazodanowe, guided-parent |  |  |
-| IloscWakatow | `Soneta.Types.Fraction` | bazodanowe | Ilość wakatów | Planowana ilość wakatów (etatów) dla zapisu historii definicji stanowiska w kontekście ZKL definicji stanowisk. |
-| InformacjeDodatkowe | `Soneta.Business.MemoText` | bazodanowe | Informacje dodatkowe |  |
-| OdpowiedzialnoscKierownicza | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OdpowiedzialnoscMaterialna | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| OdpowiedzialnoscPracownicza | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| RaportPlacowyDolnyKwartylWynagrodzeniaBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
-| RaportPlacowyGornyKwartylWynagrodzeniaBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
+| CelStanowiska | `MemoText` | bazodanowe, podlista |  |  |
+| DefinicjaStanowiskaHist | `Soneta.HR.DefinicjaStanowiskaHist` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| IloscWakatow | `Fraction` | bazodanowe | Ilość wakatów | Planowana ilość wakatów (etatów) dla zapisu historii definicji stanowiska w kontekście ZKL definicji stanowisk. |
+| InformacjeDodatkowe | `MemoText` | bazodanowe, podlista | Informacje dodatkowe |  |
+| OdpowiedzialnoscKierownicza | `MemoText` | bazodanowe, podlista |  |  |
+| OdpowiedzialnoscMaterialna | `MemoText` | bazodanowe, podlista |  |  |
+| OdpowiedzialnoscPracownicza | `MemoText` | bazodanowe, podlista |  |  |
+| RaportPlacowyDolnyKwartylWynagrodzeniaBrutto | `Currency` | bazodanowe |  |  |
+| RaportPlacowyGornyKwartylWynagrodzeniaBrutto | `Currency` | bazodanowe |  |  |
 | RaportPlacowyKod | `string` | bazodanowe |  |  |
-| RaportPlacowyMaksymalneWynagrodzenieBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
-| RaportPlacowyMedianaWynagrodzeniaBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
-| RaportPlacowyMinimalneWynagrodzenieBrutto | `Soneta.Types.Currency` | bazodanowe |  |  |
+| RaportPlacowyMaksymalneWynagrodzenieBrutto | `Currency` | bazodanowe |  |  |
+| RaportPlacowyMedianaWynagrodzeniaBrutto | `Currency` | bazodanowe |  |  |
+| RaportPlacowyMinimalneWynagrodzenieBrutto | `Currency` | bazodanowe |  |  |
 | RaportPlacowyNazwaStanowiska | `string` | bazodanowe |  |  |
 | RaportPlacowyStawka | `string` | bazodanowe |  |  |
 | RaportujeDo | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
 | StanowiskoKluczowe | `bool` | bazodanowe |  |  |
-| SymbolZKL | `string` |  |  |  |
-| UprawnieniaPracownicze | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| SymbolZKL | `string` | tylko-odczyt |  |  |
+| UprawnieniaPracownicze | `MemoText` | bazodanowe, podlista |  |  |
 | WspolpracaZewnetrzna | `string` | bazodanowe |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna | Jednostka organizacyjna przypisana do zapisu historii definicji stanowiska w kontekście ZKL definicji stanowisk. |
-| ZakresObowiazkow | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| ZakresObowiazkow | `MemoText` | bazodanowe, podlista |  |  |
 | ZastepstwoAktywne | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |

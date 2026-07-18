@@ -5,19 +5,23 @@ Opis: Element szczegółowy pracownika (Pracownik). Roczna ewidencja przychodów
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 4
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| KartaPodatkowa | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` | bazodanowe |  |  |
+| KartaPodatkowa | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` (subrow) | bazodanowe |  |  |
 | KartaPodatkowa.Dochod | `decimal` | bazodanowe | Dochód |  |
 | KartaPodatkowa.Przychod | `decimal` | bazodanowe | Przychód |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| Razem | `Soneta.Kadry.PrzychodDoOpodatkowaniaRazem` | bazodanowe |  |  |
-| Razem.Dochod | `decimal` |  |  |  |
-| Razem.Przychod | `decimal` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Razem | `Soneta.Kadry.PrzychodDoOpodatkowaniaRazem` (subrow) | bazodanowe |  |  |
+| Razem.Dochod | `decimal` | tylko-odczyt |  |  |
+| Razem.Przychod | `decimal` | tylko-odczyt |  |  |
 | Rok | `int` | bazodanowe |  |  |
-| Ryczalt | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` | bazodanowe |  |  |
+| Ryczalt | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` (subrow) | bazodanowe |  |  |
 | RyczaltPrzychodBezZUS | `decimal` | bazodanowe |  |  |
-| WgOgolnychZasad | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` | bazodanowe |  |  |
+| WgOgolnychZasad | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` (subrow) | bazodanowe |  |  |

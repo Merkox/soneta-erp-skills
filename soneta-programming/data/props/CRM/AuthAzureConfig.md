@@ -5,15 +5,19 @@ Opis: Konfiguracja integracji z Azure Active Directory dla dostawcy autoryzacji.
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AcquireTokenMode | `Soneta.CRM.AuthAzureAcquireTokenMode` | bazodanowe, enum |  |  |
+| AcquireTokenMode | `Soneta.CRM.AuthAzureAcquireTokenMode` (enum) | bazodanowe |  |  |
 | AuthProvider | `Soneta.CRM.Config.AuthProvider` | bazodanowe | AuthProvider | AuthProvider |
-| AuthorityAudience | `Soneta.CRM.AuthAzureAuthorityAudience` | bazodanowe, enum |  |  |
-| TenantId | `Soneta.Business.MemoText` | bazodanowe | TenantId | TenantId |
+| AuthorityAudience | `Soneta.CRM.AuthAzureAuthorityAudience` (enum) | bazodanowe |  |  |
+| TenantId | `MemoText` | bazodanowe, podlista | TenantId | TenantId |
 | UseDeviceCode | `bool` | bazodanowe |  |  |
 
 ## Enumy

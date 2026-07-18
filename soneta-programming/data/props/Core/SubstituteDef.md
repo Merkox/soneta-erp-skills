@@ -6,27 +6,30 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 3
+- subrowy: 4
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefaultSubstituteDef | `bool` | bazodanowe | Domyślna definicja zastępstwa | Określa czy definicja zastępstwa jest domyślna |
-| GetListReplacedCode | `Soneta.Business.Db.AlgorithmColumn` | bazodanowe | Algorytm metody GetListReplaced | Określa algorytm metody GetListReplaced |
-| GetListReplacementCode | `Soneta.Business.Db.AlgorithmColumn` | bazodanowe | Algorytm metody GetListReplacement | Określa algorytm metody GetListReplacement |
-| GetListReplacementCode.Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| GetListReplacementCode.CodeUi | `string` |  |  |  |
-| GetListReplacementCode.CodeUiRoslyn | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| GetListSubstituteAuthorityCode | `Soneta.Business.Db.AlgorithmColumn` | bazodanowe | Algorytm metody GetListSubstituteAuthority | Określa algorytm metody GetListSubstituteAuthority |
+| GetListReplacedCode | `Db.AlgorithmColumn` (subrow) | bazodanowe | Algorytm metody GetListReplaced | Określa algorytm metody GetListReplaced |
+| GetListReplacementCode | `Db.AlgorithmColumn` (subrow) | bazodanowe | Algorytm metody GetListReplacement | Określa algorytm metody GetListReplacement |
+| GetListReplacementCode.Code | `MemoText` | bazodanowe, podlista |  |  |
+| GetListReplacementCode.CodeUiRoslyn | `Compiler.ICodeEditorSource` |  |  |  |
+| GetListSubstituteAuthorityCode | `Db.AlgorithmColumn` (subrow) | bazodanowe | Algorytm metody GetListSubstituteAuthority | Określa algorytm metody GetListSubstituteAuthority |
 | IsLevelOfReplacementVisible | `bool` | bazodanowe | Widoczność pola Przejmowane obowiązki | Określa czy na formularzu zastępstwa będzie widoczne pole Przejmowane obowiązki |
 | IsSelectedEntitlesVisible | `bool` | bazodanowe | Widoczność pola Wybrane uprawnienia | Określa czy na formularzu zastępstwa będzie widoczne pole Wybrane uprawnienia |
 | LockedSubstituteDef | `bool` | bazodanowe | Zablokowana definicja zastępstwa | Określa czy definicja zastępstwa jest zablokowana |
 | Name | `string` | bazodanowe | Nazwa definicji | Nazwa definicji zastępstwa |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SendEmailInSubstituteProcess | `bool` | bazodanowe | Wyślij email | Określa czy w trakcie procesu zastępstw mają być wysyłane powiadomienia mailowe |
-| SourceCode | `string` |  |  |  |
-| SubstituteUsers | `Soneta.Business.SubTable<Soneta.Core.Substitute.SubstituteUser>` |  |  |  |
+| SourceCode | `string` | tylko-odczyt |  |  |
+| SubstituteUsers | `SubTable<Soneta.Core.Substitute.SubstituteUser>` | podlista |  |  |

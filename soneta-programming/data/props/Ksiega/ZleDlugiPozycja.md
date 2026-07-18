@@ -5,28 +5,32 @@ Opis: Element szczegółowy dokumentu złych długów (ZleDlugiDokument). Reprez
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `ZleDlugiDokument`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 9
+- podlisty: 2
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu ZD |
-| DataKorekty | `Soneta.Types.Date` | bazodanowe | Data korekty | Data ZD |
-| DataUplywuTerminu | `Soneta.Types.Date` |  | Data upływu terminu |  |
-| Dokument | `Soneta.Ksiega.ZleDlugiDokument` | bazodanowe, guided-parent |  |  |
+| DataDokumentu | `Date` | bazodanowe, tylko-odczyt |  | Data dokumentu ZD |
+| DataKorekty | `Date` | bazodanowe | Data korekty | Data ZD |
+| DataUplywuTerminu | `Date` | tylko-odczyt | Data upływu terminu |  |
+| Dokument | `Soneta.Ksiega.ZleDlugiDokument` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Korekta | `Soneta.Ksiega.ZleDlugiPozycja` | bazodanowe |  |  |
-| Korekty | `Soneta.Business.SubTable<Soneta.Ksiega.ZleDlugiPozycjaKorekty>` |  |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota pozycji |
-| KwotaPlatnosci | `Soneta.Types.Currency` |  | Kwota płatności |  |
+| Korekty | `SubTable<Soneta.Ksiega.ZleDlugiPozycjaKorekty>` | podlista |  |  |
+| Kwota | `Currency` | bazodanowe |  | Kwota pozycji |
+| KwotaPlatnosci | `Currency` | tylko-odczyt | Kwota płatności |  |
 | Platnosc | `Soneta.Kasa.Platnosc` | bazodanowe | Płatność | Płatność |
-| Przeterminowane | `int` |  | Po upływie (dni) |  |
-| RodzajPlatnosci | `string` |  | Rodzaj płatności |  |
-| Rozliczenia | `Soneta.Business.SubTable<Soneta.Ksiega.ZleDlugiPozycja>` |  |  |  |
+| Przeterminowane | `int` | tylko-odczyt | Po upływie (dni) |  |
+| RodzajPlatnosci | `string` | tylko-odczyt | Rodzaj płatności |  |
+| Rozliczenia | `SubTable<Soneta.Ksiega.ZleDlugiPozycja>` | podlista |  |  |
 | Rozliczenie | `Soneta.Kasa.RozliczenieSP` | bazodanowe |  | Rozliczenie |
-| Saldo | `Soneta.Types.Currency` |  | Saldo złe długi |  |
-| StatusPozycji | `Soneta.Ksiega.StatusPozycjiZleDlugi` | enum | Typ status |  |
+| Saldo | `Currency` | tylko-odczyt | Saldo złe długi |  |
+| StatusPozycji | `Soneta.Ksiega.StatusPozycjiZleDlugi` (enum) | tylko-odczyt | Typ status |  |
 | TerminSkrocony | `bool` | bazodanowe | Termin płatności skrócony | Termin płatności skrócony |
-| Typ | `Soneta.Ksiega.TypPozycjiZleDlugi` | bazodanowe, enum |  | Typ pozycji |
+| Typ | `Soneta.Ksiega.TypPozycjiZleDlugi` (enum) | bazodanowe, tylko-odczyt |  | Typ pozycji |
 
 ## Enumy
 

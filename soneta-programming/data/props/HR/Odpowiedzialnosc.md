@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,5 +19,5 @@ Implementuje interfejsy: `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 | Nazwa | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Stopnie | `Soneta.Business.SubTable<Soneta.HR.ZKL.OpisStanowiska.Odpowiedzialnosci.StopienOdpowiedzialnosci>` |  |  |  |
-| ZklSlownik | `Soneta.HR.IZklSlownik` |  |  |  |
+| Stopnie | `SubTable<Soneta.HR.ZKL.OpisStanowiska.Odpowiedzialnosci.StopienOdpowiedzialnosci>` | podlista |  |  |
+| ZklSlownik | `Soneta.HR.IZklSlownik` | tylko-odczyt |  |  |

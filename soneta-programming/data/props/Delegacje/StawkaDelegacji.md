@@ -4,18 +4,23 @@ Tytuł: Stawki delegacji
 Opis: Element szczegółowy KrajDelegacji (KrajDelegacji). Definiuje historyczne stawki diet i limitów noclegowych obowiązujące dla danego kraju w określonym okresie. Umożliwia automatyczne rozliczanie delegacji według właściwych kwot zależnych od daty wyjazdu.
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Kraj` → `KrajDelegacji`
+Historia: Tak — zapis historyczny tabeli `KrajDelegacji`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe | Okres aktualności | Okres obowiązywania stawki |
-| Dieta | `Soneta.Types.Currency` | bazodanowe | Wysokość diety | Wysokość diety |
-| Kraj | `Soneta.Delegacje.KrajDelegacji` | bazodanowe, guided-parent |  | Kraj delegacji |
-| LimitNocleg | `Soneta.Types.Currency` | bazodanowe | Limit na nocleg | Limit wydatków na nocleg |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| SposobOpodatkowania | `Soneta.Kadry.SposobyUnikaniaPodwójnegoOpodatkowania` | bazodanowe, enum |  | Rodzaj umowy o unikaniu podwójnego oodatkowania |
+| Aktualnosc | `FromTo` | bazodanowe, podlista | Okres aktualności | Okres obowiązywania stawki |
+| Dieta | `Currency` | bazodanowe | Wysokość diety | Wysokość diety |
+| Kraj | `Soneta.Delegacje.KrajDelegacji` | bazodanowe, tylko-odczyt, guided-parent |  | Kraj delegacji |
+| LimitNocleg | `Currency` | bazodanowe | Limit na nocleg | Limit wydatków na nocleg |
+| Parent | `Row` | tylko-odczyt |  |  |
+| SposobOpodatkowania | `Soneta.Kadry.SposobyUnikaniaPodwójnegoOpodatkowania` (enum) | bazodanowe |  | Rodzaj umowy o unikaniu podwójnego oodatkowania |
 
 ## Enumy
 

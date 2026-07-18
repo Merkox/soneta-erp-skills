@@ -6,14 +6,18 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa źródła finansowania. |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
 | RodzajZrodla | `Soneta.Core.RodzajZrodla` | bazodanowe | Rodzaj źródła | Rodzaj źródła finansowania |
 | Symbol | `string` | bazodanowe | Symbol | Symbol źródła finansowania |
 | Zablokowane | `bool` | bazodanowe | Zablokowane | Źródło finansowania zablokowane |

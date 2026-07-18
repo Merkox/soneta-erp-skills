@@ -4,12 +4,16 @@ Opis: Słownik kodów CPV (Wspólny Słownik Zamówień) stosowanych w zamówien
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kod | `string` | bazodanowe |  |  |
-| Nadrzedny | `Soneta.Towary.KodCPV` | bazodanowe | Nadrzędny |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Towary.KodCPV>` |  |  |  |
+| Nadrzedny | `Soneta.Towary.KodCPV` | bazodanowe, tylko-odczyt | Nadrzędny |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Podrzedne | `SubTable<Soneta.Towary.KodCPV>` | podlista |  |  |

@@ -6,12 +6,16 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Area | `Soneta.Business.ExternalDatabases.ExternalDatabaseArea` | bazodanowe, enum | Przeznaczenie |  |
+| Area | `ExternalDatabases.ExternalDatabaseArea` (enum) | bazodanowe, tylko-odczyt | Przeznaczenie |  |
 | DatabaseName | `string` | bazodanowe |  |  |
 | Locked | `bool` | bazodanowe | Zablokowana |  |
 | MultiSubnetFailover | `bool` | bazodanowe |  |  |
@@ -21,14 +25,14 @@ Implementuje interfejsy: `IRightsSource`
 | Timeout | `int` | bazodanowe |  |  |
 | TrustServerCertificate | `bool` | bazodanowe |  |  |
 | Trusted | `bool` | bazodanowe |  |  |
-| Type | `Soneta.Data.ExternalDatabaseType` | bazodanowe, enum |  |  |
+| Type | `Soneta.Data.ExternalDatabaseType` (enum) | bazodanowe, tylko-odczyt |  |  |
 | User | `string` | bazodanowe |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### ExternalDatabaseArea (`Soneta.Business.ExternalDatabases.ExternalDatabaseArea`)
+### ExternalDatabaseArea (`ExternalDatabases.ExternalDatabaseArea`)
 - `BI` = 1 — BI
 
 ### ExternalDatabaseType (`Soneta.Data.ExternalDatabaseType`)

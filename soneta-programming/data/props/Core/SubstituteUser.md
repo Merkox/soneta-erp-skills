@@ -5,23 +5,27 @@ Opis: Zastępstwo użytkownika w systemie. Określa zastępującego, zastępowan
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| EndDate | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Data zakończenia |
-| FromTo | `Soneta.Types.FromTo` | bazodanowe | Okres | Okres |
-| IsActive | `bool` |  |  |  |
-| IsCompleted | `bool` |  |  |  |
-| IsExpectant | `bool` |  |  |  |
-| IsVisibleStateForSubstitution | `bool` |  |  |  |
-| LevelOfReplacement | `Soneta.Core.Substitute.LevelOfReplacement` | bazodanowe, enum | Przejmowane obowiązki | Określa czy zastępujący przejmuje tylko obowiązki zastępowanego, czy także osób które on zastępuje |
-| Replaced | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Zastępowany | Określa zastępowanego |
-| Replacement | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Zastępujący | Określa zastępującego |
-| SelectedEntitles | `Soneta.Business.Db.OperatorEntitle[]` | bazodanowe | Wybrane uprawnienia zastępującego | Określa wybrane uprawnienia zastępującego |
-| StateForSubstitution | `Soneta.Core.Substitute.StateForSubstitution` | bazodanowe, enum | Stan | Stan |
-| SubstituteAuthority | `Soneta.Business.App.Operator` | bazodanowe | Uprawnienia zastępującego | Określa uprawnienia zastępującego |
+| EndDate | `Date` | bazodanowe | Data zakończenia | Data zakończenia |
+| FromTo | `FromTo` | bazodanowe, podlista | Okres | Okres |
+| IsActive | `bool` | tylko-odczyt |  |  |
+| IsCompleted | `bool` | tylko-odczyt |  |  |
+| IsExpectant | `bool` | tylko-odczyt |  |  |
+| IsVisibleStateForSubstitution | `bool` | tylko-odczyt |  |  |
+| LevelOfReplacement | `Soneta.Core.Substitute.LevelOfReplacement` (enum) | bazodanowe | Przejmowane obowiązki | Określa czy zastępujący przejmuje tylko obowiązki zastępowanego, czy także osób które on zastępuje |
+| Replaced | `ITaskUser` | bazodanowe, iface-ref | Zastępowany | Określa zastępowanego |
+| Replacement | `ITaskUser` | bazodanowe, iface-ref | Zastępujący | Określa zastępującego |
+| SelectedEntitles | `Db.OperatorEntitle[]` | bazodanowe, podlista | Wybrane uprawnienia zastępującego | Określa wybrane uprawnienia zastępującego |
+| StateForSubstitution | `Soneta.Core.Substitute.StateForSubstitution` (enum) | bazodanowe | Stan | Stan |
+| SubstituteAuthority | `App.Operator` | bazodanowe | Uprawnienia zastępującego | Określa uprawnienia zastępującego |
 | SubstituteDef | `Soneta.Core.Substitute.SubstituteDef` | bazodanowe | Definicja zastępstwa | Definicja zastępstwa powiązana z zastępstwem |
 
 ## Relacje interfejsowe

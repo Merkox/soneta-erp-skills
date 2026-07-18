@@ -5,8 +5,12 @@ Opis: Zestawienia materiałowe (BOM) definiujące skład surowców i komponentó
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,6 +19,6 @@ Guided: root
 | Kod | `string` | bazodanowe |  | Kod zestawienia materiałów. |
 | Krotnosc | `double` | bazodanowe | Krotność | Krotność zestawienia materiałów. |
 | Nazwa | `string` | bazodanowe |  | Nazwa zestawienia materiałów. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis zestawienia materiałów. |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProPozycjaZestawieniaMaterialow>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis zestawienia materiałów. |
+| Pozycje | `LpSubTable<Soneta.ProdukcjaPro.ProPozycjaZestawieniaMaterialow>` | podlista |  |  |
 | Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | bazodanowe | Wydział | Wydział zestawienia materiałów. |

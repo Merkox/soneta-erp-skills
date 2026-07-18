@@ -5,20 +5,24 @@ Opis: Sposób rozliczenia wynagrodzenia pracownika na rachunki bankowe. Definiuj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IRozliczenieWynagrodzeniaHost`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Etat | `bool` | bazodanowe |  |  |
 | Ewidencja | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
-| Host | `Soneta.Place.IRozliczenieWynagrodzeniaHost` | bazodanowe, guided-parent, iface-ref |  |  |
+| Host | `Soneta.Place.IRozliczenieWynagrodzeniaHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 | Inne | `bool` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
 | Rachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
 | Umowa | `bool` | bazodanowe |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |

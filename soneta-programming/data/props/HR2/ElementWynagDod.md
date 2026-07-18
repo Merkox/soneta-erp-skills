@@ -5,10 +5,14 @@ Opis: Element szczegółowy historycznej definicji stanowiska (DefinicjaStanowis
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Stanowisko` → `DefinicjaStanowiskaHist`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Stanowisko | `Soneta.HR.DefinicjaStanowiskaHist` | bazodanowe, guided-parent |  |  |
+| Stanowisko | `Soneta.HR.DefinicjaStanowiskaHist` | bazodanowe, tylko-odczyt, guided-parent |  |  |

@@ -5,24 +5,28 @@ Opis: Element szczegółowy karty realizacji celu (KartaRealizacjiCelu). Dokumen
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaRealizacjiCelu`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 5
+- podlisty: 3
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cel | `Soneta.HR2.CelOkresowyPracownika` | bazodanowe |  |  |
-| Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
-| Karta | `Soneta.HR2.KartaRealizacjiCelu` | bazodanowe, guided-parent |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Wartosc | `Soneta.Oceny.WartośćElementuOceny` | bazodanowe |  |  |
-| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` |  |  |  |
+| Cel | `Soneta.HR2.CelOkresowyPracownika` | bazodanowe, tylko-odczyt |  |  |
+| Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe, tylko-odczyt |  |  |
+| Karta | `Soneta.HR2.KartaRealizacjiCelu` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Wartosc | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
+| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` | tylko-odczyt |  |  |
 | Wartosc.Ocena | `Soneta.Oceny.ElementSkaliOcen` | bazodanowe |  |  |
 | Wartosc.Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| Wartosc.Uzasadnienie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Wartosc.Uzasadnienie | `MemoText` | bazodanowe, podlista |  |  |
 | Wartosc.Wartosc | `decimal` | bazodanowe | Wartość |  |
 | Wartosc.Wartosc2 | `decimal` |  |  |  |
 | Wartosc.WartoscInt | `int` |  |  |  |
-| Wartosc.WgOcena | `Soneta.Business.Key` |  |  |  |
+| Wartosc.WgOcena | `Key` | podlista |  |  |
 | Wartosc.Wykonanie | `decimal` | bazodanowe | Wykonanie |  |
 | Wartosc.WykonanieInt | `int` |  | Wykonanie |  |
-| Wartosc.Wypełniona | `bool` |  |  |  |
+| Wartosc.Wypełniona | `bool` | tylko-odczyt |  |  |

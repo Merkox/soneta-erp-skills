@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 3
+- podlisty: 3
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  | Czy dokument w buforze |
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe | Data dokumentu | Data dokumentu ZD |
+| DataDokumentu | `Date` | bazodanowe | Data dokumentu | Data dokumentu ZD |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu ZD |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy |
 | Opis | `string` | bazodanowe |  | Opis dokumentu |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Ksiega.ZleDlugiPozycja>` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu ZD |
-| Wielooddzialowosc | `bool` |  |  |  |
-| ZaplatyDo | `Soneta.Types.Date` | bazodanowe | Zapłaty do | Data graniczna zapłat |
+| Pozycje | `SubTable<Soneta.Ksiega.ZleDlugiPozycja>` | podlista |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ZD |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| ZaplatyDo | `Date` | bazodanowe | Zapłaty do | Data graniczna zapłat |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Enumy

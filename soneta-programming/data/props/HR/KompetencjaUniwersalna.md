@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aspekty | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.Kompetencje.AspektKompetencjiUniwersalnej>` |  |  |  |
+| Aspekty | `SubTable<Soneta.HR.ZKL.Slowniki.Kompetencje.AspektKompetencjiUniwersalnej>` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | Definicja | `string` | bazodanowe |  |  |
-| Grupa | `Soneta.HR.ZKL.Slowniki.Kompetencje.GrupaKompetencjiUniwersalnych` | bazodanowe | Grupa kompetencji uniwersalnych |  |
+| Grupa | `Soneta.HR.ZKL.Slowniki.Kompetencje.GrupaKompetencjiUniwersalnych` | bazodanowe, tylko-odczyt | Grupa kompetencji uniwersalnych |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Poziomy | `System.Collections.Generic.IEnumerable<Soneta.HR.ZKL.Slowniki.Kompetencje.PoziomRozwojuKompetencjiUniwersalnych>` |  |  |  |
+| Poziomy | `System.Collections.Generic.IEnumerable<Soneta.HR.ZKL.Slowniki.Kompetencje.PoziomRozwojuKompetencjiUniwersalnych>` | podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| ZklSlownik | `Soneta.HR.IZklSlownik` |  |  |  |
+| ZklSlownik | `Soneta.HR.IZklSlownik` | tylko-odczyt |  |  |

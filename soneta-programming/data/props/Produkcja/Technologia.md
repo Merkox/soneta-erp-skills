@@ -6,45 +6,49 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IKosztTechnHost`, `IZasobTechHost`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 24
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 17
+- subrowy: 0
+- razem: 35
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AlgorytmPodzialuKosztu | `Soneta.Produkcja.KosztWytworzenia.AlgorytmPodzialu` | bazodanowe, enum | Algorytm podzialu kosztu | Algorytm proporcjonalnego podziału kosztu na części przypadające na produkowane produkty. |
+| AlgorytmPodzialuKosztu | `Soneta.Produkcja.KosztWytworzenia.AlgorytmPodzialu` (enum) | bazodanowe | Algorytm podzialu kosztu | Algorytm proporcjonalnego podziału kosztu na części przypadające na produkowane produkty. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie technologii. Zablokowane technologie nie będą wyświetlane na listach wyboru. |
-| Bufor | `bool` |  |  | Określa czy technologia jest w buforze. |
-| CzasOd | `Soneta.Types.TimeSec` | bazodanowe | Czas rozpoczęcia | Czas rozpoczęcia technologii. |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia technologii. |
-| GanttItems | `System.Collections.Generic.List<Soneta.Produkcja.Technologia.GanttItem>` |  |  |  |
-| JestAktywneZlecenie | `bool` |  | Jest aktywne zlecenie | Z technologią powiązane jest aktywne zlecenie produkcyjne. |
-| JestZlecenie | `bool` |  | Jest zlecenie | Z technologią powiązane jest zlecenie produkcyjne. |
+| Bufor | `bool` | tylko-odczyt |  | Określa czy technologia jest w buforze. |
+| CzasOd | `TimeSec` | bazodanowe | Czas rozpoczęcia | Czas rozpoczęcia technologii. |
+| DataOd | `Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia technologii. |
+| GanttItems | `System.Collections.Generic.List<Soneta.Produkcja.Technologia.GanttItem>` | podlista |  |  |
+| JestAktywneZlecenie | `bool` | tylko-odczyt | Jest aktywne zlecenie | Z technologią powiązane jest aktywne zlecenie produkcyjne. |
+| JestZlecenie | `bool` | tylko-odczyt | Jest zlecenie | Z technologią powiązane jest zlecenie produkcyjne. |
 | Kod | `string` | bazodanowe | Kod technologii | Symbol, skrócona nazwa technologii. |
-| Koszty | `Soneta.Business.SubTable<Soneta.Produkcja.KosztTechn>` |  |  |  |
-| KosztyTechn | `Soneta.Business.SubTable<Soneta.Produkcja.KosztTechn>` |  |  |  |
+| Koszty | `SubTable<Soneta.Produkcja.KosztTechn>` | podlista |  |  |
+| KosztyTechn | `SubTable<Soneta.Produkcja.KosztTechn>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa technologii | Pełna nazwa technologii. |
-| Operacje | `Soneta.Business.LpSubTable<Soneta.Produkcja.Operacja>` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis technologii | Opis technologii. |
-| OsobyTechn | `Soneta.Business.SubTable` |  | Osoby rzeczywiste | Osoby rzeczywiste powiązane z technologią. |
-| OsobyTechnWzorcowe | `Soneta.Business.SubTable` |  | Osoby wzorcowe | Osoby wzorcowe powiązane z technologią. |
-| Planowanie | `Soneta.Produkcja.Technologia.PlanowanieTechnologiiWorker` |  |  |  |
-| PolProdukty | `Soneta.Business.SubTable` |  | Półprodukty | Półprodukty powiązane z technologią. |
-| PolProduktyArr | `Soneta.Produkcja.PozycjaTechn[]` |  | Półprodukty aktywne | Półprodukty powiązane z technologią. |
-| PozycjeTechn | `Soneta.Business.SubTable<Soneta.Produkcja.PozycjaTechn>` |  |  |  |
-| Produkty | `Soneta.Business.SubTable` |  |  | Produkty powiązane z technologią. |
-| ProduktyArr | `Soneta.Produkcja.PozycjaTechn[]` |  | Produkty aktywne | Produkty powiązane z technologią. |
-| Realizacja | `Soneta.Produkcja.Realizacja` |  |  |  |
-| Sposob | `Soneta.Produkcja.SposobPlanowania` | bazodanowe, enum | Sposób planowania | Określa sposób planowania technologii. |
-| Stan | `Soneta.Produkcja.StanTechnologii` | bazodanowe, enum | Stan technologii | Określa stan technologii (bufor, zatwierdzona). |
-| Surowce | `Soneta.Business.SubTable` |  |  | Surowce powiązane z technologią. |
-| SurowceArr | `Soneta.Produkcja.PozycjaTechn[]` |  | Surowce aktywne | Aktywne surowce powiązane z technologią. |
-| TechnologiaRow | `Soneta.Produkcja.Technologia` |  |  |  |
+| Operacje | `LpSubTable<Soneta.Produkcja.Operacja>` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis technologii | Opis technologii. |
+| OsobyTechn | `SubTable` | podlista | Osoby rzeczywiste | Osoby rzeczywiste powiązane z technologią. |
+| OsobyTechnWzorcowe | `SubTable` | podlista | Osoby wzorcowe | Osoby wzorcowe powiązane z technologią. |
+| Planowanie | `Soneta.Produkcja.Technologia.PlanowanieTechnologiiWorker` | tylko-odczyt |  |  |
+| PolProdukty | `SubTable` | podlista | Półprodukty | Półprodukty powiązane z technologią. |
+| PolProduktyArr | `Soneta.Produkcja.PozycjaTechn[]` | podlista | Półprodukty aktywne | Półprodukty powiązane z technologią. |
+| PozycjeTechn | `SubTable<Soneta.Produkcja.PozycjaTechn>` | podlista |  |  |
+| Produkty | `SubTable` | podlista |  | Produkty powiązane z technologią. |
+| ProduktyArr | `Soneta.Produkcja.PozycjaTechn[]` | podlista | Produkty aktywne | Produkty powiązane z technologią. |
+| Realizacja | `Soneta.Produkcja.Realizacja` | tylko-odczyt |  |  |
+| Sposob | `Soneta.Produkcja.SposobPlanowania` (enum) | bazodanowe | Sposób planowania | Określa sposób planowania technologii. |
+| Stan | `Soneta.Produkcja.StanTechnologii` (enum) | bazodanowe | Stan technologii | Określa stan technologii (bufor, zatwierdzona). |
+| Surowce | `SubTable` | podlista |  | Surowce powiązane z technologią. |
+| SurowceArr | `Soneta.Produkcja.PozycjaTechn[]` | podlista | Surowce aktywne | Aktywne surowce powiązane z technologią. |
+| TechnologiaRow | `Soneta.Produkcja.Technologia` | tylko-odczyt |  |  |
 | TechnologiaWzor | `Soneta.Produkcja.Technologia` | bazodanowe | Technologia wzorcowa | Określa technologię wzorcową dla danej technologii. |
-| Wzorcowa | `bool` |  |  | Określa czy technologia jest wzorcowa. |
-| ZasobyTechn | `Soneta.Business.SubTable<Soneta.Produkcja.ZasobTechn>` |  |  |  |
-| ZasobyTechnRzeczywiste | `Soneta.Business.SubTable` |  | Zasoby rzeczywiste | Zasoby rzeczywiste powiązane z technologią. |
-| ZasobyTechnWzorcowe | `Soneta.Business.SubTable` |  | Zasoby wzorcowe | Zasoby wzorcowe powiązane z technologią. |
-| Zatwierdzona | `bool` |  |  | Określa czy technologia jest zatwierdzona. |
+| Wzorcowa | `bool` | tylko-odczyt |  | Określa czy technologia jest wzorcowa. |
+| ZasobyTechn | `SubTable<Soneta.Produkcja.ZasobTechn>` | podlista |  |  |
+| ZasobyTechnRzeczywiste | `SubTable` | podlista | Zasoby rzeczywiste | Zasoby rzeczywiste powiązane z technologią. |
+| ZasobyTechnWzorcowe | `SubTable` | podlista | Zasoby wzorcowe | Zasoby wzorcowe powiązane z technologią. |
+| Zatwierdzona | `bool` | tylko-odczyt |  | Określa czy technologia jest zatwierdzona. |
 | Zlecenie | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Zlecenie produkcyjne | Zlecenie produkcyjne powiązane z kopią technologii wzorcowej. |
 
 ## Enumy

@@ -5,19 +5,23 @@ Opis: Dokument karty opisu stanowiska (KOS) tworzony na podstawie definicji stan
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 5
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.HR2.ElementKartyOpisuStanowiska>` |  |  |  |
-| Kompetencje | `Soneta.Business.SubTable<Soneta.HR2.KompetencjaKartyOpisuStanowiska>` |  |  |  |
-| RazemElementyOceny | `Soneta.Business.View` |  |  |  |
-| TylkoKompetencje | `Soneta.Business.View` |  |  |  |
-| TylkoZachowania | `Soneta.Business.View` |  |  |  |
-| Typ | `Soneta.HR2.TypyKartOpisuStanowiska` | bazodanowe, enum |  |  |
-| Zrodlo | `Soneta.Kadry.IŹródłoKartyOpisuStanowiska` | bazodanowe, iface-ref |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| Elementy | `SubTable<Soneta.HR2.ElementKartyOpisuStanowiska>` | podlista |  |  |
+| Kompetencje | `SubTable<Soneta.HR2.KompetencjaKartyOpisuStanowiska>` | podlista |  |  |
+| RazemElementyOceny | `View` | podlista |  |  |
+| TylkoKompetencje | `View` | podlista |  |  |
+| TylkoZachowania | `View` | podlista |  |  |
+| Typ | `Soneta.HR2.TypyKartOpisuStanowiska` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Zrodlo | `Soneta.Kadry.IŹródłoKartyOpisuStanowiska` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

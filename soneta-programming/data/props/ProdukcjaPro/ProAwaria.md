@@ -5,25 +5,29 @@ Opis: Rejestr awarii i przestojów zasobów produkcyjnych. Dokumentuje zdarzenia
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 6
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasPracy | `Soneta.ProdukcjaPro.ProCzasPracy` | bazodanowe | Czas pracy | Czas pracy awarii. |
-| CzasPrzekazania | `Soneta.Types.TimeSec` |  | Czas przekazania | Czas przekazania awarii. |
-| CzasUtworzenia | `Soneta.Types.TimeSec` |  | Czas utworzenia | Czas utworzenia awarii. |
-| CzasZamkniecia | `Soneta.Types.TimeSec` |  | Czas zamknięcia | Czas zamknięcia awarii. |
-| DataPrzekazania | `Soneta.Types.Date` |  | Data przekazania | Data przekazania awarii. |
-| DataUtworzenia | `Soneta.Types.Date` |  | Data utworzenia | Data utworzenia awarii. |
-| DataZamkniecia | `Soneta.Types.Date` |  | Data zamknięcia | Data zamknięcia awarii. |
+| CzasPrzekazania | `TimeSec` |  | Czas przekazania | Czas przekazania awarii. |
+| CzasUtworzenia | `TimeSec` |  | Czas utworzenia | Czas utworzenia awarii. |
+| CzasZamkniecia | `TimeSec` |  | Czas zamknięcia | Czas zamknięcia awarii. |
+| DataPrzekazania | `Date` |  | Data przekazania | Data przekazania awarii. |
+| DataUtworzenia | `Date` |  | Data utworzenia | Data utworzenia awarii. |
+| DataZamkniecia | `Date` |  | Data zamknięcia | Data zamknięcia awarii. |
 | Kod | `string` | bazodanowe |  | Kod awarii. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator awarii. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis awarii. |
+| Operator | `App.Operator` | bazodanowe |  | Operator awarii. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis awarii. |
 | Osoba | `Soneta.ProdukcjaPro.ProOsoba` | bazodanowe |  | Osoba awarii. |
 | Priorytet | `int` | bazodanowe |  | Priorytet awarii. |
 | Przekazanie | `System.DateTime` | bazodanowe |  | Data i czas przekazania awarii. |
-| Stan | `Soneta.ProdukcjaPro.ProStanAwarii` | bazodanowe, enum |  | Stan awarii. |
+| Stan | `Soneta.ProdukcjaPro.ProStanAwarii` (enum) | bazodanowe |  | Stan awarii. |
 | Utworzenie | `System.DateTime` | bazodanowe |  | Data i czas utworzenia awarii. |
 | Uzytkownik | `Soneta.ProdukcjaPro.ProUzytkownikPaneluMeldunkowego` | bazodanowe | Użytkownik | Użytkownik panelu meldunkowego awarii. |
 | Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe |  | Zadanie dla awarii. |

@@ -6,37 +6,41 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPreliminarza`, `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 9
+- podlisty: 5
+- subrowy: 1
+- razem: 27
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  | Czy dokument w buforze |
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu |
+| Data | `Date` | bazodanowe |  | Data dokumentu |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu |
-| IsPozycjeVisible | `bool` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| IsPozycjeVisible | `bool` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerProceduryISO | `string` | bazodanowe |  | Numer procedury ISO |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  | Numer procedury ISO |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy |
 | Opis | `string` | bazodanowe |  | Opis dokumentu |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| OpisAnalitycznyBufor | `bool` |  |  |  |
-| PageVisible | `bool` |  |  |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| OpisAnalitycznyBufor | `bool` | tylko-odczyt |  |  |
+| PageVisible | `bool` | tylko-odczyt |  |  |
 | Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Podmiot dokumentu |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Kasa.PreliminarzPozycja>` |  |  |  |
+| Pozycje | `SubTable<Soneta.Kasa.PreliminarzPozycja>` | podlista |  |  |
 | Seria | `string` | bazodanowe |  | Seria dokumentu |
-| StanDokumentuPozwalaNaBuforowanieOA | `bool` |  |  |  |
-| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| VirtualEx | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WidokAktywny | `bool` |  |  |  |
+| StanDokumentuPozwalaNaBuforowanieOA | `bool` | tylko-odczyt |  |  |
+| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` | tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| VirtualEx | `MemoText` | bazodanowe, podlista |  |  |
+| WidokAktywny | `bool` | tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Relacje interfejsowe

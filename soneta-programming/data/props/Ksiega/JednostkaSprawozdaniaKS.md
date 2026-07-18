@@ -6,37 +6,41 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Sprawozdanie` → `SprawozdanieKS`
 Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`, `IAdresHost`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 20
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 4
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| CzasOgrDataDo | `Soneta.Types.Date` | bazodanowe |  | Czas trwania jednostki powiązanej do |
-| CzasOgrDataDoOpis | `Soneta.Business.MemoText` | bazodanowe |  | Czas trwania jednostki powiązanej do (opis) |
-| CzasOgrDataOd | `Soneta.Types.Date` | bazodanowe |  | Czas trwania jednostki powiązanej od |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| CzasOgrDataDo | `Date` | bazodanowe |  | Czas trwania jednostki powiązanej do |
+| CzasOgrDataDoOpis | `MemoText` | bazodanowe, podlista |  | Czas trwania jednostki powiązanej do (opis) |
+| CzasOgrDataOd | `Date` | bazodanowe |  | Czas trwania jednostki powiązanej od |
 | CzasOgrTak | `bool` | bazodanowe |  | Ograniczony czas trwania jednostki powiązanej |
 | JednostkiZaangazWKapitaleOpis | `string` | bazodanowe |  | Nazwy (firmy) i siedziby jednostek podporządkowananych posiadających zaangażowanie w kapitale jednostki |
 | JednostkiZaangazWKapitaleWartoscKapitalow | `string` | bazodanowe |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  | Nazwa (firma) jednostki |
-| OkresSpraw | `Soneta.Types.FromTo` | bazodanowe |  | Okres sprawozdania objętego konsolidacją jeśli jest różny od okresu całego sprawozdania |
+| OkresSpraw | `FromTo` | bazodanowe, podlista |  | Okres sprawozdania objętego konsolidacją jeśli jest różny od okresu całego sprawozdania |
 | OkresSprawRozny | `bool` | bazodanowe |  | Okres sprawozdania objętego konsolidacją jest różny od okresu całego sprawozdania |
 | OpcjaDodatkoweObjasnienia | `bool` | bazodanowe |  | Będą podawane dodatkowe informacje i objaśnienia |
 | OpcjaRozliczenieRoznic | `bool` | bazodanowe |  | Będzie podawane rozliczenie różnic pomiędzy podatkiem dochodowym a wynikiem finansowym |
 | PodstawaPrawnaWylaczeniaZKonsolidacji | `string` | bazodanowe |  | Podstawa prawna oraz uzasadnienie dokonania wyłączenia |
 | PolaczenieSpl | `bool` | bazodanowe |  | Sprawozdanie finansowe jednostki jest sporządzone po połączeniu spółek |
-| PolaczenieSplOpis | `Soneta.Business.MemoText` | bazodanowe |  | Zastosowana metoda rozliczenia połączenia |
+| PolaczenieSplOpis | `MemoText` | bazodanowe, podlista |  | Zastosowana metoda rozliczenia połączenia |
 | PolaczenieSplPo | `bool` | bazodanowe |  | Sprawozdanie jednostki za okres po połączeniu spółek |
 | PowiazaniaKapitalowe | `string` | bazodanowe |  | Wzajemne powiązania kapitałowe pomiędzy jednostkami objętymi konsolidacją |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaSprawozdaniaKS>` |  |  |  |
+| Pozycje | `SubTable<Soneta.Ksiega.PozycjaSprawozdaniaKS>` | podlista |  |  |
 | PrzedmiotDzialalnosci | `string` | bazodanowe |  | Przedmiot działalności |
-| Rola | `Soneta.Ksiega.RolaJednostkiSprawozdania` | bazodanowe, enum |  |  |
+| Rola | `Soneta.Ksiega.RolaJednostkiSprawozdania` (enum) | bazodanowe |  |  |
 | Siedziba | `string` | bazodanowe |  | Siedziba jednostki |
-| Sprawozdanie | `Soneta.Ksiega.SprawozdanieKS` | bazodanowe, guided-parent |  |  |
-| UdzialWKapitale | `Soneta.Types.Percent` | bazodanowe |  | Udział w kapitale (funduszu) podstawowym |
+| Sprawozdanie | `Soneta.Ksiega.SprawozdanieKS` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| UdzialWKapitale | `Percent` | bazodanowe |  | Udział w kapitale (funduszu) podstawowym |
 | UdzialWLiczbieGlosow | `bool` | bazodanowe |  | Inny udział w liczbie głosów |
-| UdzialWLiczbieGlosowProcent | `Soneta.Types.Percent` | bazodanowe |  | Udział w całkowitej liczbie głosów, jeżeli jest różny od udziału w kapitale (funduszu) podstawowym |
+| UdzialWLiczbieGlosowProcent | `Percent` | bazodanowe |  | Udział w całkowitej liczbie głosów, jeżeli jest różny od udziału w kapitale (funduszu) podstawowym |
 
 ## Enumy
 

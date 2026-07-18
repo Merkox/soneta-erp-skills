@@ -6,41 +6,45 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 8
+- podlisty: 6
+- subrowy: 1
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` |  |  |  |
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data naliczania listy płac |
-| DataWyplaty | `Soneta.Types.Date` | bazodanowe |  | Data przekazania środków do dyspozycji pracownika. Na jej podstawie jest wyliczany mies,rok |
+| Data | `Date` | bazodanowe |  | Data naliczania listy płac |
+| DataWyplaty | `Date` | bazodanowe |  | Data przekazania środków do dyspozycji pracownika. Na jej podstawie jest wyliczany mies,rok |
 | Definicja | `Soneta.Place.DefinicjaListyPlac` | bazodanowe |  |  |
-| DeklaracjeZa | `Soneta.Types.YearMonth` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| Księgowanie | `Soneta.Place.KsięgowanieListyWorker` |  |  |  |
+| DeklaracjeZa | `YearMonth` | tylko-odczyt |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Księgowanie | `Soneta.Place.KsięgowanieListyWorker` | tylko-odczyt |  |  |
 | MiesWstecz | `int` | bazodanowe |  |  |
-| MiesiacZUS | `Soneta.Types.YearMonth` |  | Miesiąc ZUS | Miesiąc w ktorym zostaną rozliczone składki ZUS |
-| MiesiacZUSDzien | `Soneta.Types.Date` | bazodanowe | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
-| MiesiącDeklaracji | `Soneta.Types.YearMonth` |  |  |  |
-| Naliczanie | `Soneta.Place.TypNaliczenia` | bazodanowe, enum |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| MiesiacZUS | `YearMonth` |  | Miesiąc ZUS | Miesiąc w ktorym zostaną rozliczone składki ZUS |
+| MiesiacZUSDzien | `Date` | bazodanowe, tylko-odczyt | Miesiąc deklaracji ZUS | Miesiąc w którym zostaną rozliczone składki ZUS |
+| MiesiącDeklaracji | `YearMonth` | tylko-odczyt |  |  |
+| Naliczanie | `Soneta.Place.TypNaliczenia` (enum) | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerProceduryISO | `string` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Okres za jaki mają być naliczane wchodzące na wybraną listę wypłaty |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  | Okres za jaki mają być naliczane wchodzące na wybraną listę wypłaty |
 | OpisListyPlac | `string` | bazodanowe |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
 | PublikacjaWPulpitach | `bool` | bazodanowe |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| TerminPłatnościSkładek | `Soneta.Types.Date` |  |  |  |
+| TerminPłatnościSkładek | `Date` | tylko-odczyt |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Wyplaty | `Soneta.Business.SubTable<Soneta.Place.Wyplata>` |  |  |  |
+| Wyplaty | `SubTable<Soneta.Place.Wyplata>` | podlista |  |  |
 | Zatwierdzona | `bool` |  |  |  |
 
 ## Enumy

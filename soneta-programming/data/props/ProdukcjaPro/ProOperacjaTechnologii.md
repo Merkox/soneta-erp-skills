@@ -5,31 +5,35 @@ Opis: Element szczegółowy technologii produkcyjnej (ProTechnologia). Reprezent
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Technologia` → `ProTechnologia`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 9
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CechaDostepnosci | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha dostępności | Cecha dostępności operacji technologii. |
-| Czas | `Soneta.Types.TimeSec` | bazodanowe |  | Czas operacji technologii. |
-| CzasMiedzyoperacyjny | `Soneta.Types.TimeSec` | bazodanowe | Czas międzyoperacyjny | Czas międzyoperacyjny operacji technologii. |
+| CechaDostepnosci | `FeatureDefinition` | bazodanowe | Cecha dostępności | Cecha dostępności operacji technologii. |
+| Czas | `TimeSec` | bazodanowe |  | Czas operacji technologii. |
+| CzasMiedzyoperacyjny | `TimeSec` | bazodanowe | Czas międzyoperacyjny | Czas międzyoperacyjny operacji technologii. |
 | DefinicjaMeldunku | `Soneta.ProdukcjaPro.ProDefinicjaMeldunku` | bazodanowe | Definicja meldunku | Definicja meldunku dla operacji technologii. |
 | DefinicjaOperacji | `Soneta.ProdukcjaPro.ProDefinicjaOperacji` | bazodanowe | Definicja operacji | Definicja operacji dla operacji technologii. |
-| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaOperacjiTechnologii` |  |  | Kalkulacja operacji technologii. |
+| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaOperacjiTechnologii` | tylko-odczyt |  | Kalkulacja operacji technologii. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa operacji technologii. |
-| Materialy | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii>` |  | Materiały | Materiały operacji technologii. |
-| Odpady | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiTechnologii>` |  |  | Odpady operacji technologii. |
-| OperacjeNastepujace | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologiiPoprzedzajaca>` |  | Operacje następujące | Operacje następujące dla operacji technologii. |
-| OperacjePoprzedzajace | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologiiPoprzedzajaca>` |  |  |  |
-| OperacjeZlecen | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProOperacjaZlecenia>` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis operacji technologii. |
-| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` | bazodanowe, enum | Sposób wyceny | Sposób wyceny operacji technologii. |
+| Materialy | `SubTable<Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii>` | podlista | Materiały | Materiały operacji technologii. |
+| Odpady | `SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiTechnologii>` | podlista |  | Odpady operacji technologii. |
+| OperacjeNastepujace | `SubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologiiPoprzedzajaca>` | podlista | Operacje następujące | Operacje następujące dla operacji technologii. |
+| OperacjePoprzedzajace | `LpSubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologiiPoprzedzajaca>` | podlista |  |  |
+| OperacjeZlecen | `SubTable<Soneta.ProdukcjaPro.ProOperacjaZlecenia>` | podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis operacji technologii. |
+| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` (enum) | bazodanowe | Sposób wyceny | Sposób wyceny operacji technologii. |
 | Technologia | `Soneta.ProdukcjaPro.ProTechnologia` | bazodanowe, guided-parent |  | Technologia dla operacji technologii. |
 | TowarMeldowany | `Soneta.ProdukcjaPro.IProTowarMeldowany` |  | Towar meldowany | Towar meldowany operacji technologii. |
-| Uslugi | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProUslugaOperacjiTechnologii>` |  | Usługi | Usługi operacji technologii. |
-| Wydzial | `Soneta.ProdukcjaPro.ProWydzial` |  | Wydział | Wydział operacji technologii wskazany na technologii produkcyjnej. |
-| Wyroby | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiTechnologii>` |  |  | Wyroby operacji technologii. |
-| Zasoby | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiTechnologii>` |  |  | Zasoby operacji technologii. |
+| Uslugi | `SubTable<Soneta.ProdukcjaPro.ProUslugaOperacjiTechnologii>` | podlista | Usługi | Usługi operacji technologii. |
+| Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | tylko-odczyt | Wydział | Wydział operacji technologii wskazany na technologii produkcyjnej. |
+| Wyroby | `SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiTechnologii>` | podlista |  | Wyroby operacji technologii. |
+| Zasoby | `SubTable<Soneta.ProdukcjaPro.ProZasobOperacjiTechnologii>` | podlista |  | Zasoby operacji technologii. |
 
 ## Enumy
 

@@ -5,15 +5,19 @@ Opis: Bilans otwarcia rocznej informacji o zatrudnieniu (RIA) w zakresie pracy w
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 2
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Ustawa1998 | `Soneta.Kadry.BoRIAWarunkiSzczególne1998` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Ustawa1998 | `Soneta.Kadry.BoRIAWarunkiSzczególne1998` (subrow) | bazodanowe |  |  |
 | Ustawa1998.KodCharakter | `string` | bazodanowe |  |  |
 | Ustawa1998.KodWarunki | `string` | bazodanowe |  |  |
 | Ustawa1998.KodWarunki2 | `string` | bazodanowe |  |  |
@@ -22,15 +26,15 @@ Guided: root
 | Ustawa1998.Nazwa | `string` | bazodanowe |  |  |
 | Ustawa1998.Nazwa2 | `string` | bazodanowe |  |  |
 | Ustawa1998.PelnyWymiar | `bool` | bazodanowe |  |  |
-| Ustawa1998.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Ustawa1998.Wymiar | `Fraction` | bazodanowe |  |  |
 | Ustawa1998.ZmienionaNazwa | `string` | bazodanowe |  |  |
 | Ustawa1998.ZmienionaNazwa2 | `string` | bazodanowe |  |  |
-| Ustawa2008 | `Soneta.Kadry.BoRIAWarunkiSzczególne2008` | bazodanowe |  |  |
+| Ustawa2008 | `Soneta.Kadry.BoRIAWarunkiSzczególne2008` (subrow) | bazodanowe |  |  |
 | Ustawa2008.Kod | `Soneta.Kadry.KodPracyWSzególnychWarunkachCharakterze` | bazodanowe |  |  |
-| Ustawa2008.WgKod | `Soneta.Business.Key` |  |  |  |
-| Ustawa2008.Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
-| Wersja | `Soneta.Kadry.WersjaBoRIAWarunkiSzczególne` | bazodanowe, enum |  |  |
-| WersjaTxt | `string` |  |  |  |
+| Ustawa2008.WgKod | `Key` | podlista |  |  |
+| Ustawa2008.Wymiar | `Fraction` | bazodanowe |  |  |
+| Wersja | `Soneta.Kadry.WersjaBoRIAWarunkiSzczególne` (enum) | bazodanowe |  |  |
+| WersjaTxt | `string` | tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Enumy

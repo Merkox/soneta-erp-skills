@@ -5,13 +5,17 @@ Opis: Słownik rodzajów kontaktu (np. telefon, e-mail, fax, komunikator). Każd
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe | Nazwa rodzaju kontaktu | Nazwa rodzaju kontaktu. |
-| Typ | `Soneta.Core.TypRodzajuKontaktu` | bazodanowe, enum | Typ rodzaju kontaktu | Określa typ rodzaju kontaku. |
+| Typ | `Soneta.Core.TypRodzajuKontaktu` (enum) | bazodanowe | Typ rodzaju kontaktu | Określa typ rodzaju kontaku. |
 
 ## Enumy
 

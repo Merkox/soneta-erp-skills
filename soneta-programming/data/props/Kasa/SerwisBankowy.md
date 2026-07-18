@@ -5,14 +5,18 @@ Opis: Definicja serwisu bankowości elektronicznej online umożliwiającego bezp
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| IsActive | `bool` |  |  |  |
-| Nazwa | `string` | bazodanowe | Nazwa usługi |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Parametry | `Soneta.Business.SubTable<Soneta.Kasa.BankowoscElektroniczna.ParametrySerwisuBankowego>` |  |  |  |
-| ServiceId | `System.Guid` | bazodanowe |  |  |
-| ServiceUri | `string` |  |  |  |
+| IsActive | `bool` | tylko-odczyt |  |  |
+| Nazwa | `string` | bazodanowe, tylko-odczyt | Nazwa usługi |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt |  |  |
+| Parametry | `SubTable<Soneta.Kasa.BankowoscElektroniczna.ParametrySerwisuBankowego>` | podlista |  |  |
+| ServiceId | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| ServiceUri | `string` | tylko-odczyt |  |  |

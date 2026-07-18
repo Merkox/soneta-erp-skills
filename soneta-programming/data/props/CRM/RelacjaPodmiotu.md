@@ -4,21 +4,25 @@ Tytuł: Relacje podmiotów
 Opis: Definiuje relację hierarchiczną pomiędzy podmiotami (np. firma matka - spółka córka, odbiorca - płatnik). Umożliwia modelowanie powiązań kapitałowych i handlowych między kontrahentami, bankami i urzędami.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadrzedny | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref | Podmiot nadrzędny |  |
 | OdbiorcaPlatnik | `bool` | bazodanowe | Odbiorca/Dostawca jest płatnikiem |  |
-| Podrzedni | `Soneta.Business.View` |  |  |  |
-| Podrzedny | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref | Podmiot podrzędny |  |
-| PowiazaniePodmiotu | `Soneta.CRM.PowiazaniePodmiotu` | bazodanowe | Powiązanie | Powiązanie |
+| Podrzedni | `View` | podlista |  |  |
+| Podrzedny | `Soneta.Core.IPodmiot` | bazodanowe, tylko-odczyt, iface-ref | Podmiot podrzędny |  |
+| PowiazaniePodmiotu | `Soneta.CRM.PowiazaniePodmiotu` (subrow) | bazodanowe | Powiązanie | Powiązanie |
 | PowiazaniePodmiotu.IdentWewKSeF | `string` | bazodanowe | Identyfikator wewnętrzny KSeF | Identyfikator wewnętrzny KSeF. |
-| PowiazaniePodmiotu.Okres | `Soneta.Types.FromTo` | bazodanowe | Okres |  |
-| PowiazaniePodmiotu.RodzajPowiazania | `Soneta.CRM.RodzajPowiazaniaPodmiotu` | bazodanowe, enum | Rodzaj powiązania |  |
-| PowiazaniePodmiotu.Rola | `Soneta.CRM.RolaPodmiotu` | bazodanowe, enum | Rola |  |
-| PowiazaniePodmiotu.RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
+| PowiazaniePodmiotu.Okres | `FromTo` | bazodanowe, podlista | Okres |  |
+| PowiazaniePodmiotu.RodzajPowiazania | `Soneta.CRM.RodzajPowiazaniaPodmiotu` (enum) | bazodanowe | Rodzaj powiązania |  |
+| PowiazaniePodmiotu.Rola | `Soneta.CRM.RolaPodmiotu` (enum) | bazodanowe | Rola |  |
+| PowiazaniePodmiotu.RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
 | PowiazaniePodmiotu.WysylajNipWPodmiocieTrzecimKSeF | `bool` | bazodanowe | Czy wysyłać NIP w podmiocie trzecim. | Czy wysyłać NIP w podmiocie trzecim. |
 
 ## Relacje interfejsowe

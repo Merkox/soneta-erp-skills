@@ -4,22 +4,26 @@ Tytuł: Elementy systemu zewnętrznego
 Opis: Konfiguracja elementów (obiektów biznesowych) obsługiwanych przez system zewnętrzny. Określa powiązanie obiektu wewnętrznego z systemem zewnętrznym, tryb pobierania, dodawania i obsługi pobranych danych oraz domyślność.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjeCen | `Soneta.Business.ViewInfo` |  |  |  |
+| DefinicjeCen | `ViewInfo` | tylko-odczyt |  |  |
 | Dodawanie | `bool` | bazodanowe | Dodawanie |  |
 | Domyslny | `bool` | bazodanowe | Domyślny |  |
-| Element | `Soneta.Business.IElemSysZewnHost` | bazodanowe | Element |  |
+| Element | `IElemSysZewnHost` | bazodanowe | Element |  |
 | ElementZewn | `string` | bazodanowe | Obiekt z systemu zewnętrznego | Wskazanie na obiekt z systemu zewnętrzenego |
-| Magazyny | `Soneta.Business.ViewInfo` |  |  |  |
+| Magazyny | `ViewInfo` | tylko-odczyt |  |  |
 | Pobieranie | `bool` | bazodanowe | Pobieranie |  |
-| Podrzędne | `Soneta.Business.SubTable<Soneta.Core.ElemSysZewnRelacje>` |  |  |  |
-| Rodzaj | `Soneta.Core.RodzajElementuSysZewn` | bazodanowe, enum | Rodzaj danych elementu |  |
-| SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe | System zewnętrzny |  |
-| TrybObslugiPobranego | `Soneta.Core.TrybObslugiPobranego` | bazodanowe, enum | Tryb obsługi pobranego |  |
+| Podrzędne | `SubTable<Soneta.Core.ElemSysZewnRelacje>` | podlista |  |  |
+| Rodzaj | `Soneta.Core.RodzajElementuSysZewn` (enum) | bazodanowe, tylko-odczyt | Rodzaj danych elementu |  |
+| SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe, tylko-odczyt | System zewnętrzny |  |
+| TrybObslugiPobranego | `Soneta.Core.TrybObslugiPobranego` (enum) | bazodanowe | Tryb obsługi pobranego |  |
 
 ## Enumy
 

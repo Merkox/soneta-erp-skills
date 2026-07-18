@@ -4,12 +4,16 @@ Opis: Element szczegółowy towaru (Towar). Przechowuje indywidualne parametry t
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CenaMinimalna | `Soneta.Types.Currency` | bazodanowe |  | Cena minimalna netto w magazynie. W przypadku użycia na liście wyboru towarów zalecane użycie: Workers.TowarMagazynInfo.[Magazyn].CenaMinimum |
+| CenaMinimalna | `Currency` | bazodanowe |  | Cena minimalna netto w magazynie. W przypadku użycia na liście wyboru towarów zalecane użycie: Workers.TowarMagazynInfo.[Magazyn].CenaMinimum |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe |  |  |
 | StanMaximum | `Soneta.Towary.Quantity` | bazodanowe |  | Stan maksymalny w magazynie. W przypadku użycia na liście wyboru towarów zalecane użycie: Workers.TowarMagazynInfo.[Magazyn].Maximum |
 | StanMinimum | `Soneta.Towary.Quantity` | bazodanowe |  | Stan minimalny w magazynie. W przypadku użycia na liście wyboru towarów zalecane użycie: Workers.TowarMagazynInfo.[Magazyn].Minimum |

@@ -5,23 +5,27 @@ Opis: Element szczegółowy karty opisu stanowiska (KartaOpisuStanowiskaBase). O
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaOpisuStanowiskaBase`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 2
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
-| Karta | `Soneta.HR2.KartaOpisuStanowiskaBase` | bazodanowe, guided-parent |  |  |
-| Oczekiwana | `Soneta.Oceny.WartośćElementuOceny` | bazodanowe |  |  |
-| Wymagana | `Soneta.Oceny.WartośćElementuOceny` | bazodanowe |  |  |
-| Wymagana.Host | `Soneta.Oceny.IWartośćOcenyHost` |  |  |  |
+| Karta | `Soneta.HR2.KartaOpisuStanowiskaBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Oczekiwana | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
+| Wymagana | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
+| Wymagana.Host | `Soneta.Oceny.IWartośćOcenyHost` | tylko-odczyt |  |  |
 | Wymagana.Ocena | `Soneta.Oceny.ElementSkaliOcen` | bazodanowe |  |  |
 | Wymagana.Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| Wymagana.Uzasadnienie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Wymagana.Uzasadnienie | `MemoText` | bazodanowe, podlista |  |  |
 | Wymagana.Wartosc | `decimal` | bazodanowe | Wartość |  |
 | Wymagana.Wartosc2 | `decimal` |  |  |  |
 | Wymagana.WartoscInt | `int` |  |  |  |
-| Wymagana.WgOcena | `Soneta.Business.Key` |  |  |  |
+| Wymagana.WgOcena | `Key` | podlista |  |  |
 | Wymagana.Wykonanie | `decimal` | bazodanowe | Wykonanie |  |
 | Wymagana.WykonanieInt | `int` |  | Wykonanie |  |
-| Wymagana.Wypełniona | `bool` |  |  |  |
+| Wymagana.Wypełniona | `bool` | tylko-odczyt |  |  |

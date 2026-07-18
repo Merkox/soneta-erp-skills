@@ -6,30 +6,34 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IManagedRowDefinion`, `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 8
+- podlisty: 4
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Cykliczne | `bool` | bazodanowe |  |  |
 | GrupaKSU | `Soneta.HR.ZKL.Slowniki.KSU.GrupaSzkolenIUprawnien` | bazodanowe | Grupa KSU |  |
-| GrupaNazwa | `string` |  |  |  |
-| GrupyStanowiskDisplay | `string` |  |  |  |
-| Kategoria | `string` |  |  |  |
-| KategoriaDisplay | `string` |  |  |  |
-| Kreatory | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
-| KsuCelSzkolenia | `string` |  |  |  |
-| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` |  | Grupy stanowisk |  |
-| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` |  | Obszary funkcjonalne |  |
-| KsuSzkoleniaPoprzedzajace | `Soneta.Kadry.DefinicjaSzkoleniaBHP[]` |  | Szkolenie poprzedzające |  |
-| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` | enum |  |  |
+| GrupaNazwa | `string` | tylko-odczyt |  |  |
+| GrupyStanowiskDisplay | `string` | tylko-odczyt |  |  |
+| Kategoria | `string` | tylko-odczyt |  |  |
+| KategoriaDisplay | `string` | tylko-odczyt |  |  |
+| Kreatory | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
+| KsuCelSzkolenia | `string` | tylko-odczyt |  |  |
+| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` | podlista | Grupy stanowisk |  |
+| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` | podlista | Obszary funkcjonalne |  |
+| KsuSzkoleniaPoprzedzajace | `Soneta.Kadry.DefinicjaSzkoleniaBHP[]` | podlista | Szkolenie poprzedzające |  |
+| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` (enum) | tylko-odczyt |  |  |
 | NastepneDefinicja | `Soneta.Kadry.DefinicjaSzkoleniaBHP` | bazodanowe |  |  |
 | NastepneTermin | `int` | bazodanowe |  |  |
-| NastepneTerminOd | `Soneta.Kadry.SposóbWyliczaniaTerminu` | bazodanowe, enum |  |  |
+| NastepneTerminOd | `Soneta.Kadry.SposóbWyliczaniaTerminu` (enum) | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| ObszaryFunkcjonalneDisplay | `string` |  |  |  |
-| PoprzedzajaceDisplay | `string` |  |  |  |
+| ObszaryFunkcjonalneDisplay | `string` | tylko-odczyt |  |  |
+| PoprzedzajaceDisplay | `string` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
 

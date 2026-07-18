@@ -4,12 +4,16 @@ Opis: Tabela przechowująca logi z przekierowań połączeń między numerami we
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CR | `int` | bazodanowe |  |  |
-| CreatedAt | `System.DateTime` | bazodanowe |  |  |
+| CR | `int` | bazodanowe, tylko-odczyt |  |  |
+| CreatedAt | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
 | OperatorNumber | `string` | bazodanowe |  |  |
 | OriginalCallingNumber | `string` | bazodanowe |  |  |

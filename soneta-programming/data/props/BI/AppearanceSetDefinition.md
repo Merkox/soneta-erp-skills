@@ -5,10 +5,14 @@ Opis: Nazwany zestaw barw (paleta kolorów) wykorzystywany w wizualizacjach BI. 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 1
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Items | `Soneta.Business.LpSubTable<Soneta.BI.AppearanceItemDefinition>` |  |  |  |
+| Items | `LpSubTable<Soneta.BI.AppearanceItemDefinition>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |

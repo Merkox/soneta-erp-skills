@@ -5,14 +5,18 @@ Opis: Definicja szablonu pól opcjonalnych dla komunikatów Krajowego Systemu e-
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicje | `Soneta.Business.SubTable<Soneta.Core.KSeFSzablonPolOpcjonalnychDefXmlNagStatus>` |  |  |  |
+| Definicje | `SubTable<Soneta.Core.KSeFSzablonPolOpcjonalnychDefXmlNagStatus>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  | Kod szablonu |
 | Nazwa | `string` | bazodanowe | Nazwa szablonu | Nazwa identyfikatora |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Core.KSeFSzablonPolOpcjonalnychPozycja>` |  |  |  |
+| Pozycje | `SubTable<Soneta.Core.KSeFSzablonPolOpcjonalnychPozycja>` | podlista |  |  |
 | SzablonZalacznika | `Soneta.Core.KSeFSzablonZalacznika` | bazodanowe |  |  |
 | ZastosujPolaDodatkowe | `bool` | bazodanowe | Zastosuj pola dodatkowe |  |

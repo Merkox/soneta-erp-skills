@@ -5,23 +5,27 @@ Opis: Tabela przechowuje typy opłat leasingowych przypisane do środka trwałeg
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Leasing` → `SrodekTrwalyLeasing`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czestotliwosc | `Soneta.SrodkiTrwale.CzestotliwoscIndeksacji` | bazodanowe, enum |  | Czestotliwość indeksacji |
-| DataDo | `Soneta.Types.Date` | bazodanowe |  | Data zakończenia |
-| DataOd | `Soneta.Types.Date` | bazodanowe |  | Data rozpoczęcia |
-| Leasing | `Soneta.SrodkiTrwale.SrodekTrwalyLeasing` | bazodanowe, guided-parent |  |  |
+| Czestotliwosc | `Soneta.SrodkiTrwale.CzestotliwoscIndeksacji` (enum) | bazodanowe |  | Czestotliwość indeksacji |
+| DataDo | `Date` | bazodanowe |  | Data zakończenia |
+| DataOd | `Date` | bazodanowe |  | Data rozpoczęcia |
+| Leasing | `Soneta.SrodkiTrwale.SrodekTrwalyLeasing` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  | Opis oplaty |
-| RozpoczecieSplaty | `Soneta.Types.YearMonth` | bazodanowe |  | Rozpoczęcie spłaty |
+| RozpoczecieSplaty | `YearMonth` | bazodanowe |  | Rozpoczęcie spłaty |
 | TypOplaty | `Soneta.SrodkiTrwale.TypOplatyMSR` | bazodanowe |  | Typ opłaty |
-| TypWHarmonogramie | `Soneta.SrodkiTrwale.KierunekRaty` | bazodanowe, enum |  | Typ opłaty leasingowej w harmonogramie |
+| TypWHarmonogramie | `Soneta.SrodkiTrwale.KierunekRaty` (enum) | bazodanowe |  | Typ opłaty leasingowej w harmonogramie |
 | UwzgledniajWHarmonogramie | `bool` | bazodanowe |  | Czy uwzględniać w harmonogramie |
-| UwzgledniajWWycenie | `Soneta.SrodkiTrwale.UwzgledniajWWycenie` | bazodanowe, enum |  | Jak uwzględniać w wycenie |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  | Wartość pozycji |
+| UwzgledniajWWycenie | `Soneta.SrodkiTrwale.UwzgledniajWWycenie` (enum) | bazodanowe |  | Jak uwzględniać w wycenie |
+| Wartosc | `Currency` | bazodanowe |  | Wartość pozycji |
 
 ## Enumy
 

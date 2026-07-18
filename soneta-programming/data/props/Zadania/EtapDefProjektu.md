@@ -5,15 +5,19 @@ Opis: Element szczegółowy definicji projektu (DefProjektu). Definiuje etap w s
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefProjektu`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTrwania | `int` | bazodanowe | Domyślny czas trwania etapu | Domyślny czas trwania etapu. |
-| Definicja | `Soneta.Zadania.DefProjektu` | bazodanowe, guided-parent |  | Definicja projektu, do której jest przypisany ten etap |
-| Ident | `int` | bazodanowe | Identyfikator | Identyfikator etapu na definicji projektu. Wykorzystywany w relacji do projektu. |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.Zadania.DefProjektu` | bazodanowe, tylko-odczyt, guided-parent |  | Definicja projektu, do której jest przypisany ten etap |
+| Ident | `int` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator etapu na definicji projektu. Wykorzystywany w relacji do projektu. |
+| Kod | `string` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa etapu w ramach projektu. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa etapu projektu |
-| Realizacja | `Soneta.Types.Percent` | bazodanowe | Realizacja | Stopień realizacji projektu na wskazanym etapie. |
+| Realizacja | `Percent` | bazodanowe | Realizacja | Stopień realizacji projektu na wskazanym etapie. |

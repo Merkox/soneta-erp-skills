@@ -4,27 +4,31 @@ Opis: Element szczegółowy dokumentu aktualizacji kalendarza (IDokumentAktualiz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DokumentAktualizacji` → `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 9
+- podlisty: 1
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataAktualizacji | `System.DateTime` | bazodanowe |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataAktualizacji | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaDnia` | bazodanowe |  |  |
-| DokumentAktualizacji | `Soneta.Kalend.IDokumentAktualizacjiKalendarza` | bazodanowe, guided-parent, iface-ref |  |  |
-| DzienPo | `Soneta.Kalend.IStrefowy` |  |  |  |
-| Lp | `int` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` |  | Od |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| RuchomyCzasPracy | `bool` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaKalendarzaHistoria>` |  |  |  |
-| TolerancjaWe | `Soneta.Types.Time` | bazodanowe |  |  |
-| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, iface-ref |  |  |
+| DokumentAktualizacji | `Soneta.Kalend.IDokumentAktualizacjiKalendarza` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| DzienPo | `Soneta.Kalend.IStrefowy` | tylko-odczyt |  |  |
+| Lp | `int` | bazodanowe, tylko-odczyt |  |  |
+| OdGodziny | `Time` | tylko-odczyt | Od |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| RuchomyCzasPracy | `bool` | tylko-odczyt |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaKalendarzaHistoria>` | podlista |  |  |
+| TolerancjaWe | `Time` | bazodanowe |  |  |
+| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

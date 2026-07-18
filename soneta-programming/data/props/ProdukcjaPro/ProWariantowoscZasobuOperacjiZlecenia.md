@@ -5,13 +5,17 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiZlecenia` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasTj | `Soneta.Types.TimeSec` | bazodanowe | Czas tj | Czas jednostkowy wariantowości zasobu operacji zlecenia. |
-| CzasTpz | `Soneta.Types.TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy wariantowości zasobu operacji zlecenia. |
+| CzasTj | `TimeSec` | bazodanowe | Czas tj | Czas jednostkowy wariantowości zasobu operacji zlecenia. |
+| CzasTpz | `TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy wariantowości zasobu operacji zlecenia. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa wariantowości zasobu operacji zlecenia. |
 | Stawka | `Soneta.ProdukcjaPro.ProStawka` | bazodanowe |  | Stawka wariantowości zasobu operacji zlecenia. |
 | Zasob | `Soneta.ProdukcjaPro.ProZasob` | bazodanowe | Zasób | Zasób dla zasobu operacji zlecenia. |

@@ -4,65 +4,70 @@ Tytuł: Nieruchomości
 Opis: Główna kartoteka nieruchomości obejmująca budynki, lokale, pomieszczenia i liczniki. Przechowuje dane techniczne, lokalizacyjne, własnościowe oraz parametry handlowe obiektu. Obsługuje hierarchiczną strukturę nieruchomości nadrzędnych i podrzędnych.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `NieruchomoscHis`
 Implementuje interfejsy: `IZasobCRM`, `IDocumentHostCRM`, `IObiektDoPlanowania`
 
-- pola bazodanowe: 60
-- pola kalkulowane (z klas biznesowych): 27
+- pola bazodanowe (zapisywalne): 54
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 8
+- podlisty: 20
+- subrowy: 0
+- razem: 87
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ActualDate | `Soneta.Business.ActualDate` |  |  |  |
+| ActualDate | `ActualDate` |  |  |  |
 | Aktywne | `bool` | bazodanowe | Aktywne | Wpozwala na określenie, czy nieruchomość jest aktywna |
-| AktywnyDo | `Soneta.Types.Date` | bazodanowe | Aktywny do |  |
-| AktywnyOd | `Soneta.Types.Date` | bazodanowe | Aktywny od |  |
-| BudynekNadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` |  | Budynek nadrzędny |  |
+| AktywnyDo | `Date` | bazodanowe | Aktywny do |  |
+| AktywnyOd | `Date` | bazodanowe | Aktywny od |  |
+| BudynekNadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | tylko-odczyt | Budynek nadrzędny |  |
 | Cel | `string` | bazodanowe | Cel |  |
-| DataBudowy | `Soneta.Types.Date` | bazodanowe | Data budowy | Data budowy nieruchomości |
-| DataDelegalizacji | `Soneta.Types.Date` | bazodanowe | Data delegalizacji | Data delegalizacji |
-| DataInstalacji | `Soneta.Types.Date` | bazodanowe | Data instalacji | Data instalacji |
-| DataKW | `Soneta.Types.Date` | bazodanowe | Data KW | Data wpisu do księgi wieczystej |
-| DataLegalizacji | `Soneta.Types.Date` | bazodanowe | Data legalizacji | Data legalizacji |
-| DataMontazu | `Soneta.Types.Date` | bazodanowe | Data montażu | Data montażu |
-| DataProdukcji | `Soneta.Types.Date` | bazodanowe | Data produkcji | Data produkcji |
-| DataUtworzenia | `Soneta.Types.Date` | bazodanowe | Data utworzenia | Data utworzenia |
+| DataBudowy | `Date` | bazodanowe | Data budowy | Data budowy nieruchomości |
+| DataDelegalizacji | `Date` | bazodanowe | Data delegalizacji | Data delegalizacji |
+| DataInstalacji | `Date` | bazodanowe | Data instalacji | Data instalacji |
+| DataKW | `Date` | bazodanowe | Data KW | Data wpisu do księgi wieczystej |
+| DataLegalizacji | `Date` | bazodanowe | Data legalizacji | Data legalizacji |
+| DataMontazu | `Date` | bazodanowe | Data montażu | Data montażu |
+| DataProdukcji | `Date` | bazodanowe | Data produkcji | Data produkcji |
+| DataUtworzenia | `Date` | bazodanowe | Data utworzenia | Data utworzenia |
 | DeviceParentContext | `Soneta.RealEstate.Models.Database.Nieruchomosc` |  |  |  |
 | Dlugosc | `double` | bazodanowe | Długość | Długość |
-| DokumentyCRM | `Soneta.Business.SubTable<Soneta.Zadania.DokumentCRM>` |  |  |  |
-| FocusedName | `string` |  |  |  |
+| DokumentyCRM | `SubTable<Soneta.Zadania.DokumentCRM>` | podlista |  |  |
+| FocusedName | `string` | tylko-odczyt |  |  |
 | Glowny | `bool` | bazodanowe | Główny |  |
-| Historia | `Soneta.Business.HistorySubTable` |  |  |  |
-| HistoriaPodleglosci | `Soneta.Business.FromToSubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` |  |  |  |
-| HistoriaZmian | `Soneta.Business.HistorySubTable<Soneta.RealEstate.Models.Database.NieruchomoscHis>` |  |  |  |
+| Historia | `HistorySubTable` | podlista |  |  |
+| HistoriaPodleglosci | `FromToSubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` | podlista |  |  |
+| HistoriaZmian | `HistorySubTable<Soneta.RealEstate.Models.Database.NieruchomoscHis>` | podlista |  |  |
 | Identyfikator | `string` | bazodanowe | Identyfikator | Unikalny identyfikator nieruchomości |
 | Inwentarz | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe | Środek trwały, wyposażenie | Środek trwały, wyposażenie |
-| KodZasobu | `string` |  |  |  |
+| KodZasobu | `string` | tylko-odczyt |  |  |
 | KondygnacjeNad | `int` | bazodanowe | Kondygnacje nadziemne | Ilość kondygnacji nadziemnych |
 | KondygnacjePod | `int` | bazodanowe | Kondygnacje podziemne | Ilość kondygnacji podzmienych |
 | Kubatura | `double` | bazodanowe | Kubatura | Kubatura |
-| Last | `Soneta.RealEstate.Models.Database.NieruchomoscHis` |  |  |  |
+| Last | `Soneta.RealEstate.Models.Database.NieruchomoscHis` | tylko-odczyt |  |  |
 | LiczbaOsob | `int` | bazodanowe | Liczba osób |  |
 | LiczbaStanowisk | `int` | bazodanowe | Maksymalna liczba stanowisk. |  |
 | LicznikNadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe | Nadrzędny licznik główny |  |
-| LicznikiPodrzedne | `Soneta.RealEstate.Models.Database.Nieruchomosc[]` |  |  |  |
+| LicznikiPodrzedne | `Soneta.RealEstate.Models.Database.Nieruchomosc[]` | podlista |  |  |
 | Lokalizacja | `Soneta.CRM.Lokalizacja` | bazodanowe | Lokalizacja nieruchomości | Lokalizacja nieruchomości. |
-| Nadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe | Nieruchomość nadrzędna | Nieruchomość główna (dla nieruchomości grupowych) lub nieruchomość poprzedzająca. |
+| Nadrzedny | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe, tylko-odczyt | Nieruchomość nadrzędna | Nieruchomość główna (dla nieruchomości grupowych) lub nieruchomość poprzedzająca. |
 | NadrzednyId | `int` |  |  |  |
 | NadrzednyIdentyfikator | `string` |  |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa nieruchomości |
-| NazwaZasobu | `string` |  |  |  |
-| NieruchomosciUzyte | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.NieruchomoscUzyta>` |  |  |  |
+| NazwaZasobu | `string` | tylko-odczyt |  |  |
+| NieruchomosciUzyte | `SubTable<Soneta.RealEstate.Models.Database.NieruchomoscUzyta>` | podlista |  |  |
 | NrEwidencjiGiB | `string` | bazodanowe | Ewidencja Grutów i Budynków |  |
 | NrFabryczny | `string` | bazodanowe | Numer fabryczny |  |
 | NrPlomby | `string` | bazodanowe | Numer plomby |  |
 | Numer | `string` | bazodanowe | Numer |  |
 | NumerKW | `string` | bazodanowe | Numer KW | Numer księgi wieczystej |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis nieruchomości |
-| Podelementy | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.Nieruchomosc>` |  |  |  |
-| PodelementyWgAktualnosci | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` |  |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.Nieruchomosc>` |  |  |  |
-| PodrzedneWgAktualnosci | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis nieruchomości |
+| Podelementy | `SubTable<Soneta.RealEstate.Models.Database.Nieruchomosc>` | podlista |  |  |
+| PodelementyWgAktualnosci | `SubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` | podlista |  |  |
+| Podrzedne | `SubTable<Soneta.RealEstate.Models.Database.Nieruchomosc>` | podlista |  |  |
+| PodrzedneWgAktualnosci | `SubTable<Soneta.RealEstate.Models.Database.NieruchomoscRef>` | podlista |  |  |
 | PowierzchniaUzytkowa | `double` | bazodanowe | Powierzchnia użytkowa |  |
 | PowierzchniaZabudowy | `double` | bazodanowe | Powierzchnia zabudowy |  |
 | Pozwolenie | `bool` | bazodanowe | Pozwolenie na budowę | Pozwolenie na budowę |
@@ -72,32 +77,32 @@ Implementuje interfejsy: `IZasobCRM`, `IDocumentHostCRM`, `IObiektDoPlanowania`
 | Przeznaczenie | `string` | bazodanowe | Przeznaczenie | Przeznaczenie nieruchomości |
 | RezerwujCalePomieszczenie | `bool` | bazodanowe | Rezerwuj całe pomieszczenie | Domyślna opcja rezerwacji całego pomieszczenia dla kierownika. |
 | Rodzaj | `string` | bazodanowe | Rodzaj | Rodzaj nieruchomości |
-| RodzajNieruchomosci | `Soneta.RealEstate.Enums.RealEstateKind` | bazodanowe, enum | Rodzaj nieruchomości |  |
-| RozliczeniaLokalu | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` |  |  |  |
-| RozliczeniaNieruchomosci | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` |  |  |  |
-| SerializedDiagram | `Soneta.Business.MemoText` | bazodanowe | Serializowane dane diagramu | Określa serializowane dane diagramu |
-| SrodkiTrwale | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.NieruSrTrwalyRel>` |  |  |  |
+| RodzajNieruchomosci | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt | Rodzaj nieruchomości |  |
+| RozliczeniaLokalu | `SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` | podlista |  |  |
+| RozliczeniaNieruchomosci | `SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` | podlista |  |  |
+| SerializedDiagram | `MemoText` | bazodanowe, podlista | Serializowane dane diagramu | Określa serializowane dane diagramu |
+| SrodkiTrwale | `SubTable<Soneta.RealEstate.Models.Database.NieruSrTrwalyRel>` | podlista |  |  |
 | StanNieruchomosci | `Soneta.RealEstate.Models.Database.Config.StanNieruchomosci` | bazodanowe | Stan obiektu |  |
-| Stawka | `Soneta.Types.Currency` | bazodanowe |  | Stawka za jednostkę czasu wypożyczenia. |
+| Stawka | `Currency` | bazodanowe |  | Stawka za jednostkę czasu wypożyczenia. |
 | Symbol | `string` | bazodanowe | Symbol |  |
 | Szerokosc | `double` | bazodanowe | Szerokość | Szerokość |
 | Technologia | `string` | bazodanowe | Technologia | Technologia nieruchomości |
 | TowarUsluga | `Soneta.Towary.Towar` | bazodanowe |  | Towar typu usługa, do rozliczenia użycia. |
-| Towary | `Soneta.Business.SubTable<Soneta.RealEstate.UslugaNieruch>` |  |  |  |
+| Towary | `SubTable<Soneta.RealEstate.UslugaNieruch>` | podlista |  |  |
 | TypNieruchomosc | `Soneta.RealEstate.Models.Database.Config.TypNieruchomosc` | bazodanowe | Typ nieruchomości | Typ nieruchomości. |
-| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` | bazodanowe, enum |  | Określa rodzaj zaokrąglenia. |
-| TypZasobu | `string` |  |  |  |
-| UILocation | `Soneta.Types.UILocation` |  |  |  |
+| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` (enum) | bazodanowe |  | Określa rodzaj zaokrąglenia. |
+| TypZasobu | `string` | tylko-odczyt |  |  |
+| UILocation | `UILocation` |  |  |  |
 | Udzial | `double` | bazodanowe | Udział |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi |  |
+| Wartosc | `Currency` | bazodanowe | Wartość |  |
 | Wlasciciel | `Soneta.CRM.Kontrahent` | bazodanowe | Właściciel | Właściciel nieruchomości |
 | Wlasne | `bool` | bazodanowe | Nieruchomość własna | Oznacza nieruchomość własną. |
-| Wydzialy | `Soneta.Business.SubTable<Soneta.RealEstate.Models.Database.NieruWydzialRel>` |  |  |  |
+| Wydzialy | `SubTable<Soneta.RealEstate.Models.Database.NieruWydzialRel>` | podlista |  |  |
 | Wypozyczane | `bool` | bazodanowe | Możliwość wypożyczenia nieruchomości. | Oznacza możliwość wypożyczania nieruchmości. |
 | Wysokosc | `double` | bazodanowe | Wysokość | Wysokość |
 | Zarzadca | `Soneta.CRM.Kontrahent` | bazodanowe | Zarządca | Zarządca nieruchomości |
-| ZasobyCRM | `Soneta.Business.SubTable` |  |  |  |
+| ZasobyCRM | `SubTable` | podlista |  |  |
 
 ## Enumy
 

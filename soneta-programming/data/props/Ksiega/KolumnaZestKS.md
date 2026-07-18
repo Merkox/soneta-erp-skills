@@ -5,31 +5,35 @@ Opis: Element szczegółowy zestawienia księgowego (ZestawienieKS). Definiuje k
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieKS`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 1
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaEdycji | `bool` | bazodanowe |  | Blokada możliwości edycji kolumny |
 | BlokadaNumeru | `bool` | bazodanowe | Blokada Lp. | Blokada możliwości zmiany numeru kolumny |
 | BlokadaWyrazenia | `bool` | bazodanowe | Blokada wyrażenia | Blokada możliwości zmiany wyrażenia kolumny |
-| ClassName | `string` |  |  |  |
-| GenerujWg | `Soneta.Ksiega.KolumnaZestKSGenerujWg` | bazodanowe, enum | Generuj wg |  |
-| IsSystem | `bool` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| GenerujWg | `Soneta.Ksiega.KolumnaZestKSGenerujWg` (enum) | bazodanowe | Generuj wg |  |
+| IsSystem | `bool` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypKolumnyZestawienia` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Ksiega.TypKolumnyZestawienia` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Tytul | `string` | bazodanowe | Tytuł |  |
-| Wyrazenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Zakres | `Soneta.Ksiega.DefinicjaZakresu` | bazodanowe |  |  |
+| Wyrazenie | `MemoText` | bazodanowe, podlista |  |  |
+| Zakres | `Soneta.Ksiega.DefinicjaZakresu` (subrow) | bazodanowe |  |  |
 | Zakres.LicznikOkresu | `int` | bazodanowe |  |  |
 | Zakres.LicznikZakresu | `int` | bazodanowe |  |  |
-| Zakres.Okres | `Soneta.Ksiega.PredefinicjaOkresu` | bazodanowe, enum |  |  |
-| Zakres.RodzajWzglednego | `Soneta.Ksiega.RodzajZakresuWzględnego` | bazodanowe, enum | Rodzaj zakresu względnego |  |
-| Zakres.Zakres | `Soneta.Ksiega.PredefinicjaZakresu` | bazodanowe, enum |  |  |
-| Zakres.ZakresReczny | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| ZakresWg | `Soneta.Ksiega.KolumnaZestKSZakresWg` | bazodanowe, enum | Zakres wg |  |
-| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe, guided-parent |  |  |
+| Zakres.Okres | `Soneta.Ksiega.PredefinicjaOkresu` (enum) | bazodanowe |  |  |
+| Zakres.RodzajWzglednego | `Soneta.Ksiega.RodzajZakresuWzględnego` (enum) | bazodanowe | Rodzaj zakresu względnego |  |
+| Zakres.Zakres | `Soneta.Ksiega.PredefinicjaZakresu` (enum) | bazodanowe |  |  |
+| Zakres.ZakresReczny | `FromTo` | bazodanowe, podlista |  |  |
+| ZakresWg | `Soneta.Ksiega.KolumnaZestKSZakresWg` (enum) | bazodanowe | Zakres wg |  |
+| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 
 ## Enumy
 

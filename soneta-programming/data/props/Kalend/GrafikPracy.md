@@ -5,15 +5,19 @@ Opis: Grafik planu pracy przypisany do jednostki organizacyjnej. Łączy definic
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaGrafikaPracy` | bazodanowe |  |  |
-| DniGrafika | `object` |  |  |  |
+| DniGrafika | `object` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Pracownicy | `Soneta.Business.SubTable<Soneta.Kalend.GrafikPracownika>` |  |  |  |
-| Tools | `Soneta.Kalend.DefinicjaGrafikaPracy.Tools` |  |  |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| Pracownicy | `SubTable<Soneta.Kalend.GrafikPracownika>` | podlista |  |  |
+| Tools | `Soneta.Kalend.DefinicjaGrafikaPracy.Tools` | tylko-odczyt |  |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |

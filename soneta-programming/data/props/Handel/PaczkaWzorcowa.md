@@ -4,8 +4,12 @@ Opis: Wzorcowy szablon paczki kurierskiej powiązany z systemem zewnętrznym (sp
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 1
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,8 +19,8 @@ Guided: root
 | Opis | `string` | bazodanowe | Opis |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol paczki wzorcowej |
 | SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe | System zewnętrzny |  |
-| Typ | `Soneta.Handel.RodzajPaczki` | bazodanowe, enum | Typ |  |
-| Wymiary | `Soneta.Handel.Wymiary` | bazodanowe |  |  |
+| Typ | `Soneta.Handel.RodzajPaczki` (enum) | bazodanowe | Typ |  |
+| Wymiary | `Soneta.Handel.Wymiary` (subrow) | bazodanowe |  |  |
 | Wymiary.Dlugosc | `Soneta.Towary.Quantity` | bazodanowe | Długość |  |
 | Wymiary.Objetosc | `Soneta.Towary.Quantity` | bazodanowe | Objętość |  |
 | Wymiary.Szerokosc | `Soneta.Towary.Quantity` | bazodanowe | Szerokość |  |

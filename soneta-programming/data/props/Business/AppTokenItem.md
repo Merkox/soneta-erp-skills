@@ -5,13 +5,17 @@ Opis: Instancja wygenerowanego tokena aplikacyjnego. Przechowuje unikalny hash, 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe |  |  |
-| GenerateTime | `System.DateTime` | bazodanowe |  |  |
+| GenerateTime | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
 | Hash | `string` | bazodanowe | Unikalny hash tokena |  |
-| Token | `Soneta.Business.App.AppToken` | bazodanowe |  | Token, do którego należy uprawnienie |
-| ValidTo | `System.DateTime` | bazodanowe |  |  |
+| Token | `App.AppToken` | bazodanowe, tylko-odczyt |  | Token, do którego należy uprawnienie |
+| ValidTo | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |

@@ -5,14 +5,18 @@ Opis: Znacznik konta umożliwia dodatkową klasyfikację kont księgowych niezal
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Blokuje znacznik konta |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa znacznika konta |
-| Opis | `string` |  |  |  |
+| Opis | `string` | tylko-odczyt |  |  |
 | Opis1 | `string` | bazodanowe |  |  |
 | Opis2 | `string` | bazodanowe |  |  |
 | Opis3 | `string` | bazodanowe |  |  |
@@ -20,8 +24,8 @@ Guided: root
 | Opis5 | `string` | bazodanowe |  |  |
 | Opis6 | `string` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe | Symbol znacznika |  |
-| TypKonta | `Soneta.Ksiega.TypKontaZnacznikaKonta` | bazodanowe, enum | Typ konta znacznika | Typ konta znacznika |
-| TypZnacznika | `Soneta.Ksiega.TypZnacznikaKonta` | bazodanowe, enum |  | Typ znacznika konta |
+| TypKonta | `Soneta.Ksiega.TypKontaZnacznikaKonta` (enum) | bazodanowe | Typ konta znacznika | Typ konta znacznika |
+| TypZnacznika | `Soneta.Ksiega.TypZnacznikaKonta` (enum) | bazodanowe, tylko-odczyt |  | Typ znacznika konta |
 
 ## Enumy
 

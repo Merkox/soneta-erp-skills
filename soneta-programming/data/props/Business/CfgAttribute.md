@@ -5,17 +5,21 @@ Opis: Atrybut (wartość) przypisany do węzła konfiguracji. Przechowuje nazwę
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Node` → `CfgNode`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BinaryValue | `Soneta.Business.MemoBin` |  |  |  |
-| MemoValue | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| BinaryValue | `MemoBin` | tylko-odczyt |  |  |
+| MemoValue | `MemoText` | bazodanowe, podlista |  |  |
 | Name | `string` | bazodanowe |  |  |
 | Node | `Soneta.Config.CfgNode` | bazodanowe, guided-parent |  |  |
-| StrValue | `string` | bazodanowe |  |  |
-| Type | `Soneta.Config.AttributeType` | bazodanowe, enum |  |  |
+| StrValue | `string` | bazodanowe, tylko-odczyt |  |  |
+| Type | `Soneta.Config.AttributeType` (enum) | bazodanowe |  |  |
 | Value | `object` |  |  |  |
 
 ## Enumy

@@ -4,23 +4,27 @@ Tytuł: Rozliczenia podatkowe bazy danych - PIT Właściciela
 Opis: Rozliczenie zaliczki PIT właściciela firmy za okres rozliczeniowy. Zawiera przychody, koszty, dochód, kwoty do zapłaty i termin płatności.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzyRyczalt | `bool` | bazodanowe | Czy Ryczalt |  |
-| DoZaplaty | `Soneta.Types.Currency` | bazodanowe | Do zapłaty |  |
-| Dochod | `Soneta.Types.Currency` | bazodanowe | Dochód/Strata |  |
-| Koszty | `Soneta.Types.Currency` | bazodanowe | Koszty |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe | Kwota |  |
-| KwotaPlatnosci | `Soneta.Types.Currency` | bazodanowe | Kwota płatności |  |
+| DoZaplaty | `Currency` | bazodanowe | Do zapłaty |  |
+| Dochod | `Currency` | bazodanowe | Dochód/Strata |  |
+| Koszty | `Currency` | bazodanowe | Koszty |  |
+| Kwota | `Currency` | bazodanowe | Kwota |  |
+| KwotaPlatnosci | `Currency` | bazodanowe | Kwota płatności |  |
 | MikrorachunekPodatkowy | `string` | bazodanowe | Mikrorachunek podatkowy |  |
 | PITType | `string` | bazodanowe | Rodzaj zaliczki |  |
-| Przychody | `Soneta.Types.Currency` | bazodanowe | Przychód |  |
-| Rozliczenie | `Soneta.Business.Db.RozliczenieDB` | bazodanowe |  |  |
-| SkladkaSpolecznaOplacona | `Soneta.Types.Currency` | bazodanowe | Składka społeczna opłacona |  |
+| Przychody | `Currency` | bazodanowe | Przychód |  |
+| Rozliczenie | `Db.RozliczenieDB` | bazodanowe |  |  |
+| SkladkaSpolecznaOplacona | `Currency` | bazodanowe | Składka społeczna opłacona |  |
 | StatusInfo | `string` | bazodanowe | Status |  |
-| TerminPlatnosci | `Soneta.Types.Date` | bazodanowe | Termin płatności PIT |  |
+| TerminPlatnosci | `Date` | bazodanowe | Termin płatności PIT |  |
 | Wlasciciel | `string` | bazodanowe | Właściciel |  |
-| ZaMiesiac | `Soneta.Types.YearMonth` | bazodanowe | Za miesiąc |  |
+| ZaMiesiac | `YearMonth` | bazodanowe | Za miesiąc |  |

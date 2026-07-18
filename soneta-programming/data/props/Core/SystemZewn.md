@@ -5,25 +5,29 @@ Opis: Definicja systemu zewnętrznego zintegrowanego z enova365 (np. sklep inter
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 7
+- subrowy: 0
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Blokada systemu zewnętrznego |
-| Config | `Soneta.Core.Config.SystemZewnSettingsKomunikacja` |  |  |  |
-| DefinicjeXml | `Soneta.Business.SubTable<Soneta.Core.SystemZewnDefXmlNag>` |  |  |  |
+| Config | `Soneta.Core.Config.SystemZewnSettingsKomunikacja` | tylko-odczyt |  |  |
+| DefinicjeXml | `SubTable<Soneta.Core.SystemZewnDefXmlNag>` | podlista |  |  |
 | Domyslny | `bool` | bazodanowe | Domyślny |  |
-| ElementySysZewn | `Soneta.Business.SubTable<Soneta.Core.ElemSysZewn>` |  |  |  |
+| ElementySysZewn | `SubTable<Soneta.Core.ElemSysZewn>` | podlista |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Kontrahent | Kontrahent związany z systemem zewnętrznym |
-| OgolneConfig | `Soneta.Core.Config.SystemZewnSettingsOgolne` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis systemu zewnętrznego |
-| PaczkiWzorcowe | `Soneta.Business.SubTable` |  |  |  |
+| OgolneConfig | `Soneta.Core.Config.SystemZewnSettingsOgolne` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis systemu zewnętrznego |
+| PaczkiWzorcowe | `SubTable` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol dokumentu |
-| SysZewnStatusy | `Soneta.Business.SubTable<Soneta.Core.SysZewnStatus>` |  |  |  |
-| TokenySysZewn | `Soneta.Business.SubTable<Soneta.Core.SysZewToken>` |  |  |  |
-| Typ | `Soneta.Core.TypSystemuZewn` | bazodanowe, enum | Typ systemu | Typ systemu zewnętrznego |
-| UslugiDodatkowe | `Soneta.Business.SubTable<Soneta.Core.SysZewnUsDodatkowa>` |  |  |  |
+| SysZewnStatusy | `SubTable<Soneta.Core.SysZewnStatus>` | podlista |  |  |
+| TokenySysZewn | `SubTable<Soneta.Core.SysZewToken>` | podlista |  |  |
+| Typ | `Soneta.Core.TypSystemuZewn` (enum) | bazodanowe, tylko-odczyt | Typ systemu | Typ systemu zewnętrznego |
+| UslugiDodatkowe | `SubTable<Soneta.Core.SysZewnUsDodatkowa>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

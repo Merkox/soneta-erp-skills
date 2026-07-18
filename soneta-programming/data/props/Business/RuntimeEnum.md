@@ -5,12 +5,16 @@ Opis: Wartość enumeracji definiowanej dynamicznie w runtime. Powiązana z defi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Definition` → `RuntimeFieldDefinition`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definition | `Soneta.Business.Runtime.RuntimeFieldDefinition` | bazodanowe, guided-parent | Definicja pola |  |
+| Definition | `Runtime.RuntimeFieldDefinition` | bazodanowe, tylko-odczyt, guided-parent | Definicja pola |  |
 | EnumCaption | `string` | bazodanowe | Nagłówek |  |
 | Locked | `bool` | bazodanowe | Zablokowana |  |
 | Name | `string` | bazodanowe | Nazwa |  |

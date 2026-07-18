@@ -5,30 +5,34 @@ Opis: Okres obrachunkowy definiuje ramy czasowe prowadzenia księgowości w firm
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 8
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnaNumeracjaPozabilansowa | `bool` | bazodanowe |  | Włącz odrębną numeracje dekretów oraz zapisów księgowych dla kont pozabilansowych  |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe |  | Data zamknięcia zapisów |
-| DozwolonyOkres | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres księgowania |
-| DozwolonyOkresRozliczenKs | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres rozliczeń księgowych |
-| Kod | `string` |  |  |  |
-| Nazwa | `string` |  |  |  |
+| DataZamkniecia | `Date` | bazodanowe, tylko-odczyt |  | Data zamknięcia zapisów |
+| DozwolonyOkres | `FromTo` | bazodanowe, podlista |  | Dozwolony okres księgowania |
+| DozwolonyOkresRozliczenKs | `FromTo` | bazodanowe, podlista |  | Dozwolony okres rozliczeń księgowych |
+| Kod | `string` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | Nieaktywny | `bool` | bazodanowe | Nieaktywne schematy | Włącz na nieużywanych okresach, aby przyspieszyć predekretację |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Otwarcie i zamkniecie okresu obrachunkowego. |
-| OkresPodatkowyJPK | `Soneta.Types.FromTo` | bazodanowe |  | Okres podatkowy JPK |
+| Okres | `FromTo` | bazodanowe, podlista |  | Otwarcie i zamkniecie okresu obrachunkowego. |
+| OkresPodatkowyJPK | `FromTo` | bazodanowe, podlista |  | Okres podatkowy JPK |
 | Opis | `string` | bazodanowe |  |  |
-| Podokresy | `Soneta.Business.SubTable<Soneta.Ksiega.PodokresObrachunkowy>` |  |  |  |
-| ReakcjaKsiegowa | `Soneta.Types.VerifierType` | bazodanowe, enum |  | Reakcja na podatkowe przekroczenie dozwolonego okresu księgowania |
-| ReakcjaPodatkowa | `Soneta.Types.VerifierType` | bazodanowe, enum |  | Reakcja na księgowe przekroczenie dozwolonego okresu księgowania |
-| ReakcjaRozliczenKs | `Soneta.Types.VerifierType` | bazodanowe, enum |  | Reakcja na przekroczenie dozwolonego okresu rozliczeń księgowych |
-| SchematyKsiegowe | `Soneta.Business.SubTable<Soneta.Ksiega.SchematKsiegowy>` |  |  |  |
-| SchematyKsiegoweDoWywolania | `Soneta.Business.SubTable<Soneta.Ksiega.SchematKsiegowy>` |  |  |  |
-| SprawozdaniaKS | `Soneta.Business.SubTable<Soneta.Ksiega.SprawozdanieKS>` |  |  |  |
+| Podokresy | `SubTable<Soneta.Ksiega.PodokresObrachunkowy>` | podlista |  |  |
+| ReakcjaKsiegowa | `VerifierType` (enum) | bazodanowe |  | Reakcja na podatkowe przekroczenie dozwolonego okresu księgowania |
+| ReakcjaPodatkowa | `VerifierType` (enum) | bazodanowe |  | Reakcja na księgowe przekroczenie dozwolonego okresu księgowania |
+| ReakcjaRozliczenKs | `VerifierType` (enum) | bazodanowe |  | Reakcja na przekroczenie dozwolonego okresu rozliczeń księgowych |
+| SchematyKsiegowe | `SubTable<Soneta.Ksiega.SchematKsiegowy>` | podlista |  |  |
+| SchematyKsiegoweDoWywolania | `SubTable<Soneta.Ksiega.SchematKsiegowy>` | podlista |  |  |
+| SprawozdaniaKS | `SubTable<Soneta.Ksiega.SprawozdanieKS>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  | Symbol okresu obrachunkowego. |
-| Typ | `Soneta.Ksiega.TypOkresuObrachunkowego` | bazodanowe, enum |  | Typ okresu obrachunkowego |
+| Typ | `Soneta.Ksiega.TypOkresuObrachunkowego` (enum) | bazodanowe, tylko-odczyt |  | Typ okresu obrachunkowego |
 
 ## Enumy
 
@@ -39,7 +43,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `KPiR` = 1 — Księga Podatkowa
 - `Ryczałt` = 2 — Ewidencja Ryczałtowa
 
-### VerifierType (`Soneta.Types.VerifierType`)
+### VerifierType (`VerifierType`)
 - `Error` = 0 — Błąd
 - `Warning` = 1 — Ostrzeżenie
 - `Information` = 2 — Informacja

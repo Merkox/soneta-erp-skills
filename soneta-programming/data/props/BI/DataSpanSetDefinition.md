@@ -5,17 +5,21 @@ Opis: Definicja zestawu przedziałów danych używanego do klasyfikacji wartośc
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataSpanSetType | `Soneta.BI.DataSpanSetType` | bazodanowe, enum | Typ zestawu |  |
-| FieldType | `Soneta.Data.Schema.FieldType` | bazodanowe, enum | Typ(DB) |  |
-| IsAbsoluteSpan | `bool` |  |  |  |
-| IsReferenceSpan | `bool` |  |  |  |
-| IsRelativeSpan | `bool` |  |  |  |
-| Items | `Soneta.Business.LpSubTable<Soneta.BI.DataSpanItemDefinition>` |  |  |  |
+| DataSpanSetType | `Soneta.BI.DataSpanSetType` (enum) | bazodanowe | Typ zestawu |  |
+| FieldType | `Soneta.Data.Schema.FieldType` (enum) | bazodanowe, tylko-odczyt | Typ(DB) |  |
+| IsAbsoluteSpan | `bool` | tylko-odczyt |  |  |
+| IsReferenceSpan | `bool` | tylko-odczyt |  |  |
+| IsRelativeSpan | `bool` | tylko-odczyt |  |  |
+| Items | `LpSubTable<Soneta.BI.DataSpanItemDefinition>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | Value | `string` | bazodanowe | Wartość |  |
 

@@ -5,30 +5,34 @@ Opis: Cel okresowy wyznaczony pracownikowi w ramach zarządzania przez cele (MBO
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 1
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Oceniony | `bool` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Realizacja | `Soneta.HR2.RealizacjaCelu` |  |  |  |
-| Realizacje | `Soneta.Business.SubTable<Soneta.HR2.RealizacjaCelu>` |  |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| Wartosc | `Soneta.Oceny.WartośćElementuOceny` | bazodanowe |  |  |
-| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` |  |  |  |
+| Oceniony | `bool` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Realizacja | `Soneta.HR2.RealizacjaCelu` | tylko-odczyt |  |  |
+| Realizacje | `SubTable<Soneta.HR2.RealizacjaCelu>` | podlista |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| Wartosc | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
+| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` | tylko-odczyt |  |  |
 | Wartosc.Ocena | `Soneta.Oceny.ElementSkaliOcen` | bazodanowe |  |  |
 | Wartosc.Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| Wartosc.Uzasadnienie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Wartosc.Uzasadnienie | `MemoText` | bazodanowe, podlista |  |  |
 | Wartosc.Wartosc | `decimal` | bazodanowe | Wartość |  |
 | Wartosc.Wartosc2 | `decimal` |  |  |  |
 | Wartosc.WartoscInt | `int` |  |  |  |
-| Wartosc.WgOcena | `Soneta.Business.Key` |  |  |  |
+| Wartosc.WgOcena | `Key` | podlista |  |  |
 | Wartosc.Wykonanie | `decimal` | bazodanowe | Wykonanie |  |
 | Wartosc.WykonanieInt | `int` |  | Wykonanie |  |
-| Wartosc.Wypełniona | `bool` |  |  |  |
+| Wartosc.Wypełniona | `bool` | tylko-odczyt |  |  |

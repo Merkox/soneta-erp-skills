@@ -5,10 +5,14 @@ Opis: Powiązanie uprawnienia (oddziału praw) z rolą systemową. Określa, kt�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Entitle` → `Entitle`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Entitle | `Soneta.Business.App.Entitle` | bazodanowe, guided-parent | Uprawnienie |  |
-| Role | `Soneta.Business.Db.SystemRole` | bazodanowe | Powiązana rola |  |
+| Entitle | `App.Entitle` | bazodanowe, tylko-odczyt, guided-parent | Uprawnienie |  |
+| Role | `Db.SystemRole` | bazodanowe, tylko-odczyt | Powiązana rola |  |

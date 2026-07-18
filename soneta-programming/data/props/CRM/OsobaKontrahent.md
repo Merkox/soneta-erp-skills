@@ -5,8 +5,12 @@ Opis: Powiązanie osoby kontaktowej z wieloma kontrahentami jednocześnie. Umoż
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,9 +19,9 @@ Guided: root
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Kontrahent | Kontrahent, powiązany z osobą kontaktową. |
 | Nieaktualny | `bool` | bazodanowe | Nieaktualny | Wskazuje aktywność osoby kontaktowej. |
 | OsobaKontaktowa | `Soneta.CRM.KontaktOsoba` | bazodanowe | Osoba kontaktowa | Osoba kontaktowa, której przyporządkowany jest kontrahent. |
-| Projekty | `Soneta.Business.SubTable` |  |  |  |
+| Projekty | `SubTable` | podlista |  |  |
 | Stanowisko | `string` | bazodanowe | Stanowisko | Wskazuje stanowisko dla osoby kontaktowej. |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
+| Zadania | `SubTable` | podlista |  |  |
 
 ## Relacje interfejsowe
 

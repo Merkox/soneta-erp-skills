@@ -5,8 +5,12 @@ Opis: Cennik stawek stosowanych przy kalkulacji kosztów produkcji. Określa sta
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,10 +18,10 @@ Guided: root
 | Domyslna | `bool` | bazodanowe | Domyślna | Domyślna stawka dla wskazanego rodzaju zasobu. |
 | Kod | `string` | bazodanowe |  | Kod stawki. |
 | Nazwa | `string` | bazodanowe |  | Nazwa stawki. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis stawki. |
-| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` | bazodanowe, enum | Rodzaj zasobu | Rodzaj zasobu dla stawki. |
-| Typ | `Soneta.ProdukcjaPro.ProTypStawki` | bazodanowe, enum |  | Typ stawki. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość stawki. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis stawki. |
+| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` (enum) | bazodanowe | Rodzaj zasobu | Rodzaj zasobu dla stawki. |
+| Typ | `Soneta.ProdukcjaPro.ProTypStawki` (enum) | bazodanowe |  | Typ stawki. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość stawki. |
 | Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | bazodanowe | Wydział | Wydział stawki. |
 
 ## Enumy

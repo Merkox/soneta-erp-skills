@@ -4,13 +4,17 @@ Tytuł: Powiadomienia odczytane
 Opis: Rejestr odczytanych powiadomień. Przechowuje informację o tym, który użytkownik odczytał dane powiadomienie (zadanie).
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Task | `Soneta.Business.Db.Task` | bazodanowe | Powiadomienie | Odczytane powiadomienie |
-| TaskUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Odczytane przez | Odczytane przez |
+| Task | `Db.Task` | bazodanowe | Powiadomienie | Odczytane powiadomienie |
+| TaskUser | `ITaskUser` | bazodanowe, iface-ref | Odczytane przez | Odczytane przez |
 
 ## Relacje interfejsowe
 

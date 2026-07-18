@@ -5,40 +5,44 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `INoticeRecipient`, `IMfaOperator`
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 16
+- podlisty: 2
+- subrowy: 0
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllowConfig | `bool` |  |  |  |
-| Credentials | `Soneta.Business.SubTable<Soneta.Business.CredentialKey>` |  |  |  |
-| Department | `string` |  | Wydział |  |
+| AllowConfig | `bool` | tylko-odczyt |  |  |
+| Credentials | `SubTable<CredentialKey>` | podlista |  |  |
+| Department | `string` | tylko-odczyt | Wydział |  |
 | Email | `string` | bazodanowe | Adres e-mail | Określa adres e-mail webusera. |
 | FirstPassword | `string` | bazodanowe |  |  |
 | FullName | `string` | bazodanowe | Pełna nazwa | Imię i nazwisko użytkownia. |
-| HasLicenceBIN | `bool` | bazodanowe | Licencja BIN | Licencja BIN przypisana do użytkownika. |
-| HasLicenceCRN | `bool` | bazodanowe | Licencja CRM | Licencja CRM przypisana do użytkownika. |
-| HasLicenceKBN | `bool` | bazodanowe | Pulpit klienta BR | Licencja KBN przypisana do użytkownika. |
-| HasLicencePKN | `bool` | bazodanowe | Pulpit kierownika | Licencja PKN przypisana do użytkownika. |
-| HasLicencePLN | `bool` | bazodanowe | Licencja PLN | Licencja PLN przypisana do użytkownika. |
-| HasLicencePMN | `bool` | bazodanowe | Pulpit manadżera | Licencja PMN przypisana do użytkownika. |
-| HasLicencePXN | `bool` | bazodanowe | Licencja PXN | Licencja PXN przypisana do użytkownika. |
-| HasLicencePZN | `bool` | bazodanowe | Licencja PZN | Licencja PZN przypisana do użytkownika. |
-| HasLicenceWFN | `bool` | bazodanowe | Licencja WFN | Licencja WFN przypisana do użytkownika. |
-| HasLicenceZMN | `bool` | bazodanowe | Licencja ZMN | Licencja ZMN przypisana do użytkownika. |
-| Host | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref | Obiekt powiązany | Podpięty obiekt związany z użytkownikiem web (np. Pracownik, KontaktOsoba) |
+| HasLicenceBIN | `bool` | bazodanowe, tylko-odczyt | Licencja BIN | Licencja BIN przypisana do użytkownika. |
+| HasLicenceCRN | `bool` | bazodanowe, tylko-odczyt | Licencja CRM | Licencja CRM przypisana do użytkownika. |
+| HasLicenceKBN | `bool` | bazodanowe, tylko-odczyt | Pulpit klienta BR | Licencja KBN przypisana do użytkownika. |
+| HasLicencePKN | `bool` | bazodanowe, tylko-odczyt | Pulpit kierownika | Licencja PKN przypisana do użytkownika. |
+| HasLicencePLN | `bool` | bazodanowe, tylko-odczyt | Licencja PLN | Licencja PLN przypisana do użytkownika. |
+| HasLicencePMN | `bool` | bazodanowe, tylko-odczyt | Pulpit manadżera | Licencja PMN przypisana do użytkownika. |
+| HasLicencePXN | `bool` | bazodanowe, tylko-odczyt | Licencja PXN | Licencja PXN przypisana do użytkownika. |
+| HasLicencePZN | `bool` | bazodanowe, tylko-odczyt | Licencja PZN | Licencja PZN przypisana do użytkownika. |
+| HasLicenceWFN | `bool` | bazodanowe, tylko-odczyt | Licencja WFN | Licencja WFN przypisana do użytkownika. |
+| HasLicenceZMN | `bool` | bazodanowe, tylko-odczyt | Licencja ZMN | Licencja ZMN przypisana do użytkownika. |
+| Host | `IWebOperator` | bazodanowe, tylko-odczyt, iface-ref | Obiekt powiązany | Podpięty obiekt związany z użytkownikiem web (np. Pracownik, KontaktOsoba) |
 | IsAccountLocked | `bool` | bazodanowe | Zablokowany (hasło) | Oznacza konto zablokowane z powodu wielokrotnego wprowadzania niepoprawnego hasła |
 | KnowledgeBaseID | `string` | bazodanowe | Login do Bazy Wiedzy | Adres email stanowiący ID dla Bazy Wiedzy |
 | Locked | `bool` | bazodanowe | Zablokowany | Określa, czy konto jest aktualnie zablokowane. |
-| MfaMode | `Soneta.Types.MfaMode` | enum |  |  |
+| MfaMode | `MfaMode` (enum) |  |  |  |
 | Name | `string` | bazodanowe | Kod | Unikalny kod użytkownika wymagany podczas logowania się do aplikacji web'owej. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe | Operator enova365 | Powiązany z użytkownikiem enovaNet operator |
+| Operator | `App.Operator` | bazodanowe | Operator enova365 | Powiązany z użytkownikiem enovaNet operator |
 | Password | `string` | bazodanowe |  |  |
-| Profile | `Soneta.Web.Business.App.WebProfile` |  |  |  |
-| Type | `Soneta.Web.Business.Utils.WebUserType` | bazodanowe, enum | Typ użytkownika | Typ użytkownika korzystającego z aplikacji web'owej. |
-| Upn | `string` |  |  |  |
-| WebUserType | `Soneta.Web.Business.Utils.WebUserType` | enum |  |  |
-| ZarejestrowaneLicencje | `Soneta.Business.Licence.LicencjaProgramu[]` |  |  |  |
+| Profile | `Soneta.Web.Business.App.WebProfile` | tylko-odczyt |  |  |
+| Type | `Soneta.Web.Business.Utils.WebUserType` (enum) | bazodanowe | Typ użytkownika | Typ użytkownika korzystającego z aplikacji web'owej. |
+| Upn | `string` | tylko-odczyt |  |  |
+| WebUserType | `Soneta.Web.Business.Utils.WebUserType` (enum) | tylko-odczyt |  |  |
+| ZarejestrowaneLicencje | `Licence.LicencjaProgramu[]` | podlista |  |  |
 
 ## Relacje interfejsowe
 
@@ -53,7 +57,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### MfaMode (`Soneta.Types.MfaMode`)
+### MfaMode (`MfaMode`)
 - `Unregistered` = 0 — Niezarejestrowana
 - `Registered` = 1 — Zarejestrowana
 - `Verified` = 2 — Potwierdzona

@@ -5,23 +5,27 @@ Opis: Słownik typów pojazdów określający sposób klasyfikacji obiektów we 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 4
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BusinessType | `Soneta.Samochodowka.TypPojazdu` | bazodanowe, enum |  | Typ pojazdu |
-| DefPageXml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| BusinessType | `Soneta.Samochodowka.TypPojazdu` (enum) | bazodanowe |  | Typ pojazdu |
+| DefPageXml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 | Default | `bool` | bazodanowe | Domyślny | Określa, że jest to domyślny typ pojazdu. |
-| DefaultLayoutXml | `Soneta.Business.MemoText` |  |  |  |
-| DefinedType | `System.Type` |  |  |  |
-| Form | `Soneta.Vehicles.Enums.VehicleFormType` | bazodanowe, enum | Rodzaj formularza | Określa sposób wyświetlania formularza |
-| IsNetPage | `bool` |  |  |  |
+| DefaultLayoutXml | `MemoText` | podlista |  |  |
+| DefinedType | `System.Type` | tylko-odczyt |  |  |
+| Form | `Soneta.Vehicles.Enums.VehicleFormType` (enum) | bazodanowe | Rodzaj formularza | Określa sposób wyświetlania formularza |
+| IsNetPage | `bool` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa typu pojazdu. |
-| States | `Soneta.Business.LpSubTable<Soneta.Vehicles.Models.Database.Config.VehicleState>` |  |  |  |
+| States | `LpSubTable<Soneta.Vehicles.Models.Database.Config.VehicleState>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol typu pojazdu. |
 | UserBookmarkName | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Xml | `Soneta.Business.MemoText` |  |  |  |
+| Xml | `MemoText` | podlista |  |  |
 
 ## Enumy
 

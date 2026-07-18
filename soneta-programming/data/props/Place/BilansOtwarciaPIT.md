@@ -5,22 +5,26 @@ Opis: Bilans otwarcia danych podatkowych PIT pracownika przy zmianie pracodawcy 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.ElementBilansuOtwarciaPIT>` |  |  |  |
-| OkresWażności | `Soneta.Types.FromTo` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Przychod26Zwol | `decimal` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| Elementy | `SubTable<Soneta.Place.ElementBilansuOtwarciaPIT>` | podlista |  |  |
+| OkresWażności | `FromTo` | podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Przychod26Zwol | `decimal` | tylko-odczyt |  |  |
 | Przychod26ZwolEtat | `decimal` | bazodanowe | Przchód (26, etat) |  |
 | Przychod26ZwolMacierzynski | `decimal` | bazodanowe | Przychód (26, macierzyński) |  |
 | Przychod26ZwolStaze | `decimal` | bazodanowe | Przychód (26, staż) |  |
 | Przychod26ZwolUmowa | `decimal` | bazodanowe | Przchód (26, umowa) |  |
-| PrzychodUlga | `decimal` |  |  |  |
+| PrzychodUlga | `decimal` | tylko-odczyt |  |  |
 | PrzychodUlgaEtat | `decimal` | bazodanowe | Przychód (ulgi, etat) |  |
 | PrzychodUlgaMacierzynski | `decimal` | bazodanowe | Przychód (ulgi, macierzyński) |  |
 | PrzychodUlgaUmowa | `decimal` | bazodanowe | Przychód (ulgi, umowa) |  |
@@ -28,7 +32,7 @@ Guided: root
 | Spoleczne | `decimal` | bazodanowe | Koszty ZUS |  |
 | Spoleczne26 | `decimal` | bazodanowe | Koszty ZUS (26) |  |
 | Spoleczne26Zwol | `decimal` | bazodanowe | Koszty ZUS (od przychodu zwolnionego, 26) |  |
-| Wersja | `Soneta.Place.WersjaBilansuOtwarciaPIT` | bazodanowe, enum |  |  |
+| Wersja | `Soneta.Place.WersjaBilansuOtwarciaPIT` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 | ZdrDoOdlicz | `decimal` | bazodanowe | Składka zdrowotna (odliczana) |  |
 | ZdrDoOdlicz26 | `decimal` | bazodanowe | Składka zdrowotna (odliczana, 26) |  |

@@ -6,31 +6,35 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IAreaHost`
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 5
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Area | `Soneta.BI.AreaOfDataModels` | bazodanowe, enum | Obszar |  |
-| Combine | `Soneta.BI.CombineTableSources` | bazodanowe, enum | Łączenie źródeł |  |
-| ConditionText | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Data | `byte[]` |  |  |  |
-| DataModelBinaryContent | `byte[]` |  |  |  |
-| DataSource | `Soneta.Business.IRow` | bazodanowe | Źródło danych |  |
+| Area | `Soneta.BI.AreaOfDataModels` (enum) | bazodanowe | Obszar |  |
+| Combine | `Soneta.BI.CombineTableSources` (enum) | bazodanowe | Łączenie źródeł |  |
+| ConditionText | `MemoText` | bazodanowe, podlista |  |  |
+| Data | `byte[]` | podlista |  |  |
+| DataModelBinaryContent | `byte[]` | podlista |  |  |
+| DataSource | `IRow` | bazodanowe | Źródło danych |  |
 | DimHash | `bool` | bazodanowe |  |  |
 | Distinct | `bool` | bazodanowe | Unikalność danych | Określa, czy dane zwracane przez model mają być unikalne |
-| Model | `Soneta.Business.IRow` | bazodanowe | Powiązany model danych |  |
-| ModelRelationType | `Soneta.BI.RelationType` | bazodanowe, enum | Typ powiązania modelu |  |
+| Model | `IRow` | bazodanowe | Powiązany model danych |  |
+| ModelRelationType | `Soneta.BI.RelationType` (enum) | bazodanowe | Typ powiązania modelu |  |
 | MultiDatabase | `bool` | bazodanowe | Analiza wielobazowa | Określa, czy model jest przeznaczony do analiz wielobazowych |
 | Name | `string` | bazodanowe | Nazwa |  |
 | Obsolete | `bool` | bazodanowe | Przestarzały |  |
-| Relationships | `DevExpress.XtraSpreadsheet.Model.DataModelRelationshipsCollection` |  |  |  |
-| SerializationType | `Soneta.BI.SerializationType` | bazodanowe, enum | Sposób utrwalania danych |  |
+| Relationships | `DevExpress.XtraSpreadsheet.Model.DataModelRelationshipsCollection` | podlista |  |  |
+| SerializationType | `Soneta.BI.SerializationType` (enum) | bazodanowe | Sposób utrwalania danych |  |
 | ServerModel | `bool` | bazodanowe | Model serwerowy | Określa, czy zarządzanie modelem odbywa się po stronie serwera |
-| Tables | `DevExpress.XtraSpreadsheet.Model.DataModelTableCollection` |  |  |  |
+| Tables | `DevExpress.XtraSpreadsheet.Model.DataModelTableCollection` | podlista |  |  |
 | TechnicalModel | `bool` | bazodanowe | Model techniczny |  |
-| TimeSpanItem | `Soneta.Business.IRow` | bazodanowe |  |  |
-| Type | `Soneta.BI.DataModelType` | bazodanowe, enum | Typ modelu |  |
+| TimeSpanItem | `IRow` | bazodanowe |  |  |
+| Type | `Soneta.BI.DataModelType` (enum) | bazodanowe | Typ modelu |  |
 
 ## Enumy
 

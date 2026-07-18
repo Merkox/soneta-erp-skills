@@ -5,29 +5,33 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IZasobCRM`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 9
+- subrowy: 0
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Assets | `Soneta.Business.SubTable` |  |  |  |
+| Assets | `SubTable` | podlista |  |  |
 | Dysponent | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Dysponent pojazdu |
-| DysponentAdres | `string` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
-| HistoriaZmian | `Soneta.Business.HistorySubTable` |  |  |  |
+| DysponentAdres | `string` | tylko-odczyt |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
+| HistoriaZmian | `HistorySubTable` | podlista |  |  |
 | Marka | `string` | bazodanowe |  | Marka pojadu |
 | NrRejestracyjny | `string` | bazodanowe |  | Numer rejestracyjny pojazdu |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Paliwa | `Soneta.Business.SubTable<Soneta.Samochodowka.PaliwoPojazdu>` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Rodzaj | `Soneta.Samochodowka.RodzajPojazdu` | bazodanowe, enum |  | Rodzaj pojazdu |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Paliwa | `SubTable<Soneta.Samochodowka.PaliwoPojazdu>` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Rodzaj | `Soneta.Samochodowka.RodzajPojazdu` (enum) | bazodanowe |  | Rodzaj pojazdu |
 | RodzajSilnika | `Soneta.Samochodowka.EkoRodzajSilnika` | bazodanowe |  | Rodzaj silnika z pojeździe |
-| Towary | `Soneta.Business.SubTable` |  |  |  |
-| Typ | `Soneta.Samochodowka.TypPojazdu` | bazodanowe, enum |  | Typ pojazdu |
-| UsedVehicles | `Soneta.Business.SubTable` |  |  |  |
-| VehicleType | `Soneta.Samochodowka.VehicleBusinessType` | bazodanowe, enum |  |  |
+| Towary | `SubTable` | podlista |  |  |
+| Typ | `Soneta.Samochodowka.TypPojazdu` (enum) | bazodanowe |  | Typ pojazdu |
+| UsedVehicles | `SubTable` | podlista |  |  |
+| VehicleType | `Soneta.Samochodowka.VehicleBusinessType` (enum) | bazodanowe |  |  |
 | Wycofany | `bool` | bazodanowe |  |  |
-| ZasobyCRM | `Soneta.Business.SubTable` |  |  |  |
+| ZasobyCRM | `SubTable` | podlista |  |  |
 
 ## Relacje interfejsowe
 

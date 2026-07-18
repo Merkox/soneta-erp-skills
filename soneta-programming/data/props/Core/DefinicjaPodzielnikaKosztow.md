@@ -5,26 +5,30 @@ Opis: Definicja algorytmu podzielnika kosztów. Określa nazwę, typ informacji 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 4
+- subrowy: 1
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ClassName | `string` |  |  |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Domyslna | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| TabelaPodzielnika | `Soneta.Business.Table` |  |  | Tabela danych, której obiekty biorą udział w podziale. |
-| TabelaPodzielnikaItem | `Soneta.Business.Db.TableContext.TableItem` |  | Tabela podzielnika | Tabela danych, której obiekty biorą udział w podziale. |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| TabelaPodzielnika | `Table` | podlista |  | Tabela danych, której obiekty biorą udział w podziale. |
+| TabelaPodzielnikaItem | `Db.TableContext.TableItem` |  | Tabela podzielnika | Tabela danych, której obiekty biorą udział w podziale. |
 | TypeInformation | `string` | bazodanowe |  |  |
 | UnikalnoscElementowPodzialowych | `bool` | bazodanowe |  |  |
 | Zablokowane | `bool` | bazodanowe |  |  |

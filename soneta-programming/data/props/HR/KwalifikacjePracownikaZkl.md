@@ -5,18 +5,22 @@ Opis: Tabela przechowuje informacje o kwalifikacjach przypisanych do konkretnych
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataUzyskania | `Soneta.Types.Date` | bazodanowe | Data uzyskania |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| DataUzyskania | `Date` | bazodanowe | Data uzyskania |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Poziom | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomUmiejetnosci` | bazodanowe | Poziom |  |
 | Pozycja | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
-| PozycjaBase | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Pozycja słownika |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| Typ | `Soneta.HR.ZKL.Enums.TypKwalifikacjiPracownika` | bazodanowe, enum | Typ kwalifikacji pracownika |  |
+| PozycjaBase | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, tylko-odczyt, iface-ref | Pozycja słownika |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Typ | `Soneta.HR.ZKL.Enums.TypKwalifikacjiPracownika` (enum) | bazodanowe, tylko-odczyt | Typ kwalifikacji pracownika |  |
 | TypPotwierdzenia | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.TypPotwierdzenia` | bazodanowe | Typ potwierdzenia |  |
 | Uwagi | `string` | bazodanowe | Uwagi |  |
 

@@ -5,17 +5,21 @@ Opis: Tabela zawiera kompletny i szczegółowy zestaw zadań stanowiska. Jest po
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
+| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa profilu |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres obowiązywania |  |
-| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` | bazodanowe, enum |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Zadania | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Core.PozycjaProfiluZadaniowego>` |  |  |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres obowiązywania |  |
+| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| Zadania | `SubTable<Soneta.HR.ZKL.Profile.Core.PozycjaProfiluZadaniowego>` | podlista |  |  |
 
 ## Enumy
 

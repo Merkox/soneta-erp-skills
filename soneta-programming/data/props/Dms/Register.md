@@ -5,14 +5,18 @@ Opis: Rejestr grupujący dokumenty podstawowe w module DMS. Umożliwia organizac
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllowedBasicDocDefs | `Soneta.Workflow.Dms.DmsModule.BasicDocumentDefinitionRow[]` | bazodanowe | Dozwolone definicje | Dozwolone definicje dokumentów podstawowych |
-| BasicDocuments | `Soneta.Business.SubTable<Soneta.Workflow.Dms.BasicDocument>` |  |  |  |
-| Flag | `Soneta.Workflow.Dms.Config.RegisterFlags` | bazodanowe, enum | Flaga zachowania rejestrów |  |
+| AllowedBasicDocDefs | `Soneta.Workflow.Dms.DmsModule.BasicDocumentDefinitionRow[]` | bazodanowe, podlista | Dozwolone definicje | Dozwolone definicje dokumentów podstawowych |
+| BasicDocuments | `SubTable<Soneta.Workflow.Dms.BasicDocument>` | podlista |  |  |
+| Flag | `Soneta.Workflow.Dms.Config.RegisterFlags` (enum) | bazodanowe | Flaga zachowania rejestrów |  |
 | IsMain | `bool` | bazodanowe | Główny | Czy główny rejestr dokumentów podstawowych |
 | Name | `string` | bazodanowe | Nazwa | Nazwa rejestru dokumentu podstawowego |
 | Symbol | `string` | bazodanowe | Symbol | Symbol rejestru dokumentu podstawowego |

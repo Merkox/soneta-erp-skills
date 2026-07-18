@@ -5,32 +5,36 @@ Opis: Element szczegółowy dokumentu preliminarza (IDokumentPreliminarza). Repr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `IDokumentPreliminarza`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 5
+- subrowy: 0
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowana | `bool` | bazodanowe |  | Czy pozycja jest anulowana |
-| Bufor | `bool` | bazodanowe |  | Pozycja w buforze |
-| Dokument | `Soneta.Kasa.IDokumentPreliminarza` | bazodanowe, guided-parent, iface-ref |  |  |
+| Bufor | `bool` | bazodanowe, tylko-odczyt |  | Pozycja w buforze |
+| Dokument | `Soneta.Kasa.IDokumentPreliminarza` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 | EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
-| Kierunek | `Soneta.Kasa.PreliminarzKierunek` | bazodanowe, enum |  | Kierunek operacji |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaPLN | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Kierunek | `Soneta.Kasa.PreliminarzKierunek` (enum) | bazodanowe |  | Kierunek operacji |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaPLN | `Currency` | bazodanowe |  |  |
 | Nieaktywna | `bool` | bazodanowe |  | Czy pozycja jest nieaktywna |
 | NumerDodatkowy | `string` | bazodanowe |  |  |
-| NumerDokumentu | `string` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| NumerDokumentu | `string` | bazodanowe, tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Opis | `string` | bazodanowe |  | Opis pozycji preliminarza |
 | Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| Rozliczenia | `Soneta.Kasa.RozliczeniePreliminarzaList` |  |  |  |
-| RozliczeniePlatnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| RozliczenieZaplaty | `Soneta.Business.SubTable<Soneta.Kasa.Zaplata>` |  |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
-| TypPozycji | `Soneta.Kasa.PreliminarzTypPozycji` | bazodanowe, enum |  | Typ pozycji preliminarza |
-| VirtualEx | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Rozliczenia | `Soneta.Kasa.RozliczeniePreliminarzaList` | podlista |  |  |
+| RozliczeniePlatnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| RozliczenieZaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
+| Termin | `Date` | bazodanowe |  |  |
+| TypPozycji | `Soneta.Kasa.PreliminarzTypPozycji` (enum) | bazodanowe |  | Typ pozycji preliminarza |
+| VirtualEx | `MemoText` | bazodanowe, podlista |  |  |
 | Wielowalutowy | `bool` | bazodanowe |  | Plan okresowy jest wielowalutowy |
-| Zatwierdzona | `bool` |  |  |  |
+| Zatwierdzona | `bool` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

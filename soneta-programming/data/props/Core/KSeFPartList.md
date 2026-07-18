@@ -4,15 +4,19 @@ Tytuł: KSeFZapytaniaOFaktury
 Opis: Pakiet (część) danych zwróconych z KSeF w odpowiedzi na zapytanie o faktury. Zawiera numer referencyjny pakietu, nazwę, zakres dat, datę ważności, rozmiar, algorytm szyfrowania, kodowanie, URL do pobrania oraz status pobrania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | HttpMethod | `string` | bazodanowe | Metoda HTTP | Metoda HTTP, której należy użyć przy pobieraniu pliku. |
-| PartRange | `Soneta.Types.FromTo` |  |  |  |
+| PartRange | `FromTo` | podlista |  |  |
 | Pobrane | `bool` | bazodanowe | Pobrane | Informacja mówi czy część została pobrana |
-| Url | `Soneta.Business.MemoText` | bazodanowe | Adres URL | Adres URL, pod który należy wysłać żądanie pobrania. |
+| Url | `MemoText` | bazodanowe, podlista | Adres URL | Adres URL, pod który należy wysłać żądanie pobrania. |
 | algorithm | `string` | bazodanowe | Algorytm | Algorytm szyfrowania |
 | encoding | `string` | bazodanowe | Kodowanie | Kodowanie danych w pakiecie |
 | fileSize | `int` | bazodanowe | Rozmiar | Rozmiar pakietu |

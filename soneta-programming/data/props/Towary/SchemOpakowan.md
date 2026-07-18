@@ -5,29 +5,33 @@ Opis: Definicja schematu opakowań zwrotnych (kaucyjnych)/gratisów stosowanego 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Elementy | `Soneta.Business.LpSubTable<Soneta.Towary.ElemOpakowan>` |  |  |  |
+| Elementy | `LpSubTable<Soneta.Towary.ElemOpakowan>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  | Symbol, skrócona nazwa schematu. |
 | LacznaIlosc | `int` | bazodanowe | Łączna ilość gratisów | Łączna ilość gratisów. |
-| LacznaWartosc | `Soneta.Types.Currency` | bazodanowe | Łączna wartość | Łączna wartość towarów/dokumentu. |
+| LacznaWartosc | `Currency` | bazodanowe | Łączna wartość | Łączna wartość towarów/dokumentu. |
 | Nazwa | `string` | bazodanowe |  | Nazwa schematu. |
-| Obowiazuje | `Soneta.Towary.SchemGratisowObowiazuje` | bazodanowe, enum | Obowiązuje | Obowiązuje. |
-| ObowiazujeOpis | `string` |  |  |  |
-| ObslugaNaDokumentach | `Soneta.Towary.SchematOpakObslugaNaDokumentach` | enum | Obsługa na dokumentach |  |
-| ObslugaNaDokumentachOpis | `string` |  |  |  |
+| Obowiazuje | `Soneta.Towary.SchemGratisowObowiazuje` (enum) | bazodanowe | Obowiązuje | Obowiązuje. |
+| ObowiazujeOpis | `string` | tylko-odczyt |  |  |
+| ObslugaNaDokumentach | `Soneta.Towary.SchematOpakObslugaNaDokumentach` (enum) | tylko-odczyt | Obsługa na dokumentach |  |
+| ObslugaNaDokumentachOpis | `string` | tylko-odczyt |  |  |
 | Przecena | `bool` | bazodanowe | Dostępny na przecenie | Dostępny na przecenie. |
-| Przeceny | `Soneta.Business.View` |  |  |  |
-| PrzecenyDlaSchematu | `Soneta.Business.SubTable<Soneta.Towary.PrzecenaOkresowaTowaruSchematGratisow>` |  |  |  |
-| RodzajCeny | `Soneta.Towary.PoleZCenaDlaGratisow` | bazodanowe, enum | Rodzaj ceny | Rodzaj ceny. |
-| RodzajSchemGratisow | `Soneta.Towary.RodzajSchemGratisow` | bazodanowe, enum | Rodzaj schematu gratisów | Rodzaj schematu gratisów. |
-| RodzajSchemGratisowOpis | `string` |  |  |  |
-| SchematyTowary | `Soneta.Business.SubTable<Soneta.Towary.SchematTowar>` |  |  |  |
-| Typ | `Soneta.Towary.TypSchematu` | bazodanowe, enum |  | Typ schematu. |
-| Zablokowany | `bool` |  |  |  |
+| Przeceny | `View` | podlista |  |  |
+| PrzecenyDlaSchematu | `SubTable<Soneta.Towary.PrzecenaOkresowaTowaruSchematGratisow>` | podlista |  |  |
+| RodzajCeny | `Soneta.Towary.PoleZCenaDlaGratisow` (enum) | bazodanowe | Rodzaj ceny | Rodzaj ceny. |
+| RodzajSchemGratisow | `Soneta.Towary.RodzajSchemGratisow` (enum) | bazodanowe | Rodzaj schematu gratisów | Rodzaj schematu gratisów. |
+| RodzajSchemGratisowOpis | `string` | tylko-odczyt |  |  |
+| SchematyTowary | `SubTable<Soneta.Towary.SchematTowar>` | podlista |  |  |
+| Typ | `Soneta.Towary.TypSchematu` (enum) | bazodanowe |  | Typ schematu. |
+| Zablokowany | `bool` | tylko-odczyt |  |  |
 | ZbiorczaIlosc | `int` | bazodanowe | Zbiorcza ilość | Zbiorcza ilość. |
 
 ## Enumy

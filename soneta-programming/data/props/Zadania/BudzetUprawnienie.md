@@ -4,16 +4,20 @@ Tytuł: Uprawnienia budżetów
 Opis: Uprawnienie do pozycji budżetu projektu. Definiuje poziom dostępu (odczyt, edycja) dla operatora lub grupy organizacyjnej do konkretnej pozycji budżetowej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BudzetProjektu | `Soneta.Zadania.Budzetowanie.BudzetProjektu` | bazodanowe | Budżet projektu |  |
+| BudzetProjektu | `Soneta.Zadania.Budzetowanie.BudzetProjektu` | bazodanowe, tylko-odczyt | Budżet projektu |  |
 | GrupaUprawnionych | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
-| Poziom | `Soneta.Zadania.Budzetowanie.PoziomUprawnien` | bazodanowe, enum | Poziom uprawnień |  |
-| PozycjaBudzetu | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | bazodanowe | Pozycja budżetu |  |
-| Uprawniony | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Uprawniony |  |
+| Poziom | `Soneta.Zadania.Budzetowanie.PoziomUprawnien` (enum) | bazodanowe | Poziom uprawnień |  |
+| PozycjaBudzetu | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | bazodanowe, tylko-odczyt | Pozycja budżetu |  |
+| Uprawniony | `ITaskUser` | bazodanowe, iface-ref | Uprawniony |  |
 | ZGrupamiPodrzednymi | `bool` | bazodanowe | Z grupami podrzędnymi |  |
 
 ## Relacje interfejsowe

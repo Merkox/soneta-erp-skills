@@ -5,14 +5,18 @@ Opis: Przypisanie usług (towarów) do nieruchomości wraz ze stawkami, ilościa
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `Soneta.RealEstate.Models.Database.Config.DefinicjaAlgorytmuUslugi` | bazodanowe |  |  |
 | Ilosc | `double` | bazodanowe | Ilość |  |
 | Nieruchomosc | `Soneta.RealEstate.Models.Database.Nieruchomosc` | bazodanowe | Nieruchomosc |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres |  |
-| Stawka | `Soneta.Types.Currency` | bazodanowe | Stawka |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres |  |
+| Stawka | `Currency` | bazodanowe | Stawka |  |
 | Usluga | `Soneta.Towary.Towar` | bazodanowe | Usługa |  |

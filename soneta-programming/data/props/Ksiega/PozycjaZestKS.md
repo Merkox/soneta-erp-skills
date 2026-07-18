@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieKS`
 Implementuje interfejsy: `IPozycjaZestawieniaRoot`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 12
+- podlisty: 2
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,25 +19,25 @@ Implementuje interfejsy: `IPozycjaZestawieniaRoot`
 | BlokadaEdycji | `bool` | bazodanowe | Blokada edycji | Blokada możliwości edycji pozycji |
 | BlokadaNumeru | `bool` | bazodanowe | Blokada Lp. | Blokada możliwości zmiany numeru pozycji |
 | BlokadaWyrazenia | `bool` | bazodanowe | Blokada wyrażenia | Blokada możliwości zmiany wyrażenia pozycji |
-| ClassName | `string` |  |  |  |
-| Identyfikator | `string` | bazodanowe |  | Opcjonalny identyfikator pozycji |
-| IsSystem | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Identyfikator | `string` | bazodanowe, tylko-odczyt |  | Opcjonalny identyfikator pozycji |
+| IsSystem | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
-| Numer | `string` |  |  |  |
+| Numer | `string` | tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| OpisPelny | `string` |  |  | Opis pełny |
-| Poziom | `int` |  |  | Poziom pozycji w zestawieniu |
+| OpisPelny | `string` | tylko-odczyt |  | Opis pełny |
+| Poziom | `int` | tylko-odczyt |  | Poziom pozycji w zestawieniu |
 | PozycjaNadrzedna | `Soneta.Ksiega.PozycjaZestKS` |  |  | Pozycja nadrzędna |
-| RootPozycji | `Soneta.Ksiega.IPozycjaZestawieniaRoot` | bazodanowe, iface-ref |  |  |
-| SubPozycje | `Soneta.Business.SubTable<Soneta.Ksiega.PozycjaZestKS>` |  |  |  |
-| Sumowanie | `Soneta.Ksiega.SumowaniePozycji` | bazodanowe, enum |  |  |
-| SumowanieZnak | `string` |  |  |  |
-| Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypPozycjiZestawienia` | bazodanowe, enum |  |  |
+| RootPozycji | `Soneta.Ksiega.IPozycjaZestawieniaRoot` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| SubPozycje | `SubTable<Soneta.Ksiega.PozycjaZestKS>` | podlista |  |  |
+| Sumowanie | `Soneta.Ksiega.SumowaniePozycji` (enum) | bazodanowe |  |  |
+| SumowanieZnak | `string` | tylko-odczyt |  |  |
+| Symbol | `string` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypPozycjiZestawienia` (enum) | bazodanowe, tylko-odczyt |  |  |
 | WylaczNumeracje | `bool` | bazodanowe |  |  |
-| Wyrazenie | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe, guided-parent |  |  |
+| Wyrazenie | `MemoText` | bazodanowe, podlista |  |  |
+| Zestawienie | `Soneta.Ksiega.ZestawienieKS` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 
 ## Relacje interfejsowe
 

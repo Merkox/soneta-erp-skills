@@ -4,94 +4,90 @@ Tytuł: Umowy
 Opis: Umowa cywilnoprawna (zlecenie, o dzieło) zawarta z pracownikiem. Zawiera dane dokumentu, okres obowiązywania, definicję elementu płacowego, wartość, serię listy płac, stawkę VAT oraz informacje o spłacie i rozliczeniu.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `UmowaHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`, `IZrodloDeklaracji`, `IZrodloPodzielnikaKosztow`, `IPowiązanieDodatku`, `IRozliczenieWynagrodzeniaHost`, `IZestawienieDietZagrHost`, `IZestawienieDietPakietMobilHost`, `IUmowaZKalendarzem`, `IBilansOtwarcia`, `IKwotaSplacanaBO`, `IZrodloPlanu`, `IDostepnoscHost`, `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`
 
-- pola bazodanowe: 35
-- pola kalkulowane (z klas biznesowych): 47
+- pola bazodanowe (zapisywalne): 25
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 21
+- podlisty: 23
+- subrowy: 3
+- razem: 73
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Anulowana | `bool` | bazodanowe |  |  |
+| Anulowana | `bool` | bazodanowe, tylko-odczyt |  |  |
 | BilansOtwarcia | `bool` | bazodanowe |  |  |
-| Brutto | `Soneta.Types.Currency` |  |  |  |
-| BruttoSłownie | `string` |  | Słownie |  |
-| BruttoSłownieUpr | `string` |  | Słownie |  |
 | CRU | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataSplaty | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataSplatyBO | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataSplaty | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataSplatyBO | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
 | DefinicjaStawki | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Definicja stawki VAT |
-| Deklaracje | `Soneta.Business.SubTable` |  |  |  |
-| DniPlanu | `Soneta.Business.DateSubTable` |  |  |  |
-| DniPracyUmowy | `Soneta.Business.DateSubTable<Soneta.Kalend.DzienPracyUmowy>` |  |  |  |
-| Dodatki | `Soneta.Business.SubTable<Soneta.Kadry.Dodatek>` |  |  |  |
+| Deklaracje | `SubTable` | podlista |  |  |
+| DniPlanu | `DateSubTable` | podlista |  |  |
+| DniPracyUmowy | `DateSubTable<Soneta.Kalend.DzienPracyUmowy>` | podlista |  |  |
+| Dodatki | `SubTable<Soneta.Kadry.Dodatek>` | podlista |  |  |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` |  |  |  |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.Kadry.UmowaHistoria>` |  |  |  |
-| IsVisibleUstawKwoteBO | `bool` |  |  |  |
-| IsVisibleWłączBO | `bool` |  |  |  |
-| KalendarzeUmowy | `Soneta.Business.SubTable<Soneta.Kalend.KalendarzBase>` |  |  |  |
-| Kod | `string` |  |  |  |
-| KwotaSplaconaBO | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Last | `Soneta.Kadry.UmowaHistoria` |  |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| ElementyAktywne | `System.Collections.Generic.ICollection<Soneta.Place.WypElement>` | podlista |  |  |
+| Historia | `HistorySubTable<Soneta.Kadry.UmowaHistoria>` | podlista |  |  |
+| IsVisibleUstawKwoteBO | `bool` | tylko-odczyt |  |  |
+| IsVisibleWłączBO | `bool` | tylko-odczyt |  |  |
+| KalendarzeUmowy | `SubTable<Soneta.Kalend.KalendarzBase>` | podlista |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KwotaSplaconaBO | `Currency` | bazodanowe |  |  |
+| Last | `Soneta.Kadry.UmowaHistoria` | tylko-odczyt |  |  |
 | MinimalnaStawkaGodz | `bool` | bazodanowe |  |  |
-| NaliczaćPodatekRyczałtowy | `bool` |  |  |  |
-| Nieobecnosci | `Soneta.Business.FromToSubTable<Soneta.Kalend.Nieobecnosc>` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| NaliczaćPodatekRyczałtowy | `bool` | tylko-odczyt |  |  |
+| Nieobecnosci | `FromToSubTable<Soneta.Kalend.Nieobecnosc>` | podlista |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerPelny | `string` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | PodlegaVAT | `bool` | bazodanowe |  |  |
-| Podzielniki | `Soneta.Business.SubTable<Soneta.Core.PodzielnikKosztow>` |  |  |  |
-| Pozostało | `Soneta.Types.Currency` |  |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| PracaWPolsce | `Soneta.Types.Periods` |  |  |  |
-| PracaZaGranicą | `Soneta.Types.Periods` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RegulyDostepnosci | `Soneta.Business.SubTable<Soneta.Kalend.RegulaDostepnosci>` |  |  |  |
-| RodzajRozliczenia | `Soneta.Kadry.RodzajeRozliczeniaUmowy` | bazodanowe, enum |  |  |
-| RozliczeniaWynagrodzenia | `Soneta.Business.LpSubTable<Soneta.Place.RozliczenieWynagrodzenia>` |  |  |  |
-| RozliczenieCzasu | `Soneta.Business.SubTable` |  |  |  |
-| RozliczenieUmowy | `Soneta.Business.SubTable` |  |  |  |
-| RozliczenieWynagrodzenia | `Soneta.Place.RozliczenieWynagrodzenia` |  |  |  |
+| Podzielniki | `SubTable<Soneta.Core.PodzielnikKosztow>` | podlista |  |  |
+| Pozostało | `Currency` | tylko-odczyt |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| PracaWPolsce | `Periods` | tylko-odczyt |  |  |
+| PracaZaGranicą | `Periods` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RegulyDostepnosci | `SubTable<Soneta.Kalend.RegulaDostepnosci>` | podlista |  |  |
+| RodzajRozliczenia | `Soneta.Kadry.RodzajeRozliczeniaUmowy` (enum) | bazodanowe |  |  |
+| RozliczeniaWynagrodzenia | `LpSubTable<Soneta.Place.RozliczenieWynagrodzenia>` | podlista |  |  |
+| RozliczenieCzasu | `SubTable` | podlista |  |  |
+| RozliczenieUmowy | `SubTable` | podlista |  |  |
+| RozliczenieWynagrodzenia | `Soneta.Place.RozliczenieWynagrodzenia` | tylko-odczyt |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Splacono | `Soneta.Types.Currency` | bazodanowe |  |  |
-| SplaconoZBO | `Soneta.Types.Currency` |  |  |  |
-| Stan | `Soneta.Kadry.StanUmowy` | enum |  |  |
-| SąAktywneElementy | `bool` |  |  |  |
-| Słownie | `string` |  |  |  |
-| SłownieUpr | `string` |  | Słownie |  |
-| TypWartosci | `Soneta.Kadry.TypWartosciUmowy` | bazodanowe, enum |  |  |
+| Splacono | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| SplaconoZBO | `Currency` | tylko-odczyt |  |  |
+| Stan | `Soneta.Kadry.StanUmowy` (enum) | tylko-odczyt |  |  |
+| SąAktywneElementy | `bool` | tylko-odczyt |  |  |
+| TypWartosci | `Soneta.Kadry.TypWartosciUmowy` (enum) | bazodanowe |  |  |
 | Tytul | `string` | bazodanowe |  |  |
-| Ubezpieczenia | `Soneta.Kadry.Ubezpieczenia` |  |  |  |
-| Umowa | `Soneta.Kadry.Umowa` |  |  |  |
-| UmowaOkresowa | `bool` |  |  |  |
-| Wartosc | `Soneta.Types.Currency` |  |  |  |
-| WnioskiUrlopowe | `Soneta.Business.SubTable<Soneta.Kadry.WniosekUrlopowy>` |  |  |  |
+| UmowaOkresowa | `bool` | tylko-odczyt |  |  |
+| WnioskiUrlopowe | `SubTable<Soneta.Kadry.WniosekUrlopowy>` | podlista |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Wynajmujący | `Soneta.CRM.Kontrahent` |  |  |  |
-| Wypowiedzenie | `Soneta.Kadry.UmowaWypowiedzenie` | bazodanowe |  |  |
-| Wypowiedzenie.DataZlozenia | `Soneta.Types.Date` | bazodanowe | Data złożenia | Data złożenia wypowiedzenia |
+| Wynajmujący | `Soneta.CRM.Kontrahent` | tylko-odczyt |  |  |
+| Wypowiedzenie | `Soneta.Kadry.UmowaWypowiedzenie` (subrow) | bazodanowe |  |  |
+| Wypowiedzenie.DataZlozenia | `Date` | bazodanowe | Data złożenia | Data złożenia wypowiedzenia |
 | Wypowiedzenie.Dni | `int` | bazodanowe | Dni | Okres wypowiedzenia - dni |
 | Wypowiedzenie.Miesiace | `int` | bazodanowe | Miesiące | Okres wypowiedzenia - miesiące |
 | Wypowiedzenie.Tygodnie | `int` | bazodanowe | Tygodnie | Okres wypowiedzenia - tygodnie |
-| Wypowiedzenie.Uplywa | `Soneta.Types.Date` | bazodanowe | Upływa | Data upływu ukresu wypowiedzenia |
-| ZaGranica | `Soneta.Kadry.ZleceniobiorcaZaGranicą` | bazodanowe |  |  |
+| Wypowiedzenie.Uplywa | `Date` | bazodanowe | Upływa | Data upływu ukresu wypowiedzenia |
+| ZaGranica | `Soneta.Kadry.ZleceniobiorcaZaGranicą` (subrow) | bazodanowe |  |  |
 | ZaGranica.OddelegowanyDo | `Soneta.Kadry.IKrajDelegacji` | bazodanowe, iface-ref |  |  |
 | ZaGranica.PodatekZaGranica | `bool` | bazodanowe |  |  |
-| ZaGranica.UmowaZaGranicą | `bool` |  |  |  |
-| ZaGranica.WgOddelegowanyDo | `Soneta.Business.Key` |  |  |  |
-| ZestDietPakietMobil | `Soneta.Business.SubTable<Soneta.Kalend.ZestDietPakietMobil>` |  |  |  |
-| Zestawienia | `Soneta.Business.FromToSubTable<Soneta.Kalend.ZestawienieUmowy>` |  |  |  |
-| ZestawieniaDiet | `Soneta.Business.FromToSubTable<Soneta.Kalend.ZestawienieDietZagr>` |  |  |  |
+| ZaGranica.UmowaZaGranicą | `bool` | tylko-odczyt |  |  |
+| ZaGranica.WgOddelegowanyDo | `Key` | podlista |  |  |
+| ZestDietPakietMobil | `SubTable<Soneta.Kalend.ZestDietPakietMobil>` | podlista |  |  |
+| Zestawienia | `FromToSubTable<Soneta.Kalend.ZestawienieUmowy>` | podlista |  |  |
+| ZestawieniaDiet | `FromToSubTable<Soneta.Kalend.ZestawienieDietZagr>` | podlista |  |  |
 | ZgloszenieRUD | `bool` | bazodanowe |  |  |
 
 ## Relacje interfejsowe

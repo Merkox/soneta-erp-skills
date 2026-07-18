@@ -5,19 +5,23 @@ Opis: Zawiera opisowe informacje dla słownika Katalogu szkoleń i uprawnień. W
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 4
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelSzkolenia | `string` | bazodanowe | Cel szkolenia |  |
-| GrupaKSU | `Soneta.HR.ZKL.Slowniki.KSU.GrupaSzkolenIUprawnien` |  |  |  |
-| GrupyStanowisk | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuGrupaStanowisk>` |  |  |  |
-| ObszaryFunkcjonalne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuObszarFunkcjonalny>` |  |  |  |
+| GrupaKSU | `Soneta.HR.ZKL.Slowniki.KSU.GrupaSzkolenIUprawnien` | tylko-odczyt |  |  |
+| GrupyStanowisk | `SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuGrupaStanowisk>` | podlista |  |  |
+| ObszaryFunkcjonalne | `SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuObszarFunkcjonalny>` | podlista |  |  |
 | PozycjaKsuGuid | `System.Guid` | bazodanowe | Identyfikator pozycji KSU |  |
-| PozycjaKsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` | bazodanowe, enum | Typ pozycji KSU |  |
-| SzkoleniaPoprzedzajace | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuSzkoleniePoprzedzajace>` |  |  |  |
-| UprawnieniaPoprzedzajace | `Soneta.Business.SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuUprawnieniePoprzedzajace>` |  |  |  |
+| PozycjaKsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` (enum) | bazodanowe | Typ pozycji KSU |  |
+| SzkoleniaPoprzedzajace | `SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuSzkoleniePoprzedzajace>` | podlista |  |  |
+| UprawnieniaPoprzedzajace | `SubTable<Soneta.HR.ZKL.Slowniki.KSU.KsuUprawnieniePoprzedzajace>` | podlista |  |  |
 
 ## Enumy
 

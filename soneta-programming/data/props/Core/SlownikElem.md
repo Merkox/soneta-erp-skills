@@ -5,20 +5,24 @@ Opis: Słownik systemowy przechowujący elementy list wyboru (combo). Każdy ele
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Blokuje element słownika przy wyborze. |
 | Domyslny | `bool` | bazodanowe | Wartość domyślna | Wartość domyślna w ramach kategorii |
-| Kategoria | `string` | bazodanowe | Nazwa słownika | Nazwa słownika, do którego należy dany element. |
+| Kategoria | `string` | bazodanowe, tylko-odczyt | Nazwa słownika | Nazwa słownika, do którego należy dany element. |
 | Kod | `string` | bazodanowe | Kod | Kod elementem słownika. |
 | Liczba | `int` | bazodanowe | Liczba | Wartość liczbowa elementu słownika. |
 | Nadrzedny | `Soneta.Core.SlownikElem` | bazodanowe |  | Określa nadrzędny obiekt słownikowy |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa elementu słownika. |
-| Podrzędne | `Soneta.Business.SubTable<Soneta.Core.SlownikElem>` |  |  |  |
-| Selektor | `Soneta.Core.SelektorSlownika` | bazodanowe, enum | Selektor słownika | Selektor słownika. |
+| Podrzędne | `SubTable<Soneta.Core.SlownikElem>` | podlista |  |  |
+| Selektor | `Soneta.Core.SelektorSlownika` (enum) | bazodanowe, tylko-odczyt | Selektor słownika | Selektor słownika. |
 
 ## Enumy
 

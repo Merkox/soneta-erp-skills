@@ -5,13 +5,17 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Pr
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `ItemDefinition` → `DashboardItemDefinition`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdditionalInfo | `string` | bazodanowe | Informacje dodatkowe | Dodatkowe informacje elementu wizualizacji |
 | DataStatus | `bool` | bazodanowe | Stan danych |  |
 | FullValue | `bool` | bazodanowe | Wyświetlanie pełnej wartości |  |
-| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe, guided-parent |  |  |
+| ItemDefinition | `Soneta.BI.DashboardItemDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | ReportParamInfo | `bool` | bazodanowe | Informacje o parametrach wizualizacji |  |

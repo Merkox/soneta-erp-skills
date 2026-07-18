@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IProdZasob`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 4
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie zasobu. Zablokowane zasoby nie będą wyświetlane na listach wyboru. |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa zasobu rzeczywistego. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Opis zasobu rzeczywistego. |
-| RelacjeZasobu | `Soneta.Business.SubTable<Soneta.Produkcja.ProdZasobRelacja>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Opis zasobu rzeczywistego. |
+| RelacjeZasobu | `SubTable<Soneta.Produkcja.ProdZasobRelacja>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol, skrócona nazwa zasobu. |
-| WzorcoweZasobyProdukcyjne | `Soneta.Business.SubTable<Soneta.Produkcja.ProdZasobRelacja>` |  |  |  |
-| Wzorcowy | `bool` |  |  | Określa czy zasób jest wzorcowy. |
-| ZasobyCRM | `Soneta.Business.SubTable<Soneta.Produkcja.RelacjaProdZasobCRM>` |  |  |  |
+| WzorcoweZasobyProdukcyjne | `SubTable<Soneta.Produkcja.ProdZasobRelacja>` | podlista |  |  |
+| Wzorcowy | `bool` | tylko-odczyt |  | Określa czy zasób jest wzorcowy. |
+| ZasobyCRM | `SubTable<Soneta.Produkcja.RelacjaProdZasobCRM>` | podlista |  |  |

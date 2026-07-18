@@ -5,13 +5,17 @@ Opis: Element szczegółowy zasobu operacji technologii (ProZasobOperacjiTechnol
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiTechnologii` → `ProZasobOperacjiTechnologii`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  | Liczba porządkowa relacji zasób operacji technologii pozycja właściwości. |
-| Operator | `Soneta.ProdukcjaPro.ProOperatorPorownan` | bazodanowe, enum |  | Operator dla relacji zasób operacji technologii pozycja właściwości. |
+| Operator | `Soneta.ProdukcjaPro.ProOperatorPorownan` (enum) | bazodanowe |  | Operator dla relacji zasób operacji technologii pozycja właściwości. |
 | PozycjaKompetencji | `Soneta.ProdukcjaPro.ProPozycjaKompetencji` | bazodanowe | Pozycja właściwości | Pozycja właściwości dla relacji zasób operacji technologii pozycja właściwości. |
 | ZasobOperacjiTechnologii | `Soneta.ProdukcjaPro.ProZasobOperacjiTechnologii` | bazodanowe, guided-parent | Zasób operacji technologii | Zasób operacji technologii dla relacji zasób operacji technologii pozycja właściwości. |
 

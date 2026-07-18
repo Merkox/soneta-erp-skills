@@ -5,13 +5,17 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiZlecenia` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  | Liczba porządkowa relacji zasób operacji zlecenia pozycja właściwości. |
-| Operator | `Soneta.ProdukcjaPro.ProOperatorPorownan` | bazodanowe, enum |  | Operator dla relacji zasób operacji zlecenia pozycja właściwości. |
+| Operator | `Soneta.ProdukcjaPro.ProOperatorPorownan` (enum) | bazodanowe |  | Operator dla relacji zasób operacji zlecenia pozycja właściwości. |
 | PozycjaKompetencji | `Soneta.ProdukcjaPro.ProPozycjaKompetencji` | bazodanowe | Pozycja właściwości | Pozycja właściwości dla relacji zasób operacji zlecenia pozycja właściwości. |
 | ZasobOperacjiZlecenia | `Soneta.ProdukcjaPro.ProZasobOperacjiZlecenia` | bazodanowe, guided-parent | Zasób operacji zlecenia | Zasób operacji zlecenia dla relacji zasób operacji zlecenia pozycja właściwości. |
 

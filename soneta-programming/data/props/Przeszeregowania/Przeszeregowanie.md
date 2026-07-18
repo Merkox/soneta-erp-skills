@@ -5,19 +5,23 @@ Opis: Dokument zbiorczego przeszeregowania pracowników na określoną datę. Um
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 3
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataWykonania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Przeszeregowania.ElementPrzeszeregowania>` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataWykonania | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Elementy | `SubTable<Soneta.Przeszeregowania.ElementPrzeszeregowania>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Pracownicy | `System.Collections.Generic.ICollection<Soneta.Kadry.Pracownik>` |  |  |  |
-| Realizacja | `Soneta.Przeszeregowania.RealizacjaPrzeszeregowania` | bazodanowe, enum |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ZarzadzaneWnioskiem | `bool` | bazodanowe |  |  |
+| Pracownicy | `System.Collections.Generic.ICollection<Soneta.Kadry.Pracownik>` | podlista |  |  |
+| Realizacja | `Soneta.Przeszeregowania.RealizacjaPrzeszeregowania` (enum) | bazodanowe |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| ZarzadzaneWnioskiem | `bool` | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,8 +5,12 @@ Opis: Tabela konfiguracyjna przechowująca definicje paczek dokumentów, stanowi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 14
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -16,7 +20,7 @@ Guided: root
 | Blocked | `bool` | bazodanowe |  | Określa zablokowanie definicji. Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |
 | IsDefault | `bool` | bazodanowe | Domyślna |  |
 | Name | `string` | bazodanowe |  | Pełna nazwa definicji dokumentu wykorzystywana do wyszukiwania definicji. |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  | Ustawienia określające sposób numeracji dokumentów. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
@@ -26,4 +30,4 @@ Guided: root
 | Symbol | `string` | bazodanowe |  | Skrótowa nazwa definicji dokumentu wykorzystywana do wyszukiwania definicji oraz numeracji paczek dokumentów. |
 | UseMatrixAttachments | `bool` | bazodanowe |  | Stosuj matrycę dla załączników przy zamknięciu paczki. |
 | UseMatrixRegisterDoc | `bool` | bazodanowe |  | Stosuj matrycę dla plików ewidencji przy zamknięciu paczki. |
-| WidoczneCechy | `Soneta.Business.MemoText` |  |  |  |
+| WidoczneCechy | `MemoText` | podlista |  |  |

@@ -6,25 +6,29 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `TaskDefinition` → `TaskDefinition`
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataType | `System.Type` |  |  |  |
-| DefinitionType | `Soneta.Business.Db.DefinitionTypeEnum` | bazodanowe, enum | Tryb edycji | Określa tryb edycji definicji workflow |
-| HostTable | `Soneta.Business.Table` |  |  |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| HostTable | `Table` | podlista |  |  |
 | OGSchema | `Soneta.Workflow.Config.OGSchema` | bazodanowe | Definicja schematu generatora | Określa definicję schematu generatora obiektów |
-| PlugIns | `Soneta.Business.LpSubTable<Soneta.Workflow.Config.WfPlugInItemReference>` |  |  |  |
-| TableName | `string` | bazodanowe |  |  |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe, guided-parent |  |  |
+| PlugIns | `LpSubTable<Soneta.Workflow.Config.WfPlugInItemReference>` | podlista |  |  |
+| TableName | `string` | bazodanowe, tylko-odczyt |  |  |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | VariantTypeName | `string` | bazodanowe | Typ źrodła wielowariantowego | Typ źrodła wielowariantowego |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### DefinitionTypeEnum (`Soneta.Business.Db.DefinitionTypeEnum`)
+### DefinitionTypeEnum (`Db.DefinitionTypeEnum`)
 - `Standard` = 0 — Wielozakładkowy
 - `Engine` = 1 — Jednozakładkowy
 - `None` = 2 — Brak

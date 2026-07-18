@@ -5,8 +5,12 @@ Opis: Słownik właściwości (kompetencji) produkcyjnych przypisywanych do zaso
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -14,9 +18,9 @@ Guided: root
 | Kod | `string` | bazodanowe |  | Kod właściwości. |
 | Nazwa | `string` | bazodanowe |  | Nazwa właściwości. |
 | Ograniczenie | `bool` | bazodanowe |  | Ograniczenie listy operatorów porównań dla właściwości. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis właściwości. |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProPozycjaKompetencji>` |  |  |  |
-| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` | bazodanowe, enum | Rodzaj zasobu | Rodzaj zasobu dla właściwości. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis właściwości. |
+| Pozycje | `LpSubTable<Soneta.ProdukcjaPro.ProPozycjaKompetencji>` | podlista |  |  |
+| RodzajZasobu | `Soneta.ProdukcjaPro.ProRodzajZasobu` (enum) | bazodanowe | Rodzaj zasobu | Rodzaj zasobu dla właściwości. |
 
 ## Enumy
 

@@ -5,13 +5,17 @@ Opis: Urzędowe potwierdzenia odbioru (UPO) z Krajowego Systemu e-Faktur. Przech
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data sesji |
+| Data | `Date` | bazodanowe |  | Data sesji |
 | Dokument | `Soneta.Core.IKomunikatKSeFHost` | bazodanowe | Dokument | Dokument, którego dotyczy UPO |
-| UPO | `Soneta.Business.MemoText` | bazodanowe |  | Urzędowe potwierdzenie odbioru |
+| UPO | `MemoText` | bazodanowe, podlista |  | Urzędowe potwierdzenie odbioru |
 | sessionReferenceNumber | `string` | bazodanowe |  | Numer referencyjny sesji |
 | upoReferenceNumber | `string` | bazodanowe |  | Numer referencyjny UPO |

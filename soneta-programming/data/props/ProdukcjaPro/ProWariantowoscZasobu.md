@@ -5,13 +5,17 @@ Opis: Element szczegółowy zasobu produkcyjnego (ProZasob). Definiuje warianty 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zasob` → `ProZasob`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasTj | `Soneta.Types.TimeSec` | bazodanowe | Czas tj | Czas jednostkowy wariantowości zasobu. |
-| CzasTpz | `Soneta.Types.TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy wariantowości zasobu. |
+| CzasTj | `TimeSec` | bazodanowe | Czas tj | Czas jednostkowy wariantowości zasobu. |
+| CzasTpz | `TimeSec` | bazodanowe | Czas tpz | Czas przygotowawczo-zakończeniowy wariantowości zasobu. |
 | DefinicjaOperacji | `Soneta.ProdukcjaPro.ProDefinicjaOperacji` | bazodanowe | Definicja operacji | Definicja operacji wariantowości zasobu. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa wariantowości zasobu. |
 | Stawka | `Soneta.ProdukcjaPro.ProStawka` | bazodanowe |  | Stawka wariantowości zasobu. |

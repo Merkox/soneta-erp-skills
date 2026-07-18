@@ -5,34 +5,38 @@ Opis: Budżet przypisany do projektu lub innego obiektu budżetowanego. Zawiera 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 4
+- subrowy: 0
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy budżet jest aktywny (otwarty). |
-| BasicDefaultPlanVersion | `Soneta.Zadania.Budzetowanie.WersjaPlanu` |  |  |  |
-| BudgetConfiguration | `Soneta.Core.IBudgetConfiguration` |  |  |  |
-| BudgetItemSourceService | `System.Lazy<Soneta.Zadania.Budzetowanie.Services.BudgetItemSourceStrategyService>` |  |  |  |
-| CzyZakazPracowaniaZBudzetem | `bool` |  |  |  |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia budżetu | Określa datę zamknięcia budżetu. |
+| BasicDefaultPlanVersion | `Soneta.Zadania.Budzetowanie.WersjaPlanu` | tylko-odczyt |  |  |
+| BudgetConfiguration | `Soneta.Core.IBudgetConfiguration` | tylko-odczyt |  |  |
+| BudgetItemSourceService | `System.Lazy<Soneta.Zadania.Budzetowanie.Services.BudgetItemSourceStrategyService>` | tylko-odczyt |  |  |
+| CzyZakazPracowaniaZBudzetem | `bool` | tylko-odczyt |  |  |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia budżetu | Określa datę zamknięcia budżetu. |
 | Definicja | `Soneta.Zadania.Budzetowanie.DefBudget` | bazodanowe | Definicja budżetu | Definicja budżetu. |
-| DlaEtapow | `Soneta.Core.SposobRozliczania` | bazodanowe, enum |  |  |
-| KwotyBudzetu | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.KwotaBudzProj>` |  |  |  |
+| DlaEtapow | `Soneta.Core.SposobRozliczania` (enum) | bazodanowe |  |  |
+| KwotyBudzetu | `SubTable<Soneta.Zadania.Budzetowanie.KwotaBudzProj>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa budzetu projektu. |
 | Podstawowy | `bool` | bazodanowe | Budżet podstawowy | Określa czy budżet jest podstawowy w ramach projektu. |
-| PozycjeBudzProj | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.PozycjaBudzProj>` |  |  |  |
+| PozycjeBudzProj | `SubTable<Soneta.Zadania.Budzetowanie.PozycjaBudzProj>` | podlista |  |  |
 | Projekt | `Soneta.Core.IBudzetowany` | bazodanowe, iface-ref |  |  |
-| SaKwoty | `bool` |  |  |  |
-| SaPozycje | `bool` |  |  |  |
-| SposobRozliczania | `Soneta.Core.SposobRozliczania` | enum |  |  |
-| Stan | `Soneta.Core.StanBudzetu` | bazodanowe, enum | Stan budżetu | Określa stan budżetu. |
+| SaKwoty | `bool` | tylko-odczyt |  |  |
+| SaPozycje | `bool` | tylko-odczyt |  |  |
+| SposobRozliczania | `Soneta.Core.SposobRozliczania` (enum) |  |  |  |
+| Stan | `Soneta.Core.StanBudzetu` (enum) | bazodanowe | Stan budżetu | Określa stan budżetu. |
 | Symbol | `string` | bazodanowe | Symbol | Symbol budzetu projektu. |
-| TypOkresu | `Soneta.Core.TypOkresu` | bazodanowe, enum | Typ okresu budżetu. |  |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.BudzetUprawnienie>` |  |  |  |
+| TypOkresu | `Soneta.Core.TypOkresu` (enum) | bazodanowe | Typ okresu budżetu. |  |
+| Uprawnienia | `SubTable<Soneta.Zadania.Budzetowanie.BudzetUprawnienie>` | podlista |  |  |
 | Waluta | `string` | bazodanowe | Nazwa | Nazwa budzetu projektu. |
-| WariantRozliczania | `Soneta.Core.SettlementVariant` | bazodanowe, enum | Wariant rozliczania | Wariant rozliczania. |
-| WersjePlanu | `Soneta.Business.SubTable<Soneta.Zadania.Budzetowanie.WersjaPlanu>` |  |  |  |
+| WariantRozliczania | `Soneta.Core.SettlementVariant` (enum) | bazodanowe | Wariant rozliczania | Wariant rozliczania. |
+| WersjePlanu | `SubTable<Soneta.Zadania.Budzetowanie.WersjaPlanu>` | podlista |  |  |
 | Wymiar | `string` | bazodanowe | Symbol konta | Domyślny wymiar dla opisu analitycznego. |
 
 ## Relacje interfejsowe

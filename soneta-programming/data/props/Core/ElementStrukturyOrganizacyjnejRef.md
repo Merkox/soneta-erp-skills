@@ -5,12 +5,16 @@ Opis: Element szczegółowy elementu struktury organizacyjnej (ElementStrukturyO
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Element` → `ElementStrukturyOrganizacyjnej`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 2
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| EfektywnyOkres | `Soneta.Types.FromTo` |  |  |  |
-| Element | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe, guided-parent |  |  |
-| Nadrzedny | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| EfektywnyOkres | `FromTo` | podlista |  |  |
+| Element | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Nadrzedny | `Soneta.Core.ElementStrukturyOrganizacyjnej` | bazodanowe, tylko-odczyt |  |  |

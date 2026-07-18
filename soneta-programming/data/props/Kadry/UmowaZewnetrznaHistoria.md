@@ -4,27 +4,32 @@ Tytuł: UmowyZewnetrzne
 Opis: Element szczegółowy umowy zewnętrznej (UmowaZewnetrzna). Wersja historyczna umowy zewnętrznej rejestrująca zmiany zakresu umowy, stanowiska, okresu obowiązywania, kalendarza i powodu aktualizacji.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `UmowaZewnetrzna`
+Historia: Tak — zapis historyczny tabeli `UmowaZewnetrzna`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 2
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` |  |  |  |
+| DefinicjaStanowiskaHistoria | `Soneta.HR.DefinicjaStanowiskaHist` | tylko-odczyt |  |  |
 | IndywidualnyKalendarz | `bool` | bazodanowe |  |  |
-| InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` | bazodanowe, enum |  |  |
+| InterpretacjaKalendarza | `Soneta.Kadry.InterpretacjaKalendarza` (enum) | bazodanowe |  |  |
 | Kalendarz | `Soneta.Kalend.Kalendarz` | bazodanowe |  | Domyślny kalendarz umowy |
-| Nastepny | `Soneta.Kadry.UmowaZewnetrznaHistoria` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| Poprzedni | `Soneta.Kadry.UmowaZewnetrznaHistoria` |  |  |  |
-| PowodAktualizacji | `string` | bazodanowe | Powód aktualizacji | Opis powodu aktualizacji zapisu |
+| Nastepny | `Soneta.Kadry.UmowaZewnetrznaHistoria` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
+| Poprzedni | `Soneta.Kadry.UmowaZewnetrznaHistoria` | tylko-odczyt |  |  |
+| PowodAktualizacji | `string` | bazodanowe, tylko-odczyt | Powód aktualizacji | Opis powodu aktualizacji zapisu |
 | Stanowisko | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` | bazodanowe, enum |  |  |
-| Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe, guided-parent |  |  |
+| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | WgZestawien | `bool` | bazodanowe |  |  |
 | ZakresUmowy | `string` | bazodanowe |  |  |
 

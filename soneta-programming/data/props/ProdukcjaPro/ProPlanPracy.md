@@ -5,16 +5,20 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zasob` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.TimeSec` |  |  | Czas planu pracy. |
-| CzasRozpoczecia | `Soneta.Types.TimeSec` |  | Czas rozpoczęcia | Czas rozpoczęcia planu pracy. |
-| CzasZakonczenia | `Soneta.Types.TimeSec` |  | Czas zakończenia | Czas zakończenia planu pracy. |
-| DataRozpoczecia | `Soneta.Types.Date` |  | Data rozpoczęcia | Data rozpoczęcia planu pracy. |
-| DataZakonczenia | `Soneta.Types.Date` |  | Data zakończenia | Data zakończenia planu pracy. |
+| Czas | `TimeSec` | tylko-odczyt |  | Czas planu pracy. |
+| CzasRozpoczecia | `TimeSec` |  | Czas rozpoczęcia | Czas rozpoczęcia planu pracy. |
+| CzasZakonczenia | `TimeSec` |  | Czas zakończenia | Czas zakończenia planu pracy. |
+| DataRozpoczecia | `Date` |  | Data rozpoczęcia | Data rozpoczęcia planu pracy. |
+| DataZakonczenia | `Date` |  | Data zakończenia | Data zakończenia planu pracy. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa planu pracy. |
 | Rozpoczecie | `System.DateTime` | bazodanowe | Rozpoczęcie | Data i czas rozpoczęcia planu pracy. |
 | Zakonczenie | `System.DateTime` | bazodanowe | Zakończenie | Data i czas zakończenia planu pracy. |

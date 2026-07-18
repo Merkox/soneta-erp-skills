@@ -5,24 +5,28 @@ Opis: Słownik stawek podatku VAT. Każda definicja zawiera kod stawki, procent,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 1
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Kod | `string` | bazodanowe |  |  |
+| Kod | `string` | bazodanowe, tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Podstawowa | `bool` |  |  |  |
-| Stawka | `Soneta.Core.StawkaVat` | bazodanowe |  |  |
+| Podstawowa | `bool` | tylko-odczyt |  |  |
+| Stawka | `Soneta.Core.StawkaVat` (subrow) | bazodanowe |  |  |
 | Stawka.Kraj | `Soneta.Core.KrajTbl` | bazodanowe |  |  |
 | Stawka.Obnizona | `bool` | bazodanowe |  |  |
-| Stawka.Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Stawka.Status | `Soneta.Core.StatusStawkiVat` | bazodanowe, enum |  |  |
-| Stawka.WgKraj | `Soneta.Business.Key` |  |  |  |
-| Stawka.WymagaSWW | `bool` |  |  |  |
-| Stawka.Zrodlowa | `Soneta.Types.Percent` | bazodanowe |  |  |
-| WgWielkosci | `decimal` |  |  |  |
-| WymagaSWW | `bool` |  |  |  |
+| Stawka.Procent | `Percent` | bazodanowe |  |  |
+| Stawka.Status | `Soneta.Core.StatusStawkiVat` (enum) | bazodanowe |  |  |
+| Stawka.WgKraj | `Key` | podlista |  |  |
+| Stawka.WymagaSWW | `bool` | tylko-odczyt |  |  |
+| Stawka.Zrodlowa | `Percent` | bazodanowe |  |  |
+| WgWielkosci | `decimal` | tylko-odczyt |  |  |
+| WymagaSWW | `bool` | tylko-odczyt |  |  |
 | Zablokowane | `bool` | bazodanowe |  |  |
 
 ## Enumy

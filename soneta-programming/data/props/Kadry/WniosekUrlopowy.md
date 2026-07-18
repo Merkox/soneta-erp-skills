@@ -6,80 +6,83 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 42
-- pola kalkulowane (z klas biznesowych): 27
+- pola bazodanowe (zapisywalne): 24
+- pola kalkulowane (zapisywalne): 7
+- pola tylko-odczyt: 10
+- podlisty: 19
+- subrowy: 8
+- razem: 68
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| BlokadaOkresu | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataDecyzji | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |
-| Delegacja | `Soneta.Kadry.WniosekODelegację` | bazodanowe |  |  |
-| Delegacja.Cel | `Soneta.Business.MemoText` | bazodanowe |  | Cel delegacji. |
-| Delegacja.DataRozpoczeciaPlanowana | `Soneta.Types.DateShortTime` | bazodanowe |  | Planowany czas rozpoczęcia delegacji. |
-| Delegacja.DataRozpoczeciaPlanowanaDate | `Soneta.Types.Date` |  |  |  |
-| Delegacja.DataRozpoczeciaPlanowanaTime | `Soneta.Types.Time` |  |  |  |
-| Delegacja.DataZakonczeniaPlanowana | `Soneta.Types.DateShortTime` | bazodanowe |  | Planowany czas zakończenia delegacji. |
-| Delegacja.DataZakonczeniaPlanowanaDate | `Soneta.Types.Date` |  |  |  |
-| Delegacja.DataZakonczeniaPlanowanaTime | `Soneta.Types.Time` |  |  |  |
+| BlokadaOkresu | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataDecyzji | `Date` | bazodanowe |  |  |
+| Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe, tylko-odczyt |  |  |
+| Delegacja | `Soneta.Kadry.WniosekODelegację` (subrow) | bazodanowe |  |  |
+| Delegacja.Cel | `MemoText` | bazodanowe, podlista |  | Cel delegacji. |
+| Delegacja.DataRozpoczeciaPlanowana | `DateShortTime` | bazodanowe |  | Planowany czas rozpoczęcia delegacji. |
+| Delegacja.DataRozpoczeciaPlanowanaDate | `Date` |  |  |  |
+| Delegacja.DataRozpoczeciaPlanowanaTime | `Time` |  |  |  |
+| Delegacja.DataZakonczeniaPlanowana | `DateShortTime` | bazodanowe |  | Planowany czas zakończenia delegacji. |
+| Delegacja.DataZakonczeniaPlanowanaDate | `Date` |  |  |  |
+| Delegacja.DataZakonczeniaPlanowanaTime | `Time` |  |  |  |
 | Delegacja.Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  | Definicja dokumentu PWS |
-| Delegacja.IsDelegacja | `bool` |  |  |  |
+| Delegacja.IsDelegacja | `bool` | tylko-odczyt |  |  |
 | Delegacja.KrajDocelowy | `Soneta.Kadry.IKrajDelegacji` | bazodanowe, iface-ref |  | Kraj docelowy delegacji. |
 | Delegacja.SrodekTransportu | `string` | bazodanowe |  | Domyślny środek transportu. |
-| Delegacja.WgDefinicja | `Soneta.Business.Key` |  |  |  |
-| Delegacja.WgKrajDocelowy | `Soneta.Business.Key` |  |  |  |
-| Delegacja.WnioskowanaZaliczka | `Soneta.Types.Currency` | bazodanowe |  | Wnioskowana wysokość zaliczki |
-| DelegacjePWS | `Soneta.Business.SubTable` |  |  |  |
-| DniKalendarzaHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` |  |  |  |
-| DniPracyHistorie | `Soneta.Business.SubTable<Soneta.Kalend.DzienPracyHistoria>` |  |  |  |
-| DoGodziny | `Soneta.Types.Time` |  |  |  |
+| Delegacja.WgDefinicja | `Key` | podlista |  |  |
+| Delegacja.WgKrajDocelowy | `Key` | podlista |  |  |
+| Delegacja.WnioskowanaZaliczka | `Currency` | bazodanowe |  | Wnioskowana wysokość zaliczki |
+| DelegacjePWS | `SubTable` | podlista |  |  |
+| DniKalendarzaHistorie | `SubTable<Soneta.Kalend.DzienKalendarzaHistoria>` | podlista |  |  |
+| DniPracyHistorie | `SubTable<Soneta.Kalend.DzienPracyHistoria>` | podlista |  |  |
+| DoGodziny | `Time` |  |  |  |
 | IlośćDni | `int` |  |  |  |
 | Kierownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Nieobecności | `Soneta.Business.View` |  |  |  |
-| Nieobecność | `Soneta.Kalend.Nieobecnosc` |  |  |  |
-| Norma | `Soneta.Types.Time` | bazodanowe |  |  |
-| NormaNie | `Soneta.Kalend.CzasDni` |  |  |  |
-| OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| PracHistoria | `Soneta.Kadry.PracHistoria` |  |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` |  |  |  |
-| PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopu` | enum |  |  |
-| Stan | `Soneta.Kadry.StanWnioskuUrlopowego` | bazodanowe, enum |  |  |
-| TypDni | `Soneta.Kalend.TypyDni` | enum |  |  |
-| UrlopMacierzynski | `Soneta.Kadry.WniosekOUrlopMacierzyński` | bazodanowe |  |  |
+| Nieobecności | `View` | podlista |  |  |
+| Norma | `Time` | bazodanowe |  |  |
+| NormaNie | `Soneta.Kalend.CzasDni` | tylko-odczyt |  |  |
+| OdGodziny | `Time` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| PracHistoria | `Soneta.Kadry.PracHistoria` | tylko-odczyt |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | tylko-odczyt |  |  |
+| PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopu` (enum) |  |  |  |
+| Stan | `Soneta.Kadry.StanWnioskuUrlopowego` (enum) | bazodanowe |  |  |
+| TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
+| UrlopMacierzynski | `Soneta.Kadry.WniosekOUrlopMacierzyński` (subrow) | bazodanowe |  |  |
 | UrlopMacierzynski.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
-| UrlopMacierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
-| UrlopMacierzynski.Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UrlopMacierzynski.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| UrlopMacierzyńskiUzupełniający | `Soneta.Kadry.WniosekOUrlopMacierzyńskiUzupełniający` | bazodanowe |  |  |
+| UrlopMacierzynski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
+| UrlopMacierzynski.Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| UrlopMacierzynski.WgDziecko | `Key` | podlista |  |  |
+| UrlopMacierzyńskiUzupełniający | `Soneta.Kadry.WniosekOUrlopMacierzyńskiUzupełniający` (subrow) | bazodanowe |  |  |
 | UrlopMacierzyńskiUzupełniający.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
-| UrlopMacierzyńskiUzupełniający.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
-| UrlopMacierzyńskiUzupełniający.Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UrlopMacierzyńskiUzupełniający.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| UrlopOjcowski | `Soneta.Kadry.WniosekOUrlopOjcowski` | bazodanowe |  |  |
+| UrlopMacierzyńskiUzupełniający.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
+| UrlopMacierzyńskiUzupełniający.Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| UrlopMacierzyńskiUzupełniający.WgDziecko | `Key` | podlista |  |  |
+| UrlopOjcowski | `Soneta.Kadry.WniosekOUrlopOjcowski` (subrow) | bazodanowe |  |  |
 | UrlopOjcowski.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
-| UrlopOjcowski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
-| UrlopOjcowski.Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UrlopOjcowski.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| UrlopOkolicznosciowy | `Soneta.Kadry.WniosekOUrlopOkolicznościowy` | bazodanowe |  |  |
-| UrlopOkolicznosciowy.PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopuOkolicznościowego` | bazodanowe, enum |  |  |
-| UrlopRodzicielski | `Soneta.Kadry.WniosekOUrlopRodzicielski` | bazodanowe |  |  |
+| UrlopOjcowski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
+| UrlopOjcowski.Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| UrlopOjcowski.WgDziecko | `Key` | podlista |  |  |
+| UrlopOkolicznosciowy | `Soneta.Kadry.WniosekOUrlopOkolicznościowy` (subrow) | bazodanowe |  |  |
+| UrlopOkolicznosciowy.PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopuOkolicznościowego` (enum) | bazodanowe |  |  |
+| UrlopRodzicielski | `Soneta.Kadry.WniosekOUrlopRodzicielski` (subrow) | bazodanowe |  |  |
 | UrlopRodzicielski.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
-| UrlopRodzicielski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` | bazodanowe, enum |  |  |
-| UrlopRodzicielski.Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UrlopRodzicielski.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| UrlopWychowawczy | `Soneta.Kadry.WniosekOUrlopWychowawczy` | bazodanowe |  |  |
+| UrlopRodzicielski.Rozliczenie | `Soneta.Kalend.RozliczenieUrlopuMacierzyńskiego` (enum) | bazodanowe |  |  |
+| UrlopRodzicielski.Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| UrlopRodzicielski.WgDziecko | `Key` | podlista |  |  |
+| UrlopWychowawczy | `Soneta.Kadry.WniosekOUrlopWychowawczy` (subrow) | bazodanowe |  |  |
 | UrlopWychowawczy.Dziecko | `Soneta.Kadry.CzlonekRodziny` | bazodanowe |  |  |
-| UrlopWychowawczy.Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| UrlopWychowawczy.WgDziecko | `Soneta.Business.Key` |  |  |  |
-| UrlopWypoczynkowy | `Soneta.Kadry.WniosekOUrlopWypoczynkowy` | bazodanowe |  |  |
-| UrlopWypoczynkowy.PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopu` | bazodanowe, enum |  |  |
+| UrlopWychowawczy.Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| UrlopWychowawczy.WgDziecko | `Key` | podlista |  |  |
+| UrlopWypoczynkowy | `Soneta.Kadry.WniosekOUrlopWypoczynkowy` (subrow) | bazodanowe |  |  |
+| UrlopWypoczynkowy.PrzyczynaUrlopu | `Soneta.Kalend.PrzyczynaUrlopu` (enum) | bazodanowe |  |  |
 | Zastepca | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Zrodlo | `Soneta.Kalend.IZrodloWnioskuONieobecnosc` | bazodanowe, iface-ref |  |  |
-| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | iface-ref |  |  |
-| ZrodloPlanuNumer | `string` |  |  |  |
+| Zrodlo | `Soneta.Kalend.IZrodloWnioskuONieobecnosc` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | tylko-odczyt, iface-ref |  |  |
+| ZrodloPlanuNumer | `string` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

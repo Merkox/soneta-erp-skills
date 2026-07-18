@@ -4,12 +4,16 @@ Opis: Element szczegółowy historii pracownika (PracHistoria). Indywidualny pr�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Historia` → `PracHistoria`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Historia | `Soneta.Kadry.PracHistoria` | bazodanowe, guided-parent |  |  |
+| Historia | `Soneta.Kadry.PracHistoria` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Prog | `decimal` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Zerowy | `bool` | bazodanowe |  |  |
+| Wartosc | `Percent` | bazodanowe |  |  |
+| Zerowy | `bool` | bazodanowe, tylko-odczyt |  |  |

@@ -5,23 +5,27 @@ Opis: Słownik sposobów zapłaty określający metody regulowania należności 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Biernik | `string` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| CechaESP | `Soneta.Business.FeatureDefinition` | bazodanowe |  | Cecha wyliczająca ESP na płatnosci. |
+| CechaESP | `FeatureDefinition` | bazodanowe |  | Cecha wyliczająca ESP na płatnosci. |
 | IdentWewKSeF | `string` | bazodanowe | Identyfikator wewnętrzny KSeF | Identyfikator wewnętrzny KSeF. |
 | LimitKredytowy | `bool` | bazodanowe |  |  |
 | MPP | `bool` | bazodanowe |  | Metoda podzielonej płatności. |
 | Nazwa | `string` | bazodanowe |  |  |
 | Odroczony | `bool` | bazodanowe |  |  |
 | Platnik | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  | Płatnik powiązany ze sposobem zapłaty. |
-| RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
+| RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
 | TerminalPlatniczy | `bool` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypySposobowZaplaty` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kasa.TypySposobowZaplaty` (enum) | bazodanowe |  |  |
 | ZastosujDanePodmiotuTrzeciegoNaDokHan | `bool` | bazodanowe |  | Czy stosować dane podmiotu trzeciego w dokumencie handlowym. |
 
 ## Relacje interfejsowe

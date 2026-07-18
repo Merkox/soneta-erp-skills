@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 4
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data korekty |
+| Data | `Date` | bazodanowe |  | Data korekty |
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  | Elementy wynagrodzenia |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
 | NumerDokumentu | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Informacja o korekcie zajęcia komorniczego |
+| Opis | `MemoText` | bazodanowe, podlista |  | Informacja o korekcie zajęcia komorniczego |
 | OpisPrzelewu | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kadry.RodzajeKorektZajęćKomorniczych` | bazodanowe, enum |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Kadry.RodzajeKorektZajęćKomorniczych` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` (subrow) | bazodanowe |  |  |
 | Rozliczenie.Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
 | Rozliczenie.RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
-| Rozliczenie.WgOdbiorca | `Soneta.Business.Key` |  |  |  |
-| Rozliczenie.WgRachunekOdbiorcy | `Soneta.Business.Key` |  |  |  |
-| Rozliczone | `bool` |  |  |  |
-| Spłacona | `bool` |  |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  | Kwota do rozliczenia |
-| Zajecie | `Soneta.Kadry.ZajęcieKomornicze` | bazodanowe |  |  |
+| Rozliczenie.WgOdbiorca | `Key` | podlista |  |  |
+| Rozliczenie.WgRachunekOdbiorcy | `Key` | podlista |  |  |
+| Rozliczone | `bool` | tylko-odczyt |  |  |
+| Spłacona | `bool` | tylko-odczyt |  |  |
+| Wartosc | `Currency` | bazodanowe |  | Kwota do rozliczenia |
+| Zajecie | `Soneta.Kadry.ZajęcieKomornicze` | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

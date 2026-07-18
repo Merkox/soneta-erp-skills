@@ -5,45 +5,49 @@ Opis: Kartoteka technologii produkcyjnych opisujących receptury wytwarzania wyr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 18
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 7
+- subrowy: 1
+- razem: 34
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Archiwum | `bool` |  |  | Technologia w archiwum. |
-| Czas | `Soneta.Types.TimeSec` | bazodanowe |  | Czas technologii. |
-| CzasUtworzenia | `Soneta.Types.TimeSec` | bazodanowe | Czas utworzenia | Czas utworzenia technologii. |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data do | Data obowiązywania do technologii. |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data od | Data obowiązywania od technologii. |
-| DataUtworzenia | `Soneta.Types.Date` | bazodanowe | Data utworzenia | Data utworzenia technologii. |
+| Archiwum | `bool` | tylko-odczyt |  | Technologia w archiwum. |
+| Czas | `TimeSec` | bazodanowe |  | Czas technologii. |
+| CzasUtworzenia | `TimeSec` | bazodanowe | Czas utworzenia | Czas utworzenia technologii. |
+| DataDo | `Date` | bazodanowe | Data do | Data obowiązywania do technologii. |
+| DataOd | `Date` | bazodanowe | Data od | Data obowiązywania od technologii. |
+| DataUtworzenia | `Date` | bazodanowe | Data utworzenia | Data utworzenia technologii. |
 | Domyslna | `bool` | bazodanowe | Domyślna | Technologia domyślna dla wskazanego towaru. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość technologii. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość technologii. |
 | IloscMinimalna | `double` | bazodanowe | Ilość minimalna | Ilość minimalna technologii. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla technologii. |
-| Kalkulacja | `Soneta.ProdukcjaPro.ProTechnologia.KalkulacjaTechnologii` |  |  | Kalkulacja technologii. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla technologii. |
+| Kalkulacja | `Soneta.ProdukcjaPro.ProTechnologia.KalkulacjaTechnologii` | tylko-odczyt |  | Kalkulacja technologii. |
 | Krotnosc | `double` | bazodanowe | Krotność | Krotność technologii. |
-| MaterialyOperacjiTechnologii | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProTechnologiaMaterialuOperacjiTechnologii>` |  |  |  |
-| MaterialyOperacjiZlecenia | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProTechnologiaMaterialuOperacjiZlecenia>` |  |  |  |
+| MaterialyOperacjiTechnologii | `SubTable<Soneta.ProdukcjaPro.ProTechnologiaMaterialuOperacjiTechnologii>` | podlista |  |  |
+| MaterialyOperacjiZlecenia | `SubTable<Soneta.ProdukcjaPro.ProTechnologiaMaterialuOperacjiZlecenia>` | podlista |  |  |
 | Miedzywydzialowosc | `bool` | bazodanowe | Międzywydziałowość | Międzywydziałowość technologii. |
 | Nazwa | `string` | bazodanowe |  | Nazwa technologii. |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer technologii. |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer technologii. |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Operacje | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologii>` |  |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator tworzący technologię. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis technologii. |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Operacje | `LpSubTable<Soneta.ProdukcjaPro.ProOperacjaTechnologii>` | podlista |  |  |
+| Operator | `App.Operator` | bazodanowe |  | Operator tworzący technologię. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis technologii. |
 | PozycjaGlowna | `Soneta.ProdukcjaPro.IProPozycjaGlowna` |  | Pozycja główna | Pozycja główna technologii. |
-| PozycjeGlowne | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProPozycjaGlownaTechnologii>` |  |  |  |
-| Provider | `Soneta.ProdukcjaPro.ProDokument` |  |  |  |
-| Przygotowanie | `bool` |  |  | Technologia w przygotowaniu. |
-| Stan | `Soneta.ProdukcjaPro.ProStanTechnologii` | bazodanowe, enum |  | Stan technologii. |
+| PozycjeGlowne | `SubTable<Soneta.ProdukcjaPro.ProPozycjaGlownaTechnologii>` | podlista |  |  |
+| Provider | `Soneta.ProdukcjaPro.ProDokument` | tylko-odczyt |  |  |
+| Przygotowanie | `bool` | tylko-odczyt |  | Technologia w przygotowaniu. |
+| Stan | `Soneta.ProdukcjaPro.ProStanTechnologii` (enum) | bazodanowe |  | Stan technologii. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar technologii. |
 | Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | bazodanowe | Wydział | Wydział technologii. |
-| Zatwierdzona | `bool` |  |  | Technologia zatwierdzona. |
+| Zatwierdzona | `bool` | tylko-odczyt |  | Technologia zatwierdzona. |
 
 ## Enumy
 

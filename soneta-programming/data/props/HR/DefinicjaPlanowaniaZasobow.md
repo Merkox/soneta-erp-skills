@@ -5,13 +5,17 @@ Opis: Słownik definicji dokumentów planowania zasobów w module ZKL. Stanowi s
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada |  |
 | DefinicjaProcesu | `System.Guid` | bazodanowe |  |  |
-| DependentWfDefinition | `Soneta.Business.IDependentWfDefinition` |  |  |  |
+| DependentWfDefinition | `IDependentWfDefinition` |  |  |  |
 | Korekta | `bool` | bazodanowe | Korekta | Flaga określająca czy definicja przeznaczona jest dla korekty |
 | Nazwa | `string` | bazodanowe | Nazwa |  |

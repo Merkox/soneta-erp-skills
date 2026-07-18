@@ -5,25 +5,29 @@ Opis: Element szczegółowy usługi meldunku (ProMeldunek). Rejestruje usługę 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cena | `Soneta.Types.DoubleCy` | bazodanowe |  | Cena usługi meldunku. |
-| CenaPlanowana | `Soneta.Types.DoubleCy` | bazodanowe | Cena planowana | Cena planowana usługi meldunku. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość usługi meldunku. |
+| Cena | `DoubleCy` | bazodanowe |  | Cena usługi meldunku. |
+| CenaPlanowana | `DoubleCy` | bazodanowe | Cena planowana | Cena planowana usługi meldunku. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość usługi meldunku. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa usługi meldunku. |
 | IloscJednostkowaPlanowana | `double` | bazodanowe | Ilość jednostkowa planowana | Ilość jednostkowa planowana usługi meldunku. |
-| IloscPlanowana | `Soneta.Types.Amount` | bazodanowe | Ilość planowana | Ilość planowana usługi meldunku. |
-| IloscPlanowanaPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość planowana przeliczona | Ilość planowana przeliczona na podstawową jednostkę miary dla usługi meldunku. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla usługi meldunku. |
+| IloscPlanowana | `Amount` | bazodanowe | Ilość planowana | Ilość planowana usługi meldunku. |
+| IloscPlanowanaPrzeliczona | `Amount` | bazodanowe | Ilość planowana przeliczona | Ilość planowana przeliczona na podstawową jednostkę miary dla usługi meldunku. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla usługi meldunku. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa usługi meldunku. |
 | Meldunek | `Soneta.ProdukcjaPro.ProMeldunek` | bazodanowe, guided-parent |  | Meldunek dla usługi meldunku. |
-| NarzutPlanowany | `Soneta.Types.Percent` | bazodanowe | Narzut planowany | Narzut planowany usługi meldunku |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis usługi meldunku. |
+| NarzutPlanowany | `Percent` | bazodanowe | Narzut planowany | Narzut planowany usługi meldunku |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis usługi meldunku. |
 | PominWKalkulacji | `bool` | bazodanowe | Pomiń w kalkulacji | Pomijanie w kalkulacji usługi meldunku. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar usługi meldunku. |
 | UslugaOperacjiZlecenia | `Soneta.ProdukcjaPro.ProUslugaOperacjiZlecenia` | bazodanowe | Usługa operacji zlecenia | Usługa operacji zlecenia dla usługi meldunku. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość usługi meldunku. |
-| WartoscPlanowana | `Soneta.Types.Currency` | bazodanowe | Wartość planowana | Wartość planowana usługi meldunku. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość usługi meldunku. |
+| WartoscPlanowana | `Currency` | bazodanowe | Wartość planowana | Wartość planowana usługi meldunku. |

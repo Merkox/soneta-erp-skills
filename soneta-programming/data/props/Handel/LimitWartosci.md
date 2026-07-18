@@ -5,15 +5,19 @@ Opis: Element szczegółowy definicji dokumentu handlowego (DefDokHandlowego). P
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Definicja` → `DefDokHandlowego`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Handel.DefDokHandlowego` | bazodanowe, guided-parent | Definicja | Limity wartości dotyczą wybranej definicji dokumentu handlowego. |
-| Typ | `Soneta.Handel.LimitWartosciTyp` | bazodanowe, enum | Typ | Typ limitu wartości |
-| Waluta | `Soneta.Waluty.Waluta` | bazodanowe | Waluta | Waluta limitu wartości |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość limitu w walucie |
+| Typ | `Soneta.Handel.LimitWartosciTyp` (enum) | bazodanowe, tylko-odczyt | Typ | Typ limitu wartości |
+| Waluta | `Soneta.Waluty.Waluta` | bazodanowe, tylko-odczyt | Waluta | Waluta limitu wartości |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość limitu w walucie |
 
 ## Enumy
 

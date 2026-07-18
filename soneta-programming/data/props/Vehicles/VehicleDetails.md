@@ -6,37 +6,41 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDocumentHostCRM`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 22
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 0
+- razem: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Color | `string` | bazodanowe | Kolor |  |
 | Department | `Soneta.Kadry.Wydzial` | bazodanowe | Dział |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis pojazdu |  |
-| DokumentyCRM | `Soneta.Business.SubTable<Soneta.Zadania.DokumentCRM>` |  |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis pojazdu |  |
+| DokumentyCRM | `SubTable<Soneta.Zadania.DokumentCRM>` | podlista |  |  |
 | Emmision | `string` | bazodanowe | Norma emisji CO2 |  |
 | EngineCapacity | `double` | bazodanowe | Pojemność silnika |  |
-| FirstRegDate | `Soneta.Types.Date` | bazodanowe | Data pierwszej rejestracji |  |
-| FirstRegistrationDate | `Soneta.Types.Date` | bazodanowe | Data pierwszej rejestracji |  |
+| FirstRegDate | `Date` | bazodanowe | Data pierwszej rejestracji |  |
+| FirstRegistrationDate | `Date` | bazodanowe | Data pierwszej rejestracji |  |
 | FuelCardNo | `string` | bazodanowe | Numer karty paliwowej |  |
-| LastReading | `Soneta.Vehicles.VehicleReading` |  |  |  |
+| LastReading | `Soneta.Vehicles.VehicleReading` | tylko-odczyt |  |  |
 | Limit | `double` | bazodanowe | Roczny limit kilometrów |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa pojazdu |
 | Owner | `Soneta.CRM.Kontrahent` | bazodanowe | Właściciel |  |
 | Power | `double` | bazodanowe | Moc silnika |  |
 | ProductionYear | `int` | bazodanowe | Rok produkcji |  |
-| PurchaseDate | `Soneta.Types.Date` | bazodanowe | Data zakupu |  |
+| PurchaseDate | `Date` | bazodanowe | Data zakupu |  |
 | PurchaseDocument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument zakupu |  |
-| Readings | `Soneta.Business.View<Soneta.Vehicles.VehicleReading>` |  |  |  |
+| Readings | `View<Soneta.Vehicles.VehicleReading>` | podlista |  |  |
 | Seats | `int` | bazodanowe | Liczba miejsc |  |
 | Service | `Soneta.CRM.Kontrahent` | bazodanowe | Serwisant |  |
 | Transmission | `string` | bazodanowe | Skrzynia biegów |  |
 | VIN | `string` | bazodanowe | VIN |  |
-| Vehicle | `Soneta.Vehicles.Vehicle` |  |  |  |
-| VehicleBase | `Soneta.Samochodowka.Pojazd` | bazodanowe |  |  |
-| VehicleBrand | `Soneta.Business.Db.DictionaryItem` |  |  |  |
+| Vehicle | `Soneta.Vehicles.Vehicle` | tylko-odczyt |  |  |
+| VehicleBase | `Soneta.Samochodowka.Pojazd` | bazodanowe, tylko-odczyt |  |  |
+| VehicleBrand | `Db.DictionaryItem` | tylko-odczyt |  |  |
 | VehicleModel | `string` | bazodanowe | Model pojazdu |  |
 | VehicleState | `Soneta.Vehicles.Models.Database.Config.VehicleState` | bazodanowe | Stan pojazdu |  |
 | VehicleType | `Soneta.Vehicles.Models.Database.Config.VehicleType` | bazodanowe | Typ pojazdu |  |
-| WarrantyDate | `Soneta.Types.Date` | bazodanowe | Data gwarancji |  |
+| WarrantyDate | `Date` | bazodanowe | Data gwarancji |  |

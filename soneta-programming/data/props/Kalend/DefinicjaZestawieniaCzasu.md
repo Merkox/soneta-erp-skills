@@ -6,25 +6,29 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Algorytm | `MemoText` | bazodanowe, podlista |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | CellCode | `string` |  |  |  |
 | ExtenderCode | `string` |  |  |  |
 | Multi | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Powiazanie | `Soneta.Kalend.PowiązaniaZestawieniaCzasu` | bazodanowe, enum |  |  |
+| Powiazanie | `Soneta.Kalend.PowiązaniaZestawieniaCzasu` (enum) | bazodanowe |  |  |
 | PulpitPracownika | `bool` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajeZestawieniaCzasu` | bazodanowe, enum |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajeZestawieniaCzasu` (enum) | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | SourceCode | `string` |  |  |  |
 | WierszeDowolnegoTypu | `bool` | bazodanowe |  |  |
 

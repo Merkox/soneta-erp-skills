@@ -110,7 +110,7 @@ foreach (var list in interfaceImpls.Values)
 Directory.CreateDirectory(outDir);
 
 // INDEX + zliczniki
-var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string Caption, string Interfaces, string RelPath)>();
+var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string Caption, string Interfaces, string History, string RelPath)>();
 var moduleMeta = new Dictionary<string, (string Caption, string Description)>(StringComparer.Ordinal);
 int filesWritten = 0, modulesWithTables = 0;
 
@@ -146,7 +146,7 @@ foreach (var module in modules)
         var record = module.GetTypeMembers(recordBaseName + "Record").FirstOrDefault();
         if (record == null) continue; // brak *Record → nie realna tabela danych
 
-        var (md, konfig, guided, tableType, caption, interfaces) = BuildRecordMarkdown(
+        var (md, konfig, guided, tableType, caption, interfaces, history) = BuildRecordMarkdown(
             recordBaseName, module, record, topLevelClasses, interfaceImpls);
 
         var filePath = Path.Combine(moduleDir, recordBaseName + ".md");
@@ -154,7 +154,7 @@ foreach (var module in modules)
         filesWritten++;
 
         var rel = moduleShort + "/" + recordBaseName + ".md";
-        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, caption, interfaces, rel));
+        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, caption, interfaces, history, rel));
     }
 }
 
@@ -166,8 +166,10 @@ idx.AppendLine("Pliki w tym katalogu zostały wygenerowane wsadowo przez");
 idx.AppendLine("`scripts/export-props-all.csx` (ta sama logika co `scan-props.csx`).");
 idx.AppendLine("Każdy plik `<Moduł>/<RowType>.md` zawiera pełną tabelę pól jednej tabeli.");
 idx.AppendLine("Ten INDEX to zarazem pełna inwentaryzacja modułów i tabel (moduł z `Opis`; tabela:");
-idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Interfaces | Plik`).");
-idx.AppendLine("Instrukcja odczytu i regeneracji: [../references/scan-props.md](../../references/scan-props.md).");
+idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik`).");
+idx.AppendLine("Kolumna `Historia`: `historyczna → H` (obiekt wersjonowany, historia w tabeli H) albo");
+idx.AppendLine("`historia → P` (rekord historyczny obiektu P). Lista interfejsów i tabel je implementujących:");
+idx.AppendLine("[Interfaces.md](Interfaces.md). Instrukcja odczytu i regeneracji: [../references/scan-props.md](../../references/scan-props.md).");
 idx.AppendLine();
 idx.AppendLine($"- Modułów z tabelami: {modulesWithTables}");
 idx.AppendLine($"- Tabel (plików): {filesWritten}");
@@ -185,23 +187,49 @@ foreach (var grp in indexRows.GroupBy(r => r.Module).OrderBy(g => g.Key, StringC
         if (!string.IsNullOrEmpty(meta.Description)) idx.AppendLine($"- Opis: {InlineText(meta.Description)}");
         if (!string.IsNullOrEmpty(meta.Caption) || !string.IsNullOrEmpty(meta.Description)) idx.AppendLine();
     }
-    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Interfaces | Plik |");
-    idx.AppendLine("|---------|-------|--------|--------|--------|------------|------|");
+    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik |");
+    idx.AppendLine("|---------|-------|--------|--------|--------|----------|------------|------|");
     foreach (var r in grp.OrderBy(r => r.RowType, StringComparer.Ordinal))
-        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.Interfaces)} | [{r.RelPath}]({r.RelPath}) |");
+        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.History)} | {EscapeCell(r.Interfaces)} | [{r.RelPath}]({r.RelPath}) |");
     idx.AppendLine();
 }
 
 File.WriteAllText(Path.Combine(outDir, "INDEX.md"), idx.ToString());
 
+// ── Interfaces.md ─────────────────────────────────────────────────────────────
+// Interfejs → tabele implementujące (`[TableInfo(Interfaces=...)]`). Tabele linkujemy
+// do ich plików z INDEX-u, gdy dostępne.
+var pathByRow = new Dictionary<string, string>(StringComparer.Ordinal);
+foreach (var r in indexRows) pathByRow.TryAdd(r.RowType, r.RelPath);
+
+var ifc = new StringBuilder();
+ifc.AppendLine("# Interfejsy tabel — dane wygenerowane");
+ifc.AppendLine();
+ifc.AppendLine($"Interfejsów: **{interfaceImpls.Count}**.");
+ifc.AppendLine();
+ifc.AppendLine("Interfejsy zadeklarowane w `[TableInfo(Interfaces=...)]` i tabele (`RowType`), które je");
+ifc.AppendLine("implementują. Pole o typie interfejsu (relacja interfejsowa) może wskazywać na rekord");
+ifc.AppendLine("dowolnej z wymienionych tabel. Odczyt natychmiastowy, bez DLL; regeneracja razem z");
+ifc.AppendLine("[INDEX.md](INDEX.md) skryptem `export-props-all.csx`.");
+ifc.AppendLine();
+ifc.AppendLine("| Interfejs | Tabel | Tabele implementujące |");
+ifc.AppendLine("|-----------|------:|------------------------|");
+foreach (var kv in interfaceImpls)
+{
+    var impls = kv.Value.Distinct().ToList();
+    var links = impls.Select(rt => pathByRow.TryGetValue(rt, out var p) ? $"[{rt}]({p})" : "`" + rt + "`");
+    ifc.AppendLine($"| `{kv.Key}` | {impls.Count} | {string.Join(", ", links)} |");
+}
+File.WriteAllText(Path.Combine(outDir, "Interfaces.md"), ifc.ToString());
+
 Console.Error.WriteLine($"# Gotowe: zapisano {filesWritten} plików w {modulesWithTables} modułach → {outDir}");
-Console.WriteLine($"OK: {filesWritten} tabel, {modulesWithTables} modułów → {outDir}");
+Console.WriteLine($"OK: {filesWritten} tabel, {modulesWithTables} modułów, {interfaceImpls.Count} interfejsów → {outDir}");
 return 0;
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Budowa markdown pojedynczej tabeli — logika identyczna jak scan-props.csx.
 // Zwraca (markdown, konfig, guided, tableType) — trzy ostatnie do INDEX-u.
-static (string Md, string Konfig, string Guided, string TableType, string Caption, string Interfaces) BuildRecordMarkdown(
+static (string Md, string Konfig, string Guided, string TableType, string Caption, string Interfaces, string History) BuildRecordMarkdown(
     string recordBaseName,
     INamedTypeSymbol enclosing,
     INamedTypeSymbol foundRecord,
@@ -237,7 +265,7 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
     string guidedParentField = null, guidedParentType = null;
     if (!isGuidedRoot) (guidedParentField, guidedParentType) = FindGuidedParent(foundRecord, rowClass);
 
-    var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)>(StringComparer.Ordinal);
+    var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, bool ReadOnly, bool IsSubRow, string Caption, string Description)>(StringComparer.Ordinal);
     var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
     ScanRecord(foundRecord, "", visited, merged, topLevelClasses);
 
@@ -251,6 +279,7 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
     }
 
     string guidedText = "";
+    string historyText = "";  // do INDEX: „historyczna: H" / „historia: P"
     var thisInterfaces = nestedTableCls != null ? GetTableInterfaces(nestedTableCls).ToList() : new List<string>();
     if (!string.IsNullOrEmpty(tableTypeName))
     {
@@ -264,14 +293,45 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
             sb.AppendLine($"Guided: child — nadrzędna przez pole `{guidedParentField}` → `{guidedParentType}`");
             guidedText = $"child: {guidedParentField}→{guidedParentType}";
         }
+        if (mainBusinessClass != null)
+        {
+            if (mainBusinessClass.AllInterfaces.Any(i => i.Name == "IRowWithHistory"))
+            {
+                var histType = FindHistoryType(mainBusinessClass);
+                sb.AppendLine(histType != null
+                    ? $"Historyczna: Tak — wersje (historia) w tabeli `{histType}`"
+                    : "Historyczna: Tak");
+                historyText = histType != null ? $"historyczna → {histType}" : "historyczna";
+            }
+            if (mainBusinessClass.AllInterfaces.Any(i => i.Name == "IHistory"))
+            {
+                sb.AppendLine(guidedParentType != null
+                    ? $"Historia: Tak — zapis historyczny tabeli `{guidedParentType}`"
+                    : "Historia: Tak");
+                historyText = guidedParentType != null ? $"historia → {guidedParentType}" : "historia";
+            }
+        }
         if (thisInterfaces.Count > 0)
             sb.AppendLine($"Implementuje interfejsy: {string.Join(", ", thisInterfaces.Select(i => "`" + i + "`"))}");
     }
 
     sb.AppendLine();
-    var dbCount = merged.Values.Count(v => v.IsDb);
-    sb.AppendLine($"- pola bazodanowe: {dbCount}");
-    sb.AppendLine($"- pola kalkulowane (z klas biznesowych): {merged.Count - dbCount}");
+    // Rozłączny rozkład wg roli (subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane).
+    int subRowCount = 0, subListCount = 0, readOnlyCount = 0, dbCount = 0, calcCount = 0;
+    foreach (var v in merged.Values)
+    {
+        if (v.IsSubRow) subRowCount++;
+        else if (IsSubListType(v.Sym)) subListCount++;
+        else if (v.ReadOnly) readOnlyCount++;
+        else if (v.IsDb) dbCount++;
+        else calcCount++;
+    }
+    sb.AppendLine($"- pola bazodanowe (zapisywalne): {dbCount}");
+    sb.AppendLine($"- pola kalkulowane (zapisywalne): {calcCount}");
+    sb.AppendLine($"- pola tylko-odczyt: {readOnlyCount}");
+    sb.AppendLine($"- podlisty: {subListCount}");
+    sb.AppendLine($"- subrowy: {subRowCount}");
+    sb.AppendLine($"- razem: {merged.Count}");
     sb.AppendLine();
     sb.AppendLine("| Pole | Typ | Rodzaj | Tytuł | Opis |");
     sb.AppendLine("|------|-----|--------|-------|------|");
@@ -280,23 +340,25 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
     var enumsUsed = new SortedDictionary<string, INamedTypeSymbol>(StringComparer.Ordinal);
     foreach (var kv in merged)
     {
-        var rodzaj = kv.Value.IsDb ? "bazodanowe" : "";
-        if (guidedParentField != null && kv.Key == guidedParentField)
-            rodzaj = string.IsNullOrEmpty(rodzaj) ? "guided-parent" : rodzaj + ", guided-parent";
+        var isSubRow = kv.Value.IsSubRow;
+        var isSubList = !isSubRow && IsSubListType(kv.Value.Sym);
+        var tags = new List<string>();
+        if (kv.Value.IsDb) tags.Add("bazodanowe");
+        if (isSubList) tags.Add("podlista");
+        else if (kv.Value.ReadOnly && !isSubRow) tags.Add("tylko-odczyt");
+        if (guidedParentField != null && kv.Key == guidedParentField) tags.Add("guided-parent");
         var shortType = ShortTypeName(kv.Value.Type);
         if (shortType.StartsWith("I") && shortType.Length > 1 && char.IsUpper(shortType[1])
             && interfaceImpls.TryGetValue(shortType, out var impls))
         {
-            rodzaj = string.IsNullOrEmpty(rodzaj) ? "iface-ref" : rodzaj + ", iface-ref";
+            tags.Add("iface-ref");
             interfaceFields.Add((kv.Key, shortType, impls));
         }
         var en = AsEnum(kv.Value.Sym);
-        if (en != null)
-        {
-            rodzaj = string.IsNullOrEmpty(rodzaj) ? "enum" : rodzaj + ", enum";
-            enumsUsed[en.ToDisplayString()] = en;
-        }
-        sb.AppendLine($"| {kv.Key} | `{kv.Value.Type}` | {rodzaj} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
+        if (en != null) enumsUsed[en.ToDisplayString()] = en;
+        var typeSuffix = en != null ? " (enum)" : (isSubRow ? " (subrow)" : "");
+        var typeCol = "`" + PrettyType(kv.Value.Type) + "`" + typeSuffix;
+        sb.AppendLine($"| {kv.Key} | {typeCol} | {string.Join(", ", tags)} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
     }
 
     if (interfaceFields.Count > 0)
@@ -322,14 +384,14 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
         foreach (var en in enumsUsed.Values)
         {
             sb.AppendLine();
-            sb.AppendLine($"### {en.Name} (`{en.ToDisplayString()}`)");
+            sb.AppendLine($"### {en.Name} (`{PrettyType(en.ToDisplayString())}`)");
             foreach (var (name, value, caption) in GetEnumMembers(en))
                 sb.AppendLine(string.IsNullOrEmpty(caption) ? $"- `{name}` = {value}" : $"- `{name}` = {value} — {EscapeCell(caption)}");
         }
     }
 
     return (sb.ToString(), isConfigTable ? "konfig" : "", guidedText, tableTypeName ?? "",
-        tableCaption ?? "", string.Join(", ", thisInterfaces));
+        tableCaption ?? "", string.Join(", ", thisInterfaces), historyText);
 }
 
 static string ShortTypeName(string fullName)
@@ -341,11 +403,44 @@ static string ShortTypeName(string fullName)
     return dot >= 0 ? fullName.Substring(dot + 1) : fullName;
 }
 
+// (skopiowane 1:1 ze scan-props.csx — trzymać zsynchronizowane)
+static string PrettyType(string t) =>
+    string.IsNullOrEmpty(t) ? t : t.Replace("Soneta.Business.", "").Replace("Soneta.Types.", "");
+
+static bool IsObsolete(ISymbol s) =>
+    s.GetAttributes().Any(a => a.AttributeClass?.Name is "ObsoleteAttribute" or "Obsolete");
+
+static bool IsReadOnlyProp(IPropertySymbol p) =>
+    p.SetMethod == null || p.SetMethod.DeclaredAccessibility != Accessibility.Public;
+
+static bool IsSubListType(ITypeSymbol type)
+{
+    if (type is IArrayTypeSymbol) return true;
+    if (type is not INamedTypeSymbol n) return false;
+    if (n.SpecialType == SpecialType.System_String) return false;
+    if (n.Name is "Periods") return false;
+    if (n.Name is "Key" or "View") return true;
+    return n.AllInterfaces.Any(i => i.Name == "IEnumerable");
+}
+
+static string FindHistoryType(INamedTypeSymbol bizCls)
+{
+    if (bizCls == null) return null;
+    foreach (var p in EnumerateInheritedProperties(bizCls))
+    {
+        if (p.DeclaredAccessibility != Accessibility.Public) continue;
+        if (p.Type is INamedTypeSymbol pt && pt.TypeKind == TypeKind.Class
+            && pt.AllInterfaces.Any(i => i.Name == "IHistory"))
+            return pt.Name;
+    }
+    return null;
+}
+
 static void ScanRecord(
     INamedTypeSymbol record,
     string prefix,
     HashSet<INamedTypeSymbol> visited,
-    SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, string Caption, string Description)> merged,
+    SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, bool ReadOnly, bool IsSubRow, string Caption, string Description)> merged,
     Dictionary<string, INamedTypeSymbol> topLevelClasses)
 {
     if (record == null) return;
@@ -353,7 +448,7 @@ static void ScanRecord(
 
     var fields = record.GetMembers()
         .OfType<IFieldSymbol>()
-        .Where(f => f.DeclaredAccessibility == Accessibility.Public)
+        .Where(f => f.DeclaredAccessibility == Accessibility.Public && !IsObsolete(f))
         .ToList();
 
     var encMod = record.ContainingType;
@@ -368,10 +463,13 @@ static void ScanRecord(
     foreach (var f in fields)
     {
         var key = prefix + f.Name;
+        var isSub = f.Type is INamedTypeSymbol nt && nt.TypeKind == TypeKind.Class && nt.Name.EndsWith("Record");
         merged[key] = (
             f.Type.ToDisplayString(),
             f.Type,
             true,
+            false,
+            isSub,
             GetAttributeFirstString(f, "CaptionAttribute"),
             GetAttributeFirstString(f, "DescriptionAttribute"));
     }
@@ -384,22 +482,26 @@ static void ScanRecord(
         {
             if (p.DeclaredAccessibility != Accessibility.Public || p.IsStatic || p.IsIndexer || p.GetMethod == null)
                 continue;
+            if (IsObsolete(p)) { merged.Remove(prefix + p.Name); seen.Add(p.Name); continue; }
             if (!seen.Add(p.Name)) continue;
             if (infrastructureNames.Contains(p.Name) && !merged.ContainsKey(prefix + p.Name)) continue;
             var key = prefix + p.Name;
             var typeStr = p.Type.ToDisplayString();
             var caption = GetAttributeFirstString(p, "CaptionAttribute");
             var description = GetAttributeFirstString(p, "DescriptionAttribute");
+            var readOnly = IsReadOnlyProp(p);
             if (merged.TryGetValue(key, out var existing))
             {
                 merged[key] = (
                     typeStr,
                     p.Type,
                     existing.IsDb,
+                    readOnly,
+                    existing.IsSubRow,
                     !string.IsNullOrEmpty(caption) ? caption : existing.Caption,
                     !string.IsNullOrEmpty(description) ? description : existing.Description);
             }
-            else merged[key] = (typeStr, p.Type, false, caption, description);
+            else merged[key] = (typeStr, p.Type, false, readOnly, false, caption, description);
         }
     }
 
@@ -419,7 +521,7 @@ static void ScanRecord(
                 ? entry.Caption : GetAttributeFirstString(member, "CaptionAttribute");
             var description = !string.IsNullOrEmpty(entry.Description)
                 ? entry.Description : GetAttributeFirstString(member, "DescriptionAttribute");
-            merged[key] = (entry.Type, entry.Sym, entry.IsDb, caption, description);
+            merged[key] = (entry.Type, entry.Sym, entry.IsDb, entry.ReadOnly, entry.IsSubRow, caption, description);
         }
     }
 

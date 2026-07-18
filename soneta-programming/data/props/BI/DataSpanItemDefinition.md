@@ -5,17 +5,21 @@ Opis: Element szczegółowy zestawu przedziałów danych (DataSpanSetDefinition)
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DataSpanSet` → `DataSpanSetDefinition`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataSpanSet | `Soneta.BI.DataSpanSetDefinition` | bazodanowe, guided-parent | Definicja zestawu |  |
+| DataSpanSet | `Soneta.BI.DataSpanSetDefinition` | bazodanowe, tylko-odczyt, guided-parent | Definicja zestawu |  |
 | Factor | `decimal` | bazodanowe | Współczynnik |  |
-| FieldType | `Soneta.Data.Schema.FieldType` | bazodanowe, enum | Typ(DB) |  |
+| FieldType | `Soneta.Data.Schema.FieldType` (enum) | bazodanowe, tylko-odczyt | Typ(DB) |  |
 | Lp | `int` | bazodanowe |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
-| Result | `string` |  |  |  |
+| Result | `string` | tylko-odczyt |  |  |
 | SpanValue | `object` |  |  |  |
 | Value | `string` | bazodanowe | Wartość |  |
 

@@ -5,21 +5,25 @@ Opis: Przypisanie opiekuna (operatora) do kontrahenta w określonej roli i okres
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Określa czy opiekun jest aktywny. |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia opieki | Określa datę zakończenia kampanii |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia opieki | Określa datę rozpoczęcia opieki. |
-| IsVisibleKontakty | `bool` |  |  |  |
-| Kontakty | `Soneta.Business.ViewInfo` |  |  |  |
+| DataDo | `Date` | bazodanowe | Data zakończenia opieki | Określa datę zakończenia kampanii |
+| DataOd | `Date` | bazodanowe | Data rozpoczęcia opieki | Określa datę rozpoczęcia opieki. |
+| IsVisibleKontakty | `bool` | tylko-odczyt |  |  |
+| Kontakty | `ViewInfo` | tylko-odczyt |  |  |
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  | Kontrahent, do którego przypisany jest opiekun. |
 | OddzialFirmy | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Określa oddział firmy, do którego przypisany jest opiekun. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  |  |
+| Operator | `App.Operator` | bazodanowe |  |  |
 | Rola | `Soneta.CRM.Config.RolaOpiekun` | bazodanowe | Rola opiekuna | Rola opiekuna |
-| Typ | `Soneta.CRM.TypOpiekuna` | bazodanowe, enum | Typ opiekuna | Określa typ opiekuna. |
+| Typ | `Soneta.CRM.TypOpiekuna` (enum) | bazodanowe | Typ opiekuna | Określa typ opiekuna. |
 
 ## Enumy
 

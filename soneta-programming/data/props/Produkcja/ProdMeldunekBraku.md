@@ -5,23 +5,27 @@ Opis: Rejestr meldunków braków produkcyjnych zgłaszanych podczas realizacji o
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataZgloszenia | `System.DateTime` | bazodanowe | Data zgłoszenia | Data zgłoszenia meldunku braku. |
 | Ilosc | `Soneta.Towary.Quantity` | bazodanowe | Ilość | Ilość meldunku braku. |
 | Kod | `string` | bazodanowe |  | Kod, skrócona nazwa meldunku braku. |
-| Operacja | `Soneta.Produkcja.Operacja` |  |  |  |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Określa operatora, który zgłosił awarię. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis meldunku braku. |
+| Operacja | `Soneta.Produkcja.Operacja` | tylko-odczyt |  |  |
+| Operator | `App.Operator` | bazodanowe |  | Określa operatora, który zgłosił awarię. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis meldunku braku. |
 | ProdHistoria | `Soneta.Produkcja.ProdHistoria` | bazodanowe | Rejestracja | Określa rejestrację prac dla meldunku braku. |
 | ProdOsoba | `Soneta.Produkcja.ProdOsoba` | bazodanowe | Osoba | Określa osobę rzeczywsitą, która zgłosiła awarię. |
-| Stan | `Soneta.Produkcja.StanMeldunkuBraku` | bazodanowe, enum |  | Określa stan meldunku braku (nowy, zakończony). |
+| Stan | `Soneta.Produkcja.StanMeldunkuBraku` (enum) | bazodanowe |  | Określa stan meldunku braku (nowy, zakończony). |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Określa towar dla meldunku braku. |
 | Wada | `string` | bazodanowe |  | Wada towaru dla meldunku braku. |
-| Zglosil | `string` |  | Zgłosił | Określa pracownika, który zgłosił meldunek braku. |
+| Zglosil | `string` | tylko-odczyt | Zgłosił | Określa pracownika, który zgłosił meldunek braku. |
 
 ## Enumy
 

@@ -5,12 +5,16 @@ Opis: Element szczegółowy wydziału produkcyjnego (ProWydzial). Konfiguruje sc
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wydzial` → `ProWydzial`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 1
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe |  | Definicja numeracji technologii. |
+| Definicja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe |  | Definicja numeracji technologii. |
 | Definicja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Definicja.PodczasZapisu | `bool` |  |  |  |
 | Definicja.Separator | `string` | bazodanowe |  |  |

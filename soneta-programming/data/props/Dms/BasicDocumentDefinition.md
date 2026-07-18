@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IChronoOrderHostDefinition`
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 0
+- podlisty: 3
+- subrowy: 1
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllowedRuntimeDefs | `Soneta.Core.CoreModule.DbTupleDefinitionRow[]` | bazodanowe | Dozwolone definicje | Dozwolone definicje dokumentów dodatkowych |
-| BasicDocuments | `Soneta.Business.SubTable<Soneta.Workflow.Dms.BasicDocument>` |  |  |  |
+| AllowedRuntimeDefs | `Soneta.Core.CoreModule.DbTupleDefinitionRow[]` | bazodanowe, podlista | Dozwolone definicje | Dozwolone definicje dokumentów dodatkowych |
+| BasicDocuments | `SubTable<Soneta.Workflow.Dms.BasicDocument>` | podlista |  |  |
 | Default | `bool` | bazodanowe | Domyślna | Definicja domyślna |
 | DefaultDaysToResponse | `int` | bazodanowe | Dni na odpowiedź | Domyślna liczba dni na odpowiedź dla tej definicji dokumentu |
-| DefaultDocumentAccess | `Soneta.Workflow.Enums.AccessEnum` | bazodanowe, enum | Dostęp | Dostęp do dokumentu |
+| DefaultDocumentAccess | `Soneta.Workflow.Enums.AccessEnum` (enum) | bazodanowe | Dostęp | Dostęp do dokumentu |
 | IsArchCatRequired | `bool` | bazodanowe | Wymagana kategoria archiwalna | Wymagana kategoria archiwalna |
 | IsCRUAvailable | `bool` | bazodanowe | Dostępny Centralny Rejestr Umów | Dostępny Centralny Rejestr Umów (CRU) |
 | IsEnabledChronoOrder | `bool` |  |  |  |
@@ -25,15 +29,15 @@ Implementuje interfejsy: `IRightsSource`, `IChronoOrderHostDefinition`
 | LanguageCode | `string` | bazodanowe | Kod języka | Kod języka |
 | Locked | `bool` | bazodanowe | Zablokowana | Definicja zablokowana |
 | Name | `string` | bazodanowe | Nazwa | Nazwa definicji |
-| Numerator | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Określa sposób numerowania definicji |
+| Numerator | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Określa sposób numerowania definicji |
 | Numerator.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numerator.PodczasZapisu | `bool` |  |  |  |
 | Numerator.Separator | `string` | bazodanowe |  |  |
 | Numerator.Wzor | `string` | bazodanowe |  |  |
-| ResponseDeadlineBaseDate | `Soneta.Workflow.Enums.ResponseDeadlineBaseDateEnum` | bazodanowe, enum | Bazowa data odpowiedzi | Data od której liczone są dni na odpowiedź |
+| ResponseDeadlineBaseDate | `Soneta.Workflow.Enums.ResponseDeadlineBaseDateEnum` (enum) | bazodanowe | Bazowa data odpowiedzi | Data od której liczone są dni na odpowiedź |
 | Series | `bool` | bazodanowe | Seria | Seria definicji |
 | Symbol | `string` | bazodanowe | Symbol | Symbol definicji |
-| Xml | `Soneta.Business.MemoText` | bazodanowe | Zakładka użytkownika | Definicja zakładki użytkownika |
+| Xml | `MemoText` | bazodanowe, podlista | Zakładka użytkownika | Definicja zakładki użytkownika |
 
 ## Enumy
 

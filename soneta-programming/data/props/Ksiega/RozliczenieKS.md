@@ -5,34 +5,38 @@ Opis: Rozliczenie księgowe łączy parę zapisów księgowych (Winien i Ma) w c
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IRozliczenie`, `IElementKsiegowalny`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 21
+- podlisty: 2
+- subrowy: 0
+- razem: 23
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe |  | Ewidencja różnic kursowych |
-| KwotaOperacjiMa | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaOperacjiRK | `Soneta.Types.Currency` |  |  | Kwota operacji różnicy kursowej |
-| KwotaOperacjiWinien | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaRK | `Soneta.Types.Currency` |  |  | Kwota różnicy kursowej |
-| KwotaRKNetto | `Soneta.Types.Currency` |  |  | Kwota różnicy kursowej netto |
-| KwotaRKVAT | `Soneta.Types.Currency` |  |  | Kwota różnicy kursowej VAT |
-| KwotaRozliczeniaZapisu | `Soneta.Types.Currency` |  |  |  |
-| KwotaZapisuMa | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaZapisuWinien | `Soneta.Types.Currency` | bazodanowe |  |  |
-| RodzajRK | `Soneta.Kasa.RodzajRoznicyKursowej` | enum |  | Rodzaj rożnicy kursowej |
-| RozliczeniaKS | `Soneta.Business.SubTable<Soneta.Ksiega.RozliczenieKS>` |  |  |  |
-| Rozliczenie | `Soneta.Ksiega.RozliczenieKS` |  |  |  |
-| RozliczenieSP | `Soneta.Kasa.RozliczenieSP` |  |  |  |
-| RozliczenieZrodlowe | `Soneta.Core.IRozliczenie` | bazodanowe, iface-ref |  |  |
-| StatusRK | `Soneta.Kasa.StatusRoznicyKursowej` | bazodanowe, enum |  | Status różnicy kursowej |
-| Typ | `Soneta.Core.TypRozliczeniaKS` | bazodanowe, enum |  |  |
-| TypRK | `Soneta.Kasa.TypRoznicyKursowej` | enum |  | Typ rożnicy kursowej |
-| ZapisMa | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe |  |  |
-| ZapisRK | `Soneta.Ksiega.ZapisKsiegowy` |  |  | Zapis do rozliczenia RK |
-| ZapisWinien | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe |  |  |
-| ZapisyKsiegowe | `Soneta.Business.SubTable<Soneta.Ksiega.ZapisKsiegowy>` |  |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  | Ewidencja różnic kursowych |
+| KwotaOperacjiMa | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaOperacjiRK | `Currency` | tylko-odczyt |  | Kwota operacji różnicy kursowej |
+| KwotaOperacjiWinien | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaRK | `Currency` | tylko-odczyt |  | Kwota różnicy kursowej |
+| KwotaRKNetto | `Currency` | tylko-odczyt |  | Kwota różnicy kursowej netto |
+| KwotaRKVAT | `Currency` | tylko-odczyt |  | Kwota różnicy kursowej VAT |
+| KwotaRozliczeniaZapisu | `Currency` | tylko-odczyt |  |  |
+| KwotaZapisuMa | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| KwotaZapisuWinien | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| RodzajRK | `Soneta.Kasa.RodzajRoznicyKursowej` (enum) | tylko-odczyt |  | Rodzaj rożnicy kursowej |
+| RozliczeniaKS | `SubTable<Soneta.Ksiega.RozliczenieKS>` | podlista |  |  |
+| Rozliczenie | `Soneta.Ksiega.RozliczenieKS` | tylko-odczyt |  |  |
+| RozliczenieSP | `Soneta.Kasa.RozliczenieSP` | tylko-odczyt |  |  |
+| RozliczenieZrodlowe | `Soneta.Core.IRozliczenie` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| StatusRK | `Soneta.Kasa.StatusRoznicyKursowej` (enum) | bazodanowe, tylko-odczyt |  | Status różnicy kursowej |
+| Typ | `Soneta.Core.TypRozliczeniaKS` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypRK | `Soneta.Kasa.TypRoznicyKursowej` (enum) | tylko-odczyt |  | Typ rożnicy kursowej |
+| ZapisMa | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  |  |
+| ZapisRK | `Soneta.Ksiega.ZapisKsiegowy` | tylko-odczyt |  | Zapis do rozliczenia RK |
+| ZapisWinien | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  |  |
+| ZapisyKsiegowe | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

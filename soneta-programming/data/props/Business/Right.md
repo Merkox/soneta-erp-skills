@@ -5,14 +5,18 @@ Opis: Prawo dostępu przypisane do uprawnienia dla konkretnego źródła danych.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Entitle` → `IEntitle`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Entitle | `Soneta.Business.IRow` | bazodanowe, guided-parent |  | Uprawienia, którym dane prawo zostało przypisane. |
+| Entitle | `IRow` | bazodanowe, guided-parent |  | Uprawienia, którym dane prawo zostało przypisane. |
 | Expression | `Soneta.Data.QueryDefinition.Argument` |  |  |  |
 | Length | `Soneta.Data.QueryDefinition.Argument` |  |  |  |
 | Name | `string` |  |  |  |
 | ReadOnlyRight | `bool` | bazodanowe |  | Określono prawo tylko do przeglądania danych. Nie można modyfikować zapisów. |
-| Source | `Soneta.Business.IRow` | bazodanowe |  | Dane, dla których prawo jest określone. |
+| Source | `IRow` | bazodanowe |  | Dane, dla których prawo jest określone. |

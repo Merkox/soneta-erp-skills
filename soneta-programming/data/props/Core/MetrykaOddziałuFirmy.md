@@ -5,15 +5,19 @@ Opis: Element szczegółowy oddziału firmy (OddzialFirmy). Rejestruje metrykę 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Oddzial` → `OddzialFirmy`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data zmiany |  |
-| Host | `Soneta.Core.IMetrykaOddziałuFirmyHost` | bazodanowe, iface-ref |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, guided-parent |  |  |
-| Przyczyna | `string` | bazodanowe | Przyczyna zmiany |  |
+| Data | `Date` | bazodanowe, tylko-odczyt | Data zmiany |  |
+| Host | `Soneta.Core.IMetrykaOddziałuFirmyHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Przyczyna | `string` | bazodanowe, tylko-odczyt | Przyczyna zmiany |  |
 
 ## Relacje interfejsowe
 

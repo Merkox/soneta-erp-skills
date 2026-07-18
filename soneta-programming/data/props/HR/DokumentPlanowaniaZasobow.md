@@ -5,21 +5,25 @@ Opis: Nagłówek dokumentu planowania zasobów w module ZKL. Określa nazwę, ok
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 3
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe | Data dokumentu |  |
-| DataPrzeliczenia | `Soneta.Types.Date` | bazodanowe | Data przeliczenia | Data ostatniego przeliczenia dokumentu czynnością Przelicz |
-| DefinicjaDokumentu | `Soneta.HR.ZKL.PlanowanieZasobow.Definicje.DefinicjaPlanowaniaZasobow` | bazodanowe | Definicja dokumentu |  |
-| Korygowany | `Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.DokumentPlanowaniaZasobow` | bazodanowe | Koryguje dokument | Dokument korygowany przez tę korektę (wymagany dla definicji oznaczonej jako korekta) |
+| DataDokumentu | `Date` | bazodanowe | Data dokumentu |  |
+| DataPrzeliczenia | `Date` | bazodanowe, tylko-odczyt | Data przeliczenia | Data ostatniego przeliczenia dokumentu czynnością Przelicz |
+| DefinicjaDokumentu | `Soneta.HR.ZKL.PlanowanieZasobow.Definicje.DefinicjaPlanowaniaZasobow` | bazodanowe, tylko-odczyt | Definicja dokumentu |  |
+| Korygowany | `Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.DokumentPlanowaniaZasobow` | bazodanowe, tylko-odczyt | Koryguje dokument | Dokument korygowany przez tę korektę (wymagany dla definicji oznaczonej jako korekta) |
 | Nazwa | `string` | bazodanowe | Nazwa dokumentu |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres planowania |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.PozycjaDokumentuPlanowaniaZasobow>` |  |  |  |
-| StatusDokumentu | `Soneta.HR.ZKL.Enums.StatusDokumentuPlanowaniaZasobow` | bazodanowe, enum | Status |  |
-| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres planowania |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis |  |
+| Pozycje | `SubTable<Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.PozycjaDokumentuPlanowaniaZasobow>` | podlista |  |  |
+| StatusDokumentu | `Soneta.HR.ZKL.Enums.StatusDokumentuPlanowaniaZasobow` (enum) | bazodanowe | Status |  |
+| Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe, tylko-odczyt | Jednostka organizacyjna |  |
 
 ## Enumy
 

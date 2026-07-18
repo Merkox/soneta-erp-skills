@@ -6,8 +6,12 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,8 +19,8 @@ Implementuje interfejsy: `IRightsSource`
 | IsLocked | `bool` | bazodanowe |  |  |
 | LastSyncTime | `System.DateTime` | bazodanowe |  |  |
 | Name | `string` | bazodanowe |  |  |
-| Notices | `Soneta.Business.SubTable<Soneta.Core.Notice>` |  |  |  |
-| Permissions | `Soneta.Business.SubTable<Soneta.Core.NoticePermission>` |  |  |  |
+| Notices | `SubTable<Soneta.Core.Notice>` | podlista |  |  |
+| Permissions | `SubTable<Soneta.Core.NoticePermission>` | podlista |  |  |
 | Priority | `int` | bazodanowe |  |  |
 | RequiresRecipientApproval | `bool` | bazodanowe |  |  |
 | ServiceName | `string` | bazodanowe |  |  |

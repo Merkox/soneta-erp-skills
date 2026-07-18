@@ -4,19 +4,23 @@ Tytuł: eTransmisja
 Opis: Rejestr pojedynczej transmisji eDeklaracji do systemu elektronicznego urzędu. Dokumentuje czas, typ i status każdej próby wysyłki lub sprawdzenia statusu, przechowując referencję UPO oraz ewentualny opis błędu. Jedna eDeklaracja może mieć wiele transmisji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 6
+- podlisty: 2
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `System.DateTime` | bazodanowe |  | Czas transmisji |
-| EDeklaracja | `Soneta.Deklaracje.EDeklaracja` | bazodanowe | eDeklaracja | eDeklaracja transmisji |
-| NazwaPodmiotuPrzyjmujacego | `string` |  |  |  |
-| OpisStatusu | `Soneta.Business.MemoText` | bazodanowe |  | Opis statusu transmisji |
-| RefUPO | `Soneta.Business.MemoText` | bazodanowe | eDeklaracja | Referencja odbioru/Urzędowe Potwierdzenie Odbioru |
-| StatusETransmisji | `int` | bazodanowe | Status eTransmisji | Status transmisji |
-| StatusETransmisjiEnum | `Soneta.Deklaracje.StatusETransmisji` | enum | Status eTransmisji | Status eTransmisji enumerator |
-| Typ | `Soneta.Deklaracje.TypETransmisji` | bazodanowe, enum |  | Typ transmisji |
+| Czas | `System.DateTime` | bazodanowe, tylko-odczyt |  | Czas transmisji |
+| EDeklaracja | `Soneta.Deklaracje.EDeklaracja` | bazodanowe, tylko-odczyt | eDeklaracja | eDeklaracja transmisji |
+| NazwaPodmiotuPrzyjmujacego | `string` | tylko-odczyt |  |  |
+| OpisStatusu | `MemoText` | bazodanowe, podlista |  | Opis statusu transmisji |
+| RefUPO | `MemoText` | bazodanowe, podlista | eDeklaracja | Referencja odbioru/Urzędowe Potwierdzenie Odbioru |
+| StatusETransmisji | `int` | bazodanowe, tylko-odczyt | Status eTransmisji | Status transmisji |
+| StatusETransmisjiEnum | `Soneta.Deklaracje.StatusETransmisji` (enum) | tylko-odczyt | Status eTransmisji | Status eTransmisji enumerator |
+| Typ | `Soneta.Deklaracje.TypETransmisji` (enum) | bazodanowe, tylko-odczyt |  | Typ transmisji |
 
 ## Enumy
 

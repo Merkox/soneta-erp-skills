@@ -6,24 +6,28 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IEntitle`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 6
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Children | `Soneta.Business.SubTable<Soneta.Business.App.Entitle>` |  |  |  |
-| ConnectedRoles | `Soneta.Business.SubTable<Soneta.Business.Db.EntitleRef>` |  |  |  |
-| CurrentOddzial | `Soneta.Business.App.IOddzialFirmy` | bazodanowe, iface-ref |  | Aktualny oddział firmy przypisany do uprawnienia. |
-| CurrentRole | `Soneta.Business.App.Role` |  |  |  |
-| Destiny | `Soneta.Business.Db.SystemRoleDestiny` | enum |  |  |
+| Children | `SubTable<App.Entitle>` | podlista |  |  |
+| ConnectedRoles | `SubTable<Db.EntitleRef>` | podlista |  |  |
+| CurrentOddzial | `App.IOddzialFirmy` | bazodanowe, iface-ref |  | Aktualny oddział firmy przypisany do uprawnienia. |
+| CurrentRole | `App.Role` | tylko-odczyt |  |  |
+| Destiny | `Db.SystemRoleDestiny` (enum) | tylko-odczyt |  |  |
 | FullName | `string` | bazodanowe | Nazwa | Pełna nazwa oddziału praw. |
-| LegacyRole | `Soneta.Business.MemoText` | bazodanowe |  | Wynikowa rola standardowego systemu praw. |
+| LegacyRole | `MemoText` | bazodanowe, podlista |  | Wynikowa rola standardowego systemu praw. |
 | Name | `string` | bazodanowe | Kod | Unikalny kod oddziału praw. |
-| Operators | `Soneta.Business.SubTable<Soneta.Business.Db.OperatorEntitle>` |  |  |  |
-| Parent | `Soneta.Business.App.Entitle` | bazodanowe |  |  |
-| Rights | `Soneta.Business.SubTable<Soneta.Business.Db.Right>` |  |  |  |
-| RightsSystem | `Soneta.Business.App.RightsSystem` | bazodanowe, enum |  |  |
-| Roles | `Soneta.Business.SubTable<Soneta.Business.Db.EntitleRole>` |  |  |  |
+| Operators | `SubTable<Db.OperatorEntitle>` | podlista |  |  |
+| Parent | `App.Entitle` | bazodanowe |  |  |
+| Rights | `SubTable<Db.Right>` | podlista |  |  |
+| RightsSystem | `App.RightsSystem` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Roles | `SubTable<Db.EntitleRole>` | podlista |  |  |
 
 ## Relacje interfejsowe
 
@@ -38,11 +42,11 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### RightsSystem (`Soneta.Business.App.RightsSystem`)
+### RightsSystem (`App.RightsSystem`)
 - `Standard` = 0 — Standardowy
 - `Extended` = 1 — Rozszerzony
 
-### SystemRoleDestiny (`Soneta.Business.Db.SystemRoleDestiny`)
+### SystemRoleDestiny (`Db.SystemRoleDestiny`)
 - `Neutral` = 0 — Neutralna
 - `Forms` = 1 — Dla operatorów
 - `Net` = 2 — Dla pulpitów

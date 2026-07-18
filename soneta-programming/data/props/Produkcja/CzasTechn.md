@@ -5,20 +5,24 @@ Opis: Element szczegółowy operacji produkcyjnej (Operacja). Definiuje czas trw
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CechaCzas | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha czasu | Definicja cechy algorytmicznej, służąca do wyliczenia czasu. |
-| Czas | `Soneta.Types.Amount` | bazodanowe |  | Czas operacji. |
+| CechaCzas | `FeatureDefinition` | bazodanowe | Cecha czasu | Definicja cechy algorytmicznej, służąca do wyliczenia czasu. |
+| Czas | `Amount` | bazodanowe |  | Czas operacji. |
 | JednostkaCzasuDlaKosztu | `Soneta.Towary.Jednostka` | bazodanowe | Jednostka czasu dla kosztu | Jednostka czasu dla kosztu jednostkowego. |
-| Koszt | `Soneta.Types.Currency` |  |  | Koszt operacji. |
-| KosztJednostkowy | `Soneta.Types.Currency` | bazodanowe | Koszt jednostkowy | Koszt jednostkowy czasu. |
+| Koszt | `Currency` | tylko-odczyt |  | Koszt operacji. |
+| KosztJednostkowy | `Currency` | bazodanowe | Koszt jednostkowy | Koszt jednostkowy czasu. |
 | Operacja | `Soneta.Produkcja.Operacja` | bazodanowe |  | Określa operację dla danego czasu. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis czasu. |
-| Rodzaj | `Soneta.Produkcja.RodzajCzasuOperacji` | bazodanowe, enum |  | Rodzaj czasu operacji. |
-| Typ | `Soneta.Produkcja.TypCzasuOperacji` | bazodanowe, enum |  | Typ czasu operacji. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis czasu. |
+| Rodzaj | `Soneta.Produkcja.RodzajCzasuOperacji` (enum) | bazodanowe |  | Rodzaj czasu operacji. |
+| Typ | `Soneta.Produkcja.TypCzasuOperacji` (enum) | bazodanowe |  | Typ czasu operacji. |
 
 ## Enumy
 

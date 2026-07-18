@@ -5,42 +5,46 @@ Opis: Szablon konfiguracyjny meldunku produkcyjnego określający reguły raport
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 31
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 32
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AlgorytmWeryfikacjiMeldunku | `Soneta.ProdukcjaPro.ProAlgorytmWeryfikacjiMeldunku` | bazodanowe, enum | Algorytm weryfikacji meldunku | Algorytm weryfikacji meldunku dla definicji meldunku. |
+| AlgorytmWeryfikacjiMeldunku | `Soneta.ProdukcjaPro.ProAlgorytmWeryfikacjiMeldunku` (enum) | bazodanowe | Algorytm weryfikacji meldunku | Algorytm weryfikacji meldunku dla definicji meldunku. |
 | AutomatyczneRozliczanieRejestracji | `bool` | bazodanowe | Automatyczne rozliczanie rejestracji | Automatyczne rozliczanie rejestracji dla definicji meldunku. |
 | Blokada | `bool` | bazodanowe |  | Zablokowanie definicji meldunku. |
-| CechaNumeracjiDostawy | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha numeracji dostawy | Cecha numeracji dostawy dla definicji meldunku. |
-| CechaWeryfikacjiMeldunku | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha weryfikacji meldunku | Cecha weryfikacji meldunku dla definicji meldunku. |
-| CechaWycenyWyrobow | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha wyceny wyrobów | Cecha wyceny wyrobów dla definicji meldunku. |
-| DataPrzychodow | `Soneta.ProdukcjaPro.ProDataWystawianiaDokumentow` | bazodanowe, enum | Data przychodów | Data wystawiania dokumentów przychodów dla definicji meldunku. |
-| DataRozchodow | `Soneta.ProdukcjaPro.ProDataWystawianiaDokumentow` | bazodanowe, enum | Data rozchodów | Data wystawiania dokumentów rozchodów dla definicji meldunku. |
+| CechaNumeracjiDostawy | `FeatureDefinition` | bazodanowe | Cecha numeracji dostawy | Cecha numeracji dostawy dla definicji meldunku. |
+| CechaWeryfikacjiMeldunku | `FeatureDefinition` | bazodanowe | Cecha weryfikacji meldunku | Cecha weryfikacji meldunku dla definicji meldunku. |
+| CechaWycenyWyrobow | `FeatureDefinition` | bazodanowe | Cecha wyceny wyrobów | Cecha wyceny wyrobów dla definicji meldunku. |
+| DataPrzychodow | `Soneta.ProdukcjaPro.ProDataWystawianiaDokumentow` (enum) | bazodanowe | Data przychodów | Data wystawiania dokumentów przychodów dla definicji meldunku. |
+| DataRozchodow | `Soneta.ProdukcjaPro.ProDataWystawianiaDokumentow` (enum) | bazodanowe | Data rozchodów | Data wystawiania dokumentów rozchodów dla definicji meldunku. |
 | DefinicjaBrakow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja braków | Definicja braków dla definicji meldunku. |
 | DefinicjaOdpadow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja odpadów | Definicja odpadów dla definicji meldunku. |
 | DefinicjaPrzychodow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja przychodów | Definicja przychodów dla definicji meldunku. |
 | DefinicjaRozchodow | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja rozchodów | Definicja rozchodów dla definicji meldunku. |
-| DokumentyMaterialow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` | bazodanowe, enum | Dokumenty materiałów | Sposób wystawiania dokumentów materiałów dla definicji meldunku. |
-| DokumentyOdpadow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` | bazodanowe, enum | Dokumenty odpadów | Sposób wystawiania dokumentów odpadów dla definicji meldunku. |
-| DokumentyWyrobow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` | bazodanowe, enum | Dokumenty wyrobów | Sposób wystawiania dokumentów wyrobów dla definicji meldunku. |
-| IloscDomyslna | `Soneta.ProdukcjaPro.ProIloscDomyslna` | bazodanowe, enum | Ilość domyślna | Ilość domyślna definicji meldunku. |
+| DokumentyMaterialow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` (enum) | bazodanowe | Dokumenty materiałów | Sposób wystawiania dokumentów materiałów dla definicji meldunku. |
+| DokumentyOdpadow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` (enum) | bazodanowe | Dokumenty odpadów | Sposób wystawiania dokumentów odpadów dla definicji meldunku. |
+| DokumentyWyrobow | `Soneta.ProdukcjaPro.ProSposobWystawianiaDokumentow` (enum) | bazodanowe | Dokumenty wyrobów | Sposób wystawiania dokumentów wyrobów dla definicji meldunku. |
+| IloscDomyslna | `Soneta.ProdukcjaPro.ProIloscDomyslna` (enum) | bazodanowe | Ilość domyślna | Ilość domyślna definicji meldunku. |
 | Kod | `string` | bazodanowe |  | Kod definicji meldunku. |
 | Nazwa | `string` | bazodanowe |  | Nazwa definicji meldunku. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis definicji meldunku. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis definicji meldunku. |
 | PominZgodnoscDaty | `bool` | bazodanowe | Pomiń zgodność daty | Pomiń zgodność daty dla definicji meldunku. |
 | PrzepiszMaterialyZero | `bool` | bazodanowe | Przepisz materiały z ilością zero | Parametr przepisywania materiałów operacji zlecenia z ilością zero na materiały meldunku dla definicji meldunku. |
 | PrzepiszOdpadyZero | `bool` | bazodanowe | Przepisz odpady z ilością zero | Parametr przepisywania odpadów operacji zlecenia z ilością zero na odpady meldunku dla definicji meldunku. |
 | PrzepiszUslugiZero | `bool` | bazodanowe | Przepisz usługi z ilością zero | Parametr przepisywania usług operacji zlecenia z ilością zero na usługi meldunku dla definicji meldunku. |
 | PrzepiszWyrobyZero | `bool` | bazodanowe | Przepisz wyroby z ilością zero | Parametr przepisywania wyrobów operacji zlecenia z ilością zero na wyroby meldunku dla definicji meldunku. |
 | RozliczZatwierdzone | `bool` | bazodanowe | Rozlicz zatwierdzone | Rozlicz zatwierdzone pozycje dokumentów dla definicji meldunku. |
-| SposobNumeracjiDostawy | `Soneta.ProdukcjaPro.ProSposobNumeracjiDostawy` | bazodanowe, enum | Sposób numeracji dostawy | Sposób numeracji dostawy dla definicji meldunku. |
-| SposobRozliczaniaRejestracji | `Soneta.ProdukcjaPro.ProSposobRozliczaniaRejestracji` | bazodanowe, enum | Sposób rozliczania rejestracji | Sposób rozliczania rejestracji dla definicji meldunku. |
-| WarunekZakonczeniaOperacji | `Soneta.ProdukcjaPro.ProWarunekZakonczeniaOperacji` | bazodanowe, enum | Warunek zakończenia operacji | Warunek zakończenia operacji dla definicji meldunku. |
-| WycenaMaterialow | `Soneta.ProdukcjaPro.ProWycenaMaterialow` | bazodanowe, enum | Wycena materiałów | Wycena materiałów dla definicji meldunku. |
-| WycenaWyrobow | `Soneta.ProdukcjaPro.ProWycenaWyrobow` | bazodanowe, enum | Wycena wyrobów | Wycena wyrobów dla definicji meldunku. |
-| WycenaZasobow | `Soneta.ProdukcjaPro.ProWycenaZasobow` | bazodanowe, enum | Wycena zasobów | Wycena zasobów dla definicji meldunku. |
+| SposobNumeracjiDostawy | `Soneta.ProdukcjaPro.ProSposobNumeracjiDostawy` (enum) | bazodanowe | Sposób numeracji dostawy | Sposób numeracji dostawy dla definicji meldunku. |
+| SposobRozliczaniaRejestracji | `Soneta.ProdukcjaPro.ProSposobRozliczaniaRejestracji` (enum) | bazodanowe | Sposób rozliczania rejestracji | Sposób rozliczania rejestracji dla definicji meldunku. |
+| WarunekZakonczeniaOperacji | `Soneta.ProdukcjaPro.ProWarunekZakonczeniaOperacji` (enum) | bazodanowe | Warunek zakończenia operacji | Warunek zakończenia operacji dla definicji meldunku. |
+| WycenaMaterialow | `Soneta.ProdukcjaPro.ProWycenaMaterialow` (enum) | bazodanowe | Wycena materiałów | Wycena materiałów dla definicji meldunku. |
+| WycenaWyrobow | `Soneta.ProdukcjaPro.ProWycenaWyrobow` (enum) | bazodanowe | Wycena wyrobów | Wycena wyrobów dla definicji meldunku. |
+| WycenaZasobow | `Soneta.ProdukcjaPro.ProWycenaZasobow` (enum) | bazodanowe | Wycena zasobów | Wycena zasobów dla definicji meldunku. |
 | ZakonczRozpoczeteRejestracje | `bool` | bazodanowe | Zakończ rozpoczęte rejestracje | Parametr zakańczania rozpoczętych rejestracji dla definicji meldunku. |
 
 ## Enumy

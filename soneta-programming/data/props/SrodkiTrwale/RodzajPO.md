@@ -5,15 +5,19 @@ Opis: Słownik rodzajów przedmiotów opodatkowania podatkiem od nieruchomości 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.SrodkiTrwale.TypAlgorytmuStawki` | bazodanowe, enum | Typ algorytmu stawki | Typ algortymu stawki |
+| Algorytm | `Soneta.SrodkiTrwale.TypAlgorytmuStawki` (enum) | bazodanowe | Typ algorytmu stawki | Typ algortymu stawki |
 | NazwaPrzedmiotuOpodatkowania | `string` | bazodanowe | Nazwa przedmiotu opodatkowania | Nazwa przedmiotu opodatkowania |
 | Systemowe | `bool` | bazodanowe |  | Systemowy |
-| Typ | `Soneta.SrodkiTrwale.TypNieruchomosci` | bazodanowe, enum |  | Typ podatku opodatkowania |
+| Typ | `Soneta.SrodkiTrwale.TypNieruchomosci` (enum) | bazodanowe |  | Typ podatku opodatkowania |
 
 ## Enumy
 

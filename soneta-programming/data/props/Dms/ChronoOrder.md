@@ -6,26 +6,30 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDefinicjaDokumentu`, `IPermissionClient`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Access | `Soneta.Workflow.Enums.AccessEnum` | bazodanowe, enum | Dostęp | Dostęp do składu |
+| Access | `Soneta.Workflow.Enums.AccessEnum` (enum) | bazodanowe | Dostęp | Dostęp do składu |
 | Active | `bool` | bazodanowe | Aktywny | Aktywny skład |
 | ChronoOrderLoc | `Soneta.Workflow.Dms.IK.ChronoOrderLoc` | bazodanowe | Lokalizacja składu | Lokalizacja składu |
-| Creator | `Soneta.Business.App.Operator` | bazodanowe | Założył | Operator, który założył skład |
-| DataType | `Soneta.Workflow.Dms.IK.DataTypeEnum` | bazodanowe, enum | Typ przechowywanych danych | Typ przechowywanych danych w składzie |
-| IsVisibleNumerator | `bool` |  |  |  |
+| Creator | `App.Operator` | bazodanowe, tylko-odczyt | Założył | Operator, który założył skład |
+| DataType | `Soneta.Workflow.Dms.IK.DataTypeEnum` (enum) | bazodanowe | Typ przechowywanych danych | Typ przechowywanych danych w składzie |
+| IsVisibleNumerator | `bool` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa składu |
-| Numerator | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Określa sposób numerowania definicji |
+| Numerator | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Określa sposób numerowania definicji |
 | Numerator.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numerator.PodczasZapisu | `bool` |  |  |  |
 | Numerator.Separator | `string` | bazodanowe |  |  |
 | Numerator.Wzor | `string` | bazodanowe |  |  |
-| Permissions | `Soneta.Business.SubTable<Soneta.Business.Db.Permissions.RecordPermission>` |  |  |  |
+| Permissions | `SubTable<Db.Permissions.RecordPermission>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol składu |
-| Type | `Soneta.Workflow.Dms.IK.ChronoOrderTypeEnum` | bazodanowe, enum | Rodzaj składu | Rodzaj składu |
+| Type | `Soneta.Workflow.Dms.IK.ChronoOrderTypeEnum` (enum) | bazodanowe | Rodzaj składu | Rodzaj składu |
 | Year | `int` | bazodanowe | Na rok | Dedykowany dla roku |
 | YearToString | `string` |  |  |  |
 

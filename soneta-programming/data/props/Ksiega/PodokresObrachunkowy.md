@@ -5,17 +5,21 @@ Opis: Element szczegółowy okresu obrachunkowego (OkresObrachunkowy). Pozwala z
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `OkresKs` → `OkresObrachunkowy`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 4
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnaNumeracjaPozabilansowa | `bool` | bazodanowe |  | Włącz odrębną numeracje dekretów oraz zapisów księgowych dla kont pozabilansowych  |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe |  | Data zamknięcia zapisów |
-| DozwolonyOkres | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres księgowania |
-| DozwolonyOkresRozliczenKs | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres rozliczeń księgowych |
+| DataZamkniecia | `Date` | bazodanowe |  | Data zamknięcia zapisów |
+| DozwolonyOkres | `FromTo` | bazodanowe, podlista |  | Dozwolony okres księgowania |
+| DozwolonyOkresRozliczenKs | `FromTo` | bazodanowe, podlista |  | Dozwolony okres rozliczeń księgowych |
 | Firma | `Soneta.Core.OddzialFirmy` | bazodanowe | Firma | Firma, dla której definiowany jest podokres. |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Otwarcie i zamkniecie okresu obrachunkowego. |
-| OkresKs | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, guided-parent |  | Okresu obrachunkowy |
-| OkresPodatkowyJPK | `Soneta.Types.FromTo` | bazodanowe |  | Okres podatkowy JPK |
+| Okres | `FromTo` | bazodanowe, podlista |  | Otwarcie i zamkniecie okresu obrachunkowego. |
+| OkresKs | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt, guided-parent |  | Okresu obrachunkowy |
+| OkresPodatkowyJPK | `FromTo` | bazodanowe, podlista |  | Okres podatkowy JPK |
 | Opis | `string` | bazodanowe |  |  |

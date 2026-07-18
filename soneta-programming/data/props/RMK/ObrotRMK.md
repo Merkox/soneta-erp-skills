@@ -5,29 +5,33 @@ Opis: Obrót (rata) rozliczenia międzyokresowego kosztu. Reprezentuje pojedyncz
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 11
+- podlisty: 1
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CentrumKosztow | `Soneta.Core.CentrumKosztow` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data obrotu |
-| DataDo | `Soneta.Types.Date` | bazodanowe |  | Data zakończenia wyliczania obrotu |
-| Dokument | `Soneta.RMK.DokumentRMK` | bazodanowe |  | Dokumentu RMK obrotu |
+| CentrumKosztow | `Soneta.Core.CentrumKosztow` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  | Data obrotu |
+| DataDo | `Date` | bazodanowe |  | Data zakończenia wyliczania obrotu |
+| Dokument | `Soneta.RMK.DokumentRMK` | bazodanowe, tylko-odczyt |  | Dokumentu RMK obrotu |
 | Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe |  | Ewidencja dokumentu obrotu |
-| GrupaKosztow | `string` |  |  |  |
-| IloscDni | `int` |  |  |  |
-| Koszt | `Soneta.RMK.KosztRMK` | bazodanowe |  | Koszt obrotu |
+| GrupaKosztow | `string` | tylko-odczyt |  |  |
+| IloscDni | `int` | tylko-odczyt |  |  |
+| Koszt | `Soneta.RMK.KosztRMK` | bazodanowe, tylko-odczyt |  | Koszt obrotu |
 | Opis | `string` | bazodanowe |  | Opis obrotu |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| OpisAnalitycznyBufor | `bool` |  |  |  |
-| PageVisible | `bool` |  |  |  |
-| StatusObrotu | `Soneta.RMK.StatusObrotuRMK` | bazodanowe, enum |  | Status obrotu |
-| StawkaDziennaBilansowa | `double` |  |  |  |
-| StawkaDziennaPodatkowa | `double` |  |  |  |
-| Typ | `Soneta.RMK.TypObrotuRMK` | bazodanowe, enum |  | Typ obrotu |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| OpisAnalitycznyBufor | `bool` | tylko-odczyt |  |  |
+| PageVisible | `bool` | tylko-odczyt |  |  |
+| StatusObrotu | `Soneta.RMK.StatusObrotuRMK` (enum) | bazodanowe |  | Status obrotu |
+| StawkaDziennaBilansowa | `double` | tylko-odczyt |  |  |
+| StawkaDziennaPodatkowa | `double` | tylko-odczyt |  |  |
+| Typ | `Soneta.RMK.TypObrotuRMK` (enum) | bazodanowe, tylko-odczyt |  | Typ obrotu |
 | WartoscBilansowa | `decimal` | bazodanowe |  | Wartość bilansowa obrotu |
-| WartoscNKUP | `decimal` |  |  | Wartość niestanowiąca kosztów uzyskania przychodu |
+| WartoscNKUP | `decimal` | tylko-odczyt |  | Wartość niestanowiąca kosztów uzyskania przychodu |
 | WartoscPodatkowa | `decimal` | bazodanowe |  | Wartość podatkowa obrotu |
 
 ## Enumy

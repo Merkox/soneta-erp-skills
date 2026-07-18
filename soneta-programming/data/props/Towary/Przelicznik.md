@@ -4,13 +4,17 @@ Opis: Element szczegółowy jednostki miary (Jednostka). Definiuje przelicznik m
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wyliczana` → `Jednostka`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bazowa | `Soneta.Towary.Jednostka` | bazodanowe |  | Jednostka bazowa, z której wyliczana jest jednostka 'Wyliczana'. |
-| Kod | `string` |  |  |  |
-| Wspolczynnik | `Soneta.Types.Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki wyliczanej: Wyliczna=Bazowa*Wspolczynnik. |
+| Kod | `string` | tylko-odczyt |  |  |
+| Wspolczynnik | `Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki wyliczanej: Wyliczna=Bazowa*Wspolczynnik. |
 | Wyliczana | `Soneta.Towary.Jednostka` | bazodanowe, guided-parent |  | Jednostka wyliczana z jednostki bazowej. |
-| Wzór | `string` |  |  | Wzór pokazujący sposób przeliczania jednostek. |
+| Wzór | `string` | tylko-odczyt |  | Wzór pokazujący sposób przeliczania jednostek. |

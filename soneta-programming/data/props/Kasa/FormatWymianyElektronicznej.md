@@ -5,26 +5,30 @@ Opis: Definicja formatu pliku do elektronicznej wymiany danych z bankami. Okreś
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 3
+- subrowy: 1
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaSerializera | `string` | bazodanowe |  |  |
-| Parametry | `Soneta.Kasa.ParametrySerializera` |  |  |  |
-| ParametrySerializera | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Parametry | `Soneta.Kasa.ParametrySerializera` | tylko-odczyt |  |  |
+| ParametrySerializera | `MemoText` | bazodanowe, podlista |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Serializer | `Soneta.Kasa.FormatWymianyElektronicznejSerializer` |  |  |  |
-| Typ | `Soneta.Kasa.TypFormatuWymianyElektronicznej` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kasa.TypFormatuWymianyElektronicznej` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,11 +5,15 @@ Opis: Element szczegółowy procedury ISO (IsoProcedura). Przechowuje numer proc
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Procedura` → `IsoProcedura`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Numer | `string` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| Procedura | `Soneta.Core.IsoProcedura` | bazodanowe, guided-parent |  |  |
+| Procedura | `Soneta.Core.IsoProcedura` | bazodanowe, tylko-odczyt, guided-parent |  |  |

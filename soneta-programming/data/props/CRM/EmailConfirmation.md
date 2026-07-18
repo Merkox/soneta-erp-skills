@@ -4,15 +4,19 @@ Tytuł: Potwierdzenie wiadomości
 Opis: Rejestr potwierdzeń odczytu i dostarczenia wiadomości e-mail. Przechowuje datę, typ potwierdzenia i użytkownika, umożliwiając śledzenie, czy odbiorca otworzył lub otrzymał wiadomość.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Date | `System.DateTime` | bazodanowe |  |  |
-| Message | `Soneta.CRM.WiadomoscEmail` | bazodanowe |  |  |
-| Type | `Soneta.CRM.EmailConfirmationType` | bazodanowe, enum |  |  |
-| User | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref |  |  |
+| Date | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| Message | `Soneta.CRM.WiadomoscEmail` | bazodanowe, tylko-odczyt |  |  |
+| Type | `Soneta.CRM.EmailConfirmationType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| User | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

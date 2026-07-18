@@ -5,20 +5,24 @@ Opis: Rejestr kosztów eksploatacyjnych pojazdów (paliwo, serwis, ubezpieczenie
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data kosztu |
-| Dokument | `Soneta.Core.DokEwidencji` | bazodanowe |  | Dokument kosztowy |
+| Data | `Date` | bazodanowe |  | Data kosztu |
+| Dokument | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  | Dokument kosztowy |
 | IloscPaliwa | `decimal` | bazodanowe |  | Ilość paliwa |
 | IloscPaliwaKg | `decimal` |  |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Pojazd | `Soneta.Samochodowka.Pojazd` | bazodanowe |  | Pojazd, dla którego rejestrujemy koszty |
 | RodzajPaliwa | `Soneta.Samochodowka.EkoRodzajPaliwa` | bazodanowe |  | Rodzaj paliwa |
-| Rozliczenie | `Soneta.Samochodowka.RozliczenieEP` | bazodanowe |  | Rozliczenie związane z danym kosztem |
-| TypPaliwa | `Soneta.Samochodowka.TypPaliwa` | bazodanowe, enum |  | Typ paliwa (historyczny) |
+| Rozliczenie | `Soneta.Samochodowka.RozliczenieEP` | bazodanowe, tylko-odczyt |  | Rozliczenie związane z danym kosztem |
+| TypPaliwa | `Soneta.Samochodowka.TypPaliwa` (enum) | bazodanowe |  | Typ paliwa (historyczny) |
 | Wartosc | `decimal` | bazodanowe |  | Wartość kosztu |
 
 ## Enumy

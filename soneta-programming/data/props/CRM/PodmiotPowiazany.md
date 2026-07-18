@@ -4,19 +4,23 @@ Tytuł: Podmiot powiązany
 Opis: Powiązanie kontrahenta z podmiotem w kontekście oddziału firmy. Umożliwia definiowanie relacji między kontrahentami a oddziałami (np. jako dostawca, odbiorca) wraz z informacjami o rodzaju powiązania, roli i okresie obowiązywania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 1
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział | Oddział firmy |
-| PowiazaniePodmiotu | `Soneta.CRM.PowiazaniePodmiotu` | bazodanowe | Powiązanie | Powiązanie |
+| PowiazaniePodmiotu | `Soneta.CRM.PowiazaniePodmiotu` (subrow) | bazodanowe | Powiązanie | Powiązanie |
 | PowiazaniePodmiotu.IdentWewKSeF | `string` | bazodanowe | Identyfikator wewnętrzny KSeF | Identyfikator wewnętrzny KSeF. |
-| PowiazaniePodmiotu.Okres | `Soneta.Types.FromTo` | bazodanowe | Okres |  |
-| PowiazaniePodmiotu.RodzajPowiazania | `Soneta.CRM.RodzajPowiazaniaPodmiotu` | bazodanowe, enum | Rodzaj powiązania |  |
-| PowiazaniePodmiotu.Rola | `Soneta.CRM.RolaPodmiotu` | bazodanowe, enum | Rola |  |
-| PowiazaniePodmiotu.RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` | bazodanowe, enum | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
+| PowiazaniePodmiotu.Okres | `FromTo` | bazodanowe, podlista | Okres |  |
+| PowiazaniePodmiotu.RodzajPowiazania | `Soneta.CRM.RodzajPowiazaniaPodmiotu` (enum) | bazodanowe | Rodzaj powiązania |  |
+| PowiazaniePodmiotu.Rola | `Soneta.CRM.RolaPodmiotu` (enum) | bazodanowe | Rola |  |
+| PowiazaniePodmiotu.RolaPodmiotuTrzeciegoKSeF | `Soneta.Core.Enums.RolaPodmiotuTrzeciegoKSeF` (enum) | bazodanowe | Rola Podmiotu trzeciego KSeF | Rola Podmiotu trzeciego KSeF. |
 | PowiazaniePodmiotu.WysylajNipWPodmiocieTrzecimKSeF | `bool` | bazodanowe | Czy wysyłać NIP w podmiocie trzecim. | Czy wysyłać NIP w podmiocie trzecim. |
 
 ## Enumy

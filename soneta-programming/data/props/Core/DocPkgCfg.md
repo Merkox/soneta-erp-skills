@@ -5,25 +5,29 @@ Opis: Tabela konfiguracyjna przechowująca kategorie elementów paczek dokument�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blocked | `bool` | bazodanowe | Blokada kategorii |  |
-| CfgType | `Soneta.Core.PkgCfgType` | bazodanowe, enum | Typ kategorii |  |
+| CfgType | `Soneta.Core.PkgCfgType` (enum) | bazodanowe | Typ kategorii |  |
 | Default | `bool` | bazodanowe | Domyślna | Określa czy kategoria jest kategorią domyślną |
-| Flags | `Soneta.Business.Db.DocPkgCfgFlags` | bazodanowe, enum | Flagi |  |
+| Flags | `Db.DocPkgCfgFlags` (enum) | bazodanowe | Flagi |  |
 | KBOnly | `bool` | bazodanowe | Przeznaczona dla pulpitu KB |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa wyświetlana kategorii |
 | TableName | `string` | bazodanowe | Klasa | Klasa obiektu docelowego |
-| XmlSource | `Soneta.Business.MemoText` | bazodanowe | Dane kategorii | Zapis konfiguracji danych kategorii określonych przez użytkownika systemu |
+| XmlSource | `MemoText` | bazodanowe, podlista | Dane kategorii | Zapis konfiguracji danych kategorii określonych przez użytkownika systemu |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### DocPkgCfgFlags (`Soneta.Business.Db.DocPkgCfgFlags`)
+### DocPkgCfgFlags (`Db.DocPkgCfgFlags`)
 
 ### PkgCfgType (`Soneta.Core.PkgCfgType`)
 - `Attachment` = 0 — Załącznik

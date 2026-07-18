@@ -5,15 +5,19 @@ Opis: Element szczegółowy umowy (Umowa). Okresowe zestawienie czasu pracy i wa
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `Umowa`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
+| Czas | `Time` |  |  |  |
 | Ilość | `double` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Poprzednie | `Soneta.Kalend.ZestawienieUmowy` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaZestawieniaUmowy>` |  |  |  |
-| Umowa | `Soneta.Kadry.Umowa` | bazodanowe, guided-parent |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Poprzednie | `Soneta.Kalend.ZestawienieUmowy` | tylko-odczyt |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaZestawieniaUmowy>` | podlista |  |  |
+| Umowa | `Soneta.Kadry.Umowa` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Wartosc | `Currency` | bazodanowe, tylko-odczyt |  |  |

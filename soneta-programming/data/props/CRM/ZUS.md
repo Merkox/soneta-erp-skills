@@ -6,52 +6,56 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPodmiot`, `IPodmiotKasowy`, `IAdresHost`, `IElementSlownika`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 37
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 20
+- podlisty: 18
+- subrowy: 0
+- razem: 41
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| BasicDocuments | `Soneta.Business.SubTable` |  |  |  |
-| DeklaracjePodmiotu | `Soneta.Business.SubTable` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| DokumentyPreliminarza | `Soneta.Business.SubTable<Soneta.Kasa.PreliminarzDokument>` |  |  |  |
-| DokumentyRozliczeniowe | `Soneta.Business.SubTable<Soneta.Kasa.DokRozliczBase>` |  |  |  |
-| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
-| EuVAT | `string` |  |  |  |
-| Identyfikacje | `Soneta.Business.SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| BasicDocuments | `SubTable` | podlista |  |  |
+| DeklaracjePodmiotu | `SubTable` | podlista |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| DokumentyPreliminarza | `SubTable<Soneta.Kasa.PreliminarzDokument>` | podlista |  |  |
+| DokumentyRozliczeniowe | `SubTable<Soneta.Kasa.DokRozliczBase>` | podlista |  |  |
+| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | tylko-odczyt |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
+| EuVAT | `string` | tylko-odczyt |  |  |
+| Identyfikacje | `SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| LimitKredytu | `Soneta.Types.Currency` |  |  |  |
-| LimitNieograniczony | `bool` |  |  |  |
-| MatrycePodmiotu | `Soneta.Business.SubTable` |  |  |  |
-| NIP | `string` |  |  |  |
-| Nadrzedny | `Soneta.Core.IPodmiotInternal` |  |  |  |
+| LimitKredytu | `Currency` | tylko-odczyt |  |  |
+| LimitNieograniczony | `bool` | tylko-odczyt |  |  |
+| MatrycePodmiotu | `SubTable` | podlista |  |  |
+| NIP | `string` | tylko-odczyt |  |  |
+| Nadrzedny | `Soneta.Core.IPodmiotInternal` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
-| Platnik | `Soneta.Kasa.IPodmiotKasowy` | iface-ref |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| PodmiotPowiazany | `bool` |  |  |  |
-| Podrzedni | `Soneta.Business.SubTable<Soneta.CRM.RelacjaPodmiotu>` |  |  |  |
-| Pojazdy | `Soneta.Business.SubTable` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Przelewy | `Soneta.Business.SubTable<Soneta.Kasa.PrzelewBase>` |  |  |  |
-| PrzeterminowanieNieograniczone | `bool` |  |  |  |
-| Rabat | `Soneta.Types.Percent` |  |  |  |
-| Rachunki | `Soneta.Business.SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` |  |  |  |
-| RachunkiWirtualne | `Soneta.Business.SubTable<Soneta.Kasa.RachunekWirtualny>` |  |  |  |
-| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` | enum |  |  |
-| Rozrachunki | `Soneta.Business.SubTable<Soneta.Kasa.RozrachunekIdx>` |  |  |  |
+| NazwaFormatowana | `string` | tylko-odczyt |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Platnik | `Soneta.Kasa.IPodmiotKasowy` | tylko-odczyt, iface-ref |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| PodmiotPowiazany | `bool` | tylko-odczyt |  |  |
+| Podrzedni | `SubTable<Soneta.CRM.RelacjaPodmiotu>` | podlista |  |  |
+| Pojazdy | `SubTable` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Przelewy | `SubTable<Soneta.Kasa.PrzelewBase>` | podlista |  |  |
+| PrzeterminowanieNieograniczone | `bool` | tylko-odczyt |  |  |
+| Rabat | `Percent` | tylko-odczyt |  |  |
+| Rachunki | `SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` | podlista |  |  |
+| RachunkiWirtualne | `SubTable<Soneta.Kasa.RachunekWirtualny>` | podlista |  |  |
+| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | tylko-odczyt |  |  |
+| Rozrachunki | `SubTable<Soneta.Kasa.RozrachunekIdx>` | podlista |  |  |
 | SposobZaplaty | `Soneta.Kasa.FormaPlatnosci` | bazodanowe |  |  |
-| Sprawy | `Soneta.Business.SubTable<Soneta.Windykacja.SprawaWindykacyjna>` |  |  |  |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | enum |  |  |
-| Termin | `int` |  |  |  |
-| TerminPlanowany | `int` |  |  |  |
-| Typ | `Soneta.CRM.TypUrzędu` | bazodanowe, enum |  |  |
-| TypLimituKredytowego | `Soneta.CRM.TypLimituKredytowego` | enum |  |  |
-| TypPrzeterminowania | `Soneta.CRM.TypLimituKredytowego` | enum |  |  |
-| Zaplaty | `Soneta.Business.SubTable<Soneta.Kasa.Zaplata>` |  |  |  |
+| Sprawy | `SubTable<Soneta.Windykacja.SprawaWindykacyjna>` | podlista |  |  |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | tylko-odczyt |  |  |
+| Termin | `int` | tylko-odczyt |  |  |
+| TerminPlanowany | `int` | tylko-odczyt |  |  |
+| Typ | `Soneta.CRM.TypUrzędu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypLimituKredytowego | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
+| TypPrzeterminowania | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
+| Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

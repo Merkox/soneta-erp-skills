@@ -5,29 +5,33 @@ Opis: Definicja skali używanej do oceniania w arkuszach ocen. Określa rodzaj s
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 11
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 2
+- subrowy: 0
+- razem: 18
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Calkowite | `bool` | bazodanowe |  |  |
 | DlugoscPola | `int` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Oceny.ElementSkaliOcen>` |  |  |  |
+| Elementy | `SubTable<Soneta.Oceny.ElementSkaliOcen>` | podlista |  |  |
 | Indywidualny | `bool` | bazodanowe | Szablon indywidualny |  |
-| Info | `string` |  |  |  |
-| Max | `decimal` |  |  |  |
+| Info | `string` | tylko-odczyt |  |  |
+| Max | `decimal` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | PytanieGraficzne | `bool` | bazodanowe |  |  |
 | PytanieZalezne | `bool` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Oceny.RodzajeSkalOcen` | bazodanowe, enum |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| Rodzaj | `Soneta.Oceny.RodzajeSkalOcen` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | UdostepnijZalaczniki | `bool` | bazodanowe |  |  |
 | Wielowybor | `bool` | bazodanowe | Wielowybór |  |
 | WielowyborMax | `int` | bazodanowe | Maksymalna liczba zaznaczeń |  |
 | WielowyborMin | `int` | bazodanowe | Minimalna liczba zaznaczeń |  |
-| WielowyborMinMaxInfo | `string` |  |  |  |
+| WielowyborMinMaxInfo | `string` | tylko-odczyt |  |  |
 
 ## Enumy
 

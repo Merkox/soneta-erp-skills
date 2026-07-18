@@ -6,35 +6,39 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 8
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 0
+- razem: 26
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Certyfikat | `Soneta.Business.MemoBin` | bazodanowe |  |  |
-| CertyfikatHasloValue | `Soneta.Business.MemoBin` | bazodanowe |  |  |
-| CertyfikatKey | `Soneta.Business.MemoBin` | bazodanowe |  |  |
-| DataWaznosciUwierzytelnienia | `System.DateTime` |  |  |  |
+| Certyfikat | `MemoBin` | bazodanowe |  |  |
+| CertyfikatHasloValue | `MemoBin` | bazodanowe |  |  |
+| CertyfikatKey | `MemoBin` | bazodanowe |  |  |
+| DataWaznosciUwierzytelnienia | `System.DateTime` | tylko-odczyt |  |  |
 | IdentyfikatorWewnetrzny | `Soneta.Core.KSeFIdentWewn` |  | Identyfikator wewnętrzny |  |
-| IdentyfikatoryWewnetrzne | `Soneta.Core.KSeFIdentWewn[]` |  | Identyfikatory wewnętrzne |  |
-| KontekstAutentykacjiKSeF | `Soneta.Core.KSeF.Models.KontekstAutentykacjiKSeF` |  | Kontekst autentykacji certyfikatu na podstawie zapisanego ostatniego logowania |  |
+| IdentyfikatoryWewnetrzne | `Soneta.Core.KSeFIdentWewn[]` | podlista | Identyfikatory wewnętrzne |  |
+| KontekstAutentykacjiKSeF | `Soneta.Core.KSeF.Models.KontekstAutentykacjiKSeF` | tylko-odczyt | Kontekst autentykacji certyfikatu na podstawie zapisanego ostatniego logowania |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa |
-| Operator | `Soneta.Business.IWebUser[]` |  |  |  |
-| OperatorzyGuids | `Soneta.Business.MemoText` | bazodanowe | Operatorzy | Operatorzy |
+| Operator | `IWebUser[]` | podlista |  |  |
+| OperatorzyGuids | `MemoText` | bazodanowe, podlista | Operatorzy | Operatorzy |
 | Pobieranie | `bool` | bazodanowe | Pobieranie | Pobieranie |
-| Przeznaczenie | `Soneta.Core.PrzeznaczenieAutoryzacjiKSeF` | bazodanowe, enum | Przeznaczenie autoryzacji KSeF | Przeznaczenie autoryzacji KSeF. |
+| Przeznaczenie | `Soneta.Core.PrzeznaczenieAutoryzacjiKSeF` (enum) | bazodanowe | Przeznaczenie autoryzacji KSeF | Przeznaczenie autoryzacji KSeF. |
 | RefreshTokenRequestRefNumber | `string` | bazodanowe |  |  |
-| RefreshTokenRequestTempTokenValue | `Soneta.Business.MemoBin` | bazodanowe |  |  |
+| RefreshTokenRequestTempTokenValue | `MemoBin` | bazodanowe |  |  |
 | RefreshTokenValidUntil | `System.DateTime` | bazodanowe |  |  |
 | RefreshTokenValidUntilOffset | `string` | bazodanowe |  |  |
-| RefreshTokenValue | `Soneta.Business.MemoBin` | bazodanowe |  |  |
-| RelacjeDoIdentWewnKseF | `Soneta.Business.SubTable<Soneta.Core.KSeFTokenIdentWewnRel>` |  |  |  |
-| Rodzaj | `Soneta.Core.RodzajSysZewToken` | bazodanowe, enum | Rodzaj uwierzytelniania | Rodzaj uwierzytelniania. |
-| SposobIdentyfikacjiPodmiotuUwierzytelniajacego | `Soneta.Core.Enums.SposobIdentyfikacjiPodmiotuUwierzytelniajacego` | bazodanowe, enum | Sposób identyfikacji podmiotu uwierzytelniającego | Sposób identyfikacji podmiotu uwierzytelniającego. |
-| StatusUwierzytelnienia | `Soneta.Core.SysZewToken.StanUwierzytelnieniaTokenuKSeF` | enum |  |  |
-| SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe | System zewnętrzny | System zewnętrzny |
+| RefreshTokenValue | `MemoBin` | bazodanowe |  |  |
+| RelacjeDoIdentWewnKseF | `SubTable<Soneta.Core.KSeFTokenIdentWewnRel>` | podlista |  |  |
+| Rodzaj | `Soneta.Core.RodzajSysZewToken` (enum) | bazodanowe | Rodzaj uwierzytelniania | Rodzaj uwierzytelniania. |
+| SposobIdentyfikacjiPodmiotuUwierzytelniajacego | `Soneta.Core.Enums.SposobIdentyfikacjiPodmiotuUwierzytelniajacego` (enum) | bazodanowe | Sposób identyfikacji podmiotu uwierzytelniającego | Sposób identyfikacji podmiotu uwierzytelniającego. |
+| StatusUwierzytelnienia | `Soneta.Core.SysZewToken.StanUwierzytelnieniaTokenuKSeF` (enum) | tylko-odczyt |  |  |
+| SystemZewn | `Soneta.Core.SystemZewn` | bazodanowe, tylko-odczyt | System zewnętrzny | System zewnętrzny |
 | Token | `string` | bazodanowe | Numer | Numer |
-| TokenToString | `string` |  |  |  |
+| TokenToString | `string` | tylko-odczyt |  |  |
 | WersjaAPI | `string` | bazodanowe | Wersja API | Wersja API, dla której działa token. |
 | Wysylanie | `bool` | bazodanowe | Wysyłanie | Wysyłanie |
 

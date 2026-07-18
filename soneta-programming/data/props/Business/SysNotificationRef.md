@@ -5,15 +5,19 @@ Opis: Powiązanie powiadomienia systemowego z definicją procesu lub zadania. Ok
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Notification` → `SysNotification`
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Notification | `Soneta.Business.Db.Notifications.SysNotification` | bazodanowe, guided-parent | Powiadomienie |  |
-| Reference | `Soneta.Business.Db.Notifications.ISysNotificationReference` | bazodanowe, iface-ref | Dla | Określa definicję procesu lub zadania |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` |  |  |  |
-| WfDefinition | `Soneta.Business.IWFDefinition` | iface-ref |  |  |
+| Notification | `Db.Notifications.SysNotification` | bazodanowe, tylko-odczyt, guided-parent | Powiadomienie |  |
+| Reference | `Db.Notifications.ISysNotificationReference` | bazodanowe, tylko-odczyt, iface-ref | Dla | Określa definicję procesu lub zadania |
+| TaskDefinition | `Db.TaskDefinition` |  |  |  |
+| WfDefinition | `IWFDefinition` | iface-ref |  |  |
 
 ## Relacje interfejsowe
 

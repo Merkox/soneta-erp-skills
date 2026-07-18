@@ -5,41 +5,45 @@ Opis: Element szczegółowy szablonu pól opcjonalnych KSeF (KSeFSzablonPolOpcjo
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 17
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 10
+- pola tylko-odczyt: 6
+- podlisty: 4
+- subrowy: 1
+- razem: 33
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytmKluczaPolaDodatkowego | `bool` |  |  |  |
 | AktywnyAlgorytmWartosciPolaDodatkowego | `bool` |  |  |  |
 | AktywnyKodWidocznosci | `bool` | bazodanowe | Czy aktywny kod widoczności | Czy aktywny kod widoczności. |
-| AlgorytmExportuEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| AlgorytmExportuPodglad | `string` |  |  |  |
+| AlgorytmExportuEdytor | `Compiler.ICodeEditorSource` |  |  |  |
+| AlgorytmExportuPodglad | `string` | tylko-odczyt |  |  |
 | AlgorytmKluczaPolaDodatkowego | `string` |  |  |  |
-| AlgorytmKluczaPolaDodatkowegoEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
+| AlgorytmKluczaPolaDodatkowegoEdytor | `Compiler.ICodeEditorSource` |  |  |  |
 | AlgorytmWartosciPolaDodatkowego | `string` |  |  |  |
-| AlgorytmWartosciPolaDodatkowegoEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| AlgorytmWidocznosciEdytor | `Soneta.Business.Compiler.ICodeEditorSource` |  |  |  |
-| AlgorytmWidocznosciPodglad | `string` |  |  |  |
-| Cecha | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha | Cecha |
-| CodeExport | `Soneta.Business.MemoText` | bazodanowe | Kod eksportu | Kod dla eksportu. |
-| CodeVisible | `Soneta.Business.MemoText` | bazodanowe | Kod widoczności | Kod dla widoczności. |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
+| AlgorytmWartosciPolaDodatkowegoEdytor | `Compiler.ICodeEditorSource` |  |  |  |
+| AlgorytmWidocznosciEdytor | `Compiler.ICodeEditorSource` |  |  |  |
+| AlgorytmWidocznosciPodglad | `string` | tylko-odczyt |  |  |
+| Cecha | `FeatureDefinition` | bazodanowe | Cecha | Cecha |
+| CodeExport | `MemoText` | bazodanowe, podlista | Kod eksportu | Kod dla eksportu. |
+| CodeVisible | `MemoText` | bazodanowe, podlista | Kod widoczności | Kod dla widoczności. |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
 | DefinicjaXmlElement | `Soneta.Core.DefXmlElem` |  |  |  |
 | DefinicjaXmlElementGuid | `System.Guid` | bazodanowe | Identyfikator definicji elementu komunikatu KSeF | Identyfikator definicji elementu komunikatu KSeF |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | Edycja | `bool` | bazodanowe | Edycja | Edycja algorytmu eksportu |
 | Element | `string` | bazodanowe | Nazwa elementu komunikatu KSeF | Nazwa elementu komunikatu KSeF |
-| PoleOpcjonalneDodatkowe | `Soneta.Core.Enums.PoleOpcjonalneDodatkoweKSeF` | bazodanowe, enum | Pole opcjonalne dodatkowe (klucz-wartość) | Pole opcjonalne dodatkowe (klucz-wartość) |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| PoleOpcjonalneDodatkowe | `Soneta.Core.Enums.PoleOpcjonalneDodatkoweKSeF` (enum) | bazodanowe | Pole opcjonalne dodatkowe (klucz-wartość) | Pole opcjonalne dodatkowe (klucz-wartość) |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| SzablonPolOpcjonalnych | `Soneta.Core.KSeFSzablonPolOpcjonalnych` | bazodanowe |  |  |
-| Typ | `Soneta.Core.Enums.PoleOpcjonalneTypKseF` | bazodanowe, enum | Typ pola opcjonalnego | Typ pola opcjonalnego |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| SzablonPolOpcjonalnych | `Soneta.Core.KSeFSzablonPolOpcjonalnych` | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.Enums.PoleOpcjonalneTypKseF` (enum) | bazodanowe | Typ pola opcjonalnego | Typ pola opcjonalnego |
 | Wartosc | `string` | bazodanowe |  | Wartość stała |
 | WybranyWpisPolaDodatkowego | `Soneta.Core.KSeFSzablonPolOpcjonalnychPozycja.WybranyWpisPolaDodatkowegoSzablonuPolOpcjonalnych` |  |  |  |
 | Wysylaj | `bool` | bazodanowe | Wysyłaj | Czy wysyłać element |

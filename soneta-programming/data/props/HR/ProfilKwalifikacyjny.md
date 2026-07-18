@@ -5,53 +5,57 @@ Opis: Opisuje zestaw kwalifikacji wymaganych na stanowisku. Umożliwia komplekso
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 21
-- pola kalkulowane (z klas biznesowych): 21
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 23
+- subrowy: 0
+- razem: 42
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DoswGrupaOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Doświadczenie w grupie stanowisk - operator (niezbędne) |  |
-| DoswGrupaOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Doświadczenie w grupie stanowisk - operator (pożądane) |  |
-| DoswOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Doświadczenie - operator (niezbędne) |  |
-| DoswOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Doświadczenie - operator (pożądane) |  |
-| DoswiadczenieGrupa | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` |  |  |  |
-| DoswiadczenieGrupyNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` |  |  |  |
-| DoswiadczenieGrupyPozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` |  |  |  |
-| DoswiadczenieObszar | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` |  |  |  |
-| DoswiadczenieObszarNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` |  |  |  |
-| DoswiadczenieObszarPozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` |  |  |  |
-| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe |  |  |
-| ItOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Systemy IT - operator (niezbędne) |  |
-| ItOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Systemy IT - operator (pożądane) |  |
-| JezykiObce | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` |  |  |  |
-| JezykiObceNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` |  |  |  |
-| JezykiObcePozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` |  |  |  |
-| JezykiOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Języki obce - operator (niezbędne) |  |
-| JezykiOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Języki obce - operator (pożądane) |  |
-| KwalOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Kwalifikacje - operator (niezbędne) |  |
-| KwalOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Kwalifikacje - operator (pożądane) |  |
-| KwalifikacjeZawodowe | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` |  |  |  |
-| KwalifikacjeZawodoweNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` |  |  |  |
-| KwalifikacjeZawodowePozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` |  |  |  |
-| MaszynyIUrzadzenia | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` |  |  |  |
-| MaszynyIUrzadzeniaNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` |  |  |  |
-| MaszynyIUrzadzeniaPozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` |  |  |  |
-| MaszynyOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Maszyny i urządzenia - operator (niezbędne) |  |
-| MaszynyOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Maszyny i urządzenia - operator (pożądane) |  |
+| DoswGrupaOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Doświadczenie w grupie stanowisk - operator (niezbędne) |  |
+| DoswGrupaOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Doświadczenie w grupie stanowisk - operator (pożądane) |  |
+| DoswOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Doświadczenie - operator (niezbędne) |  |
+| DoswOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Doświadczenie - operator (pożądane) |  |
+| DoswiadczenieGrupa | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` | podlista |  |  |
+| DoswiadczenieGrupyNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` | podlista |  |  |
+| DoswiadczenieGrupyPozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluGrupa>` | podlista |  |  |
+| DoswiadczenieObszar | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` | podlista |  |  |
+| DoswiadczenieObszarNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` | podlista |  |  |
+| DoswiadczenieObszarPozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaDoswiadczeniaProfiluObszar>` | podlista |  |  |
+| Host | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt |  |  |
+| ItOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Systemy IT - operator (niezbędne) |  |
+| ItOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Systemy IT - operator (pożądane) |  |
+| JezykiObce | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` | podlista |  |  |
+| JezykiObceNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` | podlista |  |  |
+| JezykiObcePozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaJezykowObcychProfilu>` | podlista |  |  |
+| JezykiOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Języki obce - operator (niezbędne) |  |
+| JezykiOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Języki obce - operator (pożądane) |  |
+| KwalOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Kwalifikacje - operator (niezbędne) |  |
+| KwalOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Kwalifikacje - operator (pożądane) |  |
+| KwalifikacjeZawodowe | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` | podlista |  |  |
+| KwalifikacjeZawodoweNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` | podlista |  |  |
+| KwalifikacjeZawodowePozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaKwalifikacjiZawodowychProfilu>` | podlista |  |  |
+| MaszynyIUrzadzenia | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` | podlista |  |  |
+| MaszynyIUrzadzeniaNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` | podlista |  |  |
+| MaszynyIUrzadzeniaPozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfilu>` | podlista |  |  |
+| MaszynyOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Maszyny i urządzenia - operator (niezbędne) |  |
+| MaszynyOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Maszyny i urządzenia - operator (pożądane) |  |
 | Nazwa | `string` | bazodanowe | Nazwa profilu |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres obowiązywania |  |
-| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` | bazodanowe, enum |  |  |
-| SystemyIT | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` |  |  |  |
-| SystemyITNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` |  |  |  |
-| SystemyITPozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WyksztOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Wykształcenie - operator (niezbędne) |  |
-| WyksztOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` | bazodanowe, enum | Wykształcenie - operator (pożądane) |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres obowiązywania |  |
+| StatusProfilu | `Soneta.HR.ZKL.Enums.StatusProfilu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| SystemyIT | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` | podlista |  |  |
+| SystemyITNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` | podlista |  |  |
+| SystemyITPozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu>` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| WyksztOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Wykształcenie - operator (niezbędne) |  |
+| WyksztOperatorPozadane | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Wykształcenie - operator (pożądane) |  |
 | WyksztPoziomNiezbedne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomWyksztalcenia` | bazodanowe | Wykształcenie - poziom (niezbędne) |  |
 | WyksztPoziomPozadane | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomWyksztalcenia` | bazodanowe | Wykształcenie - poziom (pożądane) |  |
-| Wyksztalcenie | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` |  |  |  |
-| WyksztalcenieNiezbedne | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` |  |  |  |
-| WyksztalceniePozadane | `Soneta.Business.SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` |  |  |  |
+| Wyksztalcenie | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` | podlista |  |  |
+| WyksztalcenieNiezbedne | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` | podlista |  |  |
+| WyksztalceniePozadane | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaWyksztalceniaProfilu>` | podlista |  |  |
 
 ## Enumy
 

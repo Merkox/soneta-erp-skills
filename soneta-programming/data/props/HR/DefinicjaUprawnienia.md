@@ -6,30 +6,34 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowDefinion`, `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 4
+- subrowy: 0
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bezterminowe | `bool` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | GrupaKSU | `Soneta.HR.ZKL.Slowniki.KSU.GrupaSzkolenIUprawnien` | bazodanowe | Grupa KSU |  |
-| GrupaNazwa | `string` |  |  |  |
-| GrupyStanowiskDisplay | `string` |  |  |  |
+| GrupaNazwa | `string` | tylko-odczyt |  |  |
+| GrupyStanowiskDisplay | `string` | tylko-odczyt |  |  |
 | Kategoria | `Soneta.HR.KategoriaUprawnienia` | bazodanowe |  |  |
-| KategoriaDisplay | `string` |  |  |  |
-| Kreatory | `Soneta.Business.SubTable<Soneta.Core.ManagedRowCreator>` |  |  |  |
+| KategoriaDisplay | `string` | tylko-odczyt |  |  |
+| Kreatory | `SubTable<Soneta.Core.ManagedRowCreator>` | podlista |  |  |
 | KsuCelSzkolenia | `string` |  |  |  |
-| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` |  | Grupy stanowisk |  |
-| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` |  | Obszary funkcjonalne |  |
-| KsuSzkoleniaPoprzedzajace | `Soneta.HR.DefinicjaSzkolenia[]` |  | Szkolenia poprzedzające |  |
-| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` | enum |  |  |
+| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` | podlista | Grupy stanowisk |  |
+| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` | podlista | Obszary funkcjonalne |  |
+| KsuSzkoleniaPoprzedzajace | `Soneta.HR.DefinicjaSzkolenia[]` | podlista | Szkolenia poprzedzające |  |
+| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` (enum) | tylko-odczyt |  |  |
 | KsuUprawnieniePoprzedzajace | `Soneta.HR.DefinicjaUprawnienia` |  |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| ObszaryFunkcjonalneDisplay | `string` |  |  |  |
+| ObszaryFunkcjonalneDisplay | `string` | tylko-odczyt |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | Ostrzezenie | `int` | bazodanowe |  |  |
-| PoprzedzajaceDisplay | `string` |  |  |  |
+| PoprzedzajaceDisplay | `string` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
 | WaznyDoKoncaMiesiaca | `bool` | bazodanowe |  |  |

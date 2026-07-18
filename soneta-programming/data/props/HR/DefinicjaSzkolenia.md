@@ -6,27 +6,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 11
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 4
+- subrowy: 0
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | GrupaKSU | `Soneta.HR.ZKL.Slowniki.KSU.GrupaSzkolenIUprawnien` | bazodanowe | Grupa KSU |  |
-| GrupaNazwa | `string` |  |  |  |
-| GrupyStanowiskDisplay | `string` |  |  |  |
+| GrupaNazwa | `string` | tylko-odczyt |  |  |
+| GrupyStanowiskDisplay | `string` | tylko-odczyt |  |  |
 | Kategoria | `Soneta.HR.KategoriaSzkolenia` | bazodanowe |  |  |
-| KategoriaDisplay | `string` |  |  |  |
+| KategoriaDisplay | `string` | tylko-odczyt |  |  |
 | KsuCelSzkolenia | `string` |  |  |  |
-| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` |  | Grupy stanowisk |  |
-| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` |  | Obszary funkcjonalne |  |
-| KsuSzkoleniaPoprzedzajace | `Soneta.HR.DefinicjaSzkolenia[]` |  | Szkolenie poprzedzające |  |
-| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` | enum |  |  |
+| KsuGrupyStanowisk | `Soneta.HR.GrupaStanowisk[]` | podlista | Grupy stanowisk |  |
+| KsuObszaryFunkcjonalne | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.ObszarFunkcjonalny[]` | podlista | Obszary funkcjonalne |  |
+| KsuSzkoleniaPoprzedzajace | `Soneta.HR.DefinicjaSzkolenia[]` | podlista | Szkolenie poprzedzające |  |
+| KsuTyp | `Soneta.HR.ZKL.Enums.KsuPozycjaTyp` (enum) | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| ObszaryFunkcjonalneDisplay | `string` |  |  |  |
-| PoprzedzajaceDisplay | `string` |  |  |  |
+| ObszaryFunkcjonalneDisplay | `string` | tylko-odczyt |  |  |
+| PoprzedzajaceDisplay | `string` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol |  |
-| Uprawnienia | `Soneta.Business.SubTable<Soneta.HR.UprawnienieDefinicjiSzkolenia>` |  |  |  |
+| Uprawnienia | `SubTable<Soneta.HR.UprawnienieDefinicjiSzkolenia>` | podlista |  |  |
 
 ## Enumy
 

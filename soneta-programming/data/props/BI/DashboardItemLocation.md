@@ -5,15 +5,19 @@ Opis: Przypisanie elementu wizualizacji (kafelka) do konkretnej lokalizacji na d
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DashboardItem | `System.Guid` | bazodanowe |  |  |
-| DataType | `string` | bazodanowe |  |  |
-| Height | `int` | bazodanowe |  |  |
-| Identity | `System.Guid` | bazodanowe |  |  |
-| Index | `int` | bazodanowe |  |  |
-| Location | `string` | bazodanowe |  |  |
-| Width | `int` | bazodanowe |  |  |
+| DashboardItem | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| DataType | `string` | bazodanowe, tylko-odczyt |  |  |
+| Height | `int` | bazodanowe, tylko-odczyt |  |  |
+| Identity | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| Index | `int` | bazodanowe, tylko-odczyt |  |  |
+| Location | `string` | bazodanowe, tylko-odczyt |  |  |
+| Width | `int` | bazodanowe, tylko-odczyt |  |  |

@@ -5,27 +5,31 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 5
+- podlisty: 4
+- subrowy: 1
+- razem: 16
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataAnulowania | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| DataAnulowania | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Kadry.DefinicjaNagrodyKary` | bazodanowe |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Place.WypElement>` |  |  |  |
-| Nazwa | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RodzajŹródła | `Soneta.Place.RodzajŹródłaWypłaty` | enum |  |  |
-| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` | bazodanowe |  |  |
-| Rozliczenie.Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Elementy | `SubTable<Soneta.Place.WypElement>` | podlista |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RodzajŹródła | `Soneta.Place.RodzajŹródłaWypłaty` (enum) | tylko-odczyt |  |  |
+| Rozliczenie | `Soneta.Kadry.RozliczenieSwiadczenia` (subrow) | bazodanowe |  |  |
+| Rozliczenie.Data | `Date` | bazodanowe |  |  |
 | Rozliczenie.Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Rozliczenie.Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Rozliczenie.Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Rozliczenie.Rozliczone | `bool` |  |  |  |
-| Rozliczenie.WgElement | `Soneta.Business.Key` |  |  |  |
-| Typ | `Soneta.Kadry.TypNagrodyKary` | bazodanowe, enum |  |  |
+| Rozliczenie.Kwota | `Currency` | bazodanowe |  |  |
+| Rozliczenie.Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Rozliczenie.Rozliczone | `bool` | tylko-odczyt |  |  |
+| Rozliczenie.WgElement | `Key` | podlista |  |  |
+| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,19 +5,23 @@ Opis: Element szczegółowy obiektu kodowalnego (IKodowany). Przechowuje kody kr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zapis` → `IKodowany`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Jednostka | `Soneta.Business.GuidedRow` | bazodanowe |  | Jednostka przypisana do danego kodu. |
+| Jednostka | `GuidedRow` | bazodanowe |  | Jednostka przypisana do danego kodu. |
 | Kod | `string` | bazodanowe |  | Kod (może być kreskowy) do szybkiego wyszukiwania obiektów w programie. |
-| KodWlasnyObcy | `Soneta.Core.KodWlasnyObcy` | enum |  |  |
-| KodyKontrahenta | `Soneta.Business.SubTable` |  |  |  |
+| KodWlasnyObcy | `Soneta.Core.KodWlasnyObcy` (enum) |  |  |  |
+| KodyKontrahenta | `SubTable` | podlista |  |  |
 | Obcy | `bool` | bazodanowe | Kod kontrahenta | Określa kod, który stosowany jest przez danego kontrahenta. |
-| PodTypKodu | `Soneta.Core.PodTypKodu` | bazodanowe, enum | Rodzaj kodu |  |
-| TypKodu | `Soneta.Core.TypKodu` | bazodanowe, enum |  |  |
-| Zapis | `Soneta.Core.IKodowany` | bazodanowe, guided-parent, iface-ref |  | Zapis, do którego przypisany jest dany kod kreskowy |
+| PodTypKodu | `Soneta.Core.PodTypKodu` (enum) | bazodanowe | Rodzaj kodu |  |
+| TypKodu | `Soneta.Core.TypKodu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Zapis | `Soneta.Core.IKodowany` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  | Zapis, do którego przypisany jest dany kod kreskowy |
 
 ## Relacje interfejsowe
 

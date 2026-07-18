@@ -5,11 +5,15 @@ Opis: Powiązanie operatora z uprawnieniem (oddziałem praw). Określa, do któr
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Operator` → `Operator`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Entitle | `Soneta.Business.App.Entitle` | bazodanowe |  | Uprawnienia przypisane operatorowi. |
+| Entitle | `App.Entitle` | bazodanowe |  | Uprawnienia przypisane operatorowi. |
 | IsDefaultForOperator | `bool` | bazodanowe |  | Ustawienie standardowego uprawnienia dla logowania w wielooddziałowości |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe, guided-parent |  | Operator przypisany do uprawnień. |
+| Operator | `App.Operator` | bazodanowe, guided-parent |  | Operator przypisany do uprawnień. |

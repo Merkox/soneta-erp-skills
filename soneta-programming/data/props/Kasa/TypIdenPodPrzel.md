@@ -5,15 +5,19 @@ Opis: Słownik typów identyfikatorów podmiotów stosowanych w przelewach zagra
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Blokada typu identyfikatora |
 | Nazwa | `string` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| TypOsoby | `Soneta.Kasa.TypFormaPrawna` | bazodanowe, enum |  | Typ osoby |
+| TypOsoby | `Soneta.Kasa.TypFormaPrawna` (enum) | bazodanowe |  | Typ osoby |
 
 ## Enumy
 

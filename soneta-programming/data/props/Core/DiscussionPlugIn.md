@@ -5,21 +5,25 @@ Opis: Rozszerzenie (plug-in) dyskusji przypisane do zestawu. Określa klasę obi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 4
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| ConfigCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ConfigXml | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ContentInfo | `string` |  |  |  |
-| DataType | `System.Type` |  |  |  |
-| DataTypeFullName | `string` |  |  |  |
-| Description | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
-| FullName | `string` |  |  |  |
-| IconName | `string` |  |  |  |
+| ConfigCode | `MemoText` | bazodanowe, podlista |  |  |
+| ConfigXml | `MemoText` | bazodanowe, podlista |  |  |
+| ContentInfo | `string` | tylko-odczyt |  |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DataTypeFullName | `string` | tylko-odczyt |  |  |
+| Description | `MemoText` | bazodanowe, podlista | Opis |  |
+| FullName | `string` | tylko-odczyt |  |  |
+| IconName | `string` | tylko-odczyt |  |  |
 | Interface | `string` | bazodanowe | Interfejs | Interfejs wymagane od klasy obiektu zarządzanego |
-| Items | `System.Collections.Generic.IEnumerable<Soneta.Core.Conversation.DiscussionPlugIn>` |  |  |  |
+| Items | `System.Collections.Generic.IEnumerable<Soneta.Core.Conversation.DiscussionPlugIn>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa wtyczki |
-| PlugIn | `Soneta.Core.Conversation.DiscussionPlugInsSet` | bazodanowe |  |  |
-| TableName | `string` | bazodanowe | Klasa | Klasa obiektu nadrzędanego. |
+| PlugIn | `Soneta.Core.Conversation.DiscussionPlugInsSet` | bazodanowe, tylko-odczyt |  |  |
+| TableName | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa obiektu nadrzędanego. |

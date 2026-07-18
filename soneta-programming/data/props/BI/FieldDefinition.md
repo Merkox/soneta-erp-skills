@@ -5,31 +5,35 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje pole dostępne 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 30
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 21
+- pola tylko-odczyt: 7
+- podlisty: 3
+- subrowy: 0
+- razem: 44
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AggregationType | `Soneta.BI.AggregationType` | bazodanowe, enum | Typ agregacji |  |
-| Attributes | `TestCentric.Metadata.FieldAttributes` | enum |  |  |
-| BIFieldType | `Soneta.BI.BIFieldType` | bazodanowe, enum | Typ(BI) |  |
+| AggregationType | `Soneta.BI.AggregationType` (enum) | bazodanowe | Typ agregacji |  |
+| Attributes | `TestCentric.Metadata.FieldAttributes` (enum) |  |  |  |
+| BIFieldType | `Soneta.BI.BIFieldType` (enum) | bazodanowe | Typ(BI) |  |
 | BusinessPath | `string` | bazodanowe | Ścieżka biznesowa |  |
 | BusinessTypeName | `string` | bazodanowe | Typ biznesowy |  |
-| CalculationText | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| CalculationText | `MemoText` | bazodanowe, podlista |  |  |
 | Constant | `object` |  |  |  |
-| ContainsGenericParameter | `bool` |  |  |  |
-| CustomAttributes | `TestCentric.Collections.Generic.Collection<TestCentric.Metadata.CustomAttribute>` |  |  |  |
+| ContainsGenericParameter | `bool` | tylko-odczyt |  |  |
+| CustomAttributes | `TestCentric.Collections.Generic.Collection<TestCentric.Metadata.CustomAttribute>` | podlista |  |  |
 | DeclaringType | `TestCentric.Metadata.TypeDefinition` |  |  |  |
 | FieldType | `TestCentric.Metadata.TypeReference` | bazodanowe | Typ(DB) |  |
-| FullName | `string` |  |  |  |
+| FullName | `string` | tylko-odczyt |  |  |
 | HasConstant | `bool` |  |  |  |
-| HasCustomAttributes | `bool` |  |  |  |
+| HasCustomAttributes | `bool` | tylko-odczyt |  |  |
 | HasDefault | `bool` |  |  |  |
-| HasLayoutInfo | `bool` |  |  |  |
-| InitialValue | `byte[]` |  |  |  |
+| HasLayoutInfo | `bool` | tylko-odczyt |  |  |
+| InitialValue | `byte[]` | podlista |  |  |
 | IsAssembly | `bool` |  |  |  |
 | IsCompilerControlled | `bool` |  |  |  |
-| IsDefinition | `bool` |  |  |  |
+| IsDefinition | `bool` | tylko-odczyt |  |  |
 | IsFamily | `bool` |  |  |  |
 | IsFamilyAndAssembly | `bool` |  |  |  |
 | IsFamilyOrAssembly | `bool` |  |  |  |
@@ -42,17 +46,17 @@ Guided: root
 | IsRuntimeSpecialName | `bool` |  |  |  |
 | IsSpecialName | `bool` |  |  |  |
 | IsStatic | `bool` |  |  |  |
-| IsWindowsRuntimeProjection | `bool` |  |  |  |
+| IsWindowsRuntimeProjection | `bool` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | MetadataToken | `TestCentric.Metadata.MetadataToken` |  |  |  |
-| Model | `Soneta.Business.IRow` | bazodanowe | Model danych |  |
+| Model | `IRow` | bazodanowe | Model danych |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | Offset | `int` |  |  |  |
-| RVA | `int` |  |  |  |
+| RVA | `int` | tylko-odczyt |  |  |
 | ReadableName | `string` | bazodanowe | Nazwa czytelna |  |
-| SourceDefinition | `Soneta.Business.IRow` | bazodanowe |  |  |
+| SourceDefinition | `IRow` | bazodanowe |  |  |
 | SourcePath | `string` | bazodanowe |  |  |
-| TimeSpanSet | `Soneta.Business.IRow` | bazodanowe | Zestaw przedziałów |  |
+| TimeSpanSet | `IRow` | bazodanowe | Zestaw przedziałów |  |
 | Translated | `bool` | bazodanowe | Pole tłumaczone |  |
 
 ## Enumy

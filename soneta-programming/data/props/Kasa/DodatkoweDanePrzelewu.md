@@ -5,21 +5,25 @@ Opis: Element szczegółowy przelewu (PrzelewBase) przechowujący rozszerzone da
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przelew` → `PrzelewBase`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 10
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataUrodzenia | `Soneta.Types.Date` | bazodanowe |  | Data urodzenia osoby fizycznej |
+| DataUrodzenia | `Date` | bazodanowe |  | Data urodzenia osoby fizycznej |
 | Kraj | `Soneta.Core.KrajTbl` | bazodanowe |  | Kraj urodzenia osoby fizycznej |
 | Miejscowosc | `string` | bazodanowe |  | Miejscowość urodzenia osoby fizycznej |
 | Nazwa | `string` | bazodanowe |  | Nazwa/Imię i nazwisko |
 | Numer | `string` | bazodanowe |  | Numer identyfikatora |
 | OsobaFizyczna | `bool` | bazodanowe |  | Typ danych |
 | OsobaPrawna | `bool` |  |  |  |
-| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe, guided-parent |  |  |
-| RodzajIdentyfikacji | `Soneta.Kasa.RodzajIdentyfikacjiKontrahentaPrzelewu` | bazodanowe, enum |  | Rodzaj identyfikacji |
-| Typ | `Soneta.Kasa.TypDanychDodatkowych` | bazodanowe, enum |  | Typ dodatkowych danych |
+| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| RodzajIdentyfikacji | `Soneta.Kasa.RodzajIdentyfikacjiKontrahentaPrzelewu` (enum) | bazodanowe |  | Rodzaj identyfikacji |
+| Typ | `Soneta.Kasa.TypDanychDodatkowych` (enum) | bazodanowe, tylko-odczyt |  | Typ dodatkowych danych |
 | TypIdentyfikatora | `Soneta.Kasa.TypIdenPodPrzel` | bazodanowe |  | Typ identyfikatora |
 | Wojewodztwo | `string` | bazodanowe |  | Województwo urodzenia osoby fizycznej |
 | Wystawca | `string` | bazodanowe |  | Wystawca identyfikatora |

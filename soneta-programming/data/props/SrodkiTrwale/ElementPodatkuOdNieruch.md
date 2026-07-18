@@ -5,13 +5,17 @@ Opis: Element szczegółowy historii środka trwałego (SrodekTrwalyBaseHistoria
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Historia` → `SrodekTrwalyBaseHistoria`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.Date` |  |  |  |
-| Historia | `Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria` | bazodanowe, guided-parent |  |  |
+| Aktualnosc | `Date` |  |  |  |
+| Historia | `Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
 | PodlegaOpodatkowaniu | `bool` | bazodanowe |  |  |
@@ -19,4 +23,4 @@ Guided: child — nadrzędna przez pole `Historia` → `SrodekTrwalyBaseHistoria
 | Powierzchnia2 | `double` | bazodanowe |  |  |
 | PowierzchniaCalkowita | `double` | bazodanowe |  |  |
 | PrzedmiotOpodatkowania | `Soneta.SrodkiTrwale.PrzedmiotOp` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
+| Wartosc | `Currency` | bazodanowe |  |  |

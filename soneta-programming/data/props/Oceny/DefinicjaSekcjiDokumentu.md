@@ -5,13 +5,17 @@ Opis: Definicja sekcji grupującej pozycje w dokumentach oceny. Umożliwia organ
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaUI | `string` |  | Nazwa |  |
-| NazwaWyswietlana | `string` | bazodanowe | Nazwa wyświetlana |  |
+| NazwaWyswietlana | `string` | bazodanowe, tylko-odczyt | Nazwa wyświetlana |  |
 | Priorytet | `int` | bazodanowe |  |  |

@@ -5,34 +5,37 @@ Opis: Konfigurowalna definicja limitu nieobecności. Określa typ limitu (np. ur
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 9
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 0
+- razem: 24
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Automatyczny | `bool` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| DefinicjeZależne | `System.Collections.Generic.IEnumerable<Soneta.Kalend.DefinicjaLimitu>` |  |  |  |
-| IsUrlop | `bool` |  |  |  |
+| DefinicjeZależne | `System.Collections.Generic.IEnumerable<Soneta.Kalend.DefinicjaLimitu>` | podlista |  |  |
 | Kumulowany | `bool` | bazodanowe |  |  |
 | KumulowanyMinus | `bool` | bazodanowe |  |  |
 | KumulowanyPlus | `bool` |  |  |  |
 | Limit | `int` | bazodanowe |  |  |
 | LimitZUwzglednieniemNormy | `bool` | bazodanowe |  |  |
-| Naliczanie | `Soneta.Kalend.NaliczanieLimitu` | bazodanowe, enum |  |  |
-| NaliczanieJakUrlop | `bool` |  |  |  |
-| NaliczanieNaGodziny | `bool` |  |  |  |
+| Naliczanie | `Soneta.Kalend.NaliczanieLimitu` (enum) | bazodanowe |  |  |
+| NaliczanieJakUrlop | `bool` | tylko-odczyt |  |  |
+| NaliczanieNaGodziny | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NeutralName | `string` |  |  |  |
-| Opieka188 | `bool` |  |  |  |
-| OpiekunczyBezplatny | `bool` |  |  |  |
+| NeutralName | `string` | tylko-odczyt |  |  |
+| Opieka188 | `bool` | tylko-odczyt |  |  |
+| OpiekunczyBezplatny | `bool` | tylko-odczyt |  |  |
 | PierwszyUrlop | `bool` | bazodanowe |  |  |
 | PowiazanyWniosekONieobecnosc | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
 | Proporcjonalny | `bool` | bazodanowe |  |  |
-| SilaWyzsza | `bool` |  |  |  |
+| SilaWyzsza | `bool` | tylko-odczyt |  |  |
 | TylkoOstrzezenie | `bool` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypLimitu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kalend.TypLimitu` (enum) | bazodanowe |  |  |
 | WspolneZaokraglenie | `Soneta.Kalend.DefinicjaLimitu` | bazodanowe |  |  |
 | WyswietlajNaWidzecieLimity | `bool` | bazodanowe |  |  |
 

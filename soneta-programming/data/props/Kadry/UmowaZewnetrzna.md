@@ -4,45 +4,49 @@ Tytuł: Umowy zewnętrzne
 Opis: Umowa zewnętrzna (np. kontrakt B2B, umowa o współpracę) zawarta z pracownikiem. Zawiera dane dokumentu, okres obowiązywania, jednostkę organizacyjną, definicję dokumentu, powiązanego kontrahenta i opcjonalną kontynuację poprzedniej umowy.
 Tabela konfiguracyjna: Nie
 Guided: root
+Historyczna: Tak — wersje (historia) w tabeli `UmowaZewnetrznaHistoria`
 Implementuje interfejsy: `IZrodloPodzielnikaKosztow`, `IUmowaZKalendarzem`, `IZrodloPlanu`, `IDostepnoscHost`, `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 7
+- podlisty: 14
+- subrowy: 1
+- razem: 31
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CRU | `bool` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| DniPlanu | `Soneta.Business.DateSubTable` |  |  |  |
-| DniPracyUmowy | `Soneta.Business.DateSubTable<Soneta.Kalend.DzienPracyUmowy>` |  |  |  |
-| ElemRozliPracownika | `Soneta.Business.SubTable<Soneta.Place.ElementRozliczeniaPracownika>` |  |  |  |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.Kadry.UmowaZewnetrznaHistoria>` |  |  |  |
-| InformacjeDoRozl | `Soneta.Business.SubTable<Soneta.Kadry.InformacjaDoRozliczenia>` |  |  |  |
-| KalendarzeUmowy | `Soneta.Business.SubTable<Soneta.Kalend.KalendarzBase>` |  |  |  |
-| Kod | `string` |  |  |  |
+| DniPlanu | `DateSubTable` | podlista |  |  |
+| DniPracyUmowy | `DateSubTable<Soneta.Kalend.DzienPracyUmowy>` | podlista |  |  |
+| ElemRozliPracownika | `SubTable<Soneta.Place.ElementRozliczeniaPracownika>` | podlista |  |  |
+| Historia | `HistorySubTable<Soneta.Kadry.UmowaZewnetrznaHistoria>` | podlista |  |  |
+| InformacjeDoRozl | `SubTable<Soneta.Kadry.InformacjaDoRozliczenia>` | podlista |  |  |
+| KalendarzeUmowy | `SubTable<Soneta.Kalend.KalendarzBase>` | podlista |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | KontynuacjaUmowy | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe |  |  |
-| Last | `Soneta.Kadry.UmowaZewnetrznaHistoria` |  |  |  |
-| Nieobecnosci | `Soneta.Business.FromToSubTable<Soneta.Kalend.Nieobecnosc>` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Last | `Soneta.Kadry.UmowaZewnetrznaHistoria` | tylko-odczyt |  |  |
+| Nieobecnosci | `FromToSubTable<Soneta.Kalend.Nieobecnosc>` | podlista |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| NumerPelny | `string` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Podzielniki | `Soneta.Business.SubTable<Soneta.Core.PodzielnikKosztow>` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Podzielniki | `SubTable<Soneta.Core.PodzielnikKosztow>` | podlista |  |  |
 | PowiazanyKontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| RegulyDostepnosci | `Soneta.Business.SubTable<Soneta.Kalend.RegulaDostepnosci>` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| RegulyDostepnosci | `SubTable<Soneta.Kalend.RegulaDostepnosci>` | podlista |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` | bazodanowe, enum |  |  |
-| WartosciZRozliczen | `Soneta.Types.Currency` |  |  |  |
-| WnioskiUrlopowe | `Soneta.Business.SubTable<Soneta.Kadry.WniosekUrlopowy>` |  |  |  |
+| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WartosciZRozliczen | `Currency` | tylko-odczyt |  |  |
+| WnioskiUrlopowe | `SubTable<Soneta.Kadry.WniosekUrlopowy>` | podlista |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Zestawienia | `Soneta.Business.FromToSubTable<Soneta.Kalend.ZestawienieUmowyZewnetrznej>` |  |  |  |
+| Zestawienia | `FromToSubTable<Soneta.Kalend.ZestawienieUmowyZewnetrznej>` | podlista |  |  |
 
 ## Enumy
 

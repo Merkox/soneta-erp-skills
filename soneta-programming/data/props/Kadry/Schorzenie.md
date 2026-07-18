@@ -4,17 +4,21 @@ Opis: Ewidencja schorzeń i niepełnosprawności pracownika. Rejestruje okres, t
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Przyczyna | `Soneta.Kadry.PrzyczynaNiepelnosprawnosci` | bazodanowe, enum |  |  |
-| Rodzaj | `Soneta.Kadry.RodzajNiesprawnosci` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kadry.TypSchorzenia` | bazodanowe, enum |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Przyczyna | `Soneta.Kadry.PrzyczynaNiepelnosprawnosci` (enum) | bazodanowe |  |  |
+| Rodzaj | `Soneta.Kadry.RodzajNiesprawnosci` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Kadry.TypSchorzenia` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

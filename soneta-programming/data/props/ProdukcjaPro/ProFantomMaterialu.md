@@ -5,14 +5,18 @@ Opis: Element szczegółowy fantomu materiału (ProRozliczenieMaterialu). Reprez
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `RozliczenieMaterialu` → `ProRozliczenieMaterialu`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data fantomu materiału. |
+| Data | `Date` | bazodanowe |  | Data fantomu materiału. |
 | FantomWyrobu | `Soneta.ProdukcjaPro.ProFantomWyrobu` | bazodanowe | Fantom wyrobu | Fantom wyrobu dla fantomu materiału. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość fantomu materiału. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość fantomu materiału. |
 | RozliczenieMaterialu | `Soneta.ProdukcjaPro.ProRozliczenieMaterialu` | bazodanowe, guided-parent | Rozliczenie materiału | Rozliczenie materiału dla fantomu materiału. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar fantomu materiału. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość fantomu materiału. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość fantomu materiału. |

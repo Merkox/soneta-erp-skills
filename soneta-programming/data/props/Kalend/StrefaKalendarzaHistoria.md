@@ -5,18 +5,22 @@ Opis: Element szczegółowy historii dnia kalendarza (DzienKalendarzaHistoria). 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienKalendarzaHistoria`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 1
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
 | Czynnosc | `Soneta.Kalend.CzynnoscNaObiekcieDoPlanowania` | bazodanowe |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaStrefy` | bazodanowe |  |  |
-| Dzien | `Soneta.Kalend.DzienKalendarzaHistoria` | bazodanowe, guided-parent |  |  |
+| Dzien | `Soneta.Kalend.DzienKalendarzaHistoria` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Lokalizacja | `Soneta.Core.IRcpAddress` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |

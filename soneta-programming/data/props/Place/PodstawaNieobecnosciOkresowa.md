@@ -4,16 +4,20 @@ Opis: Element szczegółowy pracownika (Pracownik). Przechowuje podstawy nalicza
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaElementu | `Soneta.Place.DefinicjaElementu` | bazodanowe |  | Definicja elementu |
 | Kwota | `decimal` | bazodanowe | Kwota okresowych |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Podstawa | `decimal` | bazodanowe |  | Podstawa okresowych |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| ProcentSkladki | `Soneta.Types.Percent` | bazodanowe | Procent składki | Procent składki potrąconej |
-| WyplacanaDo | `Soneta.Types.YearMonth` |  |  |  |
-| WyplacanaOd | `Soneta.Types.YearMonth` |  |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| ProcentSkladki | `Percent` | bazodanowe | Procent składki | Procent składki potrąconej |
+| WyplacanaDo | `YearMonth` |  |  |  |
+| WyplacanaOd | `YearMonth` |  |  |  |

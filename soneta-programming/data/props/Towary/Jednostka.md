@@ -5,8 +5,12 @@ Opis: Definicja jednostki miary stosowanej do wyrażania ilości towarów. Okre�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -15,9 +19,9 @@ Guided: root
 | Kod | `string` | bazodanowe |  | Nazwa jednostki wykorzystywana przy wprowadzaniu ilości. |
 | Opis | `string` | bazodanowe |  | Opis jednostki. |
 | Precyzja | `int` | bazodanowe |  | Precyzja zaokrąglenia ilości towaru |
-| Przeliczniki | `Soneta.Business.SubTable<Soneta.Towary.Przelicznik>` |  |  |  |
-| PrzelicznikiBazowe | `Soneta.Business.SubTable<Soneta.Towary.Przelicznik>` |  |  |  |
-| Typ | `Soneta.Towary.TypJednostki` | bazodanowe, enum |  | Typ jednostki określający jej zastosowanie: masa, długość, czas, itp. |
+| Przeliczniki | `SubTable<Soneta.Towary.Przelicznik>` | podlista |  |  |
+| PrzelicznikiBazowe | `SubTable<Soneta.Towary.Przelicznik>` | podlista |  |  |
+| Typ | `Soneta.Towary.TypJednostki` (enum) | bazodanowe |  | Typ jednostki określający jej zastosowanie: masa, długość, czas, itp. |
 | Uzupelniajaca | `bool` | bazodanowe |  | Informuje, czy jednostka jest uzupełniająca wykorzystywana na deklaracji UE. |
 
 ## Enumy

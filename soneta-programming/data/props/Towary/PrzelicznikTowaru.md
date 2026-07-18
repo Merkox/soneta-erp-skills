@@ -4,13 +4,17 @@ Opis: Element szczegółowy towaru (Towar). Definiuje indywidualny przelicznik j
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bazowa | `Soneta.Towary.Jednostka` | bazodanowe |  | Jednostka bazowa, z której wyliczana jest jednostka 'Wyliczana'. |
-| Towar | `Soneta.Towary.Towar` | bazodanowe, guided-parent |  | Towar, dla którego zdefiniowany jest przelicznik |
-| Wspolczynnik | `Soneta.Types.Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki wyliczanej: Wyliczna=Bazowa*Wspolczynnik. |
+| Towar | `Soneta.Towary.Towar` | bazodanowe, tylko-odczyt, guided-parent |  | Towar, dla którego zdefiniowany jest przelicznik |
+| Wspolczynnik | `Fraction` | bazodanowe | Współczynnik | Współczynnik wyliczania jednostki wyliczanej: Wyliczna=Bazowa*Wspolczynnik. |
 | Wyliczana | `Soneta.Towary.Jednostka` | bazodanowe |  | Jednostka wyliczana z jednostki bazowej. |
-| Wzór | `string` |  |  | Wzór pokazujący sposób przeliczania jednostek. |
+| Wzór | `string` | tylko-odczyt |  | Wzór pokazujący sposób przeliczania jednostek. |

@@ -5,8 +5,12 @@ Opis: Słownik form prawnych podmiotów gospodarczych (np. spółka z o.o., osob
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -17,7 +21,7 @@ Guided: root
 | KodySF | `string` | bazodanowe | Kod formy prawnej sprawozdania finansowego | Kody odpowiadających formie prawnej dla sprawozdania finansowego |
 | LogujReferencje | `bool` | bazodanowe | Loguj referencje | Logowanie referencji do podmiotu |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa formy prawnej |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | bazodanowe, enum | Status podmiotu | Uszczegółowienie formy prawnej |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | bazodanowe | Status podmiotu | Uszczegółowienie formy prawnej |
 
 ## Enumy
 

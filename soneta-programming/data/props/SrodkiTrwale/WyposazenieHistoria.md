@@ -4,20 +4,25 @@ Tytuł: Ewidencja wyposażenia - historia
 Opis: Element szczegółowy wyposażenia (Wyposazenie). Rejestruje historyczne zmiany danych wyposażenia, takich jak ilość, wartość, miejsce użytkowania, osoba odpowiedzialna oraz wartość rynkowa z datą wyceny.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wyposazenie` → `Wyposazenie`
+Historia: Tak — zapis historyczny tabeli `Wyposazenie`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Aktualnosc | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| DataWyceny | `Soneta.Types.Date` | bazodanowe |  | Data wyceny wartości rynkowej wysposażenia |
+| Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |
+| DataWyceny | `Date` | bazodanowe |  | Data wyceny wartości rynkowej wysposażenia |
 | Ilosc | `int` | bazodanowe | Ilość |  |
 | JednostkaMiary | `Soneta.Towary.Jednostka` | bazodanowe | Jm. |  |
 | MiejsceUzytkowania | `Soneta.SrodkiTrwale.MiejsceUzytkowania` | bazodanowe | Miejsce użytkowania | Miejsce użytkowania środeka trwałego |
 | Nazwisko | `string` | bazodanowe |  | Nazwisko osoby odpowiedzialnej za wyposażenie |
 | Odpowiedzialny | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik odpowiedzialny za wyposażenie |
-| Parent | `Soneta.Business.Row` |  |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
-| WartoscRynkowa | `Soneta.Types.Currency` | bazodanowe | Wartość rynkowa | Wartość rynkowa wysposażenia |
-| Wyposazenie | `Soneta.SrodkiTrwale.Wyposazenie` | bazodanowe, guided-parent |  |  |
+| Parent | `Row` | tylko-odczyt |  |  |
+| Wartosc | `Currency` | bazodanowe | Wartość |  |
+| WartoscRynkowa | `Currency` | bazodanowe | Wartość rynkowa | Wartość rynkowa wysposażenia |
+| Wyposazenie | `Soneta.SrodkiTrwale.Wyposazenie` | bazodanowe, tylko-odczyt, guided-parent |  |  |

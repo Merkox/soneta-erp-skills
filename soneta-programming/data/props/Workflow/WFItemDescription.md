@@ -5,10 +5,14 @@ Opis: Komentarz tekstowy dołączany do elementów diagramu procesu workflow w r
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Comment | `string` | bazodanowe | Komentarz | Komentarz do wskazanego elementu workflow |
-| WFDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe | Definicja procesu | Definicja procesu |
+| WFDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe, tylko-odczyt | Definicja procesu | Definicja procesu |

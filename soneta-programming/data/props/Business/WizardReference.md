@@ -5,16 +5,20 @@ Opis: Powiązanie kreatora z obiektem biznesowym lub definicją zadania. Określ
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Host` → `IWizardReferenceHost`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 7
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 6
+- podlisty: 0
+- subrowy: 1
+- razem: 25
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Host | `Soneta.Business.IWizardReferenceHost` | bazodanowe, guided-parent, iface-ref | Kreator dla |  |
-| Identifier | `string` |  |  |  |
+| Host | `IWizardReferenceHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Kreator dla |  |
+| Identifier | `string` | tylko-odczyt |  |  |
 | Priority | `int` | bazodanowe |  |  |
 | RefGuid | `System.Guid` | bazodanowe |  |  |
-| Settings | `Soneta.Business.Db.Wizard.WizardReferenceSettings` | bazodanowe |  |  |
+| Settings | `Db.Wizard.WizardReferenceSettings` (subrow) | bazodanowe |  |  |
 | Settings.Added | `bool` | bazodanowe |  |  |
 | Settings.Code | `string` | bazodanowe |  |  |
 | Settings.Edited | `bool` | bazodanowe |  |  |
@@ -22,19 +26,19 @@ Guided: child — nadrzędna przez pole `Host` → `IWizardReferenceHost`
 | Settings.ForApplication | `bool` |  |  |  |
 | Settings.ForMobile | `bool` |  |  |  |
 | Settings.ForWebUser | `bool` |  |  |  |
-| Settings.Layout | `Soneta.Business.Db.Wizard.WizardLayouts` | bazodanowe, enum |  |  |
+| Settings.Layout | `Db.Wizard.WizardLayouts` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Settings.ListAcceptance | `bool` | bazodanowe | Akceptacja z poziomu listy | Określa czy będzie możliwa akceptacja z poziomu listy mimo posiadania kreatora |
-| Settings.Mode | `Soneta.Business.Db.Wizard.WizardReferenceMode` | bazodanowe, enum |  |  |
+| Settings.Mode | `Db.Wizard.WizardReferenceMode` (enum) | bazodanowe |  |  |
 | Settings.NoTask | `bool` | bazodanowe |  |  |
 | Settings.Readed | `bool` | bazodanowe |  |  |
-| Settings.Reference | `Soneta.Business.Db.Wizard.WizardReference` |  |  |  |
-| Settings.RowSettings | `bool` |  |  |  |
+| Settings.Reference | `Db.Wizard.WizardReference` | tylko-odczyt |  |  |
+| Settings.RowSettings | `bool` | tylko-odczyt |  |  |
 | Settings.TaskForm | `bool` | bazodanowe | Nieaktywne z poziomu listy | Określa czy kreatory zostaną uruchomione na wszystkich listach |
-| Settings.TaskSettings | `bool` |  |  |  |
+| Settings.TaskSettings | `bool` | tylko-odczyt |  |  |
 | Settings.TaskUser | `bool` | bazodanowe |  |  |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe |  |  |
-| WFDefinition | `Soneta.Business.IWFDefinition` | bazodanowe, iface-ref |  |  |
-| Wizard | `Soneta.Business.Db.Wizard.WizardDefinition` | bazodanowe |  |  |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe |  |  |
+| WFDefinition | `IWFDefinition` | bazodanowe, iface-ref |  |  |
+| Wizard | `Db.Wizard.WizardDefinition` | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 
@@ -50,11 +54,11 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### WizardLayouts (`Soneta.Business.Db.Wizard.WizardLayouts`)
+### WizardLayouts (`Db.Wizard.WizardLayouts`)
 - `Application` = 1 — Podstawowy
 - `WebUser` = 2 — Pulpity
 - `Mobile` = 4 — Aplikacja mobilna
 
-### WizardReferenceMode (`Soneta.Business.Db.Wizard.WizardReferenceMode`)
+### WizardReferenceMode (`Db.Wizard.WizardReferenceMode`)
 - `Creator` = 1 — Wbudowane opcje
 - `Editor` = 2 — Algorytm

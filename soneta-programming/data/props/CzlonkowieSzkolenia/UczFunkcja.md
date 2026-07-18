@@ -5,13 +5,17 @@ Opis: Rejestr funkcji pełnionych z wyboru przez członków organizacji. Przecho
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataDo | `Soneta.Types.Date` | bazodanowe |  | Data pełnienia funkcji do |
-| DataOd | `Soneta.Types.Date` | bazodanowe |  | Data pełnienia funkcji od |
+| DataDo | `Date` | bazodanowe |  | Data pełnienia funkcji do |
+| DataOd | `Date` | bazodanowe |  | Data pełnienia funkcji od |
 | Nazwa | `string` | bazodanowe | Funkcja | Funkcja pełniona przez członka. |
 | Opis | `string` | bazodanowe | Opis | Opis funkcji przez członka. |
 | Uczestnik | `Soneta.CzlonkowieSzkolenia.UczestnikBase` | bazodanowe |  |  |

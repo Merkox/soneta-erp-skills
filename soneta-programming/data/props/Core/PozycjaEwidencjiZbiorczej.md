@@ -5,15 +5,19 @@ Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Reprezentuje poz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Dokument | `Soneta.Core.IDokumentKsiegowalny` | bazodanowe, iface-ref | Dokument | Dokument księgowany zbiorczo |
-| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, guided-parent | Ewidencja | Ewidencja zbiorcza |
+| Dokument | `Soneta.Core.IDokumentKsiegowalny` | bazodanowe, tylko-odczyt, iface-ref | Dokument | Dokument księgowany zbiorczo |
+| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt, guided-parent | Ewidencja | Ewidencja zbiorcza |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji w ewidencji |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

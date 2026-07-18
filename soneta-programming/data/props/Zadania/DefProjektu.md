@@ -6,68 +6,72 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`
 
-- pola bazodanowe: 32
-- pola kalkulowane (z klas biznesowych): 26
+- pola bazodanowe (zapisywalne): 26
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 14
+- podlisty: 11
+- subrowy: 2
+- razem: 58
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla zadania. |
-| AlgorytmNazwyIOpisu | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla nazwy i opisu projektu w kalendarzu | Kod kalkulatora dla nazwy i opisu projektu w kalendarzu. |
+| AlgorytmNazwyIOpisu | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla nazwy i opisu projektu w kalendarzu | Kod kalkulatora dla nazwy i opisu projektu w kalendarzu. |
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod kalkulatora dla zadania | Kod klasy kalkulatora dla zadania. |
-| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` | bazodanowe, enum | Uruchom procesy |  |
-| DataType | `System.Type` |  |  |  |
-| DefBudgets | `Soneta.Zadania.Budzetowanie.DefBudget[]` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista | Kod kalkulatora dla zadania | Kod klasy kalkulatora dla zadania. |
+| CreateProcess | `Soneta.Core.DbTuples.CreateProcessType` (enum) | bazodanowe | Uruchom procesy |  |
+| DataType | `System.Type` | tylko-odczyt |  |  |
+| DefBudgets | `Soneta.Zadania.Budzetowanie.DefBudget[]` | podlista |  |  |
 | DefaultDefBudget | `Soneta.Zadania.Budzetowanie.DefBudget` |  |  |  |
-| DefinedTypeName | `string` |  |  |  |
+| DefinedTypeName | `string` | tylko-odczyt |  |  |
 | DefinicjaDokHandlowego | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja dokumentu handlowego | Domyślna definicja dokumentu handlowego generowanego dla tego projektu |
 | DefinicjaDokZapotrzebowania | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja dokumentu zapotrzebowania | Domyślna definicja dokumentu zapotrzebowania generowanego dla tego projektu |
 | DefinicjeBudzetow | `string` | bazodanowe |  | Lista definicji budżetów przypisanych do projektu. |
 | DlaUprawnienia | `bool` |  |  |  |
 | Domyslna | `bool` | bazodanowe | Domyślna | Określa, że jest to domyślna definicja projektu |
 | EntitleGuid | `System.Guid` | bazodanowe |  | Domyślne uprawnienie dla którego przypisane jest zadanie. |
-| EtapyDefProjektu | `Soneta.Business.LpSubTable<Soneta.Zadania.EtapDefProjektu>` |  |  |  |
+| EtapyDefProjektu | `LpSubTable<Soneta.Zadania.EtapDefProjektu>` | podlista |  |  |
 | FormularzUzytkownika | `bool` | bazodanowe | Formularz użytkownika | Formularz użytkownika. |
-| IsEnabled | `bool` |  |  |  |
-| IsSource | `bool` |  |  |  |
-| IsVisibleBudgetConfiguration | `bool` |  |  |  |
-| Key | `string` |  |  |  |
-| Kod | `string` |  |  |  |
-| KontrolaDat | `Soneta.Core.TypKontroli` | bazodanowe, enum | Typ kontroli dat | Określa typ kontroli dat na projekcie. |
-| KontrolaStanu | `Soneta.Core.TypKontroli` | bazodanowe, enum | Typ kontroli stanu | Określa typ kontroli stanu na projekcie. |
+| IsEnabled | `bool` | tylko-odczyt |  |  |
+| IsSource | `bool` | tylko-odczyt |  |  |
+| IsVisibleBudgetConfiguration | `bool` | tylko-odczyt |  |  |
+| Key | `string` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KontrolaDat | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Typ kontroli dat | Określa typ kontroli dat na projekcie. |
+| KontrolaStanu | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Typ kontroli stanu | Określa typ kontroli stanu na projekcie. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe | Domyślny magazyn | Określa, domyślny magazyn. |
-| NamePrefix | `string` |  |  |  |
-| Namespace | `string` |  |  |  |
+| NamePrefix | `string` | tylko-odczyt |  |  |
+| Namespace | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Pełna nazwa definicji projektu. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji projektów. |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji projektów. |
 | Numeracja.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numeracja.PodczasZapisu | `bool` |  |  |  |
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
-| PlugIns | `Soneta.Business.SubTable` |  |  |  |
+| PlugIns | `SubTable` | podlista |  |  |
 | PokazKomunikat | `bool` | bazodanowe |  | Decyduje o pokazywaniu komunikatu o kontrahencie podczas jego ustawianiu na dokument CRM. |
 | Rozliczaj | `bool` | bazodanowe | Rozliczaj |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | StageOverlap | `bool` | bazodanowe | Nachodzenie etapów |  |
-| Stany | `Soneta.Business.LpSubTable<Soneta.Zadania.StanProjektu>` |  |  |  |
+| Stany | `LpSubTable<Soneta.Zadania.StanProjektu>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji projektu wykorzystywana do wyszukiwania definicji oraz numeracji projektów CRM. |
-| SysNotifications | `Soneta.Business.SubTable<Soneta.Business.Db.Notifications.SysNotification>` |  |  |  |
-| TableName | `string` |  |  |  |
-| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` | bazodanowe, enum |  | Określa rodzaj zaokrąglenia. |
-| TypeFullName | `string` |  |  |  |
-| UprawnieniaNaAktywnosciach | `bool` |  |  |  |
-| Uprawnienie | `Soneta.Business.App.Entitle` |  |  |  |
-| WFDefinition | `Soneta.Workflow.Config.WFDefinitionExtend` |  |  |  |
-| WfEngineCode | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WfEngineCodeEditorSource | `Soneta.Business.Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
-| WizardsRef | `Soneta.Business.LpSubTable<Soneta.Business.Db.Wizard.WizardReference>` |  |  |  |
-| XmlForm | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| SysNotifications | `SubTable<Db.Notifications.SysNotification>` | podlista |  |  |
+| TableName | `string` | tylko-odczyt |  |  |
+| TypZaokraglenia | `Soneta.Zadania.TypZaokraglenia` (enum) | bazodanowe |  | Określa rodzaj zaokrąglenia. |
+| TypeFullName | `string` | tylko-odczyt |  |  |
+| UprawnieniaNaAktywnosciach | `bool` | tylko-odczyt |  |  |
+| Uprawnienie | `App.Entitle` |  |  |  |
+| WFDefinition | `Soneta.Workflow.Config.WFDefinitionExtend` | tylko-odczyt |  |  |
+| WfEngineCode | `MemoText` | bazodanowe, podlista |  |  |
+| WfEngineCodeEditorSource | `Compiler.ICodeEditorSource` |  | Algorytm procesu | Algorytm procesu |
+| WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+| XmlForm | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 | ZapisNaBiezaco | `bool` | bazodanowe | Zapis na bieżąco sesji | Jeśli możliwe, sesja zostanie zapisana najszybciej jak to możliwe. |
 
 ## Enumy

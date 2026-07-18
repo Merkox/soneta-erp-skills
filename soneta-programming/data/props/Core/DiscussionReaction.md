@@ -3,14 +3,18 @@ Nazwa tabeli: `DiscusReactions`
 Opis: Reakcja użytkownika na element dyskusji (komentarz, temat). Przechowuje powiązanie z komentarzem, właścicielem reakcji i typem reakcji (np. polubienie). Zapewnia unikalność reakcji per użytkownik i komentarz.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Comment | `Soneta.Core.Conversation.IDiscussionItem` | bazodanowe, iface-ref |  |  |
-| Owner | `Soneta.Business.IOwner` | bazodanowe |  |  |
-| ReactionType | `Soneta.Core.Conversation.DiscussionReactionType` | bazodanowe, enum |  |  |
+| Owner | `IOwner` | bazodanowe |  |  |
+| ReactionType | `Soneta.Core.Conversation.DiscussionReactionType` (enum) | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

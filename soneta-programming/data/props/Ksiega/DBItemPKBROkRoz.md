@@ -5,17 +5,21 @@ Opis: Status okresu rozliczeniowego na potrzeby użytkowników PKBR. Zawiera akt
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DBItem | `Soneta.Business.Db.DBItem` | bazodanowe | Baza danych | Bazy danych |
+| DBItem | `Db.DBItem` | bazodanowe | Baza danych | Bazy danych |
 | DataPonownegoOtwarcia | `System.DateTime` | bazodanowe | Data ponownego otwarcia okresu | Data ponownego otwarcia okresu |
 | DataZamkniecia | `System.DateTime` | bazodanowe | Data zamknięcia okresu | Data zamknięcia okresu |
-| HistoriaOkresu | `Soneta.Business.SubTable<Soneta.Ksiega.DBIPKBRHist>` |  |  |  |
-| OkresRozliczenia | `Soneta.Types.YearMonth` | bazodanowe | Okres rozliczenia | Okres rozliczenia |
-| StatusOkresu | `Soneta.Ksiega.TaxMonthStatus` | bazodanowe, enum | Status | Status |
+| HistoriaOkresu | `SubTable<Soneta.Ksiega.DBIPKBRHist>` | podlista |  |  |
+| OkresRozliczenia | `YearMonth` | bazodanowe | Okres rozliczenia | Okres rozliczenia |
+| StatusOkresu | `Soneta.Ksiega.TaxMonthStatus` (enum) | bazodanowe | Status | Status |
 
 ## Enumy
 

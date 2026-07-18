@@ -5,16 +5,20 @@ Opis: Element szczegółowy definicji projektu (DefProjektu). Definiuje możliwy
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy projekt w tym stanie jest aktywny (otwarty). |
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany dokumentów nie będą wyświetlane w liście wyboru. |
-| Definicja | `Soneta.Zadania.DefProjektu` | bazodanowe |  | Definicja projektu, do której jest przypisany ten stan |
-| Ident | `int` | bazodanowe | Identyfikator | Identyfikator stanu na definicji projektu. Wykorzystywany w relacji do projektu. |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.Zadania.DefProjektu` | bazodanowe, tylko-odczyt |  | Definicja projektu, do której jest przypisany ten stan |
+| Ident | `int` | bazodanowe, tylko-odczyt | Identyfikator | Identyfikator stanu na definicji projektu. Wykorzystywany w relacji do projektu. |
+| Kod | `string` | tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa stanu realizacji w ramach projektu. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa stanu realizacji projektu |
-| Stany | `Soneta.Business.SubTable<Soneta.Zadania.AvaliableProjectState>` |  |  |  |
+| Stany | `SubTable<Soneta.Zadania.AvaliableProjectState>` | podlista |  |  |

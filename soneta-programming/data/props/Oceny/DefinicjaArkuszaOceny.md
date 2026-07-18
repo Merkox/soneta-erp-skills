@@ -5,28 +5,32 @@ Opis: Definicja wzorca arkusza oceny wypełnianego przez jednego oceniającego. 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 12
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AkceptowanyPrzezOcenianego | `bool` | bazodanowe |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
 | DefinicjaProcesu | `System.Guid` | bazodanowe |  |  |
-| DependentWfDefinition | `Soneta.Business.IDependentWfDefinition` |  |  |  |
-| KierunekOceny | `Soneta.Oceny.KierunkiOceny` | bazodanowe, enum |  |  |
-| Kod | `string` |  |  |  |
+| DependentWfDefinition | `IDependentWfDefinition` |  |  |  |
+| KierunekOceny | `Soneta.Oceny.KierunkiOceny` (enum) | bazodanowe |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Konsolidacyjny | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Podstawa | `decimal` |  |  |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Oceny.PozycjaDefinicjiArkuszaOceny>` |  |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
+| Podstawa | `decimal` | tylko-odczyt |  |  |
+| Pozycje | `SubTable<Soneta.Oceny.PozycjaDefinicjiArkuszaOceny>` | podlista |  |  |
 | PrzeznaczonyDla | `Soneta.Oceny.TableRef` |  |  |  |
 | RodzajZrodla | `string` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 | UdostepnijOceniajacemu | `bool` | bazodanowe |  |  |
 | UdostepnijOcenianemu | `bool` | bazodanowe |  |  |
-| UdostepnijOcenianemuOdEtapu | `Soneta.Oceny.EtapyArkuszaOceny` | bazodanowe, enum |  |  |
+| UdostepnijOcenianemuOdEtapu | `Soneta.Oceny.EtapyArkuszaOceny` (enum) | bazodanowe |  |  |
 | WartoscWgKategorii | `bool` | bazodanowe |  |  |
 | Wielokrotny | `bool` | bazodanowe |  |  |
 

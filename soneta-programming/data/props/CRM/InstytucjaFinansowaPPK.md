@@ -6,77 +6,81 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPodmiot`, `IKontrahent`, `IPodmiotKasowy`, `IAdresHost`, `IElementSlownika`, `IAdresyWWWHost`, `IDaneKontaktoweHost`, `IEmailElement`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 48
+- pola bazodanowe (zapisywalne): 15
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 11
+- podlisty: 35
+- subrowy: 2
+- razem: 66
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresDoKorespondencji | `Soneta.Core.Adres` |  |  |  |
-| AdresyWWW | `Soneta.Business.SubTable<Soneta.Core.AdresWWW>` |  |  |  |
-| BasicDocuments | `Soneta.Business.SubTable` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresDoKorespondencji | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresyWWW | `SubTable<Soneta.Core.AdresWWW>` | podlista |  |  |
+| BasicDocuments | `SubTable` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  | Określa, czy dany urząd ma być widoczny na listach. |
-| DeklaracjePodmiotu | `Soneta.Business.SubTable` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| DokumentyPreliminarza | `Soneta.Business.SubTable<Soneta.Kasa.PreliminarzDokument>` |  |  |  |
-| DokumentyRozliczeniowe | `Soneta.Business.SubTable<Soneta.Kasa.DokRozliczBase>` |  |  |  |
-| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` |  |  |  |
-| DomyślnyAdresWWW | `string` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| DeklaracjePodmiotu | `SubTable` | podlista |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| DokumentyPreliminarza | `SubTable<Soneta.Kasa.PreliminarzDokument>` | podlista |  |  |
+| DokumentyRozliczeniowe | `SubTable<Soneta.Kasa.DokRozliczBase>` | podlista |  |  |
+| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | tylko-odczyt |  |  |
+| DomyślnyAdresWWW | `string` | tylko-odczyt |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
-| Identyfikacje | `Soneta.Business.SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` |  |  |  |
+| Identyfikacje | `SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` | podlista |  |  |
 | KRS | `string` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
-| Leady | `Soneta.Business.SubTable<Soneta.CRM.Lead>` |  |  |  |
-| Lokalizacje | `Soneta.Business.SubTable<Soneta.CRM.Lokalizacja>` |  |  |  |
-| MailTo | `string` |  |  |  |
-| MatrycePodmiotu | `Soneta.Business.SubTable` |  |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
+| Leady | `SubTable<Soneta.CRM.Lead>` | podlista |  |  |
+| Lokalizacje | `SubTable<Soneta.CRM.Lokalizacja>` | podlista |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| MatrycePodmiotu | `SubTable` | podlista |  |  |
 | NIP | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
-| Osoba | `Soneta.Core.Osoba` | bazodanowe |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
+| Osoba | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
 | Osoba.Adres | `string` | bazodanowe |  |  |
 | Osoba.Osoba | `string` | bazodanowe |  |  |
 | Osoba.Telefon | `string` | bazodanowe |  |  |
-| Osoby | `Soneta.Business.SubTable<Soneta.CRM.KontaktOsoba>` |  |  |  |
-| OsobyKontaktowe | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` |  |  |  |
-| PPK | `Soneta.Kasa.NumerRachunku` |  |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| PodmiotPowiazany | `bool` |  |  |  |
-| PodmiotyZastąpione | `System.Collections.Generic.List<Soneta.CRM.InstytucjaFinansowaPPK>` |  |  |  |
-| Podrzedni | `Soneta.Business.SubTable<Soneta.CRM.RelacjaPodmiotu>` |  |  |  |
-| Pojazdy | `Soneta.Business.SubTable` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Projekty | `Soneta.Business.SubTable` |  |  |  |
-| Przelewy | `Soneta.Business.SubTable<Soneta.Kasa.PrzelewBase>` |  |  |  |
+| Osoby | `SubTable<Soneta.CRM.KontaktOsoba>` | podlista |  |  |
+| OsobyKontaktowe | `SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` | podlista |  |  |
+| PPK | `Soneta.Kasa.NumerRachunku` | tylko-odczyt |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| PodmiotPowiazany | `bool` | tylko-odczyt |  |  |
+| PodmiotyZastąpione | `System.Collections.Generic.List<Soneta.CRM.InstytucjaFinansowaPPK>` | podlista |  |  |
+| Podrzedni | `SubTable<Soneta.CRM.RelacjaPodmiotu>` | podlista |  |  |
+| Pojazdy | `SubTable` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Projekty | `SubTable` | podlista |  |  |
+| Przelewy | `SubTable<Soneta.Kasa.PrzelewBase>` | podlista |  |  |
 | REGON | `string` | bazodanowe | Regon | Rejestr Gospodarki Narodowej |
-| Rabat | `Soneta.Types.Percent` |  |  |  |
-| Rachunki | `Soneta.Business.SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` |  |  |  |
-| RachunkiWirtualne | `Soneta.Business.SubTable<Soneta.Kasa.RachunekWirtualny>` |  |  |  |
-| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` | enum |  |  |
-| RodzajePodmiotu | `Soneta.Business.SubTable<Soneta.Core.RodzajPodmiot>` |  |  |  |
-| Rozrachunki | `Soneta.Business.SubTable<Soneta.Kasa.RozrachunekIdx>` |  |  |  |
+| Rabat | `Percent` | tylko-odczyt |  |  |
+| Rachunki | `SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` | podlista |  |  |
+| RachunkiWirtualne | `SubTable<Soneta.Kasa.RachunekWirtualny>` | podlista |  |  |
+| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | tylko-odczyt |  |  |
+| RodzajePodmiotu | `SubTable<Soneta.Core.RodzajPodmiot>` | podlista |  |  |
+| Rozrachunki | `SubTable<Soneta.Kasa.RozrachunekIdx>` | podlista |  |  |
 | SposobZaplaty | `Soneta.Kasa.FormaPlatnosci` | bazodanowe |  |  |
-| Sprawy | `Soneta.Business.SubTable<Soneta.Windykacja.SprawaWindykacyjna>` |  |  |  |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | enum |  |  |
-| Transakcje | `Soneta.Business.SubTable<Soneta.CRM.Transakcja>` |  |  |  |
-| TransakcjeKontrahenta | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` |  |  |  |
-| Urzadzenia | `Soneta.Business.SubTable` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
-| ZadaniaKontrahenta | `Soneta.Business.SubTable` |  |  |  |
+| Sprawy | `SubTable<Soneta.Windykacja.SprawaWindykacyjna>` | podlista |  |  |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | tylko-odczyt |  |  |
+| Transakcje | `SubTable<Soneta.CRM.Transakcja>` | podlista |  |  |
+| TransakcjeKontrahenta | `SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` | podlista |  |  |
+| Urzadzenia | `SubTable` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Zadania | `SubTable` | podlista |  |  |
+| ZadaniaKontrahenta | `SubTable` | podlista |  |  |
 | Zamiennik | `Soneta.CRM.InstytucjaFinansowaPPK` |  |  |  |
-| Zaplaty | `Soneta.Business.SubTable<Soneta.Kasa.Zaplata>` |  |  |  |
-| Zdarzenia | `Soneta.Business.SubTable<Soneta.CRM.DokumentZdarzenia>` |  |  |  |
+| Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
+| Zdarzenia | `SubTable<Soneta.CRM.DokumentZdarzenia>` | podlista |  |  |
 
 ## Enumy
 

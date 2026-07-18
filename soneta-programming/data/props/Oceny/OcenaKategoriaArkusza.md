@@ -5,12 +5,16 @@ Opis: Element szczegółowy arkusza oceny (OcenaKategoriaArkusza). Przechowuje z
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Arkusz` → `OcenaArkusz`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Arkusz | `Soneta.Oceny.OcenaArkusz` | bazodanowe, guided-parent |  |  |
-| Kategoria | `Soneta.Oceny.KategoriaElementuOceny` | bazodanowe |  |  |
-| Wartosc | `Soneta.Types.Percent` | bazodanowe |  |  |
-| WartoscWgWagi | `Soneta.Types.Percent` | bazodanowe |  |  |
+| Arkusz | `Soneta.Oceny.OcenaArkusz` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Kategoria | `Soneta.Oceny.KategoriaElementuOceny` | bazodanowe, tylko-odczyt |  |  |
+| Wartosc | `Percent` | bazodanowe, tylko-odczyt |  |  |
+| WartoscWgWagi | `Percent` | bazodanowe, tylko-odczyt |  |  |

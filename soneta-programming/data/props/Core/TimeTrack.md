@@ -5,29 +5,32 @@ Opis: Rejestracja czasu pracy hybrydowej (zdalnej). Przechowuje informację o wy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 12
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 6
+- podlisty: 2
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllDayEvent | `bool` |  |  |  |
-| Context | `Soneta.Business.Context` |  |  |  |
-| CzasRozpoczecia | `Soneta.Types.Time` | bazodanowe |  |  |
-| CzasWykonania | `Soneta.Types.Time` | bazodanowe |  |  |
-| CzasZakonczenia | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| Description | `string` |  |  |  |
-| End | `System.DateTime` |  |  |  |
+| AllDayEvent | `bool` | tylko-odczyt |  |  |
+| Context | `Context` | podlista |  |  |
+| CzasRozpoczecia | `Time` | bazodanowe |  |  |
+| CzasWykonania | `Time` | bazodanowe |  |  |
+| CzasZakonczenia | `Time` |  |  |  |
+| Data | `Date` | bazodanowe |  |  |
+| Description | `string` | tylko-odczyt |  |  |
+| End | `System.DateTime` | tylko-odczyt |  |  |
 | Host | `Soneta.Core.ITimeTrackHost` |  |  |  |
 | HostGuid | `System.Guid` | bazodanowe |  |  |
 | HostType | `string` | bazodanowe |  |  |
-| PracaAutorska | `bool` |  |  |  |
 | PracaTworcza | `bool` | bazodanowe |  |  |
-| Resource | `object` |  |  |  |
+| Resource | `object` | tylko-odczyt |  |  |
 | Rozliczone | `bool` | bazodanowe |  |  |
-| Settings | `Soneta.Business.SchedulerSettings` |  |  |  |
-| Start | `System.DateTime` |  |  |  |
+| Settings | `SchedulerSettings` | tylko-odczyt |  |  |
+| Start | `System.DateTime` | tylko-odczyt |  |  |
 | Text | `string` |  |  |  |
-| TimeTracks | `Soneta.Business.SubTable` |  |  |  |
+| TimeTracks | `SubTable` | podlista |  |  |
 | Uwagi | `string` | bazodanowe |  |  |
-| Wykonujacy | `Soneta.Business.IWykonujacy` | bazodanowe |  |  |
+| Wykonujacy | `IWykonujacy` | bazodanowe |  |  |

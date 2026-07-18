@@ -6,44 +6,48 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 19
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 7
+- subrowy: 1
+- razem: 33
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDay | `bool` | bazodanowe | Całodzienne. |  |
-| AvailabilityControl | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola dostępności pojazdu. |  |
+| AvailabilityControl | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola dostępności pojazdu. |  |
 | Blocked | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje rezerwacji nie będą wyświetlane w liście wyboru. |
-| DefPageXml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| DefPageXml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 | Default | `bool` | bazodanowe | Domyślna | Określa, że jest to domyślna definicja rezerwacji. |
-| DefaultLayoutXml | `Soneta.Business.MemoText` |  |  |  |
-| DefinedType | `System.Type` |  |  |  |
-| DomyślnaNumeracja | `string` |  |  |  |
-| FailureControl | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola awarii pojazdu. |  |
-| Form | `Soneta.Vehicles.Enums.VehicleFormType` | bazodanowe, enum | Rodzaj formularza | Określa sposób wyświetlania formularza |
-| InsuranceControl | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola ubezpieczenia pojazdu. |  |
-| IsNetPage | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
+| DefaultLayoutXml | `MemoText` | podlista |  |  |
+| DefinedType | `System.Type` | tylko-odczyt |  |  |
+| DomyślnaNumeracja | `string` | tylko-odczyt |  |  |
+| FailureControl | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola awarii pojazdu. |  |
+| Form | `Soneta.Vehicles.Enums.VehicleFormType` (enum) | bazodanowe | Rodzaj formularza | Określa sposób wyświetlania formularza |
+| InsuranceControl | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola ubezpieczenia pojazdu. |  |
+| IsNetPage | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa | Pełna nazwa definicji rezerwacji. |
-| Nazwa | `string` |  |  |  |
-| Numbering | `Soneta.Core.DefinicjaNumeracji` | bazodanowe | Numeracja | Ustawienia określające sposób numeracji rezerwacji. |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Numbering | `Soneta.Core.DefinicjaNumeracji` (subrow) | bazodanowe | Numeracja | Ustawienia określające sposób numeracji rezerwacji. |
 | Numbering.PodczasEdycji | `bool` | bazodanowe |  |  |
 | Numbering.PodczasZapisu | `bool` |  |  |  |
 | Numbering.Separator | `string` | bazodanowe |  |  |
 | Numbering.Wzor | `string` | bazodanowe |  |  |
-| Numeracja | `Soneta.Core.DefinicjaNumeracji` |  |  |  |
-| ReadingControl | `Soneta.Core.TypWymagalnosci` | bazodanowe, enum | Kontrola konieczności wprowadzenia odczytu licznika |  |
+| Numeracja | `Soneta.Core.DefinicjaNumeracji` | podlista |  |  |
+| ReadingControl | `Soneta.Core.TypWymagalnosci` (enum) | bazodanowe | Kontrola konieczności wprowadzenia odczytu licznika |  |
 | SaleDefinition | `Soneta.Handel.DefDokHandlowego` | bazodanowe | Definicja dok. handlowego |  |
-| States | `Soneta.Business.LpSubTable<Soneta.Vehicles.Models.Database.Config.ReservationState>` |  |  |  |
+| States | `LpSubTable<Soneta.Vehicles.Models.Database.Config.ReservationState>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji rezerwacji |
-| TechnicalInspectionControl | `Soneta.Core.TypKontroli` | bazodanowe, enum | Kontrola badania technicznego pojazdu. |  |
-| Typ | `Soneta.Core.TypDokumentu` | enum |  |  |
-| TypDokumentu | `System.Type` |  |  |  |
+| TechnicalInspectionControl | `Soneta.Core.TypKontroli` (enum) | bazodanowe | Kontrola badania technicznego pojazdu. |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
+| TypDokumentu | `System.Type` | tylko-odczyt |  |  |
 | UserBookmarkName | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
-| Visible | `bool` |  |  |  |
-| WidoczneCechy | `Soneta.Business.MemoText` |  |  |  |
-| Xml | `Soneta.Business.MemoText` |  |  |  |
-| XmlForm | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
+| Visible | `bool` | tylko-odczyt |  |  |
+| WidoczneCechy | `MemoText` | podlista |  |  |
+| Xml | `MemoText` | podlista |  |  |
+| XmlForm | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
 
 ## Enumy
 

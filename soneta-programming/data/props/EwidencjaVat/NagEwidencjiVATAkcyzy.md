@@ -5,56 +5,60 @@ Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Nagłówek ewide
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 
-- pola bazodanowe: 29
-- pola kalkulowane (z klas biznesowych): 16
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 26
+- podlisty: 2
+- subrowy: 1
+- razem: 45
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Akcyza | `Soneta.Types.Currency` |  |  |  |
-| Brutto | `Soneta.Types.Currency` | bazodanowe |  | Wartość brutto |
-| Bufor | `bool` |  |  |  |
-| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` |  |  |  |
-| DataDokumentu | `Soneta.Types.Date` |  |  |  |
-| DataPowstania | `Soneta.Types.Date` | bazodanowe |  | Data powstania obow. pod. VAT |
-| DataRozliczenia | `Soneta.Types.Date` |  |  |  |
-| DataRozliczeniaOSS | `Soneta.Types.Date` | bazodanowe | Data rozliczenia OSS/IOSS | Data rozliczenia w VAT |
-| DataZaewidencjonowania | `Soneta.Types.Date` | bazodanowe |  |  |
-| Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
+| Akcyza | `Currency` | tylko-odczyt |  |  |
+| Brutto | `Currency` | bazodanowe, tylko-odczyt |  | Wartość brutto |
+| Bufor | `bool` | tylko-odczyt |  |  |
+| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` | tylko-odczyt |  |  |
+| DataDokumentu | `Date` | tylko-odczyt |  |  |
+| DataPowstania | `Date` | bazodanowe |  | Data powstania obow. pod. VAT |
+| DataRozliczenia | `Date` | tylko-odczyt |  |  |
+| DataRozliczeniaOSS | `Date` | bazodanowe | Data rozliczenia OSS/IOSS | Data rozliczenia w VAT |
+| DataZaewidencjonowania | `Date` | bazodanowe |  |  |
+| Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe, tylko-odczyt |  |  |
 | DefinicjaPowstaniaObowiazku | `Soneta.EwidencjaVat.DefinicjaPowstaniaObowiazkuVAT` | bazodanowe |  | Definicja momentu powstania obowiązku podatkowego VAT |
-| DoRozliczenia | `bool` | bazodanowe |  | Określa, czy nagłówek ewidencji został już rozliczony. |
-| Elementy | `Soneta.Business.LpSubTable<Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, guided-parent |  | Dokument ewidencji nagłówka |
-| Korekta | `bool` |  |  |  |
-| KorektaDo | `Soneta.Core.DokEwidencji` |  |  |  |
-| Koszty | `Soneta.EwidencjaVat.NagEwidencjiVATAkcyzy.KosztyCalculator` |  |  |  |
-| Kraj | `Soneta.Core.KrajTbl` | bazodanowe | Kraj VAT |  |
+| DoRozliczenia | `bool` | bazodanowe, tylko-odczyt |  | Określa, czy nagłówek ewidencji został już rozliczony. |
+| Elementy | `LpSubTable<Soneta.EwidencjaVat.ElemEwidencjiVATAkcyzy>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt, guided-parent |  | Dokument ewidencji nagłówka |
+| Korekta | `bool` | tylko-odczyt |  |  |
+| KorektaDo | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Koszty | `Soneta.EwidencjaVat.NagEwidencjiVATAkcyzy.KosztyCalculator` | tylko-odczyt |  |  |
+| Kraj | `Soneta.Core.KrajTbl` | bazodanowe, tylko-odczyt | Kraj VAT |  |
 | KrajWydania | `Soneta.Core.KrajTbl` | bazodanowe | Kraj wydania | Kraj wydania towaru w procedurze OSS/IOSS |
-| NaglowkiRozliczeniaVAT | `Soneta.Business.SubTable<Soneta.EwidencjaVat.NagRozliczeniaVATAkcyzy>` |  |  |  |
-| Netto | `Soneta.Types.Currency` | bazodanowe |  | Wartość netto |
+| NaglowkiRozliczeniaVAT | `SubTable<Soneta.EwidencjaVat.NagRozliczeniaVATAkcyzy>` | podlista |  |  |
+| Netto | `Currency` | bazodanowe, tylko-odczyt |  | Wartość netto |
 | NrDokumentuK | `string` | bazodanowe |  | Nr korygowanego dokumentu |
-| Numer | `string` | bazodanowe |  |  |
-| NumerDokumentu | `string` | bazodanowe |  | Numer dokumentu |
-| OkresRozliczenia | `string` |  |  |  |
-| OpisVATUslug | `string` |  |  |  |
-| OznaczenieKSeF | `Soneta.Core.OznaczenieKSeF_JPK` | bazodanowe, enum | Oznaczenie KSeF (JPK) | Oznaczenie KSeF (JPK) |
+| Numer | `string` | bazodanowe, tylko-odczyt |  |  |
+| NumerDokumentu | `string` | bazodanowe, tylko-odczyt |  | Numer dokumentu |
+| OkresRozliczenia | `string` | tylko-odczyt |  |  |
+| OpisVATUslug | `string` | tylko-odczyt |  |  |
+| OznaczenieKSeF | `Soneta.Core.OznaczenieKSeF_JPK` (enum) | bazodanowe | Oznaczenie KSeF (JPK) | Oznaczenie KSeF (JPK) |
 | PodatnikVAT | `bool` | bazodanowe | Podatnik VAT | Czy podmiot jest podatnikiem VAT |
-| Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref |  |  |
-| PowstanieObowiazku | `Soneta.EwidencjaVat.PowstanieObowiazkuVAT` | bazodanowe |  |  |
+| Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| PowstanieObowiazku | `Soneta.EwidencjaVat.PowstanieObowiazkuVAT` (subrow) | bazodanowe |  |  |
 | PowstanieObowiazku.IloscDniWarunku | `int` | bazodanowe |  |  |
-| PowstanieObowiazku.Kasowe | `Soneta.EwidencjaVat.RozliczenieKasoweVAT` | bazodanowe, enum |  |  |
-| PowstanieObowiazku.Memorialowe | `Soneta.EwidencjaVat.RozliczenieMemorialoweVAT` | bazodanowe, enum |  |  |
-| PowstanieObowiazku.Warunek | `Soneta.EwidencjaVat.WarunekRozliczeniaVAT` | bazodanowe, enum |  |  |
+| PowstanieObowiazku.Kasowe | `Soneta.EwidencjaVat.RozliczenieKasoweVAT` (enum) | bazodanowe |  |  |
+| PowstanieObowiazku.Memorialowe | `Soneta.EwidencjaVat.RozliczenieMemorialoweVAT` (enum) | bazodanowe |  |  |
+| PowstanieObowiazku.Warunek | `Soneta.EwidencjaVat.WarunekRozliczeniaVAT` (enum) | bazodanowe |  |  |
 | PowstanieObowiazku.WarunekPrawoOdliczenia | `bool` | bazodanowe | Prawo odliczenia | Prawo odliczenia VAT, jeżeli rozliczony przez wypełnienie warunku |
-| PowstanieObowiazku.Zasada | `Soneta.EwidencjaVat.ZasadaRozliczaniaVAT` | bazodanowe, enum |  |  |
-| ProceduraOSS | `Soneta.EwidencjaVat.ProceduraOSS` | bazodanowe, enum | Procedura | Typ zastosowanej procedury OSS/IOSS |
-| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` | bazodanowe, enum |  |  |
-| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` | bazodanowe, enum |  |  |
-| TerminPlatnosci | `Soneta.Types.Date` |  |  |  |
-| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` | bazodanowe, enum |  |  |
-| VAT | `Soneta.Types.Currency` | bazodanowe |  | Wartość podatku VAT |
-| Waluta | `Soneta.Waluty.Waluta` |  | Waluta |  |
-| WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` |  | Wartości w Eur |  |
-| WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` |  | Wartości księgowe |  |
+| PowstanieObowiazku.Zasada | `Soneta.EwidencjaVat.ZasadaRozliczaniaVAT` (enum) | bazodanowe |  |  |
+| ProceduraOSS | `Soneta.EwidencjaVat.ProceduraOSS` (enum) | bazodanowe, tylko-odczyt | Procedura | Typ zastosowanej procedury OSS/IOSS |
+| RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | bazodanowe |  |  |
+| StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | bazodanowe |  |  |
+| TerminPlatnosci | `Date` | tylko-odczyt |  |  |
+| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
+| VAT | `Currency` | bazodanowe, tylko-odczyt |  | Wartość podatku VAT |
+| Waluta | `Soneta.Waluty.Waluta` | tylko-odczyt | Waluta |  |
+| WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
+| WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
 
 ## Relacje interfejsowe
 

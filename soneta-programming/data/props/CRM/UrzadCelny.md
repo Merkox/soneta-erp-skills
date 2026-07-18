@@ -6,104 +6,108 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPodmiot`, `IKontrahent`, `IPodmiotKasowy`, `IAdresHost`, `IElementSlownika`, `IAdresyWWWHost`, `IDaneKontaktoweHost`, `IEmailElement`
 
-- pola bazodanowe: 29
-- pola kalkulowane (z klas biznesowych): 64
+- pola bazodanowe (zapisywalne): 23
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 26
+- podlisty: 37
+- subrowy: 3
+- razem: 93
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AKC | `Soneta.Kasa.NumerRachunku` |  |  |  |
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| AdresyWWW | `Soneta.Business.SubTable<Soneta.Core.AdresWWW>` |  |  |  |
-| AktualizacjaPrzyImporcie | `bool` |  |  |  |
-| BaseEuVAT | `string` |  |  |  |
-| BaseNIP | `string` |  |  |  |
-| BasicDocuments | `Soneta.Business.SubTable` |  |  |  |
+| AKC | `Soneta.Kasa.NumerRachunku` | tylko-odczyt |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresyWWW | `SubTable<Soneta.Core.AdresWWW>` | podlista |  |  |
+| AktualizacjaPrzyImporcie | `bool` | tylko-odczyt |  |  |
+| BaseEuVAT | `string` | tylko-odczyt |  |  |
+| BaseNIP | `string` | tylko-odczyt |  |  |
+| BasicDocuments | `SubTable` | podlista |  |  |
 | Blokada | `bool` | bazodanowe |  | Określa, czy dany urząd ma być widoczny na listach. |
-| BlokadaSprzedaży | `bool` |  |  |  |
-| DeklaracjePodmiotu | `Soneta.Business.SubTable` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| DokumentyPreliminarza | `Soneta.Business.SubTable<Soneta.Kasa.PreliminarzDokument>` |  |  |  |
-| DokumentyRozliczeniowe | `Soneta.Business.SubTable<Soneta.Kasa.DokRozliczBase>` |  |  |  |
-| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` |  |  |  |
-| DomyślnyAdresWWW | `string` |  |  |  |
-| EFaktura | `Soneta.Core.EFaktura` | enum |  |  |
+| BlokadaSprzedaży | `bool` | tylko-odczyt |  |  |
+| DeklaracjePodmiotu | `SubTable` | podlista |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| DokumentyPreliminarza | `SubTable<Soneta.Kasa.PreliminarzDokument>` | podlista |  |  |
+| DokumentyRozliczeniowe | `SubTable<Soneta.Kasa.DokRozliczBase>` | podlista |  |  |
+| DomyslnyRachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | tylko-odczyt |  |  |
+| DomyślnyAdresWWW | `string` | tylko-odczyt |  |  |
+| EFaktura | `Soneta.Core.EFaktura` (enum) | tylko-odczyt |  |  |
 | EMAIL | `string` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
-| Identyfikacje | `Soneta.Business.SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` |  |  |  |
-| IzbaCelna | `Soneta.CRM.KodyIzbCelnych` | enum |  |  |
+| Identyfikacje | `SubTable<Soneta.Kasa.IdentyfikacjaPlatnika>` | podlista |  |  |
+| IzbaCelna | `Soneta.CRM.KodyIzbCelnych` (enum) |  |  |  |
 | Kod | `string` | bazodanowe |  |  |
 | KodIzbyCelnej | `string` | bazodanowe |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
-| KontrolaDni | `int` |  |  |  |
-| KontrolaKwota | `Soneta.Types.Currency` |  |  |  |
-| Leady | `Soneta.Business.SubTable<Soneta.CRM.Lead>` |  |  |  |
-| LimitKredytu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| LimitNieograniczony | `bool` |  |  |  |
-| Lokalizacje | `Soneta.Business.SubTable<Soneta.CRM.Lokalizacja>` |  |  |  |
-| MailTo | `string` |  |  |  |
-| MatrycePodmiotu | `Soneta.Business.SubTable` |  |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
+| KontrolaDni | `int` | tylko-odczyt |  |  |
+| KontrolaKwota | `Currency` | tylko-odczyt |  |  |
+| Leady | `SubTable<Soneta.CRM.Lead>` | podlista |  |  |
+| LimitKredytu | `Currency` | bazodanowe |  |  |
+| LimitNieograniczony | `bool` | tylko-odczyt |  |  |
+| Lokalizacje | `SubTable<Soneta.CRM.Lokalizacja>` | podlista |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| MatrycePodmiotu | `SubTable` | podlista |  |  |
 | NIP | `string` | bazodanowe |  |  |
-| Nadrzedny | `Soneta.Core.IPodmiotInternal` |  |  |  |
+| Nadrzedny | `Soneta.Core.IPodmiotInternal` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
-| OdsKarne | `Soneta.Kasa.OdsetkiKarne` | bazodanowe |  |  |
-| OdsKarne.CzyNaliczacWyn | `bool` |  |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
+| OdsKarne | `Soneta.Kasa.OdsetkiKarne` (subrow) | bazodanowe |  |  |
+| OdsKarne.CzyNaliczacWyn | `bool` | tylko-odczyt |  |  |
 | OdsKarne.Indywidualne | `bool` | bazodanowe | Ustawienia domyślne | Odsetki karne naliczane będą wg ustawien globalnych w konfiguracji. |
-| OdsKarne.OdsIndHist | `Soneta.Business.MemoText` | bazodanowe |  | Pole do przechowywania historii odsetek indywidualnych. |
-| OdsKarne.OdsIndywidualne | `Soneta.Business.HistoryValuePercent` |  | Odsetki indywidualne |  |
-| OdsKarne.OdsKwotHist | `Soneta.Business.MemoText` | bazodanowe |  | Pole do przechowywania historii kwot odsetek kwotowych. |
-| OdsKarne.OdsKwotowe | `Soneta.Business.HistoryValueCurrency` |  | Odsetki indywidualne |  |
+| OdsKarne.OdsIndHist | `MemoText` | bazodanowe, podlista |  | Pole do przechowywania historii odsetek indywidualnych. |
+| OdsKarne.OdsIndywidualne | `HistoryValuePercent` | tylko-odczyt | Odsetki indywidualne |  |
+| OdsKarne.OdsKwotHist | `MemoText` | bazodanowe, podlista |  | Pole do przechowywania historii kwot odsetek kwotowych. |
+| OdsKarne.OdsKwotowe | `HistoryValueCurrency` | tylko-odczyt | Odsetki indywidualne |  |
 | OdsKarne.RozpoczecieDni | `int` | bazodanowe | Dni rozpoczęcia | Ilość dni od daty wystawienia dokumentu do rozpoczęcia naliczania odsetek w metodzie indywidualnej. |
-| OdsKarne.RozpoczecieTyp | `Soneta.Kasa.OdsetkiRozpoczecie` | bazodanowe, enum | Typ rozpoczęcia | Determinująca sposób wyznaczenia początku naliczania odsetek. |
-| OdsKarne.SposobLiczenia | `Soneta.Kasa.OdsetkiKwotoweSposobLiczenia` | bazodanowe, enum | Sposób liczenia | Sposób liczenia odsetek kwotowych. |
-| OdsKarne.Stopa | `Soneta.Kasa.OdsetkiStopa` | bazodanowe, enum | Stopa odsetkowa | Stopa determinujaca wysokość naliczanych odsetek karnych. |
+| OdsKarne.RozpoczecieTyp | `Soneta.Kasa.OdsetkiRozpoczecie` (enum) | bazodanowe | Typ rozpoczęcia | Determinująca sposób wyznaczenia początku naliczania odsetek. |
+| OdsKarne.SposobLiczenia | `Soneta.Kasa.OdsetkiKwotoweSposobLiczenia` (enum) | bazodanowe | Sposób liczenia | Sposób liczenia odsetek kwotowych. |
+| OdsKarne.Stopa | `Soneta.Kasa.OdsetkiStopa` (enum) | bazodanowe | Stopa odsetkowa | Stopa determinujaca wysokość naliczanych odsetek karnych. |
 | OdsKarne.Zwloka | `int` | bazodanowe | Dopuszczalna zwłoka | Dopuszczalne przekroczenie terminu płatności, które nie powoduje naliczania odsetek. |
-| OdsKarne.ZwlokaWyn | `int` |  |  |  |
-| Osoba | `Soneta.Core.Osoba` | bazodanowe |  |  |
+| OdsKarne.ZwlokaWyn | `int` | tylko-odczyt |  |  |
+| Osoba | `Soneta.Core.Osoba` (subrow) | bazodanowe |  |  |
 | Osoba.Adres | `string` | bazodanowe |  |  |
 | Osoba.Osoba | `string` | bazodanowe |  |  |
 | Osoba.Telefon | `string` | bazodanowe |  |  |
-| Osoby | `Soneta.Business.SubTable<Soneta.CRM.KontaktOsoba>` |  |  |  |
-| OsobyKontaktowe | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` |  |  |  |
-| OsobyZOsobyKontrahent | `Soneta.Business.View` |  |  |  |
-| Platnik | `Soneta.Kasa.IPodmiotKasowy` | iface-ref |  |  |
-| Platnosci | `Soneta.Business.SubTable<Soneta.Kasa.Platnosc>` |  |  |  |
-| PodmiotPowiazany | `bool` |  |  |  |
-| Podrzedni | `Soneta.Business.SubTable<Soneta.CRM.RelacjaPodmiotu>` |  |  |  |
-| Pojazdy | `Soneta.Business.SubTable` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Projekty | `Soneta.Business.SubTable` |  |  |  |
-| Przelewy | `Soneta.Business.SubTable<Soneta.Kasa.PrzelewBase>` |  |  |  |
-| PrzeterminowanieNieograniczone | `bool` |  |  |  |
-| Rabat | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Rachunki | `Soneta.Business.SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` |  |  |  |
-| RachunkiWirtualne | `Soneta.Business.SubTable<Soneta.Kasa.RachunekWirtualny>` |  |  |  |
-| RodzajePodmiotu | `Soneta.Business.SubTable<Soneta.Core.RodzajPodmiot>` |  |  |  |
-| Rozrachunki | `Soneta.Business.SubTable<Soneta.Kasa.RozrachunekIdx>` |  |  |  |
+| Osoby | `SubTable<Soneta.CRM.KontaktOsoba>` | podlista |  |  |
+| OsobyKontaktowe | `SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` | podlista |  |  |
+| OsobyZOsobyKontrahent | `View` | podlista |  |  |
+| Platnik | `Soneta.Kasa.IPodmiotKasowy` | tylko-odczyt, iface-ref |  |  |
+| Platnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
+| PodmiotPowiazany | `bool` | tylko-odczyt |  |  |
+| Podrzedni | `SubTable<Soneta.CRM.RelacjaPodmiotu>` | podlista |  |  |
+| Pojazdy | `SubTable` | podlista |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Projekty | `SubTable` | podlista |  |  |
+| Przelewy | `SubTable<Soneta.Kasa.PrzelewBase>` | podlista |  |  |
+| PrzeterminowanieNieograniczone | `bool` | tylko-odczyt |  |  |
+| Rabat | `Percent` | bazodanowe |  |  |
+| Rachunki | `SubTable<Soneta.Kasa.RachunekBankowyPodmiotu>` | podlista |  |  |
+| RachunkiWirtualne | `SubTable<Soneta.Kasa.RachunekWirtualny>` | podlista |  |  |
+| RodzajePodmiotu | `SubTable<Soneta.Core.RodzajPodmiot>` | podlista |  |  |
+| Rozrachunki | `SubTable<Soneta.Kasa.RozrachunekIdx>` | podlista |  |  |
 | SposobZaplaty | `Soneta.Kasa.FormaPlatnosci` | bazodanowe |  |  |
-| Sprawy | `Soneta.Business.SubTable<Soneta.Windykacja.SprawaWindykacyjna>` |  |  |  |
+| Sprawy | `SubTable<Soneta.Windykacja.SprawaWindykacyjna>` | podlista |  |  |
 | Termin | `int` | bazodanowe |  |  |
-| TerminPlanowany | `int` |  |  |  |
-| Transakcje | `Soneta.Business.SubTable<Soneta.CRM.Transakcja>` |  |  |  |
-| TransakcjeKontrahenta | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` |  |  |  |
-| TypLimituKredytowego | `Soneta.CRM.TypLimituKredytowego` | enum |  |  |
-| TypPrzeterminowania | `Soneta.CRM.TypLimituKredytowego` | enum |  |  |
-| Urzadzenia | `Soneta.Business.SubTable` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Waluta | `Soneta.Waluty.Waluta` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
-| ZadaniaKontrahenta | `Soneta.Business.SubTable` |  |  |  |
-| Zaplaty | `Soneta.Business.SubTable<Soneta.Kasa.Zaplata>` |  |  |  |
-| Zdarzenia | `Soneta.Business.SubTable<Soneta.CRM.DokumentZdarzenia>` |  |  |  |
+| TerminPlanowany | `int` | tylko-odczyt |  |  |
+| Transakcje | `SubTable<Soneta.CRM.Transakcja>` | podlista |  |  |
+| TransakcjeKontrahenta | `SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` | podlista |  |  |
+| TypLimituKredytowego | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
+| TypPrzeterminowania | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
+| Urzadzenia | `SubTable` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| Waluta | `Soneta.Waluty.Waluta` | tylko-odczyt |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Zadania | `SubTable` | podlista |  |  |
+| ZadaniaKontrahenta | `SubTable` | podlista |  |  |
+| Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
+| Zdarzenia | `SubTable<Soneta.CRM.DokumentZdarzenia>` | podlista |  |  |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,17 @@ Opis: Zapisany układ tabeli przestawnej. Przechowuje konfigurację wierszy, kol
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | IndividualGuid | `System.Guid` | bazodanowe | Identyfikator użytkownika |  |
-| Layout | `Soneta.Business.MemoText` | bazodanowe | Zapis układu tabeli przestawnej |  |
+| Layout | `MemoText` | bazodanowe, podlista | Zapis układu tabeli przestawnej |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa układu tabeli przestawnej |
-| PivotView | `Soneta.Business.Db.PivotView` | bazodanowe |  |  |
+| PivotView | `Db.PivotView` | bazodanowe, tylko-odczyt |  |  |
 | Shared | `bool` | bazodanowe | Udostępniony |  |

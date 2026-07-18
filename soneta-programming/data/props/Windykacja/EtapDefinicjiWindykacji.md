@@ -5,17 +5,21 @@ Opis: Element szczegółowy definicji sprawy windykacyjnej (DefinicjaSprawyWindy
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTrwania | `int` | bazodanowe | Czas trwania |  |
-| Definicja | `Soneta.Windykacja.DefinicjaSprawyWindykacyjnej` | bazodanowe |  |  |
+| Definicja | `Soneta.Windykacja.DefinicjaSprawyWindykacyjnej` | bazodanowe, tylko-odczyt |  |  |
 | DefinicjaEtapu | `Soneta.Windykacja.StanWindykacji` | bazodanowe |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypEtapu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Kasa.TypEtapu` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

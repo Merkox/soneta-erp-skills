@@ -5,52 +5,56 @@ Opis: Element szczegółowy meldunku produkcyjnego (ProOperacjaZlecenia). Reprez
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 19
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 10
+- podlisty: 10
+- subrowy: 1
+- razem: 41
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Context | `Soneta.Business.Context` |  |  |  |
-| CzasUtworzenia | `Soneta.Types.TimeSec` | bazodanowe | Czas utworzenia | Czas utworzenia meldunku. |
-| CzasZlozenia | `Soneta.Types.TimeSec` | bazodanowe | Czas złożenia | Czas złożenia meldunku. |
-| DataUtworzenia | `Soneta.Types.Date` | bazodanowe | Data utworzenia | Data utworzenia meldunku. |
-| DataZlozenia | `Soneta.Types.Date` | bazodanowe | Data złożenia | Data złożenia meldunku. |
+| Context | `Context` | podlista |  |  |
+| CzasUtworzenia | `TimeSec` | bazodanowe | Czas utworzenia | Czas utworzenia meldunku. |
+| CzasZlozenia | `TimeSec` | bazodanowe | Czas złożenia | Czas złożenia meldunku. |
+| DataUtworzenia | `Date` | bazodanowe | Data utworzenia | Data utworzenia meldunku. |
+| DataZlozenia | `Date` | bazodanowe | Data złożenia | Data złożenia meldunku. |
 | DefinicjaMeldunku | `Soneta.ProdukcjaPro.ProDefinicjaMeldunku` | bazodanowe | Definicja meldunku | Definicja meldunku dla meldunku. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość meldunku. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla meldunku. |
-| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaMeldunku` |  |  | Kalkulacja meldunku. |
-| Kalkulacje | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProKalkulacjaMeldunku>` |  |  |  |
-| Materialy | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProMaterialMeldunku>` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer meldunku. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość meldunku. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla meldunku. |
+| Kalkulacja | `Soneta.ProdukcjaPro.ProKalkulacjaMeldunku` | tylko-odczyt |  | Kalkulacja meldunku. |
+| Kalkulacje | `SubTable<Soneta.ProdukcjaPro.ProKalkulacjaMeldunku>` | podlista |  |  |
+| Materialy | `LpSubTable<Soneta.ProdukcjaPro.ProMaterialMeldunku>` | podlista |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer meldunku. |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Odpady | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProOdpadMeldunku>` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Odpady | `LpSubTable<Soneta.ProdukcjaPro.ProOdpadMeldunku>` | podlista |  |  |
 | Operacja | `Soneta.ProdukcjaPro.ProOperacjaZlecenia` | bazodanowe |  | Operacja dla meldunku. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator tworzący meldunek. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis meldunku. |
+| Operator | `App.Operator` | bazodanowe |  | Operator tworzący meldunek. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis meldunku. |
 | Osoba | `Soneta.ProdukcjaPro.ProOsoba` | bazodanowe |  | Osoba dla meldunku. |
-| Otwarty | `bool` |  |  | Meldunek otwarty. |
-| RozliczenieMaterialow | `bool` |  | Rozliczenie materiałów | Stan rozliczenia ilościowego materiałów meldunku. |
-| RozliczenieOdpadow | `bool` |  | Rozliczenie odpadów | Stan rozliczenia ilościowego odpadów meldunku. |
-| RozliczenieWartosciowe | `bool` |  | Rozliczenie wartościowe | Stan rozliczenia wartościowego meldunku. |
-| RozliczenieWyrobow | `bool` |  | Rozliczenie wyrobów | Stan rozliczenia ilościowego odpadów wyrobów. |
-| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` | bazodanowe, enum | Sposób wyceny | Sposób wyceny meldunku. |
-| Stan | `Soneta.ProdukcjaPro.ProStanMeldunku` | bazodanowe, enum |  | Stan meldunku. |
+| Otwarty | `bool` | tylko-odczyt |  | Meldunek otwarty. |
+| RozliczenieMaterialow | `bool` | tylko-odczyt | Rozliczenie materiałów | Stan rozliczenia ilościowego materiałów meldunku. |
+| RozliczenieOdpadow | `bool` | tylko-odczyt | Rozliczenie odpadów | Stan rozliczenia ilościowego odpadów meldunku. |
+| RozliczenieWartosciowe | `bool` | tylko-odczyt | Rozliczenie wartościowe | Stan rozliczenia wartościowego meldunku. |
+| RozliczenieWyrobow | `bool` | tylko-odczyt | Rozliczenie wyrobów | Stan rozliczenia ilościowego odpadów wyrobów. |
+| SposobWyceny | `Soneta.ProdukcjaPro.ProSposobWyceny` (enum) | bazodanowe | Sposób wyceny | Sposób wyceny meldunku. |
+| Stan | `Soneta.ProdukcjaPro.ProStanMeldunku` (enum) | bazodanowe |  | Stan meldunku. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar meldunku. |
-| Uslugi | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProUslugaMeldunku>` |  |  |  |
+| Uslugi | `LpSubTable<Soneta.ProdukcjaPro.ProUslugaMeldunku>` | podlista |  |  |
 | Uzytkownik | `Soneta.ProdukcjaPro.ProUzytkownikPaneluMeldunkowego` | bazodanowe | Użytkownik | Użytkownik panelu meldunkowego tworzący meldunek. |
-| WycenaMaterialow | `Soneta.ProdukcjaPro.ProWycenaMaterialow` | bazodanowe, enum | Wycena materiałów | Wycena materiałów dla meldunku. |
-| WycenaWyrobow | `Soneta.ProdukcjaPro.ProWycenaWyrobow` | bazodanowe, enum | Wycena wyrobów | Wycena wyrobów dla meldunku. |
-| WycenaZasobow | `Soneta.ProdukcjaPro.ProWycenaZasobow` | bazodanowe, enum | Wycena zasobów | Wycena zasobów dla meldunku. |
-| Wydzial | `Soneta.ProdukcjaPro.ProWydzial` |  | Wydział | Wydział meldunku wskazany na zleceniu produkcyjnym. |
-| Wyroby | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProWyrobMeldunku>` |  |  |  |
-| Zamkniety | `bool` |  | Zamknięty | Meldunek zamknięty. |
-| Zasoby | `Soneta.Business.LpSubTable<Soneta.ProdukcjaPro.ProZasobMeldunku>` |  |  |  |
-| Zlecenie | `Soneta.ProdukcjaPro.ProZlecenie` |  | Zlecenie | Zlecenie meldunku wskazane na operacji zlecenia. |
+| WycenaMaterialow | `Soneta.ProdukcjaPro.ProWycenaMaterialow` (enum) | bazodanowe | Wycena materiałów | Wycena materiałów dla meldunku. |
+| WycenaWyrobow | `Soneta.ProdukcjaPro.ProWycenaWyrobow` (enum) | bazodanowe | Wycena wyrobów | Wycena wyrobów dla meldunku. |
+| WycenaZasobow | `Soneta.ProdukcjaPro.ProWycenaZasobow` (enum) | bazodanowe | Wycena zasobów | Wycena zasobów dla meldunku. |
+| Wydzial | `Soneta.ProdukcjaPro.ProWydzial` | tylko-odczyt | Wydział | Wydział meldunku wskazany na zleceniu produkcyjnym. |
+| Wyroby | `LpSubTable<Soneta.ProdukcjaPro.ProWyrobMeldunku>` | podlista |  |  |
+| Zamkniety | `bool` | tylko-odczyt | Zamknięty | Meldunek zamknięty. |
+| Zasoby | `LpSubTable<Soneta.ProdukcjaPro.ProZasobMeldunku>` | podlista |  |  |
+| Zlecenie | `Soneta.ProdukcjaPro.ProZlecenie` | tylko-odczyt | Zlecenie | Zlecenie meldunku wskazane na operacji zlecenia. |
 
 ## Enumy
 

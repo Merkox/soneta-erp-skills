@@ -5,16 +5,20 @@ Opis: Element szczegółowy definicji budżetu (DefBudget). Wyznacza ramy czasow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 3
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AllowedPlanningPeriod | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres planowania. |
-| AllowedRealizationPeriod | `Soneta.Types.FromTo` | bazodanowe |  | Dozwolony okres rejestrowania realizacji. |
-| DefBudget | `Soneta.Zadania.Budzetowanie.DefBudget` | bazodanowe |  | Definicja budżetu, z którą powiązany jest okres budżetowy |
+| AllowedPlanningPeriod | `FromTo` | bazodanowe, podlista |  | Dozwolony okres planowania. |
+| AllowedRealizationPeriod | `FromTo` | bazodanowe, podlista |  | Dozwolony okres rejestrowania realizacji. |
+| DefBudget | `Soneta.Zadania.Budzetowanie.DefBudget` | bazodanowe, tylko-odczyt |  | Definicja budżetu, z którą powiązany jest okres budżetowy |
 | Description | `string` | bazodanowe |  |  |
-| IsExtendedBudgeting | `bool` |  |  |  |
-| IsPlanningPeriodWarningActive | `bool` |  |  |  |
-| Period | `Soneta.Types.FromTo` | bazodanowe |  | Otwarcie i zamkniecie okresu budżetowego. |
+| IsExtendedBudgeting | `bool` | tylko-odczyt |  |  |
+| IsPlanningPeriodWarningActive | `bool` | tylko-odczyt |  |  |
+| Period | `FromTo` | bazodanowe, podlista |  | Otwarcie i zamkniecie okresu budżetowego. |
 | Symbol | `string` | bazodanowe |  | Symbol okresu budżetowego. |

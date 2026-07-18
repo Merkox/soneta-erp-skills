@@ -5,14 +5,18 @@ Opis: Element szczegółowy definicji leada CRM (PriorytetLeada). Definiuje pozi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie stanu. Zablokowane stany nie będą wyświetlane w liście wyboru. |
-| Definicja | `Soneta.CRM.Config.DefLeada` | bazodanowe |  | Definicja leada, do której jest przypisany jest priorytet |
-| Kod | `string` |  |  |  |
+| Definicja | `Soneta.CRM.Config.DefLeada` | bazodanowe, tylko-odczyt |  | Definicja leada, do której jest przypisany jest priorytet |
+| Kod | `string` | tylko-odczyt |  |  |
 | Kolor | `string` | bazodanowe | Kolor | Kolor stanu |
 | Lp | `int` | bazodanowe | Lp | Liczba porządkowa priorytetu w ramach leada. |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa priorytetu leada |

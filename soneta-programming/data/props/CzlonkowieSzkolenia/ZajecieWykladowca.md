@@ -4,12 +4,16 @@ Tytuł: Wykładowcy
 Opis: Przypisanie wykładowców do zajęć szkoleniowych. Określa, który wykładowca prowadzi dane zajęcie wraz z jego rolą (np. prowadzący, asystent), umożliwiając planowanie obciążenia kadry dydaktycznej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Typ | `Soneta.CzlonkowieSzkolenia.TypZajeciaWykladowcy` | bazodanowe, enum |  | Rola wykładowcy na zajęciu. |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypZajeciaWykladowcy` (enum) | bazodanowe |  | Rola wykładowcy na zajęciu. |
 | Wykladowca | `Soneta.CzlonkowieSzkolenia.WykladowcaSzkol` | bazodanowe |  |  |
 | Zajecie | `Soneta.CzlonkowieSzkolenia.ZajecieSzkolBase` | bazodanowe |  |  |
 

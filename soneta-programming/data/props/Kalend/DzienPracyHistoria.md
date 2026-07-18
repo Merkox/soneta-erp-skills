@@ -5,25 +5,29 @@ Opis: Element szczegółowy dokumentu aktualizacji kalendarza (IDokumentAktualiz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DokumentAktualizacji` → `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 1
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataAktualizacji | `System.DateTime` | bazodanowe |  |  |
-| DokumentAktualizacji | `Soneta.Kalend.IDokumentAktualizacjiKalendarza` | bazodanowe, guided-parent, iface-ref |  |  |
-| DzienPo | `Soneta.Kalend.IStrefowy` |  |  |  |
-| Lp | `int` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
+| DataAktualizacji | `System.DateTime` | bazodanowe, tylko-odczyt |  |  |
+| DokumentAktualizacji | `Soneta.Kalend.IDokumentAktualizacjiKalendarza` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
+| DzienPo | `Soneta.Kalend.IStrefowy` | tylko-odczyt |  |  |
+| Lp | `int` | bazodanowe, tylko-odczyt |  |  |
+| OdGodziny | `Time` | tylko-odczyt |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
 | RcpOK | `bool` | bazodanowe |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaPracyHistoria>` |  |  |  |
-| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, iface-ref |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaPracyHistoria>` | podlista |  |  |
+| ZrodloPlanu | `Soneta.Kalend.IZrodloPlanu` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 
 ## Relacje interfejsowe
 

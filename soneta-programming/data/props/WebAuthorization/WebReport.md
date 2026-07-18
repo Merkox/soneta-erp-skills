@@ -4,16 +4,20 @@ Opis: Definicja raportu dostępnego w aplikacji webowej enova365. Określa nazw�
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe | Aktywny | Stan raportu włączony/wyłączony z użycia. |
 | Description | `string` | bazodanowe | Opis | Opis raportu. |
 | Name | `string` | bazodanowe | Nazwa | Nazwa raportu. |
-| ReportModule | `Soneta.Web.Business.Utils.ReportsModules` | bazodanowe, enum | Moduł | Dla jakiego modułu przeznaczony jest raport. |
-| Roles | `Soneta.Business.SubTable<Soneta.Web.Business.App.WebReportRole>` |  |  |  |
+| ReportModule | `Soneta.Web.Business.Utils.ReportsModules` (enum) | bazodanowe | Moduł | Dla jakiego modułu przeznaczony jest raport. |
+| Roles | `SubTable<Soneta.Web.Business.App.WebReportRole>` | podlista |  |  |
 | VirtualPath | `string` | bazodanowe | Ścieżka wirtualna | Ścieżka wirtualna na serwerze IIS dla pliku z definicją raportu. |
 
 ## Enumy

@@ -5,24 +5,28 @@ Opis: Element szczegółowy pracownika (Pracownik). Dane z importu czytnika RCP 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.IRcpAddress` | bazodanowe |  |  |
 | CzytnikRCP | `Soneta.Kalend.CzytnikRCP` | bazodanowe |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | DefinicjaZdarzenia | `Soneta.Kalend.DefinicjaZdarzeniaRCP` | bazodanowe |  |  |
-| Godzina | `Soneta.Types.Time` | bazodanowe |  |  |
-| NormaCzas | `Soneta.Types.Time` |  | Norma (czas) |  |
-| NormaGodzinyOdDo | `string` |  | Norma (godziny) |  |
-| NormaOdGodziny | `Soneta.Types.Time` |  | Norma (od godziny) |  |
+| Godzina | `Time` | bazodanowe |  |  |
+| NormaCzas | `Time` | tylko-odczyt | Norma (czas) |  |
+| NormaGodzinyOdDo | `string` | tylko-odczyt | Norma (godziny) |  |
+| NormaOdGodziny | `Time` | tylko-odczyt | Norma (od godziny) |  |
 | Operacja | `int` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, guided-parent |  |  |
-| Stan | `Soneta.Kalend.TypWeryfikacjiWeWy` | bazodanowe, enum |  |  |
-| TrybPracy | `Soneta.Core.Enums.RcpWorkMode` | bazodanowe, enum |  |  |
-| Typ | `Soneta.Kalend.TypWejsciaWyjscia` | bazodanowe, enum |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Stan | `Soneta.Kalend.TypWeryfikacjiWeWy` (enum) | bazodanowe |  |  |
+| TrybPracy | `Soneta.Core.Enums.RcpWorkMode` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypWejsciaWyjscia` (enum) | bazodanowe |  |  |
 | Uwagi | `string` | bazodanowe |  |  |
 | WeWyO | `Soneta.Kalend.WejscieWyjscieO` | bazodanowe |  |  |
 | Zaimportowany | `bool` | bazodanowe |  |  |

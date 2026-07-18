@@ -5,13 +5,17 @@ Opis: Określa reguły przenoszenia wartości cech między powiązanymi obiektam
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| FeatureDefinition | `Soneta.Business.FeatureDefinition` | bazodanowe | Definicja cechy | Definicja cechy |
-| Host | `Soneta.Business.App.IFeatureTransferHost` | bazodanowe |  |  |
+| FeatureDefinition | `FeatureDefinition` | bazodanowe | Definicja cechy | Definicja cechy |
+| Host | `App.IFeatureTransferHost` | bazodanowe, tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa definicji transferu cech |
 | Synchronize | `bool` | bazodanowe | Synchronizuj | Flaga wskazująca, czy cecha ma być synchronizowana |
-| TableName | `string` | bazodanowe | Klasa | Klasa definicji cechy |
+| TableName | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa definicji cechy |

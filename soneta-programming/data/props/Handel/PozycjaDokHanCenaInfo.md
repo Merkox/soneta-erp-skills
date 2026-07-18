@@ -5,18 +5,22 @@ Opis: Element szczegółowy pozycji dokumentu handlowego (PozycjaDokHandlowego).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaDokHandlowego`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 7
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cena | `Soneta.Types.DoubleCy` | bazodanowe |  |  |
-| Host | `Soneta.Business.IPozycjaDokHandlowegoCenaInfoHost` | bazodanowe |  |  |
-| IndywidualnaDefinicjaCeny | `Soneta.Towary.DefinicjaCeny` | bazodanowe | Indywidualna definicja ceny |  |
-| LiczonaOd | `Soneta.Handel.CenaLiczonaOd` | bazodanowe, enum | Cena liczona od |  |
-| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, guided-parent |  | Pozycja dokumentu handlowego. |
-| Rodzaj | `Soneta.Handel.RodzajNaliczeniaCenyRabatu` | bazodanowe, enum | Rodzaj naliczenia ceny |  |
-| SchematGratisow | `Soneta.Towary.SchemOpakowan` | bazodanowe | Schemat gratisów |  |
+| Cena | `DoubleCy` | bazodanowe, tylko-odczyt |  |  |
+| Host | `IPozycjaDokHandlowegoCenaInfoHost` | bazodanowe, tylko-odczyt |  |  |
+| IndywidualnaDefinicjaCeny | `Soneta.Towary.DefinicjaCeny` | bazodanowe, tylko-odczyt | Indywidualna definicja ceny |  |
+| LiczonaOd | `Soneta.Handel.CenaLiczonaOd` (enum) | bazodanowe, tylko-odczyt | Cena liczona od |  |
+| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, tylko-odczyt, guided-parent |  | Pozycja dokumentu handlowego. |
+| Rodzaj | `Soneta.Handel.RodzajNaliczeniaCenyRabatu` (enum) | bazodanowe, tylko-odczyt | Rodzaj naliczenia ceny |  |
+| SchematGratisow | `Soneta.Towary.SchemOpakowan` | bazodanowe, tylko-odczyt | Schemat gratisów |  |
 
 ## Enumy
 

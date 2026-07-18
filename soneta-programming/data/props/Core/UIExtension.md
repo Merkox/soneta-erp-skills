@@ -5,17 +5,21 @@ Opis: Definicja niestandardowego nagłówka lub stopki dokumentu. Przechowuje de
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| EditValue | `Soneta.Business.IGuidedRow` |  |  |  |
-| Grupa | `Soneta.Core.GrupaDefinicjiNaglowkaEnum` | bazodanowe, enum | Grupa | Przeznaczenie nagłówka lub stopki |
+| EditValue | `IGuidedRow` |  |  |  |
+| Grupa | `Soneta.Core.GrupaDefinicjiNaglowkaEnum` (enum) | bazodanowe | Grupa | Przeznaczenie nagłówka lub stopki |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa nagłówka lub stopki |
-| PageForm | `Soneta.Business.MemoText` | bazodanowe | Definicja - obecny standard | Definicja zgodna z nowym standardem |
+| PageForm | `MemoText` | bazodanowe, podlista | Definicja - obecny standard | Definicja zgodna z nowym standardem |
 | Tabela | `string` | bazodanowe | Nazwa powiązanej tabeli | Nazwa tabeli, dla której elementu powstała definicja |
-| XmlOld | `Soneta.Business.MemoText` | bazodanowe | Definicja - stary standard | Definicja zgodna ze starym standardem |
+| XmlOld | `MemoText` | bazodanowe, podlista | Definicja - stary standard | Definicja zgodna ze starym standardem |
 
 ## Enumy
 

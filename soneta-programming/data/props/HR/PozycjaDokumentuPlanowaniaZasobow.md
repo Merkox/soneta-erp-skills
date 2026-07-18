@@ -5,15 +5,19 @@ Opis: Element szczegółowy dokumentu planowania zasobów (DokumentPlanowaniaZas
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentPlanowaniaZasobow`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataPrzeliczeniaWykonania | `Soneta.Types.Date` | bazodanowe | Data przeliczenia wykonania |  |
+| DataPrzeliczeniaWykonania | `Date` | bazodanowe | Data przeliczenia wykonania |  |
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe | Definicja stanowiska |  |
-| Dokument | `Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.DokumentPlanowaniaZasobow` | bazodanowe, guided-parent |  |  |
-| Ilosc | `Soneta.Types.Fraction` | bazodanowe | Ilość |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres pozycji |  |
+| Dokument | `Soneta.HR.ZKL.PlanowanieZasobow.Dokumenty.DokumentPlanowaniaZasobow` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Ilosc | `Fraction` | bazodanowe | Ilość |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres pozycji |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
-| Wykonanie | `Soneta.Types.Fraction` | bazodanowe | Wykonanie |  |
+| Wykonanie | `Fraction` | bazodanowe | Wykonanie |  |

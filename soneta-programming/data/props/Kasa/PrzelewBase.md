@@ -6,80 +6,84 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
 
-- pola bazodanowe: 40
-- pola kalkulowane (z klas biznesowych): 30
+- pola bazodanowe (zapisywalne): 27
+- pola kalkulowane (zapisywalne): 7
+- pola tylko-odczyt: 27
+- podlisty: 6
+- subrowy: 3
+- razem: 70
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AdresOdbiorcy | `Soneta.Core.Adres` |  |  |  |
-| AdresZleceniodawcy | `Soneta.Core.Adres` |  |  |  |
+| AdresOdbiorcy | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| AdresZleceniodawcy | `Soneta.Core.Adres` | tylko-odczyt |  |  |
 | AnulowanyWPaczce | `bool` | bazodanowe | Anulowany w paczce | Status Anulowany w paczce |
 | Bufor | `bool` | bazodanowe |  |  |
-| CzyWPaczce | `bool` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| CzyWPaczce | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| DodatkoweDane | `Soneta.Business.SubTable<Soneta.Kasa.DodatkoweDanePrzelewu>` |  |  |  |
-| EwidencjaSP | `Soneta.Kasa.RachunekBankowyFirmy` | bazodanowe |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| InfOplaconoWkwocie | `Soneta.Types.Currency` | bazodanowe | Opłacono w kwocie |  |
-| InfPozostaloDoOplacenia | `Soneta.Types.Currency` |  |  |  |
+| DodatkoweDane | `SubTable<Soneta.Kasa.DodatkoweDanePrzelewu>` | podlista |  |  |
+| EwidencjaSP | `Soneta.Kasa.RachunekBankowyFirmy` | bazodanowe, tylko-odczyt |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| InfOplaconoWkwocie | `Currency` | bazodanowe | Opłacono w kwocie |  |
+| InfPozostaloDoOplacenia | `Currency` | tylko-odczyt |  |  |
 | IsAdresOdbiorcy | `bool` |  |  |  |
 | IsAdresZleceniodawcy | `bool` |  |  |  |
-| KodOplaty | `Soneta.Kasa.PrzelewWalutowyKodOplaty` | bazodanowe, enum |  | Kto ponosi koszty przelewu |
-| KodStatystyczny | `string` | bazodanowe |  | Kod statystyczny operacji (3-literowy) |
-| KodStatystycznyOpis | `Soneta.Business.MemoText` | bazodanowe |  | Objaśnienie kodu statystycznego |
+| KodOplaty | `Soneta.Kasa.PrzelewWalutowyKodOplaty` (enum) | bazodanowe |  | Kto ponosi koszty przelewu |
+| KodStatystyczny | `string` | bazodanowe, tylko-odczyt |  | Kod statystyczny operacji (3-literowy) |
+| KodStatystycznyOpis | `MemoText` | bazodanowe, podlista |  | Objaśnienie kodu statystycznego |
 | KodSwiftOdbiorcy | `string` | bazodanowe |  |  |
 | KodSwiftZleceniodawcy | `string` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| KwotaVAT | `Soneta.Types.Currency` | bazodanowe |  |  |
-| MPP | `Soneta.Kasa.OpisPrzelewu.MPP` |  |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| KwotaVAT | `Currency` | bazodanowe |  |  |
+| MPP | `Soneta.Kasa.OpisPrzelewu.MPP` | tylko-odczyt |  |  |
 | MsgId | `string` | bazodanowe | Numer paczki | Identyfikator paczki przelewu |
 | NazwaOdbiorcy1 | `string` | bazodanowe |  |  |
 | NazwaOdbiorcy2 | `string` | bazodanowe |  |  |
 | NazwaZleceniodawcy1 | `string` | bazodanowe |  |  |
 | NazwaZleceniodawcy2 | `string` | bazodanowe |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OnlineMgsId | `string` | bazodanowe | Numer komunikatu | Identyfikator komunikatu |
-| OnlineStatus | `Soneta.Kasa.BankowoscElektroniczna.StatusPrzelewuOnline` | bazodanowe, enum | Status online | Status przelewu |
-| OnlineStatusTxt | `string` | bazodanowe | Status online TXT | Status przelewu tekstowy |
-| OnlineTrnsId | `string` | bazodanowe | Numer transakcji | Identyfikator przelewu |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OnlineMgsId | `string` | bazodanowe, tylko-odczyt | Numer komunikatu | Identyfikator komunikatu |
+| OnlineStatus | `Soneta.Kasa.BankowoscElektroniczna.StatusPrzelewuOnline` (enum) | bazodanowe, tylko-odczyt | Status online | Status przelewu |
+| OnlineStatusTxt | `string` | bazodanowe, tylko-odczyt | Status online TXT | Status przelewu tekstowy |
+| OnlineTrnsId | `string` | bazodanowe, tylko-odczyt | Numer transakcji | Identyfikator przelewu |
 | Opis | `string` |  |  |  |
-| PaczkaPrzelewow | `Soneta.Kasa.PaczkaPrzelewow` |  |  |  |
+| PaczkaPrzelewow | `Soneta.Kasa.PaczkaPrzelewow` | tylko-odczyt |  |  |
 | Podmiot | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Kasa.PozycjaPrzelewu>` |  |  |  |
-| PrzelewMaWlasnyOpis | `bool` |  |  |  |
+| Pozycje | `LpSubTable<Soneta.Kasa.PozycjaPrzelewu>` | podlista |  |  |
+| PrzelewMaWlasnyOpis | `bool` | tylko-odczyt |  |  |
 | Rachunek | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
-| RachunekOdbiorcy | `Soneta.Kasa.NumerRachunku` | bazodanowe |  |  |
+| RachunekOdbiorcy | `Soneta.Kasa.NumerRachunku` (subrow) | bazodanowe |  |  |
 | RachunekOdbiorcy.CS | `string` | bazodanowe |  |  |
-| RachunekOdbiorcy.IBAN | `bool` |  |  |  |
-| RachunekOdbiorcy.IsEmpty | `bool` |  |  |  |
+| RachunekOdbiorcy.IBAN | `bool` | tylko-odczyt |  |  |
+| RachunekOdbiorcy.IsEmpty | `bool` | tylko-odczyt |  |  |
 | RachunekOdbiorcy.Kierunek | `string` | bazodanowe |  |  |
 | RachunekOdbiorcy.Kraj | `string` | bazodanowe |  |  |
-| RachunekOdbiorcy.NRB | `bool` |  |  |  |
+| RachunekOdbiorcy.NRB | `bool` | tylko-odczyt |  |  |
 | RachunekOdbiorcy.Numer | `string` | bazodanowe |  |  |
-| RachunekOdbiorcy.NumerF | `string` |  |  |  |
-| RachunekOdbiorcy.PKO | `bool` |  |  |  |
+| RachunekOdbiorcy.NumerF | `string` | tylko-odczyt |  |  |
+| RachunekOdbiorcy.PKO | `bool` | tylko-odczyt |  |  |
 | RachunekOdbiorcy.Pełny | `string` |  | Numer rachunku |  |
 | RachunekOdbiorcy.PełnyNRB | `string` |  | Numer rachunku |  |
-| RachunekOdbiorcy.SEPA | `bool` |  |  |  |
-| RachunekZleceniodawcy | `Soneta.Kasa.NumerRachunku` | bazodanowe |  |  |
+| RachunekOdbiorcy.SEPA | `bool` | tylko-odczyt |  |  |
+| RachunekZleceniodawcy | `Soneta.Kasa.NumerRachunku` (subrow) | bazodanowe |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Słownie | `string` |  |  |  |
-| Typ | `Soneta.Kasa.TypPrzelewu` | bazodanowe, enum |  |  |
-| Typ2 | `Soneta.Kasa.TypPrzelewu2` | bazodanowe, enum | Wariant | Wariant przelewu standardowego |
+| Słownie | `string` | tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypPrzelewu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ2 | `Soneta.Kasa.TypPrzelewu2` (enum) | bazodanowe | Wariant | Wariant przelewu standardowego |
 | Tytulem1 | `string` | bazodanowe |  |  |
 | Tytulem2 | `string` | bazodanowe |  |  |
-| US | `Soneta.Kasa.OpisPrzelewu.US` |  |  |  |
-| WeryfikacjaTransakcji | `Soneta.Kasa.IObowiazkowaWeryfikacjaRachunku` |  |  |  |
-| ZUS | `Soneta.Kasa.OpisPrzelewu.ZUS` |  |  |  |
+| US | `Soneta.Kasa.OpisPrzelewu.US` | tylko-odczyt |  |  |
+| WeryfikacjaTransakcji | `Soneta.Kasa.IObowiazkowaWeryfikacjaRachunku` | tylko-odczyt |  |  |
+| ZUS | `Soneta.Kasa.OpisPrzelewu.ZUS` | tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Relacje interfejsowe

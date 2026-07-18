@@ -5,18 +5,22 @@ Opis: Bilans otwarcia rocznej informacji o zatrudnieniu (RIA) w zakresie pracy n
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 2
+- podlisty: 1
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | SzkSpecjalne | `bool` | bazodanowe |  |  |
-| Wersja | `Soneta.Kadry.WersjaBoRIAOświata` | bazodanowe, enum |  |  |
-| WersjaTxt | `string` |  |  |  |
-| Wymiar | `Soneta.Types.Fraction` | bazodanowe |  |  |
+| Wersja | `Soneta.Kadry.WersjaBoRIAOświata` (enum) | bazodanowe |  |  |
+| WersjaTxt | `string` | tylko-odczyt |  |  |
+| Wymiar | `Fraction` | bazodanowe |  |  |
 | Zatwierdzony | `bool` |  |  |  |
 
 ## Enumy

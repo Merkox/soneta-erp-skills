@@ -5,22 +5,26 @@ Opis: Definicja momentu powstania obowiązku podatkowego VAT. Określa zasady ro
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 1
+- razem: 11
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| PowstanieObowiazku | `Soneta.EwidencjaVat.PowstanieObowiazkuVAT` | bazodanowe |  |  |
+| PowstanieObowiazku | `Soneta.EwidencjaVat.PowstanieObowiazkuVAT` (subrow) | bazodanowe |  |  |
 | PowstanieObowiazku.IloscDniWarunku | `int` | bazodanowe |  |  |
-| PowstanieObowiazku.Kasowe | `Soneta.EwidencjaVat.RozliczenieKasoweVAT` | bazodanowe, enum |  |  |
-| PowstanieObowiazku.Memorialowe | `Soneta.EwidencjaVat.RozliczenieMemorialoweVAT` | bazodanowe, enum |  |  |
-| PowstanieObowiazku.Warunek | `Soneta.EwidencjaVat.WarunekRozliczeniaVAT` | bazodanowe, enum |  |  |
+| PowstanieObowiazku.Kasowe | `Soneta.EwidencjaVat.RozliczenieKasoweVAT` (enum) | bazodanowe |  |  |
+| PowstanieObowiazku.Memorialowe | `Soneta.EwidencjaVat.RozliczenieMemorialoweVAT` (enum) | bazodanowe |  |  |
+| PowstanieObowiazku.Warunek | `Soneta.EwidencjaVat.WarunekRozliczeniaVAT` (enum) | bazodanowe |  |  |
 | PowstanieObowiazku.WarunekPrawoOdliczenia | `bool` | bazodanowe | Prawo odliczenia | Prawo odliczenia VAT, jeżeli rozliczony przez wypełnienie warunku |
-| PowstanieObowiazku.Zasada | `Soneta.EwidencjaVat.ZasadaRozliczaniaVAT` | bazodanowe, enum |  |  |
-| Typ | `Soneta.EwidencjaVat.TypTytułuObowiązkuVAT` | bazodanowe, enum |  |  |
+| PowstanieObowiazku.Zasada | `Soneta.EwidencjaVat.ZasadaRozliczaniaVAT` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.EwidencjaVat.TypTytułuObowiązkuVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -5,30 +5,34 @@ Opis: Element szczegółowy operacji wzorcowej (IProOperacjaWzorcowa). Definiuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `IProOperacjaWzorcowa`
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 5
+- pola bazodanowe (zapisywalne): 13
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 3
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cena | `Soneta.Types.DoubleCy` | bazodanowe |  | Cena wyrobu operacji technologii. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość wyrobu operacji technologii. |
+| Cena | `DoubleCy` | bazodanowe |  | Cena wyrobu operacji technologii. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość wyrobu operacji technologii. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa wyrobu operacji technologii. |
-| IloscMaterialow | `Soneta.Types.Amount` |  | Ilość materiałów | Powiązana ilość materiałów dla wyrobu operacji technologii. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla wyrobu operacji technologii. |
+| IloscMaterialow | `Amount` | tylko-odczyt | Ilość materiałów | Powiązana ilość materiałów dla wyrobu operacji technologii. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla wyrobu operacji technologii. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa wyrobu operacji technologii. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe |  | Magazyn wyrobu operacji technologii. |
 | Operacja | `Soneta.ProdukcjaPro.IProOperacjaWzorcowa` | bazodanowe, guided-parent |  | Operacja dla wyrobu operacji technologii. |
-| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` |  | Operacja technologii | Operacja technologii dla wyrobu operacji technologii. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis wyrobu operacji technologii. |
-| Polprodukt | `Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii` |  | Półprodukt | Pierwszy powiązany półprodukt wyrobu operacji technologii. |
+| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` | tylko-odczyt | Operacja technologii | Operacja technologii dla wyrobu operacji technologii. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis wyrobu operacji technologii. |
+| Polprodukt | `Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii` | tylko-odczyt | Półprodukt | Pierwszy powiązany półprodukt wyrobu operacji technologii. |
 | PominAutomatyczneZlecenie | `bool` | bazodanowe | Pomiń automatyczne zlecenie | Pomijanie w algorytmie automatycznego generowania zlecenia powiązanego dla wyrobu operacji technologii. |
-| RelacjeMaterialWyrob | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProRelacjaMaterialWyrobOperacjiTechnologii>` |  |  |  |
+| RelacjeMaterialWyrob | `SubTable<Soneta.ProdukcjaPro.ProRelacjaMaterialWyrobOperacjiTechnologii>` | podlista |  |  |
 | RozliczFantomowo | `bool` | bazodanowe | Rozlicz fantomowo | Rozlicz fantomowo wyrob operacji technologii. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar wyrobu operacji technologii. |
-| Typ | `Soneta.ProdukcjaPro.ProTypWyrobu` | bazodanowe, enum | Typ wyrobu | Typ wyrobu operacji technologii. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość wyrobu operacji technologii. |
+| Typ | `Soneta.ProdukcjaPro.ProTypWyrobu` (enum) | bazodanowe | Typ wyrobu | Typ wyrobu operacji technologii. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość wyrobu operacji technologii. |
 | Wspolczynnik | `double` | bazodanowe | Współczynnik | Współczynnik wyrobu operacji technologii. |
-| WyrobyOperacjiZlecen | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiZlecenia>` |  |  |  |
+| WyrobyOperacjiZlecen | `SubTable<Soneta.ProdukcjaPro.ProWyrobOperacjiZlecenia>` | podlista |  |  |
 
 ## Enumy
 

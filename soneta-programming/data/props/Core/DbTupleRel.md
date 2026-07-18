@@ -5,12 +5,16 @@ Opis: Relacja dokumentu dodatkowego z obiektem biznesowym. Powiązuje dokument d
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DbTuple` → `DbTuple`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DbTuple | `Soneta.Core.DbTuples.DbTuple` | bazodanowe, guided-parent | Zdarzenie | Zdarzenie |
-| Definicja | `Soneta.Business.Runtime.RuntimeFieldDefinition` | bazodanowe | Definicja | Definicja pola dokumentu |
-| Host | `Soneta.Business.IGuidedRow` | bazodanowe | Rekord | Rekord powiązany |
-| Podstawowa | `bool` | bazodanowe | Podstawowa | Relacja podstawowa |
+| DbTuple | `Soneta.Core.DbTuples.DbTuple` | bazodanowe, tylko-odczyt, guided-parent | Zdarzenie | Zdarzenie |
+| Definicja | `Runtime.RuntimeFieldDefinition` | bazodanowe, tylko-odczyt | Definicja | Definicja pola dokumentu |
+| Host | `IGuidedRow` | bazodanowe | Rekord | Rekord powiązany |
+| Podstawowa | `bool` | bazodanowe, tylko-odczyt | Podstawowa | Relacja podstawowa |

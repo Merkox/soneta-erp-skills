@@ -5,22 +5,26 @@ Opis: Element szczegółowy karty kompetencji pracownika (KartaKompetencjiPracow
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaKompetencjiPracownika`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 3
+- podlisty: 2
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
-| Karta | `Soneta.HR2.KartaKompetencjiPracownika` | bazodanowe, guided-parent |  |  |
-| Wartosc | `Soneta.Oceny.WartośćElementuOceny` | bazodanowe |  |  |
-| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` |  |  |  |
+| Karta | `Soneta.HR2.KartaKompetencjiPracownika` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Wartosc | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
+| Wartosc.Host | `Soneta.Oceny.IWartośćOcenyHost` | tylko-odczyt |  |  |
 | Wartosc.Ocena | `Soneta.Oceny.ElementSkaliOcen` | bazodanowe |  |  |
 | Wartosc.Punktacja | `decimal` | bazodanowe | Punktacja |  |
-| Wartosc.Uzasadnienie | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Wartosc.Uzasadnienie | `MemoText` | bazodanowe, podlista |  |  |
 | Wartosc.Wartosc | `decimal` | bazodanowe | Wartość |  |
 | Wartosc.Wartosc2 | `decimal` |  |  |  |
 | Wartosc.WartoscInt | `int` |  |  |  |
-| Wartosc.WgOcena | `Soneta.Business.Key` |  |  |  |
+| Wartosc.WgOcena | `Key` | podlista |  |  |
 | Wartosc.Wykonanie | `decimal` | bazodanowe | Wykonanie |  |
 | Wartosc.WykonanieInt | `int` |  | Wykonanie |  |
-| Wartosc.Wypełniona | `bool` |  |  |  |
+| Wartosc.Wypełniona | `bool` | tylko-odczyt |  |  |

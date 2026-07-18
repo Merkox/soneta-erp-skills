@@ -5,31 +5,35 @@ Opis: Rejestr naruszeń ochrony danych osobowych zgodnie z RODO. Dokumentuje naz
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 15
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 6
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CzasNaruszenia | `Soneta.Types.Time` | bazodanowe |  | Czas naruszenia |
-| CzasZgloszenia | `Soneta.Types.Time` | bazodanowe |  | Czas zgłoszenia |
-| Data | `Soneta.Types.Date` |  |  |  |
-| DataNaruszenia | `Soneta.Types.Date` | bazodanowe |  | Data naruszenia |
-| DataZgloszenia | `Soneta.Types.Date` | bazodanowe |  | Data zgłoszenia |
-| Definicja | `Soneta.Core.IDefinicjaDokumentu` | iface-ref |  |  |
-| Konsekwencje | `Soneta.Business.MemoText` | bazodanowe | Konsekwencje naruszenia | Możliwe konsekwencje naruszenie |
+| CzasNaruszenia | `Time` | bazodanowe |  | Czas naruszenia |
+| CzasZgloszenia | `Time` | bazodanowe |  | Czas zgłoszenia |
+| Data | `Date` | tylko-odczyt |  |  |
+| DataNaruszenia | `Date` | bazodanowe |  | Data naruszenia |
+| DataZgloszenia | `Date` | bazodanowe |  | Data zgłoszenia |
+| Definicja | `Soneta.Core.IDefinicjaDokumentu` | tylko-odczyt, iface-ref |  |  |
+| Konsekwencje | `MemoText` | bazodanowe, podlista | Konsekwencje naruszenia | Możliwe konsekwencje naruszenie |
 | LiczbaOsob | `int` | bazodanowe | Liczba osób | Przybliżona liczba osób, których dotyczy naruszenie |
 | Nazwa | `string` | bazodanowe | Nazwa czynności | Nazwa czynności lub kategorii czynności |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis naruszenia | Opis naruszenia (w tym kategorie i liczba wpisów danych osobowych) |
-| PrzyczynaOpoznienia | `Soneta.Business.MemoText` | bazodanowe | Przyczyna opóźnienia | Opis przyczyny opóźnienia zgłoszenia |
-| SrodkiZaradzenia | `Soneta.Business.MemoText` | bazodanowe | Środki zaradzenia | Zastosowane/proponowane środki w celu zaradzenia naruszeniu lub zminimalizowania skutków naruszenia danych osobowych |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis naruszenia | Opis naruszenia (w tym kategorie i liczba wpisów danych osobowych) |
+| PrzyczynaOpoznienia | `MemoText` | bazodanowe, podlista | Przyczyna opóźnienia | Opis przyczyny opóźnienia zgłoszenia |
+| SrodkiZaradzenia | `MemoText` | bazodanowe, podlista | Środki zaradzenia | Zastosowane/proponowane środki w celu zaradzenia naruszeniu lub zminimalizowania skutków naruszenia danych osobowych |
 | ZbiorDanych | `Soneta.Core.GIODO.GIODOZbiorDanych` | bazodanowe | Zbiór danych |  |
 
 ## Relacje interfejsowe

@@ -5,17 +5,21 @@ Opis: Element szczegółowy pożyczki (Pozyczka). Żyrant pożyczki pracowniczej
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozyczka` → `Pozyczka`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ElementRaty | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
-| Elementy | `System.Collections.Generic.IEnumerable<Soneta.Place.WypElement>` |  |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Pozyczka | `Soneta.Kadry.Pozyczka` | bazodanowe, guided-parent | Pożyczka |  |
+| Elementy | `System.Collections.Generic.IEnumerable<Soneta.Place.WypElement>` | podlista |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
+| Pozyczka | `Soneta.Kadry.Pozyczka` | bazodanowe, tylko-odczyt, guided-parent | Pożyczka |  |
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| Procent | `Soneta.Types.Percent` | bazodanowe |  |  |
-| Raty | `System.Collections.Generic.IEnumerable<Soneta.Kadry.RataPozyczki>` |  |  |  |
-| SplatyOd | `Soneta.Types.YearMonth` | bazodanowe |  |  |
+| Procent | `Percent` | bazodanowe |  |  |
+| Raty | `System.Collections.Generic.IEnumerable<Soneta.Kadry.RataPozyczki>` | podlista |  |  |
+| SplatyOd | `YearMonth` | bazodanowe |  |  |

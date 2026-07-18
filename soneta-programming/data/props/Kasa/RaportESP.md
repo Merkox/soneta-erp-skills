@@ -6,48 +6,52 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`, `IRaportEwidencjiSP`
 
-- pola bazodanowe: 17
-- pola kalkulowane (z klas biznesowych): 20
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 20
+- podlisty: 8
+- subrowy: 1
+- razem: 37
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Data | `Soneta.Types.Date` |  |  |  |
-| Definicja | `Soneta.Core.DefinicjaDokumentu` |  |  |  |
-| Dokumenty | `Soneta.Business.SubTable<Soneta.Kasa.DokKasowyBase>` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| GotowkaKoncowe | `Soneta.Types.Currency` |  |  |  |
-| GotowkaPoczatkowe | `Soneta.Types.Currency` | bazodanowe |  |  |
-| GotowkaWplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| GotowkaWyplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Kasa | `Soneta.Kasa.EwidencjaSP` | bazodanowe |  |  |
-| Nazwa | `string` |  |  |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
+| Definicja | `Soneta.Core.DefinicjaDokumentu` | tylko-odczyt |  |  |
+| Dokumenty | `SubTable<Soneta.Kasa.DokKasowyBase>` | podlista |  |  |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| GotowkaKoncowe | `Currency` | tylko-odczyt |  |  |
+| GotowkaPoczatkowe | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| GotowkaWplaty | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| GotowkaWyplaty | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Kasa | `Soneta.Kasa.EwidencjaSP` | bazodanowe, tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerDzienny | `int` | bazodanowe |  |  |
-| NumerRaportu | `string` |  |  |  |
-| Oddzial | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  |  |
-| OkresDzien | `Soneta.Types.Date` |  |  |  |
-| OperacjeBankowe | `Soneta.Business.LpSubTable<Soneta.Kasa.OperacjaBankowa>` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| RodzajRaportu | `Soneta.Kasa.RodzajRaportuESP` | bazodanowe, enum |  |  |
-| SaldoKoncowe | `Soneta.Types.Currency` |  |  |  |
-| SaldoPoczatkowe | `Soneta.Types.Currency` | bazodanowe |  |  |
-| SymbolOkresuWgDatyDokumentu | `string` |  |  |  |
-| Wplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| Wyplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| ZaimportowaneFragmenty | `string` | bazodanowe |  |  |
+| NumerRaportu | `string` | tylko-odczyt |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  |  |
+| OkresDzien | `Date` |  |  |  |
+| OperacjeBankowe | `LpSubTable<Soneta.Kasa.OperacjaBankowa>` | podlista |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| RodzajRaportu | `Soneta.Kasa.RodzajRaportuESP` (enum) | bazodanowe, tylko-odczyt |  |  |
+| SaldoKoncowe | `Currency` | tylko-odczyt |  |  |
+| SaldoPoczatkowe | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| SymbolOkresuWgDatyDokumentu | `string` | tylko-odczyt |  |  |
+| Wplaty | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| Wyplaty | `Currency` | bazodanowe, tylko-odczyt |  |  |
+| ZaimportowaneFragmenty | `string` | bazodanowe, tylko-odczyt |  |  |
 | Zamknięty | `bool` |  |  |  |
-| Zaplaty | `Soneta.Business.LpSubTable<Soneta.Kasa.Zaplata>` |  |  |  |
+| Zaplaty | `LpSubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
 
 ## Enumy
 

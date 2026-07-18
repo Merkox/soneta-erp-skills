@@ -5,12 +5,16 @@ Opis: Zawiera listę zdefiniowanych przez użytkowników szablonów załącznik�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 2
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Definicje | `Soneta.Business.SubTable<Soneta.Core.KSeFSzablonZalacznikaDefXmlNagRelation>` |  |  |  |
-| Elementy | `Soneta.Business.SubTable<Soneta.Core.KSeFSzablonZalacznikaElement>` |  |  |  |
+| Definicje | `SubTable<Soneta.Core.KSeFSzablonZalacznikaDefXmlNagRelation>` | podlista |  |  |
+| Elementy | `SubTable<Soneta.Core.KSeFSzablonZalacznikaElement>` | podlista |  |  |
 | Kod | `string` | bazodanowe |  | Kod szablonu |
 | Nazwa | `string` | bazodanowe | Nazwa szablonu | Nazwa identyfikatora |

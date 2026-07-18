@@ -4,14 +4,18 @@ Tytuł: Prawa rekordów
 Opis: Uprawnienie na poziomie pojedynczego rekordu. Przypisuje rodzaj dostępu (odczyt, zapis) konkretnemu użytkownikowi lub grupie do wybranego obiektu biznesowego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Authorised | `Soneta.Business.Db.Permissions.IAuthorised` | bazodanowe, iface-ref | Uprawniony | Określa upawnionego |
-| Permission | `Soneta.Business.AccessRights` | bazodanowe, enum | Uprawnienie | Określa rodzaj uprawnienia |
-| PermissionClient | `Soneta.Business.Db.Permissions.IPermissionClient` | bazodanowe, iface-ref | Klient uprawnienia | Określa klienta uprawnienia |
+| Authorised | `Db.Permissions.IAuthorised` | bazodanowe, iface-ref | Uprawniony | Określa upawnionego |
+| Permission | `AccessRights` (enum) | bazodanowe | Uprawnienie | Określa rodzaj uprawnienia |
+| PermissionClient | `Db.Permissions.IPermissionClient` | bazodanowe, iface-ref | Klient uprawnienia | Określa klienta uprawnienia |
 
 ## Relacje interfejsowe
 
@@ -27,7 +31,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### AccessRights (`Soneta.Business.AccessRights`)
+### AccessRights (`AccessRights`)
 - `Denied` = 0 — Zakaz dostępu
 - `ReadOnly` = 1 — Tylko odczyt
 - `Granted` = 2 — Pełne prawo

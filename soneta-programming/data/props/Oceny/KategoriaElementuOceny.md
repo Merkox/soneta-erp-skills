@@ -5,32 +5,36 @@ Opis: Kategoria grupująca elementy oceny (np. kompetencje miękkie, wiedza tech
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 10
+- podlisty: 4
+- subrowy: 1
+- razem: 21
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| Definicje | `Soneta.Business.SubTable<Soneta.Oceny.DefinicjaElementuOceny>` |  |  |  |
-| Kategorie | `Soneta.Business.SubTable<Soneta.Oceny.OcenaKategoriaArkusza>` |  |  |  |
-| Miara | `Soneta.Oceny.MiaraElementuOceny` | bazodanowe |  |  |
-| Miara.IsWgSkali | `bool` |  |  |  |
-| Miara.IsWgWartosci | `bool` |  |  |  |
-| Miara.IsWgWartosci0 | `bool` |  |  |  |
-| Miara.IsWgWartosci2 | `bool` |  |  |  |
-| Miara.IsWgWykonania | `bool` |  |  |  |
-| Miara.IsWgWykonania0 | `bool` |  |  |  |
-| Miara.IsWgWykonania2 | `bool` |  |  |  |
-| Miara.Kryterium | `Soneta.Oceny.IKryteriumOceny` |  |  |  |
+| Definicje | `SubTable<Soneta.Oceny.DefinicjaElementuOceny>` | podlista |  |  |
+| Kategorie | `SubTable<Soneta.Oceny.OcenaKategoriaArkusza>` | podlista |  |  |
+| Miara | `Soneta.Oceny.MiaraElementuOceny` (subrow) | bazodanowe |  |  |
+| Miara.IsWgSkali | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci0 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWartosci2 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania0 | `bool` | tylko-odczyt |  |  |
+| Miara.IsWgWykonania2 | `bool` | tylko-odczyt |  |  |
+| Miara.Kryterium | `Soneta.Oceny.IKryteriumOceny` | tylko-odczyt |  |  |
 | Miara.Skala | `Soneta.Oceny.SkalaOcen` | bazodanowe |  |  |
-| Miara.SposobAgregacji | `Soneta.Oceny.SposobyAgregacji` | bazodanowe, enum | Sposób agregacji |  |
-| Miara.WgSkala | `Soneta.Business.Key` |  |  |  |
-| Miara.WgZakres | `Soneta.Business.Key` |  |  |  |
+| Miara.SposobAgregacji | `Soneta.Oceny.SposobyAgregacji` (enum) | bazodanowe | Sposób agregacji |  |
+| Miara.WgSkala | `Key` | podlista |  |  |
+| Miara.WgZakres | `Key` | podlista |  |  |
 | Miara.Zakres | `Soneta.Oceny.ZakresWartości` | bazodanowe |  |  |
-| Miara.Zdefiniowana | `bool` |  |  |  |
+| Miara.Zdefiniowana | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` | bazodanowe, enum |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

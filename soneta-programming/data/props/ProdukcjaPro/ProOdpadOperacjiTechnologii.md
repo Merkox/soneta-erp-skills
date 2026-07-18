@@ -5,31 +5,35 @@ Opis: Element szczegółowy operacji wzorcowej (IProOperacjaWzorcowa). Definiuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `IProOperacjaWzorcowa`
 
-- pola bazodanowe: 18
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| CechaDostepnosci | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha dostępności | Cecha dostępności odpadu operacji technologii. |
-| CechaIlosci | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha ilości | Cecha ilości odpadu operacji technologii. |
-| CechaTowaru | `Soneta.Business.FeatureDefinition` | bazodanowe | Cecha towaru | Cecha towaru odpadu operacji technologii. |
-| Cena | `Soneta.Types.DoubleCy` | bazodanowe |  | Cena odpadu operacji technologii. |
-| Ilosc | `Soneta.Types.Amount` | bazodanowe | Ilość | Ilość odpadu operacji technologii. |
+| CechaDostepnosci | `FeatureDefinition` | bazodanowe | Cecha dostępności | Cecha dostępności odpadu operacji technologii. |
+| CechaIlosci | `FeatureDefinition` | bazodanowe | Cecha ilości | Cecha ilości odpadu operacji technologii. |
+| CechaTowaru | `FeatureDefinition` | bazodanowe | Cecha towaru | Cecha towaru odpadu operacji technologii. |
+| Cena | `DoubleCy` | bazodanowe |  | Cena odpadu operacji technologii. |
+| Ilosc | `Amount` | bazodanowe | Ilość | Ilość odpadu operacji technologii. |
 | IloscJednostkowa | `double` | bazodanowe | Ilość jednostkowa | Ilość jednostkowa odpadu operacji technologii. |
-| IloscPrzeliczona | `Soneta.Types.Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla odpadu operacji technologii. |
+| IloscPrzeliczona | `Amount` | bazodanowe | Ilość przeliczona | Ilość przeliczona na podstawową jednostkę miary dla odpadu operacji technologii. |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa odpadu operacji technologii. |
 | Magazyn | `Soneta.Magazyny.Magazyn` | bazodanowe |  | Magazyn odpadu operacji technologii. |
 | Material | `Soneta.ProdukcjaPro.ProMaterialOperacjiTechnologii` | bazodanowe | Materiał | Materiał odpadu operacji technologii. |
-| Narzut | `Soneta.Types.Percent` | bazodanowe |  | Narzut odpadu operacji technologii. |
-| OdpadyOperacjiZlecen | `Soneta.Business.SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiZlecenia>` |  |  |  |
+| Narzut | `Percent` | bazodanowe |  | Narzut odpadu operacji technologii. |
+| OdpadyOperacjiZlecen | `SubTable<Soneta.ProdukcjaPro.ProOdpadOperacjiZlecenia>` | podlista |  |  |
 | Operacja | `Soneta.ProdukcjaPro.IProOperacjaWzorcowa` | bazodanowe, guided-parent |  | Operacja dla odpadu operacji technologii. |
-| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` |  | Operacja technologii | Operacja technologii dla odpadu operacji technologii. |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  | Opis odpadu operacji technologii. |
-| RodzajCeny | `Soneta.ProdukcjaPro.ProRodzajCeny` | bazodanowe, enum | Rodzaj ceny | Rodzaj ceny odpadu operacji technologii. |
+| OperacjaTechnologii | `Soneta.ProdukcjaPro.ProOperacjaTechnologii` | tylko-odczyt | Operacja technologii | Operacja technologii dla odpadu operacji technologii. |
+| Opis | `MemoText` | bazodanowe, podlista |  | Opis odpadu operacji technologii. |
+| RodzajCeny | `Soneta.ProdukcjaPro.ProRodzajCeny` (enum) | bazodanowe | Rodzaj ceny | Rodzaj ceny odpadu operacji technologii. |
 | Towar | `Soneta.Towary.Towar` | bazodanowe |  | Towar odpadu operacji technologii. |
-| UdzialWKalkulacji | `Soneta.ProdukcjaPro.ProUdzialWKalkulacji` | bazodanowe, enum | Udział w kalkulacji | Udział w kalkulacji odpadu operacji technologii. |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość | Wartość odpadu operacji technologii. |
-| Wspolczynnik | `Soneta.Types.Fraction` | bazodanowe | Współczynnik | Współczynnik odpadu operacji technologii. |
+| UdzialWKalkulacji | `Soneta.ProdukcjaPro.ProUdzialWKalkulacji` (enum) | bazodanowe | Udział w kalkulacji | Udział w kalkulacji odpadu operacji technologii. |
+| Wartosc | `Currency` | bazodanowe | Wartość | Wartość odpadu operacji technologii. |
+| Wspolczynnik | `Fraction` | bazodanowe | Współczynnik | Współczynnik odpadu operacji technologii. |
 
 ## Enumy
 

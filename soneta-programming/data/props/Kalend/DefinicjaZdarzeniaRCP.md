@@ -5,16 +5,20 @@ Opis: Definicja zdarzenia rejestrowanego przez czytnik RCP. Określa kod, nazwę
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| NazwaRodzaj | `string` |  |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajZdarzeniaRCP` | bazodanowe, enum |  |  |
+| NazwaRodzaj | `string` | tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajZdarzeniaRCP` (enum) | bazodanowe |  |  |
 
 ## Enumy
 

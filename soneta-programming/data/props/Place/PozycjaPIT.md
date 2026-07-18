@@ -5,13 +5,17 @@ Opis: Słownik pozycji na deklaracjach podatkowych PIT. Mapuje składniki wynagr
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 16
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 16
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
-| DochódZwolniony | `bool` |  |  |  |
+| DochódZwolniony | `bool` | tylko-odczyt |  |  |
 | IFT1 | `int` | bazodanowe |  |  |
 | Kategoria | `string` | bazodanowe |  |  |
 | Kod | `string` | bazodanowe |  |  |

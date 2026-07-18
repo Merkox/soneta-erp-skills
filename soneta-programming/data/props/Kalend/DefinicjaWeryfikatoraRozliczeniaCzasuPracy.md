@@ -5,21 +5,25 @@ Opis: Konfigurowalna definicja weryfikatora dokumentu rozliczenia czasu pracy. O
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 4
+- subrowy: 1
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Algorytm | `Soneta.Kalend.DefinicjaWeryfikatoraRozliczeniaCzasuPracy.AlgorytmBase` |  |  |  |
+| Algorytm | `Soneta.Kalend.DefinicjaWeryfikatoraRozliczeniaCzasuPracy.AlgorytmBase` | tylko-odczyt |  |  |
 | Blokada | `bool` | bazodanowe |  |  |
-| ClassName | `string` |  |  |  |
-| Code | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| DefinicjeRozliczenia | `Soneta.Business.SubTable<Soneta.Kalend.WeryfikatorRozliczeniaCzasuPracy>` |  |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| Code | `MemoText` | bazodanowe, podlista |  |  |
+| DefinicjeRozliczenia | `SubTable<Soneta.Kalend.WeryfikatorRozliczeniaCzasuPracy>` | podlista |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe |  |  |
+| Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |

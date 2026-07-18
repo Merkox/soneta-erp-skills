@@ -5,14 +5,18 @@ Opis: Tabela przechowuje dodatkowe dane KSeF przypisane do pozycji dokumentów h
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaDokHandlowego`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, guided-parent |  | Pozycja dokumentu handlowego. |
-| StawkaVat0 | `Soneta.Handel.KSeFStawkaVat0` | bazodanowe, enum | Stawka VAT 0% | Określa typ sprzedaży 0% VAT przekazywany do KSeF. |
-| StawkaVatNP | `Soneta.Handel.KSeFStawkaVatNP` | bazodanowe, enum | Stawka VAT NP | Określa typ sprzedaży niepodlegającej opodatkowaniu VAT przekazywany do KSeF. |
+| Pozycja | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe, tylko-odczyt, guided-parent |  | Pozycja dokumentu handlowego. |
+| StawkaVat0 | `Soneta.Handel.KSeFStawkaVat0` (enum) | bazodanowe | Stawka VAT 0% | Określa typ sprzedaży 0% VAT przekazywany do KSeF. |
+| StawkaVatNP | `Soneta.Handel.KSeFStawkaVatNP` (enum) | bazodanowe | Stawka VAT NP | Określa typ sprzedaży niepodlegającej opodatkowaniu VAT przekazywany do KSeF. |
 
 ## Enumy
 

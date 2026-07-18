@@ -5,15 +5,19 @@ Opis: Zaniechanie poboru zaliczki na podatek dochodowy dla pracownika. Rejestruj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe |  |  |
 | Decyzja | `string` | bazodanowe |  |  |
 | Etat | `bool` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Roczne | `bool` | bazodanowe |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Roczne | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Umowa | `bool` | bazodanowe |  |  |
 | Wartosc | `decimal` | bazodanowe |  |  |

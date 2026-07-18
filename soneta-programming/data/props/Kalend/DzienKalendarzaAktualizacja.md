@@ -4,25 +4,29 @@ Opis: Element szczegółowy pozycji aktualizacji kalendarza (PozycjaAktualizacji
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaAktualizacjiKalendarza`
 
-- pola bazodanowe: 8
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 6
+- podlisty: 1
+- subrowy: 1
+- razem: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Czas | `Soneta.Types.Time` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Czas | `Time` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Definicja | `Soneta.Kalend.DefinicjaDnia` | bazodanowe |  |  |
-| OdGodziny | `Soneta.Types.Time` |  | Od |  |
-| Pozycja | `Soneta.Kalend.PozycjaAktualizacjiKalendarza` | bazodanowe, guided-parent |  |  |
-| Praca | `Soneta.Kalend.CzasPracy` | bazodanowe |  |  |
-| Praca.Czas | `Soneta.Types.Time` | bazodanowe |  |  |
-| Praca.DoGodziny | `Soneta.Types.Time` |  |  |  |
-| Praca.OdGodziny | `Soneta.Types.Time` | bazodanowe |  |  |
-| RuchomyCzasPracy | `bool` |  |  |  |
-| Strefy | `Soneta.Business.SubTable<Soneta.Kalend.StrefaKalendarzaAktualizacja>` |  |  |  |
-| TolerancjaWe | `Soneta.Types.Time` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` | bazodanowe, enum |  |  |
-| WejścieDo | `Soneta.Types.Time` |  |  |  |
+| OdGodziny | `Time` | tylko-odczyt | Od |  |
+| Pozycja | `Soneta.Kalend.PozycjaAktualizacjiKalendarza` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Praca | `Soneta.Kalend.CzasPracy` (subrow) | bazodanowe |  |  |
+| Praca.Czas | `Time` | bazodanowe |  |  |
+| Praca.DoGodziny | `Time` |  |  |  |
+| Praca.OdGodziny | `Time` | bazodanowe |  |  |
+| RuchomyCzasPracy | `bool` | tylko-odczyt |  |  |
+| Strefy | `SubTable<Soneta.Kalend.StrefaKalendarzaAktualizacja>` | podlista |  |  |
+| TolerancjaWe | `Time` | bazodanowe |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| WejścieDo | `Time` |  |  |  |
 
 ## Enumy
 

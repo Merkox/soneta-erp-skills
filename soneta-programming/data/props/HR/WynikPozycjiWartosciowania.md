@@ -4,28 +4,32 @@ Tytuł: Wyniki pozycji wartościowania
 Opis: Element szczegółowy wartościowania stanowiska (WartosciowanieStanowiska). Przechowuje wyliczoną wartość punktową dla konkretnej pozycji słownikowej w ramach kryterium analitycznego, z rozbiciem na punkty bazowe i mnożnik.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 14
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 15
+- podlisty: 0
+- subrowy: 1
+- razem: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AnalityczneIdent | `System.Guid` | bazodanowe |  |  |
-| AnalityczneNazwa | `string` | bazodanowe |  |  |
-| KryteriumAnalityczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumAnalityczne` |  |  |  |
-| Mnoznik | `decimal` | bazodanowe | Mnożnik |  |
-| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` | bazodanowe | Pozycja słownika |  |
-| Pozycja.Ident | `System.Guid` | bazodanowe | Identyfikator pozycji słownika |  |
-| Pozycja.Nazwa | `string` | bazodanowe | Nazwa pozycji |  |
-| Pozycja.Opis | `string` | bazodanowe | Opis pozycji |  |
-| Pozycja.Opis2 | `string` | bazodanowe | Opis2 pozycji |  |
+| AnalityczneIdent | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| AnalityczneNazwa | `string` | bazodanowe, tylko-odczyt |  |  |
+| KryteriumAnalityczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumAnalityczne` | tylko-odczyt |  |  |
+| Mnoznik | `decimal` | bazodanowe, tylko-odczyt | Mnożnik |  |
+| Pozycja | `Soneta.HR.ZKL.Wartosciowanie.Macierze.PozycjaMacierzy` (subrow) | bazodanowe | Pozycja słownika |  |
+| Pozycja.Ident | `System.Guid` | bazodanowe, tylko-odczyt | Identyfikator pozycji słownika |  |
+| Pozycja.Nazwa | `string` | bazodanowe, tylko-odczyt | Nazwa pozycji |  |
+| Pozycja.Opis | `string` | bazodanowe, tylko-odczyt | Opis pozycji |  |
+| Pozycja.Opis2 | `string` | bazodanowe, tylko-odczyt | Opis2 pozycji |  |
 | Pozycja.PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
-| Pozycja.Slownik | `string` | bazodanowe | Nazwa słownika |  |
-| Pozycja.Typ | `string` | bazodanowe | Typ pozycji, tabela słownika |  |
-| PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
-| PunktyBazowe | `int` | bazodanowe | Punkty bazowe |  |
-| SyntetyczneNazwa | `string` | bazodanowe |  |  |
-| WartoscWyliczona | `decimal` | bazodanowe | Wartość wyliczona |  |
-| WartosciowanieStanowiska | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.WartosciowanieStanowiska` | bazodanowe | Wartościowanie stanowiska |  |
+| Pozycja.Slownik | `string` | bazodanowe, tylko-odczyt | Nazwa słownika |  |
+| Pozycja.Typ | `string` | bazodanowe, tylko-odczyt | Typ pozycji, tabela słownika |  |
+| PozycjaSlownika | `Soneta.HR.IZklPozycjaSlownika` | tylko-odczyt, iface-ref |  |  |
+| PunktyBazowe | `int` | bazodanowe, tylko-odczyt | Punkty bazowe |  |
+| SyntetyczneNazwa | `string` | bazodanowe, tylko-odczyt |  |  |
+| WartoscWyliczona | `decimal` | bazodanowe, tylko-odczyt | Wartość wyliczona |  |
+| WartosciowanieStanowiska | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.WartosciowanieStanowiska` | bazodanowe, tylko-odczyt | Wartościowanie stanowiska |  |
 
 ## Relacje interfejsowe
 

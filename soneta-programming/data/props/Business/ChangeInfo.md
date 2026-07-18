@@ -4,30 +4,34 @@ Tytuł: Historia zmian
 Opis: Rejestr zmian dokonanych na obiektach w systemie. Przechowuje informacje o operatorze, typie zmiany, dacie i szczegółach modyfikacji dla celów audytu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 13
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 17
+- podlisty: 2
+- subrowy: 0
+- razem: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Business.MemoText` | bazodanowe | Dane dodatkowe | Dodatkowa informacja o danym zgłoszeniu. |
-| Godzina | `Soneta.Types.Time` |  |  | Godzina wystąpienia tej zmiany. |
-| HasAssignedTimeTrack | `bool` |  |  |  |
-| Info | `string` | bazodanowe | Informacje | Dodatkowa informacja o danym zgłoszeniu. |
-| LoggedWebOperator | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref | Fizycznie zalogowany operator | Fizycznie zalogowany WebOperator |
-| LoggedWebOperatorId | `int` |  |  |  |
-| LoggedWebOperatorType | `string` | bazodanowe |  | Fizycznie zalogowany WebOperator |
-| NoteToChange | `Soneta.Business.MemoText` | bazodanowe | Uwagi do zmian | Uwagi do zmian wymagane w metryce dokumentów. |
-| Operator | `Soneta.Business.App.Operator` | bazodanowe |  | Operator, który był zalogowany do systemu, który utworzył to zgłoszenie. |
-| Row | `Soneta.Business.GuidedRow` |  | Zapis | Zmieniony zapis o ile nie został wcześniej skasowany. |
-| SourceGuid | `System.Guid` | bazodanowe | Guid źródła | Unikalny identyfikator zapisu, do którego zostało wywołane zgłoszenie. |
-| SourceTable | `string` | bazodanowe | Tabela źródła | Nazwa tabeli bazy danych zawierającej zapis, do którego zostało wywołane zgłoszenie. |
-| TaskUser | `Soneta.Business.ITaskUser` | iface-ref |  |  |
-| Time | `System.DateTime` | bazodanowe | Dzień | Data wystąpienia zgłoszenia. |
-| Type | `Soneta.Business.ChangeInfoType` | bazodanowe, enum | Typ | Typ zgłoszenia określający powód jego zgłoszenia. |
-| WebOperator | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref | Użytkownik aplikacji web'owej | Informacje o uzytkowniku aplikacji web'owej |
-| WebOperatorId | `int` |  |  |  |
-| WebOperatorType | `string` | bazodanowe |  | Informacje o uzytkowniku aplikacji web'owej |
-| WebUser | `string` | bazodanowe | Operator systemu | Operator zalogowany do systemu. |
+| Data | `MemoText` | bazodanowe, podlista | Dane dodatkowe | Dodatkowa informacja o danym zgłoszeniu. |
+| Godzina | `Time` | tylko-odczyt |  | Godzina wystąpienia tej zmiany. |
+| HasAssignedTimeTrack | `bool` | tylko-odczyt |  |  |
+| Info | `string` | bazodanowe, tylko-odczyt | Informacje | Dodatkowa informacja o danym zgłoszeniu. |
+| LoggedWebOperator | `IWebOperator` | bazodanowe, tylko-odczyt, iface-ref | Fizycznie zalogowany operator | Fizycznie zalogowany WebOperator |
+| LoggedWebOperatorId | `int` | tylko-odczyt |  |  |
+| LoggedWebOperatorType | `string` | bazodanowe, tylko-odczyt |  | Fizycznie zalogowany WebOperator |
+| NoteToChange | `MemoText` | bazodanowe, podlista | Uwagi do zmian | Uwagi do zmian wymagane w metryce dokumentów. |
+| Operator | `App.Operator` | bazodanowe, tylko-odczyt |  | Operator, który był zalogowany do systemu, który utworzył to zgłoszenie. |
+| Row | `GuidedRow` | tylko-odczyt | Zapis | Zmieniony zapis o ile nie został wcześniej skasowany. |
+| SourceGuid | `System.Guid` | bazodanowe, tylko-odczyt | Guid źródła | Unikalny identyfikator zapisu, do którego zostało wywołane zgłoszenie. |
+| SourceTable | `string` | bazodanowe, tylko-odczyt | Tabela źródła | Nazwa tabeli bazy danych zawierającej zapis, do którego zostało wywołane zgłoszenie. |
+| TaskUser | `ITaskUser` | tylko-odczyt, iface-ref |  |  |
+| Time | `System.DateTime` | bazodanowe, tylko-odczyt | Dzień | Data wystąpienia zgłoszenia. |
+| Type | `ChangeInfoType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ zgłoszenia określający powód jego zgłoszenia. |
+| WebOperator | `IWebOperator` | bazodanowe, tylko-odczyt, iface-ref | Użytkownik aplikacji web'owej | Informacje o uzytkowniku aplikacji web'owej |
+| WebOperatorId | `int` | tylko-odczyt |  |  |
+| WebOperatorType | `string` | bazodanowe, tylko-odczyt |  | Informacje o uzytkowniku aplikacji web'owej |
+| WebUser | `string` | bazodanowe, tylko-odczyt | Operator systemu | Operator zalogowany do systemu. |
 
 ## Relacje interfejsowe
 
@@ -44,7 +48,7 @@ Pole może wskazywać na rekord dowolnej z poniższych tabel.
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### ChangeInfoType (`Soneta.Business.ChangeInfoType`)
+### ChangeInfoType (`ChangeInfoType`)
 - `Created` = 1 — Utworzony
 - `Modified` = 2 — Zmieniony
 - `Imported` = 3 — Importowany

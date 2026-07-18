@@ -4,23 +4,27 @@ Opis: Rejestr przejazdów służbowych w ramach ewidencji przebiegu pojazdu (kil
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 11
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 1
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AsString | `string` |  |  |  |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data przejazdu |
+| AsString | `string` | tylko-odczyt |  |  |
+| Data | `Date` | bazodanowe |  | Data przejazdu |
 | DefinicjaTrasy | `Soneta.Samochodowka.DefinicjaTrasy` | bazodanowe |  | Definicja trasy przejazdu |
 | Pojazd | `Soneta.Samochodowka.Pojazd` | bazodanowe |  | Pojazd, którym wykonujemy przejazd |
-| Rozliczenie | `Soneta.Samochodowka.RozliczenieEP` | bazodanowe |  | Rozliczenie związane z danym przejazdem |
+| Rozliczenie | `Soneta.Samochodowka.RozliczenieEP` | bazodanowe, tylko-odczyt |  | Rozliczenie związane z danym przejazdem |
 | Stawka | `double` | bazodanowe |  | Stawka za km |
-| Trasa | `Soneta.Samochodowka.Trasa` | bazodanowe |  | Parametry trasy przejazdu |
+| Trasa | `Soneta.Samochodowka.Trasa` (subrow) | bazodanowe |  | Parametry trasy przejazdu |
 | Trasa.Cel | `string` | bazodanowe |  | Opis trasy |
 | Trasa.Dlugosc | `decimal` | bazodanowe |  | Długość trasy |
 | Trasa.Opis | `string` | bazodanowe |  | Opis trasy |
-| Trasa.Typ | `Soneta.Samochodowka.TypTrasy` | bazodanowe, enum |  | Typ trasy |
-| Wartosc | `decimal` | bazodanowe |  | Wartość przejazdu |
+| Trasa.Typ | `Soneta.Samochodowka.TypTrasy` (enum) | bazodanowe |  | Typ trasy |
+| Wartosc | `decimal` | bazodanowe, tylko-odczyt |  | Wartość przejazdu |
 
 ## Enumy
 

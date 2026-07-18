@@ -6,65 +6,69 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`, `IElementSlownika`
 
-- pola bazodanowe: 24
-- pola kalkulowane (z klas biznesowych): 30
+- pola bazodanowe (zapisywalne): 20
+- pola kalkulowane (zapisywalne): 2
+- pola tylko-odczyt: 22
+- podlisty: 9
+- subrowy: 1
+- razem: 54
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Appearance | `Soneta.Business.DataAppearance` |  |  |  |
-| Avatar | `Soneta.Business.Conversation.Interfaces.IAvatar` |  |  |  |
-| Contractor | `string` |  |  |  |
-| Data | `Soneta.Types.Date` |  |  |  |
-| DataDo | `Soneta.Types.Date` | bazodanowe | Data zakończenia | Planowana data zakończenia transakcji. |
-| DataOd | `Soneta.Types.Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia transakcji. |
-| DataSourceParent | `int?` |  |  |  |
-| DataZamkniecia | `Soneta.Types.Date` | bazodanowe | Data zamknięcia | Data faktycznego zamknięcia |
+| Appearance | `DataAppearance` | tylko-odczyt |  |  |
+| Avatar | `Conversation.Interfaces.IAvatar` | tylko-odczyt |  |  |
+| Contractor | `string` | tylko-odczyt |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
+| DataDo | `Date` | bazodanowe | Data zakończenia | Planowana data zakończenia transakcji. |
+| DataOd | `Date` | bazodanowe | Data rozpoczęcia | Data rozpoczęcia transakcji. |
+| DataSourceParent | `int?` | tylko-odczyt |  |  |
+| DataZamkniecia | `Date` | bazodanowe | Data zamknięcia | Data faktycznego zamknięcia |
 | Definicja | `Soneta.CRM.Config.DefTransakcja` | bazodanowe |  | Definicja transakcji |
-| Definition | `Soneta.Business.IWizardReferenceHost` | iface-ref |  |  |
-| DefinitionSymbol | `string` |  |  |  |
-| DefinitionType | `System.Type` |  |  |  |
-| DokumentyHandlowe | `Soneta.Business.SubTable` |  |  |  |
-| DuplicateGroupCaption | `string` |  |  |  |
-| ElementyPodzielnika | `Soneta.Business.SubTable<Soneta.Core.ElementPodzielnika>` |  |  |  |
-| Host | `Soneta.Business.ISysNotificationHost` | iface-ref |  |  |
-| IDokumentNumerPelny | `string` |  | Numer pełny |  |
-| KanbanRecordSequence | `Soneta.Core.RecordSequence` |  |  |  |
-| KanbanSequence | `int` |  |  |  |
+| Definition | `IWizardReferenceHost` | tylko-odczyt, iface-ref |  |  |
+| DefinitionSymbol | `string` | tylko-odczyt |  |  |
+| DefinitionType | `System.Type` | tylko-odczyt |  |  |
+| DokumentyHandlowe | `SubTable` | podlista |  |  |
+| DuplicateGroupCaption | `string` | tylko-odczyt |  |  |
+| ElementyPodzielnika | `SubTable<Soneta.Core.ElementPodzielnika>` | podlista |  |  |
+| Host | `ISysNotificationHost` | tylko-odczyt, iface-ref |  |  |
+| IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
+| KanbanRecordSequence | `Soneta.Core.RecordSequence` | tylko-odczyt |  |  |
+| KanbanSequence | `int` | tylko-odczyt |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  | Kontrahent podpięty do transakcji. |
-| Koszt | `Soneta.Types.Currency` | bazodanowe | Koszt | Zakładany koszt. |
+| Koszt | `Currency` | bazodanowe | Koszt | Zakładany koszt. |
 | Lead | `Soneta.CRM.Lead` | bazodanowe |  | Lead podpięty do transakcji. |
-| MailTo | `string` |  |  |  |
-| Marza | `Soneta.Types.Percent` | bazodanowe | Marża | Marża podawana w procentach wykorzystywana do wyliczania kosztu. |
-| Name | `string` |  |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Marza | `Percent` | bazodanowe | Marża | Marża podawana w procentach wykorzystywana do wyliczania kosztu. |
+| Name | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa transakcji |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| Operator | `string` |  |  |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis | Dokładny opis transakcji. |
-| PotencjalnyZysk | `Soneta.Types.Currency` |  |  |  |
-| PowiazaniaKontElementu | `Soneta.Business.SubTable` |  |  |  |
-| Priority | `string` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| Operator | `string` | tylko-odczyt |  |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis transakcji. |
+| PotencjalnyZysk | `Currency` | tylko-odczyt |  |  |
+| PowiazaniaKontElementu | `SubTable` | podlista |  |  |
+| Priority | `string` | tylko-odczyt |  |  |
 | Priorytet | `Soneta.CRM.Config.PriorytetTransakcja` | bazodanowe |  | Priorytet transakcji. |
 | Projekt | `Soneta.Core.IProjekt` | bazodanowe, iface-ref |  | Projekt, z którym powiązana jest transakcja. |
-| Prowadzacy | `Soneta.Business.App.Operator` | bazodanowe | Odpowiedzialny | Osoba odpowiedzialna za prowadzenie transakcji. |
+| Prowadzacy | `App.Operator` | bazodanowe | Odpowiedzialny | Osoba odpowiedzialna za prowadzenie transakcji. |
 | Przedstawiciel | `Soneta.CRM.KontaktOsoba` | bazodanowe | Przedstawiciel | Osoba kontaktowa ze strony kontrahenta. |
-| Przychod | `Soneta.Types.Currency` | bazodanowe | Przychód | Zakładany przychód. |
-| Sequence | `int` |  |  |  |
+| Przychod | `Currency` | bazodanowe | Przychód | Zakładany przychód. |
+| Sequence | `int` | tylko-odczyt |  |  |
 | Stan | `Soneta.CRM.Config.StanTransakcji` | bazodanowe | Stan transakcji | Stan transakcji |
-| StanData | `Soneta.Types.Date` | bazodanowe |  | Data zmiany stanu. |
-| TaskState | `string` |  |  |  |
+| StanData | `Date` | bazodanowe, tylko-odczyt |  | Data zmiany stanu. |
+| TaskState | `string` | tylko-odczyt |  |  |
 | Temperatura | `Soneta.CRM.Config.TemperaturaTransakcji` | bazodanowe |  | Temperatura transakcji. |
 | TransakcjaZrodlowa | `Soneta.CRM.Transakcja` |  |  |  |
-| TransakcjePodmiotu | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
+| TransakcjePodmiotu | `SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` | podlista |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Zadania | `SubTable` | podlista |  |  |
 | Zrodlo | `Soneta.CRM.Config.ZrodloKontaktu` | bazodanowe |  | Źródło kontaktu. |
-| Zysk | `Soneta.Types.Currency` | bazodanowe | Zysk | Zysk |
+| Zysk | `Currency` | bazodanowe | Zysk | Zysk |
 
 ## Relacje interfejsowe
 

@@ -5,14 +5,18 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Ko
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DashboardItem` → `DashboardItemDefinition`
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 5
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AppearanceSet | `Soneta.BI.AppearanceSetDefinition` | bazodanowe |  |  |
-| AppearanceType | `Soneta.BI.AppearanceType` | bazodanowe, enum | Sposób przypisania wyglądu | Sposób przypisania wyglądu do wizualizacji |
-| DashboardItem | `Soneta.BI.DashboardItemDefinition` | bazodanowe, guided-parent |  |  |
+| AppearanceType | `Soneta.BI.AppearanceType` (enum) | bazodanowe | Sposób przypisania wyglądu | Sposób przypisania wyglądu do wizualizacji |
+| DashboardItem | `Soneta.BI.DashboardItemDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | DataSpanSet | `Soneta.BI.DataSpanSetDefinition` | bazodanowe |  |  |
 | Field | `Soneta.BI.FieldDefinition` | bazodanowe |  |  |
 | Reference | `Soneta.BI.DashboardItemDefinition` | bazodanowe | Referencja | Referencyjny element wizualizacji |

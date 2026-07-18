@@ -6,12 +6,16 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IOceniany`, `IŹródłoOceny`
 
-- pola bazodanowe: 1
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 2
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data utworzenia powiązania |
-| Nazwa | `string` |  |  |  |
-| Oceniani | `Soneta.Business.SubTable<Soneta.Oceny.OcenaOceniany>` |  |  |  |
-| PowiązaneOceny | `Soneta.Business.SubTable<Soneta.Oceny.OcenaRealizacja>` |  |  |  |
+| Data | `Date` | bazodanowe |  | Data utworzenia powiązania |
+| Nazwa | `string` | tylko-odczyt |  |  |
+| Oceniani | `SubTable<Soneta.Oceny.OcenaOceniany>` | podlista |  |  |
+| PowiązaneOceny | `SubTable<Soneta.Oceny.OcenaRealizacja>` | podlista |  |  |

@@ -6,97 +6,101 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPlatny`, `IDaneKontrahentaHost`, `IRaportEwidencjiSP`, `IDokumentCRM`, `IKomunikatEDIHost`, `IEmailElement`, `IProceduraVATHost`, `IDigitalizedDocument`
 
-- pola bazodanowe: 41
-- pola kalkulowane (z klas biznesowych): 45
+- pola bazodanowe (zapisywalne): 27
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 33
+- podlisty: 22
+- subrowy: 1
+- razem: 86
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Bufor | `bool` |  |  |  |
+| Bufor | `bool` | tylko-odczyt |  |  |
 | BuforK | `bool` | bazodanowe |  | Bufor kontrolingowy |
-| CzyZalacznik | `string` |  |  |  |
-| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` |  |  |  |
-| DataDekretu | `Soneta.Types.Date` |  | Domyślna data dekretu |  |
-| DataDokumentu | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataEwidencji | `Soneta.Types.Date` | bazodanowe |  | Data dodatkowa |
-| DataKsiegowania | `Soneta.Types.Date` |  | Data księgowania |  |
-| DataOperacji | `Soneta.Types.Date` | bazodanowe |  |  |
-| DataWplywu | `Soneta.Types.Date` | bazodanowe |  |  |
+| CzyZalacznik | `string` | tylko-odczyt |  |  |
+| DaneKontrahenta | `Soneta.Core.DaneKontrahenta` | tylko-odczyt |  |  |
+| DataDekretu | `Date` | tylko-odczyt | Domyślna data dekretu |  |
+| DataDokumentu | `Date` | bazodanowe |  |  |
+| DataEwidencji | `Date` | bazodanowe |  | Data dodatkowa |
+| DataKsiegowania | `Date` | tylko-odczyt | Data księgowania |  |
+| DataOperacji | `Date` | bazodanowe |  |  |
+| DataWplywu | `Date` | bazodanowe |  |  |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
-| Dekrety | `Soneta.Business.SubTable` |  |  |  |
-| Description | `string` |  |  |  |
-| Dokument | `Soneta.Core.IDokumentKsiegowalny` | bazodanowe, iface-ref |  |  |
-| DokumentMPP | `bool` | bazodanowe | Dokument MPP |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| EwidencjaSP | `Soneta.Business.IRow` | bazodanowe |  |  |
-| EwidencjaZbiorcza | `Soneta.Core.DokEwidencji` | bazodanowe |  | Ewidencja zbiorcza |
-| EwidencjeEwidencjiZbiorczej | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` | bazodanowe | Firma |  |
+| Dekrety | `SubTable` | podlista |  |  |
+| Description | `string` | tylko-odczyt |  |  |
+| Dokument | `Soneta.Core.IDokumentKsiegowalny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+| DokumentMPP | `bool` | bazodanowe, tylko-odczyt | Dokument MPP |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| EwidencjaSP | `IRow` | bazodanowe, tylko-odczyt |  |  |
+| EwidencjaZbiorcza | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  | Ewidencja zbiorcza |
+| EwidencjeEwidencjiZbiorczej | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt | Firma |  |
 | IdentyfikatorReferencji | `System.Guid` | bazodanowe |  |  |
-| ImportExportXmls | `System.Collections.Generic.IEnumerable<Soneta.Core.ImportExportXml>` |  |  |  |
+| ImportExportXmls | `System.Collections.Generic.IEnumerable<Soneta.Core.ImportExportXml>` | podlista |  |  |
 | KSeFKomunikat | `Soneta.Core.KSeFKomunikat` | bazodanowe | Komunikat KSeF | Komunikat KSeF |
-| KSeFPlik | `Soneta.Core.KSeFPlik` |  |  |  |
-| Kod | `string` |  |  |  |
+| KSeFPlik | `Soneta.Core.KSeFPlik` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
 | KolKPiR | `int` | bazodanowe |  | Numer kolumny KPiR w ewidencjach VAT |
 | KolRyczalt | `int` | bazodanowe |  | Numer kolumny ryczałtu w ewidencjach VAT |
-| KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` |  |  |  |
-| Koszty | `Soneta.Core.IKosztyCalculator` |  |  |  |
-| KosztyEP | `Soneta.Business.SubTable` |  |  |  |
-| KwotySad | `Soneta.Business.SubTable` |  |  |  |
+| KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` | tylko-odczyt |  |  |
+| Koszty | `Soneta.Core.IKosztyCalculator` | tylko-odczyt |  |  |
+| KosztyEP | `SubTable` | podlista |  |  |
+| KwotySad | `SubTable` | podlista |  |  |
 | MetodaKasowaPIT | `bool` | bazodanowe |  | Metoda kasowa PIT |
-| NKUP | `Soneta.Types.Percent` | bazodanowe |  | Część niebędąca kosztem uzyskania przychodu |
-| Nadrzedny | `Soneta.Core.DokEwidencji` | bazodanowe |  | Nadrzędny dokument ewidencji |
-| NadrzednyTypRelacji | `Soneta.Core.TypRelacjiDokumentuEwidencji` | bazodanowe, enum |  | Typ relacji do nadrzędnego dokumentu ewidencji |
-| NagEwidencjiVATAkcyzy | `Soneta.Business.SubTable` |  |  |  |
-| NaglowkiRozliczaniaVAT | `Soneta.Business.SubTable` |  |  |  |
-| NieKsiegowac | `bool` | bazodanowe | Nie podlega księgowaniu | Nie podlega księgowaniu |
+| NKUP | `Percent` | bazodanowe |  | Część niebędąca kosztem uzyskania przychodu |
+| Nadrzedny | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  | Nadrzędny dokument ewidencji |
+| NadrzednyTypRelacji | `Soneta.Core.TypRelacjiDokumentuEwidencji` (enum) | bazodanowe, tylko-odczyt |  | Typ relacji do nadrzędnego dokumentu ewidencji |
+| NagEwidencjiVATAkcyzy | `SubTable` | podlista |  |  |
+| NaglowkiRozliczaniaVAT | `SubTable` | podlista |  |  |
+| NieKsiegowac | `bool` | bazodanowe, tylko-odczyt | Nie podlega księgowaniu | Nie podlega księgowaniu |
 | NrDokumentuK | `string` | bazodanowe |  | Nr dokumentu korygowanego |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerDodatkowy | `string` | bazodanowe |  |  |
 | NumerDokumentu | `string` | bazodanowe |  |  |
-| NumerProceduryISO | `string` | bazodanowe |  | numer procedury ISO wg ktorej powstał ten dokument |
-| ObrotyMW | `Soneta.Business.SubTable` |  |  |  |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  | numer procedury ISO wg ktorej powstał ten dokument |
+| ObrotyMW | `SubTable` | podlista |  |  |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| OpisAnalityczny | `Soneta.Business.SubTable` |  |  |  |
-| Platnosci | `Soneta.Business.SubTable` |  |  |  |
-| PodlegaKsiegowaniu | `bool` |  | Podlega księgowaniu |  |
+| OpisAnalityczny | `SubTable` | podlista |  |  |
+| Platnosci | `SubTable` | podlista |  |  |
+| PodlegaKsiegowaniu | `bool` | tylko-odczyt | Podlega księgowaniu |  |
 | Podmiot | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref |  |  |
-| Podrzedne | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| PowiazaneDokEwid | `Soneta.Business.SubTable<Soneta.Core.DokumentPowiazanyDokEwid>` |  |  |  |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| ProceduryVAT | `Soneta.Business.SubTable<Soneta.Core.RelProceduraVAT>` |  |  |  |
+| Podrzedne | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| PowiazaneDokEwid | `SubTable<Soneta.Core.DokumentPowiazanyDokEwid>` | podlista |  |  |
+| Pozycje | `LpSubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| ProceduryVAT | `SubTable<Soneta.Core.RelProceduraVAT>` | podlista |  |  |
 | PrzyczynaKorekty | `string` | bazodanowe | Przyczyna korekty | Przyczyna korekty |
-| Rozliczenia | `Soneta.Business.SubTable` |  |  |  |
-| RozliczeniaRK | `Soneta.Business.SubTable` |  |  |  |
+| Rozliczenia | `SubTable` | podlista |  |  |
+| RozliczeniaRK | `SubTable` | podlista |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Stan | `Soneta.Core.StanEwidencji` | bazodanowe, enum |  |  |
-| StanPrzetworzenia | `Soneta.Core.EwidencjaDokumentow.StanPrzetworzenia` | bazodanowe, enum | Stan przetworzenia dokumentu | Stan przetworzenia dokumentu |
-| SymbolNumeruZrodla | `string` | bazodanowe | Symbol numeru źródła | Symbol użyty podczas numeracji z dokumentu źródłowego |
-| SymbolNumeruZrodla2 | `string` |  | Symbol numeru źródła |  |
-| SymbolOkresuWgDatyDokumentu | `string` |  |  |  |
-| SymbolOkresuWgDatyEwidencji | `string` |  |  |  |
-| SymbolOkresuWgDatyWplywu | `string` |  |  |  |
+| Stan | `Soneta.Core.StanEwidencji` (enum) | bazodanowe |  |  |
+| StanPrzetworzenia | `Soneta.Core.EwidencjaDokumentow.StanPrzetworzenia` (enum) | bazodanowe | Stan przetworzenia dokumentu | Stan przetworzenia dokumentu |
+| SymbolNumeruZrodla | `string` | bazodanowe, tylko-odczyt | Symbol numeru źródła | Symbol użyty podczas numeracji z dokumentu źródłowego |
+| SymbolNumeruZrodla2 | `string` | tylko-odczyt | Symbol numeru źródła |  |
+| SymbolOkresuWgDatyDokumentu | `string` | tylko-odczyt |  |  |
+| SymbolOkresuWgDatyEwidencji | `string` | tylko-odczyt |  |  |
+| SymbolOkresuWgDatyWplywu | `string` | tylko-odczyt |  |  |
 | Szablon | `bool` | bazodanowe |  | Szablon dokumentu |
 | TryForceAttachmentPreview | `bool` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
 | TypDokumentuJPK | `Soneta.Core.ProceduraVAT` |  | Typ dokumentu VAT |  |
-| TypReferencji | `Soneta.Core.TypReferencji` | bazodanowe, enum |  |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe |  |  |
-| WartoscNetto | `Soneta.Types.Currency` |  |  |  |
-| WartosciRMK | `Soneta.Business.SubTable` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable` |  |  |  |
-| Wielofirmowosc | `bool` |  |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
-| WymagalnoscKwotyVAT | `Soneta.Core.WymagalnoscKwotyVAT` | bazodanowe, enum |  |  |
-| ZadaniaCRM | `Soneta.Business.SubTable` |  |  |  |
-| Zaplaty | `Soneta.Business.SubTable` |  |  |  |
-| Zbiorczy | `bool` |  |  |  |
+| TypReferencji | `Soneta.Core.TypReferencji` (enum) | bazodanowe |  |  |
+| Wartosc | `Currency` | bazodanowe |  |  |
+| WartoscNetto | `Currency` | tylko-odczyt |  |  |
+| WartosciRMK | `SubTable` | podlista |  |  |
+| WiadomosciPowiazane | `SubTable` | podlista |  |  |
+| Wielofirmowosc | `bool` | tylko-odczyt |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+| WymagalnoscKwotyVAT | `Soneta.Core.WymagalnoscKwotyVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
+| ZadaniaCRM | `SubTable` | podlista |  |  |
+| Zaplaty | `SubTable` | podlista |  |  |
+| Zbiorczy | `bool` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

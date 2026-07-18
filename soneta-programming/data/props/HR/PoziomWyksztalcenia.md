@@ -6,16 +6,20 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| TypSzkoly | `Soneta.HR.ZKL.Enums.TypSzkołyZKL` | bazodanowe, enum | Typ szkoły |  |
-| ZklSlownik | `Soneta.HR.IZklSlownik` |  |  |  |
+| TypSzkoly | `Soneta.HR.ZKL.Enums.TypSzkołyZKL` (enum) | bazodanowe | Typ szkoły |  |
+| ZklSlownik | `Soneta.HR.IZklSlownik` | tylko-odczyt |  |  |
 
 ## Enumy
 

@@ -6,65 +6,69 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`
 
-- pola bazodanowe: 35
-- pola kalkulowane (z klas biznesowych): 21
+- pola bazodanowe (zapisywalne): 29
+- pola kalkulowane (zapisywalne): 3
+- pola tylko-odczyt: 17
+- podlisty: 6
+- subrowy: 1
+- razem: 56
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BudynkiLokaleMieszkalne | `bool` | bazodanowe | Budynki i lokale mieszkalne |  |
 | Bufor | `bool` | bazodanowe |  | Bufor |
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |
-| Data | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu |
-| DataDokumentuDodatkowego | `Soneta.Types.Date` | bazodanowe |  | Data dokumentu dodatkowego |
-| DataOperacji | `Soneta.Types.Date` | bazodanowe |  | Data operacji |
+| Data | `Date` | bazodanowe |  | Data dokumentu |
+| DataDokumentuDodatkowego | `Date` | bazodanowe |  | Data dokumentu dodatkowego |
+| DataOperacji | `Date` | bazodanowe |  | Data operacji |
 | Definicja | `Soneta.SrodkiTrwale.DokumentST.DefDokST` | bazodanowe |  | Definicja dokumentu |
 | DokumentDodatkowy | `Soneta.Core.DokEwidencji` |  |  |  |
-| DokumentyEwidencji | `Soneta.Business.SubTable<Soneta.Core.DokEwidencji>` |  |  |  |
-| Ewidencja | `Soneta.Core.DokEwidencji` |  |  |  |
-| Firma | `Soneta.Core.OddzialFirmy` |  |  |  |
-| Historia | `Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria` | bazodanowe |  | Zapis historyczny środka związany z tym dokumentem |
+| DokumentyEwidencji | `SubTable<Soneta.Core.DokEwidencji>` | podlista |  |  |
+| Ewidencja | `Soneta.Core.DokEwidencji` | tylko-odczyt |  |  |
+| Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
+| Historia | `Soneta.SrodkiTrwale.SrodekTrwalyBaseHistoria` | bazodanowe, tylko-odczyt |  | Zapis historyczny środka związany z tym dokumentem |
 | HistoriaPodzielnika | `Soneta.Core.HistoriaPodzielnika` | bazodanowe |  | Historia podzielnika kosztów |
 | IdentDokumentuDodatkowego | `System.Guid` | bazodanowe |  |  |
-| KategoriaF03 | `Soneta.SrodkiTrwale.KategoriaF03` | bazodanowe, enum | Kategoria F-03 |  |
+| KategoriaF03 | `Soneta.SrodkiTrwale.KategoriaF03` (enum) | bazodanowe | Kategoria F-03 |  |
 | KategoriaSTDokumentu | `Soneta.SrodkiTrwale.KategoriaST` | bazodanowe |  | Kategoria, dla którego powstał dokument |
-| Kierunek | `Soneta.SrodkiTrwale.KierunekObrotuST` | bazodanowe, enum | Wartość bilansowa | Kirunek obrotów dokumentu |
-| Ksiegowanie | `Soneta.SrodkiTrwale.KsiegowanieWorker` |  |  |  |
-| KwotaNieumorzona | `Soneta.Types.Currency` |  |  |  |
+| Kierunek | `Soneta.SrodkiTrwale.KierunekObrotuST` (enum) | bazodanowe | Wartość bilansowa | Kirunek obrotów dokumentu |
+| Ksiegowanie | `Soneta.SrodkiTrwale.KsiegowanieWorker` | tylko-odczyt |  |  |
+| KwotaNieumorzona | `Currency` | tylko-odczyt |  |  |
 | Lokalizacja | `Soneta.SrodkiTrwale.LokalizacjaNier` | bazodanowe |  | Lokalizacja dla podatku od nieruchomości |
 | MiejsceUzytkowaniaDokumentu | `Soneta.SrodkiTrwale.MiejsceUzytkowania` | bazodanowe |  | Miejsce użytkowania, dla którego powstał dokument |
-| MiejsceUzytkowaniaInfo | `string` |  | Informacja o miejscu użytkowania |  |
+| MiejsceUzytkowaniaInfo | `string` | tylko-odczyt | Informacja o miejscu użytkowania |  |
 | Miejscowosc | `string` | bazodanowe | Miejscowość |  |
 | NazwaPodmiotu | `string` | bazodanowe | Nazwa podmiotu |  |
-| NieodplatnieOtrzymany | `Soneta.SrodkiTrwale.NieodplatneOtrzymanie` | bazodanowe, enum | ŚT nieodpłatnie otrzymany/przekazany |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  | Numer dokumentu |
+| NieodplatnieOtrzymany | `Soneta.SrodkiTrwale.NieodplatneOtrzymanie` (enum) | bazodanowe | ŚT nieodpłatnie otrzymany/przekazany |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  | Numer dokumentu |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
 | NumerDokumentuDodatkowego | `string` | bazodanowe |  | Numer dokumentu dodatkowego |
 | NumerKSeF | `string` | bazodanowe |  | Numer KSeF dokumentu dodatkowego |
-| NumerProceduryISO | `string` | bazodanowe |  | Numer procedury ISO |
+| NumerProceduryISO | `string` | bazodanowe, tylko-odczyt |  | Numer procedury ISO |
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  | Oddział firmy |
 | Odpowiedzialny | `Soneta.Kadry.Pracownik` | bazodanowe |  | Pracownik odpowiedzialny za dokument |
 | Opis | `string` | bazodanowe |  | Opis dokumentu |
-| OpisyAnalityczne | `Soneta.Business.ListWithView` |  |  |  |
-| PageF03Visibility | `bool` |  |  |  |
-| Podmiot | `Soneta.Core.IPodmiot` | iface-ref |  |  |
+| OpisyAnalityczne | `ListWithView` | podlista |  |  |
+| PageF03Visibility | `bool` | tylko-odczyt |  |  |
+| Podmiot | `Soneta.Core.IPodmiot` | tylko-odczyt, iface-ref |  |  |
 | PodzielnikKosztow | `Soneta.Core.PodzielnikKosztow` | bazodanowe |  | Podzielnik kosztów |
-| Pozycje | `Soneta.Business.LpSubTable<Soneta.SrodkiTrwale.ObrotST>` |  |  |  |
-| PozycjeEwidencji | `Soneta.Business.SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` |  |  |  |
-| SrodekTrwaly | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe |  | Środek związany z tym dokumentem |
-| StanDokumentuPozwalaNaBuforowanieOA | `bool` |  |  |  |
-| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` |  |  |  |
-| SymbolOkresuWgDatyDokumentu | `string` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` | bazodanowe, enum |  | Typ dokumentu środków trwałych |
+| Pozycje | `LpSubTable<Soneta.SrodkiTrwale.ObrotST>` | podlista |  |  |
+| PozycjeEwidencji | `SubTable<Soneta.Core.PozycjaEwidencjiZbiorczej>` | podlista |  |  |
+| SrodekTrwaly | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, tylko-odczyt |  | Środek związany z tym dokumentem |
+| StanDokumentuPozwalaNaBuforowanieOA | `bool` | tylko-odczyt |  |  |
+| StanDokumentuPozwalaNaZatwierdzenieOA | `bool` | tylko-odczyt |  |  |
+| SymbolOkresuWgDatyDokumentu | `string` | tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu środków trwałych |
 | Tytul | `Soneta.SrodkiTrwale.TytulDokumentuST` | bazodanowe | Tytuł dokumentu | Tytuł dokumentu środków trwałych |
-| WartoscBilansowa | `Soneta.Types.Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa dokumentu |
-| WartoscPodatkowa | `Soneta.Types.Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa dokumentu |
-| WidokAktywny | `bool` |  |  |  |
-| Wielooddzialowosc | `bool` |  |  |  |
+| WartoscBilansowa | `Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa dokumentu |
+| WartoscPodatkowa | `Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa dokumentu |
+| WidokAktywny | `bool` | tylko-odczyt |  |  |
+| Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | ZasadzeniaWieloletnie | `bool` | bazodanowe | Zasadzenia wieloletnie |  |
 | Zatwierdzony | `bool` |  |  |  |
 

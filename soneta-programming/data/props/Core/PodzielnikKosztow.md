@@ -4,18 +4,23 @@ Tytuł: Podzielniki kosztów
 Opis: Element szczegółowy źródła podzielnika kosztów (IZrodloPodzielnikaKosztow). Reprezentuje konkretny podzielnik kosztów z nazwą i powiązaniem do definicji algorytmu podziału.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zrodlo` → `IZrodloPodzielnikaKosztow`
+Historyczna: Tak — wersje (historia) w tabeli `HistoriaPodzielnika`
 
-- pola bazodanowe: 3
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Core.DefinicjaPodzielnikaKosztow` | bazodanowe |  |  |
-| Historia | `Soneta.Business.HistorySubTable<Soneta.Core.HistoriaPodzielnika>` |  |  |  |
-| Last | `Soneta.Core.HistoriaPodzielnika` |  |  |  |
+| Historia | `HistorySubTable<Soneta.Core.HistoriaPodzielnika>` | podlista |  |  |
+| Last | `Soneta.Core.HistoriaPodzielnika` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa |  |
-| TypZrodla | `string` |  | Typ źródła |  |
-| Zrodlo | `Soneta.Core.IZrodloPodzielnikaKosztow` | bazodanowe, guided-parent, iface-ref | Źródło podzielnika |  |
+| TypZrodla | `string` | tylko-odczyt | Typ źródła |  |
+| Zrodlo | `Soneta.Core.IZrodloPodzielnikaKosztow` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Źródło podzielnika |  |
 
 ## Relacje interfejsowe
 

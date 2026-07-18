@@ -5,18 +5,22 @@ Opis: Element szczegółowy pozycji budżetu (PozycjaBudzProj). Agreguje kwoty i
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaBudzProj`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Określa datę. |
-| IloscKoszt | `Soneta.Types.Amount` | bazodanowe | Ilość kosztu | Określa ilość dla kosztu. |
-| IloscPrzychod | `Soneta.Types.Amount` | bazodanowe | Ilość przychodu | Określa ilość dla przychodu. |
-| KwotaKoszt | `Soneta.Types.Currency` | bazodanowe | Kwota kosztu | Określa kwotę dla kosztu. |
-| KwotaPrzychod | `Soneta.Types.Currency` | bazodanowe | Kwota przychodu | Określa kwotę dla przychodu. |
+| Data | `Date` | bazodanowe | Data | Określa datę. |
+| IloscKoszt | `Amount` | bazodanowe | Ilość kosztu | Określa ilość dla kosztu. |
+| IloscPrzychod | `Amount` | bazodanowe | Ilość przychodu | Określa ilość dla przychodu. |
+| KwotaKoszt | `Currency` | bazodanowe | Kwota kosztu | Określa kwotę dla kosztu. |
+| KwotaPrzychod | `Currency` | bazodanowe | Kwota przychodu | Określa kwotę dla przychodu. |
 | Pozycja | `Soneta.Zadania.Budzetowanie.PozycjaBudzProj` | bazodanowe, guided-parent |  | Określna pozycję budżetu, dla której tworzony obrót. |
-| Typ | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` | bazodanowe, enum | Typ obrotu budżetu | Określa typ obrotu budżetu. |
+| Typ | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe | Typ obrotu budżetu | Określa typ obrotu budżetu. |
 
 ## Enumy
 

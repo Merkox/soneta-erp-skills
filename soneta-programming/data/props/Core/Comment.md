@@ -6,41 +6,42 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDiscussionItem`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 18
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 12
+- podlisty: 5
+- subrowy: 1
+- razem: 27
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AssignedUser | `Soneta.Business.ITaskUser` | bazodanowe, iface-ref | Powiązany użytkownik |  |
-| CalcCommentHeight | `double` |  |  |  |
+| AssignedUser | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref | Powiązany użytkownik |  |
+| CalcCommentHeight | `double` | tylko-odczyt |  |  |
 | Created | `System.DateTime` | bazodanowe | Data dodania |  |
-| Deleted | `bool` | bazodanowe |  |  |
+| Deleted | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Draft | `bool` | bazodanowe |  |  |
-| Edited | `bool` |  |  |  |
-| EstimatedHeightInHtml | `int` |  |  |  |
-| EstimatedHeightInWin | `int` |  |  |  |
+| Edited | `bool` | tylko-odczyt |  |  |
 | Host | `Soneta.Core.Conversation.ICommentDataHost` | bazodanowe, iface-ref | Host |  |
-| ItemUpdates | `Soneta.Business.SubTable<Soneta.Core.Conversation.DiscussionUpdate>` |  |  |  |
-| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` |  |  |  |
-| LikeCounter | `int` |  |  |  |
-| Likes | `Soneta.Business.SubTable<Soneta.Core.Conversation.DiscussionReaction>` |  |  |  |
+| ItemUpdates | `SubTable<Soneta.Core.Conversation.DiscussionUpdate>` | podlista |  |  |
+| LastItemUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| LastPendingUpdate | `Soneta.Core.Conversation.DiscussionUpdate` | tylko-odczyt |  |  |
+| LikeCounter | `int` | tylko-odczyt |  |  |
+| Likes | `SubTable<Soneta.Core.Conversation.DiscussionReaction>` | podlista |  |  |
 | Modified | `System.DateTime` | bazodanowe | Data edycji |  |
-| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| MyLike | `Soneta.Core.Conversation.DiscussionReaction` |  |  |  |
-| NotificationMessage | `Soneta.Business.Notifications.Models.NotificationMessage` |  |  |  |
-| Original | `Soneta.Business.Row` |  |  |  |
-| Owner | `Soneta.Business.IOwner` | bazodanowe | Właściciel |  |
-| PendingUpdate | `bool` |  |  |  |
+| MyArchive | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyFavourite | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| MyLike | `Soneta.Core.Conversation.DiscussionReaction` | tylko-odczyt |  |  |
+| NotificationMessage | `Notifications.Models.NotificationMessage` |  |  |  |
+| Original | `Row` | tylko-odczyt |  |  |
+| Owner | `IOwner` | bazodanowe | Właściciel |  |
+| PendingUpdate | `bool` | tylko-odczyt |  |  |
 | Public | `bool` | bazodanowe |  |  |
 | Simple | `bool` | bazodanowe |  |  |
-| Text | `Soneta.Core.Conversation.DiscussionText` | bazodanowe | Treść |  |
-| Text.Text | `Soneta.Business.MemoText` |  |  |  |
-| Text.TextSafe | `Soneta.Business.MemoText` |  |  |  |
-| Text.Value | `Soneta.Business.MemoText` | bazodanowe | Treść |  |
-| Type | `Soneta.Core.Conversation.CommentType` | bazodanowe, enum |  |  |
-| Value | `Soneta.Business.MemoText` |  |  |  |
+| Text | `Soneta.Core.Conversation.DiscussionText` (subrow) | bazodanowe | Treść |  |
+| Text.Text | `MemoText` | podlista |  |  |
+| Text.TextSafe | `MemoText` | podlista |  |  |
+| Text.Value | `MemoText` | bazodanowe, podlista | Treść |  |
+| Type | `Soneta.Core.Conversation.CommentType` (enum) | bazodanowe |  |  |
 
 ## Relacje interfejsowe
 

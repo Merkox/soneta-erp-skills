@@ -5,19 +5,23 @@ Opis: Ewidencja zasiłków wypłacanych pracownikowi przez innego płatnika (np.
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 2
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt |  |  |
 | Kwota | `decimal` | bazodanowe |  |  |
-| Miesiąc | `Soneta.Types.YearMonth` |  |  |  |
-| MiesiącDeklaracji | `Soneta.Types.YearMonth` |  |  |  |
+| Miesiąc | `YearMonth` |  |  |  |
+| MiesiącDeklaracji | `YearMonth` | tylko-odczyt |  |  |
 | Netto | `bool` | bazodanowe |  |  |
 | Opis | `string` | bazodanowe |  |  |
-| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Place.RodzajZasiłkuInnegoPłatnika` | bazodanowe, enum |  |  |
+| Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Place.RodzajZasiłkuInnegoPłatnika` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 

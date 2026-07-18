@@ -4,20 +4,24 @@ Opis: Konwersacja (czat) między użytkownikami systemu. Przechowuje powiązaną
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 2
+- subrowy: 0
+- razem: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Avatar | `object` |  |  |  |
+| Avatar | `object` | tylko-odczyt |  |  |
 | Dyskusja | `Soneta.Core.Conversation.Discussion` | bazodanowe | Dyskusja |  |
-| Grupowa | `bool` | bazodanowe | Konwersacja grupowa |  |
-| Last | `Soneta.Types.Date` |  |  |  |
-| Name | `string` |  |  |  |
+| Grupowa | `bool` | bazodanowe, tylko-odczyt | Konwersacja grupowa |  |
+| Last | `Date` |  |  |  |
+| Name | `string` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa |  |
-| Opis | `Soneta.Business.MemoText` | bazodanowe | Opis |  |
+| Opis | `MemoText` | bazodanowe, podlista | Opis |  |
 | OstatniWpis | `System.DateTime` | bazodanowe | Data ostatniego wpisu | Data ostatniego wpisu konwersacji |
-| Person | `Soneta.Business.GuidedRow` |  |  |  |
-| Recipients | `Soneta.Business.IOwner[]` |  |  |  |
-| Since | `string` |  |  |  |
+| Person | `GuidedRow` | tylko-odczyt |  |  |
+| Recipients | `IOwner[]` | podlista |  |  |
+| Since | `string` | tylko-odczyt |  |  |
 | ZmienionaNazwa | `bool` | bazodanowe | Zmieniona nazwa |  |

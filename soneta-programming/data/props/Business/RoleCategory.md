@@ -5,11 +5,15 @@ Opis: Kategoria grupująca role systemowe. Umożliwia organizację ról w logicz
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 1
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CategoryName | `string` | bazodanowe | Nazwa kategorii | Nazwa kategorii roli |
 | Description | `string` | bazodanowe | Opis |  |
-| RelatedRole | `Soneta.Business.SubTable<Soneta.Business.Db.CatRolRelation>` |  |  |  |
+| RelatedRole | `SubTable<Db.CatRolRelation>` | podlista |  |  |

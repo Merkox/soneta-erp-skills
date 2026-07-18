@@ -6,64 +6,68 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`, `IKodowany`, `IWebOperator`, `IDaneKontaktoweHost`, `ITowaryUlubioneHost`, `IGIODOZgodnyHost`, `IGIODOWymianaDanychHost`, `IGIODOOświadczenieHost`, `IGIODOUprawnienieHost`, `IOceniający`, `IOdpowiedzialnyZaOcenę`, `IEmailElement`, `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `ITaskUser`
 
-- pola bazodanowe: 12
-- pola kalkulowane (z klas biznesowych): 42
+- pola bazodanowe (zapisywalne): 9
+- pola kalkulowane (zapisywalne): 4
+- pola tylko-odczyt: 12
+- podlisty: 28
+- subrowy: 1
+- razem: 54
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` |  |  |  |
-| BasicDocuments | `Soneta.Business.SubTable` |  |  |  |
-| ButtonCaption | `string` |  |  |  |
-| DuplicateGroupCaption | `string` |  |  |  |
+| Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |
+| BasicDocuments | `SubTable` | podlista |  |  |
+| ButtonCaption | `string` | tylko-odczyt |  |  |
+| DuplicateGroupCaption | `string` | tylko-odczyt |  |  |
 | EMAIL | `string` |  |  |  |
-| EtapyRekrutacji | `Soneta.Business.SubTable` |  |  |  |
-| GIODOOświadczenia | `Soneta.Business.SubTable<Soneta.Core.GIODOOświadczenie>` |  |  |  |
-| GIODOUdostępnienia | `Soneta.Business.SubTable<Soneta.Core.GIODOWymianaDanych>` |  |  |  |
-| GIODOUprawnienia | `Soneta.Business.SubTable<Soneta.Core.GIODOUprawnienie>` |  |  |  |
+| EtapyRekrutacji | `SubTable` | podlista |  |  |
+| GIODOOświadczenia | `SubTable<Soneta.Core.GIODOOświadczenie>` | podlista |  |  |
+| GIODOUdostępnienia | `SubTable<Soneta.Core.GIODOWymianaDanych>` | podlista |  |  |
+| GIODOUprawnienia | `SubTable<Soneta.Core.GIODOUprawnienie>` | podlista |  |  |
 | Imie | `string` | bazodanowe |  |  |
-| IsAllowed | `bool` |  |  |  |
-| JestWizytowkaFirmy | `bool` |  |  |  |
-| Kod | `string` |  |  |  |
-| KodyKreskowe | `Soneta.Business.SubTable<Soneta.Core.KodKreskowy>` |  |  |  |
-| Kontakt | `Soneta.Core.Kontakt` | bazodanowe |  |  |
+| IsAllowed | `bool` | tylko-odczyt |  |  |
+| JestWizytowkaFirmy | `bool` | tylko-odczyt |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KodyKreskowe | `SubTable<Soneta.Core.KodKreskowy>` | podlista |  |  |
+| Kontakt | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |
 | Kontakt.EMAIL | `string` | bazodanowe |  | Adres poczty elektronicznej |
 | Kontakt.SkrytkaPocztowa | `string` | bazodanowe |  | Skrytka pocztowa |
 | Kontakt.Skype | `string` |  |  |  |
 | Kontakt.TelefonKomorkowy | `string` | bazodanowe |  | Numer telefonu komórkowego |
 | Kontakt.WWW | `string` | bazodanowe |  | Adres strony internetowej |
-| Kontakty | `Soneta.Business.SubTable<Soneta.Core.DaneKontaktowe>` |  |  |  |
+| Kontakty | `SubTable<Soneta.Core.DaneKontaktowe>` | podlista |  |  |
 | Kontrahent | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref |  |  |
 | KontrahentKontekstowy | `Soneta.Core.IKontrahent` | iface-ref |  |  |
-| KontrolaAktywna | `bool` |  |  |  |
-| Leady | `Soneta.Business.SubTable<Soneta.CRM.Lead>` |  |  |  |
-| MailTo | `string` |  |  |  |
-| Nazwa | `string` |  |  |  |
+| KontrolaAktywna | `bool` | tylko-odczyt |  |  |
+| Leady | `SubTable<Soneta.CRM.Lead>` | podlista |  |  |
+| MailTo | `string` | tylko-odczyt |  |  |
+| Nazwa | `string` | tylko-odczyt |  |  |
 | Nazwisko | `string` | bazodanowe |  |  |
 | Nieaktualny | `bool` | bazodanowe |  |  |
-| Oceniający | `Soneta.Business.SubTable` |  |  |  |
-| OfertyPracy | `Soneta.Business.SubTable` |  |  |  |
-| OstatniKontaktWaznaData | `Soneta.CRM.Osoba_Kontrahent.KontaktWazneDaty` |  |  |  |
-| PotwierdzeniaGIODO | `Soneta.Business.SubTable<Soneta.Core.GIODOZgodny>` |  |  |  |
-| PowiazaniKontrahenci | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` |  |  |  |
-| PowiązaniaStrOrg | `Soneta.Business.SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` |  |  |  |
-| PoświadczeniaOdbioru | `Soneta.Business.SubTable<Soneta.Core.PoświadczenieOdbioru>` |  |  |  |
-| Projekty | `Soneta.Business.SubTable` |  |  |  |
-| Rekrutacje | `Soneta.Business.SubTable` |  |  |  |
+| Oceniający | `SubTable` | podlista |  |  |
+| OfertyPracy | `SubTable` | podlista |  |  |
+| OstatniKontaktWaznaData | `Soneta.CRM.Osoba_Kontrahent.KontaktWazneDaty` | tylko-odczyt |  |  |
+| PotwierdzeniaGIODO | `SubTable<Soneta.Core.GIODOZgodny>` | podlista |  |  |
+| PowiazaniKontrahenci | `SubTable<Soneta.CRM.Osoba_Kontrahent.OsobaKontrahent>` | podlista |  |  |
+| PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
+| PoświadczeniaOdbioru | `SubTable<Soneta.Core.PoświadczenieOdbioru>` | podlista |  |  |
+| Projekty | `SubTable` | podlista |  |  |
+| Rekrutacje | `SubTable` | podlista |  |  |
 | Stanowisko | `string` | bazodanowe |  |  |
-| TaskList | `Soneta.Business.SubTable` |  |  |  |
-| TowaryUlubione | `Soneta.Business.SubTable` |  |  |  |
-| Transakcje | `Soneta.Business.SubTable<Soneta.CRM.Transakcja>` |  |  |  |
-| TransakcjeOsoby | `Soneta.Business.SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` |  |  |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| Wakaty | `Soneta.Business.SubTable` |  |  |  |
-| WazneDaty | `System.Collections.Generic.IEnumerable<Soneta.CRM.Osoba_Kontrahent.KontaktWazneDaty>` |  |  |  |
-| WiadomosciPowiazane | `Soneta.Business.SubTable<Soneta.CRM.ElementEmail>` |  |  |  |
-| Wizytowka | `bool` | bazodanowe | Wizytówka | Określa czy dane osoby są wizytówką. |
-| WizytowkaFirmy | `Soneta.CRM.Wizytowki.WizytowkaFirmy` |  |  |  |
-| Wizytowki | `Soneta.Business.SubTable<Soneta.CRM.Wizytowki.WizytowkaFirmy>` |  |  |  |
-| Zadania | `Soneta.Business.SubTable` |  |  |  |
-| ZadaniaOsoby | `Soneta.Business.SubTable` |  |  |  |
-| ZgloszSygnalisty | `Soneta.Business.SubTable` |  |  |  |
+| TaskList | `SubTable` | podlista |  |  |
+| TowaryUlubione | `SubTable` | podlista |  |  |
+| Transakcje | `SubTable<Soneta.CRM.Transakcja>` | podlista |  |  |
+| TransakcjeOsoby | `SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` | podlista |  |  |
+| Uwagi | `MemoText` | bazodanowe, podlista |  |  |
+| Wakaty | `SubTable` | podlista |  |  |
+| WazneDaty | `System.Collections.Generic.IEnumerable<Soneta.CRM.Osoba_Kontrahent.KontaktWazneDaty>` | podlista |  |  |
+| WiadomosciPowiazane | `SubTable<Soneta.CRM.ElementEmail>` | podlista |  |  |
+| Wizytowka | `bool` | bazodanowe, tylko-odczyt | Wizytówka | Określa czy dane osoby są wizytówką. |
+| WizytowkaFirmy | `Soneta.CRM.Wizytowki.WizytowkaFirmy` | tylko-odczyt |  |  |
+| Wizytowki | `SubTable<Soneta.CRM.Wizytowki.WizytowkaFirmy>` | podlista |  |  |
+| Zadania | `SubTable` | podlista |  |  |
+| ZadaniaOsoby | `SubTable` | podlista |  |  |
+| ZgloszSygnalisty | `SubTable` | podlista |  |  |
 | ZgodnoscGIODOPotwierdzona | `bool` |  |  |  |
 
 ## Relacje interfejsowe

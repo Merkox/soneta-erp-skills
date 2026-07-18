@@ -5,15 +5,19 @@ Opis: Pojedynczy element (pole) w definicji zestawu pól. Określa ścieżkę do
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 4
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 5
+- podlisty: 0
+- subrowy: 0
+- razem: 13
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefaultLabel | `string` |  |  |  |
-| FeatureDefinition | `Soneta.Business.FeatureDefinition` |  |  |  |
-| FeatureSetDefinition | `Soneta.Business.FeatureSetDefinition` | bazodanowe | Definicja zestawu pól | Definicja zestawu pól |
-| IsFeatureItem | `bool` |  |  |  |
+| DefaultLabel | `string` | tylko-odczyt |  |  |
+| FeatureDefinition | `FeatureDefinition` | tylko-odczyt |  |  |
+| FeatureSetDefinition | `FeatureSetDefinition` | bazodanowe, tylko-odczyt | Definicja zestawu pól | Definicja zestawu pól |
+| IsFeatureItem | `bool` | tylko-odczyt |  |  |
 | ItemCategory | `string` | bazodanowe | Kategoria | Karegoria/grupa, w której umieszczane jest pole (wartość pusta oznacza standardową) |
 | ItemHeight | `int` | bazodanowe | Wysokość | Wysokość pola wyrażona w znakach (wartość 0 oznacza standardową) |
 | ItemLabel | `string` | bazodanowe | Etykieta | Etykieta wyświetlana przed polem (wartość pusta oznacza standardową) |
@@ -22,4 +26,4 @@ Guided: root
 | ItemWidth | `int` | bazodanowe | Szerokość | Szerokość pola wyrażona w znakach (wartość 0 oznacza standardową) |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa elementu w zestawie cech |
 | NextToPrevious | `bool` | bazodanowe | Obok | Umieszcza pole obok poprzedniego |
-| Path | `string` | bazodanowe | Ścieżka do pola | Określa ścieżkę do danych prezentowanych na formularzu |
+| Path | `string` | bazodanowe, tylko-odczyt | Ścieżka do pola | Określa ścieżkę do danych prezentowanych na formularzu |

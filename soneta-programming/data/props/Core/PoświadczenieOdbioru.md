@@ -5,21 +5,25 @@ Opis: Element szczegółowy hosta poświadczenia odbioru (IPoświadczenieOdbioru
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `IPoświadczenieOdbioruHost`
 
-- pola bazodanowe: 7
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 0
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 9
+- podlisty: 1
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Data | Data poświadczenia |
-| Definicja | `Soneta.Core.DefinicjaPoświadczeniaOdbioru` | bazodanowe | Definicja | Definicja poświadczenia odbioru |
-| Dokument | `Soneta.Core.IPoświadczenieOdbioruHost` | bazodanowe, guided-parent, iface-ref |  | Dokument z poświadczeniem odbioru |
-| IsFullView | `bool` |  |  |  |
-| Podmiot | `Soneta.Business.IWebOperator` | bazodanowe, iface-ref |  | Podmiot poświadczający odbiór |
-| Poswiadczenie | `bool` | bazodanowe | Poświadczenie | Poswiadczenie odbioru |
-| Stan | `Soneta.Core.StanyPoświadczeniaOdbioru` | bazodanowe, enum |  |  |
-| Tresc | `Soneta.Business.MemoText` | bazodanowe | Oświadczenie | Treść oświadczenia |
-| TreśćPoświadczenia | `string` |  |  |  |
-| UprawnionyUżytkownik | `bool` |  |  |  |
+| Data | `Date` | bazodanowe, tylko-odczyt | Data | Data poświadczenia |
+| Definicja | `Soneta.Core.DefinicjaPoświadczeniaOdbioru` | bazodanowe, tylko-odczyt | Definicja | Definicja poświadczenia odbioru |
+| Dokument | `Soneta.Core.IPoświadczenieOdbioruHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  | Dokument z poświadczeniem odbioru |
+| IsFullView | `bool` | tylko-odczyt |  |  |
+| Podmiot | `IWebOperator` | bazodanowe, tylko-odczyt, iface-ref |  | Podmiot poświadczający odbiór |
+| Poswiadczenie | `bool` | bazodanowe, tylko-odczyt | Poświadczenie | Poswiadczenie odbioru |
+| Stan | `Soneta.Core.StanyPoświadczeniaOdbioru` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Tresc | `MemoText` | bazodanowe, podlista | Oświadczenie | Treść oświadczenia |
+| TreśćPoświadczenia | `string` | tylko-odczyt |  |  |
+| UprawnionyUżytkownik | `bool` | tylko-odczyt |  |  |
 
 ## Relacje interfejsowe
 

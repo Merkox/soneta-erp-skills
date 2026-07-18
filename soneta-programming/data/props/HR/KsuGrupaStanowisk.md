@@ -5,10 +5,14 @@ Opis: Tabela definiuje grupy stanowisk w ramach słownika  Katalogu Szkoleń i U
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 0
+- subrowy: 0
+- razem: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinicjaInfo | `Soneta.HR.ZKL.Slowniki.KSU.KsuDefinicjaInfo` | bazodanowe | Definicja informacji KSU |  |
+| DefinicjaInfo | `Soneta.HR.ZKL.Slowniki.KSU.KsuDefinicjaInfo` | bazodanowe, tylko-odczyt | Definicja informacji KSU |  |
 | GrupaStanowisk | `Soneta.HR.GrupaStanowisk` | bazodanowe | Grupa stanowisk |  |

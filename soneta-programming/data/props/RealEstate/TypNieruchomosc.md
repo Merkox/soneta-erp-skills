@@ -6,46 +6,50 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 13
+- pola bazodanowe (zapisywalne): 17
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 8
+- podlisty: 7
+- subrowy: 2
+- razem: 35
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytm | `bool` |  |  |  |
-| AlgorytmNieruchomosci | `Soneta.RealEstate.AlgorytmNieruchomosci` | bazodanowe |  | Algorytm dla typu nieruchomości |
+| AlgorytmNieruchomosci | `Soneta.RealEstate.AlgorytmNieruchomosci` (subrow) | bazodanowe |  | Algorytm dla typu nieruchomości |
 | AlgorytmNieruchomosci.Aktywny | `bool` | bazodanowe |  |  |
-| AlgorytmNieruchomosci.Kod | `Soneta.Business.MemoText` | bazodanowe |  |  |
-| ClassName | `string` |  |  |  |
-| DefPageXml | `Soneta.Business.MemoText` | bazodanowe | Definicja zakładki użytkownika. |  |
-| DefaultFileName | `string` |  |  |  |
-| DefaultIdentifier | `string` |  |  |  |
-| DefaultProject | `Soneta.Business.Compiler.RuntimeProject` |  |  |  |
-| DefinedType | `System.Type` |  |  |  |
-| Documents | `System.Collections.Generic.IEnumerable<Soneta.Business.Compiler.IRuntimeDocument>` |  |  |  |
+| AlgorytmNieruchomosci.Kod | `MemoText` | bazodanowe, podlista |  |  |
+| ClassName | `string` | tylko-odczyt |  |  |
+| DefPageXml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika. |  |
+| DefaultFileName | `string` | tylko-odczyt |  |  |
+| DefaultIdentifier | `string` | tylko-odczyt |  |  |
+| DefaultProject | `Compiler.RuntimeProject` | tylko-odczyt |  |  |
+| DefinedType | `System.Type` | tylko-odczyt |  |  |
+| Documents | `System.Collections.Generic.IEnumerable<Compiler.IRuntimeDocument>` | podlista |  |  |
 | DomyslnaDefinicja | `Soneta.Zadania.DefZadania` | bazodanowe |  | Domyślna definicja zdarzenia |
 | Domyslny | `bool` | bazodanowe | Domyślna | Określa, że jest to domyślny typ nieruchomości. |
-| Formularz | `Soneta.RealEstate.Enums.RealEstateFormType` | bazodanowe, enum | Rodzaj formularza | Określa sposób wyświetlania formularza |
+| Formularz | `Soneta.RealEstate.Enums.RealEstateFormType` (enum) | bazodanowe | Rodzaj formularza | Określa sposób wyświetlania formularza |
 | JednostkaOdczytu | `string` | bazodanowe | Jednostka odczytu | Jednostka odczytu pomiaru licznika |
-| Kod | `string` |  |  |  |
-| KodAlgorytmu | `Soneta.Business.MemoText` |  |  |  |
+| Kod | `string` | tylko-odczyt |  |  |
+| KodAlgorytmu | `MemoText` | podlista |  |  |
 | LenIdent | `int` | bazodanowe |  | Długość kodu identyfikatora. |
-| Namespace | `object` |  |  |  |
+| Namespace | `object` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa rodzaju nieruchomości. |
 | NazwaZakladkiUz | `string` | bazodanowe | Nazwa zakładki użytkownika |  |
 | Precyzja | `int` | bazodanowe | Precyzja zaokrąglenia ilości. |  |
 | PrefixIdent | `string` | bazodanowe | Prefix identyfilatora | Prefix identyfikatora nieruchomości. |
 | PrzeniesOdczyt | `bool` | bazodanowe | Przeniesienie odczytu | Automatyczne przenoszenie odczytu do powiązanych umów |
-| Rodzaj | `Soneta.RealEstate.Enums.RealEstateKind` | bazodanowe, enum | Rodzaj nieruchomości |  |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| Rodzaj | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt | Rodzaj nieruchomości |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| Stany | `Soneta.Business.LpSubTable<Soneta.RealEstate.Models.Database.Config.StanNieruchomosci>` |  |  |  |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| Stany | `LpSubTable<Soneta.RealEstate.Models.Database.Config.StanNieruchomosci>` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol rodzaju nieruchomości. |
 | Udostepnione | `bool` | bazodanowe | Pomieszczenie udostępnione do rezerwacji. |  |
 | UkryjWStrukturze | `bool` | bazodanowe | Obiekt niewidoczny w strukturze nieruchomości |  |
-| Xml | `Soneta.Business.MemoText` |  |  |  |
+| Xml | `MemoText` | podlista |  |  |
 
 ## Enumy
 

@@ -4,28 +4,32 @@ Tytuł: Rozliczenia podatkowe bazy danych
 Opis: Zbiorcze rozliczenie podatkowe bazy danych klienta za dany okres. Zawiera kwoty VAT, CIT, PIT, ZUS oraz terminy płatności i numery rachunków.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 20
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 19
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DeklaracjaDRAFEP | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaDRAFundusze | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaDRARazemDoZaplaty | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaDRASpoleczne | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaDRATerminPlatnosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| DeklaracjaDRAZdrowotne | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaPIT4RKwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaPIT4RTerminPlatnosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| DeklaracjaPIT8ARKwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaPIT8ARTerminPlatnosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| DeklaracjaVATKwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaVATKwotaDoPrzeniesienia | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaVATKwotaZwrotu | `Soneta.Types.Currency` | bazodanowe |  |  |
-| DeklaracjaVATTerminPlatnosci | `Soneta.Types.Date` | bazodanowe |  |  |
-| DeklaracjaVATTerminZwrotu | `Soneta.Types.Date` | bazodanowe |  |  |
+| DeklaracjaDRAFEP | `Currency` | bazodanowe |  |  |
+| DeklaracjaDRAFundusze | `Currency` | bazodanowe |  |  |
+| DeklaracjaDRARazemDoZaplaty | `Currency` | bazodanowe |  |  |
+| DeklaracjaDRASpoleczne | `Currency` | bazodanowe |  |  |
+| DeklaracjaDRATerminPlatnosci | `Date` | bazodanowe |  |  |
+| DeklaracjaDRAZdrowotne | `Currency` | bazodanowe |  |  |
+| DeklaracjaPIT4RKwota | `Currency` | bazodanowe |  |  |
+| DeklaracjaPIT4RTerminPlatnosci | `Date` | bazodanowe |  |  |
+| DeklaracjaPIT8ARKwota | `Currency` | bazodanowe |  |  |
+| DeklaracjaPIT8ARTerminPlatnosci | `Date` | bazodanowe |  |  |
+| DeklaracjaVATKwota | `Currency` | bazodanowe |  |  |
+| DeklaracjaVATKwotaDoPrzeniesienia | `Currency` | bazodanowe |  |  |
+| DeklaracjaVATKwotaZwrotu | `Currency` | bazodanowe |  |  |
+| DeklaracjaVATTerminPlatnosci | `Date` | bazodanowe |  |  |
+| DeklaracjaVATTerminZwrotu | `Date` | bazodanowe |  |  |
 | IndywidualnyRachunekZUS | `string` | bazodanowe |  |  |
 | MikrorachunekPodatkowy | `string` | bazodanowe |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe | Okres |  |
-| ZaliczkaCITKwota | `Soneta.Types.Currency` | bazodanowe |  |  |
-| ZaliczkaCITTerminPlatnosci | `Soneta.Types.Date` | bazodanowe |  |  |
+| Okres | `FromTo` | bazodanowe, podlista | Okres |  |
+| ZaliczkaCITKwota | `Currency` | bazodanowe |  |  |
+| ZaliczkaCITTerminPlatnosci | `Date` | bazodanowe |  |  |

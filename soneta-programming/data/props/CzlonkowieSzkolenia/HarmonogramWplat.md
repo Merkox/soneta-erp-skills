@@ -4,16 +4,20 @@ Tytuł: Harmonogramy wpłat
 Opis: Harmonogramy wpłat ratalnych za szkolenia i składki członkowskie. Definiują terminy, kwoty i typy poszczególnych rat płatności powiązanych ze zgłoszeniami uczestników lub grupami szkoleniowymi.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 6
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` | bazodanowe | Termin wpłaty | Termin wpłaty. |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  | Kwota wpłaty. |
+| Data | `Date` | bazodanowe | Termin wpłaty | Termin wpłaty. |
+| Kwota | `Currency` | bazodanowe |  | Kwota wpłaty. |
 | Platnik | `Soneta.CRM.Kontrahent` | bazodanowe | Płatnik |  |
 | Proporcja | `double` | bazodanowe |  |  |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypWplaty` | bazodanowe, enum |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypWplaty` (enum) | bazodanowe |  |  |
 | Zrodlo | `Soneta.CzlonkowieSzkolenia.IZrodloHarmWplaty` | bazodanowe, iface-ref |  |  |
 
 ## Relacje interfejsowe

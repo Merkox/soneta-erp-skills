@@ -5,14 +5,18 @@ Opis: Element szczegółowy oddziału firmy (OddzialFirmy). Przechowuje historyc
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 25
-- pola kalkulowane (z klas biznesowych): 14
+- pola bazodanowe (zapisywalne): 22
+- pola kalkulowane (zapisywalne): 5
+- pola tylko-odczyt: 11
+- podlisty: 0
+- subrowy: 1
+- razem: 39
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Adres | `Soneta.Core.Adres` | bazodanowe |  |  |
-| Adres.AdresExt | `Soneta.Core.AdresExt` |  |  |  |
-| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` |  |  |  |
+| Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |
+| Adres.AdresExt | `Soneta.Core.AdresExt` | tylko-odczyt |  |  |
+| Adres.AdresRozszerzony | `Soneta.Core.AdresRozszerzony` | tylko-odczyt |  |  |
 | Adres.Faks | `string` | bazodanowe |  | Numer faksu |
 | Adres.GLN | `string` |  |  |  |
 | Adres.Gmina | `string` | bazodanowe |  | Gmina |
@@ -21,8 +25,8 @@ Guided: root
 | Adres.KodPocztowy | `int` | bazodanowe |  | Kod pocztowy |
 | Adres.KodPocztowyS | `string` |  |  |  |
 | Adres.Kraj | `string` | bazodanowe |  | Kraj |
-| Adres.Linia1 | `string` |  |  |  |
-| Adres.Linia2 | `string` |  |  |  |
+| Adres.Linia1 | `string` | tylko-odczyt |  |  |
+| Adres.Linia2 | `string` | tylko-odczyt |  |  |
 | Adres.Miejscowosc | `string` | bazodanowe | Miejscowość | Miejscowość |
 | Adres.NietypowaLokalizacja | `string` | bazodanowe |  | Nietypowe miejsce lokalizacji |
 | Adres.NrDomu | `string` | bazodanowe |  | Numer domu (bloku) |
@@ -32,23 +36,23 @@ Guided: root
 | Adres.Powiat | `string` | bazodanowe |  | Powiat |
 | Adres.Telefon | `string` | bazodanowe |  | Numer telefonu |
 | Adres.Ulica | `string` | bazodanowe |  | Nazwa ulicy (alei, osiedla) |
-| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` | bazodanowe, enum |  | Województwo |
+| Adres.Wojewodztwo | `Soneta.Core.Wojewodztwa` (enum) | bazodanowe |  | Województwo |
 | Adres.ZagranicznyKodPocztowy | `string` | bazodanowe |  | Zagraniczny kod pocztowy |
-| BDO | `string` |  |  |  |
-| EORI | `string` |  |  |  |
+| BDO | `string` | tylko-odczyt |  |  |
+| EORI | `string` | tylko-odczyt |  |  |
 | EuVAT | `string` | bazodanowe | EU VAT |  |
 | NIP | `string` | bazodanowe |  |  |
-| Nazwa | `string` | bazodanowe |  |  |
+| Nazwa | `string` | bazodanowe, tylko-odczyt |  |  |
 | NazwaFormatowana | `string` |  |  |  |
-| NazwaPierwszaLinia | `string` |  |  |  |
+| NazwaPierwszaLinia | `string` | tylko-odczyt |  |  |
 | NazwaSkrocona | `string` | bazodanowe |  |  |
 | NumerLicencji | `string` | bazodanowe | Numer licencji oddziału | Numer licencji do weryfikacji danych oddziału. |
-| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe |  |  |
-| PKD | `string` |  |  |  |
+| Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe, tylko-odczyt |  |  |
+| PKD | `string` | tylko-odczyt |  |  |
 | REGON | `string` | bazodanowe |  |  |
-| StatusLicencji | `string` |  |  |  |
+| StatusLicencji | `string` | tylko-odczyt |  |  |
 | SufiksNazwy | `string` | bazodanowe |  |  |
-| Termin | `Soneta.Types.Date` | bazodanowe |  |  |
+| Termin | `Date` | bazodanowe |  |  |
 
 ## Enumy
 

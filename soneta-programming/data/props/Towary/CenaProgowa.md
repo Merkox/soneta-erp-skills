@@ -5,18 +5,22 @@ Opis: Element szczegółowy towaru (Towar). Definiuje cenę progową uzależnion
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe: 10
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 8
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Brutto | `Soneta.Types.DoubleCy` | bazodanowe |  | Kwota brutto ceny. |
-| Definicja | `Soneta.Towary.DefinicjaCeny` | bazodanowe | Definicja ceny | Definicja ceny określająca sposób wyliczania ceny. |
+| Brutto | `DoubleCy` | bazodanowe |  | Kwota brutto ceny. |
+| Definicja | `Soneta.Towary.DefinicjaCeny` | bazodanowe, tylko-odczyt | Definicja ceny | Definicja ceny określająca sposób wyliczania ceny. |
 | Jednostkowa | `bool` | bazodanowe | Naliczaj dla jednostki | Naliczaj dla jednostki. |
 | NaliczajWielokrotnie | `bool` | bazodanowe |  | Naliczaj wielokrotnie. |
-| Netto | `Soneta.Types.DoubleCy` | bazodanowe |  | Kwota netto ceny. |
+| Netto | `DoubleCy` | bazodanowe |  | Kwota netto ceny. |
 | Polacz | `bool` | bazodanowe | Połącz | Wymusza wzajemne przeliczanie ceny netto i brutto. |
 | Prog | `Soneta.Towary.Quantity` | bazodanowe | Próg | Próg ilościowy od jakiego obowiązuje cena. |
 | StandardowaIlosc | `Soneta.Towary.Quantity` | bazodanowe | Standardowa ilość | Standardowa ilość i jednostka dla ceny. |
-| Towar | `Soneta.Towary.Towar` | bazodanowe, guided-parent |  | Towar, któremu przyporządkowana jest cena progowa. |
+| Towar | `Soneta.Towary.Towar` | bazodanowe, tylko-odczyt, guided-parent |  | Towar, któremu przyporządkowana jest cena progowa. |
 | WszystkiePozycje | `bool` | bazodanowe | Zliczaj ze wszystkich pozycji | Zliczaj ze wszystkich pozycji. |

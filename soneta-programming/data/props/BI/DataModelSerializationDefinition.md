@@ -5,12 +5,16 @@ Opis: Definicja serializatora powiązanego bezpośrednio z modelem danych BI. Ok
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 1
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DBItemsText | `Soneta.Business.MemoText` | bazodanowe | Bazy danych |  |
+| DBItemsText | `MemoText` | bazodanowe, podlista | Bazy danych |  |
 | Model | `Soneta.BI.DataModel` | bazodanowe | Model danych |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | SerializationTable | `Soneta.BI.TableDefinition` | bazodanowe | Definicja tabeli |  |

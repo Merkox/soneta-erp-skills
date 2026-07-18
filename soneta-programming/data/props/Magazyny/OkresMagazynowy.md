@@ -5,13 +5,17 @@ Opis: Okres magazynowy definiujący przedział czasowy, w ramach którego ewiden
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 2
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 1
+- subrowy: 0
+- razem: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Info | `string` |  |  |  |
-| Okres | `Soneta.Types.FromTo` | bazodanowe |  | Określa okres czasu, dla którego jest aktualny ten okres magazynowy. |
-| Poprzedni | `Soneta.Magazyny.OkresMagazynowy` |  |  |  |
+| Info | `string` | tylko-odczyt |  |  |
+| Okres | `FromTo` | bazodanowe, podlista |  | Określa okres czasu, dla którego jest aktualny ten okres magazynowy. |
+| Poprzedni | `Soneta.Magazyny.OkresMagazynowy` | tylko-odczyt |  |  |
 | Zamkniety | `bool` | bazodanowe | Zamknięty | Określa, czy okres magazynowy jest zamknięty bez prawa do jego modyfikacji. |
-| ZamkniętyText | `string` |  |  | Informacja o tym, czy okres jest zamknięty w postaci tekstowej. |
+| ZamkniętyText | `string` | tylko-odczyt |  | Informacja o tym, czy okres jest zamknięty w postaci tekstowej. |

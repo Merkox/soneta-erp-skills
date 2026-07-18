@@ -5,30 +5,34 @@ Opis: Rejestr zdarzeń związanych z nieruchomościami, takich jak przeglądy, o
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe: 22
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 20
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 1
+- podlisty: 1
+- subrowy: 0
+- razem: 22
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataPowstania | `Soneta.Types.Date` | bazodanowe | Data powstania szkody | Data powstania szkody |
-| DataUjawnienia | `Soneta.Types.Date` | bazodanowe | Data ujawnienia szkody | Data ujawnienia szkody |
-| DataUsuniecia | `Soneta.Types.Date` | bazodanowe | Data usunięcia szkody | Data usunięcia szkody |
-| DataUtworzenia | `Soneta.Types.Date` | bazodanowe | Data utworzenia | Data utworzenia |
-| DataZgloszenia | `Soneta.Types.Date` | bazodanowe | Data zgłoszenia szkody | Data zgłoszenia szkody |
-| Decyzja | `Soneta.Zadania.Decision` | bazodanowe, enum | Decyzja |  |
+| DataPowstania | `Date` | bazodanowe | Data powstania szkody | Data powstania szkody |
+| DataUjawnienia | `Date` | bazodanowe | Data ujawnienia szkody | Data ujawnienia szkody |
+| DataUsuniecia | `Date` | bazodanowe | Data usunięcia szkody | Data usunięcia szkody |
+| DataUtworzenia | `Date` | bazodanowe | Data utworzenia | Data utworzenia |
+| DataZgloszenia | `Date` | bazodanowe | Data zgłoszenia szkody | Data zgłoszenia szkody |
+| Decyzja | `Soneta.Zadania.Decision` (enum) | bazodanowe | Decyzja |  |
 | DeklaracjaPodatkowaRozpoczecie | `string` | bazodanowe | Numer deklaracji podatkowej przy rozpoczęciu |  |
 | DeklaracjaPodatkowaZakonczenie | `string` | bazodanowe | Numer deklaracji podatkowej przy zakończeniu |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe | Kwota | Kwota |
+| Kwota | `Currency` | bazodanowe | Kwota | Kwota |
 | Numer | `string` | bazodanowe | Numer |  |
 | Odczyt | `double` | bazodanowe | Odczyt | Odczyt pomiaru licznika |
-| Oplacono | `Soneta.Zadania.PolicyPayments` | bazodanowe, enum | Opłacono |  |
+| Oplacono | `Soneta.Zadania.PolicyPayments` (enum) | bazodanowe | Opłacono |  |
 | PowierzchniaUzytkowa | `double` | bazodanowe | Powierzchnia użytkowa |  |
 | PrzedmiotNajmu | `string` | bazodanowe | Przedmiot najmu |  |
 | Rozliczenie | `Soneta.RealEstate.Models.Database.RozliczenieMediow` | bazodanowe | Rozliczenie |  |
 | Sprawca | `Soneta.CRM.Kontrahent` | bazodanowe | Sprawca |  |
-| Uwagi | `Soneta.Business.MemoText` | bazodanowe | Uwagi |  |
-| Wartosc | `Soneta.Types.Currency` | bazodanowe | Wartość |  |
-| Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe | Zadanie | Zadanie które jest efektem realizacji tego przeglądu |
+| Uwagi | `MemoText` | bazodanowe, podlista | Uwagi |  |
+| Wartosc | `Currency` | bazodanowe | Wartość |  |
+| Zadanie | `Soneta.Zadania.Zadanie` | bazodanowe, tylko-odczyt | Zadanie | Zadanie które jest efektem realizacji tego przeglądu |
 | Zglaszajacy | `Soneta.CRM.Kontrahent` | bazodanowe | Zgłaszający |  |
 | ZglaszajacyOsoba | `Soneta.CRM.KontaktOsoba` | bazodanowe | Zgłaszający |  |
 | Zgloszono | `bool` | bazodanowe | Zgłoszono |  |

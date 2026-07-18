@@ -5,34 +5,38 @@ Opis: Definicja harmonogramu automatycznego wykonywania zadań. Określa nazwę,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe: 36
-- pola kalkulowane (z klas biznesowych): 44
+- pola bazodanowe (zapisywalne): 32
+- pola kalkulowane (zapisywalne): 27
+- pola tylko-odczyt: 14
+- podlisty: 5
+- subrowy: 2
+- razem: 80
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AutoActionName | `Soneta.Business.AutoActionAttribute.AutoActionBase` | bazodanowe | Nazwa metody automatycznej | Określa nazwę metody automatycznej wywoływanej podczas przetwarzania automatycznych akcji harmonogramu |
+| AutoActionName | `AutoActionAttribute.AutoActionBase` | bazodanowe | Nazwa metody automatycznej | Określa nazwę metody automatycznej wywoływanej podczas przetwarzania automatycznych akcji harmonogramu |
 | CalcFirstInvokeTimeExpression | `string` |  | Pierwsze wywołanie | Wyrażenie określające pierwsze wywołanie harmonogramu zadań. |
-| Code | `Soneta.Business.MemoText` | bazodanowe | Kod algorytmu | Kod algorytmu kalkulatora definicji cyklu |
-| CycleDefinition | `Soneta.Core.DefinicjaCyklu` | bazodanowe | Definicja cyklu | Określa definicję cyklu |
-| CycleDefinition.AlgorytmCykluInstance | `Soneta.Core.IAlgorytmCyklu` |  |  | Instancja skompilowanego kalkulatora. |
-| CycleDefinition.Czas | `Soneta.Types.Time` | bazodanowe |  | Określa czas wystąpienia cyklu. |
+| Code | `MemoText` | bazodanowe, podlista | Kod algorytmu | Kod algorytmu kalkulatora definicji cyklu |
+| CycleDefinition | `Soneta.Core.DefinicjaCyklu` (subrow) | bazodanowe | Definicja cyklu | Określa definicję cyklu |
+| CycleDefinition.AlgorytmCykluInstance | `Soneta.Core.IAlgorytmCyklu` | tylko-odczyt |  | Instancja skompilowanego kalkulatora. |
+| CycleDefinition.Czas | `Time` | bazodanowe |  | Określa czas wystąpienia cyklu. |
 | CycleDefinition.Czerwiec | `bool` |  |  | Czerwiec - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Czwartek | `bool` |  |  | Czwartek - dzień tygodnia wystąpienia cyklu tygodniowego. |
 | CycleDefinition.DataKoniecCyklu | `bool` | bazodanowe |  | Data wystąpienia w ostatnim miesiącu/roku okresu |
-| CycleDefinition.Dzien | `Soneta.Types.Date` |  |  | Data rozpoczęcia wykonywania cyklu. |
-| CycleDefinition.DzienCzas | `System.DateTime` |  |  |  |
+| CycleDefinition.Dzien | `Date` |  |  | Data rozpoczęcia wykonywania cyklu. |
+| CycleDefinition.DzienCzas | `System.DateTime` | tylko-odczyt |  |  |
 | CycleDefinition.DzienMiesiaca | `int` |  |  | Dzień w miesiącu wystąpienia cyklu miesięcznego lub rocznego. |
 | CycleDefinition.DzienTygodnia | `Soneta.Core.DefinicjaCykluDzienTygodnia` |  |  | W zaawansowanej wersji dzień tygodnia. |
 | CycleDefinition.Godzina | `int` |  |  | Godzina wystąpienia cyklu. |
-| CycleDefinition.Godziny | `string[]` |  |  | Wybrane godziny w trybie godzinowym. |
+| CycleDefinition.Godziny | `string[]` | podlista |  | Wybrane godziny w trybie godzinowym. |
 | CycleDefinition.Grudzien | `bool` |  |  | Grudzień - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Interwal | `int` | bazodanowe |  |  |
-| CycleDefinition.IsAdvanced | `bool` |  |  |  |
-| CycleDefinition.IsMultiSelect | `bool` |  |  |  |
-| CycleDefinition.IsSingleSelect | `bool` |  |  |  |
-| CycleDefinition.JestAlgorytm | `bool` |  |  |  |
-| CycleDefinition.JestOpcjaZaawansowana | `bool` |  |  |  |
-| CycleDefinition.JestTermin | `bool` |  |  |  |
+| CycleDefinition.IsAdvanced | `bool` | tylko-odczyt |  |  |
+| CycleDefinition.IsMultiSelect | `bool` | tylko-odczyt |  |  |
+| CycleDefinition.IsSingleSelect | `bool` | tylko-odczyt |  |  |
+| CycleDefinition.JestAlgorytm | `bool` | tylko-odczyt |  |  |
+| CycleDefinition.JestOpcjaZaawansowana | `bool` | tylko-odczyt |  |  |
+| CycleDefinition.JestTermin | `bool` | tylko-odczyt |  |  |
 | CycleDefinition.KodAlgorytmu | `string` |  |  | Kod algorytmu wyliczania wystąpień cyklu. |
 | CycleDefinition.Krotnosc | `int` | bazodanowe |  | Określa ile razy cykl będzie powtórzony. |
 | CycleDefinition.Kwiecien | `bool` |  |  | Kwiecień - miesiąc wystąpienia cyklu tygodniowego. |
@@ -41,21 +45,21 @@ Guided: root
 | CycleDefinition.Luty | `bool` |  |  | Luty - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Maj | `bool` |  |  | Maj - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Marzec | `bool` |  |  | Marzec - miesiąc wystąpienia cyklu tygodniowego. |
-| CycleDefinition.MiesiacRoku | `Soneta.Core.DefinicjaCykluMiesiacRoku` | enum |  | W zaawansowanej wersji miesiąc w roku. |
+| CycleDefinition.MiesiacRoku | `Soneta.Core.DefinicjaCykluMiesiacRoku` (enum) |  |  | W zaawansowanej wersji miesiąc w roku. |
 | CycleDefinition.MinutaGodziny | `int` |  |  | Minuta w godzinie wystąpienia cyklu godzinowego. |
 | CycleDefinition.Niedziela | `bool` |  |  | Niedziela - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| CycleDefinition.OkresCyklu | `Soneta.Core.DefinicjaCykluOkresCyklu` | bazodanowe, enum |  | Określa okres, w którym oczekiwane jest wystąpienie cyklu. |
-| CycleDefinition.Options | `Soneta.Core.DefinicjaCykluOptions` | enum |  |  |
+| CycleDefinition.OkresCyklu | `Soneta.Core.DefinicjaCykluOkresCyklu` (enum) | bazodanowe |  | Określa okres, w którym oczekiwane jest wystąpienie cyklu. |
+| CycleDefinition.Options | `Soneta.Core.DefinicjaCykluOptions` (enum) | tylko-odczyt |  |  |
 | CycleDefinition.Pazdziernik | `bool` |  |  | Październik - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Piatek | `bool` |  |  | Piątek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| CycleDefinition.Podglad | `Soneta.Core.ElementCyklu` |  |  |  |
+| CycleDefinition.Podglad | `Soneta.Core.ElementCyklu` | tylko-odczyt |  |  |
 | CycleDefinition.Poniedzialek | `bool` |  |  | Poniedziałek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| CycleDefinition.PozycjaDnia | `Soneta.Core.DefinicjaCykluPozycjaDnia` | bazodanowe, enum |  | Określa pozycję dnia w okresie, w którym oczekiwane jest wystąpienie cyklu. |
-| CycleDefinition.PozycjaDniaZaawansowana | `Soneta.Core.DefinicjaCykluPozycjaDniaZaawansowana` | bazodanowe, enum |  | Określa pozycję dnia w miesiącu, w którym oczekiwane jest wystąpienie cyklu. |
-| CycleDefinition.RodzajTerminu | `Soneta.Core.DefinicjaCykluRodzajTerminu` | bazodanowe, enum |  | Wskazuje na to, czy określono termin cyklu lub termin wynika z opisu cyklu. |
+| CycleDefinition.PozycjaDnia | `Soneta.Core.DefinicjaCykluPozycjaDnia` (enum) | bazodanowe |  | Określa pozycję dnia w okresie, w którym oczekiwane jest wystąpienie cyklu. |
+| CycleDefinition.PozycjaDniaZaawansowana | `Soneta.Core.DefinicjaCykluPozycjaDniaZaawansowana` (enum) | bazodanowe |  | Określa pozycję dnia w miesiącu, w którym oczekiwane jest wystąpienie cyklu. |
+| CycleDefinition.RodzajTerminu | `Soneta.Core.DefinicjaCykluRodzajTerminu` (enum) | bazodanowe |  | Wskazuje na to, czy określono termin cyklu lub termin wynika z opisu cyklu. |
 | CycleDefinition.Sierpien | `bool` |  |  | Sierpień - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Sobota | `bool` |  |  | Sobota - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| CycleDefinition.SposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` | bazodanowe, enum |  | Określa sposób zachowania, kiedy cykl wystąpi w dniu wolnym. |
+| CycleDefinition.SposobNaDniWolne | `Soneta.Core.DefinicjaCykluSposobNaDniWolne` (enum) | bazodanowe |  | Określa sposób zachowania, kiedy cykl wystąpi w dniu wolnym. |
 | CycleDefinition.Sroda | `bool` |  |  | Środa - dzień tygodnia wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Styczen | `bool` |  |  | Styczeń - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Termin | `int` | bazodanowe |  | Określa termin wystąpienia cyklu. Wartość w polu nie jest czytelna dla użytkownika. |
@@ -63,33 +67,33 @@ Guided: root
 | CycleDefinition.Termin3 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (minuty w godzinie). Wartość w polu nie jest czytelna dla użytkownika. |
 | CycleDefinition.Termin4 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (dni w miesiącu/roku w kolejności). Wartość w polu nie jest czytelna dla użytkownika. |
 | CycleDefinition.Termin5 | `int` | bazodanowe |  | Określa termin wystąpienia cyklu (miesiące w roku w kolejności). Wartość w polu nie jest czytelna dla użytkownika. |
-| CycleDefinition.Typ | `Soneta.Core.DefinicjaCykluTyp` | bazodanowe, enum |  | Określa rodzaj cyklu za pomocą jednostki interwału czasu. |
+| CycleDefinition.Typ | `Soneta.Core.DefinicjaCykluTyp` (enum) | bazodanowe |  | Określa rodzaj cyklu za pomocą jednostki interwału czasu. |
 | CycleDefinition.Wrzesien | `bool` |  |  | Wrzesień - miesiąc wystąpienia cyklu tygodniowego. |
 | CycleDefinition.Wtorek | `bool` |  |  | Wtorek - dzień tygodnia wystąpienia cyklu tygodniowego. |
-| Date | `Soneta.Types.Date` | bazodanowe | Data cyklu | Określa datę wystąpienia cyklu |
+| Date | `Date` | bazodanowe | Data cyklu | Określa datę wystąpienia cyklu |
 | DefaultAutoAction | `bool` | bazodanowe | Użyj domyślnej akcji | Określa czy należy użyć domyślnej akcji |
-| EndDate | `Soneta.Types.Date` | bazodanowe | Czas zakończenia | Określa czas zakończenia obowiązywania cyklu |
-| ExceptionStrategy | `Soneta.Core.ExceptionStrategyEnum` | bazodanowe, enum | Strategia obsługi wyjątków | Określa strategię obsługi wyjątków |
+| EndDate | `Date` | bazodanowe | Czas zakończenia | Określa czas zakończenia obowiązywania cyklu |
+| ExceptionStrategy | `Soneta.Core.ExceptionStrategyEnum` (enum) | bazodanowe | Strategia obsługi wyjątków | Określa strategię obsługi wyjątków |
 | FolderIn | `string` | bazodanowe | Ścieżka wejściowa | Określa ścieżkę, dla której śledzone są pliki |
 | FolderOut | `string` | bazodanowe | Ścieżka wyjściowa | Określa ścieżkę, archiwalną dla przetworzonych plików |
-| Host | `Soneta.Business.IScheduleAutoJob` | bazodanowe | Rekord | Określa opcjonalny rekord powiązany |
+| Host | `IScheduleAutoJob` | bazodanowe, tylko-odczyt | Rekord | Określa opcjonalny rekord powiązany |
 | HzInstance | `string` | bazodanowe | Nazwa instacji | Określa nazwę instancji harmonogramu zadań |
-| Info | `string` |  |  |  |
-| IsExpressionSet | `bool` |  |  |  |
-| IsPageVisible | `bool` |  |  |  |
+| Info | `string` | tylko-odczyt |  |  |
+| IsExpressionSet | `bool` | tylko-odczyt |  |  |
+| IsPageVisible | `bool` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Definicja zablokowana | Określa czy definicja jest zablokowana |
 | Name | `string` | bazodanowe | Nazwa | Nazwa definicji harmonogramu |
-| OkresCyklu | `Soneta.Types.FromTo` |  | Okres cyklu | Określa okres obowiązywania cyklu |
+| OkresCyklu | `FromTo` | podlista | Okres cyklu | Określa okres obowiązywania cyklu |
 | Priority | `int` | bazodanowe | Priorytet | Określa priorytet zadania |
-| RuntimeInfo | `Soneta.Business.Compiler.RuntimeDefinitionInfo` | bazodanowe |  |  |
+| RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
-| RuntimeInfo.Project | `Soneta.Business.Compiler.RuntimeProject` | bazodanowe | Projekt |  |
-| RuntimeInfo.WgProject | `Soneta.Business.Key` |  |  |  |
-| ScheduleItems | `Soneta.Business.SubTable<Soneta.Core.Schedule.ScheduleItem>` |  |  |  |
-| ScheduleType | `Soneta.Core.ScheduleTypeEnum` | bazodanowe, enum | Typ harmonogramu | Określa typ harmonogramu |
-| StartDate | `Soneta.Types.Date` | bazodanowe | Czas rozpoczęcia | Określa czas rozpoczęcia obowiązywania cyklu |
-| TaskDefinition | `Soneta.Business.Db.TaskDefinition` | bazodanowe | Definicja zadania | Definicja zadania powiązana z definicją harmonogramu |
+| RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
+| RuntimeInfo.WgProject | `Key` | podlista |  |  |
+| ScheduleItems | `SubTable<Soneta.Core.Schedule.ScheduleItem>` | podlista |  |  |
+| ScheduleType | `Soneta.Core.ScheduleTypeEnum` (enum) | bazodanowe | Typ harmonogramu | Określa typ harmonogramu |
+| StartDate | `Date` | bazodanowe | Czas rozpoczęcia | Określa czas rozpoczęcia obowiązywania cyklu |
+| TaskDefinition | `Db.TaskDefinition` | bazodanowe | Definicja zadania | Definicja zadania powiązana z definicją harmonogramu |
 
 ## Enumy
 

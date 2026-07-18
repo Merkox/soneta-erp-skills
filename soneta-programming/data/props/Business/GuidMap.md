@@ -3,19 +3,23 @@ Nazwa tabeli: `GuidMaps`
 Opis: Uniwersalne powiązanie między dwoma dowolnymi rekordami identyfikowanymi przez GUID. Umożliwia tworzenie typowanych relacji między obiektami z różnych modułów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe: 4
-- pola kalkulowane (z klas biznesowych): 0
+- pola bazodanowe (zapisywalne): 1
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| From | `System.Guid` | bazodanowe |  |  |
+| From | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
 | Tag | `int` | bazodanowe |  |  |
-| To | `System.Guid` | bazodanowe |  |  |
-| Type | `Soneta.Business.Db.GuidMapType` | bazodanowe, enum |  |  |
+| To | `System.Guid` | bazodanowe, tylko-odczyt |  |  |
+| Type | `Db.GuidMapType` (enum) | bazodanowe, tylko-odczyt |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### GuidMapType (`Soneta.Business.Db.GuidMapType`)
+### GuidMapType (`Db.GuidMapType`)
 - `SessionReader` = 2

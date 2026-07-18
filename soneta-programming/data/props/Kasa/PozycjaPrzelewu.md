@@ -5,16 +5,20 @@ Opis: Element szczegółowy przelewu (PrzelewBase) wiążący przelew z konkretn
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przelew` → `PrzelewBase`
 
-- pola bazodanowe: 5
-- pola kalkulowane (z klas biznesowych): 3
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 4
+- podlisty: 0
+- subrowy: 0
+- razem: 8
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DataPrzelewu | `Soneta.Types.Date` | bazodanowe |  |  |
-| DokPrzelew | `Soneta.Kasa.IDokPrzelewowy` | bazodanowe |  |  |
-| Kwota | `Soneta.Types.Currency` | bazodanowe |  |  |
+| DataPrzelewu | `Date` | bazodanowe |  |  |
+| DokPrzelew | `Soneta.Kasa.IDokPrzelewowy` | bazodanowe, tylko-odczyt |  |  |
+| Kwota | `Currency` | bazodanowe |  |  |
 | Lp | `int` | bazodanowe |  |  |
 | Lpx | `int` |  |  |  |
-| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe, guided-parent |  |  |
-| Termin | `Soneta.Types.Date` |  |  |  |
-| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` |  |  |  |
+| Przelew | `Soneta.Kasa.PrzelewBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
+| Termin | `Date` | tylko-odczyt |  |  |
+| WeryfikacjaTransakcji | `Soneta.Kasa.IWeryfikacjaTransakcji` | tylko-odczyt |  |  |

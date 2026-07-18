@@ -6,33 +6,37 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe: 9
-- pola kalkulowane (z klas biznesowych): 6
+- pola bazodanowe (zapisywalne): 6
+- pola kalkulowane (zapisywalne): 1
+- pola tylko-odczyt: 3
+- podlisty: 4
+- subrowy: 1
+- razem: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Data | `Soneta.Types.Date` |  |  |  |
-| Date | `Soneta.Types.Date` | bazodanowe | Data | Data utworzenia paczki |
+| Data | `Date` | tylko-odczyt |  |  |
+| Date | `Date` | bazodanowe | Data | Data utworzenia paczki |
 | Definicja | `Soneta.Core.DocPkgDef` | bazodanowe |  |  |
-| ElementsCount | `int` |  |  |  |
-| Flags | `Soneta.Business.Db.DocPkgFlags` | bazodanowe, enum | Flagi |  |
-| Numer | `Soneta.Core.NumerDokumentu` | bazodanowe |  |  |
+| ElementsCount | `int` | tylko-odczyt |  |  |
+| Flags | `Db.DocPkgFlags` (enum) | bazodanowe | Flagi |  |
+| Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
-| Numer.Pelny | `string` | bazodanowe | Numer pełny |  |
+| Numer.Pelny | `string` | bazodanowe, tylko-odczyt | Numer pełny |  |
 | Numer.Symbol | `string` | bazodanowe |  |  |
-| Numer.WgNumeruDokumentu | `Soneta.Business.Key` |  |  |  |
-| Numer.WgSymboluDokumentu | `Soneta.Business.Key` |  |  |  |
-| PkgStatus | `Soneta.Business.Db.DocPkgStatus` | bazodanowe, enum | Status paczki dokumentów |  |
-| Pozycje | `Soneta.Business.SubTable<Soneta.Core.DocPkgItem>` |  |  |  |
-| Range | `Soneta.Types.FromTo` | bazodanowe |  |  |
+| Numer.WgNumeruDokumentu | `Key` | podlista |  |  |
+| Numer.WgSymboluDokumentu | `Key` | podlista |  |  |
+| PkgStatus | `Db.DocPkgStatus` (enum) | bazodanowe | Status paczki dokumentów |  |
+| Pozycje | `SubTable<Soneta.Core.DocPkgItem>` | podlista |  |  |
+| Range | `FromTo` | bazodanowe, podlista |  |  |
 
 ## Enumy
 
 Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
 
-### DocPkgFlags (`Soneta.Business.Db.DocPkgFlags`)
+### DocPkgFlags (`Db.DocPkgFlags`)
 
-### DocPkgStatus (`Soneta.Business.Db.DocPkgStatus`)
+### DocPkgStatus (`Db.DocPkgStatus`)
 - `Opened` = 0 — Otwarta
 - `Closed` = 1 — Zamknięta
