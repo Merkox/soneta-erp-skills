@@ -7,8 +7,9 @@ description: >
   wierszy); (2) pyta o konkretny mechanizm ORM — Session, Commit/Save, optimistic
   lock, Context, RowCondition, Datapack, ViewInfo, Features, thread-safety; (3) prosi
   o code review kodu biznesowego Soneta (safe-code); (4) pisze worker, extender,
-  akcję w menu Czynności, folder/listę; (5) chce zinwentaryzować moduły, pola lub
-  workery z bibliotek DLL; (6) chce rozpocząć nowy dodatek/rozszerzenie Soneta —
+  akcję w menu Czynności, folder/listę; (5) chce zinwentaryzować moduły, pola,
+  workery lub formularze/zakładki (pola, sekcje, kolejność wprowadzania) z bibliotek
+  DLL; (6) chce rozpocząć nowy dodatek/rozszerzenie Soneta —
   wygenerować szkielet źródeł z CLI (`dotnet new soneta-addon`, Soneta.MsBuild.SDK,
   szablony Soneta Platform Developer). Sięgnij też, gdy inny skill potrzebuje warstwy
   ORM/kodu biznesowego Soneta.
