@@ -5,13 +5,6 @@ Opis: Element szczegółowy pożyczki (Pozyczka). Żyrant pożyczki pracowniczej
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozyczka` → `Pozyczka`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ElementRaty | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |

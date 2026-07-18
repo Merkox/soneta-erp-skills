@@ -4,13 +4,6 @@ Tytuł: Szczegółowe logi prac
 Opis: Szczegółowy wpis logu wykonania zadania harmonogramu. Zawiera treść komunikatu, daty utworzenia i ostatniego wpisu, nazwę operatora, stos błędu, informacje o instancji harmonogramu (port, usługa, priorytet).
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 6
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CreationDateTime | `System.DateTime` | bazodanowe, tylko-odczyt | Data utworzenia | Określa datę utworzenia |

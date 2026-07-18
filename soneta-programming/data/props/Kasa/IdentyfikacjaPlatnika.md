@@ -4,13 +4,6 @@ Tytuł: Identyfikacje płatników
 Opis: Dane identyfikacyjne płatników używane w bankowości elektronicznej i przelewach. Przechowuje identyfikatory podmiotów kasowych (np. NIP, REGON) z podziałem na typy, umożliwiając jednoznaczne rozpoznawanie płatników przy imporcie wyciągów i generowaniu przelewów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Identyfikator | `string` | bazodanowe |  |  |

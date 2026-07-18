@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja dokumentu rozliczenia czasu pracy. Określa rodza
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 1
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

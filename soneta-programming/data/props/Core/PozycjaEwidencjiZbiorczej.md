@@ -4,20 +4,23 @@ Tytuł: Pozycje ewidencji zbiorczych
 Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Reprezentuje pozycję w ewidencji zbiorczej - powiązanie między dokumentem źródłowym księgowanym zbiorczo a zbiorczym dokumentem ewidencji.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 4
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Core.IDokumentKsiegowalny` | bazodanowe, tylko-odczyt, iface-ref | Dokument | Dokument księgowany zbiorczo |
 | Ewidencja | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt, guided-parent | Ewidencja | Ewidencja zbiorcza |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa pozycji w ewidencji |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `SprzedażZbiorczaEwidencja` | 1205 | `Soneta.EwidencjaVat.SprzedazZbiorczaEwidencja.Pozycja` |  |
 
 ## Relacje interfejsowe
 

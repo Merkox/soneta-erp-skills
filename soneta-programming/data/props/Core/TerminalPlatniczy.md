@@ -5,13 +5,6 @@ Opis: Konfiguracja terminala płatniczego. Zawiera nazwę, identyfikator termina
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 8
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresIP | `string` | bazodanowe |  |  |

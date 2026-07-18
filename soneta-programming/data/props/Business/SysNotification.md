@@ -5,20 +5,14 @@ Opis: Definicja powiadomienia systemowego powiązanego z zadaniem lub procesem. 
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`, `IWFRecipientHost`
-
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 4
-- razem: 33
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CanCreateSysNotificationCode | `Db.AlgorithmColumn` (subrow) | bazodanowe | Kod metody CanCreateSysNotification | Określa algorytm metody CanCreateSysNotification |
 | CanCreateSysNotificationCode.Code | `MemoText` | bazodanowe, podlista |  |  |
 | CanCreateSysNotificationCode.CodeUiRoslyn | `Compiler.ICodeEditorSource` |  |  |  |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | DelayUnit | `Db.Notifications.SysNotificationDelayUnit` (enum) | bazodanowe | Typ opóźnienia | Określa typ opóźnienia |
 | DelayValue | `int` | bazodanowe | Wartość opóźnienia | Określa wartość opóźnienia |
 | ErrorReaction | `Db.Notifications.SysNotificationErrorReactionType` (enum) | bazodanowe | Reakcja na błąd | Określa sposób reakcji na błąd w wysyłce powiadomienia |
@@ -48,6 +42,17 @@ Implementuje interfejsy: `IWfPlugInItemReferenceHost`, `IWFRecipientHost`
 | TaskDefinition | `Db.TaskDefinition` | bazodanowe | Definicja zadania | Definicja zadania, do której przypisane jest powiadomienie. |
 | Template | `ITemplate` | bazodanowe, iface-ref | Szablon powiadomienia | Określa szablon powiadomienia |
 | WfDefinition | `IWFDefinition` | bazodanowe, iface-ref | Definicja procesu | Określa definicję procesu |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Db.Notifications.SysNotification` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WfSysNotificationExtend` | Powiadomienie jednozakładkowe |
+| `None` | 2 | `Db.Notifications.SysNotification` |  |
 
 ## Relacje interfejsowe
 

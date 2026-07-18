@@ -4,13 +4,6 @@ Tytuł: Informacje o plikach zdalnych
 Opis: Metadane pliku przechowywanego w zdalnym magazynie. ŝączy plik załącznika z zewnętrznym identyfikatorem i uchwytem w chmurze lub innym zdalnym storage.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AttachmentFile | `Db.AttachmentFile` | bazodanowe, tylko-odczyt | Plik załącznika |  |

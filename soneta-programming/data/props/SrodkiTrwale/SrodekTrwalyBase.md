@@ -6,13 +6,7 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `SrodekTrwalyBaseHistoria`
 Implementuje interfejsy: `IInwentarz`, `IElementSlownika`, `IZasobCRM`, `IKodowany`, `IZrodloPodzielnikaKosztow`
-
-- pola bazodanowe (zapisywalne): 46
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 20
-- podlisty: 17
-- subrowy: 0
-- razem: 85
+Selektor: pole `Typ` (`Soneta.SrodkiTrwale.TypSrodkaTrwalego`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -80,7 +74,7 @@ Implementuje interfejsy: `IInwentarz`, `IElementSlownika`, `IZasobCRM`, `IKodowa
 | Stan | `Soneta.SrodkiTrwale.StanSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt |  | Stan środka trwałego |
 | StawkaVAT | `Soneta.Core.DefinicjaStawkiVat` | bazodanowe |  | Stawka VAT |
 | Terminarz | `SubTable<Soneta.SrodkiTrwale.PozycjaTerminarzaInw>` | podlista |  |  |
-| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt |  | Typ środka trwałego |
+| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ środka trwałego |
 | TypZasobu | `string` | tylko-odczyt |  |  |
 | WartoscBOMSR | `Currency` | bazodanowe |  | Wartość bilansu otwarcia MSR |
 | WartoscBilansowaBO | `Currency` | bazodanowe |  | Wartość bilansowa na dzień bilansu otwarcia |
@@ -101,6 +95,17 @@ Implementuje interfejsy: `IInwentarz`, `IElementSlownika`, `IZasobCRM`, `IKodowa
 | ZbycieNrDokumentu | `string` | bazodanowe | Nr dokumentu zbycia |  |
 | ZrodlaFinansowania | `Soneta.Core.ZrodloFinansowania[]` | podlista |  |  |
 | ZrodlaFinansowaniaDotychczasowe | `Soneta.Core.ZrodloFinansowania[]` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ŚrodekTrwały` | 1 | `Soneta.SrodkiTrwale.SrodekTrwaly` | Środek trwały |
+| `WartośćNiematerialnaIPrawna` | 2 | `Soneta.SrodkiTrwale.WartoscNiematerialnaIPrawna` | Wartość niematerialna i prawna |
+| `Wyposażenie` | 3 | `Soneta.SrodkiTrwale.SrodekWyposazenie` | Wyposażenie |
 
 ## Enumy
 

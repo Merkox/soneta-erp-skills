@@ -5,13 +5,6 @@ Opis: Wpis dokumentujący etap przetwarzania zgłoszenia sygnalisty. Rejestruje 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Data dokumentu |  |

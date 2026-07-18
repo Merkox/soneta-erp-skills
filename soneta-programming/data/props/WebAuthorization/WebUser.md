@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `INoticeRecipient`, `IMfaOperator`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 16
-- podlisty: 2
-- subrowy: 0
-- razem: 29
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowConfig | `bool` | tylko-odczyt |  |  |

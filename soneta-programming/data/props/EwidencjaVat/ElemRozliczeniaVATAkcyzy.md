@@ -4,13 +4,7 @@ Tytuł: Elementy rozliczen VAT
 Opis: Element szczegółowy nagłówka rozliczenia VAT (NagRozliczeniaVATAkcyzy). Pozycja rozliczenia VAT powiązana z konkretnym elementem ewidencji VAT, zawierająca stawkę, kwoty netto/VAT/brutto, parametry odliczeń i rodzaj zakupu. Umożliwia szczegółowe śledzenie rozliczenia poszczególnych pozycji podatkowych.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Naglowek` → `NagRozliczeniaVATAkcyzy`
-
-- pola bazodanowe (zapisywalne): 27
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 17
-- podlisty: 1
-- subrowy: 2
-- razem: 47
+Selektor: pole `TypEwidencji` (`Soneta.EwidencjaVat.TypEwidencjiVAT`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -53,7 +47,7 @@ Guided: child — nadrzędna przez pole `Naglowek` → `NagRozliczeniaVATAkcyzy`
 | StawkaAkcyzy.Typ | `Soneta.Core.TypStawkiAkcyzy` (enum) | bazodanowe |  |  |
 | StawkaAkcyzy.TypGrupy | `Soneta.Core.TypGrupyAkcyzy` (enum) | bazodanowe |  | Typ grupy wyrobów |
 | StrukturaSprzedazyNie | `bool` | bazodanowe |  | Nie uwzględniaj w liczeniu struktury sprzedaży |
-| TypEwidencji | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  | Typ ewidencji VAT |
+| TypEwidencji | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ ewidencji VAT |
 | VAT | `Currency` | bazodanowe |  | Wartość rozliczenia podatku VAT |
 | VATKoszt | `Currency` | tylko-odczyt |  |  |
 | VATKosztWsp | `Currency` | tylko-odczyt |  |  |
@@ -61,6 +55,18 @@ Guided: child — nadrzędna przez pole `Naglowek` → `NagRozliczeniaVATAkcyzy`
 | VATOdliczeniaWsp | `Currency` | tylko-odczyt |  |  |
 | WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
 | WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypEwidencji`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Sprzedaż` | 1 | `Soneta.EwidencjaVat.ElemRozliczeniaVATSprzedaz` | Element rozliczenia VAT - sprzedaż |
+| `Zakup` | 2 | `Soneta.EwidencjaVat.ElemRozliczeniaVATZakup` | Element rozliczenia VAT - zakup |
+| `SprzedażAkcyza` | 3 | `Soneta.EwidencjaVat.ElemRozliczeniaAkcyzySprzedaz` | Element rozliczenia akcyzy - sprzedaż |
+| `ZakupAkcyza` | 4 | `Soneta.EwidencjaVat.ElemRozliczeniaAkcyzyZakup` | Element rozliczenia akcyzy - zakup |
 
 ## Relacje interfejsowe
 

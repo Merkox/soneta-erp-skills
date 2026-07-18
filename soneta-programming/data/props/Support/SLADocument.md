@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `ISLADocument`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Child | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Podrzędny | Podrzędny |

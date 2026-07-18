@@ -4,13 +4,6 @@ Tytuł: Prawa rekordów
 Opis: Uprawnienie na poziomie pojedynczego rekordu. Przypisuje rodzaj dostępu (odczyt, zapis) konkretnemu użytkownikowi lub grupie do wybranego obiektu biznesowego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Authorised | `Db.Permissions.IAuthorised` | bazodanowe, iface-ref | Uprawniony | Określa upawnionego |

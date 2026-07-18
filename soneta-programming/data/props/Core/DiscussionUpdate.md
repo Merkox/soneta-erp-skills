@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDiscussionItem`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 8
-- podlisty: 3
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Action | `Soneta.Core.Conversation.DiscussionUpdateFieldAction` (enum) | bazodanowe, tylko-odczyt | Rodzaj aktualizacji |  |

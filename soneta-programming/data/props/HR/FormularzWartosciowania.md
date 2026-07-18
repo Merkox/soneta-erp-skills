@@ -4,13 +4,6 @@ Tytuł: Formularze wartościowania
 Opis: Dokument wartościowania stanowisk pracy. Grupuje stanowiska do wyceny punktowej na podstawie wybranej macierzy wartościowania, umożliwiając zbiorczą ocenę i zatwierdzenie wyników.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataWartosciowania | `Date` | bazodanowe | Data wartościowania |  |

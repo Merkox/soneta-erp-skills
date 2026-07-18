@@ -5,13 +5,6 @@ Opis: Historia zmian statusu okresu rozliczeniowego na potrzeby użytkowników P
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DBItemPKBROkRoz` → `DBItemPKBROkRoz`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DBItemPKBROkRoz | `Soneta.Ksiega.DBItemPKBROkRoz` | bazodanowe, tylko-odczyt, guided-parent |  | Okres rozliczeniowy |

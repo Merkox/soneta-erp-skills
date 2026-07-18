@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji XML (DefXmlNag). Reprezentuje pojedynczy e
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 5
-- podlisty: 7
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BazowyLp | `int` |  |  |  |

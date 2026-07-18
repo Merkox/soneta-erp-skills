@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji wzorcowej (IProOperacjaWzorcowa). Definiuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `IProOperacjaWzorcowa`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 0
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Cena | `DoubleCy` | bazodanowe |  | Cena wyrobu operacji technologii. |

@@ -5,13 +5,6 @@ Opis: Parametry procesu utrwalania danych BI dla konkretnej tabeli serializacji.
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Date | `System.DateTime` | bazodanowe | Data utrwalenia |  |

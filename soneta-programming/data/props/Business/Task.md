@@ -5,13 +5,6 @@ Opis: Instancja zadania (taska) w systemie. Reprezentuje konkretne zadanie przyp
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 33
-- podlisty: 13
-- subrowy: 0
-- razem: 73
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowModificationRight | `bool` | tylko-odczyt |  |  |

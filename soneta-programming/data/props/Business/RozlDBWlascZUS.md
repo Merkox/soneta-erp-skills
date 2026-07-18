@@ -4,13 +4,6 @@ Tytuł: Rozliczenia podatkowe bazy danych - ZUS Właściciela
 Opis: Rozliczenie składek ZUS właściciela firmy za okres rozliczeniowy. Zawiera składki społeczne, zdrowotne, FP/FGŚP, FEP oraz łączną kwotę do zapłaty.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | FEP | `decimal` | tylko-odczyt | FEP |  |

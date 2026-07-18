@@ -5,13 +5,6 @@ Opis: Definicja podstawy naliczania stażu pracy. Pozwala skonfigurować, które
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

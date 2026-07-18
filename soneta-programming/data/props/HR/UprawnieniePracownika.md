@@ -5,13 +5,6 @@ Opis: Ewidencja uprawnień posiadanych przez pracownika. Rejestruje datę uzyska
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataUtraty | `Date` | bazodanowe |  |  |

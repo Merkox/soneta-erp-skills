@@ -5,13 +5,6 @@ Opis: Element szczegółowy aktualizacji dnia kalendarza (DzienKalendarzaAktuali
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienKalendarzaAktualizacja`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

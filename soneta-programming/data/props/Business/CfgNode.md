@@ -5,13 +5,6 @@ Opis: Węzeł drzewa konfiguracji systemu. Przechowuje hierarchiczną strukturę
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Attribute | `object` |  |  |  |

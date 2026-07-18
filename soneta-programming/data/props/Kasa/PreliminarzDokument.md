@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPreliminarza`, `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 9
-- podlisty: 5
-- subrowy: 1
-- razem: 27
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  | Czy dokument w buforze |

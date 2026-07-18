@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 1
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. Zablokowane definicje kampanii nie będą wyświetlane w liście wyboru. |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoRekrutacji`, `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

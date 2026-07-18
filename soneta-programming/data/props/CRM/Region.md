@@ -5,13 +5,7 @@ Opis: Słownik regionów sprzedażowych służący do grupowania planów i opera
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 5
-- subrowy: 0
-- razem: 11
+Selektor: pole `Rodzaj` (`Soneta.CRM.Enums.RegionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -25,7 +19,22 @@ Implementuje interfejsy: `IRightsSource`
 | Opis | `MemoText` | bazodanowe, podlista |  |  |
 | PlanySprzedazowe | `SubTable` | podlista |  |  |
 | Podregiony | `SubTable<Soneta.CRM.Region>` | podlista |  |  |
-| Rodzaj | `Soneta.CRM.Enums.RegionTypeEnum` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.CRM.Enums.RegionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Custom` | 1 | `Soneta.CRM.CustomRegion` | Własne |
+| `Country` | 2 | `Soneta.CRM.CountryRegion` | Kraj |
+| `Voivodeship` | 3 | `Soneta.CRM.VoivodeshipRegion` | Województwo |
+| `District` | 4 | `Soneta.CRM.DistrictRegion` | Powiat |
+| `Municipality` | 5 | `Soneta.CRM.MunicipalityRegion` | Gmina |
+| `City` | 6 | `Soneta.CRM.CityRegion` | Miejscowość |
+| `PostalCode` | 7 | `Soneta.CRM.PostalCodeRegion` | Kod Pocztowy |
 
 ## Enumy
 

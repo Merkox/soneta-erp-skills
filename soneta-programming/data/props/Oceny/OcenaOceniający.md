@@ -4,13 +4,7 @@ Tytuł: Oceniający
 Opis: Element szczegółowy realizacji oceny (OcenaOceniający). Rejestruje osobę przeprowadzającą ocenę w ramach danej realizacji, z możliwością anulowania, umożliwiając zarządzanie listą oceniających.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ocena` → `OcenaRealizacja`
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 6
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,7 +13,17 @@ Guided: child — nadrzędna przez pole `Ocena` → `OcenaRealizacja`
 | Nazwa | `string` | tylko-odczyt |  |  |
 | Ocena | `Soneta.Oceny.OcenaRealizacja` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | Oceniajacy | `Soneta.Oceny.IOceniający` | bazodanowe, iface-ref |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.OcenaOceniający` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.AnkietaOceniający` | Ankietowany |
 
 ## Relacje interfejsowe
 

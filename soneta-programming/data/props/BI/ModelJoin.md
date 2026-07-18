@@ -5,13 +5,6 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje złączenie (JO
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 2
-- subrowy: 2
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BuildMode | `Soneta.BI.JoinBuildMode` (enum) | bazodanowe | Tryb tworzenia |  |

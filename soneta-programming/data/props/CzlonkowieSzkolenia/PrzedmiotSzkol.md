@@ -5,13 +5,6 @@ Opis: Słownik przedmiotów realizowanych w ramach szkoleń. Definiuje tematykę
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe | Nazwa przedmiotu | Nazwa przedmiotu. |

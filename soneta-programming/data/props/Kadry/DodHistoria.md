@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dodatek` → `Dodatek`
 Historia: Tak — zapis historyczny tabeli `Dodatek`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 5
-- podlisty: 5
-- subrowy: 1
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

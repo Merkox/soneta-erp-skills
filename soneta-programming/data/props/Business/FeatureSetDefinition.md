@@ -5,13 +5,6 @@ Opis: Definiuje zestawy pól (grupy cech) wyświetlane jako zakładki na formula
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 11
-- podlisty: 4
-- subrowy: 1
-- razem: 36
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowUserMode | `bool` | tylko-odczyt |  |  |

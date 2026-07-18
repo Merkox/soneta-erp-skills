@@ -5,13 +5,6 @@ Opis: Element szczegółowy odpadu meldunku (ProMeldunek). Rejestruje odpad pows
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 29
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CenaPlanowana | `DoubleCy` | bazodanowe | Cena planowana | Cena planowana odpadu meldunku. |

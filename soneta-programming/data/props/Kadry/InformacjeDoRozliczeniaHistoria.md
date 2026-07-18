@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `InformacjaDoRozliczenia` → `InformacjaDoRozliczenia`
 Historia: Tak — zapis historyczny tabeli `InformacjaDoRozliczenia`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

@@ -4,13 +4,7 @@ Tytuł: Pozycje schematów księgowych
 Opis: Element szczegółowy schematu księgowego (SchematKsiegowy). Pojedyncza reguła predekretacji określająca, na jakie konto i po której stronie zaksięgować kwotę z dokumentu źródłowego. Zawiera wyrażenia definiujące konto, stronę, kwotę i warunki księgowania.
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Schemat` → `SchematKsiegowy`
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 19
-- pola tylko-odczyt: 9
-- podlisty: 20
-- subrowy: 0
-- razem: 51
+Selektor: pole `TypEwidencji` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 27
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -58,13 +52,48 @@ Guided: child — nadrzędna przez pole `Schemat` → `SchematKsiegowy`
 | StronaPozycji | `string` | tylko-odczyt |  |  |
 | SumujZapisy | `bool` |  |  | Sumuj zapisy |
 | TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` (enum) | bazodanowe |  | Tryb edycji pozycji |
-| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ewidencji schematu |
+| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ dokumentu ewidencji schematu |
 | Warunek | `MemoText` | podlista |  | Warunek |
 | WarunekP1 | `Soneta.Ksiega.WarunekSchematu` (enum) |  |  | Warunek1 - tryb podstawowy |
 | WarunekP2 | `string` |  |  | Warunek2 - tryb podstawowy |
 | WeryfikowacPozycje | `bool` |  |  |  |
 | ZnakKwotyP | `Soneta.Ksiega.ZnakKwotySchematu` (enum) |  |  | Znak kowty - tryb podstawowy |
 | text | `MemoText` | bazodanowe, podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypEwidencji`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `WyciągBankowyEwidencja` | 120 | `Soneta.Ksiega.PozycjaSchematuWyciagowBankowych` | Pozycja ewidencji wyciągów bankowych |
+| `RaportKasowyEwidencja` | 121 | `Soneta.Ksiega.PozycjaSchematuRaportowKasowych` | Pozycja ewidencji raportów kasowych |
+| `RozliczenieEwidencja` | 122 | `Soneta.Ksiega.PozycjaSchematuRozliczen` | Pozycja ewidencji rozliczeń |
+| `NotaOdsetkowaEwidencja` | 123 | `Soneta.Ksiega.PozycjaSchematuNotOdsetkowych` | Pozycja ewidencji not odsetkowych |
+| `DelegacjaPWSEwidencja` | 124 | `Soneta.Ksiega.PozycjaSchematuDelegacji` | Pozycja ewidencji delegacji (PWS) |
+| `ListaPlacEwidencja` | 503 | `Soneta.Ksiega.PozycjaSchematuListyPlac` | Pozycja ewidencji listy płac |
+| `WyplataUmowyEwidencja` | 504 | `Soneta.Ksiega.PozycjaSchematuWyplatyUmowy` | Pozycja ewidencji wypłaty umowy |
+| `PlanowanaListaPłacEwidencja` | 521 | `Soneta.Ksiega.PozycjaSchematuPlanowanejListyPlac` | Pozycja ewidencji planowanej listy płac |
+| `PKEwidencja` | 804 | `Soneta.Ksiega.PozycjaSchematuPK` | Pozycja ewidencji PK |
+| `RóżniceKursoweEwidencja` | 805 | `Soneta.Ksiega.PozycjaSchematuRoznicKursowych` | Pozycja ewidencji różnic kursowych |
+| `BOEwidencja` | 806 | `Soneta.Ksiega.PozycjaSchematuBO` | Pozycja ewidencji BO |
+| `RóżniceKursoweMWEwidencja` | 807 | `Soneta.Ksiega.PozycjaSchematuRoznicKursowychMW` | Pozycja ewidencji różnic kursowych MW |
+| `DeklaracjaRozliczeniowa` | 1099 | `Soneta.Ksiega.PozycjaSchematuDeklaracjiRozliczeniowych` | Pozycja schematu deklaracji rozliczeniowych |
+| `MagazynEwidencja` | 1101 | `Soneta.Ksiega.PozycjaSchematuDokumentowMagazynowych` | Pozycja ewidencji dokumentów magazynowych |
+| `SprzedażEwidencja` | 1201 | `Soneta.Ksiega.PozycjaSchematuSprzedazy` | Pozycja ewidencji sprzedaży |
+| `ZakupEwidencja` | 1202 | `Soneta.Ksiega.PozycjaSchematuZakupu` | Pozycja ewidencji zakupu |
+| `RozliczenieKasoweVATEwidencja` | 1203 | `Soneta.Ksiega.PozycjaSchematuRozliczeniaKasowegoVAT` | Pozycja ewid. rozliczenia kasowego VAT |
+| `SprzedażZbiorczaEwidencja` | 1205 | `Soneta.Ksiega.PozycjaSchematuSprzedazyZbiorczej` | Pozycja ewidencji sprzedaży zbiorczej |
+| `FWUENabyciaNaliczonyEwidencja` | 1206 | `Soneta.Ksiega.PozycjaSchematuFWUENNL` | Pozycja ewid. faktur wew. nabycia UE VAT naliczony |
+| `FWUENabyciaNależnyEwidencja` | 1207 | `Soneta.Ksiega.PozycjaSchematuFWUENNZ` | Pozycja ewid. faktur wew. nabycia UE VAT należny |
+| `VATMarżaEwidencja` | 1210 | `Soneta.Ksiega.PozycjaSchematuVATMarza` | Pozycja ewidencji VAT marza |
+| `ŚrodkiTrwałeEwidencja` | 1306 | `Soneta.Ksiega.PozycjaSchematuSrodkowTrwalych` | Pozycja ewidencji środków trwałych |
+| `FakturaImportowa` | 1401 | `Soneta.Ksiega.PozycjaSchematuFakturImportowych` | Pozycja schematu faktur importowych |
+| `SAD` | 1402 | `Soneta.Ksiega.PozycjaSchematuSAD` | Pozycja ewidencji SAD |
+| `SkladkaEwidencja` | 1660 | `Soneta.CzlonkowieSzkolenia.PozycjaSchematuSkladki` | Pozycja schematu ewidencji składek |
+| `RozliczenieEPEwidencja` | 1702 | `Soneta.Ksiega.PozycjaSchematuRozliczenEP` | Pozycja ewidencji rozliczeń EP |
+| `RMKEwidencja` | 1802 | `Soneta.Ksiega.PozycjaSchematuRMK` | Pozycja schematu ewidencji RMK |
 
 ## Enumy
 

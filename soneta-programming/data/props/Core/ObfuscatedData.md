@@ -5,13 +5,6 @@ Opis: Rekord zaciemnionych (zanonimizowanych) danych osobowych. Przechowuje info
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CheckSum | `string` | bazodanowe |  |  |

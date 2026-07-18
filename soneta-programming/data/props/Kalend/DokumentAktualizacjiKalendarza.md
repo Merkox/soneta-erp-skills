@@ -5,13 +5,7 @@ Opis: Dokument aktualizacji kalendarza pracy. Służy do zbiorczego wprowadzania
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IDokumentAktualizacjiKalendarza`, `IDokument`
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 13
-- podlisty: 11
-- subrowy: 2
-- razem: 35
+Selektor: pole `Rodzaj` (`Soneta.Kalend.RodzajAktualizacjiKalendarza`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -45,11 +39,21 @@ Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IDokum
 | PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
 | PozycjeCzas | `SubTable<Soneta.Kalend.PozycjaAktualizacjiCzasu>` | podlista |  |  |
 | PozycjePlan | `SubTable<Soneta.Kalend.PozycjaAktualizacjiKalendarza>` | podlista |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Seria | `string` | bazodanowe |  |  |
 | Stan | `Soneta.Kalend.StanyDokumentuAktulizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | tylko-odczyt |  |  |
 | Zrodlo | `Soneta.Kalend.IZrodloPlanu` | iface-ref |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `AktualizacjaPlanuPracy` | 1 | `Soneta.Kalend.DokumentAktualizacjiKalendarza.PlanuPracy` | Dokument aktualizacji planu pracy |
+| `WprowadzanieCzasuPracy` | 2 | `Soneta.Kalend.DokumentAktualizacjiKalendarza.CzasuPracy` | Dokument aktualizacji czasu pracy |
 
 ## Relacje interfejsowe
 

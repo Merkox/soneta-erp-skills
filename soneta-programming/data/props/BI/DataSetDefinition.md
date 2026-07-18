@@ -5,13 +5,6 @@ Opis: Definicja zestawu danych biznesowych wykorzystywanego w procesach BI. Zawi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 6
-- subrowy: 1
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CalculateCode | `Compiler.ICodeEditorSource` |  | Kod algorytmu metody Calculate | Kod algorytmu kalkulacji kalkulatora rekordu |

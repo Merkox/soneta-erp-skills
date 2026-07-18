@@ -5,13 +5,6 @@ Opis: Definicja okresu rozliczeniowego magazynu walut powiązanego z okresem obr
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Następny | `Soneta.Kasa.OkresMW` | tylko-odczyt |  |  |

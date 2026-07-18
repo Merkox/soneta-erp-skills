@@ -4,13 +4,6 @@ Tytuł: Wyrożnienia wydawane w ramach szkolenia.
 Opis: Konfiguracja wyróżnień przyznawanych w ramach danego rodzaju szkolenia. Określa, jakie certyfikaty mogą być wydane po ukończeniu kursu, wraz z wymaganiami dotyczącymi frekwencji i wyników egzaminów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe |  | Określa, czy wyróżnienie ma być brane pod uwagę podczas generowania certyfikatów |

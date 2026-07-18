@@ -5,13 +5,6 @@ Opis: Element szczegółowy towaru-kompletu (Towar). Definiuje składnik lub pro
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `Soneta.Towary.Quantity` | bazodanowe | Ilość | Ilość elementu kompletu. |

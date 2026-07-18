@@ -5,13 +5,6 @@ Opis: Element szczegółowy struktury organizacyjnej (StrukturaOrganizacyjna). D
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DozwolonePowiazania | `bool` | bazodanowe |  |  |

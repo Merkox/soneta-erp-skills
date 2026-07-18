@@ -5,13 +5,6 @@ Opis: Element szczegółowy zestawienia materiałów (ProZestawienieMaterialow).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zestawienie` → `ProZestawienieMaterialow`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `Amount` | bazodanowe | Ilość | Ilość pozycji zestawienia materiałów. |

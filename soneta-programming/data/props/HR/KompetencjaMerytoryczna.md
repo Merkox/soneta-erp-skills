@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aspekty | `SubTable<Soneta.HR.ZKL.Slowniki.Kompetencje.AspektKompetencjiMerytorycznej>` | podlista |  |  |

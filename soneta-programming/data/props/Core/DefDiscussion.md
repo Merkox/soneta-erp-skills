@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IDiscussionPlugInHost`, `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 29
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 9
-- podlisty: 6
-- subrowy: 3
-- razem: 48
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowDraft | `bool` | bazodanowe |  | Określa czy komentarze można zapisywać jako draft |

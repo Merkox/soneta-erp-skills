@@ -5,13 +5,6 @@ Opis: Element szczegółowy rozliczenia wyrobu (ProOperacjaZlecenia). Powiązuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | FantomyWyrobow | `SubTable<Soneta.ProdukcjaPro.ProFantomWyrobu>` | podlista |  |  |

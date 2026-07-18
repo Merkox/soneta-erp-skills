@@ -5,13 +5,6 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje regułę sortow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 1
-- subrowy: 1
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Direction | `Soneta.Data.QueryDefinition.OrderByDirection` (enum) | bazodanowe | Kierunek sortowania |  |

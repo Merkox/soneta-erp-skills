@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 1
-- subrowy: 0
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |

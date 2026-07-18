@@ -5,13 +5,6 @@ Opis: Słownik typów pojazdów określający sposób klasyfikacji obiektów we 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 4
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BusinessType | `Soneta.Samochodowka.TypPojazdu` (enum) | bazodanowe |  | Typ pojazdu |

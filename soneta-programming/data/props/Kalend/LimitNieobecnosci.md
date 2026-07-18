@@ -4,13 +4,7 @@ Tytuł: Limity nieobecności
 Opis: Element szczegółowy pracownika (Pracownik). Przechowuje indywidualny limit nieobecności pracownika w danym okresie, w tym wartości bazowe, korekty, wykorzystanie oraz przeliczenia godzinowe dla urlopu wypoczynkowego.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 35
-- podlisty: 2
-- subrowy: 0
-- razem: 43
+Selektor: pole `Typ` (`Soneta.Kalend.TypLimituNieobecności`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -47,7 +41,7 @@ Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 | PrzeniesienieGodz | `Time` | tylko-odczyt |  |  |
 | Razem | `int` | tylko-odczyt |  |  |
 | RazemGodz | `Time` | tylko-odczyt |  |  |
-| Typ | `Soneta.Kalend.TypLimituNieobecności` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypLimituNieobecności` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | UrlopDni | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
 | UrlopGodz | `Soneta.Kalend.LimitNieobecnosci` | tylko-odczyt |  |  |
 | Wykorzystane | `int` | bazodanowe, tylko-odczyt |  | Ilość wykorzystanych dni urlopu |
@@ -57,6 +51,16 @@ Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 | ZaleglyGodz | `Time` | tylko-odczyt | Zaległy godz |  |
 | Zmiana | `int` | bazodanowe |  | Zmiana wartości limitu wprowadzona przez użytkownika |
 | ZmianaGodz | `Time` | bazodanowe |  | Zmiana wartości limitu/godz wprowadzona przez użytkownika |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standardowy` | 1 | `Soneta.Kalend.LimitNieobecnosciStd` |  |
+| `UrlopWypoczynkowy` | 2 | `Soneta.Kalend.LimitUrlopuWypoczynkowego` |  |
 
 ## Enumy
 

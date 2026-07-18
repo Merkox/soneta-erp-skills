@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IChronoOrderHostDefinition`
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 0
-- podlisty: 3
-- subrowy: 1
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowedRuntimeDefs | `Soneta.Core.CoreModule.DbTupleDefinitionRow[]` | bazodanowe, podlista | Dozwolone definicje | Dozwolone definicje dokumentów dodatkowych |

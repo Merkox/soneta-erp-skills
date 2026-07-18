@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 9
-- subrowy: 1
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe, tylko-odczyt | Aktywny | Wskazuje, czy korespondencja w tym stanie jest aktywna (otwarta). |

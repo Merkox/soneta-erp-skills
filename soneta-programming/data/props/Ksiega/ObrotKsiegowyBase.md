@@ -3,13 +3,7 @@ Nazwa tabeli: `ObrotyKsiegowe`
 Tytuł: Obrót księgowy
 Opis: Zagregowany obrót księgowy konta za dany okres. Przechowuje skumulowane wartości obrotów Winien i Ma (zatwierdzonych i buforowych), narastająco i za okres, oraz salda. Służy do szybkiego wyliczania stanów kont bez konieczności sumowania poszczególnych zapisów.
 Tabela konfiguracyjna: Nie
-
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 18
-- podlisty: 0
-- subrowy: 0
-- razem: 18
+Selektor: pole `Typ` (`Soneta.Ksiega.TypObrotu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -28,9 +22,19 @@ Tabela konfiguracyjna: Nie
 | SaldoMaB | `decimal` | bazodanowe, tylko-odczyt |  |  |
 | SaldoWn | `decimal` | bazodanowe, tylko-odczyt |  |  |
 | SaldoWnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
-| Typ | `Soneta.Ksiega.TypObrotu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypObrotu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wn | `decimal` | bazodanowe, tylko-odczyt |  |  |
 | WnB | `decimal` | bazodanowe, tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Księgowy` | 0 | `Soneta.Ksiega.ObrotKsiegowy` | Obrot księgowy |
+| `Podatkowy` | 1 | `Soneta.Ksiega.ObrotPodatkowy` | Obrot podatkowy |
 
 ## Enumy
 

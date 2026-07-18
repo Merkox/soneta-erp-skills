@@ -5,13 +5,6 @@ Opis: Zawiera szkolenia i uprawnienia wykorzystane na  profilu szkoleń. Wspiera
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelOpis | `MemoText` | bazodanowe, podlista | Cel/Opis |  |

@@ -5,13 +5,6 @@ Opis: Plan sprzedażowy przypisany do operatora lub regionu w określonym przedz
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 5
-- podlisty: 3
-- subrowy: 0
-- razem: 27
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe | Aktywny | Aktywny |

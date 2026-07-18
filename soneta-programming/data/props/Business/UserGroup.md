@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IAuthorised`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 3
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Locked | `bool` | bazodanowe | Zablokowana | Określa czy grupa użytkowników jest zablokowana |

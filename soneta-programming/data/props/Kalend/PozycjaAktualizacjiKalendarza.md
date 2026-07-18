@@ -4,13 +4,6 @@ Tytuł: Źródła kalendarza na dokumentach aktualizacji kalendarzy
 Opis: Pozycja aktualizacji planu pracy na dokumencie aktualizacji kalendarza. Łączy źródło planu (pracownika/umowę) z dokumentem aktualizacji, umożliwiając śledzenie zmian w kalendarzu planu pracy.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualizacjeKalendarza | `SubTable<Soneta.Kalend.DzienKalendarzaAktualizacja>` | podlista |  |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji szkolenia (DefinicjaSzkolenia). Wiąże sz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DefinicjaSzkolenia` → `DefinicjaSzkolenia`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaSzkolenia | `Soneta.HR.DefinicjaSzkolenia` | bazodanowe, tylko-odczyt, guided-parent |  |  |

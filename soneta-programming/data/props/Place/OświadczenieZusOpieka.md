@@ -5,13 +5,6 @@ Opis: Oświadczenie pracownika wymagane do przyznania zasiłku opiekuńczego z Z
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IOceniający`, `ITaskUser`
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 10
-- subrowy: 1
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Doswiadczenie | `MemoText` | bazodanowe, podlista | Doświadczenie zawodowe | Doświadczenie zawodowe. |

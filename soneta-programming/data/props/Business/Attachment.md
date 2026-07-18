@@ -5,13 +5,6 @@ Opis: Załącznik przypisany do obiektu biznesowego. Przechowuje pliki, obrazy, 
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IPermissionClient`
 
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 1
-- podlisty: 4
-- subrowy: 0
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AssociatedObject | `Ical.Net.ICalendarObject?` |  |  |  |

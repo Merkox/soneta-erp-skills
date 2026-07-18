@@ -5,13 +5,6 @@ Opis: Rejestr mandatów drogowych przypisanych do pojazdów floty. Przechowuje d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Amount | `Currency` | bazodanowe | Kwota | Kwota mandatu |

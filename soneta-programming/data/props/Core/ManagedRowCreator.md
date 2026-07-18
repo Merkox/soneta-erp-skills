@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji zarządzanego wiersza (IManagedRowDefinion
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `IManagedRowDefinion`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Core.IManagedRowDefinion` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Wymaganie |  |

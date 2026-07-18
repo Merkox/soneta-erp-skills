@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoKartyCharakterystykiPracownika`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 3
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowana | `bool` | bazodanowe | Nieaktualna |  |

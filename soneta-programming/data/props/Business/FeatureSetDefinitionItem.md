@@ -5,13 +5,6 @@ Opis: Pojedynczy element (pole) w definicji zestawu pól. Określa ścieżkę do
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefaultLabel | `string` | tylko-odczyt |  |  |

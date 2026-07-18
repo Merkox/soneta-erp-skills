@@ -5,13 +5,6 @@ Opis: Definicja algorytmu wyliczania rat pożyczki pracowniczej. Zawiera nazwę,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 1
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `MemoText` | bazodanowe, podlista |  |  |

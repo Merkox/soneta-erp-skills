@@ -5,13 +5,6 @@ Opis: Zbiór danych osobowych w rejestrze RODO. Zawiera symbol, nazwę, typ (wł
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 7
-- subrowy: 0
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Administrator | `Soneta.Core.IKontrahent` | bazodanowe, iface-ref | Adminstrator danych | Adminstrator danych osobowych |

@@ -4,13 +4,6 @@ Tytuł: Dane dokumentów BDO
 Opis: Dane BDO (Baza Danych o Odpadach) powiązane z dokumentem handlowym. Zawiera informacje o transporcie odpadów, pochodzeniu i statusie dokumentu w systemie BDO.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataTransportu | `System.DateTime` | bazodanowe | Data transportu | Planowana data transportu |

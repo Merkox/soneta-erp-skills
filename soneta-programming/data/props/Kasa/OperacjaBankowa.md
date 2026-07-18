@@ -5,13 +5,6 @@ Opis: Element szczegółowy raportu ewidencji ŚP (RaportESP) reprezentujący po
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `WyciagBankowy` → `RaportESP`
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 10
-- podlisty: 2
-- subrowy: 0
-- razem: 31
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

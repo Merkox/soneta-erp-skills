@@ -5,13 +5,6 @@ Opis: Element szczegółowy okresu obrachunkowego (OkresObrachunkowy). Pozwala z
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `OkresKs` → `OkresObrachunkowy`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 4
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnaNumeracjaPozabilansowa | `bool` | bazodanowe |  | Włącz odrębną numeracje dekretów oraz zapisów księgowych dla kont pozabilansowych  |

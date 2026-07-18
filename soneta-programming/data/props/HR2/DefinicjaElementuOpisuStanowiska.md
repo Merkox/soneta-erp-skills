@@ -5,13 +5,6 @@ Opis: Definicja pojedynczego elementu opisu stanowiska w ramach kategorii. Okre≈
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 1
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytu≈Ç | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

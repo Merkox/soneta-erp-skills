@@ -4,13 +4,6 @@ Opis: Konwersacja (czat) między użytkownikami systemu. Przechowuje powiązaną
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 2
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Avatar | `object` | tylko-odczyt |  |  |

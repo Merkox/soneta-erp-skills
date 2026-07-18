@@ -5,13 +5,6 @@ Opis: Zastępstwo użytkownika w systemie. Określa zastępującego, zastępowan
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | EndDate | `Date` | bazodanowe | Data zakończenia | Data zakończenia |

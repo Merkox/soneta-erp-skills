@@ -5,13 +5,7 @@ Opis: Definicja akordu określająca typ (indywidualny/grupowy), algorytm nalicz
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IAkord`
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 5
-- subrowy: 1
-- razem: 21
+Selektor: pole `Typ` (`Soneta.Kadry.TypAkordu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -35,7 +29,17 @@ Implementuje interfejsy: `IAkord`
 | Jednostka | `string` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Progi | `SubTable<Soneta.Kadry.ProgAkordu>` | podlista |  |  |
-| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Prosty` | 1 | `Soneta.Kadry.DefinicjaAkorduProstego` |  |
+| `Grupowy` | 2 | `Soneta.Kadry.DefinicjaAkorduGrupowego` |  |
 
 ## Enumy
 

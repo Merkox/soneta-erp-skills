@@ -5,13 +5,6 @@ Opis: Tabela powiązań stanowisk pracy ze środkami trwałymi i wyposażeniem. 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `int` | bazodanowe | Ilość |  |

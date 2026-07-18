@@ -4,13 +4,6 @@ Tytuł: eDeklaracja
 Opis: Elektroniczna wersja deklaracji przeznaczona do transmisji do urzędu skarbowego. Przechowuje dokument XML, podpis elektroniczny, status wysyłki oraz urzędowe potwierdzenie odbioru (UPO). Śledzi cykl życia eDeklaracji od utworzenia przez podpisanie do potwierdzenia odbioru.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Deklaracja | `Soneta.Deklaracje.IEDeklaracjaHost` | bazodanowe, tylko-odczyt |  | Deklaracja przeznaczona do transmisji |

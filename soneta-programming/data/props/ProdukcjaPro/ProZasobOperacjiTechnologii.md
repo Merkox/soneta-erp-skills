@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji wzorcowej (IProOperacjaWzorcowa). Definiuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `IProOperacjaWzorcowa`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 4
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaRejestracji | `bool` | bazodanowe | Blokada rejestracji | Zablokowanie rejestracji czasów prac dla zasobu operacji technologii. |

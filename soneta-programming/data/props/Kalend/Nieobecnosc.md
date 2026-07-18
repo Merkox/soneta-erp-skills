@@ -5,13 +5,7 @@ Opis: Rejestracja nieobecności pracownika. Przechowuje okres, definicję nieobe
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZrodloNieobecnosci`, `IBazaZrodlaWyplaty`, `IBilansOtwarcia`, `IZrodloDeklaracji`
-
-- pola bazodanowe (zapisywalne): 31
-- pola kalkulowane (zapisywalne): 8
-- pola tylko-odczyt: 29
-- podlisty: 14
-- subrowy: 6
-- razem: 88
+Selektor: pole `TypZrodla` (`Soneta.Kalend.TypŹródłaNieobecności`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -69,7 +63,7 @@ Implementuje interfejsy: `IZrodloNieobecnosci`, `IBazaZrodlaWyplaty`, `IBilansOt
 | RozliczenieWDniu | `bool` | bazodanowe |  |  |
 | RozliczonyOkres | `FromTo` | podlista |  |  |
 | TypDni | `Soneta.Kalend.TypyDni` (enum) | tylko-odczyt |  |  |
-| TypZrodla | `Soneta.Kalend.TypŹródłaNieobecności` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypZrodla | `Soneta.Kalend.TypŹródłaNieobecności` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Urlop | `Soneta.Kalend.UrlopWypoczynkowy` (subrow) | bazodanowe |  |  |
 | Urlop.PodstawaDo | `Date` | bazodanowe |  |  |
 | Urlop.Przyczyna | `Soneta.Kalend.PrzyczynaUrlopu` (enum) | bazodanowe |  |  |
@@ -103,6 +97,18 @@ Implementuje interfejsy: `IZrodloNieobecnosci`, `IBazaZrodlaWyplaty`, `IBilansOt
 | Zwolnienie.Przyczyna | `Soneta.Kalend.PrzyczynaZwolnienia` (enum) | bazodanowe |  |  |
 | Zwolnienie.ZwolnienieDostarczone | `Date` | bazodanowe |  |  |
 | Zwolnienie.ZwolnienieWystawione | `Date` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypZrodla`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Pracownik` | 1 | `Soneta.Kalend.NieobecnośćPracownika` | Nieobecność |
+| `Nieobecność` | 2 | `Soneta.Kalend.KorektaNieobecności` | Korekta nieobecności |
+| `Umowa` | 3 | `Soneta.Kalend.NieobecnośćUmowa` | Nieobecność umowa |
+| `UmowaZewnetrzna` | 4 | `Soneta.Kalend.NieobecnośćUmowaZewnętrzna` | Nieobecność umowa |
 
 ## Relacje interfejsowe
 

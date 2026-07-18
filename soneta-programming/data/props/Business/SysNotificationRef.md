@@ -5,13 +5,6 @@ Opis: Powiązanie powiadomienia systemowego z definicją procesu lub zadania. Ok
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Notification` → `SysNotification`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Notification | `Db.Notifications.SysNotification` | bazodanowe, tylko-odczyt, guided-parent | Powiadomienie |  |

@@ -5,13 +5,6 @@ Opis: Partia towaru (grupa dostaw) umożliwiająca śledzenie pochodzenia towaru
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IKodowany`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada. | Blokuje możliwość manipulowania grupą dostaw. |

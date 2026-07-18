@@ -4,13 +4,7 @@ Tytuł: Definicje pól dynamicznych
 Opis: Definicja pola dynamicznego (runtime) na zdarzeniu lub innym obiekcie. Określa nazwę, typ danych, indeksowanie i parametry walidacji pola tworzonego przez użytkownika.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 18
-- podlisty: 2
-- subrowy: 0
-- razem: 36
+Selektor: pole `Type` (`Runtime.RuntimeRowType`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -45,11 +39,20 @@ Guided: root
 | ReferenceTable | `Table` | podlista |  | Tabela danych, do obiektów której odnosi się wartość cechy referencyjnej. |
 | ReferenceTableItem | `Db.TableContext.TableItem` |  |  | Tabela danych, do obiektów której odnosi się wartość cechy referencyjnej. |
 | TempFields | `string` | tylko-odczyt |  |  |
-| Type | `Runtime.RuntimeRowType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Type | `Runtime.RuntimeRowType` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypeInformation | `string` | bazodanowe, tylko-odczyt | Informacja | Informacja dodatkowa dla typu pola |
 | TypeName | `string` | tylko-odczyt |  |  |
 | UpdateManagedState | `bool` | bazodanowe |  |  |
 | VerifierCode | `string` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `DbTuple` | 2 | `Soneta.Core.DbTuples.DbTupleFieldDefinition` |  |
 
 ## Relacje interfejsowe
 

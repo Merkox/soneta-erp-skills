@@ -4,13 +4,6 @@ Tytuł: Tokeny Autoryzacji
 Opis: Przechowuje tokeny autoryzacyjne OAuth używane do uwierzytelniania kont pocztowych. Zawiera token dostępu, token odświeżania oraz informacje o czasie życia, umożliwiając bezpieczne i automatyczne odnawianie sesji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Created | `System.DateTime` | bazodanowe |  |  |

@@ -5,13 +5,6 @@ Opis: Token aplikacyjny do autoryzacji dostępu API. Przechowuje nazwę, typ, za
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ExpirationDate | `Date` | bazodanowe, tylko-odczyt | Data ważności | Data ważności tokena aplikacyjnego. |

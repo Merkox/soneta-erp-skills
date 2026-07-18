@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ListaPlac` → `PlanowanaListaPłac`
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 2
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe, tylko-odczyt |  |  |

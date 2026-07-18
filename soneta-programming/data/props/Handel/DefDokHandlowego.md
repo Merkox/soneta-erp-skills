@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IWarningHost`, `IDefinicjaDokumentuOA`
 
-- pola bazodanowe (zapisywalne): 236
-- pola kalkulowane (zapisywalne): 22
-- pola tylko-odczyt: 36
-- podlisty: 19
-- subrowy: 15
-- razem: 328
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualizujCeny | `Soneta.Handel.SposobAktualizacjiCen` (enum) | bazodanowe |  | Określa sposób aktualizowania cennika podczas zatwierdzania dokumentu. |

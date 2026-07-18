@@ -5,13 +5,6 @@ Opis: Element szczegółowy elementu struktury organizacyjnej (ElementStrukturyO
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Element` → `ElementStrukturyOrganizacyjnej`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

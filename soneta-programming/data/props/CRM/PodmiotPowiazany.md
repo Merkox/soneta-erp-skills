@@ -4,13 +4,6 @@ Tytuł: Podmiot powiązany
 Opis: Powiązanie kontrahenta z podmiotem w kontekście oddziału firmy. Umożliwia definiowanie relacji między kontrahentami a oddziałami (np. jako dostawca, odbiorca) wraz z informacjami o rodzaju powiązania, roli i okresie obowiązywania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 1
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kontrahent | `Soneta.CRM.Kontrahent` | bazodanowe |  |  |

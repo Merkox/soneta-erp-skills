@@ -6,13 +6,7 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `NieruchomoscHis`
 Implementuje interfejsy: `IZasobCRM`, `IDocumentHostCRM`, `IObiektDoPlanowania`
-
-- pola bazodanowe (zapisywalne): 54
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 8
-- podlisty: 20
-- subrowy: 0
-- razem: 87
+Selektor: pole `RodzajNieruchomosci` (`Soneta.RealEstate.Enums.RealEstateKind`) — wiele typów w jednej tabeli, podtypów: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -77,7 +71,7 @@ Implementuje interfejsy: `IZasobCRM`, `IDocumentHostCRM`, `IObiektDoPlanowania`
 | Przeznaczenie | `string` | bazodanowe | Przeznaczenie | Przeznaczenie nieruchomości |
 | RezerwujCalePomieszczenie | `bool` | bazodanowe | Rezerwuj całe pomieszczenie | Domyślna opcja rezerwacji całego pomieszczenia dla kierownika. |
 | Rodzaj | `string` | bazodanowe | Rodzaj | Rodzaj nieruchomości |
-| RodzajNieruchomosci | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt | Rodzaj nieruchomości |  |
+| RodzajNieruchomosci | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj nieruchomości |  |
 | RozliczeniaLokalu | `SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` | podlista |  |  |
 | RozliczeniaNieruchomosci | `SubTable<Soneta.RealEstate.Models.Database.RozliczenieMediow>` | podlista |  |  |
 | SerializedDiagram | `MemoText` | bazodanowe, podlista | Serializowane dane diagramu | Określa serializowane dane diagramu |
@@ -103,6 +97,24 @@ Implementuje interfejsy: `IZasobCRM`, `IDocumentHostCRM`, `IObiektDoPlanowania`
 | Wysokosc | `double` | bazodanowe | Wysokość | Wysokość |
 | Zarzadca | `Soneta.CRM.Kontrahent` | bazodanowe | Zarządca | Zarządca nieruchomości |
 | ZasobyCRM | `SubTable` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `RodzajNieruchomosci`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Counter` | 0 | `Soneta.RealEstate.Models.RealEstateCounter` | Licznik |
+| `Building` | 1 | `Soneta.RealEstate.Models.RealEstateBuilding` | Budynek |
+| `Construction` | 2 | `Soneta.RealEstate.Models.RealEstateConstruction` | Budowla |
+| `Storey` | 3 | `Soneta.RealEstate.Models.RealEstateStorey` | Kondygnacja |
+| `Room` | 4 | `Soneta.RealEstate.Models.RealEstateRoom` | Pomieszczenie |
+| `Premises` | 5 | `Soneta.RealEstate.Models.RealEstatePremises` | Lokal |
+| `Lot` | 6 | `Soneta.RealEstate.Models.RealEstateLot` | Działka |
+| `Installation` | 7 | `Soneta.RealEstate.Models.RealEstateInstallation` | Instalacja |
+| `Parking` | 8 | `Soneta.RealEstate.Models.RealEstateParking` | Parking |
+| `ParkingSpot` | 9 | `Soneta.RealEstate.Models.RealEstateParkingSpot` | Parking |
 
 ## Enumy
 

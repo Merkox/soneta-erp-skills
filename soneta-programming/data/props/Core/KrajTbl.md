@@ -5,13 +5,6 @@ Opis: Słownik krajów zgodny ze standardem ISO-3166-1. Zawiera kody alfa-2, alf
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Blokada - kraj zablokowany nie może być użyty do tworzenia nowych danych |

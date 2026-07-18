@@ -5,13 +5,6 @@ Opis: Element szczegółowy pozycji aktualizacji czasu (PozycjaAktualizacjiCzasu
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaAktualizacjiCzasu`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

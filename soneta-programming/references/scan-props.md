@@ -13,10 +13,12 @@ fallback dla tabel spoza wygenerowanego zestawu (świeży dodatek, nowsza kompil
 **Jak znaleźć tabelę:**
 1. Otwórz [`../data/props/INDEX.md`](../data/props/INDEX.md) i wyszukaj `RowType` (np. `DokumentHandlowy`).
    INDEX grupuje tabele wg modułu (z opisem modułu); kolumny:
-   `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik`.
+   `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`
+   (kolumna `Selektor`: `TypEnum (N)` gdy tabela przechowuje N podtypów rozróżnianych selektorem).
 2. Otwórz plik `data/props/<Moduł>/<RowType>.md` — to dokładnie ten sam markdown,
    który wypisałby skaner na żywo (nagłówek z nazwą tabeli, `Tytuł`/`Opis`, `Guided`, `Historyczna`/`Historia`,
-   interfejsami; rozłączne statystyki; tabela `Pole | Typ | Rodzaj | Tytuł | Opis`; sekcje
+   interfejsami, `Selektor` gdy tabela przechowuje wiele typów; tabela
+   `Pole | Typ | Rodzaj | Tytuł | Opis`; sekcje `## Selektor — podtypy w jednej tabeli`,
    `## Relacje interfejsowe` i `## Enumy`).
 
 Dodatkowo [`../data/props/Interfaces.md`](../data/props/Interfaces.md) — lista wszystkich interfejsów
@@ -109,6 +111,20 @@ Algorytm:
 12. **Znacznik `guided-parent`** — pole rekordu z atrybutem `[ColumnInfo(GuidedRelation=…)]`
     dostaje w kolumnie `Rodzaj` dodatkowy tag `guided-parent`, sygnalizując, że to ono trzyma
     referencję do rootu drzewa.
+13a. **Selektor (podtypy „wiele typów w jednej tabeli")** — skrypt zbiera rejestracje
+    assembly-level `[assembly: BusinessRow(typeof(Podtyp), wartość)]` ze **wszystkich** DLL
+    i grupuje podtypy po klasie `*Row` tabeli, do której należą (pierwsza klasa `*Row`
+    zagnieżdżona w `*Module` w łańcuchu dziedziczenia podtypu). Gdy tabela ma choć
+    jeden taki podtyp:
+    - do nagłówka trafia linia `Selektor: pole \`X\` (\`TypEnum\`) — wiele typów w jednej tabeli, podtypów: N`;
+    - pole rekordu trzymające wartość selektora (typu enum selektora) dostaje w kolumnie `Rodzaj`
+      tag `selektor`;
+    - po tabeli pól wypisywana jest sekcja `## Selektor — podtypy w jednej tabeli` z listą
+      `Wartość | Nr | Klasa podtypu | Tytuł` (nazwa stałej enuma, wartość liczbowa, klasa podtypu, tytuł).
+    Mechanizm wzorca selektora opisuje [row-types.md](row-types.md); odczyt atrybutów
+    assembly-level — [assembly-attributes.md](assembly-attributes.md). „Klasa podtypu" z tej sekcji
+    jest zarazem wartością atrybutu `class` przy imporcie **nowego** obiektu przez logikę biznesową
+    (`business="true"`) — zob. skill `/soneta-config` (import/eksport XML).
 13. **Znacznik `enum` i sekcja `## Enumy`** — dla każdego pola, którego typ jest enumem
     (`TypeKind.Enum`, także pod `Nullable<>`), kolumna `Rodzaj` dostaje tag `enum`. Po tabeli pól
     (i ewentualnej sekcji relacji interfejsowych) wypisywana jest sekcja `## Enumy`: dla każdego
@@ -156,13 +172,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`, `IKontrahentRef`
 
-- pola bazodanowe (zapisywalne): 96
-- pola kalkulowane (zapisywalne): 12
-- pola tylko-odczyt: 40
-- podlisty: 60
-- subrowy: 8
-- razem: 216
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Brutto | `decimal` | bazodanowe | Brutto | Wartość brutto dokumentu |
@@ -193,6 +202,26 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Anulowany` = 3
 ```
 
+Przykład wyjścia dla tabeli z **selektorem** (nagłówek + sekcja; tu `EwidencjaSP`):
+
+```markdown
+Nazwa tabeli: `EwidencjeSP`
+...
+Selektor: pole `Typ` (`Soneta.Kasa.TypEwidencjiSP`) — wiele typów w jednej tabeli, podtypów: 3
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| Typ | `Soneta.Kasa.TypEwidencjiSP` (enum) | bazodanowe, tylko-odczyt, selektor | | |
+
+## Selektor — podtypy w jednej tabeli
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Kasa` | 1 | `Soneta.Kasa.Kasa` | Kasa |
+| `RachunekBankowy` | 2 | `Soneta.Kasa.RachunekBankowyFirmy` | Rachunek bankowy |
+| `KartaPłatnicza` | 3 | `Soneta.Kasa.KartaPłatnicza` | Karta płatnicza |
+```
+
 Kolumna `Rodzaj` jest kombinacją znaczników rozdzielonych przecinkami:
 - `bazodanowe` — pole rekordu (`*Record`); brak znacznika = property kalkulowana klasy biznesowej.
 - `tylko-odczyt` — property bez publicznego settera (nie ustawisz jej kodem/importem XML).
@@ -200,6 +229,8 @@ Kolumna `Rodzaj` jest kombinacją znaczników rozdzielonych przecinkami:
   (poza `string`; wyjątek `Periods`). Elementy dodaje się, nie ustawia wprost.
 - `guided-parent` — pole z `[ColumnInfo(GuidedRelation=…)]` trzymające referencję do nadrzędnej
   tabeli w drzewie obiektów guided.
+- `selektor` — pole trzymające wartość selektora (typ enum); tabela przechowuje wiele typów
+  obiektów, których pełną listę podaje sekcja `## Selektor — podtypy w jednej tabeli`.
 - `iface-ref` — typ pola jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=…)]` innej tabeli;
   konkretne tabele docelowe są wymienione w sekcji `## Relacje interfejsowe` pod tabelą pól
   (globalny wykaz: [`../data/props/Interfaces.md`](../data/props/Interfaces.md)).
@@ -210,10 +241,6 @@ Kolumna `Typ` niesie sufiksy:
 
 Prefiksy `Soneta.Business.` i `Soneta.Types.` są w typie skracane (`Soneta.Business.Key` → `Key`).
 Pola oznaczone `[Obsolete]` są pomijane.
-
-**Statystyki** pod nagłówkiem są rozłączne (każde pole w jednej kategorii; sumują się do `razem`):
-`bazodanowe (zapisywalne)`, `kalkulowane (zapisywalne)`, `tylko-odczyt`, `podlisty`, `subrowy`
-(priorytet: subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane).
 
 **Historia** (nagłówek + kolumna INDEX): `Historyczna: … w tabeli H` (obiekt wersjonowany,
 `IRowWithHistory`) lub `Historia: … tabeli P` (rekord historyczny obiektu P, `IHistory`).
@@ -238,6 +265,9 @@ Pola oznaczone `[Obsolete]` są pomijane.
 
 - Dane wygenerowane: [`../data/props/`](../data/props/) (indeks: [`../data/props/INDEX.md`](../data/props/INDEX.md)) — pierwsze źródło pól tabel.
 - Skrypt wsadowej regeneracji: `scripts/export-props-all.csx` — buduje kompilację raz i eksportuje cały `data/props/`.
+- [row-types.md](row-types.md) — wzorzec selektora (`[BusinessRow]`/`[NewRow]`, klasa `abstract`,
+  podtypy) leżący u podstaw sekcji `## Selektor`; [assembly-attributes.md](assembly-attributes.md) —
+  odczyt atrybutów assembly-level, na których opiera się wykrywanie podtypów.
 - [scan-modules.md](scan-modules.md) — inwentaryzacja modułów/tabel; przydatna, by ustalić `RowType`/moduł (ta sama informacja jest też w `INDEX.md`).
 - Patrz [datapack-guidedrow.md](datapack-guidedrow.md) — struktury `GuidedRow` / `ExportedRow` i mechanizm Datapack operujący na polach rekordu.
 - Patrz skill `soneta-business-xml` — definicja schematu, z którego `BusinessGenerator` produkuje klasę `XxxRecord`.

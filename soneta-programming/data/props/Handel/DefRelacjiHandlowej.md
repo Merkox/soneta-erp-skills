@@ -4,13 +4,7 @@ Tytuł: Definicje relacji handlowych
 Opis: Konfigurowalna definicja relacji między dokumentami handlowymi. Określa typ relacji (kopiowanie, korygowanie itp.), zasady przenoszenia danych, pozycji, kontrahenta, dat i walut między dokumentem nadrzędnym a podrzędnym.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 86
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 3
-- podlisty: 6
-- subrowy: 7
-- razem: 106
+Selektor: pole `Typ` (`Soneta.Handel.TypRelacjiHandlowej`) — wiele typów w jednej tabeli, podtypów: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -29,7 +23,7 @@ Guided: root
 | PodrzedneDefinicje | `SubTable<Soneta.Handel.RelacjeDokumentow.DefDokPodrzednego>` | podlista |  |  |
 | SposobKopiowania | `Soneta.Handel.SposobKopiowaniaPozycji` (enum) | bazodanowe |  | Określa sposób kopiowania wartości pozycji dokumentów handlowych do dokumentów podrzędnych. |
 | SposobKopiowaniaKorekta | `Soneta.Handel.SposobKopiowaniaPozycji` (enum) | bazodanowe | Wartość pozycji przenoszona na korektę | Określa sposób kopiowania wartości pozycji na korekty automatyczne. |
-| Typ | `Soneta.Handel.TypRelacjiHandlowej` (enum) | bazodanowe, tylko-odczyt |  | Określa typ relacji opisujący jej zachowanie |
+| Typ | `Soneta.Handel.TypRelacjiHandlowej` (enum) | bazodanowe, tylko-odczyt, selektor |  | Określa typ relacji opisujący jej zachowanie |
 | ZNadrzednego | `Soneta.Handel.DefRelacjiZ` (subrow) | bazodanowe |  | Określa zasady tworzenia dokumentów podrzędnych z nadrzędnych. |
 | ZNadrzednego.AnulujNierozliczone | `bool` | bazodanowe |  | Anuluj nierozliczone pozycje. |
 | ZNadrzednego.AutomatycznieNowy | `bool` | bazodanowe |  | Dokument zależny jest tworzony automatycznie dla nowego dokumentu. |
@@ -120,6 +114,26 @@ Guided: root
 | Zachowanie.ZasobyZNadrzednego | `bool` | bazodanowe | Zasoby z nadrzędnego | Na pozycji podrzędnego powstaje wskazanie dostawy i pobierany jest zasób utworzony przez pozycję nadrzędnego. |
 | Zachowanie.ZastepowanieProduktowSkladnikami | `bool` | bazodanowe |  | Określa, czy w relacji kopiowania produkt na pozycji nadrzędnej zostanie zastąpiony składnikami na pozycji podrzędnej. |
 | Zachowanie.ZrodloNazwyTowaru | `Soneta.Handel.ZrodloDanychPrzyPrzeksztalcaniu` (enum) | bazodanowe | Zródło nazwy towaru | Określa skąd pobierana ma być nazwa towaru na pozycje. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Korekta` | 1 | `Soneta.Handel.DefRelacjiKorekta` | Korekta |
+| `Kopiowania` | 2 | `Soneta.Handel.DefRelacjiKopiowania` | Kopiowanie |
+| `HandlowoMagazynowa` | 3 | `Soneta.Handel.DefRelacjiMagazynowa` | Handlowo-magazynowa |
+| `Przesunięcie` | 4 | `Soneta.Handel.DefRelacjiPrzesunięcia` | Przesunięcie |
+| `Inwentaryzacja` | 6 | `Soneta.Handel.DefRelacjiInwentaryzacja` | Inwentaryzacja |
+| `Kompletacja` | 9 | `Soneta.Handel.DefRelacjiKompletacji` | Kompletacja |
+| `Wiązania` | 11 | `Soneta.Handel.DefRelacjiWiązania` | Wiązanie |
+| `Zaliczka` | 12 | `Soneta.Handel.DefRelacjiZaliczki` | Relacja zaliczki |
+| `Cykliczna` | 13 | `Soneta.Handel.DefRelacjiCykliczna` | Cykliczna |
+| `Kaucji` | 14 | `Soneta.Handel.DefRelacjiKaucji` | Kaucji |
+| `ProdukcjaSurowce` | 16 | `Soneta.Handel.DefRelacjiProdukcja.Surowce` | Produkcyjna surowce |
+| `ProdukcjaProdukty` | 17 | `Soneta.Handel.DefRelacjiProdukcja.Produkty` | Produkcyjna produkty |
 
 ## Relacje interfejsowe
 

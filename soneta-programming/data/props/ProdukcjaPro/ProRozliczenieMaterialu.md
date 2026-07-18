@@ -5,13 +5,6 @@ Opis: Element szczegółowy rozliczenia materiału (ProOperacjaZlecenia). Powią
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DostawaMaterialu | `Soneta.ProdukcjaPro.ProDostawaMaterialuMeldunku` | bazodanowe | Dostawa materiału meldunku | Dostawa materiału meldunku dla rozliczenia materiału. |

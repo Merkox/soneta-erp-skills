@@ -4,13 +4,6 @@ Tytuł: Komunikaty z latarnika KSeF
 Opis: Tabela przechowuje komunikaty z latarnika KSeF powiązane z awariami systemu. Każdy komunikat zawiera identyfikator, kategorię, typ, tytuł, treść oraz daty rozpoczęcia, zakończenia i opublikowania zdarzenia awaryjnego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 0
-- subrowy: 0
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Awaria | `Soneta.Core.KSeFAwaria` | bazodanowe, tylko-odczyt | Awaria | Awaria |

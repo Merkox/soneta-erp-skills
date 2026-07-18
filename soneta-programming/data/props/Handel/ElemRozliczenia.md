@@ -5,13 +5,6 @@ Opis: Element szczegółowy pozycji dokumentu handlowego (PozycjaDokHandlowego).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaDokHandlowego`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataDo | `Date` | bazodanowe |  | Data zakończenia trwania elementu. |

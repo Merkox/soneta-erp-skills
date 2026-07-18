@@ -5,13 +5,6 @@ Opis: Rejestr zdarzeń związanych z pojazdami, takich jak przeglądy, naprawy c
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Comments | `MemoText` | bazodanowe, podlista | Uwagi |  |

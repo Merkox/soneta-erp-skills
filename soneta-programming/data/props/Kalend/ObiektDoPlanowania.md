@@ -5,13 +5,6 @@ Opis: Element szczegółowy obiektu do planowania (IObiektDoPlanowania). Repreze
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czynnosci | `SubTable<Soneta.Kalend.CzynnoscNaObiekcieDoPlanowania>` | podlista |  |  |

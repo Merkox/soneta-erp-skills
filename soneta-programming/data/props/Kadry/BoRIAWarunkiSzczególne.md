@@ -5,13 +5,6 @@ Opis: Bilans otwarcia rocznej informacji o zatrudnieniu (RIA) w zakresie pracy w
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 2
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |

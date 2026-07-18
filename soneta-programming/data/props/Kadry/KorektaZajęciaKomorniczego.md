@@ -5,13 +5,7 @@ Opis: Korekta zajęcia komorniczego umożliwiająca zarejestrowanie dodatkowej w
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
-
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 1
-- razem: 16
+Selektor: pole `Rodzaj` (`Soneta.Kadry.RodzajeKorektZajęćKomorniczych`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -21,7 +15,7 @@ Implementuje interfejsy: `IBazaZrodlaWyplaty`
 | NumerDokumentu | `string` | bazodanowe |  |  |
 | Opis | `MemoText` | bazodanowe, podlista |  | Informacja o korekcie zajęcia komorniczego |
 | OpisPrzelewu | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Kadry.RodzajeKorektZajęćKomorniczych` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kadry.RodzajeKorektZajęćKomorniczych` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Rozliczenie | `Soneta.Kadry.RozliczenieDodatku` (subrow) | bazodanowe |  |  |
 | Rozliczenie.Odbiorca | `Soneta.Kasa.IPodmiotKasowy` | bazodanowe, iface-ref |  |  |
 | Rozliczenie.RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | bazodanowe |  |  |
@@ -31,6 +25,17 @@ Implementuje interfejsy: `IBazaZrodlaWyplaty`
 | Spłacona | `bool` | tylko-odczyt |  |  |
 | Wartosc | `Currency` | bazodanowe |  | Kwota do rozliczenia |
 | Zajecie | `Soneta.Kadry.ZajęcieKomornicze` | bazodanowe, tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ZwrotNadpłaty` | 1 | `Soneta.Kadry.KorektaZajęciaKomorniczego.ZwrotNadpłaty` | Zwrot nadpłaty |
+| `UznanieNadpłaty` | 2 | `Soneta.Kadry.KorektaZajęciaKomorniczego.UznanieNadpłaty` | Uznanie nadpłaty |
+| `RozliczenieDepozytu` | 3 | `Soneta.Kadry.KorektaZajęciaKomorniczego.RozliczenieDepozytu` | Rozliczenie depozytu |
 
 ## Relacje interfejsowe
 

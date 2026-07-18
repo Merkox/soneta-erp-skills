@@ -4,13 +4,6 @@ Tytuł: Punkty macierzy kryteriów wartościowania
 Opis: Tabela przechowuje punktację macierzy wartościowania. Umożliwia obliczenia i porównania wartościowania stanowisk.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 10
-- podlisty: 0
-- subrowy: 1
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AnalityczneIdent | `System.Guid` | bazodanowe, tylko-odczyt |  |  |

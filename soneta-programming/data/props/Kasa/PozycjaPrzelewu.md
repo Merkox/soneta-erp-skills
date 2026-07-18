@@ -5,13 +5,6 @@ Opis: Element szczegółowy przelewu (PrzelewBase) wiążący przelew z konkretn
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przelew` → `PrzelewBase`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataPrzelewu | `Date` | bazodanowe |  |  |

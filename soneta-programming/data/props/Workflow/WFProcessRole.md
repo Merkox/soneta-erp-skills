@@ -5,17 +5,11 @@ Opis: Rola procesowa powiązana do definicji procesu. Rola procesowa jest widocz
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`, `IWFRecipientHost`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 2
-- podlisty: 4
-- subrowy: 2
-- razem: 20
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | ExecutorType | `Db.WFProcessRoleExecutorType` (enum) | bazodanowe | Rodzaj wykonującego | Rodzaj wykonującego |
 | GetTaskUsersByProcessRoleCode | `Db.AlgorithmColumn` (subrow) | bazodanowe | Algorytm metody GetTaskUsersByProcessRole | Określa algorytm metody GetTaskUsersByProcessRole |
 | Index | `int` |  |  |  |
@@ -35,6 +29,16 @@ Implementuje interfejsy: `IWfPlugInItemReferenceHost`, `IWFRecipientHost`
 | TaskUsers | `System.Collections.Generic.IEnumerable<ITaskUser>` | podlista |  |  |
 | WFRecipients | `SubTable<Soneta.Workflow.Config.WFRecipient>` | podlista |  |  |
 | WorkflowDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe, tylko-odczyt | Definicja workflow | Definicja workflow powiązana z elementem workflow |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.Config.WFProcessRole` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WFProcessRoleExtend` |  |
 
 ## Relacje interfejsowe
 

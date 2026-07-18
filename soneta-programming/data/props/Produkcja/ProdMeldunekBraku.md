@@ -5,13 +5,6 @@ Opis: Rejestr meldunków braków produkcyjnych zgłaszanych podczas realizacji o
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataZgloszenia | `System.DateTime` | bazodanowe | Data zgłoszenia | Data zgłoszenia meldunku braku. |

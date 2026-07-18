@@ -4,13 +4,6 @@ Tytuł: Historia statusów Biała lista
 Opis: Rejestr historii weryfikacji rachunku bankowego w Wykazie podatników VAT (Biała Lista). Przechowuje wyniki kolejnych sprawdzeń, w tym status, datę weryfikacji, identyfikator zapytania oraz zastosowaną metodę weryfikacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `Date` | bazodanowe | Data aktualności |  |

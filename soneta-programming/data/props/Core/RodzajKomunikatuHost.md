@@ -4,13 +4,6 @@ Tytuł: Rodzaje komunikatów
 Opis: Konfiguracja rodzajów komunikatów EDI przypisanych do definicji dokumentów. Określa rodzaj, kierunek (import/eksport) i zastosowanie komunikatu dla danego typu dokumentu, z liczbą porządkową.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Core.IDefinicjaKomunikatuEDIHost` | bazodanowe, iface-ref | Obiekt, dla którego zdefionowano komunikat |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy zasobu produkcyjnego (ProZasob). Definiuje warianty 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zasob` → `ProZasob`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTj | `TimeSec` | bazodanowe | Czas tj | Czas jednostkowy wariantowości zasobu. |

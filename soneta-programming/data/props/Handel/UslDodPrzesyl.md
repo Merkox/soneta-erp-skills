@@ -4,13 +4,6 @@ Tytuł: Usługi dodatkowe przesyłki
 Opis: Usługa dodatkowa przypisana do przesyłki kurierskiej na dokumencie handlowym (np. ubezpieczenie, pobranie). Zawiera kwotę i godzinę usługi.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DokumentHandlowy | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument handlowy |  |

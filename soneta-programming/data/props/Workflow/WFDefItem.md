@@ -5,13 +5,7 @@ Opis: Wzorzec (szablon) zadania używany w definicjach procesów workflow. Okre�
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWFDefItem`, `IWfPlugInItemReferenceHost`
-
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 6
-- podlisty: 6
-- subrowy: 1
-- razem: 34
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -23,7 +17,7 @@ Implementuje interfejsy: `IWFDefItem`, `IWfPlugInItemReferenceHost`
 | ClassName | `string` | tylko-odczyt |  |  |
 | Code | `MemoText` | bazodanowe, podlista | Kod algorytmu | Kod algorytmu kalkulatora definicji elementu workflow |
 | DataType | `System.Type` | tylko-odczyt |  |  |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | DefinitionWizard | `Db.Wizard.WizardDefinition` | bazodanowe | Definicja kreatora | Definicja kreatora powiązana z definicją elementu workflow |
 | Description | `MemoText` | bazodanowe, podlista | Opis | Opis definicji elementu workflow |
 | EndType | `Soneta.Workflow.Enums.EndTypeEnum` (enum) | bazodanowe | Typ elementu końcowego | Określa typ elementu końcowego definicja elementu workflow |
@@ -49,6 +43,16 @@ Implementuje interfejsy: `IWFDefItem`, `IWfPlugInItemReferenceHost`
 | TaskDefs | `SubTable` | podlista |  |  |
 | UseDefaultIcon | `bool` | bazodanowe | Domyślna ikona | Określa czy użyć domyślnej ikony. |
 | Wizard | `Db.Wizard.WizardDefinition` | bazodanowe | Definicja kreatora inicjującego definicję zadania | Definicja kreatora inicjującego definicję zadania powiązana z definicją elementu workflow |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.Config.WFDefItem` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WFDefItemExtend` |  |
 
 ## Enumy
 

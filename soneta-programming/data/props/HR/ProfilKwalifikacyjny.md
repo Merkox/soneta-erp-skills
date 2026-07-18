@@ -5,13 +5,6 @@ Opis: Opisuje zestaw kwalifikacji wymaganych na stanowisku. Umożliwia komplekso
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 23
-- subrowy: 0
-- razem: 42
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DoswGrupaOperatorNiezbedne | `Soneta.HR.ZKL.Enums.OperatorWymagan` (enum) | bazodanowe | Doświadczenie w grupie stanowisk - operator (niezbędne) |  |

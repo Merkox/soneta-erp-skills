@@ -106,11 +106,15 @@ foreach (var top in modules)
 foreach (var list in interfaceImpls.Values)
     list.Sort(StringComparer.Ordinal);
 
+// Indeks selektorów (podtypy „wiele typów w jednej tabeli") budowany RAZ ze wszystkich assembly:
+// mapa klasa *Row → wpisy [assembly: BusinessRow].
+var selectorByRow = BuildSelectorIndex(compilation);
+
 // ── Iteracja po realnych tabelach każdego modułu ──────────────────────────────
 Directory.CreateDirectory(outDir);
 
 // INDEX + zliczniki
-var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string Caption, string Interfaces, string History, string RelPath)>();
+var indexRows = new List<(string Module, string RowType, string TableType, string Konfig, string Guided, string Caption, string Interfaces, string History, string Selector, string RelPath)>();
 var moduleMeta = new Dictionary<string, (string Caption, string Description)>(StringComparer.Ordinal);
 int filesWritten = 0, modulesWithTables = 0;
 
@@ -146,15 +150,15 @@ foreach (var module in modules)
         var record = module.GetTypeMembers(recordBaseName + "Record").FirstOrDefault();
         if (record == null) continue; // brak *Record → nie realna tabela danych
 
-        var (md, konfig, guided, tableType, caption, interfaces, history) = BuildRecordMarkdown(
-            recordBaseName, module, record, topLevelClasses, interfaceImpls);
+        var (md, konfig, guided, tableType, caption, interfaces, history, selector) = BuildRecordMarkdown(
+            recordBaseName, module, record, topLevelClasses, interfaceImpls, selectorByRow);
 
         var filePath = Path.Combine(moduleDir, recordBaseName + ".md");
         File.WriteAllText(filePath, md);
         filesWritten++;
 
         var rel = moduleShort + "/" + recordBaseName + ".md";
-        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, caption, interfaces, history, rel));
+        indexRows.Add((moduleShort, recordBaseName, tableType, konfig, guided, caption, interfaces, history, selector, rel));
     }
 }
 
@@ -166,9 +170,11 @@ idx.AppendLine("Pliki w tym katalogu zostały wygenerowane wsadowo przez");
 idx.AppendLine("`scripts/export-props-all.csx` (ta sama logika co `scan-props.csx`).");
 idx.AppendLine("Każdy plik `<Moduł>/<RowType>.md` zawiera pełną tabelę pól jednej tabeli.");
 idx.AppendLine("Ten INDEX to zarazem pełna inwentaryzacja modułów i tabel (moduł z `Opis`; tabela:");
-idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik`).");
+idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`).");
 idx.AppendLine("Kolumna `Historia`: `historyczna → H` (obiekt wersjonowany, historia w tabeli H) albo");
-idx.AppendLine("`historia → P` (rekord historyczny obiektu P). Lista interfejsów i tabel je implementujących:");
+idx.AppendLine("`historia → P` (rekord historyczny obiektu P). Kolumna `Selektor`: `TypEnum (N)` gdy tabela");
+idx.AppendLine("przechowuje N podtypów rozróżnianych selektorem (szczegóły w sekcji `## Selektor` pliku tabeli).");
+idx.AppendLine("Lista interfejsów i tabel je implementujących:");
 idx.AppendLine("[Interfaces.md](Interfaces.md). Instrukcja odczytu i regeneracji: [../references/scan-props.md](../../references/scan-props.md).");
 idx.AppendLine();
 idx.AppendLine($"- Modułów z tabelami: {modulesWithTables}");
@@ -187,10 +193,10 @@ foreach (var grp in indexRows.GroupBy(r => r.Module).OrderBy(g => g.Key, StringC
         if (!string.IsNullOrEmpty(meta.Description)) idx.AppendLine($"- Opis: {InlineText(meta.Description)}");
         if (!string.IsNullOrEmpty(meta.Caption) || !string.IsNullOrEmpty(meta.Description)) idx.AppendLine();
     }
-    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik |");
-    idx.AppendLine("|---------|-------|--------|--------|--------|----------|------------|------|");
+    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik |");
+    idx.AppendLine("|---------|-------|--------|--------|--------|----------|------------|----------|------|");
     foreach (var r in grp.OrderBy(r => r.RowType, StringComparer.Ordinal))
-        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.History)} | {EscapeCell(r.Interfaces)} | [{r.RelPath}]({r.RelPath}) |");
+        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.History)} | {EscapeCell(r.Interfaces)} | {EscapeCell(r.Selector)} | [{r.RelPath}]({r.RelPath}) |");
     idx.AppendLine();
 }
 
@@ -229,12 +235,13 @@ return 0;
 // ══════════════════════════════════════════════════════════════════════════════
 // Budowa markdown pojedynczej tabeli — logika identyczna jak scan-props.csx.
 // Zwraca (markdown, konfig, guided, tableType) — trzy ostatnie do INDEX-u.
-static (string Md, string Konfig, string Guided, string TableType, string Caption, string Interfaces, string History) BuildRecordMarkdown(
+static (string Md, string Konfig, string Guided, string TableType, string Caption, string Interfaces, string History, string Selector) BuildRecordMarkdown(
     string recordBaseName,
     INamedTypeSymbol enclosing,
     INamedTypeSymbol foundRecord,
     Dictionary<string, INamedTypeSymbol> topLevelClasses,
-    SortedDictionary<string, List<string>> interfaceImpls)
+    SortedDictionary<string, List<string>> interfaceImpls,
+    Dictionary<INamedTypeSymbol, List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)>> selectorByRow)
 {
     var sb = new StringBuilder();
 
@@ -268,6 +275,21 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
     var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool IsDb, bool ReadOnly, bool IsSubRow, string Caption, string Description)>(StringComparer.Ordinal);
     var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
     ScanRecord(foundRecord, "", visited, merged, topLevelClasses);
+
+    // Selektor: podtypy „wiele typów w jednej tabeli" należące do tej klasy *Row (patrz row-types.md).
+    var selectorEntries = GetSelectorEntries(rowClass, selectorByRow);
+    INamedTypeSymbol selectorEnumType = selectorEntries.Select(e => e.EnumType).FirstOrDefault(t => t != null);
+    var selectorValueNames = BuildEnumValueNameMap(selectorEnumType);
+    string selectorFieldName = null;
+    if (selectorEntries.Count > 0 && selectorEnumType != null)
+    {
+        foreach (var kv in merged)
+        {
+            if (kv.Key.Contains('.')) continue;
+            var en = AsEnum(kv.Value.Sym);
+            if (en != null && SymbolEqualityComparer.Default.Equals(en, selectorEnumType)) { selectorFieldName = kv.Key; break; }
+        }
+    }
 
     if (mainBusinessClass != null)
         sb.AppendLine($"# Pola i właściwości klasy biznesowej: `{mainBusinessClass.ToDisplayString()}`");
@@ -313,25 +335,15 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
         }
         if (thisInterfaces.Count > 0)
             sb.AppendLine($"Implementuje interfejsy: {string.Join(", ", thisInterfaces.Select(i => "`" + i + "`"))}");
+        if (selectorEntries.Count > 0)
+        {
+            var enumDisp = selectorEnumType != null ? PrettyType(selectorEnumType.ToDisplayString()) : "int";
+            sb.AppendLine(selectorFieldName != null
+                ? $"Selektor: pole `{selectorFieldName}` (`{enumDisp}`) — wiele typów w jednej tabeli, podtypów: {selectorEntries.Count}"
+                : $"Selektor: `{enumDisp}` — wiele typów w jednej tabeli, podtypów: {selectorEntries.Count}");
+        }
     }
 
-    sb.AppendLine();
-    // Rozłączny rozkład wg roli (subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane).
-    int subRowCount = 0, subListCount = 0, readOnlyCount = 0, dbCount = 0, calcCount = 0;
-    foreach (var v in merged.Values)
-    {
-        if (v.IsSubRow) subRowCount++;
-        else if (IsSubListType(v.Sym)) subListCount++;
-        else if (v.ReadOnly) readOnlyCount++;
-        else if (v.IsDb) dbCount++;
-        else calcCount++;
-    }
-    sb.AppendLine($"- pola bazodanowe (zapisywalne): {dbCount}");
-    sb.AppendLine($"- pola kalkulowane (zapisywalne): {calcCount}");
-    sb.AppendLine($"- pola tylko-odczyt: {readOnlyCount}");
-    sb.AppendLine($"- podlisty: {subListCount}");
-    sb.AppendLine($"- subrowy: {subRowCount}");
-    sb.AppendLine($"- razem: {merged.Count}");
     sb.AppendLine();
     sb.AppendLine("| Pole | Typ | Rodzaj | Tytuł | Opis |");
     sb.AppendLine("|------|-----|--------|-------|------|");
@@ -347,6 +359,7 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
         if (isSubList) tags.Add("podlista");
         else if (kv.Value.ReadOnly && !isSubRow) tags.Add("tylko-odczyt");
         if (guidedParentField != null && kv.Key == guidedParentField) tags.Add("guided-parent");
+        if (selectorFieldName != null && kv.Key == selectorFieldName) tags.Add("selektor");
         var shortType = ShortTypeName(kv.Value.Type);
         if (shortType.StartsWith("I") && shortType.Length > 1 && char.IsUpper(shortType[1])
             && interfaceImpls.TryGetValue(shortType, out var impls))
@@ -359,6 +372,30 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
         var typeSuffix = en != null ? " (enum)" : (isSubRow ? " (subrow)" : "");
         var typeCol = "`" + PrettyType(kv.Value.Type) + "`" + typeSuffix;
         sb.AppendLine($"| {kv.Key} | {typeCol} | {string.Join(", ", tags)} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
+    }
+
+    // Enum selektora trafia do sekcji `## Enumy` z pełną listą wartości, także bez publicznego pola.
+    if (selectorEnumType != null) enumsUsed[selectorEnumType.ToDisplayString()] = selectorEnumType;
+
+    if (selectorEntries.Count > 0)
+    {
+        sb.AppendLine();
+        sb.AppendLine("## Selektor — podtypy w jednej tabeli");
+        sb.AppendLine();
+        sb.AppendLine("Tabela przechowuje różne typy obiektów rozróżniane wartością selektora"
+            + (selectorFieldName != null ? $" (pole `{selectorFieldName}`)" : "") + ".");
+        sb.AppendLine("Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.");
+        sb.AppendLine();
+        sb.AppendLine("| Wartość | Nr | Klasa podtypu | Tytuł |");
+        sb.AppendLine("|---------|----|---------------|-------|");
+        foreach (var e in selectorEntries)
+        {
+            var name = selectorValueNames.TryGetValue(e.Value, out var nm) ? nm : "—";
+            var cls = PrettyType(e.SubType.ToDisplayString());
+            var cap = GetAttributeFirstString(e.SubType, "CaptionAttribute");
+            if (string.IsNullOrEmpty(cap)) cap = GetAttributeFirstString(e.SubType, "DescriptionAttribute");
+            sb.AppendLine($"| `{name}` | {e.Value} | `{cls}` | {EscapeCell(cap)} |");
+        }
     }
 
     if (interfaceFields.Count > 0)
@@ -390,8 +427,13 @@ static (string Md, string Konfig, string Guided, string TableType, string Captio
         }
     }
 
+    // Do INDEX-u: krótka nazwa enuma selektora + liczba podtypów (puste, gdy tabela bez selektora).
+    var selectorText = selectorEntries.Count > 0
+        ? $"{ShortTypeName(selectorEnumType?.ToDisplayString() ?? "int")} ({selectorEntries.Count})"
+        : "";
+
     return (sb.ToString(), isConfigTable ? "konfig" : "", guidedText, tableTypeName ?? "",
-        tableCaption ?? "", string.Join(", ", thisInterfaces), historyText);
+        tableCaption ?? "", string.Join(", ", thisInterfaces), historyText, selectorText);
 }
 
 static string ShortTypeName(string fullName)
@@ -701,6 +743,68 @@ static IEnumerable<(string Name, string Value, string Caption)> GetEnumMembers(I
         var val = Convert.ToString(m.ConstantValue, System.Globalization.CultureInfo.InvariantCulture) ?? "";
         yield return (m.Name, val, cap);
     }
+}
+
+// ── Selektory (podtypy „wiele typów w jednej tabeli") ──────────────────────────
+// Skopiowane 1:1 ze scan-props.csx — trzymać zsynchronizowane. Zbiera rejestracje
+// [assembly: BusinessRow(typeof(Podtyp), wartość)] i grupuje podtypy po klasie *Row tabeli,
+// do której należą. Patrz row-types.md i assembly-attributes.md.
+static Dictionary<INamedTypeSymbol, List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)>>
+    BuildSelectorIndex(CSharpCompilation compilation)
+{
+    var byRow = new Dictionary<INamedTypeSymbol, List<(INamedTypeSymbol, INamedTypeSymbol, long)>>(SymbolEqualityComparer.Default);
+    foreach (var asmRef in compilation.References)
+    {
+        if (compilation.GetAssemblyOrModuleSymbol(asmRef) is not IAssemblySymbol asm) continue;
+        foreach (var a in asm.GetAttributes())
+        {
+            var an = a.AttributeClass?.Name;
+            if (an is not ("BusinessRowAttribute" or "BusinessRow")) continue;
+            var ctor = a.ConstructorArguments;
+            if (ctor.Length < 2 || ctor[0].Value is not INamedTypeSymbol sub) continue;
+            long val; try { val = Convert.ToInt64(ctor[1].Value); } catch { continue; }
+            var enumType = ctor[1].Kind == TypedConstantKind.Enum ? ctor[1].Type as INamedTypeSymbol : null;
+            var rowCls = FindOwningRowClass(sub);
+            if (rowCls == null) continue;
+            if (!byRow.TryGetValue(rowCls, out var list)) byRow[rowCls] = list = new();
+            list.Add((sub, enumType, val));
+        }
+    }
+    return byRow;
+}
+
+// Klasa *Row (tabela) będąca właścicielem podtypu — pierwszy w łańcuchu dziedziczenia typ o nazwie
+// kończącej się na "Row" zagnieżdżony w klasie "*Module" (np. `CoreModule.DefinicjaDokumentuRow`).
+static INamedTypeSymbol FindOwningRowClass(INamedTypeSymbol type)
+{
+    for (var t = type; t != null && t.SpecialType != SpecialType.System_Object; t = t.BaseType)
+        if (t.Name.EndsWith("Row") && t.ContainingType != null && t.ContainingType.Name.EndsWith("Module"))
+            return t;
+    return null;
+}
+
+// Posortowane wpisy selektora danej tabeli (rosnąco po wartości, potem po nazwie klasy).
+static List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)> GetSelectorEntries(
+    INamedTypeSymbol rowClass,
+    Dictionary<INamedTypeSymbol, List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)>> byRow)
+{
+    if (rowClass != null && byRow.TryGetValue(rowClass, out var list))
+        return list.OrderBy(e => e.Value).ThenBy(e => e.SubType.ToDisplayString(), StringComparer.Ordinal).ToList();
+    return new();
+}
+
+// Mapa wartość liczbowa → nazwa stałej enuma (pierwsza dla danej wartości).
+static Dictionary<long, string> BuildEnumValueNameMap(INamedTypeSymbol en)
+{
+    var map = new Dictionary<long, string>();
+    if (en == null) return map;
+    foreach (var m in en.GetMembers().OfType<IFieldSymbol>())
+    {
+        if (!m.HasConstantValue) continue;
+        long v; try { v = Convert.ToInt64(m.ConstantValue); } catch { continue; }
+        if (!map.ContainsKey(v)) map[v] = m.Name;
+    }
+    return map;
 }
 
 // Ścieżka bieżącego skryptu — dotnet-script udostępnia zmienną globalną, ale bezpieczniej

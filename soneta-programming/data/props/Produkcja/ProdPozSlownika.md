@@ -5,13 +5,6 @@ Opis: Element szczegółowy słownika produkcyjnego (ProdSlownik). Przechowuje p
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Slownik` → `ProdSlownik`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kod | `string` | tylko-odczyt |  |  |

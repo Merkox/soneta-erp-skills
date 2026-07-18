@@ -5,13 +5,7 @@ Opis: Kartoteka rodzajów szkoleń oferowanych przez organizację. Definiuje typ
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 10
-- subrowy: 0
-- razem: 30
+Selektor: pole `Typ` (`Soneta.CzlonkowieSzkolenia.RodzajSzkolenia`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -40,11 +34,21 @@ Implementuje interfejsy: `IElementSlownika`
 | ShowLicenses | `bool` | tylko-odczyt |  |  |
 | Stan | `Soneta.CzlonkowieSzkolenia.StanSzkolenia` (enum) | bazodanowe | Stan szkolenia | Stan szkolenia. |
 | Symbol | `string` | bazodanowe | Symbol szkolenia | Symbol szkolenia. |
-| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.RodzajSzkolenia` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Unijne | `bool` | bazodanowe |  | Określa szkolenie unijne. |
 | Uprawnienia | `SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolUprawnienie>` | podlista |  |  |
 | Wpisowe | `bool` | bazodanowe |  | Wpisowe na studia |
 | Wyroznienia | `SubTable<Soneta.CzlonkowieSzkolenia.RodzajSzkolWyroznienie>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standardowe` | 1 | `Soneta.CzlonkowieSzkolenia.RodzajSzkol` |  |
+| `Wydarzenie` | 3 | `Soneta.CzlonkowieSzkolenia.WydarzSzkol` | Wydarzenie |
 
 ## Enumy
 

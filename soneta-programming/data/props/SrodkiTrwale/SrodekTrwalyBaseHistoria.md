@@ -5,13 +5,7 @@ Opis: Element szczegółowy środka trwałego (SrodekTrwalyBase). Rejestruje his
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
 Historia: Tak — zapis historyczny tabeli `SrodekTrwalyBase`
-
-- pola bazodanowe (zapisywalne): 35
-- pola kalkulowane (zapisywalne): 14
-- pola tylko-odczyt: 9
-- podlisty: 4
-- subrowy: 3
-- razem: 65
+Selektor: pole `Typ` (`Soneta.SrodkiTrwale.TypSrodkaTrwalego`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -68,7 +62,7 @@ Historia: Tak — zapis historyczny tabeli `SrodekTrwalyBase`
 | Sezonowosc.Rodzaj | `Soneta.SrodkiTrwale.RodzajSezonowosci` (enum) | bazodanowe |  | Rodzaj sezonowości |
 | Sezonowosc.Wartosc | `string` | bazodanowe |  |  |
 | Srodek | `Soneta.SrodkiTrwale.SrodekTrwalyBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
-| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt |  | Typ środka trwałego |
+| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ środka trwałego |
 | UlgaInwestycyjna | `Currency` | bazodanowe |  | Wartość zaliczona do ulgi inwestycyjnej |
 | UlgaInwestycyjna30 | `Currency` | bazodanowe |  | Wartość 30% ulgi inwestycyjnej w pierwszym roku użytkowania |
 | WartoscPoczatkowaKUP | `Currency` | bazodanowe |  | E_12 – Wartość początkowa KUP |
@@ -80,6 +74,17 @@ Historia: Tak — zapis historyczny tabeli `SrodekTrwalyBase`
 | ZaktualizowanaWartoscPoczatkowaKUP | `Currency` | bazodanowe |  | E_13 - Zaktualizowana wartość początkowa podatkowa z Rozporządzenia |
 | Zestaw | `Soneta.SrodkiTrwale.ZestawST` | bazodanowe |  | Zestaw, do którego należy środek trwały |
 | ZmianaWartosciPoczatkowejKUP | `Currency` | bazodanowe |  | E_15 – Zmiana wartości początkowej KUP |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ŚrodekTrwały` | 1 | `Soneta.SrodkiTrwale.SrodekTrwalyHistoria` | Środek trwały |
+| `WartośćNiematerialnaIPrawna` | 2 | `Soneta.SrodkiTrwale.WartoscNiematerialnaIPrawnaHistoria` | Wartość niematerialna i prawna |
+| `Wyposażenie` | 3 | `Soneta.SrodkiTrwale.SrodekWyposazenieHistoria` | Wyposażenie |
 
 ## Enumy
 

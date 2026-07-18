@@ -4,13 +4,6 @@ Tytuł: Mnożniki macierzy kryteriów wartościowania
 Opis: Tabela zawiera mnożniki korygujące wartości macierzy. Pozwala dostosować wyniki do specyfiki organizacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 7
-- podlisty: 0
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Macierz | `Soneta.HR.ZKL.Wartosciowanie.Macierze.MacierzWartosciowania` | bazodanowe, tylko-odczyt | Macierz wartościowania |  |

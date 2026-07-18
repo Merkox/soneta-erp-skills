@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`, `IRegonHost`, `IDaneKontaktoweHost`, `IEmailElement`
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 1
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |

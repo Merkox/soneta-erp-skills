@@ -5,13 +5,6 @@ Opis: Element szczegółowy aktualizacji dnia pracy (DzienPracyAktualizacja). St
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienPracyAktualizacja`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 1
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

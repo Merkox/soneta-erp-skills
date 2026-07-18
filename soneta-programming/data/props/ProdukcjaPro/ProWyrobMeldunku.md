@@ -5,13 +5,6 @@ Opis: Element szczegółowy wyrobu meldunku (ProMeldunek). Opisuje wyrób powsta
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 0
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Cena | `DoubleCy` | bazodanowe |  | Cena wyrobu meldunku. |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `ITaskUser`, `IAuthorised`, `INoticeRecipient`, `IMfaOperator`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 6
-- podlisty: 7
-- subrowy: 0
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Credentials | `SubTable<CredentialKey>` | podlista |  |  |

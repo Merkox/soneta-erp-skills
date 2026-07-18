@@ -5,13 +5,6 @@ Opis: Element szczegółowy towaru (Towar). Rozszerza kartotekę towarową o par
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CenaStala | `DoubleCy` | bazodanowe | Cena stała | Cena stała towaru. |

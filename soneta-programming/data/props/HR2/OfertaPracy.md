@@ -5,13 +5,6 @@ Opis: Ogłoszenie o pracę publikowane na potrzeby rekrutacji. Zawiera dane stan
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IŹródłoRekrutacji`, `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 1
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

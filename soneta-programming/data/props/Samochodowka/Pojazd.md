@@ -4,13 +4,7 @@ Opis: Kartoteka pojazdów wykorzystywanych w ewidencji przebiegu. Przechowuje da
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IZasobCRM`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 9
-- subrowy: 0
-- razem: 18
+Selektor: pole `VehicleType` (`Soneta.Samochodowka.VehicleBusinessType`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -29,9 +23,18 @@ Implementuje interfejsy: `IElementSlownika`, `IZasobCRM`
 | Towary | `SubTable` | podlista |  |  |
 | Typ | `Soneta.Samochodowka.TypPojazdu` (enum) | bazodanowe |  | Typ pojazdu |
 | UsedVehicles | `SubTable` | podlista |  |  |
-| VehicleType | `Soneta.Samochodowka.VehicleBusinessType` (enum) | bazodanowe |  |  |
+| VehicleType | `Soneta.Samochodowka.VehicleBusinessType` (enum) | bazodanowe, selektor |  |  |
 | Wycofany | `bool` | bazodanowe |  |  |
 | ZasobyCRM | `SubTable` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `VehicleType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 1 | `Soneta.Vehicles.Vehicle` | Pojazd |
 
 ## Relacje interfejsowe
 

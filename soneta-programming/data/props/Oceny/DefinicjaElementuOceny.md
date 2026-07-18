@@ -4,13 +4,7 @@ Tytuł: Definicje elementów ocen
 Opis: Definicja pojedynczego kryterium oceny (kompetencji, zachowania, zadania). Określa nazwę, kategorię, miarę oceniania i rodzaj elementu, stanowiąc budulec arkuszy oceny pracowniczej.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 12
-- podlisty: 4
-- subrowy: 2
-- razem: 29
+Selektor: pole `Rodzaj` (`Soneta.Oceny.RodzajeElementuOceny`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -41,8 +35,21 @@ Guided: root
 | PozycjaDokumentu.WgSekcja | `Key` | podlista |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
 | PrzeznaczonyDla | `Soneta.Oceny.TableRef` |  |  |  |
-| Rodzaj | `Soneta.Oceny.RodzajeElementuOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Oceny.RodzajeElementuOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | RodzajZrodla | `string` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Kompetencja` | 1 | `Soneta.HR.Oceny.ElementOcenyKompetencja` | Kompetencja twarda (kwalifikacje) |
+| `Zachowanie` | 2 | `Soneta.HR.Oceny.ElementOcenyZachowanie` | Kompetencja miękka (zachowanie) |
+| `Zadanie` | 3 | `Soneta.HR.Oceny.ElementOcenyZadanie` | Cel okresowy |
+| `ElementOceny` | 10 | `Soneta.Oceny.ElementOceny` | Element oceny |
+| `ElementAnkiety` | 11 | `Soneta.Ankiety.ElementAnkiety` | Element ankiety |
 
 ## Enumy
 

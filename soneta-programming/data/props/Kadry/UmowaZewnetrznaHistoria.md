@@ -5,13 +5,7 @@ Opis: Element szczegółowy umowy zewnętrznej (UmowaZewnetrzna). Wersja history
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `UmowaZewnetrzna`
 Historia: Tak — zapis historyczny tabeli `UmowaZewnetrzna`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 2
-- subrowy: 0
-- razem: 17
+Selektor: pole `Typ` (`Soneta.Kadry.TypUmowyZewnetrznej`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -28,10 +22,20 @@ Historia: Tak — zapis historyczny tabeli `UmowaZewnetrzna`
 | Poprzedni | `Soneta.Kadry.UmowaZewnetrznaHistoria` | tylko-odczyt |  |  |
 | PowodAktualizacji | `string` | bazodanowe, tylko-odczyt | Powód aktualizacji | Opis powodu aktualizacji zapisu |
 | Stanowisko | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Umowa | `Soneta.Kadry.UmowaZewnetrzna` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | WgZestawien | `bool` | bazodanowe |  |  |
 | ZakresUmowy | `string` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `UmowaB2B` | 1 | `Soneta.Kadry.UmowaB2BHistoria` |  |
+| `UmowaAPT` | 2 | `Soneta.Kadry.UmowaAPTHistoria` |  |
 
 ## Enumy
 

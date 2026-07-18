@@ -5,13 +5,6 @@ Opis: Definicja kreatora (wizarda) prowadzącego użytkownika przez wielokrokowy
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 8
-- pola tylko-odczyt: 11
-- podlisty: 7
-- subrowy: 1
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AfterSaveAndFinishCode | `string` |  | Kod algorytmu metody AfterSaveAndFinish | Kod algorytmu kalkulatora metody wykonywanej po zapisie kreatora |

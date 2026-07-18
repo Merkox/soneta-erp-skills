@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDocumentHostCRM`
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 4
-- subrowy: 0
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ActualConsumption | `double` | tylko-odczyt |  |  |

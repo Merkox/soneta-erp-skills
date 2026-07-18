@@ -5,13 +5,6 @@ Opis: Raport nieobecności importowany z platformy PUE ZUS. Przechowuje datę wy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresEmail | `string` | bazodanowe |  |  |

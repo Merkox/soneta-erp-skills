@@ -5,13 +5,6 @@ Opis: Zgoda na edycję danych kadrowo-płacowych w zamkniętym okresie dla danej
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kadry | `bool` | bazodanowe |  |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy elementu wypłaty (WypElement). Rejestruje operację
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Stornowany` → `WypElement`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Automatyczne | `bool` | bazodanowe, tylko-odczyt |  |  |

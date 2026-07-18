@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Okresowe zestawienie czasu p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 11
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadgodziny100 | `Time` |  |  |  |

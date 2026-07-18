@@ -4,13 +4,7 @@ Tytuł: Pozycje ZD
 Opis: Element szczegółowy dokumentu złych długów (ZleDlugiDokument). Reprezentuje pojedynczą pozycję korekty powiązaną z płatnością lub rozliczeniem, z datą korekty i kwotą. Obsługuje zarówno zwiększenia, jak i zmniejszenia podstawy opodatkowania w ramach ulgi na złe długi.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `ZleDlugiDokument`
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 9
-- podlisty: 2
-- subrowy: 0
-- razem: 17
+Selektor: pole `Typ` (`Soneta.Ksiega.TypPozycjiZleDlugi`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -30,7 +24,17 @@ Guided: child — nadrzędna przez pole `Dokument` → `ZleDlugiDokument`
 | Saldo | `Currency` | tylko-odczyt | Saldo złe długi |  |
 | StatusPozycji | `Soneta.Ksiega.StatusPozycjiZleDlugi` (enum) | tylko-odczyt | Typ status |  |
 | TerminSkrocony | `bool` | bazodanowe | Termin płatności skrócony | Termin płatności skrócony |
-| Typ | `Soneta.Ksiega.TypPozycjiZleDlugi` (enum) | bazodanowe, tylko-odczyt |  | Typ pozycji |
+| Typ | `Soneta.Ksiega.TypPozycjiZleDlugi` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ pozycji |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Korekta` | 1 | `Soneta.Ksiega.ZleDlugiKorekta` | Korekta ZD |
+| `Rozliczenie` | 2 | `Soneta.Ksiega.ZleDlugiRozliczenie` | Rozliczenie ZD |
 
 ## Enumy
 

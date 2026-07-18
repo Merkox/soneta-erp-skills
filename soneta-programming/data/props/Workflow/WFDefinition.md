@@ -5,13 +5,7 @@ Opis: Główna tabela konfiguracyjna modułu Workflow przechowująca definicje p
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IWFDefinition`, `ICodeFileHost`, `IWfPlugInReferenceHost`, `ISysNotificationReference`, `IWizardReferenceHost`
-
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 13
-- podlisty: 15
-- subrowy: 3
-- razem: 58
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,7 +13,7 @@ Implementuje interfejsy: `IRightsSource`, `IWFDefinition`, `ICodeFileHost`, `IWf
 | DataCode | `MemoText` | bazodanowe, podlista |  |  |
 | DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Definicja zarządcy | Definicja rekordu zarządzającego procesem. |
 | DbTupleInterface | `string` | bazodanowe | Definicja interfejsu zarządcy | Interfejs rekordu zarządzającego procesem. |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | DependentEngine | `bool` | bazodanowe | Jednozakładkowy zależny |  |
 | DependentStandard | `bool` |  |  |  |
 | Description | `string` | bazodanowe | Opis | Opis definicji |
@@ -73,6 +67,16 @@ Implementuje interfejsy: `IRightsSource`, `IWFDefinition`, `ICodeFileHost`, `IWf
 | VersionAsString | `string` | tylko-odczyt |  |  |
 | WFWorkflows | `SubTable<Soneta.Workflow.WFWorkflow>` | podlista |  |  |
 | WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.Config.WFDefinition` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WFDefinitionExtend` | Definicja procesu (jednozakładkowego) |
 
 ## Relacje interfejsowe
 

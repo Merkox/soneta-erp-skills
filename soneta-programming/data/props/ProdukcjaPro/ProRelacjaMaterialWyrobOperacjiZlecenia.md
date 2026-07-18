@@ -5,13 +5,6 @@ Opis: Element szczegółowy materiału operacji zlecenia (ProMaterialOperacjiZle
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Material` → `ProMaterialOperacjiZlecenia`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `Amount` | bazodanowe | Ilość | Ilość relacji materiał wyrób operacji zlecenia. |

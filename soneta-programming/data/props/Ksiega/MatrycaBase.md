@@ -4,13 +4,7 @@ Tytuł: Matryce dokumentów i zapłat
 Opis: Matryca dokumentu lub zapłaty definiuje szablon automatycznego uzupełniania danych na dokumentach i zapłatach. Zawiera symbol, powiązanie z definicją dokumentu, rozszerzenie logiki oraz opcjonalny kod operatora. Matrycę można przypisać do podmiotu w celu automatycznego stosowania.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 1
-- razem: 21
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -31,10 +25,22 @@ Guided: root
 | RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | UserCodeEnabled | `bool` | bazodanowe |  | Włączanie kodu operatora |
 | UserCodeMethod | `MemoText` | bazodanowe, podlista |  | Kod operatora uzupełniający działanie matrycy |
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Wpłata` | 102 | `Soneta.Ksiega.MatrycaWplaty` | Matryca wpłaty |
+| `Wypłata` | 103 | `Soneta.Ksiega.MatrycaWyplaty` | Matryca wypłaty |
+| `SprzedażEwidencja` | 1201 | `Soneta.Ksiega.MatrycaSprzedazy` | Matryca sprzedaży |
+| `ZakupEwidencja` | 1202 | `Soneta.Ksiega.MatrycaZakupu` | Matryca zakupu |
 
 ## Enumy
 

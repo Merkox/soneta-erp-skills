@@ -3,13 +3,6 @@ Nazwa tabeli: `WynagrodzeERP7`
 Opis: Bilans otwarcia danych o wynagrodzeniach z systemu ERP7 (RP-7). Przechowuje skumulowane kwoty wynagrodzeń pracownika w podziale na kategorie składkowe, służące do prawidłowego wyliczenia świadczeń.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | KwotyInne | `decimal` | bazodanowe |  |  |

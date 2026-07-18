@@ -5,13 +5,6 @@ Opis: Tabela przechowuje pozycje paczek dokumentów. Każda pozycja powiązana j
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 11
-- podlisty: 1
-- subrowy: 0
-- razem: 27
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AnalysingState | `Db.DocPkgItemAnalysingState` (enum) | bazodanowe | Etap analizy | Etap procesu analizowania dokumentu |

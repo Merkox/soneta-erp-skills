@@ -4,13 +4,7 @@ Tytuł: Kategorie elementów ocen
 Opis: Kategoria grupująca elementy oceny (np. kompetencje miękkie, wiedza techniczna). Umożliwia organizację kryteriów oceniania w logiczne grupy z własną miarą i priorytetem wyświetlania.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 4
-- subrowy: 1
-- razem: 21
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -34,7 +28,17 @@ Guided: root
 | Miara.Zdefiniowana | `bool` | tylko-odczyt |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
 | Priorytet | `int` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.KategoriaElementuOceny` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.KategoriaElementuAnkiety` |  |
 
 ## Enumy
 

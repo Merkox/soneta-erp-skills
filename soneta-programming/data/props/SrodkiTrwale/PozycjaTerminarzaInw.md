@@ -4,13 +4,6 @@ Tytuł: Terminarz inwentarza
 Opis: Pozycja terminarza inwentaryzacji środków trwałych. Definiuje planowaną datę i nazwę czynności inwentaryzacyjnej oraz rejestruje datę jej faktycznej realizacji, umożliwiając kontrolę harmonogramu spisu z natury.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataPlanowana | `Date` | bazodanowe |  | Planowana data realizacji |

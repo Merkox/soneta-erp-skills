@@ -5,13 +5,6 @@ Opis: Instancja wygenerowanego tokena aplikacyjnego. Przechowuje unikalny hash, 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe |  |  |

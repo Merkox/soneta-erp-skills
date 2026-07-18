@@ -5,13 +5,6 @@ Opis: Element szczegółowy kalkulacji meldunku (ProMeldunek). Zawiera szczegó�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 50
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 51
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | GniazdaNarzut | `Percent` | bazodanowe | Narzut gniazd | Narzut gniazd dla kalkulacji meldunku. |

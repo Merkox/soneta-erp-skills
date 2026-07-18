@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 8
-- podlisty: 6
-- subrowy: 1
-- razem: 31
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` |  |  |  |

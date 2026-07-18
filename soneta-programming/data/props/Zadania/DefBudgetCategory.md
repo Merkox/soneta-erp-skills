@@ -4,13 +4,7 @@ Tytuł: Kategoria budżetu
 Opis: Kategoria klasyfikacji pozycji budżetowych (np. memoriałowa, płatność, zapłata). Określa typ korekty, sposób rozliczania oraz dozwolone wartości kwot i ilości opisów analitycznych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 22
+Selektor: pole `BudgetType` (`Soneta.Zadania.Budzetowanie.TypObrotuBudzetu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,7 +12,7 @@ Guided: root
 | AllowedValueOfElement | `Soneta.Core.AllowedValueOfElement` (enum) | bazodanowe | Dozwolone wartości | Dozwolone kwoty i ilości opisów analitycznych. |
 | AmountKind | `Soneta.Core.CategoryAmountKind` (enum) | bazodanowe | Rodzaj kwoty | Rodzaj kwoty kategorii budżetowej. |
 | AvailableSettlementKind | `Soneta.Core.SettlementOAKind` (enum) | bazodanowe | Dostępny rodzaj rozliczenia | Dostępny rodzaj rozliczenia. |
-| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe, tylko-odczyt | Typ kategorii budżetu | Typ kategorii budżetu |
+| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe, tylko-odczyt, selektor | Typ kategorii budżetu | Typ kategorii budżetu |
 | CategoryDefinitionRelationships | `System.Collections.Generic.IEnumerable<Soneta.Core.IBudgetCategoryDefinition>` | podlista |  |  |
 | CorrectionType | `Soneta.Core.CorrectionType` (enum) | bazodanowe | Typ korekty | Typ korekty |
 | DefBudgetCateg | `SubTable<Soneta.Zadania.Budzetowanie.DefBudgetCategoryRelation>` | podlista |  |  |
@@ -36,6 +30,16 @@ Guided: root
 | SettlementCategory | `bool` | bazodanowe | Kategoria płatność | Kategoria płatność. |
 | SettlementKind | `Soneta.Core.SettlementKind` (enum) |  |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji wykorzystywana do wyszukiwania definicji oraz numeracji. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `BudgetType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Realizacja` | 0 | `Soneta.Zadania.Budzetowanie.Models.DefBudgetCategoryRealization` | Realizacja |
+| `Plan` | 1 | `Soneta.Zadania.Budzetowanie.Models.DefBudgetCategoryPlanning` | Planowanie |
 
 ## Enumy
 

@@ -5,13 +5,6 @@ Opis: Zakres czasowy i filtrujący dla procesu utrwalania listy. Powiązany z de
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Date | `System.DateTime` | bazodanowe, tylko-odczyt | Data utrwalania | Data i godzina rozpoczęcia utrwalania. |

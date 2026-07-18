@@ -4,13 +4,6 @@ Tytuł: Dostepne stany
 Opis: Konfiguracja dozwolonych przejść między stanami realizacji zadania CRM. Określa, na jaki stan docelowy można zmienić dany stan wyjściowy zadania.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Child | `Soneta.Zadania.StanZadania` | bazodanowe | Dostępny stan |  |

@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IElementSlownikZewnRel`, `IKodowany`, `IAdresyWWWHost`
 
-- pola bazodanowe (zapisywalne): 70
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 14
-- podlisty: 41
-- subrowy: 6
-- razem: 136
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresyWWW | `SubTable<Soneta.Core.AdresWWW>` | podlista |  |  |

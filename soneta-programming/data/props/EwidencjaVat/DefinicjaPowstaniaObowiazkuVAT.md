@@ -4,13 +4,7 @@ Tytuł: Definicje powstania obowiązku VAT
 Opis: Definicja momentu powstania obowiązku podatkowego VAT. Określa zasady rozliczania (memoriałowe, kasowe), warunki powstania obowiązku oraz termin prawa do odliczenia. Służy do automatycznego ustalania daty obowiązku VAT na dokumentach zakupu i sprzedaży.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 1
-- razem: 11
+Selektor: pole `Typ` (`Soneta.EwidencjaVat.TypTytułuObowiązkuVAT`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -24,7 +18,19 @@ Guided: root
 | PowstanieObowiazku.Warunek | `Soneta.EwidencjaVat.WarunekRozliczeniaVAT` (enum) | bazodanowe |  |  |
 | PowstanieObowiazku.WarunekPrawoOdliczenia | `bool` | bazodanowe | Prawo odliczenia | Prawo odliczenia VAT, jeżeli rozliczony przez wypełnienie warunku |
 | PowstanieObowiazku.Zasada | `Soneta.EwidencjaVat.ZasadaRozliczaniaVAT` (enum) | bazodanowe |  |  |
-| Typ | `Soneta.EwidencjaVat.TypTytułuObowiązkuVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.EwidencjaVat.TypTytułuObowiązkuVAT` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Sprzedaż` | 0 | `Soneta.EwidencjaVat.DefinicjaPowstaniaObowiazkuVATSprzedaz` | Definicja powstania obowiązku VAT - sprzedaż |
+| `Zakup` | 1 | `Soneta.EwidencjaVat.DefinicjaPowstaniaObowiazkuVATZakup` | Definicja powstania obowiązku VAT - zakup |
+| `SprzedażAkcyza` | 2 | `Soneta.EwidencjaVat.DefinicjaPowstaniaObowiazkuAkcyzaSprzedaz` | Definicja powstania obowiązku akcyzy - sprzedaż |
+| `ZakupAkcyza` | 3 | `Soneta.EwidencjaVat.DefinicjaPowstaniaObowiazkuAkcyzaZakup` | Definicja powstania obowiązku akcyzy - zakup |
 
 ## Enumy
 

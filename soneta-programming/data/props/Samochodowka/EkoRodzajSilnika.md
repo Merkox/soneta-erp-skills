@@ -5,13 +5,6 @@ Opis: Słownik rodzajów silników pojazdów na potrzeby rozliczeń środowiskow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Opis | `string` | bazodanowe, tylko-odczyt |  | Opis rodzaju silnika |

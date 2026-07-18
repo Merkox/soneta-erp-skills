@@ -5,13 +5,7 @@ Opis: Historia zatrudnienia pracownika u poprzednich pracodawców oraz okresy na
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`
-
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 9
-- subrowy: 2
-- razem: 40
+Selektor: pole `Typ` (`Soneta.Kadry.TypHistoriiZatrudnienia`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -46,7 +40,7 @@ Implementuje interfejsy: `IManagedRowInfoHost`
 | Szkola | `Soneta.Kadry.TypSzkoły` (enum) | bazodanowe |  |  |
 | SzkolaStaz | `Soneta.Kadry.StazPracy` | bazodanowe |  |  |
 | TyUb | `Soneta.Kadry.TytulUbezpieczenia` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypHistoriiZatrudnienia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypHistoriiZatrudnienia` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wyksztalcenie | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.WyksztalceniePracownika` (subrow) | bazodanowe | Wykształcenie |  |
 | Wyksztalcenie.Kierunek | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Kierunek |  |
 | Wyksztalcenie.Poziom | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomWyksztalcenia` | bazodanowe | Poziom |  |
@@ -55,6 +49,16 @@ Implementuje interfejsy: `IManagedRowInfoHost`
 | Wyksztalcenie.WgPoziom | `Key` | podlista |  |  |
 | Wyksztalcenie.WgTytulStopien | `Key` | podlista |  |  |
 | ZawszeIlościowo | `bool` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Zatrudnienie` | 1 | `Soneta.Kadry.HistoriaZatrudnienia` | Historia zatrudnienia |
+| `Wyksztalcenie` | 2 | `Soneta.Kadry.UkonczonaSzkola` | Ukończona szkoła |
 
 ## Relacje interfejsowe
 

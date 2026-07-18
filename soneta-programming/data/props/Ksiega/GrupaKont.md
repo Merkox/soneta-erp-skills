@@ -4,13 +4,7 @@ Tytuł: Grupy kont
 Opis: Grupa kont definiuje nazwany zbiór kont księgowych w ramach okresu obrachunkowego. Służy do logicznego grupowania kont na potrzeby zestawień, schematów księgowych i raportów, z możliwością rozszerzenia o dodatkową logikę.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 12
+Selektor: pole `Typ` (`Soneta.Ksiega.TypGrupyKont`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -24,8 +18,18 @@ Guided: root
 | StronaGrupyBudzetujacejPlan | `Soneta.Ksiega.StronaGrupyBudzetujacej` (enum) |  |  | Strona pozycji budżetującej - plan |
 | StronaGrupyBudzetujacejWykonanie | `Soneta.Ksiega.StronaGrupyBudzetujacej` (enum) |  |  | Strona pozycji budżetującej - Wykonanie |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypGrupyKont` (enum) | bazodanowe, tylko-odczyt |  | Typ grupy kont |
+| Typ | `Soneta.Ksiega.TypGrupyKont` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ grupy kont |
 | WeryfikacjaGrupyBudzetujacej | `VerifierType` (enum) |  |  | Weryfikacja grupy budżetującej |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Synchronizująca` | 1 | `Soneta.Ksiega.GrupaKontSynchronizujaca` | Synchronizująca |
+| `Budżetująca` | 2 | `Soneta.Ksiega.GrupaKontBudzetujaca` | Budżetująca |
 
 ## Enumy
 

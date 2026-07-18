@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji funduszu pożyczkowego (DefinicjaFunduszuP
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaFunduszuPozyczkowego` → `DefinicjaFunduszuPozyczkowego`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaFunduszuPozyczkowego | `Soneta.Kadry.DefinicjaFunduszuPozyczkowego` | bazodanowe, tylko-odczyt, guided-parent | Definicja funduszu pozyczkowego |  |

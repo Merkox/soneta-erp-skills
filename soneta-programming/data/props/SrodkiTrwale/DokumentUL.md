@@ -5,13 +5,7 @@ Opis: Dokumenty umów leasingowych powiązanych ze środkami trwałymi. Przechow
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
-
-- pola bazodanowe (zapisywalne): 39
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 11
-- podlisty: 7
-- subrowy: 1
-- razem: 60
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -66,7 +60,7 @@ Implementuje interfejsy: `IDokument`
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
 | TerminPierwszejRaty | `Date` | bazodanowe |  | Termin pierwszej raty |
 | TerminWykupu | `Date` | bazodanowe |  | Termin wykupu |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ dokumentu |
 | Tytul | `Soneta.SrodkiTrwale.TytulDokumentuST` | bazodanowe | Tytuł dokumentu | Tytuł dokumentu środków trwałych |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
@@ -75,6 +69,16 @@ Implementuje interfejsy: `IDokument`
 | WspolczynnikDyskontaStr | `string` | tylko-odczyt |  |  |
 | Zakonczona | `bool` | bazodanowe | Zakończona | Zakończenie umowy |
 | ZaplaconeDo | `Date` | bazodanowe |  | Uwzględniaj jako zapłacone do |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Leasing` | 1324 | `Soneta.SrodkiTrwale.UmowaLeasingu` | Umowa leasingowa |
+| `ZmianaParametrowLeasingu` | 1325 | `Soneta.SrodkiTrwale.ZmianaParametrowLeasingu` | Zmiana parametrów leasingu |
 
 ## Relacje interfejsowe
 

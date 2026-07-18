@@ -4,13 +4,7 @@ Tytuł: Elementy przeszeregowań
 Opis: Element szczegółowy przeszeregowania (Przeszeregowanie). Określa zmianę warunków dla konkretnego pracownika: nową kwotę, procent, grupę zaszeregowania lub krotność składnika wynagrodzenia.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przeszeregowanie` → `Przeszeregowanie`
-
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 18
+Selektor: pole `RodzajPrzeszergowania` (`Soneta.Przeszeregowania.RodzajPrzeszergowania`) — wiele typów w jednej tabeli, podtypów: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -27,11 +21,25 @@ Guided: child — nadrzędna przez pole `Przeszeregowanie` → `Przeszeregowanie
 | Procent | `Percent` | bazodanowe |  |  |
 | ProcentowaZmianaKwoty | `Percent` | bazodanowe |  |  |
 | Przeszeregowanie | `Soneta.Przeszeregowania.Przeszeregowanie` | bazodanowe, tylko-odczyt, guided-parent |  |  |
-| RodzajPrzeszergowania | `Soneta.Przeszeregowania.RodzajPrzeszergowania` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RodzajPrzeszergowania | `Soneta.Przeszeregowania.RodzajPrzeszergowania` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wskaznik | `string` | bazodanowe |  |  |
 | ZmianaKrotnosci | `double` | bazodanowe |  |  |
 | ZmianaKwoty | `Currency` | bazodanowe |  |  |
 | ZmianaProcentu | `Percent` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `RodzajPrzeszergowania`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ZmianaStawki` | 1 | `Soneta.Przeszeregowania.ZmianaStawki` | Zmiana stawki zaszeregowania |
+| `NowyDodatek` | 2 | `Soneta.Przeszeregowania.NowyDodatek` | Wypłata nowego dodatku |
+| `ZakończDodatek` | 3 | `Soneta.Przeszeregowania.ZakończDodatek` | Zakończenie wypłaty dodatku |
+| `ZmianaDodatku` | 4 | `Soneta.Przeszeregowania.ZmianaDodatku` | Zmiana dodatku |
+| `DodajNagrodę` | 5 | `Soneta.Przeszeregowania.DodajNagrodę` | Wypłata nagrody |
+| `DodanieLubZmianaDodatku` | 6 | `Soneta.Przeszeregowania.DodajZmienDodatek` | Dodanie lub zmiana dodatku |
 
 ## Enumy
 

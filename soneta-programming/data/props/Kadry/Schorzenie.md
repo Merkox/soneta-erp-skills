@@ -4,13 +4,6 @@ Opis: Ewidencja schorzeń i niepełnosprawności pracownika. Rejestruje okres, t
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Okres | `FromTo` | bazodanowe, podlista |  |  |

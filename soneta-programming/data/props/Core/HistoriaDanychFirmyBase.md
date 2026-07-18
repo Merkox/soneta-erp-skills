@@ -4,13 +4,7 @@ Tytuł: Historia danych firmy
 Opis: Historia danych firmy (głównego podmiotu). Przechowuje historyczne wersje danych firmy (nazwa, NIP, EU VAT, REGON, adres, numer licencji) z datą obowiązywania, z podziałem na rodzaje zmian.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 11
-- podlisty: 0
-- subrowy: 1
-- razem: 38
+Selektor: pole `Rodzaj` (`Soneta.Core.RodzajHistoriiFirmy`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -49,9 +43,19 @@ Guided: root
 | NumerLicencji | `string` | bazodanowe | Numer licencji oddziału | Numer licencji do weryfikacji danych oddziału. |
 | PKD | `string` | tylko-odczyt |  |  |
 | REGON | `string` | bazodanowe |  |  |
-| Rodzaj | `Soneta.Core.RodzajHistoriiFirmy` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Core.RodzajHistoriiFirmy` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | StatusLicencji | `string` | tylko-odczyt |  |  |
 | Termin | `Date` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `HistoriaDanychFirmy` | 1 | `Soneta.Core.HistoriaDanychFirmy` |  |
+| `HistoriaDanychBiuraRachunkowego` | 2 | `Soneta.Core.HistoriaDanychBiuraRachunkowego` | Historia danych biura rachunkowego |
 
 ## Enumy
 

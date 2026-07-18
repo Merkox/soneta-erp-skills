@@ -5,13 +5,6 @@ Opis: Pozycja (klasa) w hierarchicznym wykazie akt, identyfikowana symbolem w ra
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 1
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ArchiveCategory | `Soneta.Workflow.Dms.Config.ArchiveCategory` (subrow) | bazodanowe | Kategoria archiwalna | Kategoria archiwalna klasy wykazu akt |

@@ -5,13 +5,6 @@ Opis: Obszar lub kategoria w hierarchii folderów pulpitów. Organizuje panele w
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 3
-- subrowy: 0
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AreaParent | `Db.DashboardArea` |  |  |  |

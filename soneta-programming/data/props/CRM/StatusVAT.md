@@ -4,13 +4,6 @@ Tytuł: Statusy VAT
 Opis: Historia weryfikacji statusu VAT kontrahenta. Rejestruje wyniki sprawdzeń aktywności numeru VAT (np. w rejestrze podatników), wraz z datą, identyfikatorem zapytania i informacją zwrotną.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `Date` | bazodanowe | Data aktualności |  |

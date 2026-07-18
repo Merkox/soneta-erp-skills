@@ -5,13 +5,7 @@ Opis: Realizacja oceny okresowej przeprowadzanej w organizacji. Reprezentuje kon
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 0
-- razem: 21
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -34,8 +28,18 @@ Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`
 | PowiązaniaStrOrg | `SubTable<Soneta.Core.PowiązanieStrukturyOrganizacyjnej>` | podlista |  |  |
 | Rok | `int` |  |  |  |
 | Termin | `Date` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Zrodlo | `Soneta.Oceny.IŹródłoOceny` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.OcenaRealizacja` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.AnkietaRealizacja` | Ankieta |
 
 ## Relacje interfejsowe
 

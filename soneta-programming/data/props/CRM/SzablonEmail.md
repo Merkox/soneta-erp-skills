@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `ITemplate`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 4
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

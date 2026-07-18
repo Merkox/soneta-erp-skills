@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Miesięczna ewidencja przych
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 29
-- podlisty: 0
-- subrowy: 0
-- razem: 49
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czerwiec | `decimal` | bazodanowe |  |  |

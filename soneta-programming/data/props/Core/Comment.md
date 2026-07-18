@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDiscussionItem`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 12
-- podlisty: 5
-- subrowy: 1
-- razem: 27
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AssignedUser | `ITaskUser` | bazodanowe, tylko-odczyt, iface-ref | Powiązany użytkownik |  |

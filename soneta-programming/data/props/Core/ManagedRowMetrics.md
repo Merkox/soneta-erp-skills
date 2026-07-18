@@ -5,13 +5,6 @@ Opis: Element szczegółowy informacji o zarządzaniu (ManagedRowInfo). Wpis w m
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ManagedRowInfo` → `ManagedRowInfo`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 9
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Autor | `GuidedRow` | tylko-odczyt |  |  |

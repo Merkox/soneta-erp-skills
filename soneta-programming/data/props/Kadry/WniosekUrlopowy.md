@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe (zapisywalne): 24
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 10
-- podlisty: 19
-- subrowy: 8
-- razem: 68
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaOkresu | `bool` | tylko-odczyt |  |  |

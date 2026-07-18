@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji zaciemniania (ObfuscateDef). Określa konk
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `ObfuscateDef` → `ObfuscateDef`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ObfuscateDef | `Soneta.Core.ObfuscateDef` | bazodanowe, guided-parent | Zakres |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy fantomu materiału (ProRozliczenieMaterialu). Reprez
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `RozliczenieMaterialu` → `ProRozliczenieMaterialu`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  | Data fantomu materiału. |

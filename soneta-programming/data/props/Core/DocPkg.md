@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 4
-- subrowy: 1
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | tylko-odczyt |  |  |

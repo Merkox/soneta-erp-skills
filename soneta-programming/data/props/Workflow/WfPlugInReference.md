@@ -5,13 +5,6 @@ Opis: Element szczegółowy hosta wtyczek (IWfPlugInReferenceHost). Powiązanie 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definition` → `IWfPlugInReferenceHost`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definition | `IWfPlugInReferenceHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Wtyczka dla |  |

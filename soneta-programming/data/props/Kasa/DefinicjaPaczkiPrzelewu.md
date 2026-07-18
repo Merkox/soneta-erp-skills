@@ -5,13 +5,6 @@ Opis: Szablon definicji paczki przelewów określający sposób numeracji i grup
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 1
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie definicji. Zablokowane definicje dokumentów nie będą wyświetlane w liście wyboru. |

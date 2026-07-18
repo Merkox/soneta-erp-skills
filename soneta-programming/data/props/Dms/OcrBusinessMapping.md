@@ -5,13 +5,6 @@ Opis: Format mapowania danych z rozpoznawania OCR na strukturę komunikatu XML. 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Name | `string` | bazodanowe | Nazwa | Nazwa formatu mapowania OCR |

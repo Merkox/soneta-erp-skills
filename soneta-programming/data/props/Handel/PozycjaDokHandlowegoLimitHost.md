@@ -5,13 +5,6 @@ Opis: Powiązanie hosta (obiektu obsługującego) z limitem pozycji dokumentu ha
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `ILimitHost`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Handel.ILimitHost` | bazodanowe, guided-parent | Host |  |

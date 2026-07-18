@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaStanowiska` → `DefinicjaStanowiska`
 Historia: Tak — zapis historyczny tabeli `DefinicjaStanowiska`
 
-- pola bazodanowe (zapisywalne): 29
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 10
-- podlisty: 7
-- subrowy: 1
-- razem: 48
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

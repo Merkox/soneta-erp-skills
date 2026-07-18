@@ -4,13 +4,6 @@ Tytuł: Uprawnienia budżetów
 Opis: Uprawnienie do pozycji budżetu projektu. Definiuje poziom dostępu (odczyt, edycja) dla operatora lub grupy organizacyjnej do konkretnej pozycji budżetowej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BudzetProjektu | `Soneta.Zadania.Budzetowanie.BudzetProjektu` | bazodanowe, tylko-odczyt | Budżet projektu |  |

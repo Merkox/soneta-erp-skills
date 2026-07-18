@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IOGSchema`, `IWorkflowItemDescriptionHost`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 13
-- podlisty: 7
-- subrowy: 1
-- razem: 37
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ClassName | `string` | tylko-odczyt |  |  |

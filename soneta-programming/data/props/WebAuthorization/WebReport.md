@@ -4,13 +4,6 @@ Opis: Definicja raportu dostępnego w aplikacji webowej enova365. Określa nazw�
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe | Aktywny | Stan raportu włączony/wyłączony z użycia. |

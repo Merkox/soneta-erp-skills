@@ -5,13 +5,6 @@ Opis: Element szczegółowy Delegacja (Delegacja). Reprezentuje pojedynczy odcin
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Delegacja` → `Delegacja`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTrwania | `Time` |  |  |  |

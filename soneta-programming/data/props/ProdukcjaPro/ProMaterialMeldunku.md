@@ -5,13 +5,6 @@ Opis: Element szczegółowy materiału meldunku (ProMeldunek). Opisuje materiał
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 26
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 4
-- subrowy: 0
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CenaPlanowana | `DoubleCy` | bazodanowe | Cena planowana | Cena planowana materiału meldunku. |

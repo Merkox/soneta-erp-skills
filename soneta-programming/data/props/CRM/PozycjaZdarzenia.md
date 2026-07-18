@@ -5,13 +5,6 @@ Opis: Element szczegółowy zdarzenia CRM (PozycjaZdarzenia). Rejestruje kolejne
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentZdarzenia`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

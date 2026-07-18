@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja grafiku pracy. Określa zakres godzinowy dnia (od
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 3
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `MemoText` | bazodanowe, podlista |  |  |

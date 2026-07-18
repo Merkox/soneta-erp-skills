@@ -4,13 +4,6 @@ Tytuł: Rejestracja czasu operacji
 Opis: Dziennik zdarzeń produkcyjnych rejestrujący przebieg realizacji operacji i technologii. Każdy wpis zawiera typ zdarzenia, zaraportowaną ilość, osobę wykonującą, datę i czas oraz stan realizacji po zdarzeniu, co umożliwia pełną historię i rozliczenie prac produkcyjnych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 9
-- podlisty: 1
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `TimeSec` | bazodanowe, tylko-odczyt |  | Czas zdarzenia. |

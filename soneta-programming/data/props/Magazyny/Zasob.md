@@ -4,13 +4,6 @@ Tytuł: Zasób
 Opis: Zasób magazynowy reprezentujący stan towaru w danym magazynie i okresie. Przechowuje ilość, ilość zarezerwowaną, partię towaru (przychodową lub rozchodową), kierunek oraz hierarchię zasobów nadrzędnych i podrzędnych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 17
-- podlisty: 5
-- subrowy: 3
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Gratis | `bool` | bazodanowe | Zasób gratisowy | Zasób gratisowy. |

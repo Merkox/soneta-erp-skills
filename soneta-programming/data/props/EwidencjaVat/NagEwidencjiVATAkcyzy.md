@@ -4,13 +4,7 @@ Tytuł: Nagłóweki ewidencji VAT
 Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Nagłówek ewidencji VAT/akcyzy grupujący elementy dotyczące jednego dokumentu podatkowego. Przechowuje dane podmiotu, kwoty netto/VAT/brutto, parametry rozliczenia VAT, moment powstania obowiązku podatkowego oraz obsługuje procedury OSS/IOSS i oznaczenia KSeF.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
-
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 26
-- podlisty: 2
-- subrowy: 1
-- razem: 45
+Selektor: pole `Typ` (`Soneta.EwidencjaVat.TypEwidencjiVAT`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -54,11 +48,23 @@ Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 | RodzajPodmiotu | `Soneta.Core.RodzajPodmiotu` (enum) | bazodanowe |  |  |
 | StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | bazodanowe |  |  |
 | TerminPlatnosci | `Date` | tylko-odczyt |  |  |
-| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | VAT | `Currency` | bazodanowe, tylko-odczyt |  | Wartość podatku VAT |
 | Waluta | `Soneta.Waluty.Waluta` | tylko-odczyt | Waluta |  |
 | WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
 | WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Sprzedaż` | 1 | `Soneta.EwidencjaVat.NagEwidencjiVATSprzedaz` | Nagłówek ewidencji VAT - sprzedaż |
+| `Zakup` | 2 | `Soneta.EwidencjaVat.NagEwidencjiVATZakup` | Nagłówek ewidencji VAT - zakup |
+| `SprzedażAkcyza` | 3 | `Soneta.EwidencjaVat.NagEwidencjiAkcyzySprzedaz` | Nagłówek ewidencji akcyzy - sprzedaż |
+| `ZakupAkcyza` | 4 | `Soneta.EwidencjaVat.NagEwidencjiAkcyzyZakup` | Nagłówek ewidencji akcyzy - zakup |
 
 ## Relacje interfejsowe
 

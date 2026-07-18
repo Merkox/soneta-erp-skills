@@ -5,13 +5,6 @@ Opis: Karta rejestracji wypadku przy pracy. Zawiera dane o dacie, miejscu, rodza
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 22
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 5
-- subrowy: 1
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ciezki | `bool` | bazodanowe | Ciężki |  |

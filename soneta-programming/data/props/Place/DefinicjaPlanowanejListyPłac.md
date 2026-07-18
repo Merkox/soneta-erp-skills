@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IDefinicjaDokumentuOA`, `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 2
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `MemoText` | bazodanowe, podlista |  |  |

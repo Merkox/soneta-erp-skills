@@ -4,20 +4,25 @@ Tytuł: Powiązania definicji stanowisk
 Opis: Opisuje relacje pomiędzy definicjami stanowisk. Umożliwia modelowanie zależności hierarchicznych i funkcjonalnych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 4
+Selektor: pole `TypPowiazania` (`Soneta.HR.ZKL.Enums.TypPowiazaniaStanowisk`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt | Definicja stanowiska |  |
 | DefinicjaStanowiskaPowiazana | `Soneta.HR.DefinicjaStanowiska` | bazodanowe | Powiązane stanowisko |  |
 | Okres | `FromTo` | bazodanowe, podlista |  |  |
-| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaStanowisk` (enum) | bazodanowe, tylko-odczyt | Typ powiązania |  |
+| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaStanowisk` (enum) | bazodanowe, tylko-odczyt, selektor | Typ powiązania |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypPowiazania`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `RaportujeDo` | 10 | `Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieRaportujeDo` | Raportuje do |
+| `ZastepstwoAktywne` | 20 | `Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieZastepstwoAktywne` | Raportuje do |
+| `WspolpracaWewnetrzna` | 30 | `Soneta.HR.ZKL.Stanowiska.Relacje.PowiazanieWspolpracaWewnetrzna` |  |
 
 ## Enumy
 

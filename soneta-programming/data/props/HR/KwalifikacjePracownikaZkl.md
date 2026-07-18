@@ -4,13 +4,7 @@ Tytuł: Kwalifikacje pracownika
 Opis: Tabela przechowuje informacje o kwalifikacjach przypisanych do konkretnych pracowników, takich jak dodatkowe kwalifikacje, umiejętność obsługi maszyn, znajomość sytemów IT i języków programowania. Dane te wykorzystywane są do oceny zgodności pracownika z wymaganiami stanowiska.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 9
+Selektor: pole `Typ` (`Soneta.HR.ZKL.Enums.TypKwalifikacjiPracownika`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -20,9 +14,20 @@ Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 | Pozycja | `Soneta.HR.IZklPozycjaSlownika` | iface-ref |  |  |
 | PozycjaBase | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, tylko-odczyt, iface-ref | Pozycja słownika |  |
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt, guided-parent |  |  |
-| Typ | `Soneta.HR.ZKL.Enums.TypKwalifikacjiPracownika` (enum) | bazodanowe, tylko-odczyt | Typ kwalifikacji pracownika |  |
+| Typ | `Soneta.HR.ZKL.Enums.TypKwalifikacjiPracownika` (enum) | bazodanowe, tylko-odczyt, selektor | Typ kwalifikacji pracownika |  |
 | TypPotwierdzenia | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.TypPotwierdzenia` | bazodanowe | Typ potwierdzenia |  |
 | Uwagi | `string` | bazodanowe | Uwagi |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `DodatkoweKwalifikacje` | 10 | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.DodatkoweKwalifikacjePracownikaZkl` | Dodatkowa kwalifikacja pracownika |
+| `ObslugaMaszynUrzadzen` | 20 | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.ObslugaMaszynUrzadzenKwalifikacjePracownikaZkl` | Obsługa maszyn i urządzeń |
+| `SystemyITJezykiProgramowania` | 30 | `Soneta.HR.ZKL.ZKLPracownik.Kwalifikacje.SystemITJezykiKwalifikacjePracownikaZkl` | System IT, Język programowania |
 
 ## Relacje interfejsowe
 

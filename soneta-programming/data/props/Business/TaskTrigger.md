@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `TaskDefinition` → `TaskDefinition`
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ClassName | `string` | tylko-odczyt |  |  |

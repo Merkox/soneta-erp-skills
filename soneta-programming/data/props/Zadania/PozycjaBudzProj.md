@@ -5,13 +5,6 @@ Opis: Pozycja budżetu projektu tworząca hierarchiczną strukturę kosztów i p
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 20
-- podlisty: 11
-- subrowy: 0
-- razem: 43
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BudgetItemKindFromContext | `Soneta.Zadania.Budzetowanie.RodzajPozycjiBudzetuFiltr` (enum) |  |  |  |

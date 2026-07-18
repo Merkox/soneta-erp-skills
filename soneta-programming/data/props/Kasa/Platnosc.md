@@ -5,13 +5,7 @@ Opis: Płatność (należność lub zobowiązanie) powstająca z dokumentu płat
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAnalitycznego`
-
-- pola bazodanowe (zapisywalne): 36
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 30
-- podlisty: 13
-- subrowy: 1
-- razem: 85
+Selektor: pole `Kierunek` (`Soneta.Core.KierunekPlatnosci`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -33,7 +27,7 @@ Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAna
 | KSeFJednostka | `string` | bazodanowe | Jednostka | Podaje się jednostkę czasu, w której liczony jest termin płatności za fakturę (np. dzień, tydzień itp.) |
 | KSeFOpis | `string` | bazodanowe |  | Opis rachunku KSeF |
 | KSeFZdarzeniePoczatkowe | `string` | bazodanowe | Zdarzenie początkowe | Podaje się zdarzenie początkowe, od którego liczony jest termin płatności za fakturę (np. wystawienie faktury). |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` | tylko-odczyt |  |  |
 | KorektyPlatnosci | `SubTable<Soneta.Kasa.Platnosc>` | podlista |  |  |
 | KsiegujZbiorczo | `bool` | bazodanowe |  |  |
@@ -100,6 +94,16 @@ Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAna
 | Zrealizowane | `bool` | tylko-odczyt |  |  |
 | Zwrot | `bool` |  |  |  |
 | ZwrotInfo | `Soneta.Kasa.InformacjaOZwrocie` (enum) | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Kierunek`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Przychod` | 1 | `Soneta.Kasa.Naleznosc` | Należność |
+| `Rozchod` | 2 | `Soneta.Kasa.Zobowiazanie` | Zobowiązanie |
 
 ## Relacje interfejsowe
 

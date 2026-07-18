@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji zlecenia (ProOperacjaZlecenia). Wskazuje to
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Operacja | `Soneta.ProdukcjaPro.ProOperacjaZlecenia` | bazodanowe, guided-parent |  | Operacja zlecenia dla towaru meldowanego. |

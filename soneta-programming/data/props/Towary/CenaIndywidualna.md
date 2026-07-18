@@ -4,13 +4,6 @@ Opis: Element szczegółowy towaru (Towar). Przechowuje cenę indywidualną towa
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 6
-- podlisty: 0
-- subrowy: 0
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Brutto | `DoubleCy` | bazodanowe |  | Kwota brutto ceny kontrahenta |

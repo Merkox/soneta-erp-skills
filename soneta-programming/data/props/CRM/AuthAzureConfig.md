@@ -5,13 +5,6 @@ Opis: Konfiguracja integracji z Azure Active Directory dla dostawcy autoryzacji.
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AcquireTokenMode | `Soneta.CRM.AuthAzureAcquireTokenMode` (enum) | bazodanowe |  |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji dokumentu (IDefinicjaDokumentuOA). Przecho
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 10
-- podlisty: 3
-- subrowy: 2
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Core.IDefinicjaDokumentuOA` | bazodanowe, tylko-odczyt, iface-ref |  |  |

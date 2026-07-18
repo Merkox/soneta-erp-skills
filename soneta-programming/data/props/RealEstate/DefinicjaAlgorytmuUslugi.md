@@ -5,13 +5,6 @@ Opis: Słownik algorytmów naliczania opłat za usługi nieruchomości. Definiuj
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 2
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytm | `bool` |  |  |  |

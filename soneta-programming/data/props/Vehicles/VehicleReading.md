@@ -5,13 +5,6 @@ Opis: Rejestr odczytów liczników (przebiegów) pojazdów z datą i osobą reje
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Date | `Date` |  |  |  |

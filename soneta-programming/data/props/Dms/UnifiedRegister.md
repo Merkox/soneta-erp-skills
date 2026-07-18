@@ -5,13 +5,6 @@ Opis: Wykaz akt (jednolity rzeczowy wykaz akt) obowiązujący w danym okresie. S
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Locked | `bool` | bazodanowe | Zablokowane | Definicja wykazu akt zablokowana |

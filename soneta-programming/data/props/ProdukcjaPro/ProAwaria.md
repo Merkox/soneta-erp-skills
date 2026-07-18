@@ -5,13 +5,6 @@ Opis: Rejestr awarii i przestojów zasobów produkcyjnych. Dokumentuje zdarzenia
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasPracy | `Soneta.ProdukcjaPro.ProCzasPracy` | bazodanowe | Czas pracy | Czas pracy awarii. |

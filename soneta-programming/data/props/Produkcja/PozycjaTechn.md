@@ -5,13 +5,6 @@ Opis: Pozycja technologii produkcyjnej określająca surowiec lub produkt przypi
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 15
-- podlisty: 2
-- subrowy: 0
-- razem: 38
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywna | `bool` | tylko-odczyt |  | Określa aktywność pozycji. |

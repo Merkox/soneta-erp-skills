@@ -5,13 +5,6 @@ Opis: Element szczegółowy źródła koloru (IŹródłoKoloruElementu). Konfigu
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zrodlo` → `IŹródłoKoloruElementu`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BackColor | `int` | bazodanowe | Kolor tła |  |

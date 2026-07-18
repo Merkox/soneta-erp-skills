@@ -5,13 +5,6 @@ Opis: Tabela konfiguracyjna przechowująca relacje hierarchiczne między definic
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadrzedna | `Soneta.Zadania.DefZadania` | bazodanowe | Nadrzędna definicja zadania |  |

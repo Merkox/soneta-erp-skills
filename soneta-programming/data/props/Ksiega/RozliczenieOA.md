@@ -4,13 +4,6 @@ Tytuł: Rozliczenie opisu analitycznego
 Opis: Rozliczenie opisu analitycznego wiąże element rozliczany z elementem rozliczającym w ramach kontroli budżetowej. Śledzi kwoty, ilości i daty rozliczeń, obsługuje powiązanie z rozliczeniami środków pieniężnych oraz kontrolę przekroczeń budżetu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Data rozliczenia | Data rozliczenia |

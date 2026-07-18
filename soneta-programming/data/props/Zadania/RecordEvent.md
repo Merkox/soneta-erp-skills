@@ -4,13 +4,6 @@ Opis: Tabela przechowująca informacje o zdarzeniach CRM oraz ich powiązania z 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | RecordEvent | `Soneta.Zadania.Zadanie` | bazodanowe, tylko-odczyt |  |  |

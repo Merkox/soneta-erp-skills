@@ -5,13 +5,7 @@ Opis: Słownik typów nieruchomości określający sposób klasyfikacji obiektó
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 8
-- podlisty: 7
-- subrowy: 2
-- razem: 35
+Selektor: pole `Rodzaj` (`Soneta.RealEstate.Enums.RealEstateKind`) — wiele typów w jednej tabeli, podtypów: 10
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -39,7 +33,7 @@ Implementuje interfejsy: `IRightsSource`
 | Precyzja | `int` | bazodanowe | Precyzja zaokrąglenia ilości. |  |
 | PrefixIdent | `string` | bazodanowe | Prefix identyfilatora | Prefix identyfikatora nieruchomości. |
 | PrzeniesOdczyt | `bool` | bazodanowe | Przeniesienie odczytu | Automatyczne przenoszenie odczytu do powiązanych umów |
-| Rodzaj | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt | Rodzaj nieruchomości |  |
+| Rodzaj | `Soneta.RealEstate.Enums.RealEstateKind` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj nieruchomości |  |
 | RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
@@ -50,6 +44,24 @@ Implementuje interfejsy: `IRightsSource`
 | Udostepnione | `bool` | bazodanowe | Pomieszczenie udostępnione do rezerwacji. |  |
 | UkryjWStrukturze | `bool` | bazodanowe | Obiekt niewidoczny w strukturze nieruchomości |  |
 | Xml | `MemoText` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Counter` | 0 | `Soneta.RealEstate.Models.Config.TypLicznika` | Typ licznika |
+| `Building` | 1 | `Soneta.RealEstate.Models.Config.TypBudynku` | Typ budynku |
+| `Construction` | 2 | `Soneta.RealEstate.Models.Config.TypBudowli` | Typ budowli |
+| `Storey` | 3 | `Soneta.RealEstate.Models.Config.TypKondygnacji` | Typ kondygnacji |
+| `Room` | 4 | `Soneta.RealEstate.Models.Config.TypPomieszczenia` | Typ pomieszczenia |
+| `Premises` | 5 | `Soneta.RealEstate.Models.Config.TypLokalu` | Typ lokalu |
+| `Lot` | 6 | `Soneta.RealEstate.Models.Config.TypDzialki` | Typ działki |
+| `Installation` | 7 | `Soneta.RealEstate.Models.Config.TypInstalacji` | Typ instalacji |
+| `Parking` | 8 | `Soneta.RealEstate.Models.Config.TypParkingu` | Typ parkingu |
+| `ParkingSpot` | 9 | `Soneta.RealEstate.Models.Config.TypMiejscaPostojowego` | Typ miejsca postojowego |
 
 ## Enumy
 

@@ -5,13 +5,6 @@ Opis: Element szczegółowy projektu (Projekt). Rzeczywisty etap realizacji proj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Projekt` → `Projekt`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 0
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie etapu. Zablokowane etapy dokumentów nie będą wyświetlane w liście wyboru. |

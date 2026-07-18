@@ -4,13 +4,6 @@ Tytuł: Elementy systemu zewnętrznego
 Opis: Konfiguracja elementów (obiektów biznesowych) obsługiwanych przez system zewnętrzny. Określa powiązanie obiektu wewnętrznego z systemem zewnętrznym, tryb pobierania, dodawania i obsługi pobranych danych oraz domyślność.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjeCen | `ViewInfo` | tylko-odczyt |  |  |

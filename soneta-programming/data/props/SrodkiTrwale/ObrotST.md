@@ -5,13 +5,7 @@ Opis: Element szczegółowy dokumentu środka trwałego (DokumentST). Rejestruje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentST`
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
-
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 15
-- podlisty: 1
-- subrowy: 0
-- razem: 30
+Selektor: pole `Typ` (`Soneta.SrodkiTrwale.TypObrotuST`) — wiele typów w jednej tabeli, podtypów: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -38,13 +32,38 @@ Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 | Stawka | `decimal` | bazodanowe |  | Stawka obrotu opodatkowania podatku od nieruchomości |
 | SymbolBilansowy | `string` | tylko-odczyt |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
 | SymbolPodatkowy | `string` | tylko-odczyt |  | Symbol metody amortyzacji z uwzględnieniem metody dodatkowej |
-| Typ | `Soneta.SrodkiTrwale.TypObrotuST` (enum) | bazodanowe, tylko-odczyt |  | Typ obrotu środka trwałego |
+| Typ | `Soneta.SrodkiTrwale.TypObrotuST` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ obrotu środka trwałego |
 | Uwagi | `string` | bazodanowe |  | Uwagi |
 | Wartosc | `Currency` | bazodanowe |  | Wartość obrotu elementu podatku od nieruchomości |
 | WartoscBilansowa | `Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa obrotu |
 | WartoscOplaty | `Currency` | tylko-odczyt |  |  |
 | WartoscPodatkowa | `Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa obrotu |
 | ZrodloFinansowania | `Soneta.Core.ZrodloFinansowania` | bazodanowe | Źródło finansowania |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `OT` | 1 | `Soneta.SrodkiTrwale.ObrotOT` | Obrót 'OT' |
+| `LT` | 2 | `Soneta.SrodkiTrwale.ObrotLT` | Obrót 'LT' |
+| `Amortyzacja` | 3 | `Soneta.SrodkiTrwale.ObrotAmortyzacja` | Obrót 'Amortyzacja' |
+| `Przeszacowanie` | 4 | `Soneta.SrodkiTrwale.ObrotPrzeszacowanie` | Obrót 'Przeszacowanie' |
+| `ZmianaWartości` | 5 | `Soneta.SrodkiTrwale.ObrotZmianaWartosci` | Obrót 'Zmiana wartości' |
+| `AmortyzacjaLT` | 6 | `Soneta.SrodkiTrwale.ObrotAmortyzacjaLT` | Obrót 'Amortyzacja LT' |
+| `AmortyzacjaZW` | 7 | `Soneta.SrodkiTrwale.ObrotAmortyzacjaZW` | Obrót 'Amortyzacja ZW' |
+| `Inwentaryzacja` | 8 | `Soneta.SrodkiTrwale.PozycjaInwentaryzacji` | Pozycja inwentaryzacji |
+| `OdpisAktualizujący` | 9 | `Soneta.SrodkiTrwale.ObrotOdpisAktualizujacy` | Obrót 'Odpis aktualizujacy' |
+| `OdpisAktualizującyLT` | 10 | `Soneta.SrodkiTrwale.ObrotOdpisAktualizujacyLT` | Obrót 'Odpis aktualizujący LT' |
+| `PodatekOdNieruchomosci` | 11 | `Soneta.SrodkiTrwale.ObrotPON` | Obrót 'Podatek od nieruchomości' |
+| `InwentaryzacjaCzastkowa` | 12 | `Soneta.SrodkiTrwale.PozycjaInwentaryzacjiCzastkowej` | Pozycja spisowa |
+| `OplataWstepna` | 20 | `Soneta.SrodkiTrwale.ObrotOplataWstepna` | Obrót Opłata wstępna |
+| `Kapital` | 21 | `Soneta.SrodkiTrwale.ObrotKapital` | Obrót Kapitał |
+| `Odsetki` | 22 | `Soneta.SrodkiTrwale.ObrotOdsetki` | Obrót Odsetki |
+| `Wykup` | 23 | `Soneta.SrodkiTrwale.ObrotWykup` | Obrót Wykup |
+| `PozostaleKoszty` | 24 | `Soneta.SrodkiTrwale.ObrotPozostaleKoszty` | Obrót Pozostałe koszty |
 
 ## Enumy
 

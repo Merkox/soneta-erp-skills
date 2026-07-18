@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IKosztTechnHost`, `IProdHistoriaZapis`, `IZasobTechHost`, `IKodowany`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 7
-- podlisty: 18
-- subrowy: 0
-- razem: 55
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywna | `bool` | tylko-odczyt |  | Określa aktywność operacji. |

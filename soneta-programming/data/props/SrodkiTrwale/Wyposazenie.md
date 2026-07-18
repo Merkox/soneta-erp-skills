@@ -7,13 +7,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `WyposazenieHistoria`
 Implementuje interfejsy: `IInwentarz`, `IKodowany`, `IZasobCRM`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataRejestracji | `Date` | tylko-odczyt |  |  |

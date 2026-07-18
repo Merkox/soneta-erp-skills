@@ -5,13 +5,6 @@ Opis: Element szczegółowy historii pracownika (PracHistoria). Rozszerzenie dan
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `PracHistoria`
 
-- pola bazodanowe (zapisywalne): 120
-- pola kalkulowane (zapisywalne): 11
-- pola tylko-odczyt: 14
-- podlisty: 16
-- subrowy: 18
-- razem: 179
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DodSwiadczeniaZUS | `Soneta.Kadry.DodatkoweŚwiadczeniaZUS` (subrow) | bazodanowe |  |  |

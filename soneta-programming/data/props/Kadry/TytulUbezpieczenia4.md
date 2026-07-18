@@ -5,13 +5,6 @@ Opis: Słownik tytułów ubezpieczenia społecznego i zdrowotnego zgodnych z kla
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CalyOpis | `string` | tylko-odczyt |  |  |

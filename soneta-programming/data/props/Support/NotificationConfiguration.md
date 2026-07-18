@@ -4,13 +4,6 @@ Tytuł: Powiadomienia
 Opis: Konfiguracja powiadomień powiązanych ze zgłoszeniami serwisowymi. Określa rodzaj powiadomienia (email, zadanie), akcję wyzwalającą, szablon wiadomości oraz warunki wysyłki, np. weryfikację operatora lub ograniczenie do obserwowanych zgłoszeń.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Action | `Soneta.Support.Support.NotificationActions` (enum) | bazodanowe | Akcja |  |

@@ -3,13 +3,7 @@ Nazwa tabeli: `RelacjeHandlowe`
 Opis: Instancja relacji między dwoma dokumentami handlowymi (nadrzędnym i podrzędnym). Przechowuje informacje o definicji relacji, stanie rozliczenia, typie oraz danych zaliczkowych.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 21
-- podlisty: 1
-- subrowy: 1
-- razem: 32
+Selektor: pole `Typ` (`Soneta.Handel.TypRelacjiHandlowej`) — wiele typów w jednej tabeli, podtypów: 17
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -42,9 +36,34 @@ Guided: root
 | Suma.NettoCy | `Currency` | tylko-odczyt |  | Wartość netto wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
 | Suma.VAT | `decimal` | bazodanowe |  | Kwota podatku VAT. |
 | Suma.VATCy | `Currency` | tylko-odczyt |  | Wartość podatku VAT wyrażona w walucie. Zawsze PLN poza dokumentami 0%. |
-| Typ | `Soneta.Handel.TypRelacjiHandlowej` (enum) | bazodanowe, tylko-odczyt |  | Określa typ relacji opisujący jej zachowanie |
+| Typ | `Soneta.Handel.TypRelacjiHandlowej` (enum) | bazodanowe, tylko-odczyt, selektor |  | Określa typ relacji opisujący jej zachowanie |
 | Wartosc | `Currency` | bazodanowe |  |  |
 | WielePozycji | `bool` | tylko-odczyt |  | Określa, czy do jednej pozycji nadrzędnej może istnieć wiele pozycji podrzędnych. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Korekta` | 1 | `Soneta.Handel.RelacjaHandlowa.Korekta` |  |
+| `Kopiowania` | 2 | `Soneta.Handel.RelacjaHandlowa.Kopiowania` |  |
+| `HandlowoMagazynowa` | 3 | `Soneta.Handel.RelacjaHandlowa.HandlowoMagazynowa` |  |
+| `Przesunięcie` | 4 | `Soneta.Handel.RelacjaHandlowa.PrzesunięcieZ` |  |
+| `PrzesunięcieDo` | 5 | `Soneta.Handel.RelacjaHandlowa.PrzesunięcieDo` |  |
+| `Inwentaryzacja` | 6 | `Soneta.Handel.RelacjaHandlowa.InwentaryzacjaNadwyżka` |  |
+| `InwentaryzacjaStrata` | 7 | `Soneta.Handel.RelacjaHandlowa.InwentaryzacjaStrata` |  |
+| `KorektaPWZ` | 8 | `Soneta.Handel.RelacjaHandlowa.KorektaPWZ` |  |
+| `Kompletacja` | 9 | `Soneta.Handel.RelacjaHandlowa.ProduktyKompletacji` |  |
+| `KompletacjaSkładniki` | 10 | `Soneta.Handel.RelacjaHandlowa.SkładnikiKompletacji` |  |
+| `Wiązania` | 11 | `Soneta.Handel.RelacjaHandlowa.Wiązania` |  |
+| `Zaliczka` | 12 | `Soneta.Handel.RelacjaHandlowa.Zaliczka` |  |
+| `Cykliczna` | 13 | `Soneta.Handel.RelacjaHandlowa.Cykliczna` |  |
+| `Kaucji` | 14 | `Soneta.Handel.RelacjaHandlowa.Kaucji` |  |
+| `RozliczenieKaucji` | 15 | `Soneta.Handel.RelacjaHandlowa.RozliczeniaKaucji` |  |
+| `ProdukcjaSurowce` | 16 | `Soneta.Handel.RelacjaHandlowa.Produkcja.Skladniki` |  |
+| `ProdukcjaProdukty` | 17 | `Soneta.Handel.RelacjaHandlowa.Produkcja.Produkty` |  |
 
 ## Enumy
 

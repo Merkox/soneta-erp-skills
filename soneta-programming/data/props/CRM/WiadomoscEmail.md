@@ -5,13 +5,7 @@ Opis: Wiadomość e-mail pobrana lub wysłana przez konto pocztowe w systemie CR
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`
-
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 14
-- subrowy: 0
-- razem: 32
+Selektor: pole `TypWiadomosci` (`Soneta.CRM.TypWiadomości`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -43,10 +37,22 @@ Implementuje interfejsy: `IPermissionClient`
 | StatusWiadomosci | `Soneta.CRM.StatusWiadomosci` (enum) | bazodanowe |  | Określa status wiadomości. |
 | Temat | `string` | bazodanowe | Temat | Temat wiadomości. |
 | Tresc | `MemoText` | bazodanowe, podlista | Treść | Treść wiadomości. |
-| TypWiadomosci | `Soneta.CRM.TypWiadomości` (enum) | bazodanowe | Typ wiadomości | Typ wiadomości. |
+| TypWiadomosci | `Soneta.CRM.TypWiadomości` (enum) | bazodanowe, selektor | Typ wiadomości | Typ wiadomości. |
 | UDW | `MemoText` | bazodanowe, podlista | UDW | Do wiadomości (Ukryte). |
 | UID | `decimal` | bazodanowe |  | Unikalny identyfikator wiadomości w skrzynce. |
 | WiadomoscZrodlowa | `Soneta.CRM.WiadomoscEmail` | bazodanowe | Wiadomość źródłowa | Identyfikator wiadomości, na którą odpowiadamy. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypWiadomosci`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Odebrana` | 0 | `Soneta.CRM.WiadomoscOdebrana` |  |
+| `Wysłana` | 1 | `Soneta.CRM.WiadomoscWyslana` |  |
+| `Robocza` | 2 | `Soneta.CRM.WiadomoscRobocza` |  |
+| `WysłanaAsystentem` | 4 | `Soneta.CRM.WiadomoscWyslanaAsystentem` |  |
 
 ## Enumy
 

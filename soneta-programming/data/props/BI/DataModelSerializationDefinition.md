@@ -5,13 +5,6 @@ Opis: Definicja serializatora powiązanego bezpośrednio z modelem danych BI. Ok
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DBItemsText | `MemoText` | bazodanowe, podlista | Bazy danych |  |

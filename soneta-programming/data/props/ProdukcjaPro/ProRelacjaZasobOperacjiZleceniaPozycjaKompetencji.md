@@ -5,13 +5,6 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiZlecenia` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  | Liczba porządkowa relacji zasób operacji zlecenia pozycja właściwości. |

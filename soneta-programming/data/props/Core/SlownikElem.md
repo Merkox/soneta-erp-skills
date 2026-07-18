@@ -4,13 +4,7 @@ Tytuł: Słownik
 Opis: Słownik systemowy przechowujący elementy list wyboru (combo). Każdy element należy do kategorii słownikowej i może mieć kod, nazwę, wartość liczbową, flagę domyślności i blokady. Obsługuje hierarchię (elementy nadrzędne i podrzędne).
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 9
+Selektor: pole `Selektor` (`Soneta.Core.SelektorSlownika`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -22,7 +16,16 @@ Guided: root
 | Nadrzedny | `Soneta.Core.SlownikElem` | bazodanowe |  | Określa nadrzędny obiekt słownikowy |
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa elementu słownika. |
 | Podrzędne | `SubTable<Soneta.Core.SlownikElem>` | podlista |  |  |
-| Selektor | `Soneta.Core.SelektorSlownika` (enum) | bazodanowe, tylko-odczyt | Selektor słownika | Selektor słownika. |
+| Selektor | `Soneta.Core.SelektorSlownika` (enum) | bazodanowe, tylko-odczyt, selektor | Selektor słownika | Selektor słownika. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Selektor`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 1 | `Soneta.Core.SlownikElem` |  |
 
 ## Enumy
 

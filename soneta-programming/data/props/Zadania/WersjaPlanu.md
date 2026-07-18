@@ -5,13 +5,7 @@ Opis: Konkretna wersja planu budżetowego projektu. Przechowuje numer, daty obow
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
-
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 15
-- podlisty: 5
-- subrowy: 1
-- razem: 32
+Selektor: pole `PlanVersionManagement` (`Soneta.Zadania.Budzetowanie.PlanVersionManagement`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -36,7 +30,7 @@ Implementuje interfejsy: `IDokument`
 | OkresPlanowania | `FromTo` | bazodanowe, podlista | Okres planowania | Określa, na jaki okres można nanosić zapisy planowane na danej wersji planów. |
 | Opis | `MemoText` | bazodanowe, podlista | Opis | Dokładny opis wersji planu. |
 | PlanVariantSymbol | `string` | tylko-odczyt |  |  |
-| PlanVersionManagement | `Soneta.Zadania.Budzetowanie.PlanVersionManagement` (enum) | bazodanowe, tylko-odczyt | Rodzaj zarządzania wersją planu | Określa, czy dana wersja planów jest lokalna czy centralna. |
+| PlanVersionManagement | `Soneta.Zadania.Budzetowanie.PlanVersionManagement` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj zarządzania wersją planu | Określa, czy dana wersja planów jest lokalna czy centralna. |
 | PlanVersionSourceService | `Soneta.Zadania.Budzetowanie.Services.PlanVersionSourceStrategyService` | tylko-odczyt |  |  |
 | PlanVersionStatus | `Soneta.Core.PlanVersionStatus` (enum) | tylko-odczyt |  |  |
 | PlanVersionType | `Soneta.Core.PlanVersionType` (enum) | tylko-odczyt |  |  |
@@ -47,6 +41,16 @@ Implementuje interfejsy: `IDokument`
 | WariantPlanu | `Soneta.Zadania.Budzetowanie.PlanVariant` | bazodanowe, tylko-odczyt | Wariant wersji planu. |  |
 | WersjaCentralna | `Soneta.Zadania.Budzetowanie.WersjaPlanu` | bazodanowe | Wersja Centralna | Centralna wersja planu, do której przypisana jest lokalna wersja planu. |
 | WersjePowiazane | `SubTable<Soneta.Zadania.Budzetowanie.WersjaPlanu>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `PlanVersionManagement`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Local` | 0 | `Soneta.Zadania.Budzetowanie.Models.WersjaPlanuLocal` |  |
+| `Central` | 1 | `Soneta.Zadania.Budzetowanie.Models.WersjaPlanuCentral` |  |
 
 ## Enumy
 

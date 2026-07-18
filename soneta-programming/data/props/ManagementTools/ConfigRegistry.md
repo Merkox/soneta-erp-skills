@@ -4,13 +4,6 @@ Tytuł: Rejestr konfiguracji
 Opis: Tabela przechowuje wpisy rejestru konfiguracji systemu enova365. Każdy wpis zawiera nazwę, opis, dane w formacie JSON oraz informacje o wersji bazy danych i dacie utworzenia lub modyfikacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DatabaseVersion | `string` | bazodanowe | Wersja bazy danych |  |

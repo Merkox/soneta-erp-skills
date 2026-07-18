@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji kręgu kosztów (DefinicjaKregu). Określa
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefinicjaKregu`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Ksiega.DefinicjaKregu` | bazodanowe, tylko-odczyt, guided-parent |  | Definicja kręgu |

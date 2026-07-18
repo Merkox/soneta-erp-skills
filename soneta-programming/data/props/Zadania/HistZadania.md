@@ -5,13 +5,6 @@ Opis: Element szczegółowy zadania (Zadanie). Przechowuje migawkę stanu zadani
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zadanie` → `Zadanie`
 
-- pola bazodanowe (zapisywalne): 29
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 1
-- razem: 35
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasDo | `Time` | bazodanowe | Godzina zakończenia | Planowana godzina zakończenia zadania |

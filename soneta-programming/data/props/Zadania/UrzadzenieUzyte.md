@@ -4,13 +4,6 @@ Tytuł: Urządzenia wykorzystane
 Opis: Rejestracja użycia urządzenia w ramach zlecenia serwisowego lub wypożyczenia. Przechowuje stan zadania, datę zamknięcia oraz powiązanie z dokumentem rozliczeniowym i zasobem CRM.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 7
-- podlisty: 0
-- subrowy: 0
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt |  |  |

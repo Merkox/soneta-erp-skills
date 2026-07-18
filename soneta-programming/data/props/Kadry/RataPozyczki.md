@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 12
-- podlisty: 3
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywneElementy | `System.Collections.Generic.IEnumerable<Soneta.Place.WypElement>` | podlista |  |  |

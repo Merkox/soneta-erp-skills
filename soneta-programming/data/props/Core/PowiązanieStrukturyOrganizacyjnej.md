@@ -5,13 +5,6 @@ Opis: Element szczegółowy źródła powiązania (IŹródłoPowiązaniaStruktur
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zrodlo` → `IŹródłoPowiązaniaStrukturyOrganizacyjnej`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | EfektywnyOkres | `FromTo` | podlista |  |  |

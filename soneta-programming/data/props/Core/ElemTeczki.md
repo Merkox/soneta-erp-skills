@@ -5,13 +5,6 @@ Opis: Pozycja teczki reprezentująca powiązanie dowolnego obiektu biznesowego (
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Teczka` → `Teczka`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Data elementu | Data elementu |

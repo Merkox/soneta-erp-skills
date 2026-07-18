@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji krotki (DbTupleDefinition). Rozszerzenie p
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DbTupleDefinition` → `DbTupleDefinition`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DbTupleDefinition | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |

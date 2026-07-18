@@ -5,24 +5,27 @@ Opis: Element szczegółowy definicji zadania (TaskDefinition). Określa źród�
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `TaskDefinition` → `TaskDefinition`
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`
-
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 0
-- razem: 8
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataType | `System.Type` | tylko-odczyt |  |  |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | HostTable | `Table` | podlista |  |  |
 | OGSchema | `Soneta.Workflow.Config.OGSchema` | bazodanowe | Definicja schematu generatora | Określa definicję schematu generatora obiektów |
 | PlugIns | `LpSubTable<Soneta.Workflow.Config.WfPlugInItemReference>` | podlista |  |  |
 | TableName | `string` | bazodanowe, tylko-odczyt |  |  |
 | TaskDefinition | `Db.TaskDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | VariantTypeName | `string` | bazodanowe | Typ źrodła wielowariantowego | Typ źrodła wielowariantowego |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Engine` | 1 | `Soneta.Workflow.Config.WfAdvTaskSource` |  |
 
 ## Enumy
 

@@ -3,13 +3,7 @@ Nazwa tabeli: `DniKalendAkt`
 Opis: Element szczegółowy pozycji aktualizacji kalendarza (PozycjaAktualizacjiKalendarza). Aktualizowany dzień planu pracy na dokumencie aktualizacji kalendarza, zawierający typ dnia, definicję dnia i normę czasu pracy.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaAktualizacjiKalendarza`
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 1
-- razem: 14
+Selektor: pole `Typ` (`Soneta.Kalend.TypKalendarza`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -25,8 +19,18 @@ Guided: child — nadrzędna przez pole `Pozycja` → `PozycjaAktualizacjiKalend
 | RuchomyCzasPracy | `bool` | tylko-odczyt |  |  |
 | Strefy | `SubTable<Soneta.Kalend.StrefaKalendarzaAktualizacja>` | podlista |  |  |
 | TolerancjaWe | `Time` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WejścieDo | `Time` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `KalendarzPracownika` | 2 | `Soneta.Kalend.DzienPlanuAktualizacja` | Wyjątek w kalendarzu |
+| `KalendarzUmowy` | 4 | `Soneta.Kalend.DzienPlanuUmowyAktualizacja` | Wyjątek w kalendarzu |
 
 ## Enumy
 

@@ -5,13 +5,6 @@ Opis: Element szczegółowy uczestnika (TytulZawodUcz). Przypisuje tytuł zawodo
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `UczestnikBase` → `UczestnikBase`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | TytulZawodowy | `Soneta.CzlonkowieSzkolenia.Config.UczTytulZawod` | bazodanowe, tylko-odczyt |  |  |

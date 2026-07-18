@@ -4,13 +4,6 @@ Tytuł: Dane dokumentów Tax Free
 Opis: Dane Tax Free powiązane z dokumentem handlowym. Zawiera informacje o podróżnym (imię, nazwisko, paszport), numer UNS, formę zwrotu podatku VAT oraz status dokumentu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataCzasNrUNS | `System.DateTime` | bazodanowe | Data i czas nadania numeru UNS |  |

@@ -7,13 +7,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `StawkaDelegacji`
 Implementuje interfejsy: `IRowWithHistory`, `IKrajDelegacji`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada | Blokada - kraj zablokowany nie może być użyty do tworzenia nowych delegacji |

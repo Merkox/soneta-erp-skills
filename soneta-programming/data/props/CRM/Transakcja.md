@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`, `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 22
-- podlisty: 9
-- subrowy: 1
-- razem: 54
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Appearance | `DataAppearance` | tylko-odczyt |  |  |

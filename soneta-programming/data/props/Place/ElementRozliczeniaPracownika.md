@@ -5,13 +5,6 @@ Opis: Element szczegółowy rozliczenia pracownika (DokumentRozliczeniaPracownik
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 9
-- podlisty: 2
-- subrowy: 0
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BaseCzas | `Time` |  |  |  |

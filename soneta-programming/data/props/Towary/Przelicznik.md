@@ -4,13 +4,6 @@ Opis: Element szczegółowy jednostki miary (Jednostka). Definiuje przelicznik m
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wyliczana` → `Jednostka`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bazowa | `Soneta.Towary.Jednostka` | bazodanowe |  | Jednostka bazowa, z której wyliczana jest jednostka 'Wyliczana'. |

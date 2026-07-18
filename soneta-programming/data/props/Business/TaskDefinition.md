@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWizardReferenceHost`, `IWfPlugInItemReferenceHost`, `IWorkflowItemDescriptionHost`, `IWFRecipientHost`, `ISysNotificationHost`, `IPreviewPageHost`, `ISysNotificationReference`
 
-- pola bazodanowe (zapisywalne): 51
-- pola kalkulowane (zapisywalne): 36
-- pola tylko-odczyt: 32
-- podlisty: 14
-- subrowy: 2
-- razem: 135
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Action | `string` |  | Wykonywana akcja | Domyślna akcja wykonywana na obiekcie nadrzędnym. |

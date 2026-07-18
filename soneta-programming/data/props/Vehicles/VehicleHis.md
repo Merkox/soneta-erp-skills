@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historia: Tak
 
-- pola bazodanowe (zapisywalne): 28
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 8
-- podlisty: 5
-- subrowy: 0
-- razem: 43
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

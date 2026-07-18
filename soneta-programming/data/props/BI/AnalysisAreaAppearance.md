@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji obszaru (AnalysisAreaDefinition). Przechow
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `AreaDefinition` → `AnalysisAreaDefinition`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AreaDefinition | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe, tylko-odczyt, guided-parent |  |  |

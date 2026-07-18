@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPlatny`, `IDokumentKsiegowalny`, `IDokumentKasowy`, `IDaneKontrahentaHost`, `IDokumentCRM`, `IKodowany`, `IExportImportXmlHost`, `IElementSlownika`, `IKomunikatEDIHost`, `IEmailElement`, `IProceduraVATHost`, `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe (zapisywalne): 95
-- pola kalkulowane (zapisywalne): 48
-- pola tylko-odczyt: 132
-- podlisty: 73
-- subrowy: 15
-- razem: 363
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywneRelacje | `Soneta.Handel.DefRelacjiHandlowej[]` | podlista |  |  |

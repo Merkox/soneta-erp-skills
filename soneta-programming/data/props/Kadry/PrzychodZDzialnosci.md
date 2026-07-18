@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Roczna ewidencja przychodów
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 4
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | KartaPodatkowa | `Soneta.Kadry.PrzychodDoOpodatkowaniaKwoty` (subrow) | bazodanowe |  |  |

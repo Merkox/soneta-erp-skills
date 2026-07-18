@@ -5,13 +5,6 @@ Opis: Dane podmiotu trzeciego (np. odbiorca, nabywca, płatnik) w komunikacie KS
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IDaneKontrahentaHost`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dane | `Soneta.Core.Enums.ZrodloDanychAdresowychKSeF` (enum) | bazodanowe | Miejsce pobierania danych do KSeF | Miejsce pobierania danych do KSeF |

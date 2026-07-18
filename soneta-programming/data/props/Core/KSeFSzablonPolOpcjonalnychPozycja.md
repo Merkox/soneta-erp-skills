@@ -5,13 +5,6 @@ Opis: Element szczegółowy szablonu pól opcjonalnych KSeF (KSeFSzablonPolOpcjo
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 6
-- podlisty: 4
-- subrowy: 1
-- razem: 33
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytmKluczaPolaDodatkowego | `bool` |  |  |  |

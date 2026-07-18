@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `Umowa`
 Historia: Tak — zapis historyczny tabeli `Umowa`
 
-- pola bazodanowe (zapisywalne): 32
-- pola kalkulowane (zapisywalne): 13
-- pola tylko-odczyt: 28
-- podlisty: 7
-- subrowy: 8
-- razem: 88
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

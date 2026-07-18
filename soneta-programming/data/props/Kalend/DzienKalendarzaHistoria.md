@@ -4,13 +4,6 @@ Opis: Element szczegółowy dokumentu aktualizacji kalendarza (IDokumentAktualiz
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DokumentAktualizacji` → `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 9
-- podlisty: 1
-- subrowy: 1
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

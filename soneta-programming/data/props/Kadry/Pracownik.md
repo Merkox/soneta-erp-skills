@@ -6,13 +6,7 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `PracHistoria`
 Implementuje interfejsy: `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`, `IBazaZrodlaWyplaty`, `IPodmiot`, `IPodmiotKasowy`, `IKontrahent`, `IZrodloPodzielnikaKosztow`, `IElementSlownika`, `IZasobCRM`, `ITaskUser`, `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IWebOperator`, `IGIODOZgodnyHost`, `IOceniany`, `IOceniający`, `IOdpowiedzialnyZaOcenę`, `IŹródłoKartyOpisuStanowiska`, `IGIODOWymianaDanychHost`, `IGIODOOświadczenieHost`, `IGIODOUprawnienieHost`, `IEmailElement`, `IRozliczenieWynagrodzeniaHost`, `IZestawienieDietZagrHost`, `IZestawienieDietPakietMobilHost`, `IAdresHost`, `IZrodloPlanu`, `IDostepnoscHost`
-
-- pola bazodanowe (zapisywalne): 24
-- pola kalkulowane (zapisywalne): 12
-- pola tylko-odczyt: 39
-- podlisty: 150
-- subrowy: 3
-- razem: 228
+Selektor: pole `Typ` (`Soneta.Kadry.TypPracownika`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -193,7 +187,7 @@ Implementuje interfejsy: `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`, `I
 | SzkoleniaBHP | `SubTable<Soneta.Kadry.SzkolenieBHP>` | podlista |  |  |
 | Transakcje | `SubTable<Soneta.CRM.Transakcja>` | podlista |  |  |
 | TransakcjeKontrahenta | `SubTable<Soneta.CRM.Osoba_Kontrahent.PodmiotTransakcja>` | podlista |  |  |
-| Typ | `Soneta.Kadry.TypPracownika` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypPracownika` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypZasobu | `string` | tylko-odczyt |  |  |
 | UkończoneSzkolenia | `SubTable<Soneta.HR.UkończoneSzkolenie>` | podlista |  |  |
 | UlgaWgGlownego | `bool` | bazodanowe |  |  |
@@ -244,6 +238,17 @@ Implementuje interfejsy: `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`, `I
 | ZgodnoscGIODOPotwierdzona | `bool` |  |  |  |
 | ZyrowaneRaty | `SubTable<Soneta.Kadry.RataPozyczki>` | podlista |  |  |
 | ŻyrowanePożyczki | `SubTable<Soneta.Kadry.ŻyrantPożyczki>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Pracownik` | 1 | `Soneta.Kadry.PracownikFirmy` | Pracownik |
+| `Właściciel` | 2 | `Soneta.Kadry.Wlasciciel` | Właściciel |
+| `OsobaWspółpracująca` | 3 | `Soneta.Kadry.OsobaWspolpracujaca` | Osoba współpracująca |
 
 ## Enumy
 

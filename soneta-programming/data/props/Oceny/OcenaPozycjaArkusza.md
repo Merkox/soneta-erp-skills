@@ -4,13 +4,7 @@ Tytuł: Pozycje arkuszy ocen
 Opis: Element szczegółowy arkusza oceny (OcenaPozycjaArkusza). Reprezentuje ocenę jednego kryterium (kompetencji, zadania) w arkuszu, przechowując wartość, wagę, wynik znormalizowany i informację o wymagalności.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 11
-- podlisty: 4
-- subrowy: 1
-- razem: 25
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,7 +13,7 @@ Guided: root
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe, tylko-odczyt |  |  |
 | Lp | `int` | bazodanowe |  | Liczba porządkowa wypłaty na planownej liście płac. |
 | Max | `decimal` | bazodanowe, tylko-odczyt |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | UzasadnienieOceny | `Soneta.Oceny.UzasadnienieOceny[]` | podlista |  |  |
 | Waga | `decimal` | bazodanowe, tylko-odczyt |  |  |
 | Wartosc | `Soneta.Oceny.WartośćElementuOceny` (subrow) | bazodanowe |  |  |
@@ -39,6 +33,16 @@ Guided: root
 | Wymagana | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Znormalizowana | `Percent` | bazodanowe, tylko-odczyt |  |  |
 | ZnormalizowanaWgWagi | `Percent` | bazodanowe, tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.OcenaPozycjaArkusza` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.AnkietaPozycjaArkusza` | Pozycja arkusza ankiety |
 
 ## Enumy
 

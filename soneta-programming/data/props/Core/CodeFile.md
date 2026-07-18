@@ -5,13 +5,6 @@ Opis: Dodatkowy plik kodu źródłowego do kompilacji dynamicznej. Przechowuje n
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Core.ICodeFileHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |

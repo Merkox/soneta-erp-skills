@@ -4,13 +4,7 @@ Tytuł: Okresy obrachunkowe
 Opis: Okres obrachunkowy definiuje ramy czasowe prowadzenia księgowości w firmie. Określa daty otwarcia i zamknięcia okresu, dozwolone przedziały księgowania oraz parametry podatkowe JPK. Umożliwia kontrolę terminów księgowania i rozliczeń księgowych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 8
-- subrowy: 0
-- razem: 19
+Selektor: pole `Typ` (`Soneta.Ksiega.TypOkresuObrachunkowego`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -32,7 +26,18 @@ Guided: root
 | SchematyKsiegoweDoWywolania | `SubTable<Soneta.Ksiega.SchematKsiegowy>` | podlista |  |  |
 | SprawozdaniaKS | `SubTable<Soneta.Ksiega.SprawozdanieKS>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  | Symbol okresu obrachunkowego. |
-| Typ | `Soneta.Ksiega.TypOkresuObrachunkowego` (enum) | bazodanowe, tylko-odczyt |  | Typ okresu obrachunkowego |
+| Typ | `Soneta.Ksiega.TypOkresuObrachunkowego` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ okresu obrachunkowego |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `KS` | 0 | `Soneta.Ksiega.OkresObrachunkowyKS` |  |
+| `KPiR` | 1 | `Soneta.Ksiega.OkresObrachunkowyKPiR` |  |
+| `Ryczałt` | 2 | `Soneta.Ksiega.OkresObrachunkowyRyczałt` |  |
 
 ## Enumy
 

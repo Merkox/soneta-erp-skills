@@ -7,13 +7,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `UmowaHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`, `IZrodloDeklaracji`, `IZrodloPodzielnikaKosztow`, `IPowiązanieDodatku`, `IRozliczenieWynagrodzeniaHost`, `IZestawienieDietZagrHost`, `IZestawienieDietPakietMobilHost`, `IUmowaZKalendarzem`, `IBilansOtwarcia`, `IKwotaSplacanaBO`, `IZrodloPlanu`, `IDostepnoscHost`, `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 21
-- podlisty: 23
-- subrowy: 3
-- razem: 73
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowana | `bool` | bazodanowe, tylko-odczyt |  |  |

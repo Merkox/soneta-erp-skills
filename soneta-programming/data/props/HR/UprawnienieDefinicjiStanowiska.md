@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji stanowiska (DefinicjaStanowiska). Przypisu
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `DefinicjaStanowiska` → `DefinicjaStanowiska`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt, guided-parent | Definicja stanowiska |  |

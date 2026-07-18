@@ -5,13 +5,6 @@ Opis: Prawo dostępu przypisane do uprawnienia dla konkretnego źródła danych.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Entitle` → `IEntitle`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Entitle | `IRow` | bazodanowe, guided-parent |  | Uprawienia, którym dane prawo zostało przypisane. |

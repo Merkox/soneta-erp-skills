@@ -5,13 +5,6 @@ Opis: Definicja pojedynczego kroku kreatora. Określa typ zakładki, algorytm, u
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 9
-- pola tylko-odczyt: 7
-- podlisty: 6
-- subrowy: 0
-- razem: 42
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AcceptedCode | `string` |  | Kod algorytmu metody Accepted | Kod algorytmu kalkulatora metody akceptacji kroku kreatora |

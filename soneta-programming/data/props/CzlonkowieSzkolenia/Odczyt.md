@@ -4,13 +4,6 @@ Opis: Rejestr odczytów i wykładów organizowanych poza regularnymi szkoleniami
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasDo | `Time` | bazodanowe | Godzina zakończenia | Godzina zakończenia. |

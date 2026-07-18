@@ -5,13 +5,6 @@ Opis: Element szczegółowy typu pojazdu (VehicleType). Definiuje możliwe stany
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | bazodanowe | Aktywny | Wskazuje, czy pojazd w tym stanie jest aktywny. |

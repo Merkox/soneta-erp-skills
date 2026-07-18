@@ -5,13 +5,7 @@ Opis: Element szczegółowy sprawozdania finansowego (IPozycjaSprawozdaniaRoot).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `RootPoz` → `IPozycjaSprawozdaniaRoot`
 Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 5
-- podlisty: 2
-- subrowy: 5
-- razem: 28
+Selektor: pole `Typ` (`Soneta.Ksiega.TypPozycjiSprawozdzaniaKS`) — wiele typów w jednej tabeli, podtypów: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -41,8 +35,22 @@ Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
 | RootPoz | `Soneta.Ksiega.IPozycjaSprawozdaniaRoot` | bazodanowe, tylko-odczyt, guided-parent, iface-ref |  |  |
 | Sprawozdanie | `Soneta.Ksiega.SprawozdanieKS` | bazodanowe, tylko-odczyt |  | Sprawozdanie, do którego należy pozycja |
 | Tresc | `MemoText` | bazodanowe, podlista |  | Treść pozycji sprawozdania księgowego |
-| Typ | `Soneta.Ksiega.TypPozycjiSprawozdzaniaKS` (enum) | bazodanowe, tylko-odczyt |  | Typ pozycji sprawozdania księgowego |
+| Typ | `Soneta.Ksiega.TypPozycjiSprawozdzaniaKS` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ pozycji sprawozdania księgowego |
 | Typ2 | `Soneta.Ksiega.Typ2PozycjiSprawozdzaniaKS` (enum) | bazodanowe, tylko-odczyt |  | Subtyp pozycji sprawozdania księgowego |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ZasadyRachunkowosci` | 0 | `Soneta.Ksiega.PozycjaSprawozdaniaZasadyRachunkowosci` | Pozycja sprawozdania - zasady rachunkowości |
+| `DodatkoweObjasnienia` | 1 | `Soneta.Ksiega.PozycjaSprawozdaniaDodatkoweObjasnienia` | Pozycja sprawozdania - dodatkowe wyjaśnienia |
+| `PodatekDochodowy` | 2 | `Soneta.Ksiega.PozycjaSprawozdaniaPodatekDochodowy` | Pozycja sprawozdania - podatek dochodowy |
+| `PodatekDochodowyUz` | 3 | `Soneta.Ksiega.PozycjaSprawozdaniaPodatekDochodowyUz` | Pozycja sprawozdania - podatek dochodowy (użytkownika) |
+| `ZestawienieLokat` | 4 | `Soneta.Ksiega.PozycjaSprawozdaniaZestawienieLokat` | Pozycja sprawozdania - zestawienie lokat |
+| `ZestawienieInformacji` | 5 | `Soneta.Ksiega.PozycjaSprawozdaniaZestawienieInformacji` | Pozycja sprawozdania - zestawienie informacji |
 
 ## Relacje interfejsowe
 

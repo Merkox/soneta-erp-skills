@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoPowiązaniaStrukturyOrganizacyjnej`, `IDokument`, `IManagedRowInfoHost`, `IPoświadczenieOdbioruHost`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 8
-- podlisty: 7
-- subrowy: 2
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BasicDocument | `Soneta.Core.Dms.IBasicDocument` | bazodanowe, tylko-odczyt | Dokument podstawowy | Dokument podstawowy |

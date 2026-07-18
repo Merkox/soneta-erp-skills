@@ -5,13 +5,6 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zasob` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `TimeSec` | tylko-odczyt |  | Czas planu pracy. |

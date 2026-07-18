@@ -5,13 +5,6 @@ Opis: Tabela przechowuje informacje o awariach i przerwach w działaniu Krajoweg
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywna | `bool` | bazodanowe | Aktywna | Aktywna |

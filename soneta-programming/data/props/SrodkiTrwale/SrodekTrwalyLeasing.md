@@ -5,13 +5,6 @@ Opis: Element szczegółowy środka trwałego (SrodekTrwalyBase). Przechowuje hi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Srodek` → `SrodekTrwalyBase`
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 22
-- podlisty: 4
-- subrowy: 0
-- razem: 41
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

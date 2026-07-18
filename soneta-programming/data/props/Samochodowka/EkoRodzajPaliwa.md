@@ -5,13 +5,6 @@ Opis: Słownik rodzajów paliw na potrzeby rozliczeń środowiskowych. Zawiera s
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Gestosc | `double` | bazodanowe, tylko-odczyt |  | Gęstość paliwa w kg/l |

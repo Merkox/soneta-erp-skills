@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja limitu nieobecności. Określa typ limitu (np. ur
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Automatyczny | `bool` | bazodanowe |  |  |

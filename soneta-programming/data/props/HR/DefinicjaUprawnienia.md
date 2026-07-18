@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowDefinion`, `IZklPozycjaSlownika`, `IPozycjaKonfiguratora`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 4
-- subrowy: 0
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bezterminowe | `bool` | bazodanowe |  |  |

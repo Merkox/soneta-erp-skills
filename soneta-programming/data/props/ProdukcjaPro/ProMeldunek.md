@@ -5,13 +5,6 @@ Opis: Element szczegółowy meldunku produkcyjnego (ProOperacjaZlecenia). Reprez
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 10
-- podlisty: 10
-- subrowy: 1
-- razem: 41
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Context | `Context` | podlista |  |  |

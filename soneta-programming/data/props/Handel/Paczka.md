@@ -3,13 +3,6 @@ Nazwa tabeli: `Paczki`
 Opis: Paczka kurierska powiązana z dokumentem handlowym i przesyłką spedytora. Zawiera wymiary, masę, typ paczki oraz odniesienie do paczki wzorcowej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 1
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe | Dokument handlowy |  |

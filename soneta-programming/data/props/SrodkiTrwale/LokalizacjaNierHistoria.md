@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Lokalizacja` → `LokalizacjaNier`
 Historia: Tak — zapis historyczny tabeli `LokalizacjaNier`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista | Aktualność | Data aktualności |

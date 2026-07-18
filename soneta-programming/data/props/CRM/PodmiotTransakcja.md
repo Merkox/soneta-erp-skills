@@ -5,13 +5,6 @@ Opis: Element szczegółowy transakcji CRM (PodmiotTransakcja). Umożliwia powi�
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Transakcja` → `Transakcja`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CanBeDeleted | `bool?` |  |  |  |

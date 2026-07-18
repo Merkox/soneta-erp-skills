@@ -5,13 +5,7 @@ Opis: Dokumenty ewidencyjne środków trwałych (OT, LT, MT i inne). Rejestrują
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`
-
-- pola bazodanowe (zapisywalne): 29
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 17
-- podlisty: 6
-- subrowy: 1
-- razem: 56
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 20
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -63,7 +57,7 @@ Implementuje interfejsy: `IDokumentKsiegowalny`
 | StanDokumentuPozwalaNaBuforowanieOA | `bool` | tylko-odczyt |  |  |
 | StanDokumentuPozwalaNaZatwierdzenieOA | `bool` | tylko-odczyt |  |  |
 | SymbolOkresuWgDatyDokumentu | `string` | tylko-odczyt |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu środków trwałych |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ dokumentu środków trwałych |
 | Tytul | `Soneta.SrodkiTrwale.TytulDokumentuST` | bazodanowe | Tytuł dokumentu | Tytuł dokumentu środków trwałych |
 | WartoscBilansowa | `Currency` | bazodanowe | Wartość bilansowa | Wartość bilansowa dokumentu |
 | WartoscPodatkowa | `Currency` | bazodanowe | Wartość podatkowa | Wartość podatkowa dokumentu |
@@ -71,6 +65,34 @@ Implementuje interfejsy: `IDokumentKsiegowalny`
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | ZasadzeniaWieloletnie | `bool` | bazodanowe | Zasadzenia wieloletnie |  |
 | Zatwierdzony | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `OT` | 1301 | `Soneta.SrodkiTrwale.OT` | OT |
+| `LT` | 1302 | `Soneta.SrodkiTrwale.LT` | LT |
+| `Amortyzacja` | 1303 | `Soneta.SrodkiTrwale.Amortyzacja` | Amortyzacja |
+| `Przeszacowanie` | 1304 | `Soneta.SrodkiTrwale.Przeszacowanie` | Przeszacowanie |
+| `ZmianaWartości` | 1305 | `Soneta.SrodkiTrwale.ZmianaWartosci` | Zmiana wartości |
+| `BOT` | 1308 | `Soneta.SrodkiTrwale.BOT` | BOT |
+| `ZmianaMiejscaUżytkowania` | 1310 | `Soneta.SrodkiTrwale.ZmianaMiejscaUzytkowania` | Zmiana miejsca użytkowania |
+| `ZmianaOsobyOdpowiedzialnej` | 1311 | `Soneta.SrodkiTrwale.ZmianaOsobyOdpowiedzialnej` | Zmiana osoby odpowiedzialnej |
+| `ZmianaParametrówAmortyzacji` | 1312 | `Soneta.SrodkiTrwale.ZmianaParametrowAmortyzacji` | Zmiana parametrów amortyzacji |
+| `ZmianaCentrumKosztów` | 1313 | `Soneta.SrodkiTrwale.ZmianaCentrumKosztow` | Zmiana centrum kosztów |
+| `Inwentaryzacja` | 1314 | `Soneta.SrodkiTrwale.Inwentaryzacja` | Inwentaryzacja |
+| `ZmianaWartościRezydualnej` | 1315 | `Soneta.SrodkiTrwale.ZmianaWartosciRezydualnej` | Zmiana wartości rezydualnej |
+| `OdpisAktualizujący` | 1317 | `Soneta.SrodkiTrwale.OdpisAktualizujacy` | Odpis aktualizujący |
+| `ZmianaWartosciDok` | 1318 | `Soneta.SrodkiTrwale.ZmianaWartosciDok` | Zmiana wartości i ilości |
+| `PodatekOdNieruchomosci` | 1319 | `Soneta.SrodkiTrwale.PodatekOdNieruchomosci` | Podatek od nieruchomości |
+| `ZmianaParametrowPodatku` | 1320 | `Soneta.SrodkiTrwale.ZmianaParametrowPodatku` | Zmiana parametrów podatku |
+| `ZmianaKategorii` | 1321 | `Soneta.SrodkiTrwale.ZmianaKategorii` | Zmiana kategorii |
+| `InwentaryzacjaCzastkowa` | 1322 | `Soneta.SrodkiTrwale.InwentaryzacjaCzastkowa` | Inwentaryzacja cząstkowa |
+| `ZmianaPodzielnikaKosztow` | 1323 | `Soneta.SrodkiTrwale.ZmianaPodzielnikaKosztow` | Zmiana podzielnika kosztów |
+| `RataLeasingowa` | 1326 | `Soneta.SrodkiTrwale.RataLeasingowa` | Rata leasingowa |
 
 ## Relacje interfejsowe
 

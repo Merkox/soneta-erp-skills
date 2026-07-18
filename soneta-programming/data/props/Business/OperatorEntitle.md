@@ -5,13 +5,6 @@ Opis: Powiązanie operatora z uprawnieniem (oddziałem praw). Określa, do któr
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Operator` → `Operator`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Entitle | `App.Entitle` | bazodanowe |  | Uprawnienia przypisane operatorowi. |

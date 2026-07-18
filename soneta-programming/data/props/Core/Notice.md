@@ -5,13 +5,6 @@ Opis: Komunikat (powiadomienie) wysłany kanałem dystrybucji. Zawiera temat, tr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 5
-- podlisty: 2
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Category | `Soneta.Core.Conversation.ThreadCategory` | bazodanowe | Kategoria |  |

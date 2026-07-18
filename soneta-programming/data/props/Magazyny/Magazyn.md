@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 0
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `Soneta.Magazyny.AlgorytmMagazynowy` (enum) | bazodanowe |  | Określa algorytm rozchodu zasobów w tym magazynie. |

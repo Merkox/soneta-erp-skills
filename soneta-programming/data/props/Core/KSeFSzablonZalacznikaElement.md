@@ -5,13 +5,6 @@ Opis: Zawiera listę elementów szablonów załączników zdefiniowanych dla kon
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 7
-- podlisty: 7
-- subrowy: 1
-- razem: 36
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualnaWartoscWiersza | `object` |  |  |  |

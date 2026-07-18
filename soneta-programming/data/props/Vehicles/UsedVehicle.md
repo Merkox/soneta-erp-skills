@@ -4,13 +4,6 @@ Tytuł: Pojazdy wykorzystane
 Opis: Rejestr wykorzystania pojazdów w ramach zadań CRM. Przechowuje dane o okresie użytkowania, dokumentach rozliczających, usługach i stawkach, stanowiąc podstawę do rozliczania kosztów eksploatacji floty.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 6
-- podlisty: 0
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt |  |  |

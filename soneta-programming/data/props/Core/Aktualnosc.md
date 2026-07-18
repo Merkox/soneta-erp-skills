@@ -5,13 +5,6 @@ Opis: Aktualność (ogłoszenie, news) publikowana w systemie. Zawiera temat, op
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 7
-- podlisty: 2
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CanAddAttachments | `bool` | tylko-odczyt |  |  |

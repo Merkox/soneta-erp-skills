@@ -5,13 +5,6 @@ Opis: Element szczegółowy hosta adresowego (IAdresHost). Przechowuje adres dan
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IAdresHost`
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 9
-- podlisty: 0
-- subrowy: 2
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |

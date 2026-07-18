@@ -5,13 +5,6 @@ Opis: Element szczegółowy obiektu nadrzędnego, np. kontrahenta lub osoby kont
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zapis` → `ITowaryUlubioneHost`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Towar | `Soneta.Towary.Towar` | bazodanowe | Ulubiony towar | Ulubiony towar skojarzony z danym zapisem. |

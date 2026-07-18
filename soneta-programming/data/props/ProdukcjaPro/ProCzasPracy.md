@@ -5,13 +5,6 @@ Opis: Element szczegółowy zasobu operacji zlecenia (ProZasobOperacjiZlecenia).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `ZasobOperacjiZlecenia` → `ProZasobOperacjiZlecenia`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Awaria | `Soneta.ProdukcjaPro.ProAwaria` | tylko-odczyt |  | Pierwsza awaria powiązana z czasem pracy. |

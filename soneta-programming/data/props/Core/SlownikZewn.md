@@ -5,13 +5,6 @@ Opis: Słownik zewnętrzny mapujący obiekty z systemów zewnętrznych na elemen
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadrzedny | `Soneta.Core.SlownikZewn` | bazodanowe |  | Nadrzędny słownik zewnętrzny |

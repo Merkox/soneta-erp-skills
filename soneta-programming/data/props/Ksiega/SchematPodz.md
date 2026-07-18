@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `ISchematPodziałowy`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 1
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie definicji. |

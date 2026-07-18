@@ -5,13 +5,6 @@ Opis: Uprawnienie RODO przyznane osobie do przetwarzania danych osobowych. Zawie
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 4
-- podlisty: 5
-- subrowy: 1
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |

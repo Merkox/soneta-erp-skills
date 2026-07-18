@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 8
-- podlisty: 10
-- subrowy: 2
-- razem: 43
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla leada. |

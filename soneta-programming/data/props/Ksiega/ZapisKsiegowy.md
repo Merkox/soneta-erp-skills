@@ -5,13 +5,7 @@ Opis: Zapis księgowy to pojedyncza pozycja dekretu przypisana do konkretnego ko
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dekret` → `DekretBase`
 Implementuje interfejsy: `IElementKsiegowalny`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 38
-- podlisty: 8
-- subrowy: 0
-- razem: 61
+Selektor: pole `Typ` (`Soneta.Ksiega.TypZapisu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -66,7 +60,7 @@ Implementuje interfejsy: `IElementKsiegowalny`
 | StanRozliczenia | `Soneta.Kasa.StanRozliczenia` (enum) | tylko-odczyt |  |  |
 | Strona | `Soneta.Core.StronaKsiegowania` (enum) | bazodanowe, tylko-odczyt |  |  |
 | StronaRozliczenia | `Soneta.Core.StronaKsiegowania` (enum) | tylko-odczyt |  |  |
-| Typ | `Soneta.Ksiega.TypZapisu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypZapisu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypDziennika | `Soneta.Ksiega.TypDziennika` (enum) | bazodanowe, tylko-odczyt |  |  |
 | TypWgKonta | `Soneta.Ksiega.TypZapisuWgKonta` (enum) | bazodanowe |  |  |
 | Winien | `Currency` |  |  |  |
@@ -76,6 +70,16 @@ Implementuje interfejsy: `IElementKsiegowalny`
 | ZapisZamkniecia | `bool` | bazodanowe, tylko-odczyt | Zapis zamknięcia |  |
 | ZapisyKsiegowe | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 | ZapisyPomocnicze | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Zwykły` | 1 | `Soneta.Ksiega.Zapis` | Zapis księgowy |
+| `Walutowy` | 2 | `Soneta.Ksiega.ZapisWalutowy` | Zapis księgowy - walutowy |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,6 @@ Opis: Powiązanie kreatora z obiektem biznesowym lub definicją zadania. Określ
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Host` → `IWizardReferenceHost`
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 6
-- podlisty: 0
-- subrowy: 1
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `IWizardReferenceHost` | bazodanowe, tylko-odczyt, guided-parent, iface-ref | Kreator dla |  |

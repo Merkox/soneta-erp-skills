@@ -4,13 +4,6 @@ Tytuł: Dane binarne załączników
 Opis: Dane binarne pliku załącznika. Przechowuje zawartość pliku, typ MIME, dane OCR oraz informacje o blokadzie edycji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `MemoBin` | bazodanowe | Dane | Binarna wartość przechowywanego pliku. |

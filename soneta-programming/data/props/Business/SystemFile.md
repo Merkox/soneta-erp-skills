@@ -4,20 +4,14 @@ Tytuł: Systemowe pliki dodatkowe
 Opis: Plik systemowy przechowywany w bazie danych, taki jak szablon wydruku, skrypt lub definicja UI. Obsługuje dziedziczenie z pliku bazowego i wersjonowanie.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 1
-- razem: 12
+Selektor: pole `FileType` (`Db.SystemFileTypes`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BaseFile | `Db.SystemFile` | bazodanowe |  |  |
 | Code | `MemoText` | bazodanowe, podlista |  |  |
 | CodeEditorSource | `Compiler.ICodeEditorSource` |  |  |  |
-| FileType | `Db.SystemFileTypes` (enum) | bazodanowe, tylko-odczyt |  |  |
+| FileType | `Db.SystemFileTypes` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | ImplementationType | `System.Type` | tylko-odczyt |  |  |
 | Locked | `bool` | bazodanowe | Zablokowane |  |
 | Name | `string` | bazodanowe |  |  |
@@ -26,6 +20,16 @@ Guided: root
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
 | RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `FileType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `DxSnippet` | 1 | `Db.DxSnippetFile` |  |
+| `Snippet` | 2 | `Db.SnippetFile` |  |
 
 ## Enumy
 

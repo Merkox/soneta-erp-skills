@@ -4,13 +4,6 @@ Opis: Element szczegółowy towaru (Towar). Definiuje zamiennik towarowy, czyli 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BiezacyTowar | `Soneta.Towary.Towar` |  |  |  |

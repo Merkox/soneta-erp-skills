@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji zlecenia (ProOperacjaZlecenia). Definiuje z
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 0
-- podlisty: 6
-- subrowy: 0
-- razem: 35
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaRejestracji | `bool` | bazodanowe | Blokada rejestracji | Zablokowanie rejestracji czasów prac dla zasobu operacji zlecenia. |

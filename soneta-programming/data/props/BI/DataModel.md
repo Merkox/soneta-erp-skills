@@ -5,13 +5,7 @@ Opis: Model danych stanowiący podstawę analiz BI. Definiuje strukturę zapytan
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IAreaHost`
-
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 5
-- subrowy: 0
-- razem: 20
+Selektor: pole `Type` (`Soneta.BI.DataModelType`) — wiele typów w jednej tabeli, podtypów: 7
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -34,7 +28,22 @@ Implementuje interfejsy: `IRightsSource`, `IAreaHost`
 | Tables | `DevExpress.XtraSpreadsheet.Model.DataModelTableCollection` | podlista |  |  |
 | TechnicalModel | `bool` | bazodanowe | Model techniczny |  |
 | TimeSpanItem | `IRow` | bazodanowe |  |  |
-| Type | `Soneta.BI.DataModelType` (enum) | bazodanowe | Typ modelu |  |
+| Type | `Soneta.BI.DataModelType` (enum) | bazodanowe, selektor | Typ modelu |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Domain` | 1 | `Soneta.BI.DomainDefinition` | Definicja domeny |
+| `Report` | 2 | `Soneta.BI.ReportDefinition` | Definicja raportu |
+| `Indicator` | 3 | `Soneta.BI.IndicatorDefinition` | Definicja wskaźnika |
+| `DomainExtender` | 4 | `Soneta.BI.DomainExtenderDefinition` | Rozszerzenie domeny |
+| `Table` | 5 | `Soneta.BI.TableDefinition` | Definicja tabeli |
+| `ReportExtender` | 6 | `Soneta.BI.ReportExtenderDefinition` | Rozszerzenie raportu |
+| `IndicatorExtender` | 7 | `Soneta.BI.IndicatorExtenderDefinition` | Rozszerzenie wskaźnika |
 
 ## Enumy
 

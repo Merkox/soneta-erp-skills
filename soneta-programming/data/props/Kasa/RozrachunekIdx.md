@@ -4,13 +4,6 @@ Tytuł: Rozrachunki
 Opis: Indeks rozrachunków umożliwiający szybkie wyszukiwanie i filtrowanie płatności i zapłat wg różnych kryteriów. Przechowuje zagregowane informacje o stanie rozliczenia dokumentu, kwotach do rozliczenia, terminach oraz datach księgowania, wspierając analizy należności i zobowiązań.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 20
-- podlisty: 0
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe, tylko-odczyt |  |  |

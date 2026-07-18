@@ -5,13 +5,6 @@ Opis: Zawiera listę dokumentów dedykowanych dla Centralnego Rejestru Umów. Po
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CRUDate | `Date` | bazodanowe | Data umowy | Data zawarcia umowy CRU |

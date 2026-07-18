@@ -4,13 +4,6 @@ Tytuł: Relacje zasobow produkcujnych z zasobami CRM
 Opis: Relacja łącząca zasób produkcyjny rzeczywisty (ProdZasob) z zasobem modułu CRM. Umożliwia synchronizację kalendarzy i dostępności między planowaniem produkcji a zarządzaniem zasobami w CRM, co pozwala unikać konfliktów rezerwacji maszyn i stanowisk.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ProdZasob | `Soneta.Produkcja.ProdZasob` | bazodanowe | Zasób | Zasób produkcyjny. |

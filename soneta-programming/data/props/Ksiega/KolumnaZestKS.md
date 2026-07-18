@@ -5,13 +5,6 @@ Opis: Element szczegółowy zestawienia księgowego (ZestawienieKS). Definiuje k
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieKS`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 1
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaEdycji | `bool` | bazodanowe |  | Blokada możliwości edycji kolumny |

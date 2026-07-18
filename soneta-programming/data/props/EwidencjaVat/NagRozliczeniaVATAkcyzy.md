@@ -4,13 +4,7 @@ Tytuł: Nagłówki rozliczeń VAT
 Opis: Element szczegółowy nagłówka ewidencji VAT (NagEwidencjiVATAkcyzy). Nagłówek rozliczenia VAT rejestrujący moment powstania obowiązku podatkowego z datą, kwotami netto/VAT/brutto oraz statusem rozliczenia. Obsługuje rozliczenia kasowe (powiązanie z rozliczeniami SP), złe długi oraz rozliczenia ręczne.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Naglowek` → `NagEwidencjiVATAkcyzy`
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 23
-- podlisty: 1
-- subrowy: 0
-- razem: 25
+Selektor: pole `Typ` (`Soneta.EwidencjaVat.TypRozliczeniaVAT`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -32,13 +26,25 @@ Guided: child — nadrzędna przez pole `Naglowek` → `NagEwidencjiVATAkcyzy`
 | RozliczenieSP | `Soneta.Kasa.RozliczenieSP` | bazodanowe, tylko-odczyt | Rozliczenie ŚP | Rozliczenie SP będące źrodłem rozliczania VAT |
 | StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | tylko-odczyt |  |  |
 | StatusRozliczenia | `Soneta.EwidencjaVat.StatusRozliczeniaVAT` (enum) | bazodanowe, tylko-odczyt |  | Status rozliczenia VAT |
-| Typ | `Soneta.EwidencjaVat.TypRozliczeniaVAT` (enum) | bazodanowe, tylko-odczyt |  | Typ rozliczenia VAT |
+| Typ | `Soneta.EwidencjaVat.TypRozliczeniaVAT` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ rozliczenia VAT |
 | TypEwidencji | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  | Typ ewidencji VAT |
 | TypStatus | `string` | tylko-odczyt |  |  |
 | VAT | `Currency` | bazodanowe, tylko-odczyt |  | Wartość rozliczenia podatku VAT |
 | VATNaliczony | `Currency` | tylko-odczyt |  |  |
 | WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
 | WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Memoriałowe` | 1 | `Soneta.EwidencjaVat.NagRozliczeniaVATMemorialowe` | Nagłówek rozliczenia VAT - memoriałowe |
+| `Kasowe` | 2 | `Soneta.EwidencjaVat.NagRozliczeniaVATKasowe` | Nagłówek rozliczenia VAT - kasowe |
+| `KasoweZłeDługiKorekta` | 4 | `Soneta.EwidencjaVat.NagRozliczeniaVATKasoweZleDlugiKorekta` | Nagłówek rozliczenia VAT - kasowe złe długi (korekta) |
+| `KasoweZłeDługi` | 5 | `Soneta.EwidencjaVat.NagRozliczeniaVATKasoweZleDlugi` | Nagłówek rozliczenia VAT - kasowe złe długi |
 
 ## Relacje interfejsowe
 

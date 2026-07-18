@@ -4,13 +4,6 @@ Tytuł: Parametry rozliczeń
 Opis: Parametry rozliczeń VAT (prewspółczynnik i współczynnik sprzedaży). Przechowuje nazwę, symbol, powiązanego kontrahenta, historyczne wartości prewspółczynników i współczynników sprzedaży (bieżących i rzeczywistych) oraz flagę blokady.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

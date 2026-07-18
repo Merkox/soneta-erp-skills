@@ -5,13 +5,6 @@ Opis: Tabela relacyjna łącząca komentarze (WFItemDescription) z elementami pr
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Description` → `IWFItemDescription`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Description | `IWFItemDescription` | bazodanowe, guided-parent | Komentarz powiązany | Komentarz powiązany z elementem |

@@ -5,13 +5,6 @@ Opis: Przypisanie panelu BI (DashboardView) do formularza aplikacji. Określa, n
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DashboardView | `System.Guid` | bazodanowe, tylko-odczyt |  |  |

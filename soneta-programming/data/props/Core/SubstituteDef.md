@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 4
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefaultSubstituteDef | `bool` | bazodanowe | Domyślna definicja zastępstwa | Określa czy definicja zastępstwa jest domyślna |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy regionu sprzedażowego (Region). Definiuje obszar ge
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 1
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |

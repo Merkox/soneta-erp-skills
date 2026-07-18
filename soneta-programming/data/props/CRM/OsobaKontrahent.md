@@ -5,13 +5,6 @@ Opis: Powiązanie osoby kontaktowej z wieloma kontrahentami jednocześnie. Umoż
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Glowny | `bool` | bazodanowe | Główny | Wskazuje czy kontrahent jest głównym Kontrahentem osoby kontaktowej. |

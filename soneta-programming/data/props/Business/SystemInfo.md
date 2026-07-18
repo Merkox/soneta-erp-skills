@@ -4,13 +4,6 @@ Tytuł: Informacja systemowa
 Opis: Przechowuje systemowe informacje konfiguracyjne identyfikowane unikalnym kluczem. Zawiera parametry wewnętrzne systemu, takie jak numery wersji i ustawienia globalne.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `MemoText` | bazodanowe, podlista |  |  |

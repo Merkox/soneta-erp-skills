@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji projektu (DefProjektu). Definiuje etap w s
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefProjektu`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTrwania | `int` | bazodanowe | Domyślny czas trwania etapu | Domyślny czas trwania etapu. |

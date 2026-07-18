@@ -4,13 +4,6 @@ Tytuł: Koszty dodatkowe
 Opis: Koszt dodatkowy przypisany do dokumentu handlowego (np. transport, ubezpieczenie). Określa kwotę oraz rodzaj kosztu: fakturowy, magazynowy lub statystyczny.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywność kosztu | Określa, czy koszt dodatkowy jest aktywny. |

@@ -4,13 +4,6 @@ Opis: Słownik kodów klasyfikacji odpadów zgodnych z rejestrem BDO (Baza danyc
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ID_BDO | `string` | bazodanowe |  | ID w systemie BDO |

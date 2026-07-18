@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 11
-- podlisty: 5
-- subrowy: 2
-- razem: 31
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaOkresu | `bool` | tylko-odczyt |  |  |

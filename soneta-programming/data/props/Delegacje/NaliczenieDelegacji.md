@@ -5,13 +5,6 @@ Opis: Element szczegółowy Delegacja (Delegacja). Przechowuje pośrednie wyniki
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Delegacja` → `Delegacja`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 50
-- podlisty: 1
-- subrowy: 0
-- razem: 59
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasTrwania | `Time` | bazodanowe, tylko-odczyt |  | Sumaryczny czas trwania |

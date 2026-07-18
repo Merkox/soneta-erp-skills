@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IManagedRowInfoHost`, `IDokument`, `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 4
-- podlisty: 6
-- subrowy: 1
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe |  |  |

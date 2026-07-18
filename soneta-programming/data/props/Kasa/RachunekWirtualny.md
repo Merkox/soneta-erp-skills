@@ -4,13 +4,6 @@ Tytuł: Rachunki wirtualne
 Opis: Numer rachunku wirtualnego przypisany do podmiotu kasowego w ramach ewidencji środków pieniężnych. Rachunki wirtualne służą do automatycznej identyfikacji wpłat od kontrahentów przy imporcie wyciągów bankowych na podstawie unikalnego numeru konta.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | bazodanowe, tylko-odczyt |  |  |

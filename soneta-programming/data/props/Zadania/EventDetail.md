@@ -5,13 +5,6 @@ Opis: Szczegóły zdarzenia komunikacyjnego (e-mail, SMS) powiązanego z zadanie
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 7
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DW | `MemoText` | bazodanowe, podlista |  |  |

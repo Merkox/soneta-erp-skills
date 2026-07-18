@@ -4,13 +4,7 @@ Tytuł: Definicje XML
 Opis: Definicja szablonu importu/eksportu XML (komunikatów, e-deklaracji, plików JPK itp.). Określa nazwę, klasę obiektu, standard, rodzaj, format pliku, kodowanie znaków, źródło danych oraz plik szablonu i schematu XSD.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 12
-- podlisty: 6
-- subrowy: 1
-- razem: 35
+Selektor: pole `Selektor` (`Soneta.Core.SelektorDefXml`) — wiele typów w jednej tabeli, podtypów: 15
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -43,12 +37,35 @@ Guided: root
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
 | RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
-| Selektor | `Soneta.Core.SelektorDefXml` (enum) | bazodanowe, tylko-odczyt | Selektor definicji | Selektor definicji. |
+| Selektor | `Soneta.Core.SelektorDefXml` (enum) | bazodanowe, tylko-odczyt, selektor | Selektor definicji | Selektor definicji. |
 | SprawozdzaniaKS | `SubTable` | podlista |  |  |
 | Standard | `Soneta.Core.StandardDefXml` (enum) | bazodanowe |  |  |
 | TableName | `string` | bazodanowe | Tabela danych | Klasa obiektu. |
 | UseStandardForm | `bool` | tylko-odczyt |  |  |
 | XMLTempate | `string` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Selektor`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `EDI` | 1 | `Soneta.Core.DefXmlNagEDI` |  |
+| `KIR` | 2 | `Soneta.Core.DefXmlNagKIR` |  |
+| `GM24` | 4 | `Soneta.Core.DefXmlNagGM24` |  |
+| `Integrator` | 8 | `Soneta.Core.DefXmlNagIntegrator` |  |
+| `JPK` | 16 | `Soneta.Core.DefXmlNagJPK` |  |
+| `Przelewy` | 32 | `Soneta.Core.DefXmlNagPrzelewy` |  |
+| `Sprawozdanie` | 64 | `Soneta.Ksiega.DefXmlNagSprawozdanie` | Definicja XML Sprawozdania |
+| `DMS` | 128 | `Soneta.Core.DefXmlNagDMS` |  |
+| `Standard` | 256 | `Soneta.Core.DefXmlNag` |  |
+| `PPK` | 512 | `Soneta.Core.DefXmlNagPPK` |  |
+| `Intrastat` | 1024 | `Soneta.Core.DefXmlNagIntrastat` |  |
+| `PUESC` | 2048 | `Soneta.Core.DefXmlNagPUESC` |  |
+| `KSeF` | 4096 | `Soneta.Core.DefXmlNagKSeF` |  |
+| `ZUSZ3` | 8192 | `Soneta.Core.DefXmlNagZUSZ3` |  |
+| `ZUSZ3a` | 16384 | `Soneta.Core.DefXmlNagZUSZ3a` |  |
 
 ## Enumy
 

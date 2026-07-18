@@ -5,13 +5,6 @@ Opis: Element szczegółowy karty realizacji celu (KartaRealizacjiCelu). Dokumen
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaRealizacjiCelu`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 5
-- podlisty: 3
-- subrowy: 1
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Cel | `Soneta.HR2.CelOkresowyPracownika` | bazodanowe, tylko-odczyt |  |  |

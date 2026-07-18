@@ -5,13 +5,6 @@ Opis: Szablon rejestracji czasu pracy (RCP). Konfiguruje parametry ewidencji cza
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 3
-- subrowy: 4
-- razem: 31
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytmAkcji | `bool` |  |  |  |

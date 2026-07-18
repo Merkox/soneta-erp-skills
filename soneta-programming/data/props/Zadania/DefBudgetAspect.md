@@ -4,18 +4,12 @@ Tytuł: Perspektywa realizacji
 Opis: Definicja perspektywy realizacji budżetu, np. planowanie, memoriał, płatność. Określa źródło danych, algorytm wyliczania oraz symbol i nazwę etapu służącego do analizy budżetowej.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 1
-- razem: 18
+Selektor: pole `BudgetType` (`Soneta.Zadania.Budzetowanie.TypObrotuBudzetu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorithm | `bool` | bazodanowe |  | Określa czy istnieje algorytm. |
-| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe, tylko-odczyt | Typ perspektywy realizacji |  |
+| BudgetType | `Soneta.Zadania.Budzetowanie.TypObrotuBudzetu` (enum) | bazodanowe, tylko-odczyt, selektor | Typ perspektywy realizacji |  |
 | Code | `MemoText` | bazodanowe, podlista | Kod | Kod |
 | CodeEditorSource | `Compiler.ICodeEditorSource` |  |  |  |
 | DataSource | `Soneta.Core.BudgetDataSource` (enum) | bazodanowe |  | Źródło danych. |
@@ -32,6 +26,16 @@ Guided: root
 | RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji wykorzystywana do wyszukiwania definicji oraz numeracji. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `BudgetType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Realizacja` | 0 | `Soneta.Zadania.Budzetowanie.Models.DefBudgetAspectRealization` | Realizacja |
+| `Plan` | 1 | `Soneta.Zadania.Budzetowanie.Models.DefBudgetAspectPlanning` | Planowanie |
 
 ## Enumy
 

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 8
-- podlisty: 7
-- subrowy: 1
-- razem: 33
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDay | `bool` | bazodanowe | Całodzienne. |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje pole, po który
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 1
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Field | `Soneta.BI.FieldProxy` (subrow) | bazodanowe | Pole |  |

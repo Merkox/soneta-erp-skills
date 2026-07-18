@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `InformacjeDoRozliczeniaHistoria`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Place.DefinicjaElementuRozliczenia` | bazodanowe |  |  |

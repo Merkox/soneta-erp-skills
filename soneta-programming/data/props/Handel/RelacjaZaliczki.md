@@ -3,13 +3,6 @@ Nazwa tabeli: `RelacjeZaliczek`
 Opis: Powiązanie dokumentu handlowego z zapłatą zaliczkową. Przechowuje typ relacji zaliczkowej i kwotę przypisaną do dokumentu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt | Dokument handlowy | Dokument handlowy dla zaliczki |

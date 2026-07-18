@@ -4,13 +4,6 @@ Tytuł: Zespoły
 Opis: Zespoły szkoleniowe wydzielone w ramach grupy szkoleniowej. Umożliwiają podział uczestników grupy na mniejsze podgrupy do realizacji zajęć laboratoryjnych, ćwiczeniowych lub projektowych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 7
-- subrowy: 0
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | GrupaSzkol | `Soneta.CzlonkowieSzkolenia.GrupaSzkol` | bazodanowe |  |  |

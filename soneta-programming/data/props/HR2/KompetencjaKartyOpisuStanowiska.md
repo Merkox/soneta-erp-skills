@@ -5,13 +5,6 @@ Opis: Element szczegółowy karty opisu stanowiska (KartaOpisuStanowiskaBase). O
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaOpisuStanowiskaBase`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 2
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |

@@ -5,13 +5,7 @@ Opis: Konfigurowalna definicja dokumentu aktualizacji kalendarza. Określa rodza
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 8
-- podlisty: 5
-- subrowy: 3
-- razem: 36
+Selektor: pole `Rodzaj` (`Soneta.Kalend.RodzajAktualizacjiKalendarza`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -37,7 +31,7 @@ Implementuje interfejsy: `IRightsSource`
 | Numeracja.Separator | `string` | bazodanowe |  |  |
 | Numeracja.Wzor | `string` | bazodanowe |  |  |
 | PlanPracy | `bool` | tylko-odczyt |  |  |
-| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Kalend.RodzajAktualizacjiKalendarza` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | RuntimeInfo | `Compiler.RuntimeDefinitionInfo` (subrow) | bazodanowe |  |  |
 | RuntimeInfo.FileName | `string` | bazodanowe | Nazwa pliku |  |
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
@@ -51,6 +45,16 @@ Implementuje interfejsy: `IRightsSource`
 | ZrodloEtat | `bool` | bazodanowe | Ogólne |  |
 | ZrodloUmowyZewn | `bool` | bazodanowe | Ogólne |  |
 | ZrodloUmowyZlec | `bool` | bazodanowe | Ogólne |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `AktualizacjaPlanuPracy` | 1 | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza.PlanuPracy` | Definicja dok. aktualizacji planu pracy |
+| `WprowadzanieCzasuPracy` | 2 | `Soneta.Kalend.DefinicjaAktualizacjiKalendarza.CzasuPracy` | Definicja dok. aktualizacji czasu pracy |
 
 ## Relacje interfejsowe
 

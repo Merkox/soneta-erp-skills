@@ -4,13 +4,7 @@ Tytuł: Definicje przedziałów czasowych
 Opis: Definicja przedziału czasowego wykorzystywanego w analizach BI. Określa nazwany zakres czasu (np. bieżący miesiąc, poprzedni kwartał) wraz z formułami obliczania granic przedziału. Przedziały są grupowane w zestawy i przypisywane do pól modeli danych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 0
-- razem: 5
+Selektor: pole `Type` (`Soneta.BI.TimeSpanType`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,7 +12,17 @@ Guided: root
 | FromTo | `FromTo` | bazodanowe, podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | ToText | `MemoText` | bazodanowe, podlista |  |  |
-| Type | `Soneta.BI.TimeSpanType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ przedziału czasowego |
+| Type | `Soneta.BI.TimeSpanType` (enum) | bazodanowe, tylko-odczyt, selektor | Typ | Typ przedziału czasowego |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Static` | 1 | `Soneta.BI.StaticTimeSpanDefinition` | Definicja statyczna |
+| `Dynamic` | 2 | `Soneta.BI.DynamicTimeSpanDefinition` | Definicja dynamiczna |
 
 ## Enumy
 

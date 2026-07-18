@@ -5,13 +5,6 @@ Opis: Dokumenty zgłoszeń uczestników na szkolenia. Rejestruje formalne zapisy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 4
-- subrowy: 1
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Data zgłoszenia | Data zgłoszenia na szkolenie. |

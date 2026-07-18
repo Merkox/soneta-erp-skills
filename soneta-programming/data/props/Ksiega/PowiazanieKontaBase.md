@@ -4,20 +4,24 @@ Tytuł: Powiązania kont
 Opis: Element szczegółowy konta księgowego (KontoBase). Reprezentuje powiązanie między kontem a elementem słownika poprzez konto słownikowe, umożliwiając automatyczne tworzenie kont analitycznych na podstawie słowników (np. kontrahentów, pracowników).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Konto` → `KontoBase`
-
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 4
+Selektor: pole `Typ` (`Soneta.Ksiega.TypPowiazania`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Element | `Soneta.Core.IElementSlownika` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | Konto | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt, guided-parent |  |  |
 | KontoSlownikowe | `Soneta.Ksiega.KontoBase` | bazodanowe, tylko-odczyt |  |  |
-| Typ | `Soneta.Ksiega.TypPowiazania` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypPowiazania` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Slownikowe` | 1 | `Soneta.Ksiega.PowiazanieSlownikowe` | Powiązanie konta - słownikowe |
+| `Systemowe` | 2 | `Soneta.Ksiega.PowiazanieSystemowe` | Powiązanie konta - systemowe |
 
 ## Relacje interfejsowe
 

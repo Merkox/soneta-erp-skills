@@ -5,13 +5,6 @@ Opis: Element szczegółowy oddziału firmy (OddzialFirmy). Przechowuje historyc
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 22
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 11
-- podlisty: 0
-- subrowy: 1
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |

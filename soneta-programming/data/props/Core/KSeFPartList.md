@@ -4,13 +4,6 @@ Tytuł: KSeFZapytaniaOFaktury
 Opis: Pakiet (część) danych zwróconych z KSeF w odpowiedzi na zapytanie o faktury. Zawiera numer referencyjny pakietu, nazwę, zakres dat, datę ważności, rozmiar, algorytm szyfrowania, kodowanie, URL do pobrania oraz status pobrania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | HttpMethod | `string` | bazodanowe | Metoda HTTP | Metoda HTTP, której należy użyć przy pobieraniu pliku. |

@@ -5,13 +5,7 @@ Opis: Operacja zmiany wkładu w funduszu pożyczkowym pracownika (dopłata lub w
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 2
-- subrowy: 0
-- razem: 11
+Selektor: pole `Kierunek` (`Soneta.Kadry.KierunekZmianyWkładuFunduszuPożyczkowego`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,13 +13,23 @@ Implementuje interfejsy: `IBazaZrodlaWyplaty`
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | Elementy | `SubTable<Soneta.Place.WypElement>` | podlista | Elementy wynagrodzenia |  |
 | Fundusz | `Soneta.Kadry.FundPozyczkowy` | bazodanowe, tylko-odczyt |  |  |
-| Kierunek | `Soneta.Kadry.KierunekZmianyWkładuFunduszuPożyczkowego` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Kadry.KierunekZmianyWkładuFunduszuPożyczkowego` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Kwota | `Currency` | bazodanowe |  | Kwota dopłaty/wypłaty |
 | KwotaDopłaty | `Currency` | tylko-odczyt |  |  |
 | KwotaWycofania | `Currency` | tylko-odczyt |  |  |
 | Opis | `MemoText` | bazodanowe, podlista |  | Opis informacji o zmianie wkładu funduszu pożyczkowego |
 | Rozliczone | `bool` | tylko-odczyt |  |  |
 | Spłacona | `bool` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Kierunek`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `WycofanieWkładu` | -1 | `Soneta.Kadry.ZmianaWkładuFunduszuPozyczkowego.WycofanieWkładu` | Wycofanie wkładu |
+| `Dopłata` | 1 | `Soneta.Kadry.ZmianaWkładuFunduszuPozyczkowego.Dopłata` | Dopłata |
 
 ## Enumy
 

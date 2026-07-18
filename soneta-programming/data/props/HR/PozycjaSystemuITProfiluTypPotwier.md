@@ -5,13 +5,6 @@ Opis: Element szczegółowy pozycji systemu IT profilu kwalifikacyjnego (Pozycja
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Pozycja | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaSystemowITProfilu` | bazodanowe, tylko-odczyt |  |  |

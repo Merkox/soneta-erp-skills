@@ -5,13 +5,6 @@ Opis: Konkretne urządzenie użytkowane powiązane z definicją (DefUrzadzeniaUz
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Handel.DefUrzadzeniaUz` | bazodanowe |  | Definicja urządzenia. |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy kalendarza (KalendarzBase). Przypisanie weryfikatora
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Kalend.DefinicjaWeryfikatoraKalendarza` | bazodanowe, tylko-odczyt |  |  |

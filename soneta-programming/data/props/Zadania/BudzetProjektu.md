@@ -5,13 +5,6 @@ Opis: Budżet przypisany do projektu lub innego obiektu budżetowanego. Zawiera 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 6
-- podlisty: 4
-- subrowy: 0
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe | Aktywny | Wskazuje, czy budżet jest aktywny (otwarty). |

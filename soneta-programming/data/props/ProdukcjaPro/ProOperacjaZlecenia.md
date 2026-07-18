@@ -5,13 +5,6 @@ Opis: Element szczegółowy zlecenia produkcyjnego (ProZlecenie). Reprezentuje p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zlecenie` → `ProZlecenie`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 7
-- podlisty: 14
-- subrowy: 0
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `TimeSec` | bazodanowe |  | Czas operacji zlecenia. |

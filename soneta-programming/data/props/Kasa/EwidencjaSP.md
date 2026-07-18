@@ -5,13 +5,7 @@ Opis: Ewidencja środków pieniężnych — kasa gotówkowa lub rachunek bankowy
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 40
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 14
-- podlisty: 12
-- subrowy: 3
-- razem: 72
+Selektor: pole `Typ` (`Soneta.Kasa.TypEwidencjiSP`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -81,12 +75,23 @@ Implementuje interfejsy: `IElementSlownika`, `IRightsSource`
 | Symbol | `string` | bazodanowe |  |  |
 | SymbolWaluty | `string` | tylko-odczyt |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  |  |
-| Typ | `Soneta.Kasa.TypEwidencjiSP` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypEwidencjiSP` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypDanych | `Soneta.Kasa.TypDanychESP` (enum) | bazodanowe |  |  |
 | UjemneStanyWKasie | `bool` | bazodanowe |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | Zero | `Currency` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Kasa` | 1 | `Soneta.Kasa.Kasa` | Kasa |
+| `RachunekBankowy` | 2 | `Soneta.Kasa.RachunekBankowyFirmy` | Rachunek bankowy |
+| `KartaPłatnicza` | 3 | `Soneta.Kasa.KartaPłatnicza` | Karta płatnicza |
 
 ## Enumy
 

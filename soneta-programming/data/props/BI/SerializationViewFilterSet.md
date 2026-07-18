@@ -5,13 +5,6 @@ Opis: Reużywalny zestaw filtrów stosowany przy utrwalaniu list BI. Definiuje n
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | FilterText | `MemoText` | bazodanowe, podlista |  |  |

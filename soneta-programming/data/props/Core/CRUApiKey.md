@@ -5,13 +5,6 @@ Opis: Zarządzanie tokenami dostępowymi dla Centralnego Rejestru Umów. Pozwala
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ApiKey | `string` | bazodanowe | Klucz API CRU | Klucz API CRU |

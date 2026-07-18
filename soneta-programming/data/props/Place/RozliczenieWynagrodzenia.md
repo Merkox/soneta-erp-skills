@@ -5,13 +5,6 @@ Opis: Sposób rozliczenia wynagrodzenia pracownika na rachunki bankowe. Definiuj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IRozliczenieWynagrodzeniaHost`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

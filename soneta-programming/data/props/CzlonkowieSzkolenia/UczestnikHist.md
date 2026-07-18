@@ -4,13 +4,6 @@ Tytuł: Historia uczestników, członków
 Opis: Rejestr zmian statusu członkostwa uczestników w organizacji. Przechowuje chronologiczną historię zmian stanów, takich jak przyjęcie, zawieszenie czy skreślenie, wraz z numerami protokołów i uchwał.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Data zmiany | Data zmiany. |

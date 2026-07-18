@@ -5,13 +5,6 @@ Opis: Zapisany wynik obliczenia zestawienia księgowego. Przechowuje nazwę, dat
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 10
-- podlisty: 7
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |

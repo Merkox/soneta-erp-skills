@@ -5,13 +5,7 @@ Opis: Dokument przelewu bankowego generowany na podstawie płatności i zobowią
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
-
-- pola bazodanowe (zapisywalne): 27
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 27
-- podlisty: 6
-- subrowy: 3
-- razem: 70
+Selektor: pole `Typ` (`Soneta.Kasa.TypPrzelewu`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -77,7 +71,7 @@ Implementuje interfejsy: `IAdresHost`
 | RachunekZleceniodawcy | `Soneta.Kasa.NumerRachunku` (subrow) | bazodanowe |  |  |
 | Seria | `string` | bazodanowe |  |  |
 | Słownie | `string` | tylko-odczyt |  |  |
-| Typ | `Soneta.Kasa.TypPrzelewu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypPrzelewu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Typ2 | `Soneta.Kasa.TypPrzelewu2` (enum) | bazodanowe | Wariant | Wariant przelewu standardowego |
 | Tytulem1 | `string` | bazodanowe |  |  |
 | Tytulem2 | `string` | bazodanowe |  |  |
@@ -85,6 +79,18 @@ Implementuje interfejsy: `IAdresHost`
 | WeryfikacjaTransakcji | `Soneta.Kasa.IObowiazkowaWeryfikacjaRachunku` | tylko-odczyt |  |  |
 | ZUS | `Soneta.Kasa.OpisPrzelewu.ZUS` | tylko-odczyt |  |  |
 | Zatwierdzony | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standardowy` | 1 | `Soneta.Kasa.Przelew` | Przelew |
+| `PrzelewZUS` | 2 | `Soneta.Kasa.PrzelewZUS` | Przelew ZUS |
+| `PrzelewPIT` | 3 | `Soneta.Kasa.PrzelewPIT` | Przelew PIT |
+| `Walutowy` | 4 | `Soneta.Kasa.PrzelewWalutowy` | Przelew Walutowy |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,6 @@ Opis: Element szczegółowy schematu opakowań/gratisów (SchemOpakowan). Defini
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Schemat` → `SchemOpakowan`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CenaBrutto | `DoubleCy` | bazodanowe | Cena brutto | Cena brutto gratisu. |

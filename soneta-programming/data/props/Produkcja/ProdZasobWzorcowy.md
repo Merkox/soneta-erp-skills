@@ -5,13 +5,6 @@ Opis: Wzorcowe (abstrakcyjne) zasoby produkcyjne definiujące kategorie maszyn, 
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IProdZasob`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Określa zablokowanie zasobu. Zablokowane zasoby nie będą wyświetlane na listach wyboru. |

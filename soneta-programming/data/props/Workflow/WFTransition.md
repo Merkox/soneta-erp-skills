@@ -5,13 +5,7 @@ Opis: Konkretna tranzycja (przejście) w definicji procesu workflow łącząca z
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWFTransition`, `IWfPlugInItemReferenceHost`
-
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 11
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 2
-- razem: 40
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -20,7 +14,7 @@ Implementuje interfejsy: `IWFTransition`, `IWfPlugInItemReferenceHost`
 | CheckCode.Code | `MemoText` | bazodanowe, podlista |  |  |
 | CheckCode.CodeUiRoslyn | `Compiler.ICodeEditorSource` |  |  |  |
 | ClassName | `string` | tylko-odczyt |  |  |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | FileName | `string` | bazodanowe | Nazwa pliku | Nazwa pliku tranzycji |
 | ForeColor | `string` | bazodanowe | Kolor |  |
 | FromPoint | `System.Drawing.PointF` |  |  |  |
@@ -55,6 +49,16 @@ Implementuje interfejsy: `IWFTransition`, `IWfPlugInItemReferenceHost`
 | WFTransitionDefinition | `Soneta.Workflow.Config.WFTransitionDefinition` | bazodanowe | Opcjonalna definicja elementu tranzycji | Definicja elementu tranzycji powiązana z elementem tranzycji |
 | WeakTransition | `bool` | bazodanowe | Tranzycja nie kończąca zadania | Tranzycja nie kończąca zadania |
 | WfDefinition | `IWFDefinition` | bazodanowe, iface-ref | Definicja procesu | Określa definicję procesu |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.Config.WFTransition` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WFTransitionExtend` |  |
 
 ## Relacje interfejsowe
 

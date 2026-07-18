@@ -4,13 +4,6 @@ Opis: Element szczegółowy użytkownika webowego (WebUser). Profil przechowuje 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowConfig | `bool` | bazodanowe | Dostęp do konfiguracji | Określa, czy konto ma uprawnienia do modyfikowania konfiguracji. |

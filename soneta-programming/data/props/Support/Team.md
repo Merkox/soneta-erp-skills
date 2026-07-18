@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDaneKontaktoweHost`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 1
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Contact | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |

@@ -4,13 +4,7 @@ Tytuł: Pozycje maszyn i urządzeń profilu
 Opis: Opisuje wymagane maszyny i urządzenia. Służy do określenia wymagań w zakresie stanowiska pracy w zakresie obsługi maszyn i urządzeń.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 8
+Selektor: pole `Rodzaj` (`Soneta.HR.ZKL.Enums.RodzajWymagania`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,10 +12,20 @@ Guided: root
 | Poziom | `Soneta.HR.ZKL.Slowniki.Kwalifikacje.PoziomUmiejetnosci` | bazodanowe | Poziom |  |
 | PozycjeTypPotwier | `SubTable<Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynyProfiluTypPotwier>` | podlista |  |  |
 | Profil | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.ProfilKwalifikacyjny` | bazodanowe, tylko-odczyt |  |  |
-| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` (enum) | bazodanowe, tylko-odczyt | Rodzaj wymagania |  |
+| Rodzaj | `Soneta.HR.ZKL.Enums.RodzajWymagania` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj wymagania |  |
 | TypyPotwierdzenia | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.TypPotwierdzenia[]` | podlista | Typy potwierdzenia |  |
 | TypyPotwierdzeniaOpis | `string` | tylko-odczyt |  |  |
 | WymaganePotwierdzenie | `bool` | bazodanowe | Wymagane potwierdzenie |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Niezbedne` | 10 | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfiluNiezbedne` | Maszyny i urządzenia |
+| `Pozadane` | 20 | `Soneta.HR.ZKL.Profile.Kwalifikacyjny.PozycjaMaszynIUrzadzenProfiluPozadane` | Maszyny i urządzenia |
 
 ## Enumy
 

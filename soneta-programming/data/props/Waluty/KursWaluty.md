@@ -4,13 +4,6 @@ Opis: Element szczegółowy kursów walut (TabelaKursowa). Przechowuje kurs kupn
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Tabela` → `TabelaKursowa`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 2
-- subrowy: 0
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe, tylko-odczyt |  |  |

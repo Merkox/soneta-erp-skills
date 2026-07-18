@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji stanowiska (DefinicjaStanowiska). Wiąże 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaStanowiska` → `DefinicjaStanowiska`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaDokumentu | `Soneta.Core.DbTuples.DbTupleDefinition` | bazodanowe | Definicja dokumentu |  |

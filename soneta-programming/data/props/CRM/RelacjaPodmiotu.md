@@ -4,13 +4,6 @@ Tytuł: Relacje podmiotów
 Opis: Definiuje relację hierarchiczną pomiędzy podmiotami (np. firma matka - spółka córka, odbiorca - płatnik). Umożliwia modelowanie powiązań kapitałowych i handlowych między kontrahentami, bankami i urzędami.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nadrzedny | `Soneta.Core.IPodmiot` | bazodanowe, iface-ref | Podmiot nadrzędny |  |

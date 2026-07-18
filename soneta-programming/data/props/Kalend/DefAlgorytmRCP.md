@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja algorytmu przetwarzania danych z czytnika RCP. Ok
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `MemoText` | bazodanowe, podlista |  |  |

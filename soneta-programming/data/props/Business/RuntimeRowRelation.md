@@ -4,13 +4,6 @@ Tytuł: Relacje wierszy runtime
 Opis: Powiązanie wiersza dynamicznego (runtime) z rekordem biznesowym. Umożliwia tworzenie relacji między zdarzeniami a obiektami z modułów programu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definition | `Runtime.RuntimeFieldDefinition` | bazodanowe, tylko-odczyt | Definicja | Definicja pola dokumentu |

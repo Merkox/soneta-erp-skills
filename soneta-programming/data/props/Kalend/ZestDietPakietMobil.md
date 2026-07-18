@@ -5,13 +5,6 @@ Opis: Element szczegółowy hosta zestawienia diet pakietu mobilności (IZestawi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IZestawienieDietPakietMobilHost`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | bazodanowe |  |  |

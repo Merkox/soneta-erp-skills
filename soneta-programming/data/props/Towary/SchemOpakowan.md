@@ -5,13 +5,6 @@ Opis: Definicja schematu opakowań zwrotnych (kaucyjnych)/gratisów stosowanego 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 0
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Elementy | `LpSubTable<Soneta.Towary.ElemOpakowan>` | podlista |  |  |

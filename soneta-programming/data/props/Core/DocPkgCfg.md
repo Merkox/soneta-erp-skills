@@ -5,13 +5,6 @@ Opis: Tabela konfiguracyjna przechowująca kategorie elementów paczek dokument�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blocked | `bool` | bazodanowe | Blokada kategorii |  |

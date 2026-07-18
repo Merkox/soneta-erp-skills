@@ -5,13 +5,7 @@ Opis: Zapis kasowy lub bankowy reprezentujący faktyczną wpłatę lub wypłatę
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAnalitycznego`, `IDaneKontrahentaHost`, `IDokumentCRM`
-
-- pola bazodanowe (zapisywalne): 33
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 37
-- podlisty: 18
-- subrowy: 4
-- razem: 94
+Selektor: pole `Kierunek` (`Soneta.Core.KierunekPlatnosci`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -33,7 +27,7 @@ Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAna
 | Karta.Nazwa | `string` | bazodanowe |  |  |
 | Karta.Numer | `string` | bazodanowe |  |  |
 | Karta.WaznaDo | `YearMonth` | bazodanowe |  |  |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | KonfiguracjaElementuOpisuAnalitycznego | `Soneta.Core.KonfiguracjaElementuOpisuAnalitycznego` | tylko-odczyt |  |  |
 | KsiegujZbiorczo | `bool` | bazodanowe |  |  |
 | Kurs | `double` | bazodanowe |  |  |
@@ -109,6 +103,16 @@ Implementuje interfejsy: `IRozliczalny`, `IElementKsiegowalny`, `IZrodloOpisuAna
 | ZasobyWgOkresu | `View` | podlista |  |  |
 | Zatwierdzona | `bool` | tylko-odczyt |  |  |
 | Zwrot | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Kierunek`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Przychod` | 1 | `Soneta.Kasa.Wplata` | Wpłata |
+| `Rozchod` | 2 | `Soneta.Kasa.Wyplata` | Wypłata |
 
 ## Relacje interfejsowe
 

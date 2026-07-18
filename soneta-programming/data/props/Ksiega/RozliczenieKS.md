@@ -4,13 +4,7 @@ Tytuł: Rozliczenia księgowe
 Opis: Rozliczenie księgowe łączy parę zapisów księgowych (Winien i Ma) w celu ich wzajemnego rozrachunku na kontach rozliczeniowych. Śledzi kwoty operacji i zapisu po obu stronach, obsługuje różnice kursowe oraz powiązanie z dokumentami ewidencji.
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IRozliczenie`, `IElementKsiegowalny`
-
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 21
-- podlisty: 2
-- subrowy: 0
-- razem: 23
+Selektor: pole `Typ` (`Soneta.Core.TypRozliczeniaKS`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -31,12 +25,23 @@ Implementuje interfejsy: `IRozliczenie`, `IElementKsiegowalny`
 | RozliczenieSP | `Soneta.Kasa.RozliczenieSP` | tylko-odczyt |  |  |
 | RozliczenieZrodlowe | `Soneta.Core.IRozliczenie` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | StatusRK | `Soneta.Kasa.StatusRoznicyKursowej` (enum) | bazodanowe, tylko-odczyt |  | Status różnicy kursowej |
-| Typ | `Soneta.Core.TypRozliczeniaKS` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypRozliczeniaKS` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypRK | `Soneta.Kasa.TypRoznicyKursowej` (enum) | tylko-odczyt |  | Typ rożnicy kursowej |
 | ZapisMa | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  |  |
 | ZapisRK | `Soneta.Ksiega.ZapisKsiegowy` | tylko-odczyt |  | Zapis do rozliczenia RK |
 | ZapisWinien | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  |  |
 | ZapisyKsiegowe | `SubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `RozliczenieSPKS` | 1 | `Soneta.Ksiega.RozliczenieSPKS` | Rozliczenie kasowo-księgowe |
+| `RozliczenieRK` | 2 | `Soneta.Ksiega.RozliczenieRK` | Rozliczenie różnicy kursowej |
+| `RozliczenieKsiegowe` | 3 | `Soneta.Ksiega.RozliczenieKsiegowe` | Rozliczenie księgowe |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,7 @@ Opis: Harmonogram zajęć szkoleniowych realizowanych w ramach grup szkoleniowyc
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoOceny`
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 11
-- podlisty: 5
-- subrowy: 0
-- razem: 32
+Selektor: pole `Typ` (`Soneta.CzlonkowieSzkolenia.TypZajeciaSzkol`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -37,7 +31,7 @@ Implementuje interfejsy: `IŹródłoOceny`
 | Stan | `Soneta.CzlonkowieSzkolenia.StanZajeciaSzkol` (enum) | bazodanowe | Stan zajęcia | Stan zajęcia szkoleniowego. |
 | Start | `System.DateTime` | tylko-odczyt |  |  |
 | Text | `string` |  |  |  |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypZajeciaSzkol` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypZajeciaSzkol` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Uczestnicy | `SubTable<Soneta.CzlonkowieSzkolenia.ZajecieUczestnik>` | podlista |  |  |
 | Uwagi | `MemoText` | bazodanowe, podlista | Dodatkowe uwagi | Dodatkowe uwagi. |
 | Wykladowca | `Soneta.CzlonkowieSzkolenia.WykladowcaSzkol` |  |  |  |
@@ -47,6 +41,18 @@ Implementuje interfejsy: `IŹródłoOceny`
 | WykladowcySzkolWizytacja | `System.Collections.IEnumerable` | tylko-odczyt |  |  |
 | Zablokowany | `bool` | bazodanowe |  | Zajecie jest zablokowane. |
 | ZespolSzkol | `Soneta.CzlonkowieSzkolenia.ZespolSzkol` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Lekcja` | 1 | `Soneta.CzlonkowieSzkolenia.LekcjaSzkol` | Zajęcie |
+| `Wynajem` | 2 | `Soneta.CzlonkowieSzkolenia.WynajemSzkol` | Wynajem |
+| `EgzaminZwyczajny` | 3 | `Soneta.CzlonkowieSzkolenia.EgzaminZwyczajny` | Egzamin zwyczajny |
+| `EgzaminPoprawkowy` | 4 | `Soneta.CzlonkowieSzkolenia.EgzaminPoprawkowy` | Egzamin poprawkowy |
 
 ## Enumy
 

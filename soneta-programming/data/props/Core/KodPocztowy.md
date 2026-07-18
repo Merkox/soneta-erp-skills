@@ -4,13 +4,6 @@ Tytuł: Tabela z kodami pocztowymi oraz odpowiadającymi im miejscowościami
 Opis: Słownik kodów pocztowych z przypisanymi miejscowościami, powiatami i województwami. Służy do automatycznego uzupełniania danych adresowych na podstawie kodu pocztowego.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | KodPocztowy | `string` | bazodanowe | Kod pocztowy |  |

@@ -5,13 +5,7 @@ Opis: Definicja typu dokumentu ewidencji (np. faktura, nota, paragon). Określa 
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IDefinicjaDokumentuOA`
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 6
-- podlisty: 3
-- subrowy: 1
-- razem: 24
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 179
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -35,10 +29,197 @@ Implementuje interfejsy: `IRightsSource`, `IDefinicjaKomunikatuEDIHost`, `IDefin
 | Rozszerzenie | `MemoText` | bazodanowe, podlista |  |  |
 | SchematPodzialowy | `Soneta.Core.ISchematPodziałowy` | bazodanowe, iface-ref |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypDokumentu | `System.Type` | tylko-odczyt |  |  |
 | TypDokumentuVAT | `Soneta.Core.ProceduraVAT` | bazodanowe | Typ dokumentu VAT (JPK) | Procedura VAT określająca typ dokumentu |
 | ZawszePrzeliczajOpisAnalityczny | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `RaportESP` | 101 | `Soneta.Kasa.RaportESP.RaportESPDefDok` |  |
+| `Wpłata` | 102 | `Soneta.Kasa.DokumentWplata.DokumentWplataDefDok` |  |
+| `Wypłata` | 103 | `Soneta.Kasa.DokumentWyplata.DokumentWyplataDefDok` |  |
+| `Przelew` | 104 | `Soneta.Kasa.PrzelewBase.PrzelewBaseDefDok` |  |
+| `PaczkaPrzelewow` | 105 | `Soneta.Kasa.PaczkaPrzelewow.PaczkaPrzelewowDefDok` |  |
+| `PotwierdzenieSalda` | 111 | `Soneta.Kasa.PotwierdzenieSalda.PotwierdzenieSaldaDefDok` |  |
+| `WezwanieDoZaplaty` | 112 | `Soneta.Kasa.WezwanieDoZaplaty.WezwanieDoZaplatyDefDok` |  |
+| `NotaOdsetkowa` | 113 | `Soneta.Kasa.DefDokNotaOdsetkowa` |  |
+| `Kompensata` | 114 | `Soneta.Kasa.Kompensata.KompensataDefDok` |  |
+| `RozliczenieZaliczki` | 115 | `Soneta.Kasa.RozliczenieZaliczki.RozliczenieZaliczkiDefDok` |  |
+| `RozliczenieDelegacji` | 116 | `Soneta.Kasa.RozliczenieDelegacji.RozliczenieDelegacjiDefDok` |  |
+| `Cesja` | 117 | `Soneta.Kasa.Cesja.CesjaDefDok` |  |
+| `NotaKorygujaca` | 118 | `Soneta.Kasa.NotaKorygujaca.NotaKorygujacaDefDok` |  |
+| `NotaKorygujacaOtrzymana` | 119 | `Soneta.Kasa.NotaKorygujacaOtrzymana.NotaKorygujacaOtrzymanaDefDok` |  |
+| `WyciągBankowyEwidencja` | 120 | `Soneta.Kasa.WyciagBankowyEwidencja.WyciagBankowyEwidencjaDefDok` |  |
+| `RaportKasowyEwidencja` | 121 | `Soneta.Kasa.RaportKasowyEwidencja.RaportKasowyEwidencjaDefDok` |  |
+| `RozliczenieEwidencja` | 122 | `Soneta.Kasa.RozliczenieEwidencja.RozliczenieEwidencjaDefDok` |  |
+| `NotaOdsetkowaEwidencja` | 123 | `Soneta.Kasa.NotaOdsetkowaEwidencja.NotaOdsetkowaEwidencjaDefDok` |  |
+| `DelegacjaPWSEwidencja` | 124 | `Soneta.Delegacje.DelegacjaEwidencja.DelegacjaEwidencjaDefDok` |  |
+| `Preliminarz` | 125 | `Soneta.Kasa.PreliminarzDokument.PreliminarzDokumentDefDok` |  |
+| `GIODOPozyskanieDanych` | 203 | `Soneta.Core.GIODOPozyskanieDanych_DefDok` | Pozyskanie danych osobowych |
+| `GIODOPowierzenieDanych` | 204 | `Soneta.Core.GIODOPowierzenieDanych_DefDok` | Powierzenie danych osobowych |
+| `GIODOPrzetwarzanie` | 205 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `GIODOUdostępnienieDanych` | 206 | `Soneta.Core.GIODOUdostępnienieDanych_DefDok` | Powierzenie danych osobowych |
+| `VAT7` | 207 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT_UE` | 208 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT_UEA` | 209 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT_UEB` | 210 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT_UEK` | 211 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT_UEK_Pozycja` | 212 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT_UEC` | 213 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT_ZD` | 214 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT27` | 215 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `GIODONaruszenie` | 216 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VAT9M` | 217 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT_UES` | 218 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `VIIDO` | 219 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VIIDO_Pozycja` | 220 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VIUDO` | 221 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VIUDO_Pozycja` | 222 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT8` | 223 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `VAT7ParametryRozliczen` | 224 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `Umowa` | 301 | `Soneta.Kadry.Umowa.DefDokUmowa` |  |
+| `OfertaPracy` | 302 | `Soneta.HR2.OfertaPracy.OfertaPracyDefDok` |  |
+| `Wypadek` | 303 | `Soneta.Kadry.Wypadek.DefDokWypadek` |  |
+| `UmowaZewnetrzna` | 304 | `Soneta.Kadry.UmowaZewnetrzna.DefDokUmowaZewnetrzna` |  |
+| `ZgloszenieSygnalisty` | 305 | `Soneta.Kadry.ZgloszenieSygnalisty.DefDokZgloszenieSygnalisty` |  |
+| `Wyplata` | 502 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ListaPlacEwidencja` | 503 | `Soneta.Place.ListaPlacEwidencja.ListaPlacEwidencjaDefDok` |  |
+| `WyplataUmowyEwidencja` | 504 | `Soneta.EwidencjaVat.WyplataUmowyEwidencja.WyplataUmowyEwidencjaDefDok` |  |
+| `PlanowanaListaPłacEwidencja` | 521 | `Soneta.Place.PlanowanaListaPłacEwidencja.PlanowanaListaPłacEwidencjaDefDok` |  |
+| `Dekret` | 801 | `Soneta.Ksiega.Dekret.DekretDefDok` |  |
+| `BO` | 802 | `Soneta.Ksiega.BO.BODefDok` |  |
+| `ZapisKsiegowy` | 803 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `PKEwidencja` | 804 | `Soneta.Ksiega.PKEwidencja.PKEwidencjaDefDok` |  |
+| `RóżniceKursoweEwidencja` | 805 | `Soneta.Ksiega.RozniceKursoweEwidencja.RozniceKursoweEwidencjaDefDok` |  |
+| `BOEwidencja` | 806 | `Soneta.Ksiega.BOEwidencja.BOEwidencjaDefDok` |  |
+| `RóżniceKursoweMWEwidencja` | 807 | `Soneta.Ksiega.RozniceKursoweMWEwidencja.RozniceKursoweMWEwidencjaDefDok` |  |
+| `RozniceKursoweKPiREwidencja` | 808 | `Soneta.Ksiega.RozniceKursoweKPiREwidencja.RozniceKursoweKPiREwidencjaDefDok` |  |
+| `DokumentZleDlugi` | 809 | `Soneta.Ksiega.ZleDlugiDokument.ZleDlugiDokumentDefDok` |  |
+| `KEDU` | 1001 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZgloszenieZUS` | 1002 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ZalacznikZUS` | 1003 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ZUSDRA` | 1004 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT4` | 1005 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT11` | 1006 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT40` | 1007 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT8A` | 1008 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT8B` | 1009 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT8C` | 1010 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `IFT1` | 1011 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT2` | 1012 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT2O` | 1013 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `PIT5` | 1014 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `AKC2` | 1015 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `AKC2E` | 1016 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ZUSIWA` | 1017 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT5L` | 1018 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `WND` | 1019 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `PFRON` | 1020 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `IFT1R` | 1021 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PITR` | 1022 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT8` | 1023 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT8O` | 1024 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT8S` | 1025 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT11Z` | 1026 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT40Z` | 1027 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PIT8CZ` | 1028 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PITRZ` | 1029 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITST` | 1030 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITSTA` | 1031 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITZAL` | 1032 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITD` | 1033 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `IFT2` | 1034 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT10Z` | 1035 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT8BR` | 1036 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITMIT` | 1037 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT8S` | 1038 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CIT8SP` | 1039 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PITRyczałt` | 1040 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `CITIP` | 1041 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITWZ` | 1042 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITKW` | 1043 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITF` | 1044 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITM` | 1045 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `WNU` | 1050 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ZSWA` | 1060 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZUSRMUA` | 1070 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `OSW` | 1080 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZUSRIA` | 1090 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `DeklaracjaRozliczeniowa` | 1099 | `Soneta.Deklaracje.DeklaracjaEwidencja.DeklaracjaEwidencjaDefDok` |  |
+| `CIT8E` | 1100 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `MagazynEwidencja` | 1101 | `Soneta.Handel.MagazynEwidencja.MagazynEwidencjaDefDok` |  |
+| `CITEZ` | 1110 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITRB` | 1150 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITWOT` | 1160 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `SprzedażEwidencja` | 1201 | `Soneta.EwidencjaVat.SprzedazEwidencja.SprzedazEwidencjaDefDok` |  |
+| `ZakupEwidencja` | 1202 | `Soneta.EwidencjaVat.ZakupEwidencja.ZakupEwidencjaDefDok` |  |
+| `RozliczenieKasoweVATEwidencja` | 1203 | `Soneta.EwidencjaVat.RozliczeniaKasoweVATEwidencja.RozliczeniaKasoweVATEwidencjaDefDok` |  |
+| `RozliczenieKasoweAkcyzyEwidencja` | 1204 | `Soneta.EwidencjaVat.RozliczeniaKasoweAkcyzyEwidencja.RozliczeniaKasoweAkcyzyEwidencjaDefDok` |  |
+| `SprzedażZbiorczaEwidencja` | 1205 | `Soneta.EwidencjaVat.SprzedazZbiorczaEwidencja.SprzedazZbiorczaEwidencjaDefDok` |  |
+| `FWUENabyciaNaliczonyEwidencja` | 1206 | `Soneta.EwidencjaVat.FWUENabyciaNaliczonyEwidencja.FWUENabyciaNaliczonyEwidencjaDefDok` |  |
+| `FWUENabyciaNależnyEwidencja` | 1207 | `Soneta.EwidencjaVat.FWUENabyciaNależnyEwidencja.FWUENabyciaNależnyEwidencjaDefDok` |  |
+| `VATMarżaEwidencja` | 1210 | `Soneta.EwidencjaVat.VATMarzaEwidencja.VATMarzaEwidencjaDefDok` |  |
+| `OT` | 1301 | `Soneta.SrodkiTrwale.OT.OTDefDok` |  |
+| `LT` | 1302 | `Soneta.SrodkiTrwale.LT.LTDefDok` |  |
+| `Amortyzacja` | 1303 | `Soneta.SrodkiTrwale.Amortyzacja.AmortyzacjaDefDok` |  |
+| `Przeszacowanie` | 1304 | `Soneta.SrodkiTrwale.Przeszacowanie.PrzeszacowanieDefDok` |  |
+| `ZmianaWartości` | 1305 | `Soneta.SrodkiTrwale.ZmianaWartosci.ZmianaWartosciDefDok` |  |
+| `ŚrodkiTrwałeEwidencja` | 1306 | `Soneta.SrodkiTrwale.SrodkiTrwaleEwidencja.SrodkiTrwaleEwidencjaDefDok` |  |
+| `BOT` | 1308 | `Soneta.SrodkiTrwale.BOT.BOTDefDok` |  |
+| `ZmianaMiejscaUżytkowania` | 1310 | `Soneta.SrodkiTrwale.ZmianaMiejscaUzytkowania.ZmianaMiejscaUzytkowaniaDefDok` |  |
+| `ZmianaOsobyOdpowiedzialnej` | 1311 | `Soneta.SrodkiTrwale.ZmianaOsobyOdpowiedzialnej.ZmianaOsobyOdpowiedzialnejDefDok` |  |
+| `ZmianaParametrówAmortyzacji` | 1312 | `Soneta.SrodkiTrwale.ZmianaParametrowAmortyzacji.ZmianaParametrowAmortyzacjiDefDok` |  |
+| `ZmianaCentrumKosztów` | 1313 | `Soneta.SrodkiTrwale.ZmianaCentrumKosztow.ZmianaCentrumKosztowDefDok` |  |
+| `Inwentaryzacja` | 1314 | `Soneta.SrodkiTrwale.Inwentaryzacja.InwentaryzacjaDefDok` |  |
+| `ZmianaWartościRezydualnej` | 1315 | `Soneta.SrodkiTrwale.ZmianaWartosciRezydualnej.ZmianaWartosciRezydualnejDefDok` |  |
+| `OdpisAktualizujący` | 1317 | `Soneta.SrodkiTrwale.OdpisAktualizujacy.OdpisAktualizujacyDefDok` |  |
+| `ZmianaWartosciDok` | 1318 | `Soneta.SrodkiTrwale.ZmianaWartosciDok.ZmianaWartosciDokDefDok` |  |
+| `PodatekOdNieruchomosci` | 1319 | `Soneta.SrodkiTrwale.PodatekOdNieruchomosci.PONDefDok` |  |
+| `ZmianaParametrowPodatku` | 1320 | `Soneta.SrodkiTrwale.ZmianaParametrowPodatku.ZmianaParametrowPodatkuDefDok` |  |
+| `ZmianaKategorii` | 1321 | `Soneta.SrodkiTrwale.ZmianaKategorii.ZmianaKategoriiDefDok` |  |
+| `InwentaryzacjaCzastkowa` | 1322 | `Soneta.SrodkiTrwale.InwentaryzacjaCzastkowa.InwentaryzacjaCzastkowaDefDok` |  |
+| `ZmianaPodzielnikaKosztow` | 1323 | `Soneta.SrodkiTrwale.ZmianaPodzielnikaKosztow.ZmianaPodzielnikaKosztowDefDok` |  |
+| `Leasing` | 1324 | `Soneta.SrodkiTrwale.UmowaLeasingu.UmowaLeasinguDefDok` |  |
+| `ZmianaParametrowLeasingu` | 1325 | `Soneta.SrodkiTrwale.ZmianaParametrowLeasingu.ZmianaParametrowLeasinguDefDok` |  |
+| `RataLeasingowa` | 1326 | `Soneta.SrodkiTrwale.RataLeasingowa.RataLeasingowaDefDok` |  |
+| `FakturaImportowa` | 1401 | `Soneta.Import.FakturaImportowaEwidencja.FakturaImportowaEwidencjaDefDok` |  |
+| `SAD` | 1402 | `Soneta.Import.SADEwidencja.SADEwidencjaDefDok` |  |
+| `IntrastatPrzywóz` | 1501 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `IntrastatWywóz` | 1502 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `IntrastatTowar` | 1503 | `Soneta.Core.DefinicjaDokumentu` |  |
+| `ZdarzenieCRM` | 1601 | `Soneta.CRM.DokumentZdarzenia.DokumentZdarzeniaDefDok` |  |
+| `SkladkaEwidencja` | 1660 | `Soneta.CzlonkowieSzkolenia.SkladkaEwidencja.SkladkaEwidencjaDefDok` |  |
+| `RozliczenieEP` | 1701 | `Soneta.Samochodowka.RozliczenieEP.RozliczenieEPDefDok` |  |
+| `RozliczenieEPEwidencja` | 1702 | `Soneta.Samochodowka.RozliczenieEPEwidencja.RozliczenieEPEwidencjaDefDok` |  |
+| `DokumentRMK` | 1801 | `Soneta.RMK.DokumentRMK.DokumentRMKDefDok` |  |
+| `RMKEwidencja` | 1802 | `Soneta.RMK.RMKEwidencja.RMKEwidencjaDefDok` |  |
+| `Delegacja` | 1900 | `Soneta.Delegacje.Delegacja.DelegacjaDefDok` |  |
+| `DocPkg` | 2003 | `Soneta.Core.DocPkg.DocPkgDefDok` |  |
+| `PPK_DokumentyPracodawcy` | 2300 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PPK_DokumentyInstytucjiFinansowej` | 2301 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PPK_RozliczenieSkładek` | 2302 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PPK_RozliczenieNadpłat` | 2303 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PPK_DokumentPracodawcy` | 2310 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `PPK_DokumentInstytucjiFinansowej` | 2320 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZAW_NR` | 2400 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `DokumentRozliczeniaKontrahenta` | 2500 | `Soneta.Place.DokumentRozliczeniaKontrahenta.DefDokRozlKontrahenta` |  |
+| `DokumentRozliczeniaPracownika` | 2501 | `Soneta.Place.DokumentRozliczeniaPracownika.DefDokRozlPracownika` |  |
+| `CUK` | 2600 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `CITCSR` | 2700 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `WniosekOZwrotNienależnieOpłaconychSkładek` | 2800 | `Soneta.Kadry.WniosekZwrotOplSkl.DefDokWniosekOZwrotNienależnieOpłaconychSkładek` |  |
+| `ZUS_Z3` | 2900 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZUS_Z3a` | 2910 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZUSDRAII` | 3000 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `ZUSRCAII` | 3010 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `DEKR` | 3020 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `INF2` | 3030 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
+| `LukaPlacowa` | 3040 | `Soneta.Deklaracje.Deklaracja.DefDeklaracji` |  |
 
 ## Relacje interfejsowe
 

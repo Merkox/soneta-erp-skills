@@ -5,13 +5,6 @@ Opis: Element szczegółowy usługi meldunku (ProMeldunek). Rejestruje usługę 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Cena | `DoubleCy` | bazodanowe |  | Cena usługi meldunku. |

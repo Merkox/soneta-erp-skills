@@ -4,13 +4,6 @@ Tytuł: Tabela z kodami pocztowymi oraz odpowiadającymi im województwami
 Opis: Rozszerzony słownik kodów pocztowych z pełną strukturą administracyjną (województwo, powiat, gmina, miejscowość, ulica) oraz identyfikatorami terytorium TERYT. Wykorzystywany do walidacji i automatycznego uzupełniania adresów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Gmina | `string` | bazodanowe |  |  |

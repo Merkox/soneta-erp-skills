@@ -4,13 +4,6 @@ Tytuł: Logi prac
 Opis: Log wykonania zadania harmonogramu. Rejestruje identyfikator elementu harmonogramu, GUID zadania, czas rozpoczęcia i zakończenia, informacje o definicji harmonogramu oraz dodatkowe dane o przebiegu zadania.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 12
-- podlisty: 1
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | EndDate | `Date` | tylko-odczyt | Data zakończenia logu | Określa datę zakończenia logu |

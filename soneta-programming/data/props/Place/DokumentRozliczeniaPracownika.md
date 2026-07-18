@@ -5,13 +5,6 @@ Opis: Element szczegółowy dokumentu rozliczenia kontrahenta (DokumentRozliczen
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 4
-- podlisty: 5
-- subrowy: 1
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BaseOkres | `FromTo` | podlista |  |  |

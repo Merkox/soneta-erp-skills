@@ -4,13 +4,6 @@ Tytuł: Parametry serwisów bankowych
 Opis: Parametry konfiguracyjne serwisu bankowości elektronicznej przypisane do konkretnego operatora. Przechowuje dane uwierzytelniające (certyfikaty, hasła) i ustawienia połączenia niezbędne do autoryzacji operatora w usłudze bankowej online.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 2
-- subrowy: 1
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ClientCert | `Soneta.Kasa.BankowoscElektroniczna.BankOnlineCert` (subrow) | bazodanowe |  |  |

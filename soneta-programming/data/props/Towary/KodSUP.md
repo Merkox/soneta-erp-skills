@@ -4,13 +4,6 @@ Opis: Słownik kodów SUP (Single Use Plastics) klasyfikujących opakowania jedn
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Jednostka | `Soneta.Towary.Jednostka` | tylko-odczyt | Jednostka |  |

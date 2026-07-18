@@ -7,13 +7,6 @@ Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 Historia: Tak — zapis historyczny tabeli `Pracownik`
 Implementuje interfejsy: `IAdresHost`, `IDaneKontaktoweHost`
 
-- pola bazodanowe (zapisywalne): 289
-- pola kalkulowane (zapisywalne): 48
-- pola tylko-odczyt: 97
-- podlisty: 51
-- subrowy: 51
-- razem: 536
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |

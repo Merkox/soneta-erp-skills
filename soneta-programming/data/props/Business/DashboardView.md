@@ -5,13 +5,7 @@ Opis: Definicja panelu (pulpitu) wyświetlanego w folderze programu. Konfiguruje
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 2
-- subrowy: 1
-- razem: 26
+Selektor: pole `ViewType` (`Db.DashboardViewType`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -40,7 +34,20 @@ Implementuje interfejsy: `IRightsSource`
 | StashLocked | `bool` | bazodanowe | Schowek zablokowany | Określa, czy schowek pulpitu jest aktualnie zablokowany. |
 | StorageContextId | `string` | bazodanowe | Identyfikator kontekstu | Unikalny identyfikator kontekstu. |
 | Tiles | `SubTable<Db.DashboardViewTile>` | podlista |  |  |
-| ViewType | `Db.DashboardViewType` (enum) | bazodanowe, tylko-odczyt | Type | Typu pulpitu określający jego wykorzystanie. |
+| ViewType | `Db.DashboardViewType` (enum) | bazodanowe, tylko-odczyt, selektor | Type | Typu pulpitu określający jego wykorzystanie. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `ViewType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Cockpit` | 1 | `Db.DashboardView.CockpitType` | Kokpit |
+| `BI` | 2 | `Db.DashboardView.BIType` | Panel BI |
+| `User` | 3 | `Db.DashboardView.UserType` | Pulpit użytkownika |
+| `Template` | 4 | `Db.DashboardView.TemplateType` | Wzorzec kafelków |
+| `BIForm` | 5 | `Db.DashboardView.BIFormType` | Panel BI formularza |
 
 ## Enumy
 

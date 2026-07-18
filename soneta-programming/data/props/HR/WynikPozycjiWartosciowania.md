@@ -4,13 +4,6 @@ Tytuł: Wyniki pozycji wartościowania
 Opis: Element szczegółowy wartościowania stanowiska (WartosciowanieStanowiska). Przechowuje wyliczoną wartość punktową dla konkretnej pozycji słownikowej w ramach kryterium analitycznego, z rozbiciem na punkty bazowe i mnożnik.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 15
-- podlisty: 0
-- subrowy: 1
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AnalityczneIdent | `System.Guid` | bazodanowe, tylko-odczyt |  |  |

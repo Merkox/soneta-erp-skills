@@ -5,13 +5,6 @@ Opis: Rejestr zdarzeń związanych z nieruchomościami, takich jak przeglądy, o
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataPowstania | `Date` | bazodanowe | Data powstania szkody | Data powstania szkody |

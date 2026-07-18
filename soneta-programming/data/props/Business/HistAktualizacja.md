@@ -5,13 +5,6 @@ Opis: Rejestr wykonanych aktualizacji bazy danych. Przechowuje powód i opis akt
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | HistHost | `Db.HistHost` (enum) | bazodanowe |  |  |

@@ -5,13 +5,6 @@ Opis: Definicja jednostki miary stosowanej do wyrażania ilości towarów. Okre�
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Jendostka nie będzie wyświetlana na listach podpowiedzi. |

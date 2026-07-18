@@ -5,13 +5,6 @@ Opis: Definicja harmonogramu automatycznego wykonywania zadań. Określa nazwę,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 32
-- pola kalkulowane (zapisywalne): 27
-- pola tylko-odczyt: 14
-- podlisty: 5
-- subrowy: 2
-- razem: 80
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AutoActionName | `AutoActionAttribute.AutoActionBase` | bazodanowe | Nazwa metody automatycznej | Określa nazwę metody automatycznej wywoływanej podczas przetwarzania automatycznych akcji harmonogramu |

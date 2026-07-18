@@ -5,13 +5,6 @@ Opis: Element szczegółowy planowanej wypłaty (PlanowanaWypłata). Przechowuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wyplata` → `PlanowanaWypłata`
 
-- pola bazodanowe (zapisywalne): 79
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 88
-- podlisty: 4
-- subrowy: 18
-- razem: 199
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BazaZrodla | `Soneta.Place.IBazaZrodlaWyplaty` | tylko-odczyt, iface-ref |  |  |

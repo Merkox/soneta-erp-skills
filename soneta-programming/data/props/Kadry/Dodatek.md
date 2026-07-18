@@ -6,13 +6,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `DodHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 3
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | tylko-odczyt |  |  |

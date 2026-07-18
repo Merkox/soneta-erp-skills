@@ -5,13 +5,6 @@ Opis: Tabela konfiguracyjna przechowująca definicje paczek dokumentów, stanowi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 1
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowAttItems | `bool` | bazodanowe |  | Flaga włączająca możliwość dodawania rekordów paczki typu Załącznik. |

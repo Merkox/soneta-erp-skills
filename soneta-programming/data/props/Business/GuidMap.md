@@ -3,13 +3,6 @@ Nazwa tabeli: `GuidMaps`
 Opis: Uniwersalne powiązanie między dwoma dowolnymi rekordami identyfikowanymi przez GUID. Umożliwia tworzenie typowanych relacji między obiektami z różnych modułów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | From | `System.Guid` | bazodanowe, tylko-odczyt |  |  |

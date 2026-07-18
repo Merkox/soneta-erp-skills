@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IŹródłoUzyskaniaUprawnienia`, `IOcenaPracownika`, `IBazaZrodlaWyplaty`
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 7
-- subrowy: 1
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Budzet | `Soneta.HR.BudżetSzkoleń` | bazodanowe |  |  |

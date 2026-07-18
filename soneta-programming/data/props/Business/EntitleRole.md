@@ -5,13 +5,6 @@ Opis: Przypisanie roli systemowej do uprawnienia (oddziału praw). Określa zest
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Entitle` → `Entitle`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Entitle | `App.Entitle` | bazodanowe, tylko-odczyt, guided-parent |  | Uprawnienia, którym dana rola została przypisana. |

@@ -4,13 +4,7 @@ Opis: Deklaracja podatkowa lub sprawozdawcza generowana w systemie. Przechowuje 
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDeklaracja`, `IDokumentPlatny`, `IDokumentKsiegowalny`, `IBazaZrodlaWyplaty`, `IEmailElement`, `IZrodloOpisuAnalitycznego`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 23
-- podlisty: 15
-- subrowy: 1
-- razem: 51
+Selektor: pole `Wersja` (`Soneta.Deklaracje.WersjaDeklaracji`) — wiele typów w jednej tabeli, podtypów: 429
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -61,10 +55,447 @@ Implementuje interfejsy: `IDeklaracja`, `IDokumentPlatny`, `IDokumentKsiegowalny
 | TekstPrywatny | `string` | tylko-odczyt |  |  |
 | Typ | `Soneta.Deklaracje.TypDeklaracji` (enum) | bazodanowe, tylko-odczyt |  |  |
 | Wariant | `int` | tylko-odczyt |  |  |
-| Wersja | `Soneta.Deklaracje.WersjaDeklaracji` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Wersja | `Soneta.Deklaracje.WersjaDeklaracji` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WiadomosciPowiazane | `SubTable` | podlista |  |  |
 | Zatwierdzona | `bool` |  |  |  |
 | Zrodlo | `Soneta.Kadry.IZrodloDeklaracji` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Wersja`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `PIT4_14` | 1014 | `Soneta.Deklaracje.PIT.PIT4_14` | PIT-4(14) |
+| `PIT4_15` | 1015 | `Soneta.Deklaracje.PIT.PIT4_15` | PIT-4(15) |
+| `PIT4_16` | 1016 | `Soneta.Deklaracje.PIT.PIT4_16` | PIT-4(16) |
+| `PIT4_17` | 1017 | `Soneta.Deklaracje.PIT.PIT4_17` | PIT-4(17) |
+| `PIT4R_1` | 1021 | `Soneta.Deklaracje.PIT.PIT4R_1` | PIT-4R (1) |
+| `PIT4R_2` | 1022 | `Soneta.Deklaracje.PIT.PIT4R_2` | PIT-4R (2) |
+| `PIT4R_3` | 1023 | `Soneta.Deklaracje.PIT.PIT4R_3` | PIT-4R (3) |
+| `PIT4R_4` | 1024 | `Soneta.Deklaracje.PIT.PIT4R_4` | PIT-4R (4) |
+| `PIT4R_5` | 1025 | `Soneta.Deklaracje.PIT.PIT4R_5` | PIT-4R (5) |
+| `PIT4R_6` | 1026 | `Soneta.Deklaracje.PIT.PIT4R_6` | PIT-4R (6) |
+| `PIT4R_7` | 1027 | `Soneta.Deklaracje.PIT.PIT4R_7` | PIT-4R (7) |
+| `PIT4R_8` | 1028 | `Soneta.Deklaracje.PIT.PIT4R_8` | PIT-4R (8) |
+| `PIT4R_9` | 1029 | `Soneta.Deklaracje.PIT.PIT4R_9` | PIT-4R (9) |
+| `PIT4R_10` | 1030 | `Soneta.Deklaracje.PIT.PIT4R_10` | PIT-4R (10) |
+| `PIT4R_11` | 1031 | `Soneta.Deklaracje.PIT.PIT4R_11` | PIT-4R (11) |
+| `PIT4R_12` | 1032 | `Soneta.Deklaracje.PIT.PIT4R_12` | PIT-4R (12) |
+| `PIT4R_13` | 1033 | `Soneta.Deklaracje.PIT.PIT4R_13` | PIT-4R (13) |
+| `PIT11_11` | 1111 | `Soneta.Deklaracje.PIT.PIT11_11` | PIT-11(11) |
+| `PIT11_12` | 1112 | `Soneta.Deklaracje.PIT.PIT11_12` | PIT-11(12) |
+| `PIT11_14` | 1114 | `Soneta.Deklaracje.PIT.PIT11_14` | PIT-11(14) |
+| `PIT11_15` | 1115 | `Soneta.Deklaracje.PIT.PIT11_15` | PIT-11(15) |
+| `PIT11_16` | 1116 | `Soneta.Deklaracje.PIT.PIT11_16` | PIT-11(16) |
+| `PIT11_17` | 1117 | `Soneta.Deklaracje.PIT.PIT11_17` | PIT-11(17) |
+| `PIT11_18` | 1118 | `Soneta.Deklaracje.PIT.PIT11_18` | PIT-11(18) |
+| `PIT11_19` | 1119 | `Soneta.Deklaracje.PIT.PIT11_19` | PIT-11(19) |
+| `PIT11_20` | 1120 | `Soneta.Deklaracje.PIT.PIT11_20` | PIT-11 (20) |
+| `PIT11_21` | 1121 | `Soneta.Deklaracje.PIT.PIT11_21` | PIT-11 (21) |
+| `PIT11_22` | 1122 | `Soneta.Deklaracje.PIT.PIT11_22` | PIT-11 (22) |
+| `PIT11_23` | 1123 | `Soneta.Deklaracje.PIT.PIT11_23` | PIT-11 (23) |
+| `PIT11_24` | 1124 | `Soneta.Deklaracje.PIT.PIT11_24` | PIT-11 (24) |
+| `PIT11_25` | 1125 | `Soneta.Deklaracje.PIT.PIT11_25` | PIT-11 (25) |
+| `PIT11_26` | 1126 | `Soneta.Deklaracje.PIT.PIT11_26` | PIT-11 (26) |
+| `PIT11_27` | 1127 | `Soneta.Deklaracje.PIT.PIT11_27` | PIT-11 (27) |
+| `PIT11_28` | 1128 | `Soneta.Deklaracje.PIT.PIT11_28` | PIT-11 (28) |
+| `PIT11_29` | 1129 | `Soneta.Deklaracje.PIT.PIT11_29` | PIT-11 (29) |
+| `PIT40_11` | 1211 | `Soneta.Deklaracje.PIT.PIT40_11` | PIT-40(11) |
+| `PIT40_12` | 1212 | `Soneta.Deklaracje.PIT.PIT40_12` | PIT-40(12) |
+| `PIT40_13` | 1213 | `Soneta.Deklaracje.PIT.PIT40_13` | PIT-40(13) |
+| `PIT40_14` | 1214 | `Soneta.Deklaracje.PIT.PIT40_14` | PIT-40(14) |
+| `PIT40_15` | 1215 | `Soneta.Deklaracje.PIT.PIT40_15` | PIT-40 (15) |
+| `PIT40_16` | 1216 | `Soneta.Deklaracje.PIT.PIT40_16` | PIT-40 (16) |
+| `PIT40_17` | 1217 | `Soneta.Deklaracje.PIT.PIT40_17` | PIT-40 (17) |
+| `PIT40_19` | 1219 | `Soneta.Deklaracje.PIT.PIT40_19` | PIT-40 (19) |
+| `PIT40_20` | 1220 | `Soneta.Deklaracje.PIT.PIT40_20` | PIT-40 (20) |
+| `PIT40_21` | 1221 | `Soneta.Deklaracje.PIT.PIT40_21` | PIT-40 (21) |
+| `PIT40_22` | 1222 | `Soneta.Deklaracje.PIT.PIT40_22` | PIT-40 (22) |
+| `PIT8A_10` | 1310 | `Soneta.Deklaracje.PIT.PIT8A_10` | PIT-8A(10) |
+| `PIT8A_11` | 1311 | `Soneta.Deklaracje.PIT.PIT8A_11` | PIT-8A(11) |
+| `PIT8A_12` | 1312 | `Soneta.Deklaracje.PIT.PIT8A_12` | PIT-8A(12) |
+| `PIT8A_13` | 1313 | `Soneta.Deklaracje.PIT.PIT8A_13` | PIT-8A(13) |
+| `PIT8AR_1` | 1321 | `Soneta.Deklaracje.PIT.PIT8AR_1` | PIT-8AR (1) |
+| `PIT8AR_2` | 1322 | `Soneta.Deklaracje.PIT.PIT8AR_2` | PIT-8AR (2) |
+| `PIT8AR_3` | 1323 | `Soneta.Deklaracje.PIT.PIT8AR_3` | PIT-8AR (3) |
+| `PIT8AR_4` | 1324 | `Soneta.Deklaracje.PIT.PIT8AR_4` | PIT-8AR (4) |
+| `PIT8AR_5` | 1325 | `Soneta.Deklaracje.PIT.PIT8AR_5` | PIT-8AR (5) |
+| `PIT8AR_6` | 1326 | `Soneta.Deklaracje.PIT.PIT8AR_6` | PIT-8AR (6) |
+| `PIT8AR_7` | 1327 | `Soneta.Deklaracje.PIT.PIT8AR_7` | PIT-8AR (7) |
+| `PIT8AR_8` | 1328 | `Soneta.Deklaracje.PIT.PIT8AR_8` | PIT-8AR (8) |
+| `PIT8AR_9` | 1329 | `Soneta.Deklaracje.PIT.PIT8AR_9` | PIT-8AR (9) |
+| `PIT8AR_10` | 1330 | `Soneta.Deklaracje.PIT.PIT8AR_10` | PIT-8AR (10) |
+| `PIT8AR_11` | 1331 | `Soneta.Deklaracje.PIT.PIT8AR_11` | PIT-8AR (11) |
+| `PIT8AR_12` | 1332 | `Soneta.Deklaracje.PIT.PIT8AR_12` | PIT-8AR (12) |
+| `PIT8AR_13` | 1333 | `Soneta.Deklaracje.PIT.PIT8AR_13` | PIT-8AR (13) |
+| `PIT8AR_14` | 1334 | `Soneta.Deklaracje.PIT.PIT8AR_14` | PIT-8AR (14) |
+| `PIT8B_10` | 1410 | `Soneta.Deklaracje.PIT.PIT8B_10` | PIT-8B(10) |
+| `PIT8B_12` | 1412 | `Soneta.Deklaracje.PIT.PIT8B_12` | PIT-8B(12) |
+| `PIT8B_14` | 1414 | `Soneta.Deklaracje.PIT.PIT8B_14` | PIT-8B(14) |
+| `PIT8C_3` | 1503 | `Soneta.Deklaracje.PIT.PIT8C_3` | PIT-8C(3) |
+| `PIT8C_4` | 1504 | `Soneta.Deklaracje.PIT.PIT8C_4` | PIT-8C(4) |
+| `PIT8C_5` | 1505 | `Soneta.Deklaracje.PIT.PIT8C_5` | PIT-8C(5) |
+| `PIT8C_6` | 1506 | `Soneta.Deklaracje.PIT.PIT8C_6` | PIT-8C(6) |
+| `PIT8C_7` | 1507 | `Soneta.Deklaracje.PIT.PIT8C_7` | PIT-8C(7) |
+| `PIT8C_8` | 1508 | `Soneta.Deklaracje.PIT.PIT8C_8` | PIT-8C(8) |
+| `PIT8C_9` | 1509 | `Soneta.Deklaracje.PIT.PIT8C_9` | PIT-8C(9) |
+| `PIT8C_10` | 1510 | `Soneta.Deklaracje.PIT.PIT8C_10` | PIT-8C(10) |
+| `PIT8C_11` | 1511 | `Soneta.Deklaracje.PIT.PIT8C_11` | PIT-8C(11) |
+| `PIT8C_12` | 1512 | `Soneta.Deklaracje.PIT.PIT8C_12` | PIT-8C(12) |
+| `PIT8C_13` | 1513 | `Soneta.Deklaracje.PIT.PIT8C_13` | PIT-8C(13) |
+| `IFT1_4` | 1604 | `Soneta.Deklaracje.PIT.IFT1_4` | IFT-1(4) |
+| `IFT1_5` | 1605 | `Soneta.Deklaracje.PIT.IFT1_5` | IFT-1(5) |
+| `IFT1_6` | 1606 | `Soneta.Deklaracje.PIT.IFT1_6` | IFT-1(6) |
+| `IFT1_7` | 1607 | `Soneta.Deklaracje.PIT.IFT1_7` | IFT-1 (7) |
+| `IFT1_8` | 1608 | `Soneta.Deklaracje.PIT.IFT1_8` | IFT-1 (8) |
+| `IFT1_9` | 1609 | `Soneta.Deklaracje.PIT.IFT1_9` | IFT-1 (9) |
+| `IFT1_10` | 1610 | `Soneta.Deklaracje.PIT.IFT1_10` | IFT-1 (10) |
+| `IFT1_11` | 1611 | `Soneta.Deklaracje.PIT.IFT1_11` | IFT-1 (11) |
+| `IFT1_12` | 1612 | `Soneta.Deklaracje.PIT.IFT1_12` | IFT-1 (12) |
+| `IFT1_13` | 1613 | `Soneta.Deklaracje.PIT.IFT1_13` | IFT-1 (13) |
+| `IFT1_14` | 1614 | `Soneta.Deklaracje.PIT.IFT1_14` | IFT-1 (14) |
+| `IFT1_15` | 1615 | `Soneta.Deklaracje.PIT.IFT1_15` | IFT-1 (15) |
+| `IFT1_16` | 1616 | `Soneta.Deklaracje.PIT.IFT1_16` | IFT-1 (16) |
+| `IFT1_17` | 1617 | `Soneta.Deklaracje.PIT.IFT1_17` | IFT-1 (17) |
+| `IFT1_18` | 1618 | `Soneta.Deklaracje.PIT.IFT1_18` | IFT-1 (18) |
+| `PIT5_12` | 1712 | `Soneta.Deklaracje.PIT.PIT5_12` | PIT-5(12) |
+| `PIT5_13` | 1713 | `Soneta.Deklaracje.PIT.PIT5_13` | PIT-5(13) |
+| `PIT5_14` | 1714 | `Soneta.Deklaracje.PIT.PIT5_14` | PIT-5(14) |
+| `PIT5_15` | 1715 | `Soneta.Deklaracje.PIT.PIT5_15` | PIT-5(15) |
+| `PIT5_16` | 1716 | `Soneta.Deklaracje.PIT.PIT5_16` | Zaliczka podatku dochodowego wg skali (do 2021) |
+| `PIT5_2022` | 1722 | `Soneta.Deklaracje.PIT.PIT5_2022` | Zaliczka podatku dochodowego wg skali (do 31.05.2022) |
+| `PIT5_2022_2` | 1723 | `Soneta.Deklaracje.PIT.PIT5_2022_2` | Zaliczka podatku dochodowego wg skali |
+| `PIT5L_1` | 1801 | `Soneta.Deklaracje.PIT.PIT5L_1` | PIT-5L(1) |
+| `PIT5L_2` | 1802 | `Soneta.Deklaracje.PIT.PIT5L_2` | PIT-5L(2) |
+| `PIT5L_3` | 1803 | `Soneta.Deklaracje.PIT.PIT5L_3` | PIT-5L(3) |
+| `PIT5L_4` | 1804 | `Soneta.Deklaracje.PIT.PIT5L_4` | Zaliczka podatku dochodowego liniowego (do 2021) |
+| `PIT5L_2022` | 1822 | `Soneta.Deklaracje.PIT.PIT5L_2022` | Zaliczka podatku dochodowego liniowego (do 31.05.2022) |
+| `PIT5L_2022_2` | 1823 | `Soneta.Deklaracje.PIT.PIT5L_2022_2` | Zaliczka podatku dochodowego liniowego |
+| `PITRyczałt_1` | 1901 | `Soneta.Deklaracje.PIT.PITRyczałt` | Ryczałt do 2021 |
+| `PITRyczałt_2` | 1902 | `Soneta.Deklaracje.PIT.PITRyczałt2022` | Ryczałt do 31.05.2022 |
+| `PITRyczałt_2022_2` | 1903 | `Soneta.Deklaracje.PIT.PITRyczałt2022_2` | Ryczałt |
+| `IFT1R_5` | 2005 | `Soneta.Deklaracje.PIT.IFT1R_5` | IFT-1R(5) |
+| `IFT1R_6` | 2006 | `Soneta.Deklaracje.PIT.IFT1R_6` | IFT-1R(6) |
+| `IFT1R_7` | 2007 | `Soneta.Deklaracje.PIT.IFT1R_7` | IFT-1R (7) |
+| `IFT1R_8` | 2008 | `Soneta.Deklaracje.PIT.IFT1R_8` | IFT-1R (8) |
+| `IFT1R_9` | 2009 | `Soneta.Deklaracje.PIT.IFT1R_9` | IFT-1R (9) |
+| `IFT1R_10` | 2010 | `Soneta.Deklaracje.PIT.IFT1R_10` | IFT-1R (10) |
+| `IFT1R_11` | 2011 | `Soneta.Deklaracje.PIT.IFT1R_11` | IFT-1R (11) |
+| `IFT1R_12` | 2012 | `Soneta.Deklaracje.PIT.IFT1R_12` | IFT-1R (12) |
+| `IFT1R_13` | 2013 | `Soneta.Deklaracje.PIT.IFT1R_13` | IFT-1R (13) |
+| `IFT1R_14` | 2014 | `Soneta.Deklaracje.PIT.IFT1R_14` | IFT-1R (14) |
+| `IFT1R_15` | 2015 | `Soneta.Deklaracje.PIT.IFT1R_15` | IFT-1R (15) |
+| `IFT1R_16` | 2016 | `Soneta.Deklaracje.PIT.IFT1R_16` | IFT-1R (16) |
+| `IFT1R_17` | 2017 | `Soneta.Deklaracje.PIT.IFT1R_17` | IFT-1R (17) |
+| `IFT1R_18` | 2018 | `Soneta.Deklaracje.PIT.IFT1R_18` | IFT-1R (18) |
+| `PITR_11` | 2111 | `Soneta.Deklaracje.PIT.PITR_11` | PIT-R (11) |
+| `PITR_12` | 2112 | `Soneta.Deklaracje.PIT.PITR_12` | PIT-R (12) |
+| `PITR_13` | 2113 | `Soneta.Deklaracje.PIT.PITR_13` | PIT-R (13) |
+| `PITR_14` | 2114 | `Soneta.Deklaracje.PIT.PITR_14` | PIT-R (14) |
+| `PITR_15` | 2115 | `Soneta.Deklaracje.PIT.PITR_15` | PIT-R (15) |
+| `PITR_16` | 2116 | `Soneta.Deklaracje.PIT.PITR_16` | PIT-R (16) |
+| `PITR_17` | 2117 | `Soneta.Deklaracje.PIT.PITR_17` | PIT-R (17) |
+| `PITR_18` | 2118 | `Soneta.Deklaracje.PIT.PITR_18` | PIT-R (18) |
+| `PITR_19` | 2119 | `Soneta.Deklaracje.PIT.PITR_19` | PIT-R (19) |
+| `PITR_20` | 2120 | `Soneta.Deklaracje.PIT.PITR_20` | PIT-R (20) |
+| `PITR_21` | 2121 | `Soneta.Deklaracje.PIT.PITR_21` | PIT-R (21) |
+| `PITR_22` | 2122 | `Soneta.Deklaracje.PIT.PITR_22` | PIT-R (22) |
+| `PIT8S_3` | 2203 | `Soneta.Deklaracje.PIT.PIT8S_3` | PIT-8S (3) |
+| `ZUS_RUD` | 2801 | `Soneta.Deklaracje.ZUS.RUD` | ZUS RUD |
+| `ZUS_RUD_O` | 2901 | `Soneta.Deklaracje.ZUS.RUD_O` |  |
+| `ZUS_KEDU` | 3001 | `Soneta.Deklaracje.ZUS.KEDU` | KEDU |
+| `ZUS_ZUA` | 3101 | `Soneta.Deklaracje.ZUS.ZUA` | ZUS ZUA |
+| `ZUS_ZIUA` | 3201 | `Soneta.Deklaracje.ZUS.ZIUA` | ZUS ZIUA |
+| `ZUS_ZCNA` | 3301 | `Soneta.Deklaracje.ZUS.ZCNA` | ZUS ZCNA |
+| `ZUS_ZCNA_O` | 3401 | `Soneta.Deklaracje.ZUS.ZCNA_O` |  |
+| `ZUS_ZCZA` | 3501 | `Soneta.Deklaracje.ZUS.ZCZA` | ZUS ZCZA |
+| `ZUS_ZCZA_O` | 3601 | `Soneta.Deklaracje.ZUS.ZCZA_O` |  |
+| `ZUS_ZWUA` | 3701 | `Soneta.Deklaracje.ZUS.ZWUA` | ZUS ZWUA |
+| `ZUS_ZZA` | 3801 | `Soneta.Deklaracje.ZUS.ZZA` | ZUS ZZA |
+| `ZUS_IWA` | 3901 | `Soneta.Deklaracje.ZUS.IWA` | ZUS IWA |
+| `ZUS_DRA` | 4101 | `Soneta.Deklaracje.ZUS.DRA` | ZUS DRA |
+| `ZUS_RCA` | 4201 | `Soneta.Deklaracje.ZUS.RCA` | ZUS RCA |
+| `ZUS_RCA_O` | 4301 | `Soneta.Deklaracje.ZUS.RCA_O` | ZUS RCA |
+| `ZUS_RNA` | 4401 | `Soneta.Deklaracje.ZUS.RNA` | ZUS RNA |
+| `ZUS_RNA_O` | 4501 | `Soneta.Deklaracje.ZUS.RNA_O` | ZUS RNA |
+| `ZUS_RZA` | 4601 | `Soneta.Deklaracje.ZUS.RZA` | ZUS RZA |
+| `ZUS_RZA_O` | 4701 | `Soneta.Deklaracje.ZUS.RZA_O` | ZUS RZA |
+| `ZUS_RSA` | 4801 | `Soneta.Deklaracje.ZUS.RSA` | ZUS RSA |
+| `ZUS_RSA_O` | 4901 | `Soneta.Deklaracje.ZUS.RSA_O` | ZUS RSA |
+| `ZUS_RGA` | 5001 | `Soneta.Deklaracje.ZUS.RGA` | ZUS RGA |
+| `ZUS_RGA_O` | 5101 | `Soneta.Deklaracje.ZUS.RGA_O` | ZUS RGA |
+| `ZUS_ZSWA` | 5201 | `Soneta.Deklaracje.ZUS.ZSWA` | ZUS ZSWA |
+| `ZUS_ZSWA_O` | 5301 | `Soneta.Deklaracje.ZUS.ZSWA_O` |  |
+| `ZUS_RMUA` | 5401 | `Soneta.Deklaracje.ZUS.RMUA` | ZUS IMIR |
+| `ZUS_OSW` | 5501 | `Soneta.Deklaracje.ZUS.OSW` | ZUS OSW |
+| `ZUS_RIA` | 5601 | `Soneta.Deklaracje.ZUS.RIA` | ZUS RIA |
+| `ZUS_RPA` | 5701 | `Soneta.Deklaracje.ZUS.RPA` | ZUS RPA |
+| `ZUS_RPA_O` | 5801 | `Soneta.Deklaracje.ZUS.RPA_O` | ZUS RPA |
+| `ZUS_DRII` | 5901 | `Soneta.Deklaracje.ZUS.DRAII` | ZUS DRA 2 |
+| `ZUS_RCAII` | 6001 | `Soneta.Deklaracje.ZUS.RCAII` | ZUS RCA 2 |
+| `PFRON_WN_D_v1` | 6101 | `Soneta.Deklaracje.PFRON.WN_D_v1` | WnD (v1) |
+| `PFRON_WN_D_v2` | 6102 | `Soneta.Deklaracje.PFRON.WN_D_v2` | WnD (v2) |
+| `PFRON_WN_D_v3` | 6103 | `Soneta.Deklaracje.PFRON.WN_D_v3` | WnD (v3) |
+| `PFRON_WN_D_v4` | 6104 | `Soneta.Deklaracje.PFRON.WN_D_v4` | WnD (v4) |
+| `PFRON_WN_D_v5` | 6105 | `Soneta.Deklaracje.PFRON.WN_D_v5` | WnD (v5) |
+| `PFRON_WN_D_v6` | 6106 | `Soneta.Deklaracje.PFRON.WN_D_v6` | WnD (v6) |
+| `PFRON_INF_D` | 6201 | `Soneta.Deklaracje.PFRON.INF_D` | INF-D |
+| `PFRON_INF_D_P_v1` | 6301 | `Soneta.Deklaracje.PFRON.INF_D_P_v1` | INF-D-P (v1) |
+| `PFRON_INF_D_P_v2` | 6302 | `Soneta.Deklaracje.PFRON.INF_D_P_v2` | INF-D-P (v2) |
+| `PFRON_INF_D_P_v3` | 6303 | `Soneta.Deklaracje.PFRON.INF_D_P_v3` | INF-D-P (v3) |
+| `PFRON_INF_D_P_v4` | 6304 | `Soneta.Deklaracje.PFRON.INF_D_P_v4` | INF-D-P (v4) |
+| `PFRON_INF_D_P_v5` | 6305 | `Soneta.Deklaracje.PFRON.INF_D_P_v5` | INF-D-P (v5) |
+| `PFRON_INF_D_P_v6` | 6306 | `Soneta.Deklaracje.PFRON.INF_D_P_v6` | INF-D-P (v6) |
+| `PFRON_INF_D_P_v7` | 6307 | `Soneta.Deklaracje.PFRON.INF_D_P_v7` | INF-D-P (v7) |
+| `PFRON_INF_D_P_v8` | 6308 | `Soneta.Deklaracje.PFRON.INF_D_P_v8` | INF-D-P (v8, v9, v10) |
+| `PFRON_WN_U_v1` | 6401 | `Soneta.Deklaracje.PFRON.WN_U_v1` | WnU (v1) |
+| `PFRON_INF_U_P_v1` | 6501 | `Soneta.Deklaracje.PFRON.INF_U_P_v1` | INF-U-P (v1) |
+| `PFRON_DEK_R_v1` | 6801 | `Soneta.Deklaracje.PFRON.DEK_R_v1` | DEK-R (v1) |
+| `PFRON_DEK_R_v2` | 6802 | `Soneta.Deklaracje.PFRON.DEK_R_v2` | DEK-R (v2) |
+| `PFRON_INF_2_v1` | 6901 | `Soneta.Deklaracje.PFRON.INF_2_v1` | INF-2 |
+| `IntrastatPrzywóz` | 7101 | `Soneta.Deklaracje.UE.IntrastatPrzywóz` | INTRASTAT Przywóz |
+| `IntrastatWywóz` | 7201 | `Soneta.Deklaracje.UE.IntrastatWywóz` | INTRASTAT Wywóz |
+| `IntrastatTowar` | 7301 | `Soneta.Deklaracje.UE.IntrastatTowar` | Towar |
+| `VATUE_1` | 7401 | `Soneta.Deklaracje.VAT.VATUE_1` | VAT-UE(1) |
+| `VATUE_2` | 7402 | `Soneta.Deklaracje.VAT.VATUE_2` | VAT-UE(2) |
+| `VATUE_3` | 7403 | `Soneta.Deklaracje.VAT.VATUE_3` | VAT-UE(3) |
+| `VATUE_4` | 7404 | `Soneta.Deklaracje.VAT.VATUE_4` | VAT-UE(4) |
+| `VATUE_5` | 7405 | `Soneta.Deklaracje.VAT.VATUE_5` | VAT-UE(5) |
+| `VATUEA_1` | 7501 | `Soneta.Deklaracje.VAT.VATUEA_1` | VAT-UE/A(1) |
+| `VATUEA_2` | 7502 | `Soneta.Deklaracje.VAT.VATUEA_2` | VAT-UE/A(2) |
+| `VATUEA_3` | 7503 | `Soneta.Deklaracje.VAT.VATUEA_3` | VAT-UE/A(3) |
+| `VATUEA_4` | 7504 | `Soneta.Deklaracje.VAT.VATUEA_4` | VAT-UE/A(4) |
+| `VATUEA_5` | 7505 | `Soneta.Deklaracje.VAT.VATUEA_5` | VAT-UE/A(5) |
+| `VATUEB_1` | 7601 | `Soneta.Deklaracje.VAT.VATUEB_1` | VAT-UE/B(1) |
+| `VATUEB_2` | 7602 | `Soneta.Deklaracje.VAT.VATUEB_2` | VAT-UE/B(2) |
+| `VATUEB_3` | 7603 | `Soneta.Deklaracje.VAT.VATUEB_3` | VAT-UE/B(3) |
+| `VATUEB_4` | 7604 | `Soneta.Deklaracje.VAT.VATUEB_4` | VAT-UE/B(4) |
+| `VATUEB_5` | 7605 | `Soneta.Deklaracje.VAT.VATUEB_5` | VAT-UE/B(5) |
+| `VATUEK_1` | 7701 | `Soneta.Deklaracje.VAT.VATUEK_1` | VAT-UEK(1) |
+| `VATUEK_2` | 7702 | `Soneta.Deklaracje.VAT.VATUEK_2` | VAT-UEK(2) |
+| `VATUEK_3` | 7703 | `Soneta.Deklaracje.VAT.VATUEK_3` | VAT-UEK(3) |
+| `VATUEK_4` | 7704 | `Soneta.Deklaracje.VAT.VATUEK_4` | VAT-UEK(4) |
+| `VATUEK_5` | 7705 | `Soneta.Deklaracje.VAT.VATUEK_5` | VAT-UEK(5) |
+| `VATUEC_1` | 7801 | `Soneta.Deklaracje.VAT.VATUEC_1` | VAT-UE/C(1) |
+| `VATUEC_2` | 7802 | `Soneta.Deklaracje.VAT.VATUEC_2` | VAT-UE/C(2) |
+| `VATUEC_4` | 7804 | `Soneta.Deklaracje.VAT.VATUEC_4` | VAT-UE/C(4) |
+| `VATUEC_5` | 7805 | `Soneta.Deklaracje.VAT.VATUEC_5` | VAT-UE/C(5) |
+| `VATUES_1` | 7901 | `Soneta.Deklaracje.VAT.VATUES_1` | VAT-UE/S(1) |
+| `VAT7_7` | 8107 | `Soneta.Deklaracje.VAT.VAT7_7` | VAT-7(7) |
+| `VAT7_8` | 8108 | `Soneta.Deklaracje.VAT.VAT7_8` | VAT-7(8) |
+| `VAT7_9` | 8109 | `Soneta.Deklaracje.VAT.VAT7_9` | VAT-7(9) |
+| `VAT7_10` | 8110 | `Soneta.Deklaracje.VAT.VAT7_10` | VAT-7(10)/VAT-7K(4)/VAT-7D(1) |
+| `VAT7_11` | 8111 | `Soneta.Deklaracje.VAT.VAT7_11` | VAT-7(11)/VAT-7K(5)/VAT-7D(2) |
+| `VAT7_12` | 8112 | `Soneta.Deklaracje.VAT.VAT7_12` | VAT-7(12)/VAT-7K(6)/VAT-7D(3) |
+| `VAT7_13` | 8113 | `Soneta.Deklaracje.VAT.VAT7_13` | VAT-7(13)/VAT-7K(7)/VAT-7D(4) |
+| `VAT7_14` | 8114 | `Soneta.Deklaracje.VAT.VAT7_14` | VAT-7(14)/VAT-7K(8)/VAT-7D(5) |
+| `VAT7_15` | 8115 | `Soneta.Deklaracje.VAT.VAT7_15` | VAT-7(15)/VAT-7K(9)/VAT-7D(6) |
+| `VAT7_16` | 8116 | `Soneta.Deklaracje.VAT.VAT7_16` | VAT-7(16)/VAT-7K(10)/VAT-7D(7) |
+| `VAT7_17` | 8117 | `Soneta.Deklaracje.VAT.VAT7_17` | VAT-7(17)/VAT-7K(11)/VAT-7D(8) |
+| `VAT7_18` | 8118 | `Soneta.Deklaracje.VAT.VAT7_18` | VAT-7(18)/VAT-7K(12) |
+| `VAT7_19` | 8119 | `Soneta.Deklaracje.VAT.VAT7_19` | VAT-7(19)/VAT-7K(13) |
+| `VAT7_20` | 8120 | `Soneta.Deklaracje.VAT.VAT7_20` | VAT-7(20)/VAT-7K(14) |
+| `VAT7_21` | 8121 | `Soneta.Deklaracje.VAT.VAT7_21` | VAT-7(21)/VAT-7K(15) |
+| `VAT7_22` | 8122 | `Soneta.Deklaracje.VAT.VAT7_22` | VAT-7(22)/VAT-7K(16) |
+| `VAT7_23` | 8123 | `Soneta.Deklaracje.VAT.VAT7_23` | VAT-7(23)/VAT-7K(17) |
+| `CIT2_14` | 8214 | `Soneta.Deklaracje.CIT.CIT2_14` | CIT-2(14) |
+| `CIT2_15` | 8215 | `Soneta.Deklaracje.CIT.CIT2_15` | CIT-2(15) |
+| `CIT2_16` | 8216 | `Soneta.Deklaracje.CIT.CIT2_16` | CIT-2(16) |
+| `CIT2_17` | 8217 | `Soneta.Deklaracje.CIT.CIT2_17` | CIT-2(17) |
+| `CIT2O_1` | 8301 | `Soneta.Deklaracje.CIT.CIT2O_1` | CIT-2/O(1) |
+| `CIT2O_2` | 8302 | `Soneta.Deklaracje.CIT.CIT2O_2` | CIT-2/O(2) |
+| `CIT2O_3` | 8303 | `Soneta.Deklaracje.CIT.CIT2O_3` | CIT-2/O(3) |
+| `CIT2O_4` | 8304 | `Soneta.Deklaracje.CIT.CIT2O_4` | CIT-2/O(4) |
+| `AKC2_3` | 8403 | `Soneta.Deklaracje.AKC.AKC2_3` | AKC-2 (3) |
+| `AKC2_4` | 8404 | `Soneta.Deklaracje.AKC.AKC2_4` | AKC-2 (4) |
+| `AKC2E_3` | 8503 | `Soneta.Deklaracje.AKC.AKC2E_3` |  |
+| `CIT8_21` | 8621 | `Soneta.Deklaracje.CIT.CIT8_21` | CIT-8(21) |
+| `CIT8_22` | 8622 | `Soneta.Deklaracje.CIT.CIT8_22` | CIT-8(22) |
+| `CIT8_23` | 8623 | `Soneta.Deklaracje.CIT.CIT8_23` | CIT-8(23) |
+| `CIT8_24` | 8624 | `Soneta.Deklaracje.CIT.CIT8_24` | CIT-8(24) |
+| `CIT8_25` | 8625 | `Soneta.Deklaracje.CIT.CIT8_25` | CIT-8(25) |
+| `CIT8_26` | 8626 | `Soneta.Deklaracje.CIT.CIT8_26` | CIT-8(26) |
+| `CIT8_27` | 8627 | `Soneta.Deklaracje.CIT.CIT8_27` | CIT-8(27) |
+| `CIT8_28` | 8628 | `Soneta.Deklaracje.CIT.CIT8_28` | CIT-8(28) |
+| `CIT8_29` | 8629 | `Soneta.Deklaracje.CIT.CIT8_29` | CIT-8(29) |
+| `CIT8_30` | 8630 | `Soneta.Deklaracje.CIT.CIT8_30` | CIT-8(30) |
+| `CIT8_31` | 8631 | `Soneta.Deklaracje.CIT.CIT8_31` | CIT-8(31) |
+| `CIT8_32` | 8632 | `Soneta.Deklaracje.CIT.CIT8_32` | CIT-8(32) |
+| `CIT8_33` | 8633 | `Soneta.Deklaracje.CIT.CIT8_33` | CIT-8(33) |
+| `CIT8_34` | 8634 | `Soneta.Deklaracje.CIT.CIT8_34` | CIT-8(34) |
+| `CIT8O_8` | 8708 | `Soneta.Deklaracje.CIT.CIT8O_8` | CIT-8/O(8) |
+| `CIT8O_9` | 8709 | `Soneta.Deklaracje.CIT.CIT8O_9` | CIT-8/O(9) |
+| `CIT8O_10` | 8710 | `Soneta.Deklaracje.CIT.CIT8O_10` | CIT-8/O(10) |
+| `CIT8O_11` | 8711 | `Soneta.Deklaracje.CIT.CIT8O_11` | CIT-8/O(11) |
+| `CIT8O_12` | 8712 | `Soneta.Deklaracje.CIT.CIT8O_12` | CIT-8/O(12) |
+| `CIT8O_13` | 8713 | `Soneta.Deklaracje.CIT.CIT8O_13` | CIT-8/O(13) |
+| `CIT8O_14` | 8714 | `Soneta.Deklaracje.CIT.CIT8O_14` | CIT-8/O(14) |
+| `CIT8O_15` | 8715 | `Soneta.Deklaracje.CIT.CIT8O_15` | CIT-8/O(15) |
+| `CIT8O_16` | 8716 | `Soneta.Deklaracje.CIT.CIT8O_16` | CIT-8/O(16) |
+| `CIT8O_17` | 8717 | `Soneta.Deklaracje.CIT.CIT8O_17` | CIT-8/O(17) |
+| `CIT8O_18` | 8718 | `Soneta.Deklaracje.CIT.CIT8O_18` | CIT-8/O(18) |
+| `CIT8O_19` | 8719 | `Soneta.Deklaracje.CIT.CIT8O_19` | CIT-8/O(19) |
+| `CIT8O_20` | 8720 | `Soneta.Deklaracje.CIT.CIT8O_20` | CIT-8/O(20) |
+| `VATZD_1` | 8801 | `Soneta.Deklaracje.VAT.VATZD_1` |  |
+| `CITD_3` | 8903 | `Soneta.Deklaracje.CIT.CITD_3` | CIT-D(3) |
+| `CITD_4` | 8904 | `Soneta.Deklaracje.CIT.CITD_4` | CIT-D(4) |
+| `CITD_5` | 8905 | `Soneta.Deklaracje.CIT.CITD_5` | CIT-D(5) |
+| `CITD_6` | 8906 | `Soneta.Deklaracje.CIT.CITD_6` | CIT-D(6) |
+| `CITD_7` | 8907 | `Soneta.Deklaracje.CIT.CITD_7` | CIT-D(7) |
+| `CITD_8` | 8908 | `Soneta.Deklaracje.CIT.CITD_8` | CIT-D(8) |
+| `PIT11Z_20` | 9020 | `Soneta.Deklaracje.PIT.PIT11Z_20` | PIT-11Z (20) |
+| `PIT11Z_21` | 9021 | `Soneta.Deklaracje.PIT.PIT11Z_21` | PIT-11Z (21) |
+| `PIT11Z_22` | 9022 | `Soneta.Deklaracje.PIT.PIT11Z_22` | PIT-11Z (22) |
+| `PIT11Z_23` | 9023 | `Soneta.Deklaracje.PIT.PIT11Z_23` | PIT-11Z (23) |
+| `PIT11Z_24` | 9024 | `Soneta.Deklaracje.PIT.PIT11Z_24` | PIT-11Z (24) |
+| `PIT11Z_25` | 9025 | `Soneta.Deklaracje.PIT.PIT11Z_25` | PIT-11Z (25) |
+| `PIT11Z_26` | 9026 | `Soneta.Deklaracje.PIT.PIT11Z_26` | PIT-11Z (26) |
+| `PIT11Z_27` | 9027 | `Soneta.Deklaracje.PIT.PIT11Z_27` | PIT-11Z (27) |
+| `PIT11Z_28` | 9028 | `Soneta.Deklaracje.PIT.PIT11Z_28` | PIT-11Z (28) |
+| `PIT11Z_29` | 9029 | `Soneta.Deklaracje.PIT.PIT11Z_29` | PIT-11Z (29) |
+| `PIT40Z_20` | 9120 | `Soneta.Deklaracje.PIT.PIT40Z_20` | PIT-40Z (20) |
+| `PIT40Z_21` | 9121 | `Soneta.Deklaracje.PIT.PIT40Z_21` | PIT-40Z (21) |
+| `PIT40Z_22` | 9122 | `Soneta.Deklaracje.PIT.PIT40Z_22` | PIT-40Z (22) |
+| `PIT8CZ_7` | 9207 | `Soneta.Deklaracje.PIT.PIT8CZ_7` | PIT-8CZ (7) |
+| `PIT8CZ_8` | 9208 | `Soneta.Deklaracje.PIT.PIT8CZ_8` | PIT-8CZ (8) |
+| `PIT8CZ_9` | 9209 | `Soneta.Deklaracje.PIT.PIT8CZ_9` | PIT-8CZ (9) |
+| `PIT8CZ_10` | 9210 | `Soneta.Deklaracje.PIT.PIT8CZ_10` | PIT-8CZ (10) |
+| `PIT8CZ_11` | 9211 | `Soneta.Deklaracje.PIT.PIT8CZ_11` | PIT-8CZ (11) |
+| `PIT8CZ_12` | 9212 | `Soneta.Deklaracje.PIT.PIT8CZ_12` | PIT-8CZ (12) |
+| `PIT8CZ_13` | 9213 | `Soneta.Deklaracje.PIT.PIT8CZ_13` | PIT-8CZ (13) |
+| `PITRZ_17` | 9317 | `Soneta.Deklaracje.PIT.PITRZ_17` | PIT-RZ (17) |
+| `PITRZ_18` | 9318 | `Soneta.Deklaracje.PIT.PITRZ_18` | PIT-RZ (18) |
+| `PITRZ_19` | 9319 | `Soneta.Deklaracje.PIT.PITRZ_19` | PIT-RZ (19) |
+| `PITRZ_20` | 9320 | `Soneta.Deklaracje.PIT.PITRZ_20` | PIT-RZ (20) |
+| `PITRZ_21` | 9321 | `Soneta.Deklaracje.PIT.PITRZ_21` | PIT-RZ (21) |
+| `PITRZ_22` | 9322 | `Soneta.Deklaracje.PIT.PITRZ_22` | PIT-RZ (22) |
+| `CITST_7` | 10007 | `Soneta.Deklaracje.CIT.CITST_7` | CIT-ST(7) |
+| `CITST_8` | 10008 | `Soneta.Deklaracje.CIT.CITST_8` | CIT-ST(8) |
+| `CIT8ST_1` | 10009 | `Soneta.Deklaracje.CIT.CIT8ST_1` | CIT-8ST(1) |
+| `CITST_7_M` | 10107 | `Soneta.Deklaracje.CIT.CITST_7_Multi` |  |
+| `CITST_8_M` | 10108 | `Soneta.Deklaracje.CIT.CITST_8_Multi` |  |
+| `CIT8ST_1_M` | 10109 | `Soneta.Deklaracje.CIT.CIT8ST_1_Multi` |  |
+| `CITSTA_5` | 10205 | `Soneta.Deklaracje.CIT.CITSTA_5` | CIT-ST/A (5) |
+| `CIT8STA_1` | 10206 | `Soneta.Deklaracje.CIT.CIT8STA_1` | CIT/A (1) |
+| `CITSTA_5_M` | 10305 | `Soneta.Deklaracje.CIT.CITSTA_5_Multi` |  |
+| `CIT8STA_1_M` | 10306 | `Soneta.Deklaracje.CIT.CIT8STA_1_Multi` |  |
+| `IFT2_5` | 10405 | `Soneta.Deklaracje.CIT.IFT2_5` | IFT-2/IFT-2R(5) |
+| `IFT2_6` | 10406 | `Soneta.Deklaracje.CIT.IFT2_6` | IFT-2/IFT-2R(6) |
+| `IFT2_7` | 10407 | `Soneta.Deklaracje.CIT.IFT2_7` | IFT-2/IFT-2R(7) |
+| `IFT2_8` | 10408 | `Soneta.Deklaracje.CIT.IFT2_8` | IFT-2/IFT-2R(8) |
+| `IFT2_9` | 10409 | `Soneta.Deklaracje.CIT.IFT2_9` | IFT-2/IFT-2R(9) |
+| `IFT2_10` | 10410 | `Soneta.Deklaracje.CIT.IFT2_10` | IFT-2/IFT-2R(10) |
+| `IFT2_11` | 10411 | `Soneta.Deklaracje.CIT.IFT2_11` | IFT-2/IFT-2R(11) |
+| `IFT2_12` | 10412 | `Soneta.Deklaracje.CIT.IFT2_12` | IFT-2/IFT-2R(12) |
+| `CIT10Z_1` | 10501 | `Soneta.Deklaracje.CIT.CIT10Z_1` | CIT-10Z(1) |
+| `CIT10Z_2` | 10502 | `Soneta.Deklaracje.CIT.CIT10Z_2` | CIT-10Z(2) |
+| `CIT10Z_3` | 10503 | `Soneta.Deklaracje.CIT.CIT10Z_3` | CIT-10Z(3) |
+| `CIT10Z_4` | 10504 | `Soneta.Deklaracje.CIT.CIT10Z_4` | CIT-10Z(4) |
+| `CIT10Z_5` | 10505 | `Soneta.Deklaracje.CIT.CIT10Z_5` | CIT-10Z(5) |
+| `CIT10Z_6` | 10506 | `Soneta.Deklaracje.CIT.CIT10Z_6` | CIT-10Z(6) |
+| `CIT10Z_7` | 10507 | `Soneta.Deklaracje.CIT.CIT10Z_7` | CIT-10Z(7) |
+| `VAT27_1` | 10601 | `Soneta.Deklaracje.VAT.VAT27_1` | VAT-27(1) |
+| `VAT27_2` | 10602 | `Soneta.Deklaracje.VAT.VAT27_2` | VAT-27(2) |
+| `CIT8BR_1` | 10701 | `Soneta.Deklaracje.CIT.CIT8BR_1` | CIT-8/BR(1) |
+| `CIT8BR_3` | 10703 | `Soneta.Deklaracje.CIT.CIT8BR_3` | CIT-8/BR(3) |
+| `CIT8BR_4` | 10704 | `Soneta.Deklaracje.CIT.CIT8BR_4` | CIT-8/BR(4) |
+| `CIT8BR_5` | 10705 | `Soneta.Deklaracje.CIT.CIT8BR_5` | CIT-8/BR(5) |
+| `CIT8BR_6` | 10706 | `Soneta.Deklaracje.CIT.CIT8BR_6` | CIT-8/BR(6) |
+| `CIT8BR_7` | 10707 | `Soneta.Deklaracje.CIT.CIT8BR_7` | CIT-8/BR(7) |
+| `CIT8BR_8` | 10708 | `Soneta.Deklaracje.CIT.CIT8BR_8` | CIT-8/BR(8) |
+| `CIT8BR_9` | 10709 | `Soneta.Deklaracje.CIT.CIT8BR_9` | CIT-8/BR(9) |
+| `CIT8BR_10` | 10710 | `Soneta.Deklaracje.CIT.CIT8BR_10` | CIT-8/BR(10) |
+| `CITMIT_1` | 10801 | `Soneta.Deklaracje.CIT.CITMIT_1` | CIT/MIT(1) |
+| `CITMIT_2` | 10802 | `Soneta.Deklaracje.CIT.CITMIT_2` | CIT/MIT(2) |
+| `CITMIT_3` | 10803 | `Soneta.Deklaracje.CIT.CITMIT_3` | CIT/MIT(3) |
+| `CIT8S_1` | 10901 | `Soneta.Deklaracje.CIT.CIT8S_1` | CIT/8S(1) |
+| `CIT8S_2` | 10902 | `Soneta.Deklaracje.CIT.CIT8S_2` | CIT/8S(2) |
+| `CIT8S_3` | 10903 | `Soneta.Deklaracje.CIT.CIT8S_3` | CIT/8S(3) |
+| `CIT8S_4` | 10904 | `Soneta.Deklaracje.CIT.CIT8S_4` | CIT/8S(4) |
+| `CIT8S_5` | 10905 | `Soneta.Deklaracje.CIT.CIT8S_5` | CIT/8S(5) |
+| `CIT8S_6` | 10906 | `Soneta.Deklaracje.CIT.CIT8S_6` | CIT/8S(6) |
+| `CIT8S_7` | 10907 | `Soneta.Deklaracje.CIT.CIT8S_7` | CIT/8S(7) |
+| `CIT8SP_1` | 11001 | `Soneta.Deklaracje.CIT.CIT8SP_1` | CIT/8SP(1) |
+| `CIT8SP_2` | 11002 | `Soneta.Deklaracje.CIT.CIT8SP_2` | CIT/8SP(2) |
+| `CIT8SP_3` | 11003 | `Soneta.Deklaracje.CIT.CIT8SP_3` | CIT/8SP(3) |
+| `CIT8SP_4` | 11004 | `Soneta.Deklaracje.CIT.CIT8SP_4` | CIT/8SP(4) |
+| `CIT8SP_5` | 11005 | `Soneta.Deklaracje.CIT.CIT8SP_5` | CIT/8SP(5) |
+| `CIT8SP_6` | 11006 | `Soneta.Deklaracje.CIT.CIT8SP_6` | CIT/8SP(6) |
+| `CIT8SP_7` | 11007 | `Soneta.Deklaracje.CIT.CIT8SP_7` | CIT/8SP(7) |
+| `CITIP_2` | 11102 | `Soneta.Deklaracje.CIT.CITIP_2` | CIT/IP(2) |
+| `CITIP_3` | 11103 | `Soneta.Deklaracje.CIT.CITIP_3` | CIT/IP(3) |
+| `CITIP_4` | 11104 | `Soneta.Deklaracje.CIT.CITIP_4` | CIT/IP(4) |
+| `CITIP_5` | 11105 | `Soneta.Deklaracje.CIT.CITIP_5` | CIT/IP(5) |
+| `CITWZ_1` | 11201 | `Soneta.Deklaracje.CIT.CITWZ_1` | CIT/WZ(1) |
+| `CITWZ_2` | 11202 | `Soneta.Deklaracje.CIT.CITWZ_2` | CIT/WZ(2) |
+| `CITWZ_3` | 11203 | `Soneta.Deklaracje.CIT.CITWZ_3` | CIT/WZ(3) |
+| `CITKW_1` | 11301 | `Soneta.Deklaracje.CIT.CITKW_1` | CIT/KW(1) |
+| `CITKW_2` | 11302 | `Soneta.Deklaracje.CIT.CITKW_2` | CIT/KW(2) |
+| `CITKW_3` | 11303 | `Soneta.Deklaracje.CIT.CITKW_3` | CIT/KW(3) |
+| `CITKW_4` | 11304 | `Soneta.Deklaracje.CIT.CITKW_4` | CIT/KW(4) |
+| `VIIDO_1` | 11401 | `Soneta.Deklaracje.VAT.VIIDO_1` | VII-DO(1) |
+| `VIIDO_2` | 11402 | `Soneta.Deklaracje.VAT.VIIDO_2` | VII-DO(2) |
+| `VIIDO_1_Pozycja` | 11501 | `Soneta.Deklaracje.VAT.VIIDO_1_Pozycja` |  |
+| `VIIDO_2_Pozycja` | 11502 | `Soneta.Deklaracje.VAT.VIIDO_2_Pozycja` |  |
+| `VIUDO_1` | 11601 | `Soneta.Deklaracje.VAT.VIUDO_1` | VIU-DO(1) |
+| `VIUDO_2` | 11602 | `Soneta.Deklaracje.VAT.VIUDO_2` | VIU-DO(2) |
+| `VIUDO_1_Pozycja` | 11701 | `Soneta.Deklaracje.VAT.VIUDO_1_Pozycja` |  |
+| `VIUDO_2_Pozycja` | 11702 | `Soneta.Deklaracje.VAT.VIUDO_2_Pozycja` |  |
+| `VAT8_11` | 11911 | `Soneta.Deklaracje.VAT.VAT8_11` | VAT-8(11) |
+| `VAT8_12` | 11912 | `Soneta.Deklaracje.VAT.VAT8_12` | VAT-8(12) |
+| `VAT9M_8` | 12001 | `Soneta.Deklaracje.VAT.VAT9M_8` | VAT-9M(8) |
+| `VAT9M_9` | 12002 | `Soneta.Deklaracje.VAT.VAT9M_9` | VAT-9M(9) |
+| `VAT9M_10` | 12003 | `Soneta.Deklaracje.VAT.VAT9M_10` | VAT-9M(10) |
+| `VAT9M_11` | 12004 | `Soneta.Deklaracje.VAT.VAT9M_11` | VAT-9M(11) |
+| `ZAW_NR_1` | 13001 | `Soneta.Deklaracje.ZAW.ZAW_NR_1` | ZAW-NR(1) |
+| `ZAW_NR_2` | 13002 | `Soneta.Deklaracje.ZAW.ZAW_NR_2` | ZAW-NR(2) |
+| `CUK_1` | 14001 | `Soneta.Deklaracje.CUK.CUK_1` | CUK-1 (1) |
+| `CUK_2` | 14002 | `Soneta.Deklaracje.CUK.CUK_2` | CUK-1 (2) |
+| `CIT8E_2` | 15002 | `Soneta.Deklaracje.CIT.CIT8E_2` | CIT-8E(2) |
+| `CIT8E_3` | 15003 | `Soneta.Deklaracje.CIT.CIT8E_3` | CIT-8E(3) |
+| `CIT8E_4` | 15004 | `Soneta.Deklaracje.CIT.CIT8E_4` | CIT-8E(4) |
+| `CITEZ_2` | 15102 | `Soneta.Deklaracje.CIT.CITEZ_2` | CIT/EZ(2) |
+| `CITEZ_3` | 15103 | `Soneta.Deklaracje.CIT.CITEZ_3` | CIT/EZ(3) |
+| `CITRB_1` | 16001 | `Soneta.Deklaracje.CIT.CITRB_1` | CIT-RB(1) |
+| `CITRB_2` | 16002 | `Soneta.Deklaracje.CIT.CITRB_2` | CIT-RB(2) |
+| `CITCSR_1` | 17001 | `Soneta.Deklaracje.CIT.CITCSR_1` | CIT-CSR(1) |
+| `CITCSR_2` | 17002 | `Soneta.Deklaracje.CIT.CITCSR_2` | CIT-CSR(2) |
+| `VAT7_ParametryRozliczen` | 18001 | `Soneta.Deklaracje.VAT.VAT7_22.ParametrRozliczen` | Parametr rozliczeń VAT-7(22)/VAT-7K(16) |
+| `VAT7_23_ParametryRozliczen` | 18002 | `Soneta.Deklaracje.VAT.VAT7_23.ParametrRozliczen_23` | Parametr rozliczeń VAT-7(23)/VAT-7K(17) |
+| `CITWOT_1` | 19000 | `Soneta.Deklaracje.CIT.CITWOT_1` | CIT-WOT(1) |
+| `CITF_1` | 19001 | `Soneta.Deklaracje.CIT.CITF_1` | CIT-F(1) |
+| `CITM_2` | 19102 | `Soneta.Deklaracje.CIT.CITM_2` | CIT-M(2) |
+| `ZUS_RIA_V` | 20001 | `Soneta.Deklaracje.ZUS.RIA_V` | ZUS RIA |
+| `ZUS_RIA_VI` | 20101 | `Soneta.Deklaracje.ZUS.RIA_VI` | ZUS RIA |
+| `ZUS_RIA_VII` | 20201 | `Soneta.Deklaracje.ZUS.RIA_VII` | ZUS RIA |
+| `ZUS_RIA_VIII` | 20301 | `Soneta.Deklaracje.ZUS.RIA_VIII` | ZUS RIA |
+| `ZUS_RIA_IX` | 20401 | `Soneta.Deklaracje.ZUS.RIA_IX` | ZUS RIA |
+| `ZUS_RIA_X` | 20501 | `Soneta.Deklaracje.ZUS.RIA_X` | ZUS RIA |
+| `ZUS_RIA_XI` | 20601 | `Soneta.Deklaracje.ZUS.RIA_XI` | ZUS RIA |
+| `ZUS_Z3` | 21000 | `Soneta.Deklaracje.ZUS.Z3` | ZUS Z-3 |
+| `ZUS_Z3a` | 21100 | `Soneta.Deklaracje.ZUS.Z3a` | ZUS Z-3a |
+| `Luka_placowa_v1` | 22000 | `Soneta.Deklaracje.Luka_placowa.LukaPlacowa_v1` | Luka płacowa |
+| `Luka_placowa_Poziom_v1` | 22001 | `Soneta.Deklaracje.Luka_placowa.PoziomWynagrodzenia` | Poziom wynagrodzenia |
+| `Luka_placowa_Pracownik_v1` | 22002 | `Soneta.Deklaracje.Luka_placowa.PracownikLuki` | Pracownik luki płacowej |
+| `PPK_DokumentyPracodawcy_1` | 25001 | `Soneta.Deklaracje.PPK.DokumentyPracodawcyPPK` | Dokumenty pracodawcy (PPK) |
+| `PPK_DokumentyInstytucjiFinansowej_1` | 25101 | `Soneta.Deklaracje.PPK.DokumentyInstytucjiFinansowejPPK` | Dokumenty instytucji finansowej (PPK) |
+| `PPK_RozliczenieSkładek_1` | 25201 | `Soneta.Deklaracje.PPK.RozliczenieSkładekPPK` | PPK - Rozliczenie składek |
+| `PPK_RejestracjaUczestnika_1` | 25301 | `Soneta.Deklaracje.PPK.RejestracjaUczestnikaPPK` | PPK - Rejestracja uczestnika |
+| `PPK_Składki_1` | 25401 | `Soneta.Deklaracje.PPK.SkładkiPPK` | PPK - Składka |
+| `PPK_KorektaSkładek_1` | 25501 | `Soneta.Deklaracje.PPK.KorektaSkładekPPK` | PPK - Korekta składki |
+| `PPK_DeklaracjaUczestnika_1` | 25601 | `Soneta.Deklaracje.PPK.DeklaracjaUczestnikaPPK` | PPK - Deklaracja uczestnika |
+| `PPK_ZmianaDanychKontaktu_1` | 25701 | `Soneta.Deklaracje.PPK.ZmianaDanychKontaktowychUczestnikaPPK` | PPK - Zmiana danych kontaktu elektronicznego uczestnika |
+| `PPK_ZmianaDanychIdentyfikacyjnych_1` | 25801 | `Soneta.Deklaracje.PPK.ZmianaDanychIdentyfikacyjnychUczestnikaPPK` | PPK - Zmiana danych identyfikacyjnych uczestnika |
+| `PPK_ZakończenieZatrudnienia_1` | 25901 | `Soneta.Deklaracje.PPK.ZakończenieZatrudnieniaUczestnikaPPK` | PPK - Zakończenie zatrudnienia uczestnika |
+| `PPK_WypłataŚrodków_1` | 26001 | `Soneta.Deklaracje.PPK.WypłataŚrodkówPrzezUczestnikaPPK` | Wypłata środków przez uczestnika PPK |
+| `PPK_ZwrotNadpłaty_1` | 26101 | `Soneta.Deklaracje.PPK.ZwrotNadpłatyPPK` | Zwrot środków w wyniku rozliczenia korekty lub rezygnacji z dokonywania wpłat (PPK) |
+| `PPK_WypłataTransferowa_1` | 26201 | `Soneta.Deklaracje.PPK.WypłataTransferowaPPK` | Wypłata transferowa |
+| `PPK_NadanieUczestnikowiNumeruEwidencji_1` | 26301 | `Soneta.Deklaracje.PPK.NadanieUczestnikowiNumeruPPK` | Nadanie uczestnikowi numeru ewidencji PPK |
+| `PPK_ZwrotŚrodków_1` | 26401 | `Soneta.Deklaracje.PPK.ZwrotŚrodkówPPK` | Zwrot środków PPK |
+| `PPK_RozliczenieNadpłat_1` | 26501 | `Soneta.Deklaracje.PPK.RozliczenieNadpłatPPK` | PPK - Rozliczenie nadpłat |
+| `PPK_Transfer_1` | 26601 | `Soneta.Deklaracje.PPK.TransferPPK` | PPK - Transfer |
 
 ## Relacje interfejsowe
 

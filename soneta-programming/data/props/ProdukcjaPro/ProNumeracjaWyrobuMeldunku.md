@@ -5,13 +5,6 @@ Opis: Element szczegółowy numeracji wyrobu meldunku (ProWyrobMeldunku). Przech
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `WyrobMeldunku` → `ProWyrobMeldunku`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `Amount` | bazodanowe | Ilość | Ilość numeracji wyrobu meldunku. |

@@ -4,13 +4,6 @@ Tytuł: Elementy powiązane
 Opis: Powiązanie wiadomości e-mail z elementami systemu (kontrahentami, dokumentami, transakcjami). Umożliwia przypisywanie korespondencji do obiektów biznesowych, zarówno ręcznie jak i automatycznie, tworząc spójną historię komunikacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Element | `IEmailElement` | bazodanowe, iface-ref | Element powiązany | Element, który powiązany jest z wiadomością |

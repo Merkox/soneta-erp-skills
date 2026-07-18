@@ -5,13 +5,6 @@ Opis: Rozszerzenie ZKL zapisu historii definicji stanowiska (DefinicjaStanowiska
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaStanowiskaHist` → `DefinicjaStanowiskaHist`
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 7
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelStanowiska | `MemoText` | bazodanowe, podlista |  |  |

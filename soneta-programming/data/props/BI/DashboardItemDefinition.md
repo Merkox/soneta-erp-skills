@@ -4,13 +4,7 @@ Tytuł: Definicje elementów wizualizacji
 Opis: Definicja elementu wizualizacji (kafelka) na dashboardzie BI. Określa typ wizualizacji (tabela, wykres, wartość), powiązany model danych, opis, limit wyświetlanych rekordów oraz symbol jednostki. Stanowi podstawowy budulec paneli analitycznych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 5
-- subrowy: 0
-- razem: 17
+Selektor: pole `Type` (`Soneta.BI.DashboardItemType`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -28,9 +22,20 @@ Guided: root
 | Name | `string` | tylko-odczyt |  |  |
 | Obsolete | `bool` | bazodanowe | Przestarzały |  |
 | Params | `SubTable<Soneta.BI.DashboardItemParam>` | podlista |  |  |
-| Type | `Soneta.BI.DashboardItemType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ elementu wizualizacji |
+| Type | `Soneta.BI.DashboardItemType` (enum) | bazodanowe, tylko-odczyt, selektor | Typ | Typ elementu wizualizacji |
 | UnitSymbol | `string` | bazodanowe | Symbol jednostki | Symbol jednostki |
 | Visualization | `Soneta.BI.VisualizationType` (enum) | bazodanowe, tylko-odczyt | Wizualizacja | Wizualizacja elementu |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `List` | 1 | `Soneta.BI.ListItemDefinition` | Raport |
+| `Indicator` | 2 | `Soneta.BI.IndicatorItemDefinition` | Wskaźnik |
+| `PivotReport` | 3 | `Soneta.BI.PivotItemDefinition` | Tabela przestawna |
 
 ## Enumy
 

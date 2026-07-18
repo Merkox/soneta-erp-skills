@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operator` → `Operator`
 Implementuje interfejsy: `IDaneKontaktoweHost`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 1
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Contact | `Soneta.Core.Kontakt` (subrow) | bazodanowe |  |  |

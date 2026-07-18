@@ -4,13 +4,7 @@ Tytuł: Konto
 Opis: Konto księgowe w planie kont firmy. Przechowuje symbol, nazwę, typ konta (bilansowe, wynikowe, pozabilansowe), bilans otwarcia, walutę oraz strukturę hierarchiczną (konta syntetyczne i analityczne). Umożliwia powiązanie ze słownikami, kontrolę salda, przypisanie do oddziałów firm oraz obsługę kont wielowalutowych.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 34
-- podlisty: 8
-- subrowy: 0
-- razem: 62
+Selektor: pole `Rodzaj` (`Soneta.Ksiega.RodzajKonta`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -50,7 +44,7 @@ Guided: root
 | PozycjeGrupKont | `SubTable<Soneta.Ksiega.PozGrupyKont>` | podlista |  |  |
 | PrzyszlySymbol | `string` | bazodanowe |  | Symbol konta w przyszłym okresie. |
 | PrzyszlySymbolUstawiony | `bool` | tylko-odczyt |  |  |
-| Rodzaj | `Soneta.Ksiega.RodzajKonta` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Ksiega.RodzajKonta` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Rodzaj2 | `Soneta.Ksiega.Rodzaj2Konta` (enum) | tylko-odczyt |  |  |
 | Rozliczeniowe | `bool` | bazodanowe |  |  |
 | Segment | `string` | bazodanowe |  | Segment konta. |
@@ -76,6 +70,17 @@ Guided: root
 | ZnacznikKonta | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta |  |
 | ZnacznikKontaDodatkowy | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta dodatkowy |  |
 | ZnacznikKontaDodatkowyPD | `Soneta.Ksiega.ZnacznikKonta` | bazodanowe | Znacznik konta dodatkowy PD |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Zwykłe` | 1 | `Soneta.Ksiega.Konto` | Konto |
+| `Waluty` | 2 | `Soneta.Ksiega.KontoWaluty` | Konto waluty |
+| `Walutowe` | 3 | `Soneta.Ksiega.KontoWalutowe` | Konto walutowe |
 
 ## Enumy
 

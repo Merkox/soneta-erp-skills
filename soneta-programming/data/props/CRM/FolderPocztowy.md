@@ -4,13 +4,6 @@ Tytuł: Folder pocztowy skrzynki
 Opis: Folder na skrzynce pocztowej IMAP powiązany z kontem pocztowym. Śledzi stan synchronizacji (najwyższy UID, UIDValidity) poszczególnych folderów, umożliwiając przyrostowe pobieranie wiadomości i rozróżnienie poczty wychodzącej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | FolderPocztyWychodzacej | `bool` | bazodanowe | Poczta wychodząca | Folder poczty wychodzącej |

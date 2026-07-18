@@ -3,13 +3,6 @@ Nazwa tabeli: `RelacjeOpisowPIM`
 Opis: Definicja relacji wiążącej obiekt Host z OpisemPIM. Określa przypisanie opisu do wskazanego elementu oraz powiązania między danymi systemowymi.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Domyslny | `bool` | bazodanowe |  |  |

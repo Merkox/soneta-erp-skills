@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `LokalizacjaNierHistoria`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  | Blokada |

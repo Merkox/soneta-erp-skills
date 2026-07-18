@@ -5,13 +5,6 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje parametr filtru
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 1
-- subrowy: 2
-- razem: 18
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Code | `Soneta.BI.ReportParamCode` | bazodanowe | Algorytm |  |

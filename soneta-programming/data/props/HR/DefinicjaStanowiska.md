@@ -7,13 +7,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `DefinicjaStanowiskaHist`
 Implementuje interfejsy: `IŹródłoKartyOpisuStanowiska`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 22
-- subrowy: 0
-- razem: 38
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BadaniaLekarskie | `SubTable<Soneta.HR.BadaniaLekarskieDefinicjiStanowiska>` | podlista |  |  |

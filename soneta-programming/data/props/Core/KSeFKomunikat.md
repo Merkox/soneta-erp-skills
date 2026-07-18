@@ -5,13 +5,6 @@ Opis: Komunikat (faktura) wymieniany z Krajowym Systemem e-Faktur. Przechowuje d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 20
-- podlisty: 1
-- subrowy: 0
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CertyfikatOffline | `Soneta.Core.SysZewToken` | bazodanowe | Certyfikat KSeF do podpisu offline | Certyfikat KSeF, do podpisu linku do weryfikacji wystawcy, dla dokumentów wystawianych w trybie offline. |

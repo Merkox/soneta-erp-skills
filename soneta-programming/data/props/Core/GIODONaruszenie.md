@@ -5,13 +5,6 @@ Opis: Rejestr naruszeń ochrony danych osobowych zgodnie z RODO. Dokumentuje naz
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IDokument`
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 6
-- subrowy: 1
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasNaruszenia | `Time` | bazodanowe |  | Czas naruszenia |

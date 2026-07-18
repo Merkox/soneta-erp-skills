@@ -5,13 +5,7 @@ Opis: Instancja uruchomionego procesu workflow utworzona na podstawie definicji 
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IWFWorkflow`, `IWFFeatureDefs`, `IDokument`
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 12
-- podlisty: 7
-- subrowy: 1
-- razem: 30
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -24,7 +18,7 @@ Implementuje interfejsy: `IWFWorkflow`, `IWFFeatureDefs`, `IDokument`
 | DateTimeFrom | `System.DateTime` | tylko-odczyt | Data i czas rozpoczęcia | Data i czas rozpoczęcia procesu |
 | DateTimeTo | `System.DateTime` | tylko-odczyt | Data i czas zakończenia | Data i czas zakończenia procesu |
 | DateTo | `Date` | bazodanowe | Data zakończenia | Data zakończenia procesu |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | IDokumentNumerPelny | `string` | tylko-odczyt | Numer pełny |  |
 | IsClosed | `bool` | bazodanowe | Status procesu | Status procesu (zamknięty lub aktywny) |
 | LiveTasks | `System.Collections.Generic.IEnumerable<Db.Task>` | podlista |  |  |
@@ -45,6 +39,16 @@ Implementuje interfejsy: `IWFWorkflow`, `IWFFeatureDefs`, `IDokument`
 | TimeFrom | `TimeSec` | bazodanowe | Godzina rozpoczęcia | Godzina rozpoczęcia procesu |
 | TimeTo | `TimeSec` | bazodanowe | Godzina zakończenia | Godzina zakończenia procesu |
 | WorkflowDefinition | `Soneta.Workflow.Config.WFDefinition` | bazodanowe, tylko-odczyt | Definicja workflow | Definicja workflow powiązana z elementem workflow |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.WFWorkflow` |  |
+| `Engine` | 1 | `Soneta.Workflow.WFWorkflowExtend` |  |
 
 ## Enumy
 

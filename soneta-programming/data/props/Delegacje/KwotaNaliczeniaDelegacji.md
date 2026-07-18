@@ -5,13 +5,6 @@ Opis: Element szczegółowy NaliczenieDelegacji (NaliczenieDelegacji). Przechowu
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Naliczenie` → `NaliczenieDelegacji`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kurs | `double` | bazodanowe |  | Kurs do przeliczenia kwoty w walucie |

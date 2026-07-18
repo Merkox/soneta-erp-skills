@@ -5,13 +5,6 @@ Opis: Element szczegółowy sprawy windykacyjnej (SprawaWindykacyjna). Wiąże k
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Sprawa` → `SprawaWindykacyjna`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Lp | `int` | bazodanowe |  |  |

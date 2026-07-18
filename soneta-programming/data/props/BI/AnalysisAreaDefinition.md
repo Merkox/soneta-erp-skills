@@ -5,13 +5,6 @@ Opis: Definicja obszaru merytorycznego w module BI. Obszary tworzą hierarchiczn
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Appearances | `SubTable<Soneta.BI.AnalysisAreaAppearance>` | podlista |  |  |

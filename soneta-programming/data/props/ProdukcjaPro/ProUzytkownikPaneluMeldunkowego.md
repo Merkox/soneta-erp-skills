@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWebOperator`, `ITaskUser`
 
-- pola bazodanowe (zapisywalne): 27
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 3
-- subrowy: 0
-- razem: 30
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokumentacja | `bool` | bazodanowe |  | Aktywna zakładka dokumentacji panelu meldunkowego. |

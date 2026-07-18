@@ -5,13 +5,6 @@ Opis: Identyfikator wewnętrzny KSeF (NIP lub numer wewnętrzny) dla podmiotu tr
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 5
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Blokada identyfikatora wewnętrznego | Blokada identyfikatora wewnętrznego |

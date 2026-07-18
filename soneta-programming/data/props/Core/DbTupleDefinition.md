@@ -5,13 +5,7 @@ Opis: Definicja typu dokumentu dodatkowego (zdarzenia, formularza dynamicznego).
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRuntimeRowDefinition`, `IRightsSource`, `IManagedRowDefinion`, `IWizardReferenceHost`, `ICodeFileHost`, `ISysNotificationHost`, `IWfPlugInReferenceHost`, `IPreviewPageHost`
-
-- pola bazodanowe (zapisywalne): 24
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 18
-- podlisty: 16
-- subrowy: 3
-- razem: 65
+Selektor: pole `Typ` (`Soneta.Core.DbTuples.DbTupleDefinitionType`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -74,12 +68,22 @@ Implementuje interfejsy: `IRuntimeRowDefinition`, `IRightsSource`, `IManagedRowD
 | Tools.FieldsByName | `System.Collections.Generic.Dictionary<string, Runtime.RuntimeFieldDefinition>` | podlista |  |  |
 | TupleTypeFullName | `string` | tylko-odczyt |  |  |
 | TylkoPosrednio | `bool` | bazodanowe | Utwórz tylko pośrednio |  |
-| Typ | `Soneta.Core.DbTuples.DbTupleDefinitionType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.DbTuples.DbTupleDefinitionType` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypeFullName | `string` | tylko-odczyt |  |  |
 | Ukryty | `bool` | bazodanowe |  |  |
 | WfDefinition | `IWFDefinition` | tylko-odczyt, iface-ref |  |  |
 | WizardsRef | `LpSubTable<Db.Wizard.WizardReference>` | podlista |  |  |
 | Xml | `MemoText` | bazodanowe, podlista | Definicja zakładki użytkownika |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standalone` | 0 | `Soneta.Core.DbTuples.DbTupleDefinition` |  |
+| `Dependent` | 1 | `Soneta.Core.DbTuples.DbTupleDefinitionDependent` | Definicja dokumentu dodatkowego (zależnego) |
 
 ## Relacje interfejsowe
 

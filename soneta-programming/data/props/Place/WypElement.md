@@ -4,13 +4,7 @@ Tytuł: Elementy wypłaty
 Opis: Element szczegółowy wypłaty (Wyplata). Reprezentuje pojedynczy naliczony składnik wynagrodzenia z wartością, podatkami, składkami ZUS i okresem, za który został naliczony.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 74
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 140
-- podlisty: 12
-- subrowy: 19
-- razem: 255
+Selektor: pole `RodzajZrodla` (`Soneta.Place.RodzajŹródłaWypłaty`) — wiele typów w jednej tabeli, podtypów: 33
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -243,7 +237,7 @@ Guided: root
 | RachunekOdbiorcy | `Soneta.Kasa.RachunekBankowyPodmiotu` | tylko-odczyt |  |  |
 | RodzajSkladki | `Soneta.Place.RodzajSkladki` (enum) | bazodanowe | Rodzaj składki |  |
 | RodzajSkładkiInfo | `string` | tylko-odczyt | Rodzaj składki |  |
-| RodzajZrodla | `Soneta.Place.RodzajŹródłaWypłaty` (enum) | bazodanowe, tylko-odczyt |  |  |
+| RodzajZrodla | `Soneta.Place.RodzajŹródłaWypłaty` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | RozliczenieStorna | `bool` | tylko-odczyt |  |  |
 | Seria | `string` | tylko-odczyt |  |  |
 | Skladniki | `SubTable<Soneta.Place.WypSkladnik>` | podlista |  |  |
@@ -269,6 +263,47 @@ Guided: root
 | ZasiłekZus | `bool` | tylko-odczyt |  |  |
 | Zatwierdzony | `bool` | tylko-odczyt |  |  |
 | _KodRSA | `Soneta.Place.KodRSA` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `RodzajZrodla`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Etat` | 1 | `Soneta.Place.WypElementEtat` |  |
+| `Nieobecność` | 2 | `Soneta.Place.WypElementNieobecność` |  |
+| `Umowa` | 3 | `Soneta.Place.WypElementUmowa` |  |
+| `Akord` | 4 | `Soneta.Place.WypElementAkord` |  |
+| `Storno` | 5 | `Soneta.Place.WypElementStorno` |  |
+| `Dodatek` | 6 | `Soneta.Place.WypElementDodatek` |  |
+| `NadgodzinyI` | 7 | `Soneta.Place.WypElementNadgodziny.I` |  |
+| `NadgodzinyII` | 8 | `Soneta.Place.WypElementNadgodziny.II` |  |
+| `NadgodzinyŚw` | 9 | `Soneta.Place.WypElementNadgodziny.Św` |  |
+| `Nocne` | 10 | `Soneta.Place.WypElementNadgodziny.Noc` |  |
+| `Kurs` | 11 | `Soneta.Place.WypElementKurs` |  |
+| `Świadczenie` | 12 | `Soneta.Place.WypElementŚwiadczenie` |  |
+| `Nagroda` | 13 | `Soneta.Place.WypElementNagrodaKara.WypElementNagroda` |  |
+| `Kara` | 14 | `Soneta.Place.WypElementNagrodaKara.WypElementKara` |  |
+| `FundPożWpisowe` | 15 | `Soneta.Place.WypElementZmianaFunduszPozyczkowy.Dopłata` |  |
+| `FundPożWycofanie` | 16 | `Soneta.Place.WypElementZmianaFunduszPozyczkowy.Wycofanie` |  |
+| `FundPożSkładka` | 17 | `Soneta.Place.WypElementFunduszPożyczkowy.Składka` |  |
+| `Pożyczka` | 18 | `Soneta.Place.WypElementPożyczka.Wypłata` |  |
+| `PożyczkaSpłata` | 19 | `Soneta.Place.WypElementPożyczka.Spłata` |  |
+| `Zaliczka` | 21 | `Soneta.Place.WypElementZaliczka.Realizacja` |  |
+| `SpłataZaliczki` | 22 | `Soneta.Place.WypElementZaliczka.SpłataZaliczki` |  |
+| `ZajęcieKomornicze` | 23 | `Soneta.Place.WypElementZajęcieKomornicze` |  |
+| `Odchyłki` | 24 | `Soneta.Place.WypElementNadgodziny.Odchyłki` |  |
+| `DodatekAutomatyczny` | 25 | `Soneta.Place.WypElementDodatekAutomatyczny` |  |
+| `ZbiegPracyIRodzicielstwa` | 26 | `Soneta.Place.WypElementZbiegPracyIRodzicielstwa` |  |
+| `PIT40` | 27 | `Soneta.Deklaracje.PIT.WypElementPIT40` |  |
+| `ZajęcieKomorniczeZwrotNadpłaty` | 28 | `Soneta.Place.WypElementZajęcieKomorniczeKorekta.ZwrotNadpłaty` |  |
+| `ZajęcieKomorniczeUznanieNadpłaty` | 29 | `Soneta.Place.WypElementZajęcieKomorniczeKorekta.UznanieNadpłaty` |  |
+| `ZajęcieKomorniczeRozliczDepozytu` | 30 | `Soneta.Place.WypElementZajęcieKomorniczeKorekta.RozliczenieDepozytu` |  |
+| `UmowaRozliczenie` | 31 | `Soneta.Place.WypElementUmowaRozliczenieCzasu` |  |
+| `WyrównanieDoMinimalnej` | 32 | `Soneta.Place.WypElementNadgodziny.WyrównanieDoMinimalnej` |  |
+| `ZwrotNadpłatyPPK` | 33 | `Soneta.Deklaracje.PPK.WypElementPPK.ZwrotNadpłaty_PPK` |  |
+| `PrzychódOdSkładkiPracodawcyPPK` | 34 | `Soneta.Deklaracje.PPK.WypElementPPK.PrzychódOdSkładkiPracodawcy_PPK` |  |
 
 ## Relacje interfejsowe
 

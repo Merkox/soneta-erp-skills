@@ -5,13 +5,6 @@ Opis: Element szczegółowy wyniku zestawienia księgowego (WynikZestKS). Przech
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wynik` → `WynikZestKS`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Klucz | `Soneta.Core.IZestawienieKSKolumnaKlucz` | tylko-odczyt |  |  |

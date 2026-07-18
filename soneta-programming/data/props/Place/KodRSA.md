@@ -5,13 +5,6 @@ Opis: Słownik kodów tytułu świadczenia/przerwy stosowanych na deklaracji ZUS
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Budzet | `bool` | bazodanowe |  |  |

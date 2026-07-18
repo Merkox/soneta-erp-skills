@@ -5,13 +5,7 @@ Opis: Definicja raportu przestawnego (tabeli przestawnej). Określa typ źródł
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 2
-- subrowy: 0
-- razem: 8
+Selektor: pole `Type` (`Db.PivotViewType`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -22,7 +16,17 @@ Implementuje interfejsy: `IRightsSource`
 | IsIndividual | `bool` | tylko-odczyt |  |  |
 | Name | `string` | bazodanowe | Nazwa | Nazwa raportu przestawnego wyświetlana w drzewie folderów. |
 | Styles | `SubTable<Db.PivotViewStyle>` | podlista |  |  |
-| Type | `Db.PivotViewType` (enum) | bazodanowe, tylko-odczyt | Typ | Typ źródła danych raportu przestawnego. |
+| Type | `Db.PivotViewType` (enum) | bazodanowe, tylko-odczyt, selektor | Typ | Typ źródła danych raportu przestawnego. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `BI` | 1 | `Db.BIPivotView` |  |
+| `CRM` | 2 | `Soneta.Zadania.Models.CRMPivotView` |  |
 
 ## Enumy
 

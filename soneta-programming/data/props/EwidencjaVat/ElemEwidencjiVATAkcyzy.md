@@ -5,13 +5,7 @@ Opis: Element szczegółowy nagłówka ewidencji VAT (NagEwidencjiVATAkcyzy). Re
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Naglowek` → `NagEwidencjiVATAkcyzy`
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
-
-- pola bazodanowe (zapisywalne): 38
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 18
-- podlisty: 3
-- subrowy: 3
-- razem: 68
+Selektor: pole `Typ` (`Soneta.EwidencjaVat.TypEwidencjiVAT`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -79,10 +73,22 @@ Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 | StawkaAkcyzy.Typ | `Soneta.Core.TypStawkiAkcyzy` (enum) | bazodanowe |  |  |
 | StawkaAkcyzy.TypGrupy | `Soneta.Core.TypGrupyAkcyzy` (enum) | bazodanowe |  | Typ grupy wyrobów |
 | StrukturaSprzedazyNie | `bool` | bazodanowe |  | Nie uwzględniaj w liczeniu struktury sprzedaży |
-| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.EwidencjaVat.TypEwidencjiVAT` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | VAT | `Currency` | bazodanowe |  | Wartość podatku |
 | WartoscEur | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości w Eur |  |
 | WartoscKsi | `Soneta.EwidencjaVat.INettoVATBrutto` | tylko-odczyt | Wartości księgowe |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Sprzedaż` | 1 | `Soneta.EwidencjaVat.ElemEwidencjiVATSprzedaz` | Element ewidencji VAT - sprzedaż |
+| `Zakup` | 2 | `Soneta.EwidencjaVat.ElemEwidencjiVATZakup` | Element ewidencji VAT - zakup |
+| `SprzedażAkcyza` | 3 | `Soneta.EwidencjaVat.ElemEwidencjiAkcyzySprzedaz` | Element ewidencji akcyzy - sprzedaż |
+| `ZakupAkcyza` | 4 | `Soneta.EwidencjaVat.ElemEwidencjiAkcyzyZakup` | Element ewidencji akcyzy - zakup |
 
 ## Relacje interfejsowe
 

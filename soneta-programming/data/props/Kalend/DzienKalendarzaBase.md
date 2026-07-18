@@ -3,13 +3,7 @@ Nazwa tabeli: `DniKalendarza`
 Opis: Element szczegółowy kalendarza (KalendarzBase). Pojedynczy dzień w kalendarzu pracy, definiujący typ dnia, przypisaną definicję dnia roboczego, normę czasu pracy oraz tolerancję wejścia dla danej daty.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Kalendarz` → `KalendarzBase`
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 1
-- razem: 14
+Selektor: pole `Typ` (`Soneta.Kalend.TypKalendarza`) — wiele typów w jednej tabeli, podtypów: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -25,8 +19,22 @@ Guided: child — nadrzędna przez pole `Kalendarz` → `KalendarzBase`
 | RuchomyCzasPracy | `bool` | tylko-odczyt |  |  |
 | Strefy | `SubTable<Soneta.Kalend.StrefaKalendarza>` | podlista |  |  |
 | TolerancjaWe | `Time` | bazodanowe |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WejścieDo | `Time` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Kalendarz` | 1 | `Soneta.Kalend.DzienKalendarza` | Dzień kalendarza |
+| `KalendarzPracownika` | 2 | `Soneta.Kalend.DzienPlanu` | Wyjątek w kalendarzu |
+| `SeriaDni` | 3 | `Soneta.Kalend.DzienSerii` | Dzień serii |
+| `KalendarzUmowy` | 4 | `Soneta.Kalend.DzienPlanuUmowy` | Wyjątek w kalendarzu |
+| `KalendarzPlanuKopia` | 10 | `Soneta.Kalend.DzienPlanuKopia` | Kopia planu pracy |
+| `KalendarzPracyKopia` | 11 | `Soneta.Kalend.DzienPracyKopia` | Kopia dnia pracy |
 
 ## Enumy
 

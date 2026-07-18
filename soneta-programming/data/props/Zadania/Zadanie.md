@@ -5,13 +5,7 @@ Opis: Zadanie lub zdarzenie CRM stanowiące podstawową jednostkę pracy w modul
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `ITimeTrack`, `IElementSlownika`, `IEmailElement`, `IDocumentHostCRM`, `IManagedRowInfoHost`, `IToDoItemHost`
-
-- pola bazodanowe (zapisywalne): 56
-- pola kalkulowane (zapisywalne): 33
-- pola tylko-odczyt: 49
-- podlisty: 26
-- subrowy: 2
-- razem: 166
+Selektor: pole `Rodzaj` (`Soneta.Core.RodzajZadania`) — wiele typów w jednej tabeli, podtypów: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -134,7 +128,7 @@ Implementuje interfejsy: `ITimeTrack`, `IElementSlownika`, `IEmailElement`, `IDo
 | Przypomnienie | `Time` | bazodanowe | Przypomnienie | Czas przypomnienia o zadaniu |
 | PrzypomnienieWg | `Soneta.Core.PrzypomnienieWg` (enum) | bazodanowe |  |  |
 | Przypomnij | `bool` |  |  |  |
-| Rodzaj | `Soneta.Core.RodzajZadania` (enum) | bazodanowe, tylko-odczyt | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
+| Rodzaj | `Soneta.Core.RodzajZadania` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj zadania | Rodzaj zadania. Może być zadanie lub zdarzenie. Dziedziczone z definicji. |
 | Role | `App.Role` |  |  |  |
 | RoleGuid | `System.Guid` | bazodanowe |  | Rola dla której przypisane jest zadanie. |
 | SchedulerInterval | `Interval` |  |  |  |
@@ -181,6 +175,28 @@ Implementuje interfejsy: `ITimeTrack`, `IElementSlownika`, `IEmailElement`, `IDo
 | Zespol | `string` |  |  |  |
 | dateStart | `System.DateTime` |  |  |  |
 | dateStop | `System.DateTime` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Zadanie` | 1 | `Soneta.Zadania.Zadanie` | Zadanie |
+| `Zdarzenie` | 2 | `Soneta.Zadania.ZdarzenieExt` | Zdarzenie |
+| `Zlecenie` | 3 | `Soneta.Zadania.ZlecenieExt` | Zlecenie |
+| `Wypożyczenie` | 4 | `Soneta.Zadania.WypozyczenieExt` | Wypożyczenie |
+| `OrgPracyZdalnej` | 5 | `Soneta.Zadania.Models.Zadania.HybridWork` | Praca hybrydowa |
+| `Planowane` | 6 | `Soneta.RealEstate.Models.Planned` | Zdarzenie planowane |
+| `Incydentalne` | 7 | `Soneta.RealEstate.Models.Incidental` | Zdarzenie incydentalne |
+| `Pomiar` | 8 | `Soneta.RealEstate.Models.Measurement` | Pomiar |
+| `Najem` | 9 | `Soneta.RealEstate.Models.Rent` | Najem |
+| `Polisa` | 10 | `Soneta.RealEstate.Models.Policy` | Polisa |
+| `Szkoda` | 11 | `Soneta.RealEstate.Models.Damage` | Szkoda |
+| `Fleet` | 100 | `Soneta.Vehicles.Models.FleetEvent` | Zdarzenie pojazdu |
+| `Grupujace` | 150 | `Soneta.Zadania.Models.Zadania.ZadanieGrupujace` | Zadanie grupujące |
+| `Projektowe` | 151 | `Soneta.Zadania.Models.Zadania.ZadanieProjektowe` | Zadanie projektowe |
 
 ## Relacje interfejsowe
 

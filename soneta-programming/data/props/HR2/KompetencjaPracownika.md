@@ -5,13 +5,6 @@ Opis: Element szczegółowy karty kompetencji pracownika (KartaKompetencjiPracow
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Karta` → `KartaKompetencjiPracownika`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 1
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zrodlo` → `IZrodloPodzielnikaKosztow`
 Historyczna: Tak — wersje (historia) w tabeli `HistoriaPodzielnika`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Core.DefinicjaPodzielnikaKosztow` | bazodanowe |  |  |

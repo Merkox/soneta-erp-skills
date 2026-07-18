@@ -5,13 +5,6 @@ Opis: Element schematu podziałowego definiuje pojedynczy wymiar podziału w ram
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 18
-- pola tylko-odczyt: 12
-- podlisty: 6
-- subrowy: 1
-- razem: 47
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Agregacja | `bool` | bazodanowe | Agregacja opisów analitycznych | Określa czy agregować tekie same opisy analityczne. |

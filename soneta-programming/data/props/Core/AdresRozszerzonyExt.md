@@ -5,13 +5,6 @@ Opis: Element szczegółowy adresu (AdresExt). Przechowuje rozszerzone dane adre
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `AdresExt`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 1
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresRozszerzony | `Soneta.Core.AdresRozszerzony` (subrow) | bazodanowe |  |  |

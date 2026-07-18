@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji zestawu danych (DataSetDefinition). Defini
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Code | `MemoText` | bazodanowe, podlista |  |  |

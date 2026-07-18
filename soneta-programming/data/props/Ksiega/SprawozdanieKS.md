@@ -5,13 +5,7 @@ Opis: Sprawozdanie finansowe firmy za dany okres obrachunkowy (bilans, rachunek 
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
-
-- pola bazodanowe (zapisywalne): 27
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 21
-- subrowy: 0
-- razem: 56
+Selektor: pole `Rodzaj` (`Soneta.Ksiega.RodzajSprawozdaniaKS`) — wiele typów w jednej tabeli, podtypów: 12
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -22,7 +16,7 @@ Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
 | Okres | `FromTo` | bazodanowe, podlista |  |  |
 | OkresKS | `Soneta.Ksiega.OkresObrachunkowy` | bazodanowe, tylko-odczyt |  | Okres obrachunkowy sprawozdania |
 | Pozycje | `SubTable<Soneta.Ksiega.PozycjaSprawozdaniaKS>` | podlista |  |  |
-| Rodzaj | `Soneta.Ksiega.RodzajSprawozdaniaKS` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Ksiega.RodzajSprawozdaniaKS` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Signatures | `Soneta.Ksiega.SprawozdanieKS.SignatureManager` | tylko-odczyt |  |  |
 | Stan | `Soneta.Ksiega.StanSprawozdaniaKS` (enum) | bazodanowe, tylko-odczyt |  |  |
 | TypJednostki | `Soneta.Ksiega.TypJednostkiKsiegowy` (enum) | bazodanowe, tylko-odczyt |  |  |
@@ -71,6 +65,26 @@ Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`
 | WynikZestZmianyKapital | `Soneta.Ksiega.WynikZestKS` | bazodanowe |  | Wynik zestawienia księgowego - ZZWK |
 | Xml | `MemoText` | bazodanowe, podlista |  | Wygenerowany XML |
 | XmlSignatures | `MemoText` | bazodanowe, podlista |  | Sygnatury XML |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `MikroPln` | 1 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `MikroTys` | 2 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `MalaPln` | 3 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `MalaTys` | 4 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `InnaPln` | 5 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `InnaTys` | 6 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `OpPln` | 7 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `OpTys` | 8 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `SkonsolidowanaPln` | 9 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `SkonsolidowanaTys` | 10 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `ASIPln` | 11 | `Soneta.Ksiega.SprawozdanieKS` |  |
+| `ASITys` | 12 | `Soneta.Ksiega.SprawozdanieKS` |  |
 
 ## Enumy
 

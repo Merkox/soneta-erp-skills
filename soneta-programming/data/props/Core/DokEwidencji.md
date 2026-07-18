@@ -5,13 +5,7 @@ Opis: Główna tabela dokumentów ewidencji (faktur, not, korekt itp.). Zawiera 
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPlatny`, `IDaneKontrahentaHost`, `IRaportEwidencjiSP`, `IDokumentCRM`, `IKomunikatEDIHost`, `IEmailElement`, `IProceduraVATHost`, `IDigitalizedDocument`
-
-- pola bazodanowe (zapisywalne): 27
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 33
-- podlisty: 22
-- subrowy: 1
-- razem: 86
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 29
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -88,7 +82,7 @@ Implementuje interfejsy: `IDokumentPlatny`, `IDaneKontrahentaHost`, `IRaportEwid
 | SymbolOkresuWgDatyWplywu | `string` | tylko-odczyt |  |  |
 | Szablon | `bool` | bazodanowe |  | Szablon dokumentu |
 | TryForceAttachmentPreview | `bool` |  |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypDokumentuJPK | `Soneta.Core.ProceduraVAT` |  | Typ dokumentu VAT |  |
 | TypReferencji | `Soneta.Core.TypReferencji` (enum) | bazodanowe |  |  |
 | Wartosc | `Currency` | bazodanowe |  |  |
@@ -101,6 +95,43 @@ Implementuje interfejsy: `IDokumentPlatny`, `IDaneKontrahentaHost`, `IRaportEwid
 | ZadaniaCRM | `SubTable` | podlista |  |  |
 | Zaplaty | `SubTable` | podlista |  |  |
 | Zbiorczy | `bool` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `WyciągBankowyEwidencja` | 120 | `Soneta.Kasa.WyciagBankowyEwidencja` | Wyciąg bankowy |
+| `RaportKasowyEwidencja` | 121 | `Soneta.Kasa.RaportKasowyEwidencja` | Raport kasowy |
+| `RozliczenieEwidencja` | 122 | `Soneta.Kasa.RozliczenieEwidencja` | Rozliczenie dokumentów |
+| `NotaOdsetkowaEwidencja` | 123 | `Soneta.Kasa.NotaOdsetkowaEwidencja` | Nota odsetkowa |
+| `DelegacjaPWSEwidencja` | 124 | `Soneta.Delegacje.DelegacjaEwidencja` | Delegacja PWS ewidencja |
+| `ListaPlacEwidencja` | 503 | `Soneta.Place.ListaPlacEwidencja` | Lista płac |
+| `WyplataUmowyEwidencja` | 504 | `Soneta.EwidencjaVat.WyplataUmowyEwidencja` |  |
+| `PlanowanaListaPłacEwidencja` | 521 | `Soneta.Place.PlanowanaListaPłacEwidencja` | Planowana lista płac |
+| `PKEwidencja` | 804 | `Soneta.Ksiega.PKEwidencja` | Polecenie księgowania |
+| `RóżniceKursoweEwidencja` | 805 | `Soneta.Ksiega.RozniceKursoweEwidencja` | Rożnice kursowe |
+| `BOEwidencja` | 806 | `Soneta.Ksiega.BOEwidencja` | Bilans otwarcia |
+| `RóżniceKursoweMWEwidencja` | 807 | `Soneta.Ksiega.RozniceKursoweMWEwidencja` | Rożnice kursowe MW |
+| `RozniceKursoweKPiREwidencja` | 808 | `Soneta.Ksiega.RozniceKursoweKPiREwidencja` | Różnice kursowe KPiR |
+| `DeklaracjaRozliczeniowa` | 1099 | `Soneta.Deklaracje.DeklaracjaEwidencja` | Deklaracja |
+| `MagazynEwidencja` | 1101 | `Soneta.Handel.MagazynEwidencja` | Magazyn ewidencja |
+| `SprzedażEwidencja` | 1201 | `Soneta.EwidencjaVat.SprzedazEwidencja` | Sprzedaż |
+| `ZakupEwidencja` | 1202 | `Soneta.EwidencjaVat.ZakupEwidencja` | Zakup |
+| `RozliczenieKasoweVATEwidencja` | 1203 | `Soneta.EwidencjaVat.RozliczeniaKasoweVATEwidencja` | Rozliczenia kasowe VAT |
+| `RozliczenieKasoweAkcyzyEwidencja` | 1204 | `Soneta.EwidencjaVat.RozliczeniaKasoweAkcyzyEwidencja` | Rozliczenia kasowe akcyzy |
+| `SprzedażZbiorczaEwidencja` | 1205 | `Soneta.EwidencjaVat.SprzedazZbiorczaEwidencja` | Sprzedaż zbiorcza |
+| `FWUENabyciaNaliczonyEwidencja` | 1206 | `Soneta.EwidencjaVat.FWUENabyciaNaliczonyEwidencja` | Dokument wewnętrzny nabycia VAT naliczony |
+| `FWUENabyciaNależnyEwidencja` | 1207 | `Soneta.EwidencjaVat.FWUENabyciaNależnyEwidencja` | Dokument wewnętrzny nabycia VAT należny |
+| `VATMarżaEwidencja` | 1210 | `Soneta.EwidencjaVat.VATMarzaEwidencja` | VAT marża |
+| `ŚrodkiTrwałeEwidencja` | 1306 | `Soneta.SrodkiTrwale.SrodkiTrwaleEwidencja` | Środki trwałe |
+| `FakturaImportowa` | 1401 | `Soneta.Import.FakturaImportowaEwidencja` | Faktura importowa |
+| `SAD` | 1402 | `Soneta.Import.SADEwidencja` | SAD |
+| `SkladkaEwidencja` | 1660 | `Soneta.CzlonkowieSzkolenia.SkladkaEwidencja` | Składka ewidencja |
+| `RozliczenieEPEwidencja` | 1702 | `Soneta.Samochodowka.RozliczenieEPEwidencja` |  |
+| `RMKEwidencja` | 1802 | `Soneta.RMK.RMKEwidencja` |  |
 
 ## Relacje interfejsowe
 

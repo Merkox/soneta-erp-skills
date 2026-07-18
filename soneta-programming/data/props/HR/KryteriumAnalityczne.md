@@ -5,13 +5,6 @@ Opis: Zawiera kryteria analityczne służące do szczegółowego grupowania wart
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | KryteriumSyntetyczne | `Soneta.HR.ZKL.Wartosciowanie.Konfiguracja.KryteriumSyntetyczne` | bazodanowe, tylko-odczyt | Kryterium syntetyczne |  |

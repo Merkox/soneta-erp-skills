@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji budżetu (DefBudget). Wyznacza ramy czasow
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowedPlanningPeriod | `FromTo` | bazodanowe, podlista |  | Dozwolony okres planowania. |

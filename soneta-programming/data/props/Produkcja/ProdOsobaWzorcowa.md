@@ -5,13 +5,6 @@ Opis: Wzorcowe (abstrakcyjne) osoby produkcyjne definiujące role i stanowiska w
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IProdOsoba`, `IProdZasob`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

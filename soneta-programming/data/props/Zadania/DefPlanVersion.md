@@ -4,13 +4,7 @@ Tytuł: Definicje planów wersji
 Opis: Szablon wersji planu budżetowego. Konfiguruje numerację, rodzaj wersji planu (centralna/lokalna) oraz parametry zarządzania wersjami planów w ramach budżetowania projektów.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 1
-- razem: 16
+Selektor: pole `PlanVersionType` (`Soneta.Core.PlanVersionType`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -25,11 +19,21 @@ Guided: root
 | Numbering.Separator | `string` | bazodanowe |  |  |
 | Numbering.Wzor | `string` | bazodanowe |  |  |
 | Numeracja | `Soneta.Core.DefinicjaNumeracji` | podlista |  |  |
-| PlanVersionType | `Soneta.Core.PlanVersionType` (enum) | bazodanowe, tylko-odczyt | Rodzaj definicji wersji planu | Rodzaj definicji wersji planu. |
+| PlanVersionType | `Soneta.Core.PlanVersionType` (enum) | bazodanowe, tylko-odczyt, selektor | Rodzaj definicji wersji planu | Rodzaj definicji wersji planu. |
 | Symbol | `string` | bazodanowe | Symbol | Skrótowa nazwa definicji wersji planu. |
 | Typ | `Soneta.Core.TypDokumentu` (enum) | tylko-odczyt |  |  |
 | TypDokumentu | `System.Type` | tylko-odczyt |  |  |
 | WidoczneCechy | `MemoText` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `PlanVersionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Basic` | 0 | `Soneta.Zadania.Budzetowanie.Models.DefPlanVersionBasic` | Plan Bazowy |
+| `Corrective` | 1 | `Soneta.Zadania.Budzetowanie.Models.DefPlanVersionCorrective` | Korekta planu |
 
 ## Enumy
 

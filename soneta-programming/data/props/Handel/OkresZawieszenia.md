@@ -5,13 +5,6 @@ Opis: Element szczegółowy dokumentu handlowego (DokumentHandlowy). Przechowuje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentHandlowy`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Do | `Date` |  |  |  |

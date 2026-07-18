@@ -5,13 +5,7 @@ Opis: Dokument rozliczenia złych długów (ZD) służy do ewidencji korekt poda
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokument`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 3
-- subrowy: 1
-- razem: 17
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -28,10 +22,19 @@ Implementuje interfejsy: `IDokument`
 | Oddzial | `Soneta.Core.OddzialFirmy` | bazodanowe | Oddział firmy | Oddział firmy |
 | Opis | `string` | bazodanowe |  | Opis dokumentu |
 | Pozycje | `SubTable<Soneta.Ksiega.ZleDlugiPozycja>` | podlista |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ZD |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ dokumentu ZD |
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
 | ZaplatyDo | `Date` | bazodanowe | Zapłaty do | Data graniczna zapłat |
 | Zatwierdzony | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `DokumentZleDlugi` | 809 | `Soneta.Ksiega.ZleDlugiDokument` |  |
 
 ## Enumy
 

@@ -5,13 +5,6 @@ Opis: Element słownika systemowego. Przechowuje hierarchiczne listy wartości d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Category | `string` | bazodanowe, tylko-odczyt | Nazwa słownika | Nazwa słownika, do którego należy dany element. |

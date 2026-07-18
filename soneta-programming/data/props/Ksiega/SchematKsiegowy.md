@@ -4,13 +4,7 @@ Tytuł: Schematy księgowe
 Opis: Schemat księgowy służy do automatycznej predekretacji dokumentów ewidencji na zapisy księgowe. Definiuje reguły rozksięgowania dla konkretnego typu dokumentu w danym okresie obrachunkowym, z możliwością przypisania do firmy i definicji dokumentu. Może być edytowany w trybie wizualnym lub jako kod.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 13
-- pola tylko-odczyt: 10
-- podlisty: 11
-- subrowy: 1
-- razem: 44
+Selektor: pole `TypEwidencji` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 27
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -52,12 +46,47 @@ Guided: root
 | SchematBaseTypeName | `string` | tylko-odczyt |  |  |
 | TrybEdycji | `Soneta.Ksiega.TrybEdycjiSchematu` (enum) | bazodanowe |  | Tryb edycji schematu |
 | TypDziennikaSchematu | `Soneta.Ksiega.TypDziennikaSchematuKsiegowego` (enum) |  |  |  |
-| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  | Typ dokumentu ewidencji schematu |
+| TypEwidencji | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ dokumentu ewidencji schematu |
 | UsunPusty | `bool` |  |  | Usuwanie pustych dekretów |
 | Warunek | `MemoText` | podlista |  | Warunek - tryb zaawansowany |
 | WeryfikowacSchemat | `bool` |  |  |  |
 | WyjatkiKontP | `string` |  |  | Wyjątki kont |
 | text | `MemoText` | bazodanowe, podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypEwidencji`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `WyciągBankowyEwidencja` | 120 | `Soneta.Ksiega.SchematWyciagowBankowych` | Schemat ewidencji wyciągów bankowych |
+| `RaportKasowyEwidencja` | 121 | `Soneta.Ksiega.SchematRaportowKasowych` | Schemat ewidencji raportów kasowych |
+| `RozliczenieEwidencja` | 122 | `Soneta.Ksiega.SchematRozliczen` | Schemat ewidencji rozliczeń |
+| `NotaOdsetkowaEwidencja` | 123 | `Soneta.Ksiega.SchematNotOdsetkowych` | Schemat ewidencji not odsetkowych |
+| `DelegacjaPWSEwidencja` | 124 | `Soneta.Ksiega.SchematDelegacji` | Schemat ewidencji delegacji (PWS) |
+| `ListaPlacEwidencja` | 503 | `Soneta.Ksiega.SchematListyPlac` | Schemat ewidencji listy płac |
+| `WyplataUmowyEwidencja` | 504 | `Soneta.Ksiega.SchematWyplatyUmowy` | Schemat ewidencji wypłaty umowy |
+| `PlanowanaListaPłacEwidencja` | 521 | `Soneta.Ksiega.SchematPlanowanejListyPlac` | Schemat ewidencji planowanej listy płac |
+| `PKEwidencja` | 804 | `Soneta.Ksiega.SchematPK` | Schemat ewidencji PK |
+| `RóżniceKursoweEwidencja` | 805 | `Soneta.Ksiega.SchematRoznicKursowych` | Schemat ewidencji różnic kursowych |
+| `BOEwidencja` | 806 | `Soneta.Ksiega.SchematBO` | Schemat ewidencji BO |
+| `RóżniceKursoweMWEwidencja` | 807 | `Soneta.Ksiega.SchematRoznicKursowychMW` | Schemat ewidencji różnic kursowych MW |
+| `DeklaracjaRozliczeniowa` | 1099 | `Soneta.Ksiega.SchematDeklaracjiRozliczeniowych` | Schemat deklaracji rozliczeniowych |
+| `MagazynEwidencja` | 1101 | `Soneta.Ksiega.SchematDokumentowMagazynowych` | Schemat ewidencji dokumentów magazynowych |
+| `SprzedażEwidencja` | 1201 | `Soneta.Ksiega.SchematSprzedazy` | Schemat ewidencji sprzedaży |
+| `ZakupEwidencja` | 1202 | `Soneta.Ksiega.SchematZakupu` | Schemat ewidencji zakupu |
+| `RozliczenieKasoweVATEwidencja` | 1203 | `Soneta.Ksiega.SchematRozliczeniaKasowegoVAT` | Schemat ewid. rozliczenia kasowego VAT |
+| `SprzedażZbiorczaEwidencja` | 1205 | `Soneta.Ksiega.SchematSprzedazyZbiorczej` | Schemat ewidencji sprzedaży zbiorczej |
+| `FWUENabyciaNaliczonyEwidencja` | 1206 | `Soneta.Ksiega.SchematFWUENNL` | Schemat ewid. dokumentów wew. nabycia UE VAT naliczony |
+| `FWUENabyciaNależnyEwidencja` | 1207 | `Soneta.Ksiega.SchematFWUENNZ` | Schemat ewid. dokumentów wew. nabycia UE VAT należny |
+| `VATMarżaEwidencja` | 1210 | `Soneta.Ksiega.SchematVATMarza` | Schemat ewidencji VAT marża |
+| `ŚrodkiTrwałeEwidencja` | 1306 | `Soneta.Ksiega.SchematSrodkowTrwalych` | Schemat ewidencji środków trwałych |
+| `FakturaImportowa` | 1401 | `Soneta.Ksiega.SchematFakturImportowych` | Schemat ewidencji faktur importowych |
+| `SAD` | 1402 | `Soneta.Ksiega.SchematSAD` | Schemat ewidencji SAD |
+| `SkladkaEwidencja` | 1660 | `Soneta.CzlonkowieSzkolenia.SchematSkladki` | Schemat ewidencji składek |
+| `RozliczenieEPEwidencja` | 1702 | `Soneta.Ksiega.SchematRozliczenEP` | Schemat ewidencji rozliczeń EP |
+| `RMKEwidencja` | 1802 | `Soneta.Ksiega.SchematRMK` | Schemat ewidencji RMK |
 
 ## Enumy
 

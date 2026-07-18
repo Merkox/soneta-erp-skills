@@ -5,13 +5,7 @@ Opis: Dokument rozliczeniowy (nota odsetkowa, kompensata, wezwanie do zapłaty i
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKsiegowalny`, `IDokumentPlatny`, `IDokumentCRM`, `IEmailElement`
-
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 11
-- podlisty: 11
-- subrowy: 1
-- razem: 46
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -53,7 +47,7 @@ Implementuje interfejsy: `IDokumentKsiegowalny`, `IDokumentPlatny`, `IDokumentCR
 | Seria | `string` | bazodanowe |  |  |
 | Stan | `Soneta.Windykacja.StanWindykacji` | bazodanowe |  |  |
 | TabelaKursowa | `Soneta.Waluty.TabelaKursowa` | bazodanowe |  | Tabela kursowa do przeliczeń walutowych |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WiadomosciPowiazane | `SubTable` | podlista |  |  |
 | Wielofirmowosc | `bool` | tylko-odczyt |  |  |
 | Wielooddzialowosc | `bool` | tylko-odczyt |  |  |
@@ -61,6 +55,23 @@ Implementuje interfejsy: `IDokumentKsiegowalny`, `IDokumentPlatny`, `IDokumentCR
 | Windykacje | `SubTable<Soneta.Windykacja.Windykacja>` | podlista |  |  |
 | ZadaniaCRM | `SubTable` | podlista |  |  |
 | Zatwierdzony | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `PotwierdzenieSalda` | 111 | `Soneta.Kasa.PotwierdzenieSalda` | Potwierdzenie salda |
+| `WezwanieDoZaplaty` | 112 | `Soneta.Kasa.WezwanieDoZaplaty` | Wezwanie do zapłaty |
+| `NotaOdsetkowa` | 113 | `Soneta.Kasa.NotaOdsetkowa` | Nota odsetkowa |
+| `Kompensata` | 114 | `Soneta.Kasa.Kompensata` | Kompensata |
+| `RozliczenieZaliczki` | 115 | `Soneta.Kasa.RozliczenieZaliczki` | Rozliczenie zaliczki |
+| `RozliczenieDelegacji` | 116 | `Soneta.Kasa.RozliczenieDelegacji` | Rozliczenie delegacji |
+| `Cesja` | 117 | `Soneta.Kasa.Cesja` | Cesja |
+| `NotaKorygujaca` | 118 | `Soneta.Kasa.NotaKorygujaca` | Nota korygująca |
+| `NotaKorygujacaOtrzymana` | 119 | `Soneta.Kasa.NotaKorygujacaOtrzymana` | Nota korygująca otrzymana |
 
 ## Relacje interfejsowe
 

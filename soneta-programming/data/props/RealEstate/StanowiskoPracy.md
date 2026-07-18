@@ -5,13 +5,6 @@ Opis: Kartoteka stanowisk pracy przypisanych do pomieszczeń w nieruchomościach
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 3
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywne | `bool` | bazodanowe | Określa, czy stanowisko pracy jest aktywne | Określa, czy stanowisko pracy jest aktywne |

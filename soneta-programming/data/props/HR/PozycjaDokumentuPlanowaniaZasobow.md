@@ -5,13 +5,6 @@ Opis: Element szczegółowy dokumentu planowania zasobów (DokumentPlanowaniaZas
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentPlanowaniaZasobow`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataPrzeliczeniaWykonania | `Date` | bazodanowe | Data przeliczenia wykonania |  |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`, `IElementStrukturyOrganizacyjnej`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 8
-- podlisty: 14
-- subrowy: 0
-- razem: 29
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Config | `Soneta.Core.ElementStrukturyOrganizacyjnej.ElementConfig` | tylko-odczyt |  |  |

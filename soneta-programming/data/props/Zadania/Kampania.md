@@ -5,13 +5,6 @@ Opis: Kampania marketingowa CRM grupująca projekty i zadania w ramach wspólneg
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 12
-- podlisty: 6
-- subrowy: 1
-- razem: 35
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt |  |  |

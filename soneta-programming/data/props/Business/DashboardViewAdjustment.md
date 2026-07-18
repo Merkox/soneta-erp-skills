@@ -5,13 +5,6 @@ Opis: Indywidualne modyfikacje położenia i rozmiaru kafelka na pulpicie dla ko
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Tile` → `DashboardViewTile`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Column | `int` | bazodanowe | Kolumna | Położenie X w jednostkach siatki na pulpicie (-1 brak). |

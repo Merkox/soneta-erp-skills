@@ -5,13 +5,6 @@ Opis: Element szczegółowy historii zatrudnienia (HistoriaZatrudnieniaBase). Re
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zatrudnienie` → `HistoriaZatrudnieniaBase`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Okres | `FromTo` | bazodanowe, podlista |  |  |

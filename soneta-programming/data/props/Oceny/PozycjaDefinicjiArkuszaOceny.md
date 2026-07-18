@@ -4,13 +4,7 @@ Tytuł: Pozycje definicji arkusza oceny
 Opis: Element szczegółowy definicji arkusza oceny (PozycjaDefinicjiArkuszaOceny). Przypisuje kryterium oceny do arkusza z określoną wagą, wymagalnością i opcjonalną zależnością od pytania nadrzędnego.
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `DefinicjaArkusza` → `DefinicjaArkuszaOceny`
-
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 10
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -19,11 +13,21 @@ Guided: child — nadrzędna przez pole `DefinicjaArkusza` → `DefinicjaArkusza
 | DefinicjaPytaniaNadrzednego | `Soneta.Oceny.DefinicjaElementuOceny` | bazodanowe |  |  |
 | Procent | `Percent` | tylko-odczyt |  |  |
 | PytanieZalezne | `bool` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Waga | `decimal` | bazodanowe |  |  |
 | WartoscPytaniaNadrzednego | `decimal` | bazodanowe |  |  |
 | Wyliczana | `bool` | bazodanowe |  |  |
 | Wymagana | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.PozycjaDefinicjiArkuszaOceny` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.PozycjaDefinicjiArkuszaAnkiety` | Pozycja definicji arkusza ankiety |
 
 ## Enumy
 

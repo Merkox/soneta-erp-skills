@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Ws
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BIFieldType | `Soneta.BI.BIFieldType` (enum) | tylko-odczyt |  |  |

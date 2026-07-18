@@ -5,13 +5,6 @@ Opis: Szablon weryfikatora rejestracji czasu pracy. Definiuje reguły walidacji 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 3
-- subrowy: 2
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktywnyAlgorytmWeryfikacji | `bool` |  |  |  |

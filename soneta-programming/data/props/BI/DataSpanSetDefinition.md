@@ -4,24 +4,31 @@ Tytuł: Zestawy przedziałów danych
 Opis: Definicja zestawu przedziałów danych używanego do klasyfikacji wartości pól w wizualizacjach BI. Określa typ zestawu, typ bazodanowy pola oraz sposób podziału wartości na zakresy (np. przedziały kwotowe, procentowe).
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 8
+Selektor: pole `FieldType` (`Soneta.Data.Schema.FieldType`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataSpanSetType | `Soneta.BI.DataSpanSetType` (enum) | bazodanowe | Typ zestawu |  |
-| FieldType | `Soneta.Data.Schema.FieldType` (enum) | bazodanowe, tylko-odczyt | Typ(DB) |  |
+| FieldType | `Soneta.Data.Schema.FieldType` (enum) | bazodanowe, tylko-odczyt, selektor | Typ(DB) |  |
 | IsAbsoluteSpan | `bool` | tylko-odczyt |  |  |
 | IsReferenceSpan | `bool` | tylko-odczyt |  |  |
 | IsRelativeSpan | `bool` | tylko-odczyt |  |  |
 | Items | `LpSubTable<Soneta.BI.DataSpanItemDefinition>` | podlista |  |  |
 | Name | `string` | bazodanowe | Nazwa |  |
 | Value | `string` | bazodanowe | Wartość |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `FieldType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `String` | 1 | `Soneta.BI.StringDataSpanSetDefinition` | Zestaw przedziałów tekstowych |
+| `Int32` | 2 | `Soneta.BI.IntegerDataSpanSetDefinition` | Zestaw przedziałów liczb całkowitych |
+| `Date` | 5 | `Soneta.BI.DateDataSpanSetDefinition` | Zestaw przedziałów dat |
+| `Percent` | 10 | `Soneta.BI.PercentDataSpanSetDefinition` | Zestaw przedziałów procentowych |
+| `Decimal` | 11 | `Soneta.BI.DecimalDataSpanSetDefinition` | Zestaw przedziałów liczb dziesiętnych |
 
 ## Enumy
 

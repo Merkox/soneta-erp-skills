@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 8
-- podlisty: 8
-- subrowy: 1
-- razem: 40
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `TimeSec` | bazodanowe |  | Czas zlecenia. |

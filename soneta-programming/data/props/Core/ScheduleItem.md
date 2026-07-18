@@ -4,13 +4,6 @@ Tytuł: Elementy harmonogramów
 Opis: Pojedynczy element (instancja wykonania) harmonogramu. Powiązany z definicją harmonogramu i zadaniem, zawiera identyfikator wiersza, czas wykonania, opcjonalny rekord powiązany oraz czas wystąpienia wyjątku.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 11
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definition | `IScheduleDefinition` | tylko-odczyt |  |  |

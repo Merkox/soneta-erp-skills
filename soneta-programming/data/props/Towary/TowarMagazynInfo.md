@@ -4,13 +4,6 @@ Opis: Element szczegółowy towaru (Towar). Przechowuje indywidualne parametry t
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CenaMinimalna | `Currency` | bazodanowe |  | Cena minimalna netto w magazynie. W przypadku użycia na liście wyboru towarów zalecane użycie: Workers.TowarMagazynInfo.[Magazyn].CenaMinimum |

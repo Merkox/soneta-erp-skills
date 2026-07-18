@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IManagedRowDefinion`, `ISysNotificationHost`, `IWizardReferenceHost`, `IWfPlugInReferenceHost`, `IWFDefinitionHost`, `IPreviewPageHost`
 
-- pola bazodanowe (zapisywalne): 70
-- pola kalkulowane (zapisywalne): 16
-- pola tylko-odczyt: 12
-- podlisty: 20
-- subrowy: 2
-- razem: 120
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AktualizujCzas | `bool` | bazodanowe | Aktualizuj czas zakończenia zadania | Aktualizuje datę i czas zakończenia zadania po zmianie stanu na nieaktywny |

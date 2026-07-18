@@ -4,13 +4,6 @@ Opis: Tabela relacji między zgłoszeniami serwisowymi a innymi dokumentami w sy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Child | `Soneta.Core.IDokument` | bazodanowe, tylko-odczyt, iface-ref | Dokument podrzędny | Podrzędny dokument. |

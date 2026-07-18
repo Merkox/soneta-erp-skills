@@ -4,13 +4,6 @@ Tytuł: Role identyfikatorów wewnętrznych KSeF
 Opis: Przypisanie roli podmiotu trzeciego KSeF do identyfikatora wewnętrznego. Określa typ roli (sprzedaż/zakup) i konkretną rolę podmiotu trzeciego, dla której identyfikator wewnętrzny jest stosowany.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | IdentWewnKSeF | `Soneta.Core.KSeFIdentWewn` | bazodanowe, tylko-odczyt |  |  |

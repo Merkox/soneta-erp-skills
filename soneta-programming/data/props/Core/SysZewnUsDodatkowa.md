@@ -4,13 +4,6 @@ Tytuł: Lista usług dodatkowych
 Opis: Konfiguracja usług dodatkowych dostępnych w systemie zewnętrznym. Powiązuje usługę (z elementu słownika) z systemem zewnętrznym i hostem, z opcją domyślnego wyboru przy tworzeniu zamówień.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Host | `Soneta.Core.ISysZewnUsDodatkowaHost` | bazodanowe | Host |  |

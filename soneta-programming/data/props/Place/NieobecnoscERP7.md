@@ -3,13 +3,6 @@ Nazwa tabeli: `NieobecnosciERP7`
 Opis: Bilans otwarcia danych o nieobecnościach z systemu ERP7 (RP-7). Przechowuje historyczne okresy nieobecności pracownika z podziałem na kategorie, niezbędne do prawidłowego naliczania świadczeń chorobowych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe |  |  |

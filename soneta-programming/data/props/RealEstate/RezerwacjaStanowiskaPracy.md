@@ -5,13 +5,6 @@ Opis: Rejestr rezerwacji stanowisk pracy przez pracowników. Umożliwia planowan
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelRezerwacji | `Soneta.RealEstate.Models.Database.CelRezerwacji` | bazodanowe | Cel rezerwacji | Cel rezerwacji stanowiska |

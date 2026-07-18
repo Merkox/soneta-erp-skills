@@ -5,13 +5,6 @@ Opis: Element szczegółowy wyszukania (Wyszukanie). Definiuje pojedyncze kryter
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Wyszukanie` → `Wyszukanie`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.HR.DefElementuOcenyPracownika` | bazodanowe |  |  |

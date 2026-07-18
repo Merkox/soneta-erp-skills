@@ -5,13 +5,7 @@ Opis: Słownik urzędów (ZUS, skarbowych i innych) wykorzystywanych w rozliczen
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPodmiot`, `IPodmiotKasowy`, `IAdresHost`, `IElementSlownika`
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 20
-- podlisty: 18
-- subrowy: 0
-- razem: 41
+Selektor: pole `Typ` (`Soneta.CRM.TypUrzędu`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -52,10 +46,22 @@ Implementuje interfejsy: `IPodmiot`, `IPodmiotKasowy`, `IAdresHost`, `IElementSl
 | StatusPodmiotu | `Soneta.Core.StatusPodmiotu` (enum) | tylko-odczyt |  |  |
 | Termin | `int` | tylko-odczyt |  |  |
 | TerminPlanowany | `int` | tylko-odczyt |  |  |
-| Typ | `Soneta.CRM.TypUrzędu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.CRM.TypUrzędu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypLimituKredytowego | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
 | TypPrzeterminowania | `Soneta.CRM.TypLimituKredytowego` (enum) | tylko-odczyt |  |  |
 | Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ZUS` | 1 | `Soneta.CRM.ZUSCentrala` | Centrala ZUS |
+| `PFRON` | 2 | `Soneta.CRM.PFRONCentrala` | Centrala PFRON |
+| `US` | 3 | `Soneta.CRM.UrzadSkarbowyCentrala` | Centrala urząd skarbowy |
+| `GUS` | 4 | `Soneta.CRM.GusCentrala` | Centrala gus |
 
 ## Relacje interfejsowe
 

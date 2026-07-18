@@ -4,13 +4,7 @@ Tytuł: Definicje ocen
 Opis: Definicja procesu oceny okresowej określająca jego parametry organizacyjne. Konfiguruje typ oceny, okres, strukturę organizacyjną, algorytm kalkulacji i procesy workflow, stanowiąc wzorzec dla realizacji ocen pracowniczych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 1
-- podlisty: 6
-- subrowy: 1
-- razem: 25
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -37,8 +31,18 @@ Guided: root
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
 | StrukturaFirmy | `Soneta.Oceny.TableRef` |  |  |  |
 | StrukturaOrganizacyjna | `Soneta.Core.StrukturaOrganizacyjna` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | UkrywajOceniajacych | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.DefinicjaOceny` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.DefinicjaAnkiety` | Definicja ankiety |
 
 ## Enumy
 

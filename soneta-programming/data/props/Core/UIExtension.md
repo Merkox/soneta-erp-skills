@@ -5,13 +5,6 @@ Opis: Definicja niestandardowego nagłówka lub stopki dokumentu. Przechowuje de
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | EditValue | `IGuidedRow` |  |  |  |

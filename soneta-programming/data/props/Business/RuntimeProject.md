@@ -5,13 +5,6 @@ Opis: Projekt w środowisku runtime zawierający kod kompilowany dynamicznie. Na
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Description | `string` | bazodanowe | Opis |  |

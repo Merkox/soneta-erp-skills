@@ -5,13 +5,7 @@ Opis: Rachunek bankowy przypisany do podmiotu kasowego (kontrahenta, pracownika 
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
-
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 10
-- podlisty: 4
-- subrowy: 2
-- razem: 37
+Selektor: pole `Typ` (`Soneta.Kasa.TypRachunkuBankowego`) — wiele typów w jednej tabeli, podtypów: 19
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -50,8 +44,35 @@ Implementuje interfejsy: `IAdresHost`
 | Rachunek.WgBank | `Key` | podlista |  |  |
 | StatusBL | `Soneta.Core.StatusBialaLista` (enum) | bazodanowe | Status w Wykazie |  |
 | StatusyBL | `SubTable<Soneta.Kasa.HistoriaStatusuBL>` | podlista |  |  |
-| Typ | `Soneta.Kasa.TypRachunkuBankowego` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kasa.TypRachunkuBankowego` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Waluta | `Soneta.Waluty.Waluta` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Pracownika` | 5001 | `Soneta.Kadry.RachunekBankowyPracownika` |  |
+| `EwidencjiSP` | 8001 | `Soneta.Kasa.RachunekBankowyEwidencjiSP` |  |
+| `Kontrahenta` | 9001 | `Soneta.CRM.RachunekBankowyKontrahenta` |  |
+| `PIT` | 9011 | `Soneta.CRM.RachunekPIT` |  |
+| `CIT` | 9012 | `Soneta.CRM.RachunekCIT` |  |
+| `VAT` | 9013 | `Soneta.CRM.RachunekVAT` |  |
+| `ZalPIT` | 9014 | `Soneta.CRM.RachunekZalPIT` |  |
+| `AKC` | 9015 | `Soneta.CRM.RachunekAKC` |  |
+| `OSS` | 9016 | `Soneta.CRM.RachunekOSS` |  |
+| `Spoleczne` | 9021 | `Soneta.CRM.ZUSCentrala.RachunekSpoleczne` |  |
+| `Zdrowotne` | 9022 | `Soneta.CRM.ZUSCentrala.RachunekZdrowotne` |  |
+| `Fundusze` | 9023 | `Soneta.CRM.ZUSCentrala.RachunekFundusze` |  |
+| `PFRON` | 9024 | `Soneta.CRM.ZUSCentrala.RachunekPFRON` |  |
+| `PFRONWpłaty` | 9025 | `Soneta.CRM.PFRONCentrala.RachunekWpłaty` |  |
+| `FEP` | 9026 | `Soneta.CRM.ZUSCentrala.RachunekFEP` |  |
+| `ZUS` | 9027 | `Soneta.CRM.ZUSCentrala.RachunekZUS` |  |
+| `PPK` | 9028 | `Soneta.CRM.RachunekPPK` |  |
+| `KAS` | 9029 | `Soneta.CRM.UrzadSkarbowyCentrala.RachunekUS` |  |
+| `KAS_GV` | 9030 | `Soneta.CRM.UrzadSkarbowyCentrala.RachunekUS` |  |
 
 ## Relacje interfejsowe
 

@@ -4,13 +4,6 @@ Opis: Wzorcowy szablon paczki kurierskiej powiązany z systemem zewnętrznym (sp
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 1
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Domyslna | `bool` | bazodanowe | Domyślna |  |

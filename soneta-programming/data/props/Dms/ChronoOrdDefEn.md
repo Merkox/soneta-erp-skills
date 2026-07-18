@@ -5,13 +5,6 @@ Opis: Tabela konfiguracyjna dla obsługi elementów składów chronologicznych. 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definition | `Soneta.Workflow.Dms.IK.Interfaces.IChronoOrderHostDefinition` | bazodanowe, iface-ref | Definicja | Definicja dla której jest dostępny skład |

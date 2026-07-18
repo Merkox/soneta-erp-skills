@@ -4,13 +4,6 @@ Opis: Definicja składnika rozliczenia dla umów zewnętrznych (np. zlecenia z k
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 42
-- pola kalkulowane (zapisywalne): 9
-- pola tylko-odczyt: 1
-- podlisty: 5
-- subrowy: 6
-- razem: 63
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe |  |  |

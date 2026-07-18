@@ -5,13 +5,6 @@ Opis: Definicja utrwalania widoku listy do tabeli BI. Określa tabelę źródło
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Description | `string` | bazodanowe | Opis | Opis objaśniający zawartość definicji utrwalania listy |

@@ -5,13 +5,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IEmailElement`, `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 7
-- pola tylko-odczyt: 1
-- podlisty: 3
-- subrowy: 1
-- razem: 31
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Argument | `Soneta.Data.QueryDefinition.Argument` |  |  |  |

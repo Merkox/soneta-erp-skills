@@ -5,13 +5,6 @@ Opis: Element szczegółowy hosta dokumentów CRM (IDocumentHostCRM). Łączy do
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Host` → `IDocumentHostCRM`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzyZadaniePoprawne | `bool` | tylko-odczyt |  |  |

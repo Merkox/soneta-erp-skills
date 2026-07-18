@@ -5,13 +5,6 @@ Opis: Dokument zbiorczego rozliczenia wynagrodzenia z kontrahentem zewnętrznym 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 5
-- subrowy: 1
-- razem: 17
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |

@@ -5,13 +5,6 @@ Opis: Główna definicja składnika wynagrodzenia (np. wynagrodzenie zasadnicze,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 178
-- pola kalkulowane (zapisywalne): 45
-- pola tylko-odczyt: 49
-- podlisty: 18
-- subrowy: 37
-- razem: 327
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualizacja | `bool` | bazodanowe |  | Aktualizacja zapisu po wyplacie (dotyczy tylko dodatkow) |

@@ -4,13 +4,7 @@ Tytuł: Definicje analityk
 Opis: Element szczegółowy konta księgowego (KontoBase). Definiuje strukturę analityki konta, w tym wzór segmentu, długość segmentu, powiązanie ze słownikiem oraz warunki użycia. Umożliwia automatyczne generowanie kont analitycznych i kontrolę poziomów księgowania.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Konto` → `KontoBase`
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 6
-- podlisty: 1
-- subrowy: 0
-- razem: 21
+Selektor: pole `Typ` (`Soneta.Ksiega.TypDefinicjiAnalityki`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -26,7 +20,7 @@ Guided: child — nadrzędna przez pole `Konto` → `KontoBase`
 | Poziom | `int` | tylko-odczyt |  |  |
 | RelacjaOpisAnal | `Soneta.Ksiega.RelacjaOpisAnal` | bazodanowe |  | Relacja do opisu analitycznego |
 | TworzenieWgUprawnien | `bool` | bazodanowe |  | Analityka jest dodawana od strony wzorcowego planu kont |
-| Typ | `Soneta.Ksiega.TypDefinicjiAnalityki` (enum) | bazodanowe | Typ | Typ definicji analityki |
+| Typ | `Soneta.Ksiega.TypDefinicjiAnalityki` (enum) | bazodanowe, selektor | Typ | Typ definicji analityki |
 | TypAnalityki | `Soneta.Ksiega.TypAnalityki` (enum) | bazodanowe |  | Typ analityki |
 | TypWzoruSegmentu | `Soneta.Ksiega.TypWzoruPorownania` (enum) | bazodanowe |  | Typ wzoru segmentu |
 | Warunek | `string` | bazodanowe |  | Warunek użycia definicji analityki |
@@ -35,6 +29,16 @@ Guided: child — nadrzędna przez pole `Konto` → `KontoBase`
 | WyjatkiViewInfo | `ViewInfo` | tylko-odczyt |  |  |
 | WzorSegmentu | `string` | bazodanowe | Wzór segmentu | Wzór segmentu |
 | ZabronioneKsiegowanie | `bool` | bazodanowe |  | Nie pozwala księgować na tym poziomie analityki |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standardowa` | 0 | `Soneta.Ksiega.DefinicjaAnalityki` |  |
+| `Wyjatek` | 1 | `Soneta.Ksiega.WyjatekDefinicjiAnalityki` | Wyjątek definicji analityki |
 
 ## Enumy
 

@@ -4,13 +4,7 @@ Tytuł: Znaczniki kont
 Opis: Znacznik konta umożliwia dodatkową klasyfikację kont księgowych niezależnie od struktury planu kont. Pozwala oznaczać konta symbolami i opisami w celu grupowania, filtrowania i raportowania, np. do celów podatkowych lub sprawozdawczych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 12
+Selektor: pole `TypZnacznika` (`Soneta.Ksiega.TypZnacznikaKonta`) — wiele typów w jednej tabeli, podtypów: 9
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -25,7 +19,24 @@ Guided: root
 | Opis6 | `string` | bazodanowe |  |  |
 | Symbol | `string` | bazodanowe | Symbol znacznika |  |
 | TypKonta | `Soneta.Ksiega.TypKontaZnacznikaKonta` (enum) | bazodanowe | Typ konta znacznika | Typ konta znacznika |
-| TypZnacznika | `Soneta.Ksiega.TypZnacznikaKonta` (enum) | bazodanowe, tylko-odczyt |  | Typ znacznika konta |
+| TypZnacznika | `Soneta.Ksiega.TypZnacznikaKonta` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ znacznika konta |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypZnacznika`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Banki` | 1 | `Soneta.Ksiega.ZnacznikKontaBanki` | Znacznik banki |
+| `ZakladyUbezpieczen` | 2 | `Soneta.Ksiega.ZnacznikKontaZakladyUbezpieczen` | Znacznik zakłady ubezpieczeń |
+| `JednostkiPubliczne` | 3 | `Soneta.Ksiega.ZnacznikKontaJednostkiPubliczne` | Znacznik organizacje pożytku publicznego |
+| `FunduszeInwestycyjne` | 4 | `Soneta.Ksiega.ZnacznikKontaFunduszeInwestycyjne` | Znacznik fundusze inwestycyjne |
+| `DomyMaklerskie` | 5 | `Soneta.Ksiega.ZnacznikKontaDomyMaklerskie` | Znacznik domy maklerskie |
+| `SpoldzielczeKasy` | 6 | `Soneta.Ksiega.ZnacznikKontaSpoldzielczeKasy` | Znacznik spóldzielcze kasy oszczędnościowo-kredytowe |
+| `PozostaleJednostki` | 7 | `Soneta.Ksiega.ZnacznikKontaPozostaleJednostki` | Znacznik pozostałe jednostki |
+| `PD_Pozabilansowe` | 8 | `Soneta.Ksiega.ZnacznikKontaPDPozabilansowe` | Znacznik PD/pozabilansowe |
+| `MSSF` | 9 | `Soneta.Ksiega.ZnacznikKontaMSSF` | Znacznik MSSF |
 
 ## Enumy
 

@@ -4,13 +4,6 @@ Tytuł: Wzorcowe czasy operacji
 Opis: Konfigurowalna definicja wzorcowego czasu operacji produkcyjnej. Stanowi szablon czasu (np. czas przygotowania, czas maszynowy, czas ręczny) z określonym typem, rodzajem i jednostką miary, który może być automatycznie dodawany do nowych operacji w technologii.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DodawanyDomyslnie | `bool` | bazodanowe | Dodawany domyślnie | Czas dodawany domyślnie. |

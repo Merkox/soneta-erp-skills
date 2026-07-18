@@ -5,13 +5,6 @@ Opis: Kartoteka technologii produkcyjnych opisujących receptury wytwarzania wyr
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 7
-- subrowy: 1
-- razem: 34
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Archiwum | `bool` | tylko-odczyt |  | Technologia w archiwum. |

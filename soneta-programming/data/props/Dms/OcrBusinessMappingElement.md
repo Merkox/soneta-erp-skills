@@ -5,13 +5,6 @@ Opis: Pojedyncza pozycja (pole) w formacie mapowania OCR definiująca region na 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 9
-- podlisty: 2
-- subrowy: 1
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ClassName | `string` | tylko-odczyt |  |  |

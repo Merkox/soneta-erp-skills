@@ -5,13 +5,7 @@ Opis: Wypłata wynagrodzenia dla pracownika w ramach listy płac. Zawiera kwotę
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentPlatny`, `IDokumentKsiegowalny`, `IZrodloOpisuAnalitycznego`
-
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 20
-- pola tylko-odczyt: 35
-- podlisty: 19
-- subrowy: 1
-- razem: 90
+Selektor: `Soneta.Place.TypWyplaty` — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -106,6 +100,17 @@ Implementuje interfejsy: `IDokumentPlatny`, `IDokumentKsiegowalny`, `IZrodloOpis
 | Zatwierdzona | `bool` | tylko-odczyt |  |  |
 | Zwrot | `bool` |  |  |  |
 
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora.
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Etat` | 1 | `Soneta.Place.WyplataEtat` | Wypłata etatowa |
+| `Umowa` | 2 | `Soneta.Place.WyplataUmowa` | Wypłata umowy |
+| `Inne` | 3 | `Soneta.Place.WyplataInne` | Inne wypłata |
+
 ## Relacje interfejsowe
 
 Pola, których typ jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=...)]` innych tabel.
@@ -153,3 +158,9 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `Wylicz` = 0 — Wylicz
 - `Wynagrodzenie` = 1
 - `InnaZapłata` = 2
+
+### TypWyplaty (`Soneta.Place.TypWyplaty`)
+- `Wszystkie` = 0
+- `Etat` = 1
+- `Umowa` = 2 — Umowa
+- `Inne` = 3

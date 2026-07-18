@@ -5,13 +5,6 @@ Opis: Rozszerzenie (plug-in) dyskusji przypisane do zestawu. Określa klasę obi
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 4
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ConfigCode | `MemoText` | bazodanowe, podlista |  |  |

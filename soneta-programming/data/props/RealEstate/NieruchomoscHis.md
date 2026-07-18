@@ -7,13 +7,6 @@ Guided: root
 Historia: Tak
 Implementuje interfejsy: `IDocumentHostCRM`
 
-- pola bazodanowe (zapisywalne): 53
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 15
-- podlisty: 5
-- subrowy: 0
-- razem: 77
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

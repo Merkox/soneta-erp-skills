@@ -4,13 +4,6 @@ Tytuł: Dokumenty powiązane UL
 Opis: Powiązania dokumentów zewnętrznych z umowami leasingowymi. Umożliwiają dołączenie faktur, not i innych dokumentów do umowy leasingu wraz z ich kategoryzacją. Służą do kompletowania dokumentacji leasingowej w jednym miejscu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Core.IDokumentPowiazanyUL` | bazodanowe |  |  |

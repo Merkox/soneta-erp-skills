@@ -5,13 +5,6 @@ Opis: Element szczegółowy rozliczenia czasu pracy (RozliczenieCzasuPracy). Poj
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 3
-- subrowy: 0
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | bazodanowe |  |  |

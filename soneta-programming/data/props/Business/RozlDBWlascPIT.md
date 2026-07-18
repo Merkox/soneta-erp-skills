@@ -4,13 +4,6 @@ Tytuł: Rozliczenia podatkowe bazy danych - PIT Właściciela
 Opis: Rozliczenie zaliczki PIT właściciela firmy za okres rozliczeniowy. Zawiera przychody, koszty, dochód, kwoty do zapłaty i termin płatności.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 15
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzyRyczalt | `bool` | bazodanowe | Czy Ryczalt |  |

@@ -5,13 +5,6 @@ Opis: Plik dokumentu pobranego z Krajowego Systemu e-Faktur (KSeF). Zawiera dane
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 33
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 2
-- subrowy: 0
-- razem: 45
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AkceptacjaKlienta | `bool` | bazodanowe | Akceptacja klienta | Akceptacja klienta |

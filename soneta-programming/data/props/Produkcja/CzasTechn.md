@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji produkcyjnej (Operacja). Definiuje czas trw
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CechaCzas | `FeatureDefinition` | bazodanowe | Cecha czasu | Definicja cechy algorytmicznej, służąca do wyliczenia czasu. |

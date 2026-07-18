@@ -5,13 +5,6 @@ Opis: Element szczegółowy dyskusji (Discussion). Powiązanie dyskusji z dowoln
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 12
-- podlisty: 1
-- subrowy: 1
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Discussion | `Soneta.Core.Conversation.Discussion` | bazodanowe |  |  |

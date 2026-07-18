@@ -3,13 +3,6 @@ Nazwa tabeli: `PrzecenyOkresTwr`
 Opis: Pozycja promocji okresowej przypisująca konkretny towar do przeceny. Określa promocyjne ceny netto i brutto, rabat procentowy oraz progi ilościowe dla danego towaru w ramach aktywnej promocji, z opcjami naliczania jednostkowego, wielokrotnego i zliczania ze wszystkich pozycji dokumentu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Brutto | `DoubleCy` | bazodanowe | Cena promocyjna brutto | Promocyjna cena brutto. |

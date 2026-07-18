@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 35
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 12
-- podlisty: 6
-- subrowy: 11
-- razem: 68
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AkceptujPromocje | `bool` | bazodanowe |  | Określa, czy definicja ceny dopuszcza stosowanie promocji. |

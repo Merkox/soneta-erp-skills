@@ -5,13 +5,6 @@ Opis: Element szczegółowy modelu danych (DataModel). Definiuje pole dostępne 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 21
-- pola tylko-odczyt: 7
-- podlisty: 3
-- subrowy: 0
-- razem: 44
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AggregationType | `Soneta.BI.AggregationType` (enum) | bazodanowe | Typ agregacji |  |

@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji zestawu danych (DataSetDefinition). Defini
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BIFieldType | `Soneta.BI.BIFieldType` (enum) | bazodanowe | Typ(BI) |  |

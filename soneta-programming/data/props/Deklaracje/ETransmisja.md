@@ -4,13 +4,6 @@ Tytuł: eTransmisja
 Opis: Rejestr pojedynczej transmisji eDeklaracji do systemu elektronicznego urzędu. Dokumentuje czas, typ i status każdej próby wysyłki lub sprawdzenia statusu, przechowując referencję UPO oraz ewentualny opis błędu. Jedna eDeklaracja może mieć wiele transmisji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `System.DateTime` | bazodanowe, tylko-odczyt |  | Czas transmisji |

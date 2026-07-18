@@ -5,13 +5,6 @@ Opis: Element szczegółowy umowy zewnętrznej (UmowaZewnetrzna). Okresowe zesta
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `UmowaZewnetrzna`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` |  |  |  |

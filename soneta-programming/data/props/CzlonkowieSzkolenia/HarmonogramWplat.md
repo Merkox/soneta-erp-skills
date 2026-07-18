@@ -4,13 +4,6 @@ Tytuł: Harmonogramy wpłat
 Opis: Harmonogramy wpłat ratalnych za szkolenia i składki członkowskie. Definiują terminy, kwoty i typy poszczególnych rat płatności powiązanych ze zgłoszeniami uczestników lub grupami szkoleniowymi.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe | Termin wpłaty | Termin wpłaty. |

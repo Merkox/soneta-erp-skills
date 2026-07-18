@@ -5,13 +5,6 @@ Opis: Rejestr badań technicznych pojazdów floty firmowej. Przechowuje dane o d
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Flaw | `Soneta.Vehicles.Enums.FlawType` (enum) | bazodanowe | Usterka |  |

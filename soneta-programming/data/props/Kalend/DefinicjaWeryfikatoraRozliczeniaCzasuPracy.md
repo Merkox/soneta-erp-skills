@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja weryfikatora dokumentu rozliczenia czasu pracy. O
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 4
-- subrowy: 1
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `Soneta.Kalend.DefinicjaWeryfikatoraRozliczeniaCzasuPracy.AlgorytmBase` | tylko-odczyt |  |  |

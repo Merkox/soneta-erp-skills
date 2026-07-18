@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IPozycjaZestawieniaRoot`
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 10
-- pola tylko-odczyt: 9
-- podlisty: 7
-- subrowy: 1
-- razem: 41
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Blokada zestawienia |

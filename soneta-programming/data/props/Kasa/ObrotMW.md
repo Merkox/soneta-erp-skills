@@ -4,13 +4,6 @@ Tytuł: Obroty
 Opis: Obrót w magazynie walut wiążący wpłatę z wypłatą walutową. Rejestruje kurs przychodu i rozchodu waluty, umożliwiając wyliczenie różnicy kursowej między kursem nabycia a kursem rozchodu środków w ewidencji walutowej.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 16
-- podlisty: 0
-- subrowy: 3
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DokEwidencji | `Soneta.Core.DokEwidencji` | bazodanowe, tylko-odczyt |  |  |

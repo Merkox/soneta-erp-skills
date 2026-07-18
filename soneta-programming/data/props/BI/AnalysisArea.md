@@ -5,13 +5,6 @@ Opis: Element szczegółowy obiektu obsługującego obszary (IAreaHost). Przypis
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AreaDefinition | `Soneta.BI.AnalysisAreaDefinition` | bazodanowe | Definicja obszaru |  |

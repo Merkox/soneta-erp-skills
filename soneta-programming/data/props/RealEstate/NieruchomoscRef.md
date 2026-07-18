@@ -5,13 +5,6 @@ Opis: Element szczegółowy nieruchomości (Nieruchomosc). Przechowuje historię
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Nieruchomosc` → `Nieruchomosc`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

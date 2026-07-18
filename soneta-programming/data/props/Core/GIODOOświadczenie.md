@@ -5,13 +5,6 @@ Opis: Oświadczenie RODO (zgoda na przetwarzanie danych) złożone przez osobę.
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 5
-- subrowy: 1
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bufor | `bool` | bazodanowe |  |  |

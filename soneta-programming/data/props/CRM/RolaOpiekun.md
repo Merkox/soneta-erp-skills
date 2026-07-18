@@ -5,13 +5,6 @@ Opis: Słownik ról opiekunów kontrahentów (np. opiekun handlowy, serwisowy, r
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe | Nazwa | Nazwa roli opiekuna |

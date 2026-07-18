@@ -5,13 +5,6 @@ Opis: Element szczegółowy hosta adresów WWW (IAdresyWWWHost). Przechowuje adr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zapis` → `IAdresyWWWHost`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `string` | bazodanowe | Adres WWW | Adres WWW skojarzony z danym zapisem. |

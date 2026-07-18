@@ -5,13 +5,6 @@ Opis: Definiuje cechy (pola użytkownika) przypisywane do obiektów biznesowych.
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 16
-- podlisty: 5
-- subrowy: 1
-- razem: 51
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorithm | `FeatureAlgorithm` (enum) | bazodanowe | Algorytm | Rodzaj algorytmu wyliczenia cechy |

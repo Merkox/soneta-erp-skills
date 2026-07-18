@@ -5,13 +5,6 @@ Opis: Dodatkowy koszt technologii produkcyjnej przypisany do technologii, operac
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywnosc | `Soneta.Produkcja.Aktywnosc` (enum) | bazodanowe | Aktywność | Sposób wyznaczanie aktywności dla kosztu. |

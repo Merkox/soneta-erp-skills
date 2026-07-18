@@ -5,13 +5,6 @@ Opis: Element szczegółowy grupy kont (GrupaKont). Wskazuje konkretne konto ksi
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Grupa` → `GrupaKont`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Grupa | `Soneta.Ksiega.GrupaKont` | bazodanowe, tylko-odczyt, guided-parent |  | Grupa kont |

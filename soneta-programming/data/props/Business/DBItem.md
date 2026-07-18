@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 18
-- pola tylko-odczyt: 30
-- podlisty: 7
-- subrowy: 0
-- razem: 65
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ActivityType | `Db.ActivityType` (enum) | bazodanowe | Rodzaj działalności | Rozdzaj prowadzonej działalności księgowej klienta |

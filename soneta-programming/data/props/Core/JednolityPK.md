@@ -5,13 +5,6 @@ Opis: Plik Jednolitego Pliku Kontrolnego (JPK) generowany i wysyłany do adminis
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 28
-- podlisty: 10
-- subrowy: 0
-- razem: 43
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AuthInfo | `MemoText` | bazodanowe, podlista |  | Informacja o podpisie nieautoryzowanym |

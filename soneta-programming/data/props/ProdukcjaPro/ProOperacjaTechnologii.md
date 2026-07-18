@@ -5,13 +5,6 @@ Opis: Element szczegółowy technologii produkcyjnej (ProTechnologia). Reprezent
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Technologia` → `ProTechnologia`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 9
-- subrowy: 0
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CechaDostepnosci | `FeatureDefinition` | bazodanowe | Cecha dostępności | Cecha dostępności operacji technologii. |

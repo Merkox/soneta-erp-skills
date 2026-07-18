@@ -5,13 +5,6 @@ Opis: Tabela przechowuje dodatkowe opisy i adnotacje dołączane do wierszy inny
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdditionalDescriptionSource | `Soneta.Core.IAdditionalDescriptionSender` | bazodanowe | Źródło dodatkowej informacji |  |

@@ -4,13 +4,6 @@ Tytuł: Relacje do partii
 Opis: Powiązanie pozycji dokumentu handlowego z partią (grupą dostaw) towaru na magazynie. Określa kierunek operacji (przychód/rozchód) oraz ilość towaru pobraną z partii.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Ilosc | `Soneta.Towary.Quantity` | bazodanowe | Pobrano ilość | Ilość wskazana do pobrania przez pozycję wydania. |

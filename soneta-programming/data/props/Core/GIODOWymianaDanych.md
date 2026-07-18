@@ -3,13 +3,7 @@ Nazwa tabeli: `GIODOWymDanych`
 Opis: Rejestr udostępnień i pozyskań danych osobowych zgodnie z RODO. Dokumentuje wymianę danych: kierunek (udostępnienie/pozyskanie), podmiot, zakres danych, sposób pozyskania, zbiór danych, definicję dokumentu oraz flagi (na wniosek osoby, tylko dostęp itp.).
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 6
-- podlisty: 3
-- subrowy: 1
-- razem: 23
+Selektor: pole `Kierunek` (`Soneta.Core.GIODOKierunekWymianyDanych`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -17,7 +11,7 @@ Guided: root
 | Data | `Date` | bazodanowe | Data | Data udostępnienia. |
 | Definicja | `Soneta.Core.DefinicjaDokumentu` | bazodanowe |  |  |
 | Host | `Soneta.Core.IGIODOWymianaDanychHost` | bazodanowe, tylko-odczyt, iface-ref |  | Zapis do którego przypisano informacja o wymianie danych |
-| Kierunek | `Soneta.Core.GIODOKierunekWymianyDanych` (enum) | bazodanowe, tylko-odczyt | Kierunek | Udostępnienie czy pozyskanie. |
+| Kierunek | `Soneta.Core.GIODOKierunekWymianyDanych` (enum) | bazodanowe, tylko-odczyt, selektor | Kierunek | Udostępnienie czy pozyskanie. |
 | NaWniosekOsoby | `bool` | bazodanowe, tylko-odczyt | Na wniosek osoby | Dane udostępnione na wniosek osoby, której dotyczą. |
 | Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
@@ -36,6 +30,19 @@ Guided: root
 | Zakres | `MemoText` | bazodanowe, podlista | Zakres | Zakres udostępnionych danych. |
 | Zatwierdzony | `bool` |  |  |  |
 | ZbiorDanych | `Soneta.Core.GIODO.GIODOZbiorDanych` | bazodanowe, tylko-odczyt |  | Zbiór danych do którego przypisano informacja o wymianie danych |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Kierunek`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Powierzenie` | 1 | `Soneta.Core.GIODOPowierzenieDanych` | Powierzenie danych osobowych |
+| `Pozyskanie` | 2 | `Soneta.Core.GIODOPozyskanieDanych` | Pozyskanie danych osobowych |
+| `PowierzenieZbioru` | 3 | `Soneta.Core.GIODOPowierzenieZbioru` | Powierzenie zbioru danych osobowych |
+| `PozyskanieZbioru` | 4 | `Soneta.Core.GIODOPozyskanieZbioru` | Pozyskanie zbioru danych osobowych |
+| `Udostępnienie` | 5 | `Soneta.Core.GIODOUdostępnienieDanych` | Udostępnienie danych osobowych |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji słownika (DefinicjaSlownika). Definiuje p
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefinicjaSlownika`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Ksiega.DefinicjaSlownika` | bazodanowe, tylko-odczyt, guided-parent |  | Definicja słownika |

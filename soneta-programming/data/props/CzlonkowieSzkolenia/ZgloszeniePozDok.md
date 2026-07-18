@@ -3,13 +3,6 @@ Nazwa tabeli: `ZgloszeniaPozDok`
 Opis: Powiązanie zgłoszeń szkoleniowych z pozycjami dokumentów handlowych. Rejestruje faktury i inne dokumenty finansowe wystawione w związku ze zgłoszeniem uczestnika na szkolenie, umożliwiając rozliczenie kosztów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe |  |  |

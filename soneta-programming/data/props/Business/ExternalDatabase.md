@@ -5,17 +5,11 @@ Opis: Konfiguracja połączenia z zewnętrzną bazą danych SQL. Przechowuje par
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 12
+Selektor: pole `Area` (`ExternalDatabases.ExternalDatabaseArea`) — wiele typów w jednej tabeli, podtypów: 1
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Area | `ExternalDatabases.ExternalDatabaseArea` (enum) | bazodanowe, tylko-odczyt | Przeznaczenie |  |
+| Area | `ExternalDatabases.ExternalDatabaseArea` (enum) | bazodanowe, tylko-odczyt, selektor | Przeznaczenie |  |
 | DatabaseName | `string` | bazodanowe |  |  |
 | Locked | `bool` | bazodanowe | Zablokowana |  |
 | MultiSubnetFailover | `bool` | bazodanowe |  |  |
@@ -27,6 +21,15 @@ Implementuje interfejsy: `IRightsSource`
 | Trusted | `bool` | bazodanowe |  |  |
 | Type | `Soneta.Data.ExternalDatabaseType` (enum) | bazodanowe, tylko-odczyt |  |  |
 | User | `string` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Area`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `BI` | 1 | `ExternalDatabases.ExternalBIDatabase` | Baza danych BI |
 
 ## Enumy
 

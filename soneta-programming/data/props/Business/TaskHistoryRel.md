@@ -4,13 +4,6 @@ Tytuł: Historie zadań
 Opis: Relacja historii przepływu zadań w procesie workflow. ŝączy zadanie źródłowe z docelowym przez tranzycję, tworząc ścieżkę przebiegu procesu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | First | `bool` | bazodanowe, tylko-odczyt | Utworzenie zadania | Określa czy jest to tranzycja która utworzyła taska. |

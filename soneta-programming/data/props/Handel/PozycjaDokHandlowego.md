@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokumentHandlowy`
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe (zapisywalne): 99
-- pola kalkulowane (zapisywalne): 43
-- pola tylko-odczyt: 122
-- podlisty: 23
-- subrowy: 11
-- razem: 298
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BezRabatu | `bool` | bazodanowe |  | Określa czy dla pozycji ma być zastosowany rabat. |

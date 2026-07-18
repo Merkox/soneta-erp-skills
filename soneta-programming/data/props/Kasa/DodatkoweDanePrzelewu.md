@@ -5,13 +5,6 @@ Opis: Element szczegółowy przelewu (PrzelewBase) przechowujący rozszerzone da
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Przelew` → `PrzelewBase`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataUrodzenia | `Date` | bazodanowe |  | Data urodzenia osoby fizycznej |

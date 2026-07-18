@@ -5,13 +5,6 @@ Opis: Tabela przechowuje typy opłat leasingowych przypisane do środka trwałeg
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Leasing` → `SrodekTrwalyLeasing`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czestotliwosc | `Soneta.SrodkiTrwale.CzestotliwoscIndeksacji` (enum) | bazodanowe |  | Czestotliwość indeksacji |

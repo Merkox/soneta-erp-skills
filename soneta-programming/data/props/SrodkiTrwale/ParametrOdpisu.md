@@ -5,13 +5,6 @@ Opis: Element szczegółowy obrotu środka trwałego (ObrotST). Przechowuje para
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Amortyzacja` → `ObrotST`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 2
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Amortyzacja | `Soneta.SrodkiTrwale.ObrotST` | bazodanowe, tylko-odczyt, guided-parent |  | Odpis amortyzacyjny |

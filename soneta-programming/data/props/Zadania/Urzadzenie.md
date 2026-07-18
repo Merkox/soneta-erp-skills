@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IKodowany`, `IZasobCRM`, `IElementSlownika`, `IDocumentHostCRM`
 
-- pola bazodanowe (zapisywalne): 22
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 10
-- subrowy: 0
-- razem: 40
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |

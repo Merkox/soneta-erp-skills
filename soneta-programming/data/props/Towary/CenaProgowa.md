@@ -5,13 +5,6 @@ Opis: Element szczegółowy towaru (Towar). Definiuje cenę progową uzależnion
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Towar` → `Towar`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Brutto | `DoubleCy` | bazodanowe |  | Kwota brutto ceny. |

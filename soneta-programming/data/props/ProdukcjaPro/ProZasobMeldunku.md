@@ -5,13 +5,6 @@ Opis: Element szczegółowy zasobu meldunku (ProMeldunek). Rejestruje zasób pro
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Meldunek` → `ProMeldunek`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `TimeSec` | bazodanowe |  | Czas zasobu meldunku. |

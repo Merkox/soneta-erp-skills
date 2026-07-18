@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IZrodloOpisuAnalitycznego`
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 6
-- pola tylko-odczyt: 20
-- podlisty: 11
-- subrowy: 1
-- razem: 56
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BuforOpisuAnalitycznego | `bool` | bazodanowe |  | Bufor opisu analitycznego |

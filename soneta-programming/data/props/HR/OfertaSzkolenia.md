@@ -5,13 +5,7 @@ Opis: Oferta szkoleniowa od dostawcy. Zawiera szczegóły organizacyjne: czas tr
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IAdresHost`
-
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 1
-- razem: 24
+Selektor: pole `Typ` (`Soneta.HR.TypOfertySzkolenia`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -38,7 +32,17 @@ Implementuje interfejsy: `IAdresHost`
 | Nazwa | `string` | bazodanowe |  |  |
 | Opis | `MemoText` | bazodanowe, podlista |  |  |
 | Osoba | `Soneta.CRM.KontaktOsoba` | bazodanowe |  |  |
-| Typ | `Soneta.HR.TypOfertySzkolenia` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.HR.TypOfertySzkolenia` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Wewnętrzne` | 1 | `Soneta.HR.OfertaSzkoleniaWewnętrznego` | Oferta szkolenia wewnętrznego |
+| `Zewnętrzne` | 2 | `Soneta.HR.OfertaSzkoleniaZewnętrznego` | Oferta szkolenia |
 
 ## Enumy
 

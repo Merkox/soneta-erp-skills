@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IDefinicjaDokumentuOA`
 
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 4
-- podlisty: 4
-- subrowy: 2
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywna | `Soneta.Place.DefinicjaListyPlac` | tylko-odczyt |  |  |

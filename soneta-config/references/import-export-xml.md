@@ -130,7 +130,7 @@ tworzenia obiektu.
 | `business` | session / rekord / pole | `true` = tryb przez logikę biznesową |
 | `fromto` | session | okres przetwarzania kolekcji datowanych |
 | `guid`, `where`, `key`, `id` | rekord | identyfikacja — zob. wyżej |
-| `class` | rekord | konkretny typ przy dziedziczeniu (np. wariant specjalny obiektu) |
+| `class` | rekord (tryb biznesowy) | podtyp selektora przy tworzeniu **nowego** obiektu w tabeli z selektorem — zob. Część 2 |
 | `deleted="True"` | rekord | kasuje wskazany rekord (bez treści elementu) |
 | `updateonly="true"` | rekord | tylko aktualizacja — gdy rekord nie istnieje, pomiń |
 | `insertonly="true"` | rekord | tylko nowy — gdy rekord istnieje, pomiń |
@@ -256,6 +256,15 @@ Zasady:
 - Nowy obiekt może wymagać parametrów tworzenia — przekazuje się je **atrybutami** elementu
   rekordu (nazwa atrybutu = nazwa parametru); w kolekcji rodzic jest przekazywany
   automatycznie. Atrybut `ctor` wybiera wariant tworzenia.
+- **Atrybut `class` — podtyp selektora.** Gdy tabela ma **selektor** (jedna tabela przechowuje
+  wiele typów obiektów), atrybutem `class` wskazujesz **konkretny podtyp** do utworzenia
+  (np. `<EwidencjaSP class="Kasa">`). Stosuje się go **wyłącznie** w tym trybie
+  (`business="true"`) i **tylko przy tworzeniu nowego** obiektu — przy aktualizacji istniejącego
+  podtyp jest już ustalony, więc `class` jest zbędny (a niezgodny — błędny). Bez `class` obiekt
+  powstaje jako podtyp domyślny tabeli. Czy tabela ma selektor i jakie są dopuszczalne podtypy
+  sprawdzisz w sekcji `## Selektor — podtypy w jednej tabeli` narzędzia `scan-props`
+  (`/soneta-programming`): wartością atrybutu `class` jest **nazwa klasy podtypu** (kolumna
+  „Klasa podtypu"); brak sekcji `Selektor` = tabela bez selektora, `class` nie ma zastosowania.
 - Referencje wygodnie wskazywać elementem z `where` po czytelnym kluczu (kod, symbol) —
   plik pozostaje przenośny między bazami.
 

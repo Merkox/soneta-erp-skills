@@ -4,13 +4,7 @@ Tytuł: Słownik procedur VAT
 Opis: Słownik procedur VAT używanych w JPK_V7M i dokumentach ewidencji. Każda procedura posiada typ, symbol, nazwę, flagę blokady oraz algorytmy (handlowy i ewidencji) określające automatyczne stosowanie procedury na dokumentach.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 7
-- podlisty: 4
-- subrowy: 3
-- razem: 20
+Selektor: pole `Typ` (`Soneta.Core.TypProceduryVAT`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -33,7 +27,20 @@ Guided: root
 | SupportsCodeE | `bool` | tylko-odczyt |  |  |
 | SupportsCodeH | `bool` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe | Symbol | Symbol |
-| Typ | `Soneta.Core.TypProceduryVAT` (enum) | bazodanowe, tylko-odczyt | Typ | Typ słownika |
+| Typ | `Soneta.Core.TypProceduryVAT` (enum) | bazodanowe, tylko-odczyt, selektor | Typ | Typ słownika |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `GrupaTowarowaVAT` | 1 | `Soneta.Core.GrupaTowarowaVAT` | Grupa towarowa VAT |
+| `TypDokumentuSprzedazVAT` | 2 | `Soneta.Core.TypDokumentuSprzedazVAT` | Typ dokumentu sprzedaży VAT |
+| `TypDokumentuZakupVAT` | 3 | `Soneta.Core.TypDokumentuZakupVAT` | Typ dokumentu zakupu VAT |
+| `ProceduraSprzedazVAT` | 4 | `Soneta.Core.ProceduraSprzedazVAT` | Procedura sprzedaży VAT |
+| `ProceduraZakupVAT` | 5 | `Soneta.Core.ProceduraZakupVAT` | Procedura zakupu VAT |
 
 ## Enumy
 

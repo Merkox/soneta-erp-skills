@@ -5,13 +5,6 @@ Opis: Element szczegółowy pozycji złych długów (ZleDlugiPozycja). Przechowu
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Korekta` → `ZleDlugiPozycja`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Korekta | `Soneta.Ksiega.ZleDlugiPozycja` | bazodanowe, tylko-odczyt, guided-parent |  |  |

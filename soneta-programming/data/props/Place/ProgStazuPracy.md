@@ -4,13 +4,6 @@ Opis: Element szczegółowy definicji elementu wynagrodzenia (DefinicjaElementu)
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefinicjaElementu`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Place.DefinicjaElementu` | bazodanowe, tylko-odczyt, guided-parent |  |  |

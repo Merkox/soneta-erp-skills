@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Sprawozdanie` → `SprawozdanieKS`
 Implementuje interfejsy: `IPozycjaSprawozdaniaRoot`, `IAdresHost`
 
-- pola bazodanowe (zapisywalne): 20
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 4
-- subrowy: 0
-- razem: 26
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` | tylko-odczyt |  |  |

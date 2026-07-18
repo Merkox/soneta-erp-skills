@@ -5,13 +5,6 @@ Opis: Element szczegółowy zestawienia umowy zewnętrznej (ZestawienieUmowyZewn
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieUmowyZewnetrznej`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | bazodanowe |  |  |

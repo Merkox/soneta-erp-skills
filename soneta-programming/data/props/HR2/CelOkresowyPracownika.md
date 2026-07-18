@@ -5,13 +5,6 @@ Opis: Cel okresowy wyznaczony pracownikowi w ramach zarządzania przez cele (MBO
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 1
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowany | `bool` | bazodanowe |  |  |

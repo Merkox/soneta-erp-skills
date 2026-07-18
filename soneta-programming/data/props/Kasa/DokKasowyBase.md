@@ -5,13 +5,7 @@ Opis: Dokument kasowy (KP/KW) rejestrujący operację wpłaty lub wypłaty gotó
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDokumentKasowy`, `IDokumentCRM`
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 10
-- podlisty: 5
-- subrowy: 1
-- razem: 24
+Selektor: pole `Kierunek` (`Soneta.Core.KierunekPlatnosci`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -21,7 +15,7 @@ Implementuje interfejsy: `IDokumentKasowy`, `IDokumentCRM`
 | EwidencjaSP | `Soneta.Kasa.EwidencjaSP` | tylko-odczyt |  |  |
 | Firma | `Soneta.Core.OddzialFirmy` | tylko-odczyt |  |  |
 | Kasa | `Soneta.Kasa.Kasa` | bazodanowe, tylko-odczyt |  |  |
-| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Kierunek | `Soneta.Core.KierunekPlatnosci` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Numer | `Soneta.Core.NumerDokumentu` (subrow) | bazodanowe |  |  |
 | Numer.Numer | `int` | bazodanowe |  |  |
 | Numer.NumerPelny | `string` |  |  |  |
@@ -39,6 +33,16 @@ Implementuje interfejsy: `IDokumentKasowy`, `IDokumentCRM`
 | Zaplata | `Soneta.Kasa.Zaplata` | tylko-odczyt |  |  |
 | Zaplaty | `SubTable<Soneta.Kasa.Zaplata>` | podlista |  |  |
 | Zatwierdzony | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Kierunek`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Przychod` | 1 | `Soneta.Kasa.DokumentWplata` | Wpłata |
+| `Rozchod` | 2 | `Soneta.Kasa.DokumentWyplata` | Wypłata |
 
 ## Enumy
 

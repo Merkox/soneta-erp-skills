@@ -5,13 +5,6 @@ Opis: Tabela przechowuje reguły dostępności i niedostępności przypisane do 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 25
-- pola kalkulowane (zapisywalne): 29
-- pola tylko-odczyt: 11
-- podlisty: 3
-- subrowy: 1
-- razem: 69
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CalyDzien | `bool` |  |  |  |

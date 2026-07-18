@@ -4,13 +4,6 @@ Tytuł: Obrót
 Opis: Obrót magazynowy rejestrujący ruch towaru między partiami (przychód i rozchód). Zawiera ilość, daty, informacje o partii przychodowej i rozchodowej, stornowaniach oraz jest powiązany z magazynem i okresem magazynowym.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 20
-- podlisty: 3
-- subrowy: 3
-- razem: 34
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | bazodanowe, tylko-odczyt |  | Czas (rozchodu) powstania obrotu. |

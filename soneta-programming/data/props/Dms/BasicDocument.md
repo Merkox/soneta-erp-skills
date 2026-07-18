@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`, `IEmailElement`, `IDaneKontrahentaHost`, `IDokument`, `IChronoOrderHost`, `IDmsArchInfoHost`
 
-- pola bazodanowe (zapisywalne): 23
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 17
-- podlisty: 9
-- subrowy: 2
-- razem: 54
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AddingDatetime | `System.DateTime` | bazodanowe, tylko-odczyt | Data i czas dodania do sprawy | Data i czas dodania pisma do sprawy |

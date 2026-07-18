@@ -4,13 +4,7 @@ Tytuł: Pozycja dokumentu rozliczeniowego
 Opis: Element szczegółowy dokumentu rozliczeniowego (DokRozliczBase). Reprezentuje pojedynczą pozycję noty odsetkowej, kompensaty lub wezwania do zapłaty, wiążąc ją z rozliczeniem i płatnością oraz przechowując kwoty, daty i okres naliczania.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `DokRozliczBase`
-
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 17
+Selektor: pole `Typ` (`Soneta.Core.TypDokumentu`) — wiele typów w jednej tabeli, podtypów: 4
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -29,8 +23,20 @@ Guided: child — nadrzędna przez pole `Dokument` → `DokRozliczBase`
 | Procent | `Percent` | bazodanowe |  |  |
 | Rozliczenie | `Soneta.Kasa.RozliczenieSP` | bazodanowe |  |  |
 | TerminZaplaty | `Date` | bazodanowe |  |  |
-| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Core.TypDokumentu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Utworzone | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `PotwierdzenieSalda` | 111 | `Soneta.Kasa.PotwierdzenieSaldaPozycja` | Potwierdzenie salda |
+| `WezwanieDoZaplaty` | 112 | `Soneta.Kasa.WezwanieDoZaplatyPozycja` | Wezwanie do zapłaty |
+| `NotaOdsetkowa` | 113 | `Soneta.Kasa.NotaOdsetkowaPozycja` |  |
+| `Kompensata` | 114 | `Soneta.Kasa.KompensataPozycja` | Kompensata |
 
 ## Relacje interfejsowe
 

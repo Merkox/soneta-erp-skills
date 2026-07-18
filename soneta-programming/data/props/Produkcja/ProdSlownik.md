@@ -5,13 +5,6 @@ Opis: Konfigurowalna definicja słownika produkcyjnego przechowującego listy wa
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 2
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowana | Określa zablokowanie słownika. Zablokowane słowniki nie będą wyświetlane na listach wyboru. |

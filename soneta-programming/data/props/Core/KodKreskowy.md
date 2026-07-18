@@ -5,13 +5,6 @@ Opis: Element szczegółowy obiektu kodowalnego (IKodowany). Przechowuje kody kr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zapis` → `IKodowany`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Jednostka | `GuidedRow` | bazodanowe |  | Jednostka przypisana do danego kodu. |

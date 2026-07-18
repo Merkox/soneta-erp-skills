@@ -5,13 +5,7 @@ Opis: Wzorzec (szablon) tranzycji definiujący reguły przejścia między krokam
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWfPlugInItemReferenceHost`
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 7
-- podlisty: 5
-- subrowy: 3
-- razem: 29
+Selektor: pole `DefinitionType` (`Db.DefinitionTypeEnum`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -21,7 +15,7 @@ Implementuje interfejsy: `IWfPlugInItemReferenceHost`
 | CheckCode.CodeUiRoslyn | `Compiler.ICodeEditorSource` |  |  |  |
 | ClassName | `string` | tylko-odczyt |  |  |
 | DataType | `System.Type` | tylko-odczyt |  |  |
-| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt | Tryb edycji | Określa tryb edycji definicji workflow |
+| DefinitionType | `Db.DefinitionTypeEnum` (enum) | bazodanowe, tylko-odczyt, selektor | Tryb edycji | Określa tryb edycji definicji workflow |
 | FormattedName | `string` | bazodanowe | Nazwa formatowana | Ogólne |
 | Info | `string` | tylko-odczyt |  |  |
 | IsDefaultTransition | `bool` | bazodanowe | Domyślna tranzycja | Określa czy tranzycja jest domyślna |
@@ -44,6 +38,16 @@ Implementuje interfejsy: `IWfPlugInItemReferenceHost`
 | SourceTask | `Soneta.Workflow.Enums.WFDefItemCategory` (enum) |  | Zadanie źródłowe |  |
 | Statement | `MemoText` | bazodanowe, podlista | Kod algorytmu | Kod algorytmu kalkulatora realizacji zadania |
 | WFTransitions | `SubTable<Soneta.Workflow.Config.WFTransition>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `DefinitionType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Standard` | 0 | `Soneta.Workflow.Config.WFTransitionDefinition` |  |
+| `Engine` | 1 | `Soneta.Workflow.Config.WFTransitionDefinitionExtend` |  |
 
 ## Enumy
 

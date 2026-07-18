@@ -5,13 +5,6 @@ Opis: Zawiera opisowe informacje dla słownika Katalogu szkoleń i uprawnień. W
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 4
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CelSzkolenia | `string` | bazodanowe | Cel szkolenia |  |

@@ -4,13 +4,6 @@ Tytuł: Nieruchomości wykorzystane
 Opis: Rejestr wykorzystania nieruchomości w ramach zadań CRM, np. wynajem pomieszczeń czy rezerwacje. Przechowuje dane o okresie użytkowania, powierzchni wynajmowanej, stawkach oraz powiązanych dokumentach handlowych rozliczających użycie obiektu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 15
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 11
-- podlisty: 0
-- subrowy: 0
-- razem: 28
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt |  |  |

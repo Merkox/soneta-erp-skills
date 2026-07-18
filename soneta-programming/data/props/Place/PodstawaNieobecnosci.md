@@ -3,13 +3,7 @@ Nazwa tabeli: `PodstawyNieobec`
 Opis: Element szczegółowy pracownika (Pracownik). Przechowuje miesięczną podstawę naliczania wynagrodzenia za czas nieobecności (chorobowe, urlopy), z uwzględnieniem norm czasu pracy i składek.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
-
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 22
+Selektor: pole `Typ` (`Soneta.Place.TypyPodstawNieobecnosci`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -31,10 +25,20 @@ Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 | PrzeliczaneMinimalne | `decimal` | bazodanowe | Przeliczane (minimalne) |  |
 | PrzeliczaneStawka | `decimal` | bazodanowe | Przeliczane (stawka) |  |
 | Roczne | `decimal` | bazodanowe |  |  |
-| Typ | `Soneta.Place.TypyPodstawNieobecnosci` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Place.TypyPodstawNieobecnosci` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WNominalnej | `decimal` | bazodanowe | W nominalnej |  |
 | WWyplaconejMale | `decimal` | bazodanowe | W wypłaconej (małe wahania) |  |
 | WWyplaconejZnaczne | `decimal` | bazodanowe | W wypłaconej (znaczne wahania) |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Chorobowa` | 1 | `Soneta.Place.PodstawaChorobowego` |  |
+| `Wypoczynkowy` | 2 | `Soneta.Place.PodstawaWypoczynkowego` |  |
 
 ## Enumy
 

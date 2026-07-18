@@ -5,13 +5,6 @@ Opis: Element szczegółowy dokumentu preliminarza (IDokumentPreliminarza). Repr
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `IDokumentPreliminarza`
 
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 5
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowana | `bool` | bazodanowe |  | Czy pozycja jest anulowana |

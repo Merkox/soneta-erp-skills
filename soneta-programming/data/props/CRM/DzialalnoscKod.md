@@ -4,13 +4,6 @@ Tytuł: Wykaz kodów PDK z opisem działalności
 Opis: Słownik kodów Polskiej Klasyfikacji Działalności (PKD) z hierarchiczną strukturą sekcji, działów, grup i klas. Służy do klasyfikacji rodzajów działalności gospodarczej kontrahentów zgodnie ze standardem GUS.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dzial | `string` | bazodanowe |  |  |

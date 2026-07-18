@@ -5,13 +5,6 @@ Opis: Element szczegółowy zadania (Zadanie). Przypisuje zasób (np. urządzeni
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Zadanie` → `Zadanie`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 7
-- podlisty: 3
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt | Całodzienne |  |

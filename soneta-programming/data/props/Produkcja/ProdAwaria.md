@@ -5,13 +5,6 @@ Opis: Rejestr zgłoszeń awaryjnych na zasobach produkcyjnych. Przechowuje kod i
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataZgloszenia | `System.DateTime` | bazodanowe | Data zgłoszenia | Data zgłoszenia awarii. |

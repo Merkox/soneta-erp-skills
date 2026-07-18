@@ -5,13 +5,6 @@ Opis: Rozszerzone ustawienia operatora. Określa uprawnienia administracyjne, lo
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operator` → `Operator`
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 1
-- subrowy: 0
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllowConversion | `bool` | bazodanowe | Dozwolona konwersja | Określa operatora, który może wykonywać konwersję bazy danych. |

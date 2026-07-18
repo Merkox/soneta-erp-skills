@@ -4,13 +4,6 @@ Opis: Element szczegółowy należności (IRozliczalny) rejestrujący historię 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `IRozliczalny`
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 16
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CofanieDoBufora | `bool` |  |  |  |

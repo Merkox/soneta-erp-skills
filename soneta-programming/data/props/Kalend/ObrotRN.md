@@ -5,13 +5,6 @@ Opis: Element szczegółowy strefy pracy (StrefaPracy). Obrót magazynu nadgodzi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `StrefaNadgodziny` → `StrefaPracy`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 0
-- subrowy: 2
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasRozliczany | `Time` | tylko-odczyt |  |  |

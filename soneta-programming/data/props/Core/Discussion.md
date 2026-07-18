@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDiscussionItem`, `IDiscussionPlugInHost`
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 30
-- podlisty: 14
-- subrowy: 3
-- razem: 67
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ActiveUsers | `System.Collections.Generic.IEnumerable<Soneta.Core.Conversation.DiscussionUser>` | podlista |  |  |

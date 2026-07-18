@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Raport` → `PUERaportNieobecnosci`
 Implementuje interfejsy: `IDokumentAktualizacjiKalendarza`
 
-- pola bazodanowe (zapisywalne): 23
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 8
-- subrowy: 0
-- razem: 37
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzyAnulowane | `string` | bazodanowe |  |  |

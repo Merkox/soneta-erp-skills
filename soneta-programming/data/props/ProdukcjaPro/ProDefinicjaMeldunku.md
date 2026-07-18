@@ -5,13 +5,6 @@ Opis: Szablon konfiguracyjny meldunku produkcyjnego określający reguły raport
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 31
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 32
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AlgorytmWeryfikacjiMeldunku | `Soneta.ProdukcjaPro.ProAlgorytmWeryfikacjiMeldunku` (enum) | bazodanowe | Algorytm weryfikacji meldunku | Algorytm weryfikacji meldunku dla definicji meldunku. |

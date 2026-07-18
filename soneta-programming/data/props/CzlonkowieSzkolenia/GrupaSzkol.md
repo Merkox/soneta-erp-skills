@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IElementSlownika`, `IZrodloHarmWplaty`, `IEmailElement`, `IOceniany`, `IŹródłoOceny`
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 18
-- podlisty: 18
-- subrowy: 0
-- razem: 50
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Certyfikaty | `View` | podlista |  |  |

@@ -122,6 +122,10 @@ public abstract class Zgloszenie : SerwisModule.ZgloszenieRow {
 }
 ```
 
+> Gotowy wykaz podtypów selektora dla każdej tabeli (wartość → klasa, tytuł, dodawalność z UI)
+> generuje skaner pól — sekcja `## Selektor — podtypy w jednej tabeli`; patrz
+> [scan-props.md](scan-props.md) i dane w [`../data/props/`](../data/props/).
+
 Reguły:
 - klasa bazowa obiektu jest **`abstract`** (selector jest `readonly` → konstruktor `(RowCreator)`);
 - każdy podtyp ma konstruktor `[DefaultConstructor]` ustawiający swoją wartość selector'a oraz

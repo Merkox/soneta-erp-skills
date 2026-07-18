@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `PaliwoSilnika` → `EkoPaliwoSilnika`
 Historia: Tak — zapis historyczny tabeli `EkoPaliwoSilnika`
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista | Okres aktualności | Okres obowiązywania stawki |

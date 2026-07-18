@@ -5,13 +5,6 @@ Opis: Rejestr funkcji pełnionych z wyboru przez członków organizacji. Przecho
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataDo | `Date` | bazodanowe |  | Data pełnienia funkcji do |

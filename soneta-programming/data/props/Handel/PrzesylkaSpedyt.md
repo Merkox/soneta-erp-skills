@@ -5,13 +5,6 @@ Opis: Przesyłka kurierska powiązana z dokumentem handlowym. Zawiera dane adres
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 37
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 7
-- podlisty: 7
-- subrowy: 4
-- razem: 59
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dokument | `Soneta.Handel.DokumentHandlowy` | bazodanowe, tylko-odczyt | Dokument handlowy |  |

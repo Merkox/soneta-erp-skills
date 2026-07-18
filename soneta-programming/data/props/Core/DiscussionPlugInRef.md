@@ -4,13 +4,7 @@ Tytuł: Powiązania rozszerzeń
 Opis: Element szczegółowy hosta rozszerzeń dyskusji (IDiscussionPlugInHost). Powiązuje rozszerzenie z definicją dyskusji, określając typ, priorytet, blokadę, konfigurację oraz uprawnienia (dołączanie, edycja, usuwanie, konfigurowanie).
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Definition` → `IDiscussionPlugInHost`
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 1
-- subrowy: 0
-- razem: 11
+Selektor: pole `Type` (`Soneta.Core.Conversation.DiscussionPlugInRefType`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -24,7 +18,17 @@ Guided: child — nadrzędna przez pole `Definition` → `IDiscussionPlugInHost`
 | PlugIn | `Soneta.Core.Conversation.DiscussionPlugIn` | bazodanowe, tylko-odczyt | Rozszerzenie |  |
 | Priority | `int` | bazodanowe |  |  |
 | Removable | `bool` | bazodanowe |  |  |
-| Type | `Soneta.Core.Conversation.DiscussionPlugInRefType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Type | `Soneta.Core.Conversation.DiscussionPlugInRefType` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Definition` | 1 | `Soneta.Core.Conversation.DiscussionPlugInDefRef` | Referencja do definicji |
+| `Discussion` | 2 | `Soneta.Core.Conversation.DiscussionPlugInDisRef` | Referencja do dyskusji |
 
 ## Relacje interfejsowe
 

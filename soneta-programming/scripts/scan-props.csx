@@ -149,6 +149,23 @@ var merged = new SortedDictionary<string, (string Type, ITypeSymbol Sym, bool Is
 var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
 ScanRecord(foundRecord, "", visited, merged, topLevelClasses);
 
+// Selektor: tabela przechowująca wiele typów obiektów. Zbieramy rejestracje [assembly: BusinessRow]
+// i wybieramy podtypy należące do tej tabeli (klasy *Row). Patrz row-types.md.
+var selectorByRow = BuildSelectorIndex(compilation);
+var selectorEntries = GetSelectorEntries(rowClass, selectorByRow);
+INamedTypeSymbol selectorEnumType = selectorEntries.Select(e => e.EnumType).FirstOrDefault(t => t != null);
+var selectorValueNames = BuildEnumValueNameMap(selectorEnumType);
+string selectorFieldName = null;
+if (selectorEntries.Count > 0 && selectorEnumType != null)
+{
+    foreach (var kv in merged)
+    {
+        if (kv.Key.Contains('.')) continue;
+        var en = AsEnum(kv.Value.Sym);
+        if (en != null && SymbolEqualityComparer.Default.Equals(en, selectorEnumType)) { selectorFieldName = kv.Key; break; }
+    }
+}
+
 if (mainBusinessClass != null)
 {
     Console.WriteLine($"# Pola i właściwości klasy biznesowej: `{mainBusinessClass.ToDisplayString()}`");
@@ -188,6 +205,13 @@ if (!string.IsNullOrEmpty(tableTypeName))
     var thisInterfaces = nestedTableCls != null ? GetTableInterfaces(nestedTableCls).ToList() : new System.Collections.Generic.List<string>();
     if (thisInterfaces.Count > 0)
         Console.WriteLine($"Implementuje interfejsy: {string.Join(", ", thisInterfaces.Select(i => "`" + i + "`"))}");
+    if (selectorEntries.Count > 0)
+    {
+        var enumDisp = selectorEnumType != null ? PrettyType(selectorEnumType.ToDisplayString()) : "int";
+        Console.WriteLine(selectorFieldName != null
+            ? $"Selektor: pole `{selectorFieldName}` (`{enumDisp}`) — wiele typów w jednej tabeli, podtypów: {selectorEntries.Count}"
+            : $"Selektor: `{enumDisp}` — wiele typów w jednej tabeli, podtypów: {selectorEntries.Count}");
+    }
 }
 
 // Indeks interfejs → lista tabel implementujących, na potrzeby pokazania alternatyw
@@ -217,24 +241,6 @@ foreach (var asmRef in compilation.References)
 foreach (var list in interfaceImpls.Values)
     list.Sort(StringComparer.Ordinal);
 Console.WriteLine();
-// Rozłączny rozkład wg roli (każde pole w dokładnie jednej kategorii; sumują się do całości).
-// Priorytet: subrow > podlista > tylko-odczyt > bazodanowe/kalkulowane (zapisywalne).
-int subRowCount = 0, subListCount = 0, readOnlyCount = 0, dbCount = 0, calcCount = 0;
-foreach (var v in merged.Values)
-{
-    if (v.IsSubRow) subRowCount++;
-    else if (IsSubListType(v.Sym)) subListCount++;
-    else if (v.ReadOnly) readOnlyCount++;
-    else if (v.IsDb) dbCount++;
-    else calcCount++;
-}
-Console.WriteLine($"- pola bazodanowe (zapisywalne): {dbCount}");
-Console.WriteLine($"- pola kalkulowane (zapisywalne): {calcCount}");
-Console.WriteLine($"- pola tylko-odczyt: {readOnlyCount}");
-Console.WriteLine($"- podlisty: {subListCount}");
-Console.WriteLine($"- subrowy: {subRowCount}");
-Console.WriteLine($"- razem: {merged.Count}");
-Console.WriteLine();
 Console.WriteLine("| Pole | Typ | Rodzaj | Tytuł | Opis |");
 Console.WriteLine("|------|-----|--------|-------|------|");
 var interfaceFields = new System.Collections.Generic.List<(string Field, string IfaceShort, System.Collections.Generic.List<string> Impls)>();
@@ -251,6 +257,7 @@ foreach (var kv in merged)
     if (isSubList) tags.Add("podlista");
     else if (kv.Value.ReadOnly && !isSubRow) tags.Add("tylko-odczyt");
     if (guidedParentField != null && kv.Key == guidedParentField) tags.Add("guided-parent");
+    if (selectorFieldName != null && kv.Key == selectorFieldName) tags.Add("selektor");
     var shortType = ShortTypeName(kv.Value.Type);
     if (shortType.StartsWith("I") && shortType.Length > 1 && char.IsUpper(shortType[1])
         && interfaceImpls.TryGetValue(shortType, out var impls))
@@ -264,6 +271,31 @@ foreach (var kv in merged)
     var typeSuffix = en != null ? " (enum)" : (isSubRow ? " (subrow)" : "");
     var typeCol = "`" + PrettyType(kv.Value.Type) + "`" + typeSuffix;
     Console.WriteLine($"| {kv.Key} | {typeCol} | {string.Join(", ", tags)} | {EscapeCell(kv.Value.Caption)} | {EscapeCell(kv.Value.Description)} |");
+}
+
+// Enum selektora ma trafić do sekcji `## Enumy` z pełną listą wartości, także gdy nie ma
+// odpowiadającego mu publicznego pola w rekordzie (wartość trzymana w warstwie bazowej).
+if (selectorEnumType != null) enumsUsed[selectorEnumType.ToDisplayString()] = selectorEnumType;
+
+if (selectorEntries.Count > 0)
+{
+    Console.WriteLine();
+    Console.WriteLine("## Selektor — podtypy w jednej tabeli");
+    Console.WriteLine();
+    Console.WriteLine("Tabela przechowuje różne typy obiektów rozróżniane wartością selektora"
+        + (selectorFieldName != null ? $" (pole `{selectorFieldName}`)" : "") + ".");
+    Console.WriteLine("Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.");
+    Console.WriteLine();
+    Console.WriteLine("| Wartość | Nr | Klasa podtypu | Tytuł |");
+    Console.WriteLine("|---------|----|---------------|-------|");
+    foreach (var e in selectorEntries)
+    {
+        var name = selectorValueNames.TryGetValue(e.Value, out var nm) ? nm : "—";
+        var cls = PrettyType(e.SubType.ToDisplayString());
+        var cap = GetAttributeFirstString(e.SubType, "CaptionAttribute");
+        if (string.IsNullOrEmpty(cap)) cap = GetAttributeFirstString(e.SubType, "DescriptionAttribute");
+        Console.WriteLine($"| `{name}` | {e.Value} | `{cls}` | {EscapeCell(cap)} |");
+    }
 }
 
 if (interfaceFields.Count > 0)
@@ -652,4 +684,66 @@ static IEnumerable<(string Name, string Value, string Caption)> GetEnumMembers(I
         var val = Convert.ToString(m.ConstantValue, System.Globalization.CultureInfo.InvariantCulture) ?? "";
         yield return (m.Name, val, cap);
     }
+}
+
+// ── Selektory (podtypy „wiele typów w jednej tabeli") ──────────────────────────
+// Zbiera rejestracje [assembly: BusinessRow(typeof(Podtyp), wartość)] ze wszystkich assembly
+// i grupuje podtypy po klasie *Row tabeli, do której należą. Patrz row-types.md (wzorzec
+// selektora) i assembly-attributes.md (odczyt atrybutów assembly-level).
+static System.Collections.Generic.Dictionary<INamedTypeSymbol, System.Collections.Generic.List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)>>
+    BuildSelectorIndex(CSharpCompilation compilation)
+{
+    var byRow = new System.Collections.Generic.Dictionary<INamedTypeSymbol, System.Collections.Generic.List<(INamedTypeSymbol, INamedTypeSymbol, long)>>(SymbolEqualityComparer.Default);
+    foreach (var asmRef in compilation.References)
+    {
+        if (compilation.GetAssemblyOrModuleSymbol(asmRef) is not IAssemblySymbol asm) continue;
+        foreach (var a in asm.GetAttributes())
+        {
+            var an = a.AttributeClass?.Name;
+            if (an is not ("BusinessRowAttribute" or "BusinessRow")) continue;
+            var ctor = a.ConstructorArguments;
+            if (ctor.Length < 2 || ctor[0].Value is not INamedTypeSymbol sub) continue;
+            long val; try { val = Convert.ToInt64(ctor[1].Value); } catch { continue; }
+            var enumType = ctor[1].Kind == TypedConstantKind.Enum ? ctor[1].Type as INamedTypeSymbol : null;
+            var rowCls = FindOwningRowClass(sub);
+            if (rowCls == null) continue;
+            if (!byRow.TryGetValue(rowCls, out var list)) byRow[rowCls] = list = new();
+            list.Add((sub, enumType, val));
+        }
+    }
+    return byRow;
+}
+
+// Klasa *Row (tabela) będąca właścicielem podtypu — pierwszy w łańcuchu dziedziczenia typ o nazwie
+// kończącej się na "Row" zagnieżdżony w klasie "*Module" (np. `CoreModule.DefinicjaDokumentuRow`).
+static INamedTypeSymbol FindOwningRowClass(INamedTypeSymbol type)
+{
+    for (var t = type; t != null && t.SpecialType != SpecialType.System_Object; t = t.BaseType)
+        if (t.Name.EndsWith("Row") && t.ContainingType != null && t.ContainingType.Name.EndsWith("Module"))
+            return t;
+    return null;
+}
+
+// Posortowane wpisy selektora danej tabeli (rosnąco po wartości, potem po nazwie klasy).
+static System.Collections.Generic.List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)> GetSelectorEntries(
+    INamedTypeSymbol rowClass,
+    System.Collections.Generic.Dictionary<INamedTypeSymbol, System.Collections.Generic.List<(INamedTypeSymbol SubType, INamedTypeSymbol EnumType, long Value)>> byRow)
+{
+    if (rowClass != null && byRow.TryGetValue(rowClass, out var list))
+        return list.OrderBy(e => e.Value).ThenBy(e => e.SubType.ToDisplayString(), StringComparer.Ordinal).ToList();
+    return new();
+}
+
+// Mapa wartość liczbowa → nazwa stałej enuma (pierwsza dla danej wartości).
+static System.Collections.Generic.Dictionary<long, string> BuildEnumValueNameMap(INamedTypeSymbol en)
+{
+    var map = new System.Collections.Generic.Dictionary<long, string>();
+    if (en == null) return map;
+    foreach (var m in en.GetMembers().OfType<IFieldSymbol>())
+    {
+        if (!m.HasConstantValue) continue;
+        long v; try { v = Convert.ToInt64(m.ConstantValue); } catch { continue; }
+        if (!map.ContainsKey(v)) map[v] = m.Name;
+    }
+    return map;
 }

@@ -5,13 +5,6 @@ Opis: Element szczegółowy bilansu otwarcia PIT (BilansOtwarciaPIT). Przechowuj
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dokument` → `BilansOtwarciaPIT`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dochód | `decimal` | tylko-odczyt |  |  |

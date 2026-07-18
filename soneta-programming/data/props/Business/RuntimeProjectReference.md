@@ -5,13 +5,6 @@ Opis: Zależność projektu runtime od biblioteki lub innego projektu. Określa 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `RuntimeProject` → `RuntimeProject`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Reference | `string` | bazodanowe | Zależność |  |

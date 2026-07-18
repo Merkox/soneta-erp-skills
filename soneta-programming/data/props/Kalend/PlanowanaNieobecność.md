@@ -5,13 +5,6 @@ Opis: Planowana nieobecność pracownika (np. urlop zaplanowany z wyprzedzeniem)
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Definicja | `Soneta.Kalend.DefinicjaNieobecnosci` | bazodanowe |  |  |

@@ -3,13 +3,6 @@ Nazwa tabeli: `SlownikiPIM`
 Opis: Pola dodatkowe przypisane do Hosta. Dzięki szabloną można użyć wartości np. do tłumaczeń cech, nazw, kodów.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Cecha | `FeatureDefinition` | bazodanowe |  |  |

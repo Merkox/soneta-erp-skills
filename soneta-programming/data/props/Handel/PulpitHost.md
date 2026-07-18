@@ -4,13 +4,6 @@ Tytuł: Obiekty wykorzystywane w pulpitach
 Opis: Powiązanie obiektów biznesowych (hostów) z pulpitami. Określa typ i przeznaczenie obiektu wyświetlanego na pulpicie użytkownika.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dla | `Soneta.Handel.PulpitHostDla` (enum) | bazodanowe |  |  |

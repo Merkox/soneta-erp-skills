@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Adres lokalizacji, z której
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 8
-- podlisty: 1
-- subrowy: 1
-- razem: 30
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `Soneta.Core.Adres` (subrow) | bazodanowe |  |  |

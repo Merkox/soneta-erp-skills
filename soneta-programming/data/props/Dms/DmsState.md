@@ -5,13 +5,6 @@ Opis: Przechowuje informacje o statusach przypisanych do konkretnych obiektów (
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BasicDocStates | `SubTable<Soneta.Workflow.Dms.BasicDocument>` | podlista |  |  |

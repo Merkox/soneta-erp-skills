@@ -5,13 +5,6 @@ Opis: Element szczegółowy oddziału firmy (OddzialFirmy). Rejestruje metrykę 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Oddzial` → `OddzialFirmy`
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `Date` | bazodanowe, tylko-odczyt | Data zmiany |  |

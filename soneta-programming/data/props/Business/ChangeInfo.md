@@ -4,13 +4,6 @@ Tytuł: Historia zmian
 Opis: Rejestr zmian dokonanych na obiektach w systemie. Przechowuje informacje o operatorze, typie zmiany, dacie i szczegółach modyfikacji dla celów audytu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 17
-- podlisty: 2
-- subrowy: 0
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `MemoText` | bazodanowe, podlista | Dane dodatkowe | Dodatkowa informacja o danym zgłoszeniu. |

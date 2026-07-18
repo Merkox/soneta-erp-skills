@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Host` → `IWfPlugInItemReferenceHost`
 Implementuje interfejsy: `IWFRecipientHost`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Config | `Soneta.Workflow.Config.PlugInItemConfig` | tylko-odczyt |  |  |

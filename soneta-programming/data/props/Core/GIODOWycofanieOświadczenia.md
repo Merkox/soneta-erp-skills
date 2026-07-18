@@ -4,13 +4,6 @@ Opis: Element szczegółowy definicji oświadczenia RODO (GIODODefinicjaOświadc
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `GIODODefinicjaOświadczenia`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Auto | `bool` | bazodanowe |  |  |

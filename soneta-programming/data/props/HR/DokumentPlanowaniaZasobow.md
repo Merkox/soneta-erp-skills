@@ -5,13 +5,6 @@ Opis: Nagłówek dokumentu planowania zasobów w module ZKL. Określa nazwę, ok
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataDokumentu | `Date` | bazodanowe | Data dokumentu |  |

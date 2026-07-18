@@ -4,20 +4,27 @@ Tytuł: Powiązania stanowisk z pozycjami słowników ZKL
 Opis: Tabela służy do powiązania definicji poszczególnych stanowisk z odpowiednimi pozycjami w słownikach ZKL. Umożliwia jednoznaczne przypisanie stanowisk do obowiązujących klasyfikacji.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 4
+Selektor: pole `TypPowiazania` (`Soneta.HR.ZKL.Enums.TypPowiazaniaSlownikaZkl`) — wiele typów w jednej tabeli, podtypów: 5
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaStanowiska | `Soneta.HR.DefinicjaStanowiska` | bazodanowe, tylko-odczyt | Definicja stanowiska |  |
 | Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Pozycja | `Soneta.HR.IZklPozycjaSlownika` | bazodanowe, iface-ref | Pozycja słownika |  |
-| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaSlownikaZkl` (enum) | bazodanowe, tylko-odczyt | Typ powiązania |  |
+| TypPowiazania | `Soneta.HR.ZKL.Enums.TypPowiazaniaSlownikaZkl` (enum) | bazodanowe, tylko-odczyt, selektor | Typ powiązania |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypPowiazania`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `WyposazenieStanowiska` | 10 | `Soneta.HR.ZKL.OpisStanowiska.ZasobyINarzedzia.PowiazanieWyposazenieStanowiska` | Wyposażenie stanowiska |
+| `DokumentProcedura` | 20 | `Soneta.HR.ZKL.OpisStanowiska.ZasobyINarzedzia.PowiazanieDokumentyIProcedury` | Dokument i procedury |
+| `Wysilek` | 30 | `Soneta.HR.ZKL.OpisStanowiska.ZasobyINarzedzia.PowiazanieWysilek` | Wysiłek |
+| `DostepDoSystemow` | 40 | `Soneta.HR.ZKL.OpisStanowiska.ZasobyINarzedzia.PowiazanieDostepyDoSystemow` | Dostęp do systemów |
+| `Benefit` | 50 | `Soneta.HR.ZKL.OpisStanowiska.ZasobyINarzedzia.PowiazanieBenefity` | Benefity |
 
 ## Relacje interfejsowe
 

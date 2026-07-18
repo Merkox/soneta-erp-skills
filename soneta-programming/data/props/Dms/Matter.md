@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPermissionClient`, `IEmailAttachmentsHolder`, `IEmailElement`, `IDokument`, `IDmsArchInfoHost`
 
-- pola bazodanowe (zapisywalne): 14
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 12
-- podlisty: 9
-- subrowy: 2
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | ArchInfos | `SubTable<Soneta.Workflow.Dms.IK.DmsArchInfo>` | podlista |  |  |

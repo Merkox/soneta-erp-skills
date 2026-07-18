@@ -4,13 +4,6 @@ Opis: Słownik walut stosowanych w systemie. Definiuje symbole, nazwy i krotnoś
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 1
-- razem: 13
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Calkowity | `string` | bazodanowe |  |  |

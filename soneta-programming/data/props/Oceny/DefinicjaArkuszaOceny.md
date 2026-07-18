@@ -4,13 +4,7 @@ Tytuł: Definicje arkuszy ocen
 Opis: Definicja wzorca arkusza oceny wypełnianego przez jednego oceniającego. Określa kierunek oceny (samoocena, przełożony, współpracownicy), parametry udostępniania wyników oraz powiązanie z procesem workflow.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 2
-- subrowy: 0
-- razem: 19
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -27,12 +21,22 @@ Guided: root
 | Pozycje | `SubTable<Soneta.Oceny.PozycjaDefinicjiArkuszaOceny>` | podlista |  |  |
 | PrzeznaczonyDla | `Soneta.Oceny.TableRef` |  |  |  |
 | RodzajZrodla | `string` | bazodanowe |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | UdostepnijOceniajacemu | `bool` | bazodanowe |  |  |
 | UdostepnijOcenianemu | `bool` | bazodanowe |  |  |
 | UdostepnijOcenianemuOdEtapu | `Soneta.Oceny.EtapyArkuszaOceny` (enum) | bazodanowe |  |  |
 | WartoscWgKategorii | `bool` | bazodanowe |  |  |
 | Wielokrotny | `bool` | bazodanowe |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.DefinicjaArkuszaOceny` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.DefinicjaArkuszaAnkiety` |  |
 
 ## Enumy
 

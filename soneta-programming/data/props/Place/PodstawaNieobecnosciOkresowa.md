@@ -4,13 +4,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Przechowuje podstawy nalicza
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaElementu | `Soneta.Place.DefinicjaElementu` | bazodanowe |  | Definicja elementu |

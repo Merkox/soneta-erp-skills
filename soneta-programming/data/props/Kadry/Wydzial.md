@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IElementStrukturyFirmy`, `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 28
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 17
-- podlisty: 19
-- subrowy: 5
-- razem: 70
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AgencjaPT | `Soneta.Kadry.AgencjaPracyTymczasowejWdz` (subrow) | bazodanowe |  |  |

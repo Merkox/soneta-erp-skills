@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IKosztTechnHost`, `IZasobTechHost`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 17
-- subrowy: 0
-- razem: 35
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AlgorytmPodzialuKosztu | `Soneta.Produkcja.KosztWytworzenia.AlgorytmPodzialu` (enum) | bazodanowe | Algorytm podzialu kosztu | Algorytm proporcjonalnego podziału kosztu na części przypadające na produkowane produkty. |

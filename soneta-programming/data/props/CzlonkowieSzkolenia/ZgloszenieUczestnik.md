@@ -5,13 +5,6 @@ Opis: Pozycje uczestników na zgłoszeniu szkoleniowym. Łączy konkretnego ucze
 Tabela konfiguracyjna: Nie
 Implementuje interfejsy: `IZrodloHarmWplaty`, `IEmailElement`
 
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 4
-- pola tylko-odczyt: 18
-- podlisty: 15
-- subrowy: 0
-- razem: 58
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AdresEmail | `string` | bazodanowe |  | Adres poczty elektronicznej |

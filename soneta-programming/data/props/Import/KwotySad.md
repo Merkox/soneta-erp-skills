@@ -5,13 +5,6 @@ Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Przechowuje kwot
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Akcyza | `Currency` | bazodanowe |  |  |

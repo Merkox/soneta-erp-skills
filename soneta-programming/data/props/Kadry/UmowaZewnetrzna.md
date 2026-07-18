@@ -6,13 +6,7 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `UmowaZewnetrznaHistoria`
 Implementuje interfejsy: `IZrodloPodzielnikaKosztow`, `IUmowaZKalendarzem`, `IZrodloPlanu`, `IDostepnoscHost`, `IZrodloNieobecnosci`, `IZrodloWnioskuONieobecnosc`
-
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 7
-- podlisty: 14
-- subrowy: 1
-- razem: 31
+Selektor: pole `Typ` (`Soneta.Kadry.TypUmowyZewnetrznej`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -42,11 +36,21 @@ Implementuje interfejsy: `IZrodloPodzielnikaKosztow`, `IUmowaZKalendarzem`, `IZr
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
 | RegulyDostepnosci | `SubTable<Soneta.Kalend.RegulaDostepnosci>` | podlista |  |  |
 | Seria | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypUmowyZewnetrznej` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WartosciZRozliczen | `Currency` | tylko-odczyt |  |  |
 | WnioskiUrlopowe | `SubTable<Soneta.Kadry.WniosekUrlopowy>` | podlista |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
 | Zestawienia | `FromToSubTable<Soneta.Kalend.ZestawienieUmowyZewnetrznej>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `UmowaB2B` | 1 | `Soneta.Kadry.UmowaB2B` | Umowa B2B |
+| `UmowaAPT` | 2 | `Soneta.Kadry.UmowaAPT` | Umowa APT |
 
 ## Enumy
 

@@ -5,13 +5,6 @@ Opis: Element szczegółowy operacji zlecenia (ProOperacjaZlecenia). Definiuje z
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Operacja` → `ProOperacjaZlecenia`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | IloscPoprzedzajaca | `Amount` | tylko-odczyt | Ilość poprzedzająca | Ilość poprzedzająca dla operacji zlecenia poprzedzającej. |

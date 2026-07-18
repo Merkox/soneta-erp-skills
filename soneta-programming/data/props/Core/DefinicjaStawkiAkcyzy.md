@@ -5,13 +5,6 @@ Opis: Słownik stawek podatku akcyzowego. Każda definicja zawiera kod, symbol (
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 1
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kod | `string` | bazodanowe |  |  |

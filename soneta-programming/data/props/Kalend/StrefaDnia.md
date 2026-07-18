@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji dnia (DefinicjaDnia). Strefa czasowa przyp
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Dzien` → `DefinicjaDnia`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 1
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

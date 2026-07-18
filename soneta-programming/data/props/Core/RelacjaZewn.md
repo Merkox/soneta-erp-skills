@@ -4,13 +4,6 @@ Tytuł: Powiązania obiektów programu z obiektami z systemów zewnętrznych
 Opis: Tabela relacji mapująca obiekty wewnętrzne programu na obiekty w systemach zewnętrznych. Przechowuje identyfikator obiektu programu (GUID), typ tabeli, identyfikator zewnętrzny, system zewnętrzny, datę i dodatkowe informacje.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Data | `System.DateTime` | bazodanowe | Data | Data |

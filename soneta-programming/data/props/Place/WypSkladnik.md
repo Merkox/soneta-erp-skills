@@ -4,13 +4,7 @@ Tytuł: Składniki wypłaty
 Opis: Element szczegółowy elementu wypłaty (WypElement). Przechowuje szczegółowe parametry obliczeniowe składnika: podstawy, ułamki, czas, dni i okres, rozbijając naliczenie na atomowe części składowe.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Element` → `WypElement`
-
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 11
-- podlisty: 5
-- subrowy: 0
-- razem: 31
+Selektor: pole `Rodzaj` (`Soneta.Place.RodzajSkładnikaWypłaty`) — wiele typów w jednej tabeli, podtypów: 14
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -29,7 +23,7 @@ Guided: child — nadrzędna przez pole `Element` → `WypElement`
 | Podstawa5 | `DoubleCy` | bazodanowe | Podstawa 5 |  |
 | PodstawaOkres | `FromTo` | bazodanowe, podlista | PodstawaOkres |  |
 | Procent | `Percent` |  | Procent |  |
-| Rodzaj | `Soneta.Place.RodzajSkładnikaWypłaty` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Rodzaj | `Soneta.Place.RodzajSkładnikaWypłaty` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | RozliczenieStorna | `bool` | tylko-odczyt |  |  |
 | SkładnikiPowiązane | `System.Collections.IList` | podlista |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
 | SkładnikiPowiązane2 | `System.Collections.IList` | podlista |  | Składniki tego samego źródła wypłaty, z przecinającym się okresem |
@@ -45,6 +39,28 @@ Guided: child — nadrzędna przez pole `Element` → `WypElement`
 | WartośćKorygowanaCy | `Currency` | tylko-odczyt |  | Suma w walucie wszystkich składników głównych i korygowanych zawierających danych składnik |
 | Wspolczynnik | `decimal` |  | Współczynnik |  |
 | Zatwierdzony | `bool` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Rodzaj`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Główny` | 1 | `Soneta.Place.WypSkladnikGłówny` |  |
+| `Korekta` | 2 | `Soneta.Place.WypSkladnikKorekta` |  |
+| `PomniejszenieProp` | 101 | `Soneta.Place.WypSkladnikPomniejszenie.Proporcjonalne` |  |
+| `Pomniejszenie130` | 102 | `Soneta.Place.WypSkladnikPomniejszenie.Pomn130` |  |
+| `PomniejszenieZaDzień` | 103 | `Soneta.Place.WypSkladnikPomniejszenie.PomnZaDzień` |  |
+| `PomniejszeniePropZero` | 104 | `Soneta.Place.WypSkladnikPomniejszenie.ProporcjonalneZero` |  |
+| `PomniejszenieStorno` | 150 | `Soneta.Place.WypSkladnikStorno` |  |
+| `OdchyłkaPlus` | 200 | `Soneta.Place.WypSkladnikOdchyłka.Plus` |  |
+| `OdchyłkaMinus` | 201 | `Soneta.Place.WypSkladnikOdchyłka.Minus` |  |
+| `OdchyłkaAkordMinus` | 202 | `Soneta.Place.WypSkladnikOdchyłka.AkordMinus` |  |
+| `OdchyłkaRozliczanePlus` | 203 | `Soneta.Place.WypSkladnikOdchyłka.RozliczanePlus` |  |
+| `OdchyłkaRozliczaneMinus` | 204 | `Soneta.Place.WypSkladnikOdchyłka.RozliczaneMinus` |  |
+| `OdchyłkaPostojoweMinus` | 205 | `Soneta.Place.WypSkladnikOdchyłka.PostojoweMinus` |  |
+| `Algorytm` | 300 | `Soneta.Place.WypSkladnikPomniejszenie.Algorytm` |  |
 
 ## Enumy
 

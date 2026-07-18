@@ -5,13 +5,6 @@ Opis: Rejestracja czasu pracy hybrydowej (zdalnej). Przechowuje informację o wy
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 6
-- podlisty: 2
-- subrowy: 0
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AllDayEvent | `bool` | tylko-odczyt |  |  |

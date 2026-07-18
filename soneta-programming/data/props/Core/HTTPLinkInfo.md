@@ -4,13 +4,6 @@ Opis: Informacja o linku HTTP udostępniającym dokument na zewnątrz. Przechowu
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 12
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anonimowy | `bool` | bazodanowe |  |  |

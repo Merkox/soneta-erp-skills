@@ -5,13 +5,6 @@ Opis: Element szczegółowy czytnika RCP (CzytnikRCP). Mapowanie kodu zdarzenia 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `CzytnikRCP` → `CzytnikRCP`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzytnikRCP | `Soneta.Kalend.CzytnikRCP` | bazodanowe, tylko-odczyt, guided-parent |  |  |

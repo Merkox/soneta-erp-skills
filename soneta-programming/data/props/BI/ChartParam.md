@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji wizualizacji (DashboardItemDefinition). Za
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 25
-- podlisty: 0
-- subrowy: 0
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AxesSwap | `bool` | bazodanowe, tylko-odczyt | Odwrócenie osi | Zamienia miejscami osie X i Y |

@@ -5,13 +5,6 @@ Opis: Słownik stawek podatku VAT. Każda definicja zawiera kod stawki, procent,
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 1
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kod | `string` | bazodanowe, tylko-odczyt |  |  |

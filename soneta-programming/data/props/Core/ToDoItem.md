@@ -4,13 +4,6 @@ Tytuł: Elementy do wykonania
 Opis: Lista zadań do wykonania (to-do) powiązana z obiektem biznesowym. Każdy element posiada numer porządkowy, temat i flagę wykonania. Służy do śledzenia prostych czynności w kontekście dokumentu lub procesu.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Completed | `bool` | bazodanowe | Wykonany |  |

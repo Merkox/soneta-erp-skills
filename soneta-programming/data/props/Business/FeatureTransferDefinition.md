@@ -5,13 +5,6 @@ Opis: Określa reguły przenoszenia wartości cech między powiązanymi obiektam
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | FeatureDefinition | `FeatureDefinition` | bazodanowe | Definicja cechy | Definicja cechy |

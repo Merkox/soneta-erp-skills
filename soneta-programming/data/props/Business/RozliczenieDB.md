@@ -4,13 +4,6 @@ Tytuł: Rozliczenia podatkowe bazy danych
 Opis: Zbiorcze rozliczenie podatkowe bazy danych klienta za dany okres. Zawiera kwoty VAT, CIT, PIT, ZUS oraz terminy płatności i numery rachunków.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 1
-- subrowy: 0
-- razem: 20
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DeklaracjaDRAFEP | `Currency` | bazodanowe |  |  |

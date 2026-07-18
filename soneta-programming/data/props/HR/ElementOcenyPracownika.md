@@ -5,13 +5,6 @@ Opis: Element szczegółowy oceny pracownika (IOcenaPracownika). Przechowuje war
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ocena` → `IOcenaPracownika`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualny | `bool` | tylko-odczyt |  |  |

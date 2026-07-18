@@ -4,13 +4,7 @@ Opis: Nagroda lub kara przyznana pracownikowi. Rejestruje typ (nagroda/kara), de
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
-
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 4
-- subrowy: 1
-- razem: 16
+Selektor: pole `Typ` (`Soneta.Kadry.TypNagrodyKary`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -29,7 +23,17 @@ Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`
 | Rozliczenie.Okres | `FromTo` | bazodanowe, podlista |  |  |
 | Rozliczenie.Rozliczone | `bool` | tylko-odczyt |  |  |
 | Rozliczenie.WgElement | `Key` | podlista |  |  |
-| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Nagroda` | 1 | `Soneta.Kadry.Nagroda` | Nagroda |
+| `Kara` | 2 | `Soneta.Kadry.Kara` | Kara |
 
 ## Enumy
 

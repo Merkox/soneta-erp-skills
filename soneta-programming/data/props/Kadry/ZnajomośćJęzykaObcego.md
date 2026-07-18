@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Ewidencja znajomości język
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 1
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataWydaniaZaswiadczenia | `Date` | bazodanowe | Data wydania zaświadczenia |  |

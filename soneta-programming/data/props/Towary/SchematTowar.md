@@ -5,13 +5,6 @@ Opis: Element szczegółowy schematu opakowań/gratisów (SchemOpakowan). Przypi
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `SchematOpakowan` → `SchemOpakowan`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DomyslnyPrzychod | `bool` | bazodanowe |  | Określa, czy dany schamat jest domyślnym dla dokumentów przychodowych.  |

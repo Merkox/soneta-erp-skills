@@ -5,13 +5,6 @@ Opis: Słownik stanów (etapów) windykacji definiujący możliwe kroki w proces
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 11
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 1
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AutomatycznePrzejscie | `bool` | bazodanowe | Przejdź do kolejnego etapu |  |

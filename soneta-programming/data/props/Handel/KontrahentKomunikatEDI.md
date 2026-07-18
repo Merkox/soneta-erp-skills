@@ -4,13 +4,6 @@ Tytuł: Komunikaty EDI dla kontrahenta
 Opis: Konfiguracja komunikatów EDI przypisana do kontrahenta. Określa definicję komunikatu, sposób generowania i wysyłania oraz platformę EDI dla wymiany dokumentów elektronicznych.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 10
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BaseSerwer | `string` | tylko-odczyt |  |  |

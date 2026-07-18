@@ -5,13 +5,6 @@ Opis: Element szczegółowy definicji zadania (DefZadania). Klasyfikuje rodzaj a
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Definicja` → `DefZadania`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 0
-- subrowy: 0
-- razem: 7
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Blokada | `bool` | bazodanowe | Zablokowany | Określa zablokowanie typu. Zablokowane typy dokumentów nie będą wyświetlane w liście wyboru. |

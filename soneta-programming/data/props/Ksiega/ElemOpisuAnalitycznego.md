@@ -4,13 +4,7 @@ Tytuł: Opis analityczny
 Opis: Element szczegółowy dokumentu ewidencji (DokEwidencji). Reprezentuje pojedynczą pozycję opisu analitycznego, przypisującą kwotę do wymiaru analitycznego (np. centrum kosztów, projektu). Obsługuje podzielniki kosztów, budżety projektów, rozliczenia międzyokresowe oraz powiązania z płatnościami i zapisami księgowymi.
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
-
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 15
-- podlisty: 5
-- subrowy: 0
-- razem: 39
+Selektor: pole `Typ` (`Soneta.Ksiega.TypOpisuAnalitycznego`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -47,12 +41,22 @@ Guided: child — nadrzędna przez pole `Ewidencja` → `DokEwidencji`
 | SegmentyBudzetoweZad | `Soneta.Ksiega.ElemOpisuAnalitycznego.SegmentyBudzetoweCollection` | tylko-odczyt |  |  |
 | SubordinateRightsSettlements | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ElemOpisuAnalitycznego>` | podlista |  |  |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Ksiega.TypOpisuAnalitycznego` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypOpisuAnalitycznego` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | WersjaPlanu | `Soneta.Core.IBudgetPlanVersion` | bazodanowe |  | Wersja planu |
 | Wymiar | `string` | bazodanowe |  |  |
 | ZapisPowiazany | `Soneta.Ksiega.ZapisKsiegowy` | bazodanowe, tylko-odczyt |  | Powiązany zapis |
 | ZapisyKsiegowe | `System.Collections.Generic.IEnumerable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 | Zrodlo | `Soneta.Core.IZrodloOpisuAnalitycznego` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `OpisEwidencji` | 1 | `Soneta.Ksiega.ElementOpisuEwidencji` | Element opisu ewidencji |
+| `OpisŹródła` | 2 | `Soneta.Ksiega.ElementOpisuZrodla` | Element opisu źródła |
 
 ## Relacje interfejsowe
 

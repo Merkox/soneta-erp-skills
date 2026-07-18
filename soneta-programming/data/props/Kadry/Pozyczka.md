@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBazaZrodlaWyplaty`, `IPowiązanieWypłaty`, `IRozliczenieWynagrodzeniaHost`, `IBilansOtwarcia`
 
-- pola bazodanowe (zapisywalne): 18
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 14
-- podlisty: 6
-- subrowy: 2
-- razem: 40
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AlgorytmRaty | `Soneta.Kadry.AlgorytmRatyPożyczki` | bazodanowe |  |  |

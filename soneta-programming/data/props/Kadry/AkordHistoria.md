@@ -6,13 +6,7 @@ Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Akord` → `Akord`
 Historia: Tak — zapis historyczny tabeli `Akord`
 Implementuje interfejsy: `IAkord`
-
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 4
-- podlisty: 8
-- subrowy: 1
-- razem: 26
+Selektor: pole `Typ` (`Soneta.Kadry.TypAkordu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -40,8 +34,18 @@ Implementuje interfejsy: `IAkord`
 | OkresZatrudnienia | `FromTo` | podlista |  |  |
 | Parent | `Row` | tylko-odczyt |  |  |
 | Progi | `SubTable<Soneta.Kadry.ProgAkordu>` | podlista |  |  |
-| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Prosty` | 1 | `Soneta.Kadry.AkordProstyHistoria` | Akord |
+| `Grupowy` | 2 | `Soneta.Kadry.AkordGrupowyHistoria` | Akord grupowy |
 
 ## Enumy
 

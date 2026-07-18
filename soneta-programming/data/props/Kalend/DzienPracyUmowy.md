@@ -5,13 +5,6 @@ Opis: Element szczegółowy umowy z kalendarzem (IUmowaZKalendarzem). Ewidencja 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Umowa` → `IUmowaZKalendarzem`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

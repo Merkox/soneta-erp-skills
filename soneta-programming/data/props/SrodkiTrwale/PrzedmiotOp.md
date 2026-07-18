@@ -5,13 +5,6 @@ Opis: Element szczegółowy historii lokalizacji nieruchomości (LokalizacjaNier
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Historia` → `LokalizacjaNierHistoria`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 0
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `Soneta.SrodkiTrwale.TypAlgorytmuStawki` (enum) | bazodanowe |  | Typ algorytmu stawki opodatkowania |

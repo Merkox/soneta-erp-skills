@@ -4,13 +4,7 @@ Tytuł: Dziennik księgowy
 Opis: Dekret księgowy stanowi podstawową jednostkę zapisu w dzienniku księgowym. Grupuje zapisy księgowe dotyczące jednej operacji gospodarczej, zawiera numer ewidencji, datę, opis oraz sumy stron Winien i Ma. Obsługuje dekrety buforowe, dekrety zamknięcia okresu, grupowanie zapisów oraz predekretację za pomocą schematów księgowych.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 40
-- podlisty: 4
-- subrowy: 2
-- razem: 59
+Selektor: pole `Typ` (`Soneta.Ksiega.TypDziennika`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -66,13 +60,23 @@ Guided: root
 | Storno | `Soneta.Ksiega.DekretBase` | tylko-odczyt |  |  |
 | Symbol | `string` | bazodanowe |  | Symbol dokumentu dekretu |
 | SymbolNumeruZrodlaEwidencji | `string` | tylko-odczyt |  |  |
-| Typ | `Soneta.Ksiega.TypDziennika` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Ksiega.TypDziennika` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | TypWgKont | `Soneta.Ksiega.TypDekretuWgKont` (enum) | bazodanowe |  |  |
 | Winien | `Currency` | bazodanowe, tylko-odczyt |  |  |
 | Wprowadzil | `App.Operator` | tylko-odczyt |  |  |
 | Zamkniety | `bool` | tylko-odczyt |  |  |
 | Zapisy | `LpSubTable<Soneta.Ksiega.ZapisKsiegowy>` | podlista |  |  |
 | Zatwierdzil | `App.Operator` | tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Dekret` | 1 | `Soneta.Ksiega.Dekret` | Dekret |
+| `BO` | 2 | `Soneta.Ksiega.BO` | BO |
 
 ## Enumy
 

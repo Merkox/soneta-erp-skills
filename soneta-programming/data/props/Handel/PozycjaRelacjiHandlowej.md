@@ -5,13 +5,6 @@ Opis: Element szczegółowy relacji handlowej (RelacjaHandlowa). Wiąże pozycje
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Relacja` → `RelacjaHandlowa`
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 13
-- podlisty: 1
-- subrowy: 2
-- razem: 25
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dodatkowa | `bool` | bazodanowe, tylko-odczyt |  | Pozycja dodatkowa dodana ręcznie do listy relacji. |

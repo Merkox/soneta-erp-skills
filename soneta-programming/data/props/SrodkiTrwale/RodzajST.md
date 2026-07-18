@@ -4,13 +4,7 @@ Tytuł: Klasyfikacja Rodzajowa Środków Trwałych
 Opis: Słownik klasyfikacji rodzajowej środków trwałych (KRŚT). Umożliwia przypisanie symbolu, stawki amortyzacji oraz powiązania z klasyfikacjami PKOB i PKWiU. Stanowi podstawę do prawidłowego naliczania odpisów amortyzacyjnych.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 9
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 10
-- podlisty: 1
-- subrowy: 0
-- razem: 20
+Selektor: pole `Typ` (`Soneta.SrodkiTrwale.TypSrodkaTrwalego`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -33,7 +27,17 @@ Guided: root
 | StawkaDo | `Percent` | bazodanowe |  | Max. stwaka amortyzacji |
 | StawkaOd | `Percent` | bazodanowe |  | Min. stwaka amortyzacji |
 | Symbol | `string` | bazodanowe |  |  |
-| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt |  | Typ rodzaju środka trwałego |
+| Typ | `Soneta.SrodkiTrwale.TypSrodkaTrwalego` (enum) | bazodanowe, tylko-odczyt, selektor |  | Typ rodzaju środka trwałego |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `ŚrodekTrwały` | 1 | `Soneta.SrodkiTrwale.RodzajSrodkaTrwalego` | Rodzaj środka trwałego |
+| `WartośćNiematerialnaIPrawna` | 2 | `Soneta.SrodkiTrwale.RodzajWartosciNiematerialnejIPrawnej` | Rodzaj wartości niematerialnej i prawnej |
 
 ## Enumy
 

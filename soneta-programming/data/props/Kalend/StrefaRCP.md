@@ -5,13 +5,6 @@ Opis: Element szczegółowy dnia RCP (DzienRCP). Strefa czasowa zarejestrowana p
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Dzien` → `DzienRCP`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 5
-- podlisty: 0
-- subrowy: 1
-- razem: 14
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Czas | `Time` | tylko-odczyt |  |  |

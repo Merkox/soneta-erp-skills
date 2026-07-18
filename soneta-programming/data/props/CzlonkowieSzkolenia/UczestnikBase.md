@@ -5,13 +5,7 @@ Opis: Kartoteka uczestników i członków organizacji. Przechowuje dane osobowe,
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHost`, `IGIODOWymianaDanychHost`, `IGIODOOświadczenieHost`, `IEmailElement`, `IOceniany`
-
-- pola bazodanowe (zapisywalne): 66
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 14
-- podlisty: 21
-- subrowy: 0
-- razem: 103
+Selektor: pole `Typ` (`Soneta.CzlonkowieSzkolenia.TypUczestnika`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -102,7 +96,7 @@ Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHos
 | Sygnatariusz | `bool` | bazodanowe |  |  |
 | SygnatariuszData | `Date` | bazodanowe |  |  |
 | Symbol | `string` | tylko-odczyt |  |  |
-| Typ | `Soneta.CzlonkowieSzkolenia.TypUczestnika` (enum) | bazodanowe |  |  |
+| Typ | `Soneta.CzlonkowieSzkolenia.TypUczestnika` (enum) | bazodanowe, selektor |  |  |
 | TypyDzialalnosci | `SubTable<Soneta.CzlonkowieSzkolenia.TypDzialalUcz>` | podlista |  |  |
 | TytulNaukowy | `string` | bazodanowe | Tytul naukowy | Tytul naukowy. |
 | TytulZawodowy | `string` | bazodanowe | Tytul zawodowy | Tytul zawodowy. |
@@ -118,6 +112,17 @@ Implementuje interfejsy: `IPeselHost`, `INipHost`, `IPlecHost`, `IGIODOZgodnyHos
 | Zajecia | `View` | podlista |  |  |
 | Zgloszenia | `SubTable<Soneta.CzlonkowieSzkolenia.ZgloszenieUczestnik>` | podlista |  |  |
 | ZgodnoscGIODOPotwierdzona | `bool` |  |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `UczestnikSzkolenia` | 1 | `Soneta.CzlonkowieSzkolenia.UczestnikSzkolenia` |  |
+| `CzlonekZwyczajny` | 2 | `Soneta.CzlonkowieSzkolenia.CzlonekZwyczajny` | Członek zwyczajny |
+| `CzlonekWspierajacy` | 3 | `Soneta.CzlonkowieSzkolenia.CzlonekWspierajacy` | Członek wspierający |
 
 ## Enumy
 

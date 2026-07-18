@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IŹródłoKoloruElementu`
 
-- pola bazodanowe (zapisywalne): 16
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 2
-- razem: 24
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BackColor | `int` |  |  |  |

@@ -5,13 +5,6 @@ Opis: Konfiguracja uprawnień zawodowych przyznawanych w ramach danego rodzaju s
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaUprawnienia | `Soneta.HR.DefinicjaUprawnienia` | bazodanowe |  |  |

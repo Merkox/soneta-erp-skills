@@ -3,13 +3,7 @@ Nazwa tabeli: `Kalendarze`
 Opis: Kalendarz pracy określający normy czasu pracy, zasady rozliczania nadgodzin, godziny nocne oraz powiązanie z domyślną definicją dnia. Może być kalendarzem ogólnym lub indywidualnym kalendarzem pracownika bądź umowy.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 44
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 3
-- podlisty: 4
-- subrowy: 4
-- razem: 57
+Selektor: pole `Typ` (`Soneta.Kalend.TypKalendarza`) — wiele typów w jednej tabeli, podtypów: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -63,13 +57,27 @@ Guided: root
 | RuntimeInfo.Identifier | `string` | bazodanowe | Identyfikator |  |
 | RuntimeInfo.Project | `Compiler.RuntimeProject` | bazodanowe | Projekt |  |
 | RuntimeInfo.WgProject | `Key` | podlista |  |  |
-| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kalend.TypKalendarza` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Umowa | `Soneta.Kalend.IUmowaZKalendarzem` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | UwzglWymiarEtatu | `bool` | bazodanowe |  |  |
 | WersjonowanieCzas | `bool` | bazodanowe |  |  |
 | WersjonowaniePlan | `bool` | bazodanowe |  |  |
 | WeryfikacjaRegul | `Soneta.Kalend.WeryfikacjaRegulCzasuPracy` (enum) | bazodanowe |  |  |
 | Weryfikatory | `SubTable<Soneta.Kalend.WeryfikatorKalendarza>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Kalendarz` | 1 | `Soneta.Kalend.Kalendarz` | Kalendarz |
+| `KalendarzPracownika` | 2 | `Soneta.Kalend.KalendarzPracownika` |  |
+| `SeriaDni` | 3 | `Soneta.Kalend.SeriaDni` | Seria dni |
+| `KalendarzUmowy` | 4 | `Soneta.Kalend.KalendarzUmowy` |  |
+| `KalendarzPlanuKopia` | 10 | `Soneta.Kalend.KalendarzPlanuKopia` |  |
+| `KalendarzPracyKopia` | 11 | `Soneta.Kalend.KalendarzPracyKopia` |  |
 
 ## Relacje interfejsowe
 

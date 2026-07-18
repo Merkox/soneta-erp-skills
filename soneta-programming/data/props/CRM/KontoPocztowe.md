@@ -5,17 +5,11 @@ Opis: Konfiguracja konta pocztowego e-mail operatora systemu. Przechowuje parame
 Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IRightsSource`
-
-- pola bazodanowe (zapisywalne): 29
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 3
-- podlisty: 4
-- subrowy: 1
-- razem: 38
+Selektor: pole `AccountType` (`Soneta.CRM.AuthProviderType`) — wiele typów w jednej tabeli, podtypów: 3
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| AccountType | `Soneta.CRM.AuthProviderType` (enum) | bazodanowe, tylko-odczyt | Typ dostawcy | Typ dostawcy autoryzacji |
+| AccountType | `Soneta.CRM.AuthProviderType` (enum) | bazodanowe, tylko-odczyt, selektor | Typ dostawcy | Typ dostawcy autoryzacji |
 | Algorytm | `bool` | bazodanowe |  | Określa czy istnieje algorytm dla konta pocztowego. |
 | AuthProvider | `Soneta.CRM.Config.AuthProvider` | bazodanowe | Dostawca Autoryzacji | Dostawca Autoryzacji |
 | Blokada | `bool` | bazodanowe | Blokada | Określa czy konto jest zablokowane. |
@@ -53,6 +47,17 @@ Implementuje interfejsy: `IRightsSource`
 | UploadSentMail | `bool` | bazodanowe | Po udanej wysyłce wiadomości zapisz ją w folderze wiadomości wysłanych na serwerze |  |
 | Wiadomosci | `SubTable<Soneta.CRM.WiadomoscEmail>` | podlista |  |  |
 | ZamienZKL | `bool` | bazodanowe | Zamień znaki końca linii | Określa czy znaki końca linii mają zostać zamienione. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `AccountType`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Password` | 1 | `Soneta.CRM.Config.PasswordAccount` |  |
+| `Gmail` | 2 | `Soneta.CRM.Config.GmailAccount` |  |
+| `Outlook` | 3 | `Soneta.CRM.Config.OutlookAccount` |  |
 
 ## Enumy
 

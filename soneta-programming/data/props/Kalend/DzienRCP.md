@@ -5,13 +5,6 @@ Opis: Element szczegółowy pracownika (Pracownik). Dzień RCP pracownika — za
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Pracownik` → `Pracownik`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 7
-- podlisty: 5
-- subrowy: 1
-- razem: 19
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Bledy | `MemoText` | bazodanowe, podlista |  |  |

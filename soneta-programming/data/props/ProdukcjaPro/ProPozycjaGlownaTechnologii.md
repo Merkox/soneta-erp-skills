@@ -5,13 +5,6 @@ Opis: Element szczegółowy technologii produkcyjnej (ProTechnologia). Wskazuje 
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Technologia` → `ProTechnologia`
 
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 2
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | PozycjaGlowna | `Soneta.ProdukcjaPro.IProPozycjaGlowna` | bazodanowe | Pozycja główna | Pozycja główna technologii. |

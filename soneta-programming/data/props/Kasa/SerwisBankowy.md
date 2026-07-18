@@ -5,13 +5,6 @@ Opis: Definicja serwisu bankowości elektronicznej online umożliwiającego bezp
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | IsActive | `bool` | tylko-odczyt |  |  |

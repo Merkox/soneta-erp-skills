@@ -3,17 +3,11 @@ Nazwa tabeli: `PrzecenyOkres`
 Opis: Definicja promocji okresowej (przeceny) obowiązującej w określonym przedziale czasu. Obsługuje promocje ogólne, indywidualne (dla kontrahenta) i grupowe (dla grupy kontrahentów) z konfiguracją priorytetu, kierunku ceny, przypisanego cennika i magazynu oraz opcjami zatwierdzania i rabatowania.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 12
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 0
-- razem: 20
+Selektor: pole `Cel` (`Soneta.Towary.CelPrzecenyOkresowej`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
-| Cel | `Soneta.Towary.CelPrzecenyOkresowej` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Cel | `Soneta.Towary.CelPrzecenyOkresowej` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Cena | `Soneta.Towary.DefinicjaCeny` | bazodanowe | Cena przeceniana |  |
 | GrupaKontrahentow | `FeatureDefinition` | bazodanowe | Nazwa cechy grupującej | Określa dla jakiej grupy kontrahentów jest promocja grupowa. |
 | GrupaKontrahentowWartosc | `string` | bazodanowe | Wartość cechy grupującej | Określa dla jakiej grupy kontrahentów jest promocja grupowa. |
@@ -33,6 +27,16 @@ Guided: root
 | Stosowanie | `Soneta.Towary.StosowaniePrzeceny` (enum) | bazodanowe | Stosowanie przeceny okresowej | Stosowawnie przeceny okresowej. |
 | Typ | `Soneta.Towary.TypPrzecenyOkresowej` (enum) | bazodanowe |  | Wskazuje na typ danej promocji okresowej, ważne przy ewentualnym ustalaniu priorytetów w przypadku zachodzących na siebie okresów promocji. |
 | Zatwierdzona | `bool` | bazodanowe |  | Wskazuje na to, czy promocja jest zatwierdzona. |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Cel`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `PrzecenaCeny` | 0 | `Soneta.Towary.PrzecenaOkresowaCeny` | Przecena okresowa |
+| `PrzecenaRabatu` | 1 | `Soneta.Towary.PrzecenaOkresowaRabatu` | Rabat okresowy |
 
 ## Enumy
 

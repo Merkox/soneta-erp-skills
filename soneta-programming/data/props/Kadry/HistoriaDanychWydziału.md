@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Wydzial` → `Wydzial`
 Implementuje interfejsy: `IMetrykaWydziałuHost`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktualnosc | `FromTo` | bazodanowe, podlista |  |  |

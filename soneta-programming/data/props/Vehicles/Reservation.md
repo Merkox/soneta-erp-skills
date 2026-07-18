@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IDocumentHostCRM`, `IEmailElement`
 
-- pola bazodanowe (zapisywalne): 17
-- pola kalkulowane (zapisywalne): 9
-- pola tylko-odczyt: 18
-- podlisty: 5
-- subrowy: 1
-- razem: 50
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Active | `bool` | tylko-odczyt |  |  |

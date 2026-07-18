@@ -5,13 +5,6 @@ Opis: Słownik wersji produktów obsługiwanych w module wsparcia technicznego. 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 7
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 8
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AvailableForDownload | `bool` | tylko-odczyt |  |  |

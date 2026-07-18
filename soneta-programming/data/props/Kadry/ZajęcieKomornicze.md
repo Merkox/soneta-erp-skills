@@ -7,13 +7,6 @@ Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `ZajęcieKomorniczeHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
 
-- pola bazodanowe (zapisywalne): 10
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 7
-- podlisty: 8
-- subrowy: 1
-- razem: 28
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowane | `bool` | bazodanowe, tylko-odczyt |  |  |

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Implementuje interfejsy: `IBudzetowany`, `IEmailElement`, `IElementSlownika`, `IProjekt`, `IDocumentHostCRM`
 
-- pola bazodanowe (zapisywalne): 21
-- pola kalkulowane (zapisywalne): 11
-- pola tylko-odczyt: 22
-- podlisty: 22
-- subrowy: 1
-- razem: 77
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Aktywny | `bool` | bazodanowe, tylko-odczyt | Aktywny | Wskazuje, czy projekt w tym stanie jest aktywny (otwarty). |

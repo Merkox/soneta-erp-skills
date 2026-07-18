@@ -5,13 +5,6 @@ Opis: Kafelek na pulpicie wyświetlający dane z folderu, wskaźnika lub innego 
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Dashboard` → `DashboardView`
 
-- pola bazodanowe (zapisywalne): 19
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 13
-- podlisty: 4
-- subrowy: 0
-- razem: 39
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adjustments | `SubTable<Db.DashboardViewAdjustment>` | podlista |  |  |

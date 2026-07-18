@@ -4,13 +4,7 @@ Tytuł: Karty opisu stanowisk
 Opis: Dokument karty opisu stanowiska (KOS) tworzony na podstawie definicji stanowiska lub innego źródła. Zbiera w jednym miejscu kompetencje, obowiązki i wymagania dotyczące stanowiska na określony dzień.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 5
-- subrowy: 0
-- razem: 8
+Selektor: pole `Typ` (`Soneta.HR2.TypyKartOpisuStanowiska`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -20,8 +14,18 @@ Guided: root
 | RazemElementyOceny | `View` | podlista |  |  |
 | TylkoKompetencje | `View` | podlista |  |  |
 | TylkoZachowania | `View` | podlista |  |  |
-| Typ | `Soneta.HR2.TypyKartOpisuStanowiska` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.HR2.TypyKartOpisuStanowiska` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Zrodlo | `Soneta.Kadry.IŹródłoKartyOpisuStanowiska` | bazodanowe, tylko-odczyt, iface-ref |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `KartaOpisuStanowiska` | 1 | `Soneta.HR2.KartaOpisuStanowiska` |  |
+| `OgłoszenieOPracę` | 2 | `Soneta.HR2.KartaOpisuStanowiskaOgłoszenie` | Karta opisu stanowiska (ogłoszenie) |
 
 ## Relacje interfejsowe
 

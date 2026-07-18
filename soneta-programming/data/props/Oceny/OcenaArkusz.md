@@ -4,13 +4,7 @@ Tytuł: Arkusze oceny
 Opis: Arkusz oceny wypełniany przez oceniającego dla konkretnego ocenianego w ramach realizacji oceny. Przechowuje typ, etap, wartość zagregowaną i punktację, łącząc definicję arkusza z uczestnikami procesu oceniania.
 Tabela konfiguracyjna: Nie
 Guided: root
-
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 13
-- podlisty: 8
-- subrowy: 0
-- razem: 26
+Selektor: pole `TypOceny` (`Soneta.Oceny.TypOceny`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -36,10 +30,20 @@ Guided: root
 | TylkoZachowania | `View` | podlista |  |  |
 | TylkoZadania | `View` | podlista |  |  |
 | Typ | `Soneta.Oceny.TypArkuszaOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
-| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt |  |  |
+| TypOceny | `Soneta.Oceny.TypOceny` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wartosc | `Percent` | bazodanowe, tylko-odczyt |  |  |
 | WartoscWgKategorii | `bool` | bazodanowe, tylko-odczyt |  |  |
 | WartoscWgWagi | `Percent` | bazodanowe, tylko-odczyt |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `TypOceny`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Ocena` | 1 | `Soneta.Oceny.OcenaArkusz` |  |
+| `Ankieta` | 2 | `Soneta.Ankiety.AnkietaArkusz` | Arkusz ankiety |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,7 @@ Tabela konfiguracyjna: Nie
 Guided: root
 Historyczna: Tak — wersje (historia) w tabeli `AkordHistoria`
 Implementuje interfejsy: `IBazaZrodlaWyplaty`
-
-- pola bazodanowe (zapisywalne): 2
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 4
-- podlisty: 5
-- subrowy: 0
-- razem: 11
+Selektor: pole `Typ` (`Soneta.Kadry.TypAkordu`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -23,9 +17,19 @@ Implementuje interfejsy: `IBazaZrodlaWyplaty`
 | Okres | `FromTo` | bazodanowe, podlista |  |  |
 | PelnyOkres | `bool` | bazodanowe, tylko-odczyt |  |  |
 | Pracownik | `Soneta.Kadry.Pracownik` | bazodanowe, tylko-odczyt |  |  |
-| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypAkordu` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | Wydzial | `Soneta.Kadry.Wydzial` | bazodanowe | Jednostka organizacyjna |  |
 | Zestawienia | `FromToSubTable<Soneta.Kalend.ZestawienieAkorduBase>` | podlista |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Prosty` | 1 | `Soneta.Kadry.AkordProsty` | Akord |
+| `Grupowy` | 2 | `Soneta.Kadry.AkordGrupowy` | Akord grupowy |
 
 ## Enumy
 

@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IRightsSource`, `IElementSlownika`
 
-- pola bazodanowe (zapisywalne): 31
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 6
-- podlisty: 6
-- subrowy: 0
-- razem: 43
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | AlgorytmIlosciMaterial | `Soneta.ProdukcjaPro.ProAlgorytmWyliczaniaIlosci` (enum) | bazodanowe | Algorytm ilości materiał | Algorytm wyliczania ilości materiału dla wydziału. |

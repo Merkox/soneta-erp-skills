@@ -5,13 +5,6 @@ Opis: Konfiguracja drukarki fiskalnej: nazwa, port, symbol kasy, ustawienia druk
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 56
-- pola kalkulowane (zapisywalne): 5
-- pola tylko-odczyt: 1
-- podlisty: 2
-- subrowy: 0
-- razem: 64
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Adres | `string` | bazodanowe |  |  |

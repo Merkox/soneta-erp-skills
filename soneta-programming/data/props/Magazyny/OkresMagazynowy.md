@@ -5,13 +5,6 @@ Opis: Okres magazynowy definiujący przedział czasowy, w ramach którego ewiden
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 1
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 3
-- podlisty: 1
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Info | `string` | tylko-odczyt |  |  |

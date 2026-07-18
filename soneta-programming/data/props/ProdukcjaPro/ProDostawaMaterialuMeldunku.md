@@ -5,13 +5,6 @@ Opis: Element szczegółowy dostawy materiału meldunku (ProMaterialMeldunku). O
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `MaterialMeldunku` → `ProMaterialMeldunku`
 
-- pola bazodanowe (zapisywalne): 5
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 5
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Dostawa | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  | Wskazana dostawa dla dostawy materiału meldunku. |

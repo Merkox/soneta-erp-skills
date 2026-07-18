@@ -6,13 +6,6 @@ Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `Zestawienie` → `ZestawienieKS`
 Implementuje interfejsy: `IPozycjaZestawieniaRoot`
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 12
-- podlisty: 2
-- subrowy: 0
-- razem: 23
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | BlokadaDodPozycji | `bool` | bazodanowe | Blokada dod subpozycji | Blokada możliwości dodawania subpozycji |

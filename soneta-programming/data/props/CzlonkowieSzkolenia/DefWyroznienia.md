@@ -5,13 +5,6 @@ Opis: Słownik definicji wyróżnień, certyfikatów i odznaczeń przyznawanych 
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 8
-- pola kalkulowane (zapisywalne): 2
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 1
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Nazwa | `string` | bazodanowe | Nazwa szkolenia | Nazwa szkolenia. |

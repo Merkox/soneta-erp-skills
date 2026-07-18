@@ -4,13 +4,6 @@ Tytuł: Importy, eksporty XML
 Opis: Rejestr operacji importu i eksportu XML. Przechowuje informację o wykonanej operacji: obiekt źródłowy, wykorzystaną definicję XML, ścieżkę pliku, rodzaj operacji (import/eksport), przetworzony dokument XML oraz wynik walidacji.
 Tabela konfiguracyjna: Nie
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 2
-- podlisty: 1
-- subrowy: 0
-- razem: 9
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DefinicjaXmlNag | `Soneta.Core.DefXmlNag` | bazodanowe | Definicja wykorzystana do importu/eksportu. |  |

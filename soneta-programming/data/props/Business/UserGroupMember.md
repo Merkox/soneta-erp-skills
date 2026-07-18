@@ -5,13 +5,6 @@ Opis: Członkostwo w grupie użytkowników. ŝączy operatora lub inny podmiot a
 Tabela konfiguracyjna: Tak
 Guided: child — nadrzędna przez pole `UserGroup` → `UserGroup`
 
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 3
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Locked | `bool` | bazodanowe | Zablokowany | Określa czy członek grupy użytkowników jest zablokowany |

@@ -5,13 +5,7 @@ Opis: Wtyczka rozszerzająca pojedynczy element (zadanie lub tranzycję) procesu
 Tabela konfiguracyjna: Tak
 Guided: root
 Implementuje interfejsy: `IWfPlugInItemHost`
-
-- pola bazodanowe (zapisywalne): 3
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 8
-- podlisty: 4
-- subrowy: 0
-- razem: 15
+Selektor: pole `Type` (`WfPlugInItemType`) — wiele typów w jednej tabeli, podtypów: 6
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -28,8 +22,22 @@ Implementuje interfejsy: `IWfPlugInItemHost`
 | Name | `string` | bazodanowe | Nazwa | Nazwa tranzycji |
 | PlugIn | `Soneta.Workflow.Config.IWfPlugInItemHost` | bazodanowe, tylko-odczyt, iface-ref |  |  |
 | TableName | `string` | bazodanowe, tylko-odczyt | Klasa | Klasa obiektu nadrzędanego. |
-| Type | `WfPlugInItemType` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Type | `WfPlugInItemType` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
 | VariantTypeName | `string` | bazodanowe | Typ wtyczki wielowariantowej | Typ wtyczki wielowariantowej |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Type`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Task` | 1 | `Soneta.Workflow.Config.WfTaskPlugIn` | Zadanie |
+| `Transition` | 2 | `Soneta.Workflow.Config.WfTransitionPlugIn` | Przejście |
+| `ProcessRole` | 3 | `Soneta.Workflow.Config.WfProcessRolePlugIn` | Rola procesowa |
+| `TaskTrigger` | 4 | `Soneta.Workflow.Config.WfTaskTriggerPlugIn` | Wyzwalacz zadania |
+| `TaskSource` | 5 | `Soneta.Workflow.Config.WfTaskSourcePlugIn` | Źródło zadania |
+| `SysNotification` | 6 | `Soneta.Workflow.Config.WfSysNotificationPlugIn` | Powiadomienie |
 
 ## Relacje interfejsowe
 

@@ -5,13 +5,6 @@ Opis: Rejestr wyróżnień, certyfikatów i odznaczeń przyznanych uczestnikom. 
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 3
-- subrowy: 1
-- razem: 22
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Anulowane | `bool` | bazodanowe |  | Wyróżnienie anulowane. |

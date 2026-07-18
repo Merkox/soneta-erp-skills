@@ -4,13 +4,7 @@ Tytuł: Definicje nagród lub kar
 Opis: Słownik definicji nagród i kar pracowniczych. Określa typ (nagroda/kara), nazwę, powiązany element płacowy do rozliczenia oraz domyślną kwotę nagrody lub kary.
 Tabela konfiguracyjna: Tak
 Guided: root
-
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 1
-- podlisty: 0
-- subrowy: 0
-- razem: 5
+Selektor: pole `Typ` (`Soneta.Kadry.TypNagrodyKary`) — wiele typów w jednej tabeli, podtypów: 2
 
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
@@ -18,7 +12,17 @@ Guided: root
 | Element | `Soneta.Place.DefinicjaElementu` | bazodanowe |  |  |
 | Kwota | `Currency` | bazodanowe |  |  |
 | Nazwa | `string` | bazodanowe |  |  |
-| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt |  |  |
+| Typ | `Soneta.Kadry.TypNagrodyKary` (enum) | bazodanowe, tylko-odczyt, selektor |  |  |
+
+## Selektor — podtypy w jednej tabeli
+
+Tabela przechowuje różne typy obiektów rozróżniane wartością selektora (pole `Typ`).
+Każdy podtyp rejestruje `[assembly: BusinessRow(typeof(...), wartość)]`.
+
+| Wartość | Nr | Klasa podtypu | Tytuł |
+|---------|----|---------------|-------|
+| `Nagroda` | 1 | `Soneta.Kadry.DefinicjaNagrody` | Definicja nagrody |
+| `Kara` | 2 | `Soneta.Kadry.DefinicjaKary` | Definicja kary |
 
 ## Enumy
 

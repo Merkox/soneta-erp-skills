@@ -4,13 +4,6 @@ Tytuł: Parametry paneli BI
 Opis: Pojedynczy parametr w zestawie parametrów panelu BI. Przechowuje nazwę, typ danych oraz wartość domyślną parametru filtrującego wizualizację. Parametry mogą być przypisane do konkretnego kafelka na dashboardzie.
 Tabela konfiguracyjna: Tak
 
-- pola bazodanowe (zapisywalne): 0
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 5
-- podlisty: 1
-- subrowy: 0
-- razem: 6
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | DataType | `string` | bazodanowe, tylko-odczyt | Typ danych |  |

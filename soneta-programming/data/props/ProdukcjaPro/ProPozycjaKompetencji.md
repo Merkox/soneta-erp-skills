@@ -5,13 +5,6 @@ Opis: Element szczegółowy właściwości produkcyjnej (ProKompetencja). Defini
 Tabela konfiguracyjna: Nie
 Guided: child — nadrzędna przez pole `Kompetencja` → `ProKompetencja`
 
-- pola bazodanowe (zapisywalne): 4
-- pola kalkulowane (zapisywalne): 0
-- pola tylko-odczyt: 0
-- podlisty: 0
-- subrowy: 0
-- razem: 4
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Kompetencja | `Soneta.ProdukcjaPro.ProKompetencja` | bazodanowe, guided-parent | Właściwość | Właściwość dla pozycji właściwości. |

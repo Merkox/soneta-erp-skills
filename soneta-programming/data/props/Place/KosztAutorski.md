@@ -5,13 +5,6 @@ Opis: Ewidencja kosztów uzyskania przychodów z tytułu praw autorskich (50% KU
 Tabela konfiguracyjna: Nie
 Guided: root
 
-- pola bazodanowe (zapisywalne): 6
-- pola kalkulowane (zapisywalne): 1
-- pola tylko-odczyt: 4
-- podlisty: 0
-- subrowy: 0
-- razem: 11
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | CzasPrzepracowany | `Time` | bazodanowe | Czas przepracowany |  |

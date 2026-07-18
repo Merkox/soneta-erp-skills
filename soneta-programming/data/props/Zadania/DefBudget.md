@@ -5,13 +5,6 @@ Opis: Szablon budżetu projektu określający źródła danych planowania i real
 Tabela konfiguracyjna: Tak
 Guided: root
 
-- pola bazodanowe (zapisywalne): 13
-- pola kalkulowane (zapisywalne): 3
-- pola tylko-odczyt: 2
-- podlisty: 3
-- subrowy: 0
-- razem: 21
-
 | Pole | Typ | Rodzaj | Tytuł | Opis |
 |------|-----|--------|-------|------|
 | Algorytm | `bool` |  |  |  |
