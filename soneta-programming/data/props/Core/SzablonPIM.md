@@ -1,0 +1,19 @@
+# Pola i właściwości klasy biznesowej: `Soneta.Core.PIM.SzablonPIM`
+Nazwa tabeli: `SzablonyPIM`
+Tytuł: Szablony PIM
+Opis: Definicje rodzajów szablonów PIM używanych do klasyfikacji opisów. Określają nazwy typów wskazujących sposób organizacji oraz zastosowania treści.
+Tabela konfiguracyjna: Tak
+Guided: root
+
+- pola bazodanowe (zapisywalne): 3
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 3
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| Nazwa | `string` | bazodanowe |  |  |
+| Priorytet | `int` | bazodanowe |  |  |
+| Tabela | `string` | bazodanowe |  |  |

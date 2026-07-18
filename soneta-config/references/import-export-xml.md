@@ -5,6 +5,35 @@ obsługuje trzy zastosowania: **import według rekordów** (dane konfiguracyjne,
 bazy demo), **import przez logikę biznesową** (dokumenty i dane operacyjne z pełną walidacją)
 oraz **eksport** wskazanych rekordów wraz z powiązanymi danymi (datapack).
 
+## Zasada nadrzędna — najpierw odczytaj rzeczywistą strukturę, potem generuj XML
+
+**Weryfikacja nazw pól, typów, wartości enum i struktury to zadanie AGENTA, nie operatora.**
+Nie zgaduj i **nie deleguj sprawdzenia użytkownikowi** — nie kończ pliku listą „do potwierdzenia
+przez Ciebie" ani prośbą, by operator zweryfikował pola. Operator zna proces biznesowy; ustalenie
+dokładnych nazw pól, ich typów i tego, czy pole jest kolekcją czy subrowem, należy do agenta
+i robi się to **skanem DLL**. Zanim zbudujesz jakikolwiek plik importu, **obowiązkowo** odczytaj
+rzeczywistą strukturę docelowego obiektu z bibliotek DLL — to część zadania, nie krok opcjonalny:
+
+- **`scan-props`** (`/soneta-programming`) — pola i właściwości obiektu oraz jego podkolekcje.
+  Tryb *według rekordów* → tylko pola z `Rodzaj = bazodanowe`; tryb *biznesowy* → właściwości
+  biznesowe. Stąd bierzesz **dokładne nazwy** pól, typy i dozwolone wartości (enum).
+- **`scan-forms`** (`/soneta-programming`) — zakładki, sekcje danych i **kolejność pól**
+  formularza; w trybie `business="true"` kolejność wprowadzania = kolejność pól na formularzu.
+  Stąd bierzesz kolejność elementów i to, co logicznie stanowi „dane obiektu" (zakres eksportu).
+
+Dopiero na tej podstawie generuj XML. Samodzielny odczyt skanami jest **domyślną i wymaganą**
+drogą; prośba do operatora o weryfikację pól to sygnał, że pominięto skan. Dostęp do DLL jest
+częścią środowiska pracy — a gdy naprawdę go brak, jawnie to powiedz i oznacz nazwy jako
+niezweryfikowane, zamiast zlecać ich sprawdzenie użytkownikowi.
+
+**Rozgranicz dwie rzeczy:** weryfikacja struktury skanem (`scan-props`/`scan-forms`) jest
+**read-only i zawsze po stronie agenta** — wchodzi w budowę pliku. Natomiast **próbny import do
+bazy (`dbmgr importxml`) i odczyt efektu na żywej aplikacji (`buscall`) modyfikują bazę /
+uruchamiają program — wykonuje je agent, ale dopiero na wyraźne żądanie użytkownika** (nie
+importuj samowolnie po samym zbudowaniu pliku). Kolejność pracy: `scan-props`/`scan-forms` →
+budowa pliku; a gdy użytkownik zleci test — `dbmgr importxml` → odczyt efektu z programu
+(zob. *Testowanie plików XML*).
+
 ## Szkielet pliku
 
 ```xml
@@ -79,6 +108,7 @@ regionalnych:
 | Tekst | wprost; pusty element `<Pole />` = pusty tekst | `<Nazwa>Spółka z o.o.</Nazwa>` |
 | Liczba | kropka dziesiętna, bez separatorów tysięcy | `<Kurs>4.1234</Kurs>` |
 | Data | `RRRR-MM-DD` | `<Data>2014-09-01</Data>` |
+| Okres (od–do, `FromTo`) | `od...do` (separator `...`); puste „od"/„do" = zakres otwarty; `(wszystko)` = bez ograniczeń; `(pusty)` = brak okresu | `<Okres>2026-01-02...</Okres>`, `<Aktualnosc>(wszystko)</Aktualnosc>` |
 | Logiczny | `True` / `False` (wielkość liter dowolna) | `<Domyslna>True</Domyslna>` |
 | Enum | nazwa wartości | `<Stan>Zatwierdzony</Stan>` |
 | Kwota z walutą | liczba + kod waluty | `<Cena>5.13 PLN</Cena>` |
@@ -108,7 +138,7 @@ tworzenia obiektu.
 | `addnew="true"` | kolekcja | tylko dopisuj — nie kasuj istniejących elementów kolekcji |
 | `relationsimportmode="update"` | kolekcja | aktualizuj po GUID zamiast zastępować |
 | `duplicate="Number"` | pole | przy konflikcie unikalności dołóż przyrostek ` 2`, ` 3`… |
-| `date` | rekord w kolekcji historycznej | data wpisu historii (aktualizacja od tej daty) |
+| `date` | rekord w kolekcji historycznej | aktualizacja **od tej daty** — cięcie okresu: nowy zapis (klon poprzedniego z nadpisanymi polami), poprzedni zostaje do dnia przed. Zob. *Aktualizacja historyczna* |
 | `ctor` | rekord (tryb biznesowy) | wybór wariantu tworzenia obiektu |
 | `priority`, `versionName` | session (dbinit) | zob. sekcję o dbinit |
 
@@ -153,6 +183,48 @@ są elementy z pliku. Modyfikatory: `addnew="true"` (tylko dopisywanie),
 `relationsimportmode="update"` (aktualizacja po GUID; elementy nieobecne w pliku są kasowane
 po zakończeniu), `fromto` (kasowanie ogranicza się do okresu).
 
+**Kolekcje historyczne (zapisy „od–do") wymagają `addnew="true"`.** Kolekcja przechowująca
+zapisy historyczne obiektu (np. historia danych kadrowych pracownika) nie znosi domyślnej
+podmiany: kasowanie zawartości przy ponownym wczytaniu usuwałoby zapisy historii, a **ostatniego
+(jedynego) zapisu historii skasować nie można** — import kończy się wtedy błędem. Aby plik był
+**idempotentny** (bezpieczny do ponownego wczytania i przenoszenia między bazami), na kolekcji
+historycznej ustaw `addnew="true"` i nadaj rekordom historycznym **stały `guid`** — wtedy zapis
+o istniejącym GUID jest aktualizowany, a nie kasowany. `relationsimportmode="update"` **nie
+wystarcza** dla kolekcji historycznych.
+
+### Aktualizacja historyczna — zmiana wartości „od dnia" (`date`)
+
+Aby zmienić wartość **od wskazanej daty** (a nie nadpisać bieżący zapis), na rekordzie
+w kolekcji historycznej ustaw `date="RRRR-MM-DD"`. Silnik wykonuje wtedy **cięcie okresu**:
+dotychczasowy zapis obowiązuje do dnia poprzedzającego, a od podanej daty powstaje **nowy
+zapis** — klon poprzedniego z nadpisanymi polami. W treści rekordu podaj **tylko pola, które
+się zmieniają**; pozostałe (np. stanowisko, wymiar, powiązania) przechodzą z klonowanego zapisu.
+
+- Łącz z `addnew="true"` na kolekcji — chroni pozostałe zapisy historii przed skasowaniem.
+- `date` (nowy zapis **od daty**, „od dnia") vs `guid` na zapisie (**nadpisanie istniejącego**
+  zapisu, zmiana „wstecz", bez cięcia okresu) — świadomie wybierz jedno.
+- Identyfikuj obiekt nadrzędny po kluczu naturalnym (`where="Pole=wartość"`); gdy warunek
+  pasuje do wielu rekordów, import zgłasza błąd — doprecyzuj klucz.
+
+```xml
+<session xmlns="http://www.soneta.pl/schema/business" fromto="(wszystko)">
+  <Obiekt where="Klucz=wartość">
+    <Historia addnew="true">
+      <ZapisHistoryczny date="2026-08-01">
+        <!-- tylko pole, które zmieniamy; reszta klonuje się z poprzednika -->
+        <Pole>nowa wartość</Pole>
+      </ZapisHistoryczny>
+    </Historia>
+  </Obiekt>
+</session>
+```
+
+Zweryfikowane importem na bazie demo (zmiana stawki zaszeregowania pracownika od 1. dnia
+miesiąca): powstał nowy zapis „ważny od" tej daty ze zmienioną stawką, a poprzednia stawka
+pozostała na zapisie obowiązującym do dnia poprzedzającego. Efekt widać w programie na
+zakładce **Historia zapisów** obiektu (kolumna „Ważny od" + zmienione pole). Gotowy plik:
+[examples/aktualizacja-historyczna-stawka.xml](../examples/aktualizacja-historyczna-stawka.xml).
+
 ### Cechy (features)
 
 ```xml
@@ -175,7 +247,10 @@ Zasady:
 - **Kolejność elementów ma znaczenie** — właściwości są ustawiane po kolei, a każda może
   uruchamiać operacje biznesowe. Reguła praktyczna: odzwierciedlaj kolejność, w jakiej
   **operator wpisywałby dane na formularzu** (najpierw definicja dokumentu, potem kontrahent,
-  potem pozycje, na końcu stan).
+  potem pozycje, na końcu stan). Rzeczywistą kolejność pól i **sekcje danych** (zakładki, grupy)
+  formularza — nawet gdy masz tylko skompilowane DLL — odczytasz narzędziem **`scan-forms`**
+  ze skilla `/soneta-programming` (kolejność pól = kolejność wprowadzania; rozwija też ścieżki
+  pól i `Include`).
 - Dostępne właściwości biznesowe obiektu (oraz jego podkolekcje) zwraca narzędzie `scan-props`
   ze skilla `/soneta-programming`.
 - Nowy obiekt może wymagać parametrów tworzenia — przekazuje się je **atrybutami** elementu
@@ -213,6 +288,16 @@ Standardowy eksport działa **wyłącznie według rekordów**. Eksportowany jest
 - można dodatkowo wskazać kolekcje, relacje lub cechy do dołączenia (np. `Features`,
   nazwy kolekcji, ścieżki rozdzielane kropką).
 
+### Ustalenie zakresu eksportu
+
+Zanim wskażesz kolekcje, relacje i cechy do dołączenia, ustal, **co logicznie stanowi „dane
+obiektu"**. Podpowiada to narzędzie **`scan-forms`** ze skilla `/soneta-programming`: zakładki
+i sekcje formularza pokazują, które podkolekcje i cechy operator widzi jako część obiektu
+(listy `Grid` = kolekcje, zakładki systemowe = załączniki/cechy). Pełny zestaw kolekcji
+i relacji rekordu wylicza `scan-props` (`/soneta-programming`). **Świadomie ogranicz zakres**
+do danych potrzebnych w bazie docelowej — nadmiarowe relacje zewnętrzne rozrastają datapack
+o kolejne rekordy powiązane, których import może wymagać dodatkowych słowników.
+
 Struktura wyniku:
 
 - każdy rekord dostaje atrybuty `id` (identyfikator lokalny) i `guid`; typ pochodny — `class`;
@@ -225,6 +310,33 @@ Struktura wyniku:
 
 Plik wyniku eksportu jest bezpośrednio zdatny do importu według rekordów — to podstawowy
 sposób **przenoszenia ustawień konfiguracyjnych między bazami**.
+
+## Przykład: kompletny plik importu (pracownik etatowy)
+
+Gotowy, **zweryfikowany próbnym importem** plik: pracownik zatrudniony na umowę o pracę
+z wynagrodzeniem zasadniczym miesięcznym — [examples/import-pracownik-etatowy.xml](../examples/import-pracownik-etatowy.xml).
+Ilustruje obiekt w **modelu „root + historia"** (rekord główny + kolekcja zapisów historycznych,
+w których leżą właściwe dane) importowany **według rekordów**.
+
+Nieoczywiste ustalenia potwierdzone na żywej bazie (istotne dla każdego obiektu kadrowego,
+a wzorzec „root + historia" ma też inne obszary platformy):
+
+- **Kolekcja historyczna z `addnew="true"` + stały `guid` na zapisach** — inaczej ponowny
+  import wybucha na „kasowaniu ostatniego zapisu historii" (zob. *Zachowanie kolekcji…* wyżej).
+- **Dane trzymane w osobnej strukturze zapisuj tam, gdzie faktycznie są.** Część danych obiektu
+  (np. adresy pracownika) nie jest przechowywana wprost w rekordzie — wpisanie ich jako
+  podelementu głównego rekordu kończy się błędem. Miejsce i nazwy pól ustalaj skanami
+  (`scan-props`/`scan-forms` w `/soneta-programming`), nie zgaduj (zob. *Zasada nadrzędna*).
+- **Referencje przez standardowe GUID-y (z zerami) są przenośne** między bazami — dobre do
+  wskazywania słowników i korzeni struktur (wydział-korzeń, kalendarz podstawowy, definicja
+  elementu wynagrodzenia, tytuł ubezpieczenia). Referencje do rekordów o GUID nadawanym per baza
+  (np. konkretny wydział, urząd skarbowy) wymagają podmiany lub wskazania przez `where`.
+- **Format okresu `FromTo`:** `od...do` (puste „do" = okres otwarty, np. `2026-01-02...`);
+  **wymiar etatu** jako ułamek (`1/1`); **kwota z walutą** z kodem (`12,345.00 PLN`).
+
+Strukturę i dokładne nazwy pól obiektu pracownika (root, historia, warunki etatu, stawka)
+dokumentują receptury domeny Kadry-Płace w `/soneta-programming` (rozdziały o zatrudnieniu
+i o etacie).
 
 ## Pliki `*.dbinit.xml` — inicjowanie i konwersja bazy
 
@@ -247,8 +359,14 @@ osadzania (automatyczny przez Soneta.Sdk lub ręczny wpis w projekcie) opisuje a
 
 ## Testowanie plików XML
 
-Zbudowany plik przetestuj **próbą wczytania do bazy** narzędziem `dbmgr` (opis narzędzia:
-`/soneta-tools`):
+Próbny import do bazy i odczyt efektu na żywej aplikacji **modyfikują bazę / uruchamiają
+program**, więc wykonuje je agent **tylko na wyraźne żądanie użytkownika** — nie importuj
+samowolnie po samym zbudowaniu pliku (sam plik zweryfikuj strukturalnie skanem i tyle dostarcz,
+proponując test). Gdy żądanie testu pada, **całość robi agent, nie operator**: nie odsyłaj
+użytkownika, by sam wczytał plik i sprawdził wynik. Wtedy przetestuj plik **próbą wczytania do
+bazy** narzędziem `dbmgr`, a następnie **sam odczytaj efekt z programu** (odczyt pól / zrzut
+ekranu przez `buscall` — `/soneta-tools`) i potwierdź, że dane zmieniły się zgodnie z zamiarem
+(opis narzędzia: `/soneta-tools`):
 
 ```bash
 dbmgr importxml <NazwaBazy> plik.xml
@@ -269,6 +387,9 @@ Zasady:
 
 ## Checklisty
 
+**Przed budową pliku (obowiązkowo):**
+- [ ] Struktura obiektu odczytana skanami z DLL, a nie zgadnięta: `scan-props` (nazwy pól/właściwości, typy, wartości enum) i — dla `business="true"` — `scan-forms` (kolejność pól, sekcje danych). Zob. *Zasada nadrzędna* na górze.
+
 **Przed importem:**
 - [ ] Właściwy tryb: konfiguracja/inicjacja → według rekordów; dane operacyjne → logika biznesowa.
 - [ ] Rekordy główne to rekordy guidowane; GUID-y stałe i unikalne (nie generuj ich losowo przy każdym wydaniu pliku).
@@ -276,20 +397,31 @@ Zasady:
 - [ ] Business-mode: kolejność elementów jak przy wpisywaniu na formularzu; stan dokumentu na końcu.
 - [ ] Referencje przenośne: GUID lub `where` po kodzie/symbolu; bez `#ID`.
 - [ ] Kolekcje: świadomy wybór zastąpienia (domyślne) vs `addnew` vs `relationsimportmode="update"`.
+- [ ] Kolekcje historyczne („od–do"): `addnew="true"` + stały `guid` na zapisach (idempotencja; inaczej błąd „kasowanie ostatniego zapisu historii").
+- [ ] Zmiana wartości „od dnia" → `date="RRRR-MM-DD"` na zapisie (cięcie okresu, nowy zapis) + tylko zmieniane pola; nie mylić z nadpisaniem zapisu przez `guid`. Zob. *Aktualizacja historyczna*.
+- [ ] Dane trzymane w osobnej strukturze (np. adresy) zapisane we właściwym miejscu, nie wprost w rekordzie — miejsce potwierdzone skanem.
 - [ ] dbinit: `versionName`, `priority` i `dbversion` na każdym rekordzie głównym.
 
-**Testowanie pliku:**
+**Weryfikacja struktury (zawsze, część budowy pliku):**
+- [ ] Nazwy pól/typy/struktura (pole vs kolekcja vs subrow) zweryfikowane skanem przez agenta — read-only, nie zlecone użytkownikowi.
+
+**Testowanie na bazie — tylko na wyraźne żądanie użytkownika (wtedy wykonuje agent, nie operator):**
 - [ ] Próbne wczytanie na bazie testowej/kopii: `dbmgr importxml <baza> plik.xml` (→ `/soneta-tools`).
 - [ ] Ponowne wczytanie nie duplikuje rekordów (idempotencja identyfikacji).
-- [ ] Weryfikacja efektu na działającej aplikacji (buscall → `/soneta-tools`) lub testem
-  integracyjnym (`ImportBusinessXml` → artykuł *integration-tests* w `/soneta-programming`).
+- [ ] Efekt odczytany z programu **przez agenta** (buscall: odczyt pól / zrzut ekranu → `/soneta-tools`) lub testem
+  integracyjnym (`ImportBusinessXml` → artykuł *integration-tests* w `/soneta-programming`) — potwierdzona zgodność danych z zamiarem.
 
 ## Powiązania
 
 - `/soneta-programming` — warstwa programistyczna importu/eksportu (klasy `SessionReader` /
   `SessionWriter`): artykuł *sessionreader-sessionwriter*; ponadto *datapack-guidedrow*
   (rekordy guidowane, datapack), *row-types* (`OnImporting`/`OnImported`), *scan-props*
-  (inwentaryzacja pól i właściwości), *integration-tests* (`ImportBusinessXml`).
+  (inwentaryzacja pól i właściwości; wylicza też kolekcje i relacje do zakresu eksportu),
+  *scan-forms* (zakładki, sekcje danych i kolejność pól formularza — kolejność wprowadzania
+  pod `business="true"`; podpowiada zakres eksportu — co stanowi „dane obiektu"),
+  *integration-tests* (`ImportBusinessXml`).
+- `/soneta-form-xml` — składnia formularzy (`Page`/`Group`/`Field`/`DataContext`/`EditValue`);
+  zakładki i grupy jako sekcje danych do uzupełnienia.
 - `/soneta-tools` — `dbmgr` (operacje na bazach, import XML z CLI), `buscall` (weryfikacja
   efektów importu na żywej aplikacji).
 - [SKILL.md](../SKILL.md) — mapa tego skilla.

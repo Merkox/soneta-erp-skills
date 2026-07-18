@@ -1,0 +1,57 @@
+# Pola i właściwości klasy biznesowej: `Soneta.Zadania.DokumentCRM`
+Nazwa tabeli: `DokumentyCRM`
+Tytuł: Dokumenty powiązane
+Opis: Element szczegółowy hosta dokumentów CRM (IDocumentHostCRM). Łączy dokument (np. handlowy, księgowy) z zadaniem, projektem lub kampanią CRM, umożliwiając śledzenie dokumentacji biznesowej.
+Tabela konfiguracyjna: Nie
+Guided: child — nadrzędna przez pole `Host` → `IDocumentHostCRM`
+
+- pola bazodanowe (zapisywalne): 7
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 3
+- podlisty: 0
+- subrowy: 0
+- razem: 10
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| CzyZadaniePoprawne | `bool` | tylko-odczyt |  |  |
+| Data | `Date` | tylko-odczyt |  |  |
+| Dokument | `Soneta.Core.IDokumentCRM` | bazodanowe, iface-ref |  |  |
+| Domyslny | `bool` | bazodanowe |  |  |
+| Host | `Soneta.Zadania.IDocumentHostCRM` | bazodanowe, guided-parent, iface-ref |  |  |
+| KopiowanieDokCRM | `Soneta.Core.KopiowanieDokCRM` (enum) | bazodanowe |  |  |
+| PozycjaDokHandl | `Soneta.Handel.PozycjaDokHandlowego` | bazodanowe |  |  |
+| RodzajDokCRM | `Soneta.Zadania.RodzajDokCRM` (enum) | bazodanowe |  |  |
+| SumowanieWartosci | `Soneta.Core.SumowanieWartosciCRM` (enum) | bazodanowe |  |  |
+| Wartosc | `Currency` | tylko-odczyt |  |  |
+
+## Relacje interfejsowe
+
+Pola, których typ jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=...)]` innych tabel.
+Pole może wskazywać na rekord dowolnej z poniższych tabel.
+
+| Pole | Interfejs | Tabele implementujące |
+|------|-----------|------------------------|
+| Dokument | `IDokumentCRM` | `DokEwidencji`, `DokKasowyBase`, `DokRozliczBase`, `DokumentHandlowy`, `SprawaWindykacyjna`, `Zaplata` |
+| Host | `IDocumentHostCRM` | `Nieruchomosc`, `NieruchomoscHis`, `Projekt`, `Reservation`, `RozliczenieMediow`, `Urzadzenie`, `VehicleDetails`, `Zadanie` |
+
+## Enumy
+
+Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
+
+### KopiowanieDokCRM (`Soneta.Core.KopiowanieDokCRM`)
+- `Brak` = 0 — Brak
+- `Kopiowanie` = 1
+
+### SumowanieWartosciCRM (`Soneta.Core.SumowanieWartosciCRM`)
+- `Brak` = 0 — Brak
+- `Przychód` = 1
+- `Koszt` = 2
+- `PrzychódKoszt` = 3
+- `CenaZakupuKoszt` = 4
+
+### RodzajDokCRM (`Soneta.Zadania.RodzajDokCRM`)
+- `Brak` = 0
+- `DokHandlowy` = 1 — Dokument handlowy
+- `Część` = 2
+- `Usługa` = 3

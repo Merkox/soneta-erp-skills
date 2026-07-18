@@ -7,8 +7,9 @@ description: >
   wierszy); (2) pyta o konkretny mechanizm ORM — Session, Commit/Save, optimistic
   lock, Context, RowCondition, Datapack, ViewInfo, Features, thread-safety; (3) prosi
   o code review kodu biznesowego Soneta (safe-code); (4) pisze worker, extender,
-  akcję w menu Czynności, folder/listę; (5) chce zinwentaryzować moduły, pola lub
-  workery z bibliotek DLL; (6) chce rozpocząć nowy dodatek/rozszerzenie Soneta —
+  akcję w menu Czynności, folder/listę; (5) chce zinwentaryzować moduły, pola,
+  workery lub formularze/zakładki (pola, sekcje, kolejność wprowadzania) z bibliotek
+  DLL; (6) chce rozpocząć nowy dodatek/rozszerzenie Soneta —
   wygenerować szkielet źródeł z CLI (`dotnet new soneta-addon`, Soneta.MsBuild.SDK,
   szablony Soneta Platform Developer). Sięgnij też, gdy inny skill potrzebuje warstwy
   ORM/kodu biznesowego Soneta.
@@ -51,9 +52,10 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Receptury kodu per obiekt biznesowy (domena Handel) — `DokumentHandlowy` (faktury/magazynowe/zamówienia/korekty, relacje `IRelacjeService`, cykl życia, magazyn/partie/obroty, VAT/waluty, płatności, KSeF/fiskal/Intrastat, wydruki). Indeks + mapa receptur (HANDEL-W1–W82); rozdziały `references/domeny/handel/HANDEL01..HANDEL14` | [references/domeny/handel.md](references/domeny/handel.md) |
 | Receptury kodu per obiekt biznesowy (domena Kadry-Płace) — `Pracownik` (zatrudnienie i dane kadrowe, historia `PracHistoria`+`Etat`, dodatki, nieobecności/limity, plan pracy/RCP, umowy cywilnoprawne, naliczanie wypłat, listy płac, wydruki PDF). Indeks + mapa receptur (KADRY-A*…K*); rozdziały `references/domeny/kadry/KADRY01..KADRY11` | [references/domeny/kadry.md](references/domeny/kadry.md) |
 | **Zasady bezpiecznego kodu biznesowego — checklist do review i refaktoringu**                     | [references/safe-code.md](references/safe-code.md) |
-| Skanowanie pól obiektu biznesowego z DLL (Roslyn MetadataReference)                   | [references/scan-props.md](references/scan-props.md) |
-| Inwentaryzacja modułów i tabel (`*Module` / `*Row` / `*Table`) z DLL                  | [references/scan-modules.md](references/scan-modules.md) |
+| Pola obiektów biznesowych — dane wygenerowane (`data/props/`) + skaner/regeneracja z DLL      | [references/scan-props.md](references/scan-props.md) |
+| Moduły i tabele (`*Module` / `*Row` / `*Table`) — gotowy przegląd w `data/props/INDEX.md` + skaner z DLL | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
+| Zakładki, sekcje danych i pola formularzy (zasoby `*.pageform.xml`/`*.form.xml`) z DLL — katalog `data/forms/INDEX.md` + skaner na żądanie (`DataContext`/`EditValue`, `Include`, listy, kolejność pól pod kod i import XML) | [references/scan-forms.md](references/scan-forms.md) |
 | Inwentaryzacja folderów statycznych menu (`[assembly: FolderView]`) z DLL — drzewo, listy, formularze | narzędzie `scan-folders` w skillu `/soneta-config` |
 | **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | [references/buscall-live-testing.md](references/buscall-live-testing.md) (weryfikacja na żywo) |
 | **Import/eksport XML z kodu — `SessionReader`/`SessionWriter`** — konstruktory (`Session` vs `Login`), obsługa błędów (`CollectExceptions`, zdarzenie `ReaderException`/`ReaderResponse`), mapowanie GUID-ów (`AddGuidMap`, `GuidMapPolicy`), tryby kolekcji (`RelationsImportMode`), eksport datapacku z subexports, `ImportBusinessXml` w testach; struktura samego pliku XML → artykuł *import-export-xml* w `/soneta-config` | [references/sessionreader-sessionwriter.md](references/sessionreader-sessionwriter.md) |
@@ -336,11 +338,18 @@ Gotowe **receptury per obiekt biznesowy** (realne pola, kolekcje i workery) są 
 
 ## Narzędzia pomocnicze
 
-Skill udostępnia trzy skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (Roslyn `MetadataReference.CreateFromFile`):
+Skill udostępnia skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (metadane typów: Roslyn `MetadataReference.CreateFromFile`; zasoby osadzone: `System.Reflection.Metadata`):
 
-- `scan-modules.csx` — listuje moduły (`*Module`) i ich tabele (`*Row`/`*Table`) z Caption/Description. Dobre na start. Szczegóły, parametry i przykłady uruchomienia: [references/scan-modules.md](references/scan-modules.md).
-- `scan-props.csx` — wypisuje pola i właściwości kalkulowane konkretnej klasy biznesowej, rekurencyjnie po polach typu subrow. Sięgnij po niego, gdy znasz już tabelę i potrzebujesz jej kontraktu. Szczegóły: [references/scan-props.md](references/scan-props.md).
+- **Pola tabel — najpierw dane wygenerowane.** Kontrakty pól **wszystkich ~1200 tabel** są już wyeksportowane do [`data/props/`](data/props/) (plik na tabelę + [`data/props/INDEX.md`](data/props/INDEX.md)). Odczyt jest natychmiastowy — nie skanuj DLL, gdy tabela tam jest. Jak znaleźć i jak regenerować po zmianie wersji: [references/scan-props.md](references/scan-props.md).
+- **Moduły i tabele — gotowy przegląd w [`data/props/INDEX.md`](data/props/INDEX.md).** To zarazem indeks propsów i pełna inwentaryzacja: moduł (z `Opis`) → tabele `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik` (kolumna `Historia`: `historyczna → H` / `historia → P`). Odczyt natychmiastowy, dobre na start i do znalezienia `RowType`/`TableType`.
+- **Interfejsy — [`data/props/Interfaces.md`](data/props/Interfaces.md).** Wszystkie interfejsy z `[TableInfo(Interfaces=...)]` i tabele je implementujące (relacje interfejsowe w jednym miejscu, tabele linkowane do plików).
+- `scan-modules.csx` — skaner **na żądanie** listujący moduły i tabele z DLL (dla innego katalogu DLL niż ten, z którego zbudowano `data/props/`). Szczegóły: [references/scan-modules.md](references/scan-modules.md).
+- `export-props-all.csx` — **wsadowo** regeneruje cały `data/props/` z DLL (kompilacja budowana raz, ~1200 tabel w kilka sekund). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku. Szczegóły: [references/scan-props.md](references/scan-props.md).
+- `scan-props.csx` — skaner **na żądanie** dla pojedynczej tabeli (fallback, gdy tabeli nie ma w `data/props/`). Wypisuje pola i właściwości kalkulowane klasy biznesowej, rekurencyjnie po polach typu subrow. Szczegóły: [references/scan-props.md](references/scan-props.md).
 - `scan-workers.csx` — wypisuje na stdout **JSON** z workerami i extenderami zarejestrowanymi atrybutem assembly `[Worker<…>]`, pogrupowanymi wg `DataType`. Dla każdej klasy: parametry inicjowane z `Context` (ctor + `[Context]`, z rozwinięciem pod-property dla typów dziedziczących z `ContextBase`), property do bindowania, akcje menu Czynności. Opcjonalny drugi argument filtruje wynik do konkretnego typu danych (np. `DokumentHandlowy`) — w praktyce konieczny, bo pełne skanowanie zwraca tysiące rejestracji. Wynik łatwo przetwarzać `jq`. Szczegóły: [references/scan-workers.md](references/scan-workers.md).
+- **Formularze — najpierw INDEX.** Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do [`data/forms/INDEX.md`](data/forms/INDEX.md) (`Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka | Przestrzeń`, **posortowany po typie danych**). Typ = segment przed nazwą zakładki w `…<TYP>.<ZAKŁADKA>.pageform.xml` (albo `DataType`). Zakładki typów ogólnych (`Row`/`IRow`/…) wydzielone jako **systemowe** (osobna sekcja; `scan-forms` nie raportuje ich per obiekt). Odczyt natychmiastowy, bez DLL — do ustalenia „obiekt → zakładki". Regeneracja: `export-forms-index.csx`. Szczegóły: [references/scan-forms.md](references/scan-forms.md).
+- `scan-forms.csx` — skaner **na żądanie** dla pojedynczego obiektu: odczytuje z zasobów osadzonych (`*.pageform.xml`/`*.form.xml`) **zakładki, sekcje danych (grupy) i pola** w **kolejności wprowadzania**, rozwijając ścieżki pól przez łańcuch `DataContext`/`EditValue`, dołączane `Include` (także między bibliotekami) oraz listy (`Grid`/`Scheduler`/… → kolumny elementu kolekcji, separator `:` między wczytaniem listy a polami elementu). Argument = prefiks nazwy pliku lub `DataType`/`Namespace.Typ`. Do budowania danych kodem i importu XML `business="true"`. Szczegóły: [references/scan-forms.md](references/scan-forms.md).
+- `export-forms-index.csx` — **wsadowo** generuje `data/forms/INDEX.md` z DLL (jeden przebieg, ~5700 zakładek w ~1 s). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku.
 Inwentaryzację **folderów statycznych menu** (`[assembly: FolderView]`) — drzewo pozycji menu, list i formularzy — realizuje narzędzie **`scan-folders`** przeniesione do skilla **`/soneta-config`** (komplementarne do `scan-modules`: perspektywa funkcjonalno-użytkowa zamiast danych).
 
 ## Konwencje nazewnicze

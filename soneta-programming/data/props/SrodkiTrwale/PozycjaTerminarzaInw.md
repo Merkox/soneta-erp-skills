@@ -1,0 +1,39 @@
+# Pola i właściwości klasy biznesowej: `Soneta.SrodkiTrwale.PozycjaTerminarzaInw`
+Nazwa tabeli: `TerminarzInw`
+Tytuł: Terminarz inwentarza
+Opis: Pozycja terminarza inwentaryzacji środków trwałych. Definiuje planowaną datę i nazwę czynności inwentaryzacyjnej oraz rejestruje datę jej faktycznej realizacji, umożliwiając kontrolę harmonogramu spisu z natury.
+Tabela konfiguracyjna: Nie
+
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 2
+- podlisty: 0
+- subrowy: 0
+- razem: 6
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| DataPlanowana | `Date` | bazodanowe |  | Planowana data realizacji |
+| DataRealizacji | `Date` | bazodanowe |  | Data realizacji |
+| Inwentarz | `Soneta.SrodkiTrwale.IInwentarz` | bazodanowe, tylko-odczyt, iface-ref |  | Pozycja inwentarzu |
+| Nazwa | `string` | bazodanowe |  | Nazwa pozycji terminarza |
+| Opis | `string` | bazodanowe |  | Opis pozycji terminarza |
+| StatusPozycji | `Soneta.SrodkiTrwale.StatusPozycjiTerminarza` (enum) | tylko-odczyt |  |  |
+
+## Relacje interfejsowe
+
+Pola, których typ jest interfejsem zadeklarowanym w `[TableInfo(Interfaces=...)]` innych tabel.
+Pole może wskazywać na rekord dowolnej z poniższych tabel.
+
+| Pole | Interfejs | Tabele implementujące |
+|------|-----------|------------------------|
+| Inwentarz | `IInwentarz` | `SrodekTrwalyBase`, `Wyposazenie` |
+
+## Enumy
+
+Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
+
+### StatusPozycjiTerminarza (`Soneta.SrodkiTrwale.StatusPozycjiTerminarza`)
+- `Brak` = 0
+- `DoRealizacji` = 1
+- `Zrealizowane` = 2

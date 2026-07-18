@@ -1,0 +1,17 @@
+# Pola i właściwości klasy biznesowej: `Soneta.Core.DocPkgItemProp`
+Nazwa tabeli: `DocPkgItemProps`
+Opis: Tabela przechowuje właściwości elementów paczek dokumentów. Każdy wpis identyfikuje obiekt programu przez GUID i typ tabeli, umożliwiając rozszerzanie metadanych pozycji paczki o dodatkowe powiązania.
+Tabela konfiguracyjna: Nie
+Guided: root
+
+- pola bazodanowe (zapisywalne): 2
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 2
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| ItemGuid | `System.Guid` | bazodanowe | Identyfikator obiektu programu | Wskazanie na obiekt programu |
+| ItemTable | `string` | bazodanowe | Typ obiektu programu | Typ obiektu programu |

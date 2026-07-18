@@ -1,0 +1,27 @@
+# Pola i właściwości klasy biznesowej: `Soneta.CzlonkowieSzkolenia.KlubUczHist`
+Nazwa tabeli: `KlubyUczHist`
+Tytuł: Przynależność do klubów
+Opis: Historia przynależności uczestników do klubów i kół organizacji. Rejestruje zmiany członkostwa w jednostkach organizacyjnych z datami i akcjami (dołączenie, wystąpienie), umożliwiając śledzenie rotacji członków.
+Tabela konfiguracyjna: Nie
+
+- pola bazodanowe (zapisywalne): 4
+- pola kalkulowane (zapisywalne): 0
+- pola tylko-odczyt: 0
+- podlisty: 0
+- subrowy: 0
+- razem: 4
+
+| Pole | Typ | Rodzaj | Tytuł | Opis |
+|------|-----|--------|-------|------|
+| Akcja | `Soneta.CzlonkowieSzkolenia.StanPrzynaleznosci` (enum) | bazodanowe |  |  |
+| Data | `Date` | bazodanowe | Data zmiany | Data zmiany. |
+| Nazwa | `string` | bazodanowe |  |  |
+| Uczestnik | `Soneta.CzlonkowieSzkolenia.UczestnikBase` | bazodanowe |  |  |
+
+## Enumy
+
+Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytuł).
+
+### StanPrzynaleznosci (`Soneta.CzlonkowieSzkolenia.StanPrzynaleznosci`)
+- `Przyjecie` = 0 — Przyjęcie
+- `Skreslenie` = 1 — Skreślenie
