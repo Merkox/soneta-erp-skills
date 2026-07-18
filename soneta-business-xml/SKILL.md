@@ -23,6 +23,43 @@ Pliki te definiują obiekty biznesowe (encje ORM), które platforma automatyczni
 3. **business.xml + klasy Row/Table = jeden nierozłączny krok.** Sam XML się nie kompiluje — wygenerowany `*.business.cs` wymaga klas konkretnych, bez nich `error CS0246` ([references/generated-classes.md](references/generated-classes.md)).
 4. **`<module>` bez `description`** = `#warning 'Description for module X is not defined'` w generowanym kodzie — zawsze podawaj opis modułu.
 
+## ⚠ Krytyczne zasady — łamią RUNTIME (build przechodzi bez ostrzeżeń)
+
+Te trzy błędy **nie dają żadnego sygnału przy kompilacji** — build jest zielony, a program pada
+dopiero przy pierwszym użyciu danej ścieżki kodu. Sprawdzaj je świadomie przy każdej nowej tabeli,
+bo nic Cię przed nimi nie ostrzeże automatycznie.
+
+1. **`selector="true"` na zwykłym polu enum (nie dyskryminatorze typu)** — objaw:
+   `Nierozpoznany typ wiersza. Selektor N w tabeli X nieznaleziony.` przy każdym odczycie listy.
+   `selector="true"` stosuj **wyłącznie**, gdy ta sama tabela SQL przechowuje różne typy
+   biznesowe, każdy jako osobna klasa C# (`abstract` baza + podtypy rejestrowane
+   `[assembly: BusinessRow(...)]`) — patrz [references/generated-classes.md](references/generated-classes.md).
+   Zwykłe pole statusu/kategorii/typu służące tylko do filtrowania i wyświetlania (`Status`,
+   `RecipientType`, `TypWpisu`...) **nigdy** nie dostaje `selector="true"` — to zwykły enum bez
+   dodatkowego atrybutu.
+2. **`required="true"` na polu, którego domyślna wartość typu jest poprawnym stanem.** Generator
+   utożsamia `default(T)` z „polem pustym" dla **każdego typu wartościowego**, nie tylko `int`:
+   `0` (int/double/decimal/currency), `Guid.Empty`, wartość enum o numerze `0`, `Date.MinValue`/
+   `DateTime.MinValue`, `Time.Zero`, `Quantity.Zero` — dla wszystkich tych typów `required="true"`
+   generuje `if (value==default) throw RequiredException(...)`. Objaw: `Wymagane jest
+   wprowadzenie wartości pola 'X'` przy inicjalizacji obiektu wartością domyślną (np. licznik
+   `AttemptCount = 0` w `OnAdded()`). Zasada: `required="true"` tylko gdy wartość domyślna typu
+   jest **semantycznie niedopuszczalna** w domenie pola (np. `MaxAttempts` — 0 maksymalnych prób
+   nie ma sensu; `Lp` — pozycja 0 nie istnieje). Dla liczników/postępów zaczynających się od zera
+   (`AttemptCount`, `Retries`, `Kolejnosc` liczona od 0) używaj `required="false"` — kolumna SQL
+   zostaje taka sama (nienullowalna dla typu wartościowego), zmienia się tylko walidacja C#.
+   Jedyny typ z sensowną semantyką required = `string` (`IsNullOrEmpty`) i referencja do wiersza
+   (`== null`) — patrz [references/table-reference.md](references/table-reference.md#requiredtype---wartości).
+3. **`tablename` dłuższy niż 16 znaków.** Nie łamie builda — łamie **każdą** transakcję zapisu
+   na tej tabeli w runtime: `String or binary data would be truncated`, bo kolumna
+   `ChangeInfos.SourceTable` (mechanizm audytu zmian, uruchamiany dla praktycznie każdej tabeli
+   `guided="Root"`/`guided="Exported"`) ma `length="16"`. To ten sam limit co kolumny referencyjne
+   do nazw tabel w Cechach, `LockInfos.RecordTable`, `Attachments` — więc dotyczy każdej tabeli,
+   nie tylko tych z relacjami interface'owymi. **Żaden etap kompilacji tego nie sprawdza** dla
+   dodatków budowanych przez Soneta SDK — limit trzeba pilnować ręcznie, zawsze
+   ≤16 znaków, z zachowaniem liczby mnogiej (`DokumentyHandlowe` → `DokHandlowe`) — patrz
+   [references/table-reference.md](references/table-reference.md#atrybut-tablename--limit-16-znaków).
+
 ## Struktura pliku business.xml
 
 ```xml
