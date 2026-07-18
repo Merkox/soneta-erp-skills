@@ -5,6 +5,22 @@ Odczyt rzeczywistej struktury formularzy platformy Soneta — **zakładek**, **s
 Służy do budowania kodu wprowadzającego dane oraz do przygotowania [importu XML](../../soneta-config/SKILL.md)
 w trybie `business="true"`, gdzie **kolejność pól i przynależność do sekcji** ma znaczenie.
 
+## Najpierw INDEX (`data/forms/INDEX.md`) — szybkie wyszukanie „obiekt → zakładki”
+
+Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do
+[`../data/forms/INDEX.md`](../data/forms/INDEX.md) — jedna tabela: `Nazwa bazowa | Zakładka |
+Priority | DataType | Biblioteka | Przestrzeń`, posortowana po nazwie bazowej (klastruje
+`Kontrahent*`, `Wyplata*`…). Odczyt jest natychmiastowy i **nie wymaga DLL** — użyj go, by
+ustalić, jakie zakładki ma obiekt, w której bibliotece i czy nazwa jest niejednoznaczna
+(kolumna `DataType`, przestrzeń). **Nie zawiera pól ani sekcji** — te wypisuje skaner niżej.
+
+Regeneracja po zmianie wersji/kompilacji (jeden przebieg po DLL):
+
+```bash
+dotnet script ~/.claude/skills/soneta-programming/scripts/export-forms-index.csx \
+    -- <KatalogDll> ~/.claude/skills/soneta-programming/data/forms
+```
+
 ## Po co to
 
 Kolejność, w jakiej operator wypełnia pola na formularzu, pośrednio odzwierciedla kolejność
@@ -201,6 +217,8 @@ w dokumencie (kolejność wprowadzania przez operatora).
 
 ## Powiązania
 
+- Dane wygenerowane: [`../data/forms/INDEX.md`](../data/forms/INDEX.md) — katalog wszystkich
+  zakładek (pierwsze źródło „obiekt → zakładki"); regeneracja skryptem `scripts/export-forms-index.csx`.
 - [`/soneta-form-xml`](../../soneta-form-xml/SKILL.md) — składnia `Page`/`Group`/`Field`/`Include`,
   `DataContext`, `EditValue`; strona źródłowa tego, co skaner odczytuje.
 - [scan-props.md](scan-props.md) — pola bazodanowe i kalkulowane tabeli (typy, tytuły) do
