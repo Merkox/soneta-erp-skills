@@ -72,12 +72,23 @@ string FileName(string resName)
     // dwa ostatnie to „form"/„pageform"+"xml" — bierzemy 3 ostatnie segmenty jako nazwę pliku
     return string.Join('.', parts[^3..]);
 }
-string BaseName(string resName)
-{
-    var fn = FileName(resName);
-    var dot = fn.IndexOf('.');
-    return dot > 0 ? fn.Substring(0, dot) : fn;
-}
+// Foldery/segmenty, które NIE są typem danych — gdy trafią na pozycję typu (segment przed
+// nazwą zakładki), typ bierzemy z nazwy zakładki (np. okno konfiguracji `Config.<Typ>…`).
+var GenericFolders = new HashSet<string>(StringComparer.Ordinal)
+{ "Config", "UI", "Forms", "Form", "PageForm", "PageForms", "Lookups", "Lookup", "LookupForm", "Res", "Dialogs", "Dialog" };
+
+// Typy ogólne (bazowe/interfejsy) — zakładki przypięte do nich to zakładki systemowe (Załączniki,
+// Notatki, Dyskusja…) dokładane do wielu obiektów; nie raportujemy ich przy skanie konkretnego
+// obiektu (chyba że argument to sam typ ogólny). Pełną definicję da `scan-forms -- Row …`.
+var GeneralInterfaces = new HashSet<string>(StringComparer.Ordinal)
+{ "Row", "GuidedRow", "ExportedRow", "IRow", "IGuidedRow", "object", "Object" };
+bool argIsSystem = GeneralInterfaces.Contains(rootType) || GeneralInterfaces.Contains(rootType.Contains('.') ? rootType.Substring(rootType.LastIndexOf('.') + 1) : rootType);
+
+// Reguła dopasowania nazwy: równość albo prefiks zakończony wielką literą (żeby `Kontrahent`
+// nie łapał `Kontrahentowy`, a `Dokument` łapał `DokumentHandlowy`).
+static bool MatchName(string value, string arg) =>
+    value.Equals(arg, StringComparison.Ordinal) ||
+    (value.StartsWith(arg, StringComparison.Ordinal) && value.Length > arg.Length && char.IsUpper(value[arg.Length]));
 
 // Indeks do Include: nazwa pliku (lower) -> zasób.
 var byFileName = new Dictionary<string, FormRes>(StringComparer.OrdinalIgnoreCase);
@@ -94,13 +105,18 @@ bool qualified = rootType.Contains('.');
 var simpleArg = qualified ? rootType.Substring(rootType.LastIndexOf('.') + 1) : rootType;
 var nsPart = qualified ? rootType.Substring(0, rootType.LastIndexOf('.')) : ""; // np. „Kasa" / „Soneta.Kasa"
 
-var parsed = new List<(FormRes Res, XDocument Doc, int Priority, string Caption, string MatchBy)>();
+var parsed = new List<(FormRes Res, XDocument Doc, int Priority, string Caption)>();
 var nsHints = new SortedSet<string>(StringComparer.Ordinal); // przestrzenie zasobów trafień (do ostrzeżenia)
 foreach (var p in allForms.Where(f => f.Name.ToLowerInvariant().EndsWith(".pageform.xml")))
 {
-    var b = BaseName(p.Name);
-    bool nameSimple = b.Equals(simpleArg, StringComparison.Ordinal) ||
-                      (b.StartsWith(simpleArg, StringComparison.Ordinal) && b.Length > simpleArg.Length && char.IsUpper(b[simpleArg.Length]));
+    // Nazwa zasobu ma postać „…<TYP>.<ZAKŁADKA>.pageform.xml": typ = segment PRZED nazwą
+    // zakładki (dla folderów generycznych jak `Config` typ jest w nazwie zakładki). Dopasowujemy
+    // po typie z nazwy oraz — zapasowo, by nie gubić — po samej nazwie zakładki.
+    var parts = p.Name.Split('.');
+    var tabFile = parts.Length >= 3 ? parts[^3] : p.Name;
+    var typeSeg = parts.Length >= 4 ? parts[^4] : "";
+    var typeFromName = (typeSeg.Length == 0 || GenericFolders.Contains(typeSeg)) ? tabFile : typeSeg;
+    bool nameSimple = MatchName(typeFromName, simpleArg) || MatchName(tabFile, simpleArg);
     // Nazwa pliku nie niesie namespace — przy nazwie kwalifikowanej zawężamy po przestrzeni
     // ZASOBU (nazwa zasobu zaczyna się od domyślnego namespace assembly, np. `Soneta.Kasa.UI…`).
     bool byName = nameSimple && (!qualified || p.Name.IndexOf(nsPart, StringComparison.OrdinalIgnoreCase) >= 0);
@@ -114,13 +130,18 @@ foreach (var p in allForms.Where(f => f.Name.ToLowerInvariant().EndsWith(".pagef
         ? (string.Equals(typeFull, rootType, StringComparison.Ordinal) || typeFull.EndsWith("." + rootType, StringComparison.Ordinal))
         : string.Equals(SimpleTypeName(dataType), rootType, StringComparison.Ordinal));
     if (!byName && !byType) continue;
+
+    // Zakładka systemowa (typ ogólny: Row/GuidedRow/IRow/…) — pomijamy przy skanie konkretnego
+    // obiektu; raportujemy tylko, gdy argument to sam typ ogólny (patrz INDEX, sekcja systemowa).
+    var effType = !string.IsNullOrEmpty(typeFull) ? SimpleTypeName(dataType) : typeFromName;
+    if (!argIsSystem && GeneralInterfaces.Contains(effType)) continue;
+
     nsHints.Add(NsHint(p.Name)); // dwa pierwsze człony nazwy zasobu = domyślny namespace modułu
 
     int prio = int.TryParse(df?.Attribute("Priority")?.Value, out var pr) ? pr : 100;
     var page = df?.Descendants().FirstOrDefault(e => e.Name.LocalName == "Page");
-    var cap = page?.Attribute("CaptionHtml")?.Value ?? page?.Attribute("Caption")?.Value ?? b;
-    var matchBy = byName && byType ? "nazwa+DataType" : byName ? "nazwa" : "DataType";
-    parsed.Add((p, doc, prio, cap, matchBy));
+    var cap = page?.Attribute("CaptionHtml")?.Value ?? page?.Attribute("Caption")?.Value ?? tabFile;
+    parsed.Add((p, doc, prio, cap));
 }
 
 if (parsed.Count == 0)
@@ -132,10 +153,10 @@ parsed = parsed.OrderBy(x => x.Priority).ThenBy(x => FileName(x.Res.Name), Strin
 
 Console.WriteLine($"# Formularze dla `{rootType}` — zakładki, sekcje i pola");
 Console.WriteLine();
-Console.WriteLine($"Dopasowano {parsed.Count} zakładek (pageform) — po nazwie pliku lub po `DataType`. " +
-                  "Pierwszy człon nazwy = klasa / interfejs / klasa dziedzicząca (selektor) / `Config.` (okno konfiguracji). " +
-                  "Kolejność pól = kolejność w dokumencie (kolejność wprowadzania przez operatora). " +
-                  "Wiążący typ danych podaje atrybut `DataType` na `<DataForm>`, gdy jest — nazwa pliku bywa niejednoznaczna.");
+Console.WriteLine($"Dopasowano {parsed.Count} zakładek (pageform) po typie danych lub `DataType`. " +
+                  "Typ z nazwy zasobu `…<TYP>.<ZAKŁADKA>.pageform.xml` = segment przed nazwą zakładki " +
+                  "(dla folderu `Config` — z nazwy zakładki); jawnie wiąże atrybut `DataType` na `<DataForm>`. " +
+                  "Kolejność pól = kolejność w dokumencie (kolejność wprowadzania przez operatora).");
 Console.WriteLine();
 
 // Ostrzeżenie o niejednoznaczności namespace: trafienia z wielu przestrzeni (modułów).
@@ -149,15 +170,20 @@ if (!qualified && nsHints.Count > 1)
     Console.WriteLine();
 }
 
-foreach (var (res, doc, prio, cap, matchBy) in parsed)
+foreach (var (res, doc, prio, cap) in parsed)
 {
     Console.WriteLine($"## Zakładka: {InlineText(cap)}");
     Console.WriteLine();
-    Console.WriteLine($"- plik: `{FileName(res.Name)}` (DLL `{res.Dll}`), Priority={prio}, dopasowano po: {matchBy}");
+    Console.WriteLine($"- plik: `{FileName(res.Name)}` (DLL `{res.Dll}`), Priority={prio}");
     var dataType = doc.Root?.Attribute("DataType")?.Value;
     if (!string.IsNullOrEmpty(dataType)) Console.WriteLine($"- typ danych (DataType): `{dataType}`");
     var rights = doc.Root?.Attribute("RightName")?.Value;
     if (!string.IsNullOrEmpty(rights)) Console.WriteLine($"- prawo: `{rights}`");
+    // Wymagane licencje — atrybut `Contexts` na <DataForm>; bez prefiksu `License.`/`Licence.`
+    // (np. „HAN | FA", „HAN_Złoty or HAN_Platynowy").
+    var contexts = doc.Root?.Attribute("Contexts")?.Value;
+    if (!string.IsNullOrEmpty(contexts))
+        Console.WriteLine($"- licencje: `{InlineText(contexts).Replace("License.", "").Replace("Licence.", "")}`");
     Console.WriteLine();
     Console.WriteLine("| # | Sekcja | Ścieżka pola | Etykieta | Uwagi |");
     Console.WriteLine("|---|--------|--------------|----------|-------|");
@@ -165,7 +191,7 @@ foreach (var (res, doc, prio, cap, matchBy) in parsed)
     var rows = new List<Row>();
     var visited = new HashSet<string>();
     foreach (var el in doc.Root.Elements())
-        Walk(el, "", "", "", rows, visited, byFileName);
+        Walk(el, "", "", "", null, null, null, rows, visited, byFileName);
 
     int i = 1;
     foreach (var r in rows)
@@ -177,10 +203,20 @@ return 0;
 // --- Rekurencyjny przechód po drzewie UI, z akumulacją kontekstu (ścieżki DataContext)
 // oraz sekcji (ścieżki tytułów Group). ---
 void Walk(XElement el, string ctx, string section, string suffix,
+          string listOuterCtx, string listLabel, string filterLabel,
           List<Row> rows, HashSet<string> visited,
           Dictionary<string, FormRes> index)
 {
     var ln = el.Name.LocalName;
+
+    // Pasek filtra listy (`Class="DataBar"`) — jego pola filtrują listę i dotyczą kontekstu
+    // NADRZĘDNEGO (host listy / ViewInfo `Context`), nie elementu kolekcji. Przełącz kontekst
+    // na zewnętrzny i oznacz poddrzewo jako filtr danej listy (listLabel).
+    if (listOuterCtx != null && HasClass(el, "DataBar"))
+    {
+        ctx = listOuterCtx;
+        filterLabel = listLabel;
+    }
 
     // Aktualizacja kontekstu z DataContext elementu (dotyczy jego potomków).
     var childCtx = ctx;
@@ -217,7 +253,7 @@ void Walk(XElement el, string ctx, string section, string suffix,
                 var incDoc = LoadXml(incRes);
                 if (incDoc != null)
                     foreach (var c in incDoc.Root.Elements())
-                        Walk(c, incCtx, section, incSuffix, rows, visited, index);
+                        Walk(c, incCtx, section, incSuffix, listOuterCtx, listLabel, filterLabel, rows, visited, index);
             }
             else rows.Add(new Row(section, incCtx, "", $"Include (cykl pominięty): {src}"));
         }
@@ -231,36 +267,40 @@ void Walk(XElement el, string ctx, string section, string suffix,
     bool isField = ln == "Field" || ln == "Data" || ln == "Html" || ln == "Markdown" || ln == "Chips" || ln == "Axis";
     if (!string.IsNullOrEmpty(ev) && (isField || isList))
     {
-        var (path, note) = ResolvePath(childCtx, ev);
+        var path = ResolvePath(childCtx, ev);
         var cap = el.Attribute("CaptionHtml")?.Value ?? el.Attribute("Caption")?.Value ?? "";
         var noteParts = new List<string>();
         if (!string.IsNullOrEmpty(suffix)) noteParts.Add($"Suffix={suffix}");
-        if (isList)
-        {
-            var coll = IsCode(Unwrap(ev)) ? Unwrap(ev) : path;
-            noteParts.Add($"lista ({ln}) — kolumny odnoszą się do elementu kolekcji `{coll}`");
-        }
+        if (isList) noteParts.Add($"lista ({ln})");
         else if (!isField) noteParts.Add(ln.ToLowerInvariant());
-        if (!string.IsNullOrEmpty(note)) noteParts.Add(note);
-        var vis = el.Attribute("Visibility")?.Value;
-        if (!string.IsNullOrEmpty(vis)) noteParts.Add($"Visibility={vis}");
+        if (!string.IsNullOrEmpty(filterLabel)) noteParts.Add($"filtr listy: `{filterLabel}`");
         rows.Add(new Row(section, path, InlineText(cap), string.Join("; ", noteParts)));
 
         if (isList)
         {
             // Kolumny listy odnoszą się do ELEMENTU kolekcji zwracanej przez EditValue listy,
-            // nie do kontekstu rodzica. Kontekst kolumn = ścieżka kolekcji z markerem `[]`
-            // (albo kontekst z kodu, gdy kolekcja pochodzi z extendera/workera).
+            // nie do kontekstu rodzica. Kontekst kolumn = ścieżka kolekcji z granicą `:`.
+            // Host listy (childCtx) = kontekst nadrzędny, a `path` = etykieta listy dla filtrów.
             var itemCtx = ListItemContext(childCtx, ev);
             foreach (var c in el.Elements())
-                Walk(c, itemCtx, childSection, suffix, rows, visited, index);
+                Walk(c, itemCtx, childSection, suffix, childCtx, path, null, rows, visited, index);
             return;
         }
     }
 
     // Zejście w potomków (kontenery layoutu: Page/Group/Stack/Row/Flow/Bar/Dashboard...).
     foreach (var c in el.Elements())
-        Walk(c, childCtx, childSection, suffix, rows, visited, index);
+        Walk(c, childCtx, childSection, suffix, listOuterCtx, listLabel, filterLabel, rows, visited, index);
+}
+
+// Czy element ma daną klasę stylu (`Class` = lista wartości rozdzielonych spacją).
+static bool HasClass(XElement el, string cls)
+{
+    var c = el.Attribute("Class")?.Value;
+    if (string.IsNullOrEmpty(c)) return false;
+    foreach (var part in c.Split(' ', StringSplitOptions.RemoveEmptyEntries))
+        if (part.Equals(cls, StringComparison.Ordinal)) return true;
+    return false;
 }
 
 // Elementy listowe/kolekcyjne — ich EditValue zwraca kolekcję, a dzieci to kolumny elementu.
@@ -268,34 +308,56 @@ static bool IsListElement(string ln) => ln is
     "Grid" or "TreeList" or "Scheduler" or "Gantt" or "GanttDiagram" or
     "KanbanDiagram" or "Pivot" or "Chart" or "Diagram" or "TreeDiagram";
 
-// Kontekst elementu kolekcji (wiersza listy) na podstawie EditValue listy.
+// Granica kolekcji (element listy) w kontekście — znacznik wewnętrzny renderowany jako „:".
+// Oddziela część ścieżki wczytującą listę od pól na elemencie listy (np. `Ceny:Definicja`).
+const string CollMark = "\u0001";
+
+// Dołącza segment do kontekstu: po granicy kolekcji wstawia „:", w innym wypadku „.".
+// UWAGA: porównania ordinalne — kulturowe traktują U+0001 jako znak ignorowany (EndsWith≡"").
+static string Join(string prefix, string seg)
+{
+    if (string.IsNullOrEmpty(prefix)) return seg;
+    if (prefix.EndsWith(CollMark, StringComparison.Ordinal)) return prefix.Substring(0, prefix.Length - 1) + ":" + seg;
+    return prefix + "." + seg;
+}
+
+// Renderuje kontekst do postaci ścieżki: wiszącą granicę kolekcji zamienia na „:"
+// (sygnalizując element listy, gdy pole rozwiązuje kod/worker bez jawnego pola).
+static string Disp(string ctx)
+{
+    if (ctx.EndsWith(CollMark, StringComparison.Ordinal)) return ctx.Substring(0, ctx.Length - 1) + ":";
+    return ctx;
+}
+
+// `{new X}` / `{New X}` w DataContext lub EditValue = nowy korzeń kontekstu (obiekt z kodu,
+// np. extender) — zastępuje kontekst rodzica zamiast się do niego doklejać.
+static bool IsNewRoot(string v) => v.StartsWith("new ", StringComparison.OrdinalIgnoreCase);
+
+// Kontekst elementu kolekcji (wiersza listy) na podstawie EditValue listy — z granicą kolekcji.
 static string ListItemContext(string ctx, string evRaw)
 {
     var v = Unwrap(evRaw);
-    if (IsCode(v)) return "?" + v;                         // kolekcja z kodu — element nierozwiązywalny do DB
-    if (ctx.StartsWith("?")) return ctx;                    // już pod kontekstem z kodu
-    var coll = string.IsNullOrEmpty(ctx) ? v : ctx + "." + v;
-    return coll + "[]";                                     // marker elementu kolekcji
+    var coll = IsNewRoot(v) ? v : Join(ctx, v);
+    return coll + CollMark;
 }
 
 // Łączy kontekst rodzica z wartością DataContext elementu.
-// {DataSource} = reset do korzenia. {new X}/{...()} = kontekst z kodu (nierozwiązywalny).
+// {DataSource} = reset do korzenia. {new X} = nowy korzeń. Pozostałe = nawigacja po ścieżce.
 static string CombineContext(string parent, string dcRaw)
 {
     var v = Unwrap(dcRaw);
-    if (v == "DataSource" || v == "") return "";                 // korzeń = otwarty obiekt
-    if (IsCode(v)) return "?" + v;                                // kontekst z kodu
-    if (parent.StartsWith("?")) return parent;                    // pod kontekstem z kodu
-    return string.IsNullOrEmpty(parent) ? v : parent + "." + v;
+    if (v == "DataSource" || v == "") return "";     // korzeń = otwarty obiekt
+    if (IsNewRoot(v)) return v;                        // extender = nowy korzeń
+    return Join(parent, v);
 }
 
-// Zwraca (pełna ścieżka pola, uwaga). Ścieżka względem otwartego obiektu (DataSource).
-static (string Path, string Note) ResolvePath(string ctx, string evRaw)
+// Zwraca pełną ścieżkę pola względem otwartego obiektu (DataSource). Wyrażenia dostępowe
+// (`Workers.…`, `Features.…`, `+`, `()`) zostają wprost w ścieżce — bez opisowych not.
+static string ResolvePath(string ctx, string evRaw)
 {
     var v = Unwrap(evRaw);
-    if (IsCode(v)) return (ctx.TrimStart('?'), DescribeCode(v));
-    if (ctx.StartsWith("?")) return (ctx.TrimStart('?') + "." + v, "pod kontekstem z kodu");
-    return (string.IsNullOrEmpty(ctx) ? v : ctx + "." + v, "");
+    if (IsNewRoot(v)) return Disp(v);                 // wartość z extendera = pełne wyrażenie
+    return Disp(Join(ctx, v));
 }
 
 static string Unwrap(string s)
@@ -324,33 +386,6 @@ static string SimpleTypeName(string dataType)
     if (plus >= 0) return full.Substring(plus + 1);
     var dot = full.LastIndexOf('.');
     return dot >= 0 ? full.Substring(dot + 1) : full;
-}
-
-// Wyrażenie „z kodu": new/New (extender), wywołanie metody (nawiasy), operator + (nawigacja
-// ViewInfo), warunek (?), cechy (Features) i workery (Workers).
-static bool IsCode(string v) =>
-    v.StartsWith("new ", StringComparison.OrdinalIgnoreCase) ||
-    v.Contains('(') || v.Contains('+') || v.StartsWith("?") ||
-    v.StartsWith("Workers.") || v.StartsWith("Features.");
-
-// Czytelny opis wartości pochodzącej z kodu — do kolumny „Uwagi".
-static string DescribeCode(string v)
-{
-    if (v.StartsWith("Features.", StringComparison.Ordinal))
-        return $"cecha obiektu (FeatureDefinition): `{v.Substring("Features.".Length)}`";
-    if (v.StartsWith("Workers.", StringComparison.Ordinal))
-        return $"worker (bind; nazwa klasy bywa z sufiksem `Worker`): `{v.Substring("Workers.".Length)}`";
-    if (v.StartsWith("new ", StringComparison.OrdinalIgnoreCase))
-    {
-        // „new FooExtender.Bar" → klasa FooExtender
-        var body = v.Substring(4).Trim();
-        var cls = body.Split(new[] { '.', ' ', '(' }, 2)[0];
-        var kind = cls.EndsWith("Extender", StringComparison.Ordinal) ? "extender" : "obiekt z kodu";
-        return $"{kind}: `{cls}` (bind `{v}`)";
-    }
-    if (v.Contains('+')) return $"nawigacja ViewInfo (operator `+`): `{v}`";
-    if (v.Contains('(')) return $"wywołanie metody/kod: `{v}`";
-    return $"wartość z kodu/bindu: `{v}`";
 }
 
 // --- Odczyt bajtów zasobu i parsowanie XML (obcięcie BOM). ---

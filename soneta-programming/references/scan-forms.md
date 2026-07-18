@@ -9,13 +9,21 @@ w trybie `business="true"`, gdzie **kolejność pól i przynależność do sekcj
 
 Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do
 [`../data/forms/INDEX.md`](../data/forms/INDEX.md) — jedna tabela:
-`Typ danych | Źródło | Nazwa bazowa | Zakładka | Priority | Biblioteka | Przestrzeń`,
-**posortowana po typie danych**. Klucz `Typ danych` = atrybut `DataType`, gdy jest
-(`Źródło`=`DataType`), inaczej nazwa bazowa (typ dorozumiany z nazwy pliku, `Źródło`=`nazwa`) —
-dzięki temu zakładki jednego typu są razem, także gdy plik ma nazwę niepowiązaną z typem
-(`GeneralBI` → `DashboardView`) lub gdy rozszerzenie dokłada zakładkę pod cudzy typ
-(`KontrahentCennik` z `DataType=Kontrahent` trafia pod `Kontrahent`). Odczyt jest natychmiastowy
-i **nie wymaga DLL**. **Nie zawiera pól ani sekcji** — te wypisuje skaner niżej.
+`Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka | Przestrzeń`,
+**posortowana po typie danych**. Nazwa zasobu ma postać `…<TYP>.<ZAKŁADKA>.pageform.xml`,
+więc `Typ danych` to **segment przed nazwą zakładki** (walidowany względem realnych `RowType`;
+dla okien konfiguracji z folderem `Config` typ bierzemy z nazwy zakładki), albo atrybut
+`DataType`, gdy jest. Dzięki temu zakładki jednego typu są razem — np. całe okno
+`DokumentHandlowy` (pliki `Dokument*`) i ten sam plik zakładki użyty przez różne typy
+(`KontrahentDodatkowe` = „Warunki płatności" pod `Kontrahent`, `Bank`, `UrzadSkarbowy`…).
+Odczyt jest natychmiastowy i **nie wymaga DLL**. **Nie zawiera pól ani sekcji** — te wypisuje
+skaner niżej.
+
+Zakładki przypięte do **typów ogólnych** (`Row`, `GuidedRow`, `ExportedRow`, `IRow`,
+`IGuidedRow`, `object`) to **zakładki systemowe** (Załączniki, Notatki, Dyskusja, Panel BI,
+„Dodatkowe (cechy)"…) — platforma dokłada je do wielu obiektów, więc są w INDEX-ie w osobnej
+sekcji „Zakładki systemowe", a `scan-forms` dla konkretnego obiektu ich **nie raportuje**
+(pokaże je tylko przy skanie samego typu ogólnego, np. `-- Row`).
 
 Regeneracja po zmianie wersji/kompilacji (jeden przebieg po DLL):
 
@@ -60,7 +68,7 @@ Algorytm:
 5. Dla elementów z `EditValue` (`Field`, `Data`, `Html`, `Markdown`, `Axis`) wypisz wiersz:
    `Sekcja | Ścieżka pola | Etykieta | Uwagi`. Elementy **listowe** (`Grid`, `Scheduler`, `Gantt`,
    `Pivot`, `Chart`…) wypisz jako wiersz listy i zejdź w kolumny z kontekstem **elementu
-   kolekcji** (marker `[]`) — patrz sekcja „Listy".
+   kolekcji** (separator `:`) — patrz sekcja „Listy".
 6. `Include` z atrybutem `Source` będącym nazwą pliku → wczytaj dołączany fragment, złóż jego
    kontekst z `DataContext`/`Suffix` z elementu `Include` i rekurencyjnie rozwiń jego pola.
    Cykle są zabezpieczone (zbiór odwiedzonych `zasób|kontekst`).
@@ -76,21 +84,14 @@ składni bindowania opisuje skill [`/soneta-form-xml`](../../soneta-form-xml/SKI
 | `Group DataContext="{Adres}"` + `Field EditValue="{Ulica}"` | `Adres.Ulica` |
 | zagnieżdżony `EditValue="{AdresRozszerzony.Dzielnica}"` | `Adres.AdresRozszerzony.Dzielnica` |
 | `Include Source="AdresH.form.xml" DataContext="{Adres}"` | pola fragmentu rebazowane na `Adres.*` |
-| `EditValue="{new Ext.X}"`, `{A+B.C}`, `{...()}`, `Workers.`, `Features.` | wartość **z kodu** — nie sklejana w ścieżkę, opisana w `Uwagi` |
+| `EditValue="{Workers.Cena.Netto}"` | `Workers.Cena.Netto` (accessor workera — wprost w ścieżce) |
+| `EditValue="{ObiektViewInfo+TypParams.Pole}"` | `ObiektViewInfo+TypParams.Pole` (nawigacja `ViewInfo`) |
+| `DataContext="{new FooExtender}"` | `new FooExtender` — nowy korzeń (obiekt z kodu), pola: `new FooExtender.Bar` |
 
-Znacznik `?` wewnętrznie oznacza kontekst pochodzący z kodu (extender, ViewInfo) — takich
-gałęzi nie da się rozwinąć do ścieżki pola bazodanowego; skaner sygnalizuje to w `Uwagi`.
-
-Wartości z kodu skaner opisuje konkretnie (kolumna `Uwagi`):
-
-| Wzorzec `EditValue`/`DataContext` | Znaczenie |
-|---|---|
-| `{new FooExtender.Bar}` | **extender** `FooExtender` (mechanizm podobny do workera) — wartość/kolekcja z kodu |
-| `{Workers.Foo.Bar}` | **worker** — nazwa klasy bywa z sufiksem `Worker` (np. `Foo` → `FooWorker`) |
-| `{Features.NazwaCechy}` | **cecha obiektu** zdefiniowana w konfiguracji (`FeatureDefinition`) — patrz [features.md](features.md) |
-| `{ObiektViewInfo+TypParams.Pole}` | nawigacja przez `ViewInfo` (operator `+`) — patrz [viewinfo.md](viewinfo.md) |
-
-Strony kodu: extendery/workery — [worker-extender.md](worker-extender.md); cechy — [features.md](features.md).
+Wyrażenia dostępowe (`Workers.…`, `Features.…`, `+`, `()`, `new …Extender`) zostają **wprost
+w ścieżce** — są standardową składnią accessor-ów, więc nie są opisywane osobną notą (mniej szumu).
+Ścieżka sama sygnalizuje pochodzenie wartości; szczegóły workerów/extenderów bada się na bieżąco
+([worker-extender.md](worker-extender.md)), cech — [features.md](features.md), `ViewInfo` — [viewinfo.md](viewinfo.md).
 
 ### Listy — `Grid`, `Scheduler`, `Gantt`, `Pivot`, `Chart`…
 
@@ -99,15 +100,22 @@ Elementy listowe (`Grid`, `TreeList`, `Scheduler`, `Gantt`, `GanttDiagram`, `Kan
 wewnątrz (kolumny) odnoszą się już do **elementu tej kolekcji** — innego obiektu niż kontekst
 rodzica. Skaner:
 
-- wypisuje sam element listy jednym wierszem z notą `lista (Grid) — kolumny odnoszą się do
-  elementu kolekcji \`X\``,
-- kolumnom nadaje kontekst elementu kolekcji z markerem **`[]`**, więc ich ścieżki to
-  `X[].Pole` (np. `Ceny[].Netto`, `Ceny[].Definicja.Priorytet`, `PrzelicznikiTowaru[].Bazowa`).
+- wypisuje sam element listy jednym wierszem (ścieżka = kolekcja) z notą `lista (Grid)`,
+- kolumnom nadaje kontekst elementu kolekcji, oddzielając **dwukropkiem `:`** część wczytującą
+  listę od pól na elemencie: `Kolekcja:Pole` (np. `Ceny:Netto`, `Ceny:Definicja.Priorytet`,
+  `PrzelicznikiTowaru:Bazowa`).
 
-Gdy kolekcja pochodzi z kodu (`{new Ext.Ceny}`, `{Workers…}`, `{Metoda()}`), element jest
-nierozwiązywalny do pola bazodanowego — kolumny są opisane jako będące „pod kontekstem z kodu",
-a kolekcja pokazana z jej wyrażeniem. Do budowy danych/importu XML dla takiej listy sięgnij po
-typ elementu kolekcji narzędziem [scan-props.md](scan-props.md) (property zwracającej kolekcję).
+Gdy kolekcja pochodzi z kodu, wyrażenie zostaje w ścieżce, np.
+`new TowarExtender.Ceny:Workers.Cena.Netto` (kolekcja z extendera `:` accessor workera na
+elemencie). Aby poznać realne pola elementu, sięgnij po typ zwracany przez kolekcję narzędziem
+[scan-props.md](scan-props.md).
+
+**Paski filtra (`Class="DataBar"`).** Element w liście z klasą `DataBar` (zwykle `Flow`/`Group`
+z `DataContext="{Context}"`) to **filtry listy**, nie kolumny — jego pola dotyczą kontekstu
+**nadrzędnego** (host listy / parametry `ViewInfo` w `Context`), więc rozwijają się jako
+`Context.Params.Pole` (bez prefiksu kolekcji i bez `:`), a nie w kontekście elementu kolekcji.
+W `Uwagi` dostają notę **`filtr listy: \`<kolekcja>\``** wskazującą, której listy dotyczą
+(przydatne, gdy w jednej sekcji jest kilka list o tych samych parametrach filtra).
 
 ## Wybór zakładek — po nazwie pliku i po `DataType`
 
@@ -115,18 +123,15 @@ Platforma składa okno wielozakładkowe w runtime; **nie ma atrybutu assembly wi
 pojedynczy `pageform` z typem** (`FolderView` dotyczy tylko list/folderów). Skaner łączy więc
 dwa tryby dopasowania (suma) do podanego argumentu:
 
-**(a) po nazwie pliku** — pierwszy człon nazwy pliku `pageform` niesie typ okna. Może to być:
-- nazwa **klasy** (`Kontrahent` → zakładki kontrahenta),
-- nazwa **interfejsu** (relacje interfejsowe — wspólne zakładki wielu tabel),
-- nazwa **klasy dziedziczącej** (selektory),
-- **`Config.`** — okno konfiguracji (ustawienia modułów).
-
-Prefiks bywa szerszy/krótszy niż nazwa typu — okno `DokumentHandlowy` składają pliki
-`Dokument*` (`DokumentOgolne`, `DokumentPlatnosci`, `DokumentKontrahent`, `DokumentUE`…), więc
-podaje się prefiks `Dokument` (dobierany domenowo — może objąć też inne typy `Dokument*`).
-Warunek: nazwa bazowa pliku równa argumentowi **albo** zaczyna się od niego, po czym następuje
-wielka litera (dzięki temu `Kontrahent` nie łapie listy `Dokumenty`, a `Dokument` —
-`DokumentyPowiazane`).
+**(a) po nazwie pliku** — nazwa zasobu ma postać `…<TYP>.<ZAKŁADKA>.pageform.xml`, więc typ
+okna to **segment przed nazwą zakładki** (dla folderu `Config` typ jest w nazwie zakładki).
+Skaner dopasowuje argument do tego typu **oraz** — zapasowo, by nie gubić — do samej nazwy
+zakładki. Dzięki temu `DokumentHandlowy` łapie od razu całe okno dokumentu (pliki
+`DokumentOgolne`, `DokumentPlatnosci`, `DokumentKontrahent`…), a `Kontrahent` — zakładki
+kontrahenta (`KontrahentAdresy`, `KontrahentDodatkowe`…), **nie łapiąc** tego samego pliku
+zakładki użytego przez inny typ (`Bank.KontrahentDodatkowe`). Typ w segmencie może być klasą,
+interfejsem lub klasą dziedziczącą (selektorem). Warunek dopasowania: równość albo prefiks
+zakończony wielką literą (`Kontrahent` nie łapie `Kontrahentowy`).
 
 **(b) po `DataType`** — gdy `<DataForm>` ma atrybut `DataType="Namespace.Typ,Assembly"`, typ
 jest **jawny** (nazwa pliku bywa niejednoznaczna: formularze parametrów workerów, konfiguracji,
@@ -134,8 +139,11 @@ selektory). Dla argumentu prostego skaner dopasowuje po **nazwie prostej** typu
 (`Soneta.Business.Db.DashboardView` → `DashboardView`), więc łapie też zakładki o nazwach plików
 niepowiązanych z typem (`GeneralBI.pageform.xml`, `GeneralCockpit.pageform.xml`).
 
-W nagłówku każdej zakładki skaner pokazuje `dopasowano po: nazwa | DataType | nazwa+DataType`
-oraz `typ danych (DataType)`, jeśli jest — łatwo zweryfikować przynależność zakładki do typu.
+W nagłówku każdej zakładki skaner pokazuje metadane: `plik` (DLL), `Priority`, `typ danych
+(DataType)` gdy jest, `prawo` (`RightName`) oraz **`licencje`** — wymagane moduły licencyjne całej zakładki z atrybutu
+`Contexts` na `<DataForm>`, **bez prefiksu** `License.`/`Licence.` (np. `HAN | FA`, czasem
+z poziomem `_Złoty`/`_Platynowy`). Składnię `Contexts` opisuje skill
+[`/soneta-form-xml`](../../soneta-form-xml/SKILL.md).
 
 ### Zawężanie po namespace — ta sama nazwa w wielu modułach
 
@@ -175,23 +183,23 @@ dotnet script .../scan-forms.csx -- KadryPlace.Wyplata ~/d/dev/bin/debug
 ### Przykładowe wyjście
 
 ```markdown
-# Formularz obiektu `Kontrahent` — zakładki i pola
+# Formularze dla `Kontrahent` — zakładki, sekcje i pola
 
-Dopasowano 33 zakładek (pageform) po prefiksie nazwy pliku. Kolejność pól = kolejność
-w dokumencie (kolejność wprowadzania przez operatora).
+Dopasowano 51 zakładek (pageform) po typie danych lub `DataType`. …
 
 ## Zakładka: Ogólne
 
 - plik: `Kontrahent.pageform.xml` (DLL `Soneta.CRM.UI.dll`), Priority=0
 - prawo: `Page:KontrahentPage`
+- licencje: `HAN | FA | KS`
 
 | # | Sekcja | Ścieżka pola | Etykieta | Uwagi |
 |---|--------|--------------|----------|-------|
 | 1 | Dane identyfikacyjne | Kod | Kod |  |
-| 2 | Dane identyfikacyjne | EuVAT | EU VAT/NIP |  |
 | 14 | Adres | Adres.Ulica | Ulica |  |
 | 31 | Adres | Adres.AdresRozszerzony.Dzielnica | Dzielnica |  |
-| 44 | Kontakt |  |  | lista/grid; wartość z kodu/bindu: {New …Ext.Kontakty} |
+| 44 | Kontakt | Kontakty |  | lista (Grid) — kolumny odnoszą się do elementu kolekcji `Kontakty` |
+| 45 | Kontakt | Kontakty:Osoba | Osoba |  |
 ```
 
 ## Kody wyjścia
@@ -211,11 +219,11 @@ w dokumencie (kolejność wprowadzania przez operatora).
   assembly modułu) i na `DataType` — gdy oba są nietypowe (formularz w nietypowej przestrzeni),
   zawężenie może pominąć plik; wtedy użyj argumentu prostego i przejrzyj ostrzeżenie o przestrzeniach.
 - Skanuje tylko górny poziom katalogu (`SearchOption.TopDirectoryOnly`).
-- Gałęzi zależnych od `Visibility`/`Contexts` (licencje, cechy, extendery) skaner **nie
-  wartościuje** — wypisuje wszystkie pola i przenosi warunek do `Uwagi`. Faktyczna widoczność
-  zależy od danych i licencji w czasie działania.
+- Gałęzi zależnych od `Visibility` skaner **nie wartościuje** — wypisuje wszystkie pola
+  (warunku `Visibility` nie pokazuje). Faktyczna widoczność zależy od danych, cech i licencji
+  w czasie działania; wymagane licencje całej zakładki są w metadanych (`licencje`).
 - Kolumny list (`Grid`/`Scheduler`/…) odnoszą się do **elementu kolekcji**, nie do rodzica —
-  patrz sekcja „Listy" niżej. Marker `[]` w ścieżce oznacza element kolekcji.
+  patrz sekcja „Listy" niżej. Dwukropek `:` w ścieżce oddziela wczytanie listy od pól elementu.
 - Pierwsze uruchomienie pobiera pakiety potrzebne `dotnet-script` — wymaga internetu.
 
 ## Powiązania
