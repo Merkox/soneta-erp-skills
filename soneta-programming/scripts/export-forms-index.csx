@@ -69,9 +69,16 @@ foreach (var dll in Directory.EnumerateFiles(dllDir, "*.dll", SearchOption.TopDi
 
 if (rows.Count == 0) { Console.Error.WriteLine($"Brak zasobów *.pageform.xml w {dllDir}"); return 2; }
 
-// Sortowanie: nazwa bazowa (grupuje „Kontrahent*", „Wyplata*"), potem Priority, DLL.
+// Typ efektywny = DataType (gdy jawny) albo nazwa bazowa (typ dorozumiany z nazwy pliku).
+// Tylko ~14% pageformów ma jawny DataType, więc sortujemy po typie efektywnym — inaczej
+// większość (pusty DataType) trafiłaby w jedno miejsce.
+static string EffType(Rec r) => string.IsNullOrEmpty(r.DataType) ? r.Base : r.DataType;
+
+// Sortowanie: typ danych (efektywny) → nazwa bazowa → Priority → DLL.
 rows.Sort((a, b) => {
-    int c = string.Compare(a.Base, b.Base, StringComparison.Ordinal);
+    int c = string.Compare(EffType(a), EffType(b), StringComparison.Ordinal);
+    if (c != 0) return c;
+    c = string.Compare(a.Base, b.Base, StringComparison.Ordinal);
     if (c != 0) return c;
     c = a.Priority.CompareTo(b.Priority);
     if (c != 0) return c;
@@ -79,27 +86,35 @@ rows.Sort((a, b) => {
 });
 
 var distinctBase = rows.Select(r => r.Base).Distinct().Count();
+var distinctType = rows.Select(EffType).Distinct().Count();
 var sb = new StringBuilder();
 sb.AppendLine("# Indeks zakładek formularzy (pageform) — dane wygenerowane");
 sb.AppendLine();
-sb.AppendLine($"Zakładek (pageform): **{rows.Count}** · nazw bazowych: **{distinctBase}** · bibliotek UI: **{dllWithForms}**.");
+sb.AppendLine($"Zakładek (pageform): **{rows.Count}** · typów danych: **{distinctType}** · nazw bazowych: **{distinctBase}** · bibliotek UI: **{dllWithForms}**.");
 sb.AppendLine();
 sb.AppendLine("Katalog do szybkiego wyszukania „obiekt → zakładki” bez uruchamiania skanera i bez");
 sb.AppendLine("dostępu do DLL. **Nie zawiera pól ani sekcji** — pełną zawartość zakładki (pola,");
 sb.AppendLine("sekcje danych, rozwinięte ścieżki `DataContext`/`EditValue`, `Include`, listy) wypisuje");
 sb.AppendLine("na żądanie `scan-forms.csx` — patrz [../../references/scan-forms.md](../../references/scan-forms.md).");
 sb.AppendLine();
-sb.AppendLine("**Jak używać:** wyszukaj `Nazwa bazowa` po prefiksie obiektu (np. `Kontrahent`, `Wyplata`).");
-sb.AppendLine("Okno składane jest z wielu plików o wspólnym prefiksie; kolumna `DataType` wiąże typ");
-sb.AppendLine("jawnie (rozstrzyga niejednoznaczność, gdy ta sama nazwa jest w wielu modułach/przestrzeniach).");
+sb.AppendLine("**Sortowanie po typie danych.** Klucz = `Typ danych` = atrybut `DataType`, gdy jest");
+sb.AppendLine("(kolumna `Źródło`=`DataType`), inaczej **nazwa bazowa** (typ dorozumiany z nazwy pliku,");
+sb.AppendLine("`Źródło`=`nazwa`). Dzięki temu zakładki tego samego typu są razem, także gdy plik ma");
+sb.AppendLine("nazwę niepowiązaną z typem (np. `GeneralBI` → `DashboardView`).");
+sb.AppendLine();
+sb.AppendLine("**Jak używać:** wyszukaj `Typ danych` (np. `Kontrahent`, `Wyplata`, `DashboardView`).");
 sb.AppendLine("Po znalezieniu obiektu odczytaj jego pola: `dotnet script scan-forms.csx -- <prefiks|Namespace.Typ> <KatalogDll>`.");
 sb.AppendLine();
-sb.AppendLine("## Zakładki wg nazwy bazowej");
+sb.AppendLine("## Zakładki wg typu danych");
 sb.AppendLine();
-sb.AppendLine("| Nazwa bazowa | Zakładka | Priority | DataType | Biblioteka (DLL) | Przestrzeń |");
-sb.AppendLine("|---|---|---|---|---|---|");
+sb.AppendLine("| Typ danych | Źródło | Nazwa bazowa | Zakładka | Priority | Biblioteka (DLL) | Przestrzeń |");
+sb.AppendLine("|---|---|---|---|---|---|---|");
 foreach (var r in rows)
-    sb.AppendLine($"| {Esc(r.Base)} | {Esc(r.Caption)} | {r.Priority} | {Esc(r.DataType)} | {Esc(r.Dll)} | {Esc(r.NsHint)} |");
+{
+    var eff = EffType(r);
+    var src = string.IsNullOrEmpty(r.DataType) ? "nazwa" : "DataType";
+    sb.AppendLine($"| {Esc(eff)} | {src} | {Esc(r.Base)} | {Esc(r.Caption)} | {r.Priority} | {Esc(r.Dll)} | {Esc(r.NsHint)} |");
+}
 sb.AppendLine();
 sb.AppendLine("## Liczba zakładek wg biblioteki");
 sb.AppendLine();

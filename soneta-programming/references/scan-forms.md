@@ -8,11 +8,14 @@ w trybie `business="true"`, gdzie **kolejność pól i przynależność do sekcj
 ## Najpierw INDEX (`data/forms/INDEX.md`) — szybkie wyszukanie „obiekt → zakładki”
 
 Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do
-[`../data/forms/INDEX.md`](../data/forms/INDEX.md) — jedna tabela: `Nazwa bazowa | Zakładka |
-Priority | DataType | Biblioteka | Przestrzeń`, posortowana po nazwie bazowej (klastruje
-`Kontrahent*`, `Wyplata*`…). Odczyt jest natychmiastowy i **nie wymaga DLL** — użyj go, by
-ustalić, jakie zakładki ma obiekt, w której bibliotece i czy nazwa jest niejednoznaczna
-(kolumna `DataType`, przestrzeń). **Nie zawiera pól ani sekcji** — te wypisuje skaner niżej.
+[`../data/forms/INDEX.md`](../data/forms/INDEX.md) — jedna tabela:
+`Typ danych | Źródło | Nazwa bazowa | Zakładka | Priority | Biblioteka | Przestrzeń`,
+**posortowana po typie danych**. Klucz `Typ danych` = atrybut `DataType`, gdy jest
+(`Źródło`=`DataType`), inaczej nazwa bazowa (typ dorozumiany z nazwy pliku, `Źródło`=`nazwa`) —
+dzięki temu zakładki jednego typu są razem, także gdy plik ma nazwę niepowiązaną z typem
+(`GeneralBI` → `DashboardView`) lub gdy rozszerzenie dokłada zakładkę pod cudzy typ
+(`KontrahentCennik` z `DataType=Kontrahent` trafia pod `Kontrahent`). Odczyt jest natychmiastowy
+i **nie wymaga DLL**. **Nie zawiera pól ani sekcji** — te wypisuje skaner niżej.
 
 Regeneracja po zmianie wersji/kompilacji (jeden przebieg po DLL):
 
