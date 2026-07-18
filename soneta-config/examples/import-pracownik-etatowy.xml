@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Przykładowy pracownik zatrudniony na umowę o pracę (etat) z wynagrodzeniem
+  zasadniczym miesięcznym 12 345,00 zł. Import WEDŁUG REKORDÓW (bez business="true")
+  — sposób właściwy dla danych kadrowych/inicjujących bazę (jak baza demo).
+
+  Zweryfikowany próbnym importem (dbmgr importxml) — wczytuje się i jest idempotentny.
+
+  Idempotencja (klucz):
+    Kolekcja historyczna <Historia> ma addnew="true", a rekord <PracHistoria> stały guid.
+    Bez tego ponowne wczytanie próbuje podmienić kolekcję, kasując zapisy historii —
+    a ostatniego/jedynego zapisu historii skasować nie można (import kończy się błędem).
+
+  Referencje standardowe (przenośne między bazami — GUID-y z zerami):
+    Wydział (korzeń struktury / Firma) 00000000-0005-0001-0001-000000000000
+    Kalendarz podstawowy               00000000-0006-0003-0001-000000000000
+    Def. elementu „Wynagr. zasadnicze" 00000000-0007-0002-0002-000000000000
+    Tytuł ubezpieczenia 0110 (pracownik)00000000-0005-0002-0110-000000000000
+  Jeśli w docelowej bazie pracownik ma trafić do konkretnego wydziału,
+  podmień GUID w <Etat><Wydzial> na GUID tego wydziału.
+
+  Uwaga: adresu NIE zapisuje się wprost w zapisie historii — dane adresowe pracownika
+  są przechowywane w osobnej strukturze; wpisanie <Adres> jako podelementu kończy się błędem.
+
+  Formaty: FromTo = "od...do" (puste "do" = okres otwarty); Fraction = "1/1";
+  kwota z walutą = "12,345.00 PLN" (kropka dziesiętna); data = RRRR-MM-DD.
+-->
+<session fromto="(wszystko)">
+  <Pracownik id="Pracownik_1" guid="1a2b3c4d-0001-0001-0001-000000000001"
+             class="Soneta.Kadry.PracownikFirmy,Soneta.KadryPlace">
+    <Typ>Pracownik</Typ>
+    <Kod>100</Kod>
+    <Nazwisko>Nowak</Nazwisko>
+    <Imie>Anna</Imie>
+    <PESEL>90051512340</PESEL>
+    <Wieloetatowosc>NieDotyczy</Wieloetatowosc>
+
+    <Historia addnew="true">
+      <PracHistoria id="PracHistoria_1" guid="1a2b3c4d-0001-0001-0001-000000000002">
+        <Aktualnosc>(wszystko)</Aktualnosc>
+
+        <!-- Dane personalne -->
+        <Nazwisko>Nowak</Nazwisko>
+        <Imie>Anna</Imie>
+        <PESEL>90051512340</PESEL>
+        <IdentyfikatorPodatkowy>PESEL</IdentyfikatorPodatkowy>
+        <Plec>K</Plec>
+        <Urodzony>
+          <Data>1990-05-15</Data>
+          <Miejsce>Kraków</Miejsce>
+        </Urodzony>
+
+        <!-- Dane podatkowe (PIT) -->
+        <Podatki>
+          <TypProgow>Standardowe</TypProgow>
+          <KosztyRodzaj>JedenStosPracy</KosztyRodzaj>
+          <KosztyMnoznik>1.00</KosztyMnoznik>
+          <UlgaMnoznik>1.00</UlgaMnoznik>
+          <UlgaCzesc>Ulga112</UlgaCzesc>
+        </Podatki>
+
+        <!-- Warunki zatrudnienia etatowego -->
+        <Etat>
+          <Wydzial>00000000-0005-0001-0001-000000000000</Wydzial>
+          <DataZawarcia>2026-01-02</DataZawarcia>
+          <DataRozpPracy>2026-01-02</DataRozpPracy>
+          <Okres>2026-01-02...</Okres>
+          <Podstawa>UmowyOPrace</Podstawa>
+          <TypUmowy>NaCzasNieokreślony</TypUmowy>
+          <Stanowisko>Specjalista</Stanowisko>
+          <Kalendarz>00000000-0006-0003-0001-000000000000</Kalendarz>
+          <InterpretacjaKalendarza>WgPlanu</InterpretacjaKalendarza>
+          <TypStawki>Dowolna</TypStawki>
+
+          <!-- Wynagrodzenie zasadnicze: 12 345 zł / mies., pełny etat -->
+          <Zaszeregowanie>
+            <Wymiar>1/1</Wymiar>
+            <Stawka>12,345.00 PLN</Stawka>
+            <RodzajStawki>Miesieczna</RodzajStawki>
+            <Element>00000000-0007-0002-0002-000000000000</Element>
+          </Zaszeregowanie>
+
+          <!-- Ubezpieczenia ZUS: tytuł 0110, obowiązkowe społeczne + zdrowotne -->
+          <Ubezpieczenia>
+            <Tyub4>00000000-0005-0002-0110-000000000000</Tyub4>
+            <ObowiazkoweOd>2026-01-02</ObowiazkoweOd>
+            <Emerytalne><Typ>Obowiazkowe</Typ><Przyczyna>NieDotyczy</Przyczyna></Emerytalne>
+            <Rentowe><Typ>Obowiazkowe</Typ><Przyczyna>NieDotyczy</Przyczyna></Rentowe>
+            <Chorobowe><Typ>Obowiazkowe</Typ><Przyczyna>NieDotyczy</Przyczyna></Chorobowe>
+            <Wypadkowe><Typ>Obowiazkowe</Typ><Przyczyna>NieDotyczy</Przyczyna></Wypadkowe>
+            <Zdrowotne><Typ>Obowiazkowe</Typ><Przyczyna>NieDotyczy</Przyczyna></Zdrowotne>
+          </Ubezpieczenia>
+
+          <PracownikZwolniony>False</PracownikZwolniony>
+        </Etat>
+
+        <!-- Parametry naliczania nieobecności / zasiłków -->
+        <Nieobecnosci>
+          <OkresZasilkowy>Standardowy_6_9</OkresZasilkowy>
+        </Nieobecnosci>
+
+        <!-- Dane statystyczne GUS -->
+        <GUS>
+          <GlowneMiejscePracy>True</GlowneMiejscePracy>
+        </GUS>
+      </PracHistoria>
+    </Historia>
+  </Pracownik>
+</session>

@@ -51,7 +51,9 @@ do wczytywania danych i ustawień konfiguracyjnych oraz ich eksportu. Trzy czę�
 
 Artykuł specyfikuje identyfikację rekordów (GUID, `where`, `key`, `id`), formaty wartości
 (liczby, daty, referencje, kwoty z walutą), atrybuty specjalne oraz reguły plików
-`*.dbinit.xml` (`priority`, `versionName`, `dbversion`).
+`*.dbinit.xml` (`priority`, `versionName`, `dbversion`). Zawiera też gotowy, zweryfikowany
+importem **przykład** (obiekt w modelu „root + historia") —
+[examples/import-pracownik-etatowy.xml](examples/import-pracownik-etatowy.xml).
 
 ### `scan-folders` — [references/scan-folders.md](references/scan-folders.md)
 

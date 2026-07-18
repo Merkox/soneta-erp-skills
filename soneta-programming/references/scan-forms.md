@@ -4,6 +4,8 @@ Odczyt rzeczywistej struktury formularzy platformy Soneta — **zakładek**, **s
 (grup) i **pól w kolejności wprowadzania** — wprost z bibliotek DLL, bez dostępu do źródeł.
 Służy do budowania kodu wprowadzającego dane oraz do przygotowania [importu XML](../../soneta-config/SKILL.md)
 w trybie `business="true"`, gdzie **kolejność pól i przynależność do sekcji** ma znaczenie.
+Zakładki i listy (`Grid`) pokazują też, co logicznie stanowi „dane obiektu" — pomaga to
+**ustalić zakres eksportu** (które podkolekcje i cechy dołączyć do datapacku).
 
 ## Najpierw INDEX (`data/forms/INDEX.md`) — szybkie wyszukanie „obiekt → zakładki”
 
@@ -235,6 +237,6 @@ Dopasowano 51 zakładek (pageform) po typie danych lub `DataType`. …
 - [scan-props.md](scan-props.md) — pola bazodanowe i kalkulowane tabeli (typy, tytuły) do
   których prowadzą ścieżki pól z formularza.
 - [`/soneta-config`](../../soneta-config/SKILL.md) — import/eksport XML; sekcje i kolejność pól
-  są istotne przy `business="true"`.
+  są istotne przy `business="true"`, a listy/zakładki podpowiadają zakres eksportu (datapack).
 - [context.md](context.md), [safe-code.md](safe-code.md) — budowanie danych kodem w poprawnej sekwencji.
 - Narzędzie `scan-folders` (`/soneta-config`) — statyczne foldery menu (listy, formularze).
