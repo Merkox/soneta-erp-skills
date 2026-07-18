@@ -403,6 +403,14 @@ się automatycznie. `CaptionHtml` bez `/` → samodzielna zakładka; z `/` → h
 > dostępna. (Jeśli wyjątkowo nie zostanie znaleziona, dopiero wtedy rozważ jawne dołączenie
 > zasobu w konfiguracji projektu.)
 
+> **Zakładki i grupy = sekcje danych.** `Page` i `Group` wyznaczają logiczne **sekcje danych**
+> do uzupełnienia, a kolejność pól odzwierciedla kolejność wprowadzania (i pośrednio wykonywanego
+> kodu). Ma to znaczenie przy budowaniu danych **kodem** oraz przy **imporcie XML `business="true"`**
+> (patrz skill `/soneta-config`). Gdy masz tylko skompilowane DLL (bez źródeł formularzy), zakładki,
+> sekcje i rozwinięte ścieżki pól (łańcuch `DataContext`+`EditValue`, dołączane `Include`)
+> odczytasz z zasobów osadzonych skanerem **`scan-forms`** ze skilla `/soneta-programming`
+> (references/scan-forms.md).
+
 ### Zmiana kontekstu danych
 
 - `DataContext="{Adres}"` — zmienia kontekst **aktualnego elementu i podrzędnych**

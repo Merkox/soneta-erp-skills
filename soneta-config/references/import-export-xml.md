@@ -175,7 +175,10 @@ Zasady:
 - **Kolejność elementów ma znaczenie** — właściwości są ustawiane po kolei, a każda może
   uruchamiać operacje biznesowe. Reguła praktyczna: odzwierciedlaj kolejność, w jakiej
   **operator wpisywałby dane na formularzu** (najpierw definicja dokumentu, potem kontrahent,
-  potem pozycje, na końcu stan).
+  potem pozycje, na końcu stan). Rzeczywistą kolejność pól i **sekcje danych** (zakładki, grupy)
+  formularza — nawet gdy masz tylko skompilowane DLL — odczytasz narzędziem **`scan-forms`**
+  ze skilla `/soneta-programming` (kolejność pól = kolejność wprowadzania; rozwija też ścieżki
+  pól i `Include`).
 - Dostępne właściwości biznesowe obiektu (oraz jego podkolekcje) zwraca narzędzie `scan-props`
   ze skilla `/soneta-programming`.
 - Nowy obiekt może wymagać parametrów tworzenia — przekazuje się je **atrybutami** elementu
@@ -289,7 +292,10 @@ Zasady:
 - `/soneta-programming` — warstwa programistyczna importu/eksportu (klasy `SessionReader` /
   `SessionWriter`): artykuł *sessionreader-sessionwriter*; ponadto *datapack-guidedrow*
   (rekordy guidowane, datapack), *row-types* (`OnImporting`/`OnImported`), *scan-props*
-  (inwentaryzacja pól i właściwości), *integration-tests* (`ImportBusinessXml`).
+  (inwentaryzacja pól i właściwości), *scan-forms* (zakładki, sekcje danych i kolejność pól
+  formularza — kolejność wprowadzania pod `business="true"`), *integration-tests* (`ImportBusinessXml`).
+- `/soneta-form-xml` — składnia formularzy (`Page`/`Group`/`Field`/`DataContext`/`EditValue`);
+  zakładki i grupy jako sekcje danych do uzupełnienia.
 - `/soneta-tools` — `dbmgr` (operacje na bazach, import XML z CLI), `buscall` (weryfikacja
   efektów importu na żywej aplikacji).
 - [SKILL.md](../SKILL.md) — mapa tego skilla.
