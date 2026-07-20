@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Master-detail: wydruk dokumentu z pozycjami.
+     - CurrentList = lista dokumentów; DetailBand "naglowek" drukuje pola nagłówka dokumentu.
+     - Zagnieżdżony DetailReportBand DataMember="Pozycje" iteruje kolekcję pozycji bieżącego
+       dokumentu (relacja jeden-do-wielu; Soneta nie używa XRSubreport).
+       * GroupHeaderBand: nagłówek kolumn pozycji (RepeatEveryPage).
+       * DetailBand: wiersz pozycji; Lp. przez <Summary Func="RecordNumber">.
+       * ReportFooterBand: suma wartości pozycji dokumentu — sumSum([Wartosc]).
+     Ten sam DataSource="#Ref-0" na raporcie i na DetailReportBand; różnicuje je DataMember. -->
+<XtraReportsLayoutSerializer SerializerVersion="20.2.7.0" Ref="1"
+    ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2"
+    Name="Dokument" DisplayName="Dokument z pozycjami" SnapGridSize="25"
+    ReportUnit="TenthsOfAMillimeter" Margins="198, 198, 200, 200"
+    PaperKind="A4" PageWidth="2100" PageHeight="2970"
+    Version="20.2" DataSource="#Ref-0" Dpi="254" Font="Calibri, 9pt">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="topMargin" HeightF="200" Dpi="254" />
+
+    <!-- Poziom master: nagłówek dokumentu. PageBreak="BeforeBandExceptFirstEntry" =
+         każdy dokument od nowej strony (pierwszy bez łamania). -->
+    <Item2 Ref="3" ControlType="DetailBand" Name="naglowek" HeightF="260"
+           PageBreak="BeforeBandExceptFirstEntry" Dpi="254">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRLabel" Name="lblNumer" Text="[Numer.NumerPelny]"
+               SizeF="1200,90" LocationFloat="0,0" Font="Calibri, 14pt, style=Bold"
+               TextAlignment="MiddleLeft" Dpi="254" Padding="5,5,0,0,254" />
+        <Item2 Ref="5" ControlType="XRLabel" Name="lblData" Text="[Data]" TextFormatString="Data: {0:d}"
+               SizeF="504,60" LocationFloat="1200,0" TextAlignment="MiddleRight"
+               Dpi="254" Padding="5,5,0,0,254" />
+        <Item3 Ref="6" ControlType="XRLabel" Name="lblKontrahent" Text="[Kontrahent.Nazwa]"
+               SizeF="1704,60" LocationFloat="0,100" TextAlignment="MiddleLeft"
+               Dpi="254" Padding="5,5,0,0,254" />
+      </Controls>
+    </Item2>
+
+    <!-- Poziom detail: pozycje dokumentu -->
+    <Item3 Ref="7" ControlType="DetailReportBand" Name="pozycje" Level="0"
+           DataMember="Pozycje" DataSource="#Ref-0" Dpi="254">
+      <Bands>
+        <Item1 Ref="8" ControlType="GroupHeaderBand" Name="naglowekPozycji"
+               RepeatEveryPage="true" HeightF="70" KeepTogether="true" Dpi="254">
+          <Controls>
+            <Item1 Ref="9" ControlType="XRTable" Name="tabNagPoz" AnchorHorizontal="Both"
+                   SizeF="1704,70" LocationFloat="0,0" Dpi="254">
+              <Rows>
+                <Item1 Ref="10" ControlType="XRTableRow" Name="wNagPoz" Weight="1" Dpi="254">
+                  <Cells>
+                    <Item1 Ref="11" ControlType="XRTableCell" Name="hLp"      Weight="0.06" Text="Lp."   Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item2 Ref="12" ControlType="XRTableCell" Name="hTowar"   Weight="0.48" Text="Towar" Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleLeft"  Dpi="254" Padding="5,5,0,0,254" />
+                    <Item3 Ref="13" ControlType="XRTableCell" Name="hIlosc"   Weight="0.14" Text="Ilość" Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item4 Ref="14" ControlType="XRTableCell" Name="hCena"    Weight="0.16" Text="Cena"  Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item5 Ref="15" ControlType="XRTableCell" Name="hWartosc" Weight="0.16" Text="Wartość" Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254" />
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+          </Controls>
+        </Item1>
+
+        <Item2 Ref="16" ControlType="DetailBand" Name="wierszPozycji" HeightF="55" Dpi="254">
+          <Controls>
+            <Item1 Ref="17" ControlType="XRTable" Name="tabPoz" AnchorHorizontal="Both"
+                   SizeF="1704,55" LocationFloat="0,0" Dpi="254">
+              <Rows>
+                <Item1 Ref="18" ControlType="XRTableRow" Name="wPoz" Weight="1" Dpi="254">
+                  <Cells>
+                    <Item1 Ref="19" ControlType="XRTableCell" Name="cLp" Weight="0.06" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254">
+                      <Summary Ref="20" Running="Report" Func="RecordNumber" />
+                    </Item1>
+                    <Item2 Ref="21" ControlType="XRTableCell" Name="cTowar"   Weight="0.48" Text="[Towar.Nazwa]"     TextAlignment="MiddleLeft"  Dpi="254" Padding="5,5,0,0,254" />
+                    <Item3 Ref="22" ControlType="XRTableCell" Name="cIlosc"   Weight="0.14" Text="[Ilosc]"          TextAlignment="MiddleRight" TextFormatString="{0:n2}" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item4 Ref="23" ControlType="XRTableCell" Name="cCena"    Weight="0.16" Text="[CenaJednostkowa]" TextAlignment="MiddleRight" TextFormatString="{0:n2}" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item5 Ref="24" ControlType="XRTableCell" Name="cWartosc" Weight="0.16" Text="[Wartosc]"        TextAlignment="MiddleRight" TextFormatString="{0:n2}" Dpi="254" Padding="5,5,0,0,254" />
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+          </Controls>
+        </Item2>
+
+        <Item3 Ref="25" ControlType="ReportFooterBand" Name="podsumowaniePozycji" HeightF="60" Dpi="254">
+          <Controls>
+            <Item1 Ref="26" ControlType="XRTable" Name="tabPodsum" AnchorHorizontal="Both"
+                   SizeF="1704,60" LocationFloat="0,0" Dpi="254">
+              <Rows>
+                <Item1 Ref="27" ControlType="XRTableRow" Name="wPodsum" Weight="1" Dpi="254">
+                  <Cells>
+                    <Item1 Ref="28" ControlType="XRTableCell" Name="fLabel" Weight="0.84" Text="Razem dokument:" Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" Dpi="254" Padding="5,5,0,0,254" />
+                    <Item2 Ref="29" ControlType="XRTableCell" Name="fSuma"  Weight="0.16" Font="Calibri, 9pt, style=Bold" TextAlignment="MiddleRight" TextFormatString="{0:n2}" Dpi="254" Padding="5,5,0,0,254">
+                      <ExpressionBindings>
+                        <Item1 Ref="30" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([Wartosc])" />
+                      </ExpressionBindings>
+                    </Item2>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+          </Controls>
+        </Item3>
+      </Bands>
+    </Item3>
+
+    <Item4 Ref="31" ControlType="BottomMarginBand" Name="bottomMargin" HeightF="200" Dpi="254" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="Soneta.Business.UI.DxReports.BusinessDataSource,Soneta.Business.UI.DxReports"
+           Name="BusinessSource" DataKind="CurrentList" />
+    <Item2 Ref="32" ObjectType="Soneta.Business.UI.DxReports.Components.BusinessContext,Soneta.Business.UI.DxReports"
+           Name="BusinessContext" StylesSource="standardowy" SingleRow="false" TreatStringAsValueInExport="false" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>
