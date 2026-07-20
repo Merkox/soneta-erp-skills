@@ -3,12 +3,11 @@ name: soneta-erp
 description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
   soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
-  soneta-form-xml, soneta-place-def-elementow, soneta-config (konfiguracja i funkcje
-  domenowe — import/eksport XML, scan-folders, konfiguracja uruchomieniowa appsettings.json:
+  soneta-form-xml, soneta-repx (wydruki DevExpress .repx), soneta-place-def-elementow,
+  soneta-config (konfiguracja i funkcje domenowe — import/eksport XML, scan-folders,
+  konfiguracja uruchomieniowa appsettings.json
   porty i adresy komponentów), soneta-config-reg (rejestr konfiguracji
-  ConfigReg — providery, *.reg.json, przenoszenie ustawień między bazami),
-  soneta-tools (narzędzia CLI: dbmgr,
-  buscall, SonetaFrame), soneta-containers (uruchamianie i wdrażanie w kontenerach:
+  ConfigReg — providery, *.reg.json, przenoszenie ustawień między bazami), soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (uruchamianie i wdrażanie w kontenerach:
   docker compose, Apple container / Container Desktop, Helm/Kubernetes, wybór wersji
   obrazów, tworzenie bazy w kontenerze). Używaj gdy użytkownik: (1) rozpoczyna
   zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
@@ -68,6 +67,15 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   programu: uruchamianie, parametry startowe, plik ustawień i źródła baz danych. Używaj gdy
   użytkownik zarządza bazą z CLI, tworzy bazę demo, robi backup/konwersję, uruchamia ramkę
   i konfiguruje połączenia do baz, albo weryfikuje zmiany na uruchomionej aplikacji.
+* `/soneta-repx` - Wydruki DevExpress XtraReports (pliki `.repx` — serializowany XML) dla
+  platformy Soneta. Struktura raportu (pasma, kontrolki `XRTable`/`XRLabel` i własne kontrolki
+  Soneta `AmountLabel`/`Header`/`Footer`), źródło danych `BusinessDataSource` z `DataKind`
+  (`CurrentList`/`Context`/`SingleRow`/`Session`), master-detail przez `DetailReportBand`,
+  wiązania `ExpressionBindings`, podsumowania, grupowanie, formatowanie warunkowe oraz rejestracja
+  `[assembly: DxReport(...)]`. Używaj gdy użytkownik tworzy/edytuje plik `.repx`, pyta o strukturę
+  wydruku DevExpress w Soneta/enova365, źródło danych raportu lub jego rejestrację. Kod-behind
+  wydruku (`ReportSnippet`, `[DxBind]`) i logika ORM licząca dane → `/soneta-programming`; formularz
+  parametrów wydruku → `/soneta-form-xml`.
 * `/soneta-form-xml` - XML z nieistniejącymi elementami. ZAWSZE używaj tego skilla gdy użytkownik: (1) prosi o utworzenie lub modyfikację pliku pageform.xml, viewform.xml, form.xml, lookupform.xml lub gridform.xml dla platformy Soneta (enova365); (2) pyta o elementy DataForm, Page, Group, Grid, Field, Row, Stack, Flow, Command, Include, Appearance, GroupBy w Soneta; (3) pyta o składnię EditValue, DataContext, Visibility, RowCondition, Renderable, CaptionHtml, Footer, Class lub układ UI formularzy Soneta; (4) pokazuje istniejący plik form.xml/pageform.xml/viewform.xml i pyta o jego strukturę lub chce go rozszerzyć; (5) pyta o warunkową widoczność, formatowanie warunkowe (Appearance), bindowanie danych lub wzorce UI w Soneta.
 * `/soneta-containers` - Uruchamianie i wdrażanie platformy Soneta w kontenerach (dla partnerów,
   bez dostępu do kodu). Trzy ścieżki: **docker compose** (główna), **Apple `container` /
