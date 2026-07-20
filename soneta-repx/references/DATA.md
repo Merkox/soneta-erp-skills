@@ -35,6 +35,10 @@ z którego źródła pasmo czerpie dane. O tym, **skąd** pochodzą dane, decydu
 - Właściwość skalarna do bindowania kontrolki: `Kod`, `Kontrahent.Nazwa`, `Ceny.Podstawowa.Netto`.
 - Klasa parametrów snippet (dla `DataKind="Context"`): `NazwaSnippet+KlasaContext.Wlasciwosc`
   (znak `+` = klasa zagnieżdżona CLR).
+- **Kontekst nagłówka/stopki (dla `DataKind="Context"`):** `ReportContext.Title`, `…PlainTitle`,
+  `…FiltersDescription`, `…UserFiltersDescription`, `…ParametersDescription` — tytuł i opisy
+  filtrów/parametrów przekazane z raportu-rodzica. Wiązane zwykle na `XRRichText` (`PropertyName="Rtf"`)
+  lub `XRLabel` (`Text`). Zob. [SUBREPORTS.md](SUBREPORTS.md).
 
 `DataMember` jest **wymagany**, gdy `DataKind` = `Context` lub `Session`. Dla `CurrentList`/
 `SingleRow` zwykle zbędny (lista jest gotowa).
@@ -152,6 +156,24 @@ Definiowane na poziomie raportu; potem używasz ich jak zwykłego pola (`[Nazwa]
 `FieldType` = typ .NET (`Int16`, `String`, `Decimal`, `DateTime`, `Boolean`…). Wariant bez
 `Expression`, tylko z `DataMember`, oznacza pole liczone po stronie danych Soneta (raport je
 tylko binduje).
+
+**Pole kalkulowane liczone w kodzie (snippet).** Deklarujesz pole z pustym ciałem (bez `Expression`),
+a wartość zwracasz w snippecie zdarzeniem `<Nazwa>_GetValue`:
+
+```xml
+<CalculatedFields>
+  <Item1 Ref="2" Name="ParametersDescriptionStr" FieldType="String" />
+</CalculatedFields>
+```
+```csharp
+[DxBind] private void ParametersDescriptionStr_GetValue(object s, GetValueEventArgs e) {
+    Context.Get(out ReportContext rc);
+    e.Value = string.Join("\n", rc.PlainParametersDescription);   // wartość pola z kodu
+}
+```
+
+Potem używasz `[ParametersDescriptionStr]` jak zwykłego pola (np. `DataMember` etykiety). Model
+snippetu → [SNIPPET.md](SNIPPET.md), kontekst nagłówka → [SUBREPORTS.md](SUBREPORTS.md).
 
 ## Filtrowanie — `FilterString`
 

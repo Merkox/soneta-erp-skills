@@ -137,6 +137,10 @@ wybiera arkusz przez `StylesSource` na `BusinessContext`:
   wydruków: arkusze stylów, nagłówki, stopki, podraporty, wzorce użytkownika). Nagłówki/stopki
   wstawia się kontrolkami `Header`/`Footer` przez `ReportSourceName` → [CONTROLS.md](CONTROLS.md).
 
+Pełna anatomia pliku `.repss` (składnia, właściwości stylów, katalog nazwanych stylów) →
+[STYLES.md](STYLES.md). Budowa samych plików nagłówka/stopki/podraportu oraz mechanizm wiązania po
+nazwie logicznej → [SUBREPORTS.md](SUBREPORTS.md).
+
 ## Wersje DevExpress
 
 - **Runtime programu: DevExpress 25.2.** Edytując `.repx` narzędziem DevExpress używaj wersji

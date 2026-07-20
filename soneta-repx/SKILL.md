@@ -1,6 +1,6 @@
 ---
 name: soneta-repx
-description: "Wydruki i raporty w Soneta (enova365, Triva) — pliki .repx (DevExpress XtraReports, serializowany XML). Sięgaj po ten skill przy KAŻDYM zadaniu, którego efektem jest wydruk/raport: faktury, dokumentu, deklaracji, listy, zestawienia; utworzenie, przeróbka lub poprawa pliku .repx (też z załącznika); pytanie „jak w wydruku/raporcie zrobić X”. Typowe X: podpięcie danych (bieżąca lista, dokument z pozycjami, master-detail, podraport), podział stron / dokument od nowej strony, kolumna Lp, tabele, grupowanie i sumy, formatowanie warunkowe, kwoty, nakładanie wartości na skan/wzór formularza (NIP, checkboxy), rejestracja wydruku. Wyzwalają też pojęcia techniczne: XtraReportsLayoutSerializer, pasma (DetailBand/DetailReportBand/GroupHeaderBand), kontrolki (XRLabel/XRTable/AmountLabel/Header/Footer), BusinessDataSource/DataKind, ExpressionBindings/Summary/GroupFields/CalculatedFields/FilterString, [assembly: DxReport], ReportSnippet/[DxBind]. Wystarczy „wydruk”, „raport” lub „.repx” w kontekście Soneta/enova365. NIE dla: business.xml, form.xml, import/eksport konfiguracji, SQL, Excel, szablony Word .dotx."
+description: "Wydruki i raporty w Soneta (enova365, Triva) — pliki .repx (DevExpress XtraReports, serializowany XML). Sięgaj po ten skill przy KAŻDYM zadaniu, którego efektem jest wydruk/raport: faktury, dokumentu, deklaracji, listy, zestawienia; utworzenie, przeróbka lub poprawa pliku .repx (też z załącznika); pytanie „jak w wydruku/raporcie zrobić X”. Typowe X: podpięcie danych (bieżąca lista, dokument z pozycjami, master-detail, podraport), podział stron / dokument od nowej strony, kolumna Lp, tabele, grupowanie i sumy, formatowanie warunkowe, kwoty, nakładanie wartości na skan/wzór formularza (NIP, checkboxy), własny nagłówek/stopka/podpisy dokumentu, arkusz stylów (.repss), rejestracja wydruku. Wyzwalają też pojęcia techniczne: XtraReportsLayoutSerializer, StyleSheetSerializer/.repss (arkusze stylów), pasma (DetailBand/DetailReportBand/GroupHeaderBand/SubBand), kontrolki (XRLabel/XRTable/AmountLabel/Header/Footer), BusinessDataSource/DataKind, ReportContext, ExpressionBindings/Summary/GroupFields/CalculatedFields/FilterString, [assembly: DxReport], ReportSnippet/[DxBind]. Wystarczy „wydruk”, „raport” lub „.repx” w kontekście Soneta/enova365. NIE dla: business.xml, form.xml, import/eksport konfiguracji, SQL, Excel, szablony Word .dotx."
 ---
 
 # Soneta DX Reports — wydruki DevExpress XtraReports (.repx)
@@ -144,6 +144,19 @@ zestaw funkcji, formatowanie warunkowe (`Iif` na `BackColor`/`Visible`) i pola k
 > **Uwaga:** Soneta **nie** używa `XRSubreport`, `XRCheckBox` ani `XRZipCode` — zastępują je
 > powyższe kontrolki i zagnieżdżone `DetailReportBand`. Szczegóły → [references/CONTROLS.md](references/CONTROLS.md).
 
+## Nagłówki, stopki, podraporty i style — wzorce współdzielone
+
+Nagłówek/stopkę/podraport **wstawiasz** kontrolką `Header`/`Footer`/`DatabaseSubReport` z
+`ReportSourceName` (nazwa logiczna, nie plik) — program rozwiązuje ją na wzorzec z konfiguracji, więc
+klient może podmienić standardowy nagłówek własnym bez ruszania raportu. **Budowa** samego pliku
+nagłówka/stopki (`DataKind="Context"`, `SubBand` pierwszej/kolejnej strony, `ReportContext.Title`,
+helpery `ReportTools`/`XtraReportHelper`) oraz wielosekcyjnych podraportów →
+[references/SUBREPORTS.md](references/SUBREPORTS.md).
+
+Formatowanie jest **centralne w arkuszu `.repss`**: kontrolki wskazują styl po nazwie (`StyleName`),
+a raport wybiera arkusz przez `StyleSheetPath`/`StylesSource` (`"standardowy"`). Struktura pliku
+`.repss`, właściwości stylów i katalog nazwanych stylów → [references/STYLES.md](references/STYLES.md).
+
 ## Gotowe przykłady (assets)
 
 - [assets/Szkielet.repx](assets/Szkielet.repx) — minimalny raport listy (`CurrentList`).
@@ -169,6 +182,10 @@ zestaw funkcji, formatowanie warunkowe (`Iif` na `BackColor`/`Visible`) i pola k
 - [ ] Master-detail: `DetailReportBand` ma `DataMember` = nazwa kolekcji podrzędnej.
 - [ ] Wiązania używają istniejących pól obiektu (`[Pole]`, `[Relacja].[Pole]`).
 - [ ] Kwoty przez `AmountLabel`; format liczb/dat przez `TextFormatString`/`FormatString`.
+- [ ] Style: kontrolki/pasma używają `StyleName` z arkusza `.repss` (+ `StylePriority Use*="false"`),
+      raport ma `StyleSheetPath`/`StylesSource`. Zob. [references/STYLES.md](references/STYLES.md).
+- [ ] Nagłówek/stopka/podraport: wstawiony przez `ReportSourceName` (nazwa logiczna); własny plik
+      budowany wg wzorca (`DataKind="Context"`, `SubBand`, `ReportContext.*`). Zob. [references/SUBREPORTS.md](references/SUBREPORTS.md).
 - [ ] Jeśli wydruk ma pojawić się w programie: przygotowana rejestracja `[assembly: DxReport(...)]`
       (lub dodanie jako wzorzec użytkownika w edytorze wydruków). Zob. REGISTRATION.md.
 
