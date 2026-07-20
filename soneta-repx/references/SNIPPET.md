@@ -183,7 +183,15 @@ Podkreślenia w nazwie kontrolki są dozwolone (rozbicie następuje na ostatnim 
 |---|---|---|
 | `BeforePrint` | `CancelEventArgs` | **Najczęstsze.** Ustawianie `Text`/`Visible`/`BackColor`; `e.Cancel = true` ukrywa kontrolkę/bandę. |
 | `DataSourceRowChanged` | `DataSourceRowEventArgs` | Zmiana bieżącego rekordu bandy — przelicz nagłówek/dane raz na rekord. |
-| `PrintOnPage` | `PrintOnPageEventArgs` | Decyzje zależne od strony (np. „drukuj tylko na ostatniej”). |
+| `PrintOnPage` | `PrintOnPageEventArgs` | Decyzje zależne od strony (np. „drukuj tylko na ostatniej”); `e.Cancel` chowa element na danej stronie. |
+| `GetValue` | `GetValueEventArgs` | Zwrot wartości pola kalkulowanego z kodu (`e.Value = …`) — pole zadeklarowane bez `Expression`. Zob. [DATA.md](DATA.md). |
+
+Dodatkowo w handlerach dostępne: `Report.DataAdapter` (bieżący obiekt danych bandy — alternatywa dla
+`GetCurrentRow()`), `Tag` (parametr przekazany do podraportu), `MasterReport` (≠ `null` → jesteśmy
+podraportem), `Context.Get(out ReportContext rc)` (kontekst nagłówka/stopki). Teksty tłumacz przez
+`"…{0}…".TranslateFormat(x)` / `"…".Translate()`; `[TranslateIgnore]` wyłącza tłumaczenie metody.
+Gotowe helpery nagłówka/stopki (`ReportTools.GetHeaderData`/`GetFooterData`, `XtraReportHelper.*`) →
+[SUBREPORTS.md](SUBREPORTS.md).
 
 > **Pułapka:** `BeforePrint` na tej samej kontrolce odpala się wielokrotnie (raz na wystąpienie).
 > Ciężką inicjalizację (odczyt konfiguracji, dane firmy) rób raz — pod strażą flagi:
@@ -362,3 +370,4 @@ DevExpress: [../assets/Dokument.repx.cs](../assets/Dokument.repx.cs).
 - **/soneta-form-xml** — formularz parametrów wydruku (`pageform.xml`).
 - [REGISTRATION.md](REGISTRATION.md) — osadzanie `.repx.cs`, rejestracja wydruku, style.
 - [DATA.md](DATA.md) — `BusinessDataSource`, `DataKind`, wiązanie band i `DataMember`.
+- [SUBREPORTS.md](SUBREPORTS.md) — snippety nagłówków/stopek/podraportów: helpery `ReportTools`/`XtraReportHelper`, `SubBand` FirstPage/NextPage, sekcje `DetailReportBand` sterowane snippetem.

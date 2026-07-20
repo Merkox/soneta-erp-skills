@@ -93,6 +93,60 @@ Typowo umieszcza się je w `GroupHeaderBand`/`GroupFooterBand` z `RepeatEveryPag
 
 `StylePriority` z `Use*="false"` = „nie nadpisuj tej właściwości, bierz ze stylu nazwanego"
 (`StyleName`). Dzięki temu formatowanie jest centralne (arkusz `.repss`), a nie duplikowane.
+Nazwane style i ich katalog → [STYLES.md](STYLES.md).
+
+## Atrybuty rozmieszczenia, obramowania i zachowania
+
+Występują na większości kontrolek i komórek tabeli (obok `SizeF`/`LocationFloat`):
+
+| Atrybut | Znaczenie |
+|---|---|
+| `CanShrink` | `true` → kontrolka/wiersz kurczy wysokość, gdy treść krótsza (częste w nagłówkach). |
+| `CanGrow` | `true` → rośnie do treści. |
+| `ProcessNullValues` | `SuppressAndShrink` → ukryj i zwiń, gdy wartość pusta (chowanie pustych wierszy dokumentu). |
+| `Visible` | `false` → element niedrukowany (bandy, wiersze, kontrolki); często przełączany w snippecie. |
+| `AnchorHorizontal` | `Left` / `Right` / `Both` — zakotwiczenie przy zmianie szerokości strony. |
+| `AnchorVertical` | `Top` / `Bottom` / `Both` — zakotwiczenie pionowe (np. w `XRPanel`). |
+| `Borders` | Które krawędzie rysować: `None`, `All`, lista `Right, Bottom` / `Left, Bottom`. |
+| `BorderColor` / `BorderWidth` | Kolor / grubość krawędzi (gdy nie ze stylu). |
+| `AutoWidth` | `true` → szerokość etykiety dopasowana do tekstu. |
+| `WordWrap` | `false` → tekst bez zawijania. |
+| `RightToLeft` | `No` / `Yes` — kierunek tekstu. |
+| `KeepTogether` | `true` na wierszu/komórce → nie dziel między strony. |
+
+## Kod kreskowy, tekst RTF, linia
+
+```xml
+<!-- XRBarCode: typ kodu w podelemencie <Symbology>, dane przez DataBindings/ExpressionBindings -->
+<Item Ref="18" ControlType="XRBarCode" Name="barCode" Module="5" AutoModule="true" ShowText="false"
+      SizeF="762,87" LocationFloat="5,5" Dpi="254">
+  <Symbology Ref="19" Name="Code128" />
+  <DataBindings>
+    <Item Ref="20" PropertyName="Text" DataMember="Numer" />
+  </DataBindings>
+</Item>
+
+<!-- XRRichText: treść RTF w SerializableRtfString (base64) LUB wiązana do właściwości Rtf -->
+<Item Ref="26" ControlType="XRRichText" Name="richText1" SerializableRtfString="ewBc...(base64)"
+      SizeF="824,64" LocationFloat="4,0" Dpi="254" StyleName="NaglowekTytulStyl" Font="Times New Roman, 9.75pt">
+  <DataBindings>
+    <Item Ref="27" PropertyName="Rtf" DataMember="ReportContext.Title" />
+  </DataBindings>
+</Item>
+
+<!-- XRLine: linia (np. miejsce na podpis) -->
+<Item Ref="34" ControlType="XRLine" Name="line1" LineStyle="Dot" SizeF="339,5" LocationFloat="484,21" Dpi="254" />
+```
+
+- **`XRBarCode`**: `Symbology Name` = symbolika (`Code128`, `Code39`, `QRCode`, `DataMatrix`);
+  `Module`/`AutoModule` = szerokość kreski, `ShowText="false"` = bez podpisu. Symbolikę można też
+  ustawić w snippecie (`barCode.Symbology = new …Generator()`).
+- **`XRRichText`**: statyczny RTF trzymany jako base64 w `SerializableRtfString`; treść dynamiczna —
+  wiązanie `PropertyName="Rtf"` (np. do `ReportContext.*`, zob. [SUBREPORTS.md](SUBREPORTS.md)).
+- **`XRLine`**: `LineStyle` = `Solid`/`Dot`/`Dash`.
+
+Kontrolki `Header`/`Footer`/`DatabaseSubReport` (nagłówek/stopka/podraport szablonowy) — poniżej;
+**budowa** samych plików nagłówka/stopki/podraportu → [SUBREPORTS.md](SUBREPORTS.md).
 
 ## `XRTable` — struktura i szerokości
 

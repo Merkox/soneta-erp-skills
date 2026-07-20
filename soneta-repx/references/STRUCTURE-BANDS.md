@@ -29,9 +29,15 @@ referencyjny) i `ControlType` (klasa .NET). Odwołania krzyżowe zapisywane są 
 | `Font` | Domyślna czcionka, np. `Calibri, 9pt`. |
 | `Version` | Wersja formatu serializera (`20.2`) — metadana, nie zmieniaj. |
 | `DataSource` | `#Ref-N` → komponent źródła danych w `ComponentStorage`. |
+| `StyleSheetPath` | Nazwa logiczna arkusza stylów `.repss` (np. `standardowy`) — wpina style do raportu; kontrolki wskazują styl przez `StyleName`. Zob. [STYLES.md](STYLES.md). |
 | `FilterString` | Filtr wierszy (składnia DevExpress) — zwykle filtruje się po stronie źródła, patrz [DATA.md](DATA.md). |
 | `Landscape` | `true` = orientacja pozioma; brak = pionowa. |
+| `Bookmark` | Etykieta pozycji w drzewie zakładek (np. eksport PDF). |
 | `SnapGridSize` | Skok siatki projektanta (bez wpływu na wydruk). |
+
+Po sekcji `<Bands>` w pliku pojawiają się zwykle elementy pomocnicze bez wpływu na treść:
+`<DesignerOptions ShowExportWarnings="false" />` (opcje projektanta) i `<Watermark ShowBehind="false" />`
+(znak wodny — pusty, gdy nieużywany). Nie usuwaj ich bez potrzeby.
 
 ### Jednostki: `ReportUnit` + `Dpi`
 
@@ -77,6 +83,28 @@ Sekcja `<Bands>` zawiera pasma w kolejności `ItemN`. Rola każdego:
 | `GroupUnion` | Trzymanie grupy razem: `WithFirstDetail`, `WithLastDetail`, `WholePage`. |
 | `StyleName` | Nazwa stylu z arkusza (`.repss`), np. `ListaStylAutomatyczny`, `NaglowekTytulStyl`. |
 | `PageBreak` | `BeforeBand` / `AfterBand` / `AfterBandExceptLastEntry` — wymuszenie podziału strony. |
+| `Visible` | `false` → pasmo niedrukowane (często przełączane w snippecie). |
+| `BackColor` | Tło pasma (gdy nie ze stylu). |
+| `Expanded` | Tylko projektant (zwinięcie pasma w edytorze) — bez wpływu na wydruk. |
+
+## Podpasma — `<SubBands>` / `SubBand`
+
+`DetailBand` (i inne pasma) mogą mieć dołączone **podpasma** w sekcji `<SubBands>` — dodatkowe
+warstwy drukowane bezpośrednio pod pasmem-rodzicem. Najczęstszy wzorzec to **wariant „pierwsza vs
+kolejna strona”** w nagłówkach: pełna pieczątka na pierwszej stronie, skrót na następnych.
+
+```xml
+<Item2 Ref="3" ControlType="DetailBand" Name="detailBand1" HeightF="0" Dpi="254">
+  <SubBands>
+    <Item1 Ref="4" ControlType="SubBand" Name="subband_FirstPage" HeightF="447" Dpi="254"> … </Item1>
+    <Item2 Ref="37" ControlType="SubBand" Name="subband_NextPage"  HeightF="184" Dpi="254"> … </Item2>
+  </SubBands>
+</Item2>
+```
+
+- Który `SubBand` się drukuje, wybiera snippet zdarzeniem `subband_XXX_BeforePrint` (`e.Cancel`).
+- `SubBand` przyjmuje `PageBreak="AfterBand"` (np. strona tytułowa przed resztą).
+- Pełny wzorzec nagłówka pierwszej/kolejnej strony → [SUBREPORTS.md](SUBREPORTS.md).
 
 ## Master-detail — zagnieżdżony `DetailReportBand`
 
@@ -117,6 +145,12 @@ Zasady:
 - Częsty wzorzec produkcyjny: **dwa** `BusinessDataSource` — root raportu na `Context`
   (nagłówek/parametry), a `DetailReportBand` na osobnym `CurrentList` (właściwa lista). Zob.
   [DATA.md](DATA.md).
+- **Wiele sekcji obok siebie:** rodzeństwo `DetailReportBand` z rosnącym `Level` (`Level="0"`, `"1"`,
+  `"2"`…) daje kilka niezależnych tabel w jednym podraporcie; źródło i widoczność każdej sekcji
+  ustawia snippet w `DataSourceRowChanged` (`Section.DataSource = …ToArray()`, `Section.Visible`).
+  Wzorzec → [SUBREPORTS.md](SUBREPORTS.md).
+- **Wydruk drzewiasty:** `DetailBand` z podelementem `<HierarchyPrintOptions Indent="50.8" />`
+  drukuje dane hierarchicznie z wcięciem na poziom.
 
 ## Grupowanie
 
