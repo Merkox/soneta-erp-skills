@@ -7,11 +7,16 @@ description: >
   (business="false", pliki *.dbinit.xml, baza demo), import przez logikę biznesową
   (business="true"), eksport datapacku, identyfikacja rekordów po GUID, formaty wartości;
   (B) `scan-folders` — inwentaryzacja statycznych folderów menu (`[assembly: FolderView]`)
-  z bibliotek DLL. Używaj gdy użytkownik: (1) buduje lub analizuje plik XML importu danych
+  z bibliotek DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty i adresy
+  komponentów (orchestrator/server/web/webapi/webwcf/router/commhub), kolejność nadpisań
+  konfiguracji (profil systemu, nakładki `-c`, zmienne `SONETA_`, argumenty CLI), znaczenie
+  kluczy. Używaj gdy użytkownik: (1) buduje lub analizuje plik XML importu danych
   do platformy Soneta (dbinit.xml, dane demo, przenoszenie ustawień między bazami);
   (2) pyta o atrybuty guid/where/key/id/business/deleted/dbversion w XML Soneta;
   (3) eksportuje rekordy guidowane do XML; (4) chce zmapować strukturę menu programu
-  z DLL (drzewo folderów, listy, formularze) lub wpiąć nowy folder w istniejące menu.
+  z DLL (drzewo folderów, listy, formularze) lub wpiąć nowy folder w istniejące menu;
+  (5) konfiguruje porty/adresy komponentów albo pyta, co robi klucz w `appsettings.json`
+  i która warstwa go nadpisuje.
   Warstwa kodu importu (SessionReader/SessionWriter) i ORM → /soneta-programming;
   operacje na bazie z CLI → /soneta-tools.
 ---
@@ -28,6 +33,7 @@ są wyłącznie mechanizmy faktycznie obecne w skillu; kolejne artykuły dodawan
 |---|---|
 | **Budowa pliku XML importu/eksportu danych i ustawień** (dbinit.xml, demo, przenoszenie konfiguracji) | **/soneta-config** ([import-export-xml](references/import-export-xml.md)) |
 | Inwentaryzacja/mapa **folderów statycznych menu** (`[assembly: FolderView]`) z DLL | **/soneta-config** ([scan-folders](references/scan-folders.md)) |
+| **Konfiguracja uruchomieniowa** (porty, adresy komponentów, warstwy nadpisań `appsettings.json`) | **/soneta-config** ([appsettings](references/appsettings.md)) |
 | Kod obsługujący import/eksport (`SessionReader`/`SessionWriter`), klasy ORM, workery | [/soneta-programming](../soneta-programming/SKILL.md) |
 | Inwentaryzacja modułów/tabel (`scan-modules`), pól (`scan-props`), workerów (`scan-workers`) | [/soneta-programming](../soneta-programming/SKILL.md) |
 | Operacje na bazie z CLI (dbmgr), test na żywej aplikacji (buscall) | [/soneta-tools](../soneta-tools/SKILL.md) |
@@ -68,6 +74,21 @@ Perspektywa **funkcjonalno-użytkowa** (co użytkownik klika w menu) — komplem
 perspektywy **danych** (`scan-modules`) i **pól** (`scan-props`) ze skilla
 [/soneta-programming](../soneta-programming/SKILL.md). Planistyczne użycie inwentaryzacji
 opisuje [/soneta-addon-planning](../soneta-addon-planning/SKILL.md).
+
+### Konfiguracja uruchomieniowa `appsettings.json` — [references/appsettings.md](references/appsettings.md)
+
+Ustawienia uruchomieniowe komponentów (orchestrator, server, web, webapi, webwcf, router,
+commhub): **dwa pliki** `appsettings.json` (część back-end i część front-end) i które
+komponenty obsługują, mapa domyślnych **portów** oraz **trzy pary adresów, które muszą się
+zgadzać** (`Server:Urls`↔`ServerEndpoint`, `Router:Urls`↔`RouterEndpoint`,
+`CommHub:Urls`↔`CommHubClient`), **kolejność warstw nadpisań** (plik bazowy → profil systemu
+→ nakładka `-c` → zmienne `SONETA_` → argumenty CLI) — źródło najczęstszej pułapki „zmieniłem
+`appsettings.json`, a nic się nie zmieniło" — dwa tryby połączenia frontend→serwer
+(bezpośredni vs przez router) oraz słownik znaczeń kluczy. Zawiera checklistę zmiany
+portu/adresu.
+
+Uruchamianie komponentów, ramki hostującej i zarządzanie bazami opisuje
+[/soneta-tools](../soneta-tools/SKILL.md).
 
 ## Powiązania
 

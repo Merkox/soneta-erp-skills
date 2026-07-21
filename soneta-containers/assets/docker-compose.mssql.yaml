@@ -1,0 +1,85 @@
+# Soneta (enova365 / Triva) — SAMOWYSTARCZALNY stack z SQL Serverem w kontenerze.
+# Wariant DOCKEROWY: mssql + dbinit + server + web.
+#
+#   docker compose -f docker-compose.mssql.yaml up -d
+#
+# Dlaczego to wariant dockerowy, a nie dla Container Desktop:
+#   w Container Desktop zadanie `x-init` odpala się PRZED zwykłymi usługami i NIE może
+#   od nich zależeć — nie doczekałoby się kontenera SQL. Na macOS uruchom SQL jako
+#   osobny kontener (patrz references/apple-container.md), a potem użyj docker-compose.yaml.
+#
+# PODMIEŃ: tag wersji obrazów oraz hasła SA (poniżej wartości deweloperskie).
+
+name: soneta-stack
+
+services:
+  # SQL Server jako kontener. healthcheck = dbinit poczeka aż serwer przyjmie połączenia.
+  # UWAGA: obraz mssql jest amd64-only. Na Apple Silicon działa przez emulację (Docker Desktop);
+  #        na ARM Linux nie ruszy — dodaj wtedy własny obraz SQL zgodny z arch.
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: soneta-mssql
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "enova.123456"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql-data:/var/opt/mssql
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"enova.123456\" -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  # Inicjalizacja bazy — czeka na gotowy SQL, łączy się po nazwie kontenera (soneta-mssql).
+  dbinit:
+    image: soneta/server.standard:2606.0.1-alpine
+    container_name: soneta-dbinit
+    mem_limit: 4g
+    depends_on:
+      mssql:
+        condition: service_healthy
+    entrypoint: ["dotnet", "dbmgr.dll"]
+    # UWAGA: --recreate DROPUJE bazę przy KAŻDYM starcie. Po pierwszym udanym starcie usuń
+    #        --recreate albo startuj tylko: docker compose -f docker-compose.mssql.yaml up -d server web
+    command: create sttest --mssql --sqlserver "soneta-mssql,1433" --sqldb sttest --sqluser sa --sqlpwd "enova.123456" --demo gold --active --recreate
+    environment:
+      SONETA_Server__DbRegister__Name: "sttest"
+      SONETA_Server__DbRegister__Server: "soneta-mssql,1433"
+      SONETA_Server__DbRegister__DatabaseName: "sttest"
+      SONETA_Server__DbRegister__User: "sa"
+      SONETA_Server__DbRegister__Password: "enova.123456"
+
+  server:
+    image: soneta/server.standard:2606.0.1-alpine
+    container_name: soneta-server
+    mem_limit: 4g
+    entrypoint: ["dotnet", "/app/server.dll"]
+    depends_on:
+      dbinit:
+        condition: service_completed_successfully
+    environment:
+      SONETA_Server__DbRegister__Name: "sttest"
+      SONETA_Server__DbRegister__Server: "soneta-mssql,1433"
+      SONETA_Server__DbRegister__DatabaseName: "sttest"
+      SONETA_Server__DbRegister__User: "sa"
+      SONETA_Server__DbRegister__Password: "enova.123456"
+
+  web:
+    image: soneta/web.standard:2606.0.1-alpine
+    container_name: soneta-web
+    mem_limit: 2g
+    entrypoint: ["dotnet", "/app/web.dll"]
+    depends_on:
+      - server
+    environment:
+      SONETA_ServerEndpoint: "http://soneta-server:22000"
+      SONETA_URLS: "http://*:8080"
+    ports:
+      - "60000:8080"
+
+volumes:
+  mssql-data:

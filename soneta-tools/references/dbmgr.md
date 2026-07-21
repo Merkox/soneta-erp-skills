@@ -173,6 +173,11 @@ wystartuje z tym samym dodatkiem i tą samą bazą SQL, którą utworzył `dbmgr
 > docker inspect <kontener> --format '{{range .Config.Env}}{{println .}}{{end}}' | grep MSSQL_SA_PASSWORD
 > ```
 
+> **`dbmgr` w kontenerze (bez lokalnego .NET).** Obraz `soneta/server.standard` zawiera
+> `dbmgr.dll` — bazę tworzy się usługą init w compose (`entrypoint: ["dotnet","dbmgr.dll"]`)
+> albo ad hoc: `docker compose run --rm dbinit <komenda>`. Uruchamianie stacku (server + web),
+> wybór wersji obrazu i wariant z kontenerem `mssql` opisuje **`/soneta-containers`**.
+
 > **⚠️ Prawa operatora do dodatku.** Operator `Administrator` z bazy demo-gold **nie ma praw**
 > do obiektów nowego dodatku. Nadaj rolę z prawem `Dodatki=Granted` — np. importując plik roli
 > przez `dbmgr importxml moja_baza rola.xml`. Plik roli musi być w **UTF-8** i poprawnie
