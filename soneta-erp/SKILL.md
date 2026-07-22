@@ -4,7 +4,9 @@ description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
   soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-place-def-elementow, soneta-config (konfiguracja i funkcje
-  domenowe — import/eksport XML, scan-folders), soneta-tools (narzędzia CLI: dbmgr,
+  domenowe — import/eksport XML, scan-folders), soneta-config-reg (rejestr konfiguracji
+  ConfigReg — providery, *.reg.json, przenoszenie ustawień między bazami),
+  soneta-tools (narzędzia CLI: dbmgr,
   buscall, SonetaFrame). Używaj gdy użytkownik: (1) rozpoczyna
   zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
   o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
@@ -42,6 +44,15 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   eksportuje rekordy do XML, albo mapuje strukturę menu dodatku. Warstwa kodu importu
   (`SessionReader`/`SessionWriter`) i ORM → `/soneta-programming`; operacje na bazie z CLI →
   `/soneta-tools`.
+* `/soneta-config-reg` - **Rejestr konfiguracji (ConfigReg)** — silnik zrzucający całą
+  konfigurację bazy do drzewa `ConfigReg`, serializowanego do plików `*.reg.json` i tabeli
+  `ConfigRegistry`. Od strony kodu C#: providery `IConfigRegProvider` (Root/Module/Table/Row/
+  SubTable/Storage/Addins), atrybut `[ConfigReg(Hide/Ignore/Include/ChildrenType)]` sterujący
+  zakresem rejestru, potok Loader → Differ/Merger → SessionUpdater, format JSON (`$strict`,
+  `$v`, `#klucz`, `@atrybut`). Używaj gdy użytkownik pyta o rejestr konfiguracji, chce wyłączyć
+  tabelę lub kolumnę z rejestru, pisze/poprawia provider albo debuguje przenoszenie ustawień
+  między bazami przez rejestr. Odróżnij od `/soneta-config`: XML (`<session>`, `dbinit.xml`)
+  to inny, niezależny mechanizm.
 * `/soneta-tools` - Narzędzia deweloperskie wiersza poleceń Soneta. `dbmgr` — zarządzanie
   bazami danych (tworzenie/rejestracja, konwersja, backup/restore, licencje, rozszerzenia,
   analiza, kompilacja); przygotowanie baz testowych/demo i automatyzacja w CI. `buscall` —
