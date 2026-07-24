@@ -4,10 +4,13 @@ description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
   soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-place-def-elementow, soneta-config (konfiguracja i funkcje
-  domenowe — import/eksport XML, scan-folders), soneta-config-reg (rejestr konfiguracji
+  domenowe — import/eksport XML, scan-folders, konfiguracja uruchomieniowa appsettings.json:
+  porty i adresy komponentów), soneta-config-reg (rejestr konfiguracji
   ConfigReg — providery, *.reg.json, przenoszenie ustawień między bazami),
   soneta-tools (narzędzia CLI: dbmgr,
-  buscall, SonetaFrame). Używaj gdy użytkownik: (1) rozpoczyna
+  buscall, SonetaFrame), soneta-containers (uruchamianie i wdrażanie w kontenerach:
+  docker compose, Apple container / Container Desktop, Helm/Kubernetes, wybór wersji
+  obrazów, tworzenie bazy w kontenerze). Używaj gdy użytkownik: (1) rozpoczyna
   zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
   o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
   Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne
@@ -39,9 +42,13 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   (pliki `*.dbinit.xml`, baza demo), import przez logikę biznesową (`business="true"`),
   eksport datapacku, identyfikacja po GUID, formaty wartości; (B) `scan-folders` —
   inwentaryzacja **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL
-  (drzewo pozycji menu, listy, formularze, powiązanie z tabelą/`ViewInfo`). Używaj gdy
+  (drzewo pozycji menu, listy, formularze, powiązanie z tabelą/`ViewInfo`); (C) **konfiguracja
+  uruchomieniowa `appsettings.json`** — porty i adresy komponentów (orchestrator, server, web,
+  webapi, webwcf, router, commhub), sprzężone pary adresów, kolejność warstw nadpisań
+  (profil systemu, `-c`, `SONETA_`, argumenty CLI), znaczenie kluczy. Używaj gdy
   użytkownik buduje/analizuje XML importu danych Soneta, przenosi ustawienia między bazami,
-  eksportuje rekordy do XML, albo mapuje strukturę menu dodatku. Warstwa kodu importu
+  eksportuje rekordy do XML, mapuje strukturę menu dodatku, albo konfiguruje porty/adresy
+  komponentów i pyta, co robi klucz w `appsettings.json`. Warstwa kodu importu
   (`SessionReader`/`SessionWriter`) i ORM → `/soneta-programming`; operacje na bazie z CLI →
   `/soneta-tools`.
 * `/soneta-config-reg` - **Rejestr konfiguracji (ConfigReg)** — silnik zrzucający całą
@@ -62,3 +69,12 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   użytkownik zarządza bazą z CLI, tworzy bazę demo, robi backup/konwersję, uruchamia ramkę
   i konfiguruje połączenia do baz, albo weryfikuje zmiany na uruchomionej aplikacji.
 * `/soneta-form-xml` - XML z nieistniejącymi elementami. ZAWSZE używaj tego skilla gdy użytkownik: (1) prosi o utworzenie lub modyfikację pliku pageform.xml, viewform.xml, form.xml, lookupform.xml lub gridform.xml dla platformy Soneta (enova365); (2) pyta o elementy DataForm, Page, Group, Grid, Field, Row, Stack, Flow, Command, Include, Appearance, GroupBy w Soneta; (3) pyta o składnię EditValue, DataContext, Visibility, RowCondition, Renderable, CaptionHtml, Footer, Class lub układ UI formularzy Soneta; (4) pokazuje istniejący plik form.xml/pageform.xml/viewform.xml i pyta o jego strukturę lub chce go rozszerzyć; (5) pyta o warunkową widoczność, formatowanie warunkowe (Appearance), bindowanie danych lub wzorce UI w Soneta.
+* `/soneta-containers` - Uruchamianie i wdrażanie platformy Soneta w kontenerach (dla partnerów,
+  bez dostępu do kodu). Trzy ścieżki: **docker compose** (główna), **Apple `container` /
+  Container Desktop** (macOS), **Helm / Kubernetes** (beta). Obejmuje: wybór wersji obrazów
+  (`soneta/server.standard`, `web.standard` — Docker Hub lub `registry.soneta.pl`), tworzenie
+  i zarządzanie bazą w kontenerze (usługa init z `dbmgr create`, `--demo`, `--recreate`),
+  SQL zewnętrzny (`host.docker.internal` / `host.containers.internal`) lub kontener `mssql`.
+  Używaj gdy użytkownik stawia środowisko test/demo na obrazach Soneta, pyta o
+  `docker-compose.yaml`, Container Desktop, `helm install`, tag/wersję obrazu, albo o
+  kolejność/host-alias/porty przy starcie stacku. Składnię samych komend `dbmgr` → `/soneta-tools`.

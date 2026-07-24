@@ -1,0 +1,66 @@
+# Soneta (enova365 / Triva) — uruchomienie w kontenerach: dbinit + server + web.
+# SQL Server ZEWNĘTRZNY (na hoście lub w osobnym kontenerze).
+#
+# Działa w:
+#   - Docker:            docker compose up -d
+#   - Container Desktop: wklej całość w oknie „Uruchom Docker Compose"
+#
+# PODMIEŃ przed uruchomieniem:
+#   1. tag wersji obrazów  (patrz references/obrazy-wersje.md)
+#   2. SA_PASSWORD         (hasło poniżej to WARTOŚĆ DEWELOPERSKA — zmień poza dev)
+#   3. host SQL            (host.docker.internal = Docker; dla Apple container patrz komentarz)
+#
+# UWAGA (Container Desktop / Apple container): zmień "host.docker.internal"
+#       na "host.containers.internal" w 3 miejscach (dbinit.command, dbinit.environment, server.environment).
+#       Zmienne ${...} NIE są tam interpolowane — wpisuj wartości wprost.
+
+name: soneta-test
+
+services:
+  # Jednorazowa inicjalizacja bazy: reużywa obraz server.standard (ma w środku dbmgr.dll).
+  dbinit:
+    image: soneta/server.standard:2606.0.1-alpine
+    container_name: soneta-dbinit
+    x-init: true            # Container Desktop: uruchom pierwszy, blokująco. Docker: pole ignorowane.
+    mem_limit: 4g
+    entrypoint: ["dotnet", "dbmgr.dll"]
+    # UWAGA: --recreate DROPUJE bazę przy KAŻDYM starcie (także po `down` i re-`up`).
+    #        Po pierwszym udanym starcie usuń --recreate albo startuj tylko: docker compose up -d server web
+    command: create sttest --mssql --sqlserver "host.docker.internal,1433" --sqldb sttest --sqluser sa --sqlpwd "enova.123456" --demo gold --active --recreate
+    # Ten sam wpis bazy dla poleceń dbmgr ad hoc (convert/list/backup) — patrz references/docker-compose.md.
+    environment:
+      SONETA_Server__DbRegister__Name: "sttest"
+      SONETA_Server__DbRegister__Server: "host.docker.internal,1433"
+      SONETA_Server__DbRegister__DatabaseName: "sttest"
+      SONETA_Server__DbRegister__User: "sa"
+      SONETA_Server__DbRegister__Password: "enova.123456"
+
+  # Serwer logiki biznesowej (nasłuchuje domyślnie na 22000 w sieci projektu).
+  server:
+    image: soneta/server.standard:2606.0.1-alpine
+    container_name: soneta-server
+    mem_limit: 4g           # serwer w pracy ciągłej — w Apple container bez limitu grozi OOM
+    entrypoint: ["dotnet", "/app/server.dll"]
+    depends_on:
+      dbinit:
+        condition: service_completed_successfully   # Docker. Container Desktop i tak odpala x-init pierwszy.
+    environment:
+      SONETA_Server__DbRegister__Name: "sttest"
+      SONETA_Server__DbRegister__Server: "host.docker.internal,1433"
+      SONETA_Server__DbRegister__DatabaseName: "sttest"
+      SONETA_Server__DbRegister__User: "sa"
+      SONETA_Server__DbRegister__Password: "enova.123456"
+
+  # Aplikacja webowa — łączy się z serwerem po nazwie kontenera (soneta-server).
+  web:
+    image: soneta/web.standard:2606.0.1-alpine
+    container_name: soneta-web
+    mem_limit: 2g
+    entrypoint: ["dotnet", "/app/web.dll"]
+    depends_on:
+      - server
+    environment:
+      SONETA_ServerEndpoint: "http://soneta-server:22000"
+      SONETA_URLS: "http://*:8080"
+    ports:
+      - "60000:8080"   # web dostępny na http://localhost:60000

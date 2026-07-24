@@ -1,0 +1,47 @@
+# Soneta Helm chart — minimalny values.yaml (chart w fazie BETA).
+# Instalacja:
+#   helm repo add soneta https://soneta.github.io/helm-charts
+#   helm upgrade sample soneta/soneta -f values.example.yaml --install
+#
+# SQL Server jest ZEWNĘTRZNY (chart go nie stawia) — podaj go w sekcji dblist.
+# Tworzenie bazy: uruchom raz w trybie admin (patrz references/helm-k8s.md), potem adminMode=false.
+
+image:
+  product: "standard"          # standard | ...
+  tag: "2606.0.1"              # PODMIEŃ na wybraną wersję (patrz references/obrazy-wersje.md)
+  serverTagPostfix: "-alpine"
+  webTagPostfix: "-alpine"
+  # repository: ""             # puste = domyślne repo obrazów (Docker Hub soneta/*)
+  webapi: false
+  webwcf: false
+  scheduler: false
+
+# Lista baz (zewnętrzny MSSQL). GUID/hasła jako sekrety w realnym wdrożeniu.
+dblist: |-
+  <DatabaseCollection>
+    <MsSqlDatabase>
+      <Name>sample</Name>
+      <Active>true</Active>
+      <Server>sql.twoja.domena,1433</Server>
+      <User>sa</User>
+      <Password>enova.123456</Password>
+    </MsSqlDatabase>
+  </DatabaseCollection>
+
+ingress:
+  enabled: true
+  class: nginx
+  host: enova365.twoja.domena
+  # tlsSecretName: ingress-tls
+
+resources:
+  server:
+    requests: { cpu: 100m, memory: 500Mi }
+    limits:   { cpu: 2,    memory: 2Gi }
+
+envs:
+  all:
+    - name: TZ
+      value: Europe/Warsaw
+
+# adminMode: false            # true tylko na czas tworzenia/konwersji bazy przez dbmgr

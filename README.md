@@ -110,6 +110,19 @@ Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami domenowymi
 
 > Uwaga: warstwa kodu importu/eksportu (`SessionReader`/`SessionWriter`) i kod ORM → `soneta-programming`; operacje na bazie z CLI → `soneta-tools`.
 
+### 9. soneta-containers
+
+Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — dla partnerów, bez dostępu do kodu programu.
+
+**Zakres:**
+- **Docker Compose** (ścieżka główna): gotowe `docker-compose.yaml` (dbinit + server + web), cykl życia, zmienne `SONETA_...`
+- **Apple `container` / Container Desktop** (macOS): różnice, wklejanie YAML, grupy, `x-init`
+- **Helm / Kubernetes** (beta): `helm repo add soneta`, `values.yaml`, `dblist`, `adminMode`
+- **Wybór wersji obrazów**: `soneta/server.standard`, `web.standard` — Docker Hub (publiczne) i `registry.soneta.pl` (alfa)
+- **Baza w kontenerze**: usługa init z `dbmgr create` (`--demo`, `--recreate`), SQL zewnętrzny lub kontener `mssql`
+
+**Kiedy używać:** stawianie środowiska test/demo na obrazach Soneta, `docker compose up`, Container Desktop, `helm install`, wybór tagu/wersji, problemy startu stacku (kolejność, host-alias, porty). Składnię komend `dbmgr` → `soneta-tools`.
+
 ## Powiązania między skillami
 
 Skille są zaprojektowane do współpracy:
@@ -123,6 +136,7 @@ Skille są zaprojektowane do współpracy:
 7. **soneta-place-def-elementow** → konfiguruje warstwę płacową (definicje elementów wynagrodzenia)
 8. **soneta-config** → konfiguruje działający program (ustawienia, cechy, prawa) i uruchamia funkcje domenowe (czynności, harmonogram)
 9. **soneta-tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
+10. **soneta-containers** → uruchamia i wdraża gotowy produkt w kontenerach (docker compose, Apple container, Helm); bazę zakłada `dbmgr` w kontenerze (składnia → `soneta-tools`)
 
 ## Instalacja
 

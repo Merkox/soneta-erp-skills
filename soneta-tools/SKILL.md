@@ -72,4 +72,8 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 
 - **`/soneta-programming`** — warstwa ORM i kod biznesowy; `buscall` służy do weryfikacji
   napisanego tam kodu na żywej aplikacji.
+- **`/soneta-containers`** — uruchamianie i wdrażanie produktu w kontenerach (docker compose,
+  Apple container / Container Desktop, Helm). Tu wołasz `dbmgr` **w kontenerze** (obraz
+  `server.standard` ma `dbmgr.dll`) — składnię komend bierzesz z tego skilla, orkiestrację
+  z `/soneta-containers`.
 - **`/soneta-erp`** — meta-skill z mapą wszystkich skilli platformy Soneta.
