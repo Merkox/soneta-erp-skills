@@ -320,8 +320,7 @@
          relname="Projekty klienta" children="Projekty"/>
     <col name="Kierownik" type="Pracownik" category="Ogólne"
          relname="Projekty kierownika"/>
-    <col name="Status" type="StatusProjektu" category="Ogólne" 
-         selector="true"/>
+    <col name="Status" type="StatusProjektu" category="Ogólne" important="true"/>
     <col name="Priorytet" type="PriorytetProjektu" category="Ogólne"/>
     <col name="Okres" type="OkresProjektu" category="Terminy"/>
     <col name="Opis" type="text" category="Dodatkowe"/>

@@ -36,11 +36,21 @@
 
 ### Atrybut `tablename` — limit 16 znaków
 
-`tablename` może mieć **maksymalnie 16 znaków**. Wynika to z relacji interfejsowych, w których
-identyfikatorem wskazywanej tabeli jest 16-znakowe pole bazodanowe. Dłuższe nazwy skraca się,
-ale **skrócona forma nadal musi być w liczbie mnogiej** (to wciąż nazwa tabeli/kolekcji), np.
-`DokumentyHandlowe` → `tablename="DokHandlowe"`, `PozycjeDokumentow` → `tablename="PozDokumentow"`.
-Nazwa klasy C# (`name`, l. poj.) nie ma tego ograniczenia.
+`tablename` może mieć **maksymalnie 16 znaków**. To nie jest wskazówka stylistyczna — to twardy
+limit SQL, który **nie ujawnia się przy kompilacji**, tylko przy pierwszej transakcji zapisu na
+tej tabeli w runtime: `String or binary data would be truncated`. Przyczyna: kolumna
+`ChangeInfos.SourceTable` (dziennik zmian/audyt, uruchamiany dla praktycznie **każdej** tabeli
+`guided="Root"`/`guided="Exported"` przy każdym zapisie) ma `length="16"` — dłuższa nazwa tabeli
+zwyczajnie się w niej nie mieści. Ten sam limit (`length="16"`) występuje też na kolumnach
+referencyjnych do nazw tabel w Cechach, `LockInfos.RecordTable` i `Attachments`, więc problem
+dotyczy każdej tabeli, nie tylko tych uczestniczących w relacjach interfejsowych.
+
+**Nic tego nie sprawdza za Ciebie.** Dla dodatków budowanych przez Soneta SDK nie ma żadnej
+walidacji długości `tablename` — ani w XSD (zwykły `xs:string`), ani w generatorze. Limit trzeba
+pilnować ręcznie przy każdej nowej tabeli. Dłuższe nazwy skraca się, ale **skrócona forma nadal
+musi być w liczbie mnogiej** (to wciąż nazwa tabeli/kolekcji), np. `DokumentyHandlowe` →
+`tablename="DokHandlowe"`, `PozycjeDokumentow` → `tablename="PozDokumentow"`. Nazwa klasy C#
+(`name`, l. poj.) nie ma tego ograniczenia.
 
 `tablename` musi być też **globalnie unikalny w bazie danych** — służy jako identyfikator tabeli
 w relacjach interfejsowych, więc uważaj na kolizje z tabelami modułów platformy
@@ -187,6 +197,18 @@ atrybutem `[BusinessRow]`; pozycje menu „Nowy" wyznacza `[NewRow]`. Pełny wzo
 [generated-classes.md](generated-classes.md). Wzorzec selektora po stronie kodu opisuje też
 skill `/soneta-programming` (row-types.md).
 
+> ⚠ **`selector="true"` ≠ „pole enum, po którym filtruję/wyświetlam".** To rozróżnienie
+> decyduje, czy tabela w ogóle się wczyta. Selector oznacza **dyskryminator polimorficzny**:
+> ta sama tabela SQL przechowuje różne typy biznesowe, każdy jako osobna klasa `abstract`+podtyp
+> zarejestrowany `[assembly: BusinessRow(typeof(Podtyp), WartośćEnum)]` (patrz krok 3 w
+> [generated-classes.md](generated-classes.md)). Jeśli tabela ma **jedną** klasę C# dla
+> wszystkich wierszy — pole typu enum takie jak `Status`, `RecipientType`, `TypWpisu`,
+> `Kategoria` **nie dostaje `selector="true"`**, nawet jeśli jest `important="true"` i steruje
+> wyświetlaniem. Błędne dodanie selectora do zwykłego pola enum kompiluje się bez ostrzeżeń,
+> ale przy pierwszym odczycie listy rzuca w runtime `Nierozpoznany typ wiersza. Selektor N
+> w tabeli X nieznaleziony.` — bo ORM szuka klasy zarejestrowanej dla tej wartości, a żadna
+> nie istnieje (jest jedna zwykła klasa Row dla całej tabeli).
+
 ### Relacje
 
 | Atrybut | Typ | Opis |
@@ -222,7 +244,38 @@ skill `/soneta-programming` (row-types.md).
 
 - `true` - pole wymagane, walidowane
 - `false` - pole opcjonalne
-- `noverified` - pole wymagane, ale bez walidacji
+- `noverified` - pole wymagane (kolumna SQL), ale generator **nie dodaje** sprawdzenia w setterze —
+  żadna wartość (łącznie z domyślną) nie rzuca wyjątku
+
+### ⚠ `required="true"` traktuje wartość domyślną typu jako „puste" — dla KAŻDEGO typu wartościowego
+
+To najczęstsza pułapka tego atrybutu i **nie dotyczy tylko `int`**. Generator, tworząc setter dla
+`required="true"`, porównuje przypisywaną wartość z `default(T)` tego typu i rzuca
+`RequiredException`, jeśli są równe — dokładnie tak samo, jak dla `null` w typach referencyjnych:
+
+| Typ kolumny | Wartość traktowana jako „puste" (rzuca `RequiredException`) |
+|---|---|
+| `int`, `double`, `decimal`, `currency`, `doublecy` | `0` |
+| `guid` | `Guid.Empty` |
+| enum | wartość o numerze `0` (niezależnie od tego, czy w C# ma w ogóle nazwę) |
+| `date` / `datetime` | `Date.MinValue` / `DateTime.MinValue` |
+| `time` | `Time.Zero` |
+| `percent`, typy ilościowe | odpowiednik `Zero`/`Empty` danego typu |
+| `string` | `""` **lub** `null` (`string.IsNullOrEmpty`) |
+| referencja do wiersza | `null` (jedyny przypadek zgodny z intuicją „required = nie-null") |
+
+**Zasada:** stosuj `required="true"` tylko wtedy, gdy wartość domyślna typu jest **semantycznie
+niedopuszczalna** w domenie tego pola — np. `MaxAttempts` (0 maksymalnych prób nie ma sensu),
+`Lp` (pozycja 0 nie istnieje), `Ilosc` na pozycji dokumentu (0 sztuk to brak pozycji). Dla pól,
+w których wartość domyślna typu jest poprawnym, spodziewanym stanem — liczniki i progresje od
+zera (`AttemptCount`, `Retries`), pola opcjonalne inicjalizowane na `0`/`Guid.Empty` — używaj
+**`required="false"`**. Kolumna SQL pozostaje bez zmian (typ wartościowy i tak nie przechowuje
+NULL) — zmienia się wyłącznie walidacja C# w setterze.
+
+Objaw błędnego `required="true"` w runtime: `Wymagane jest wprowadzenie wartości pola 'X'`
+rzucane **przy tworzeniu obiektu**, gdy kod inicjalizuje pole wartością domyślną (np.
+`AttemptCount = 0;` w `OnAdded()`) — build przechodzi bez ostrzeżeń, błąd wychodzi dopiero przy
+pierwszym uruchomieniu tej ścieżki kodu.
 
 ## ReadonlyType - wartości
 
@@ -381,7 +434,7 @@ Wzorce relacji — [relations-guide.md](relations-guide.md).
   </col>
   
   <col name="Status" type="StatusFaktury" 
-       category="Ogólne" selector="true"
+       category="Ogólne" important="true"
        description="Status dokumentu"/>
   
   <col name="WartoscNetto" type="currency" readonly="true"

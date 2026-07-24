@@ -34,6 +34,7 @@ są wyłącznie mechanizmy faktycznie obecne w skillu; kolejne artykuły dodawan
 | **Budowa pliku XML importu/eksportu danych i ustawień** (dbinit.xml, demo, przenoszenie konfiguracji) | **/soneta-config** ([import-export-xml](references/import-export-xml.md)) |
 | Inwentaryzacja/mapa **folderów statycznych menu** (`[assembly: FolderView]`) z DLL | **/soneta-config** ([scan-folders](references/scan-folders.md)) |
 | **Konfiguracja uruchomieniowa** (porty, adresy komponentów, warstwy nadpisań `appsettings.json`) | **/soneta-config** ([appsettings](references/appsettings.md)) |
+| **Rejestr konfiguracji** (ConfigReg): providery, `*.reg.json`, `[ConfigReg]`, merge/diff/zapis | [/soneta-config-reg](../soneta-config-reg/SKILL.md) |
 | Kod obsługujący import/eksport (`SessionReader`/`SessionWriter`), klasy ORM, workery | [/soneta-programming](../soneta-programming/SKILL.md) |
 | Inwentaryzacja modułów/tabel (`scan-modules`), pól (`scan-props`), workerów (`scan-workers`) | [/soneta-programming](../soneta-programming/SKILL.md) |
 | Operacje na bazie z CLI (dbmgr), test na żywej aplikacji (buscall) | [/soneta-tools](../soneta-tools/SKILL.md) |
@@ -100,4 +101,8 @@ Uruchamianie komponentów, ramki hostującej i zarządzanie bazami opisuje
   na etapie planowania dodatku.
 - [/soneta-tools](../soneta-tools/SKILL.md) — operacje na bazie z CLI, weryfikacja efektów
   importu na żywej aplikacji (buscall).
+- [/soneta-config-reg](../soneta-config-reg/SKILL.md) — **rejestr konfiguracji (ConfigReg)**:
+  drugi, niezależny mechanizm przenoszenia ustawień między bazami. XML (`<session>`) przenosi
+  wskazane rekordy; ConfigReg zdejmuje stan konfiguracji jako całość, wykrywa różnice i scala
+  paczki. Rozłączny kod, rozłączne formaty plików.
 - [/soneta-erp](../soneta-erp/SKILL.md) — mapa wyboru skilla.
