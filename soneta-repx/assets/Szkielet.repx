@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Minimalny wydruk listy: iteruje po bieżącej liście (CurrentList) i drukuje jedno pole [Kod] na wiersz.
+     Jednostki: TenthsOfAMillimeter + Dpi 254 (standard produkcyjny), A4 = 2100 x 2970 (0,1 mm). -->
+<XtraReportsLayoutSerializer SerializerVersion="20.2.7.0" Ref="1"
+    ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2"
+    Name="Szkielet" DisplayName="Szkielet listy" SnapGridSize="25"
+    ReportUnit="TenthsOfAMillimeter" Margins="198, 198, 200, 200"
+    PaperKind="A4" PageWidth="2100" PageHeight="2970"
+    Version="20.2" DataSource="#Ref-0" Dpi="254" Font="Calibri, 9pt">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="topMargin" HeightF="200" Dpi="254" />
+    <Item2 Ref="3" ControlType="DetailBand" Name="detail" HeightF="80" Dpi="254">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRLabel" Name="lblKod" Text="[Kod]"
+               SizeF="1704,80" LocationFloat="0,0" TextAlignment="MiddleLeft"
+               Dpi="254" Padding="5,5,0,0,254" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="5" ControlType="BottomMarginBand" Name="bottomMargin" HeightF="200" Dpi="254" />
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="Soneta.Business.UI.DxReports.BusinessDataSource,Soneta.Business.UI.DxReports"
+           Name="BusinessSource" DataKind="CurrentList" />
+    <Item2 Ref="6" ObjectType="Soneta.Business.UI.DxReports.Components.BusinessContext,Soneta.Business.UI.DxReports"
+           Name="BusinessContext" StylesSource="standardowy" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>
