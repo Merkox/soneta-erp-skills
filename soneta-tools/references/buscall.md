@@ -30,6 +30,9 @@ Binarka `buscall` (oraz `BusCall.dll`) leży w katalogu build projektu BusCall
   `tools/call` i zwraca odpowiedź MCP (patrz sekcja na końcu). Do własnych orkiestratorów.
 - `mcp` (dawny) — długożyjący serwer stdio JSON-RPC; nadal działa, ale do większości zadań
   zbędnie skomplikowany względem `call`.
+- **`open`** — `buscall --db <Baza> open [folder]` uruchamia SonetaFrame i opcjonalnie ustawia
+  folder, nie wywołując żadnej metody. Przydatne, gdy chcesz najpierw wystartować aplikację
+  (start trwa kilkadziesiąt sekund), a dopiero potem mierzyć czas kolejnych `call`.
 
 `--db <Baza>` wskazuje **nazwę połączenia bazy** zdefiniowaną w SonetaFrame (nie fizyczną nazwę
 bazy SQL). To połączenie decyduje też, z jakiego kodu startuje aplikacja — szczegóły w
@@ -52,6 +55,18 @@ buscall --db Demo call update_field_value 'fieldsValues=["Nazwa=Buciki"]' # wart
 - Wartość będąca JSON-em (obiekt/tablica) — cały argument w apostrofach powłoki, aby powłoka
   nie interpretowała `{}`/`[]`.
 - Metoda bez argumentów: po prostu `buscall --db Demo call where_I_am`.
+
+> **Parametr tablicowy bez nawiasów = błąd.** Jeśli metoda oczekuje tablicy, a podasz gołą wartość,
+> dostaniesz:
+> ```json
+> {"kind":"error","error":"The requested operation requires an element of type 'Array', but the target element has type 'String'."}
+> ```
+> Komunikat mówi wyłącznie o typie, nie o nazwie parametru — sprawdź w `methods.list`, który
+> argument jest tablicą, i ujmij go w nawiasy kwadratowe:
+> ```bash
+> buscall --db Demo call jakas_metoda 'buttons=Zapisz|Zapisano'      # ŹLE — string
+> buscall --db Demo call jakas_metoda 'buttons=["Zapisz|Zapisano"]'  # DOBRZE — tablica JSON
+> ```
 
 ## Odkrywanie metod i ich parametrów
 
@@ -183,6 +198,24 @@ buscall call application_close                                   # bez --db
   na STDOUT, **kod wyjścia 0** (samo wywołanie się powiodło).
 - **Błąd samego wywołania** (nieznana metoda, brak połączenia z pipe) → komunikat na **STDERR**
   i **kod wyjścia 1**.
+
+### Metody, które nie odpowiadają od razu
+
+Większość metod wraca natychmiast, ale niektóre **otwierają okno i czekają na reakcję operatora** —
+`call` wisi wtedy tak długo, aż ktoś kliknie w aplikacji. To nie jest zawieszenie: dopiero
+kliknięcie generuje wynik.
+
+Żeby zobaczyć, na co właściwie czekasz, uruchom takie wywołanie **w tle** i zrób zrzut ekranu
+drugim procesem:
+
+```bash
+buscall --db Demo call <metoda-czekajaca-na-operatora> ... &   # blokuje do czasu kliknięcia
+buscall --db Demo call take_screenshot                         # osobny proces, wraca od razu
+```
+
+Uwaga: `application_close` **przerywa** takie oczekiwanie — zrywa named pipe, więc czekające
+wywołanie kończy się komunikatem o zerwanym połączeniu i wyniku już nie zobaczysz. Jeśli zależy ci
+na wyniku, zamknij okno w aplikacji (albo poproś operatora), a nie zamykaj całego frame'a.
 
 ## Wariant zgodny z MCP: `callmcp`
 
