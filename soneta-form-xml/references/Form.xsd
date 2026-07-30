@@ -18,6 +18,7 @@
 				<xs:element name="Grid" type="gridElement" maxOccurs="unbounded"/>
 				<xs:element name="Cards" type="cardsElement" maxOccurs="unbounded"/>
 				<xs:element name="CardTemplate" type="cardTemplateElement" maxOccurs="unbounded"/>
+				<xs:element name="TileRow" type="tileRowElement" maxOccurs="unbounded"/>
 				<xs:element name="Scheduler" type="schedulerElement" maxOccurs="unbounded"/>
 				<xs:element name="Diagram" type="diagramElement" maxOccurs="unbounded"/>
 				<xs:element name="CustomDiagram" type="customDiagramElement" maxOccurs="unbounded" />
@@ -51,6 +52,7 @@
 			<xs:attribute name="Contexts" type="xs:string" use="optional"/>
 			<xs:attribute name="ViewType" type="enumDataFormView" use="optional"/>
 			<xs:attribute name="Mode" type="enumDataFormMode" use="optional"/>
+			<xs:attribute name="Target" type="enumDataFormTarget" use="optional"/>
 			<xs:attribute name="RightName" type="xs:string" use="optional"/>
 			<xs:attribute name="RightCaption" type="xs:string" use="optional"/>
 			<xs:attribute name="ResourceName" type="xs:string" use="optional"/>
@@ -75,6 +77,7 @@
             <xs:element name="Grid" type="gridElement" maxOccurs="unbounded" />
 						<xs:element name="Cards" type="cardsElement" maxOccurs="unbounded" />
 						<xs:element name="CardTemplate" type="cardTemplateElement" maxOccurs="unbounded" />
+						<xs:element name="TileRow" type="tileRowElement" maxOccurs="unbounded" />
 						<xs:element name="Scheduler" type="schedulerElement" maxOccurs="unbounded" />
             <xs:element name="Diagram" type="diagramElement" maxOccurs="unbounded" />
 						<xs:element name="CustomDiagram" type="customDiagramElement" maxOccurs="unbounded" />
@@ -104,6 +107,7 @@
 			<xs:element name="Chips" type="chipsElement" maxOccurs="unbounded"/>
             <xs:element name="UserControl" type="userControlElement" maxOccurs="unbounded" />
             <xs:element name="Template" type="templateElement" maxOccurs="unbounded" />
+            <xs:element name="Assistant" type="assistantElement" maxOccurs="unbounded" />
           </xs:choice>
         </xs:sequence>
       </xs:extension>
@@ -125,6 +129,7 @@
           <xs:element name="Grid" type="gridElement" maxOccurs="unbounded" />
 					<xs:element name="Cards" type="cardsElement" maxOccurs="unbounded" />
 					<xs:element name="CardTemplate" type="cardTemplateElement" maxOccurs="unbounded" />
+					<xs:element name="TileRow" type="tileRowElement" maxOccurs="unbounded" />
 					<xs:element name="Scheduler" type="schedulerElement" maxOccurs="unbounded" />
           <xs:element name="Diagram" type="diagramElement" maxOccurs="unbounded" />
 					<xs:element name="CustomDiagram" type="customDiagramElement" maxOccurs="unbounded" />
@@ -153,6 +158,7 @@
 		  <xs:element name="Chips" type="chipsElement" maxOccurs="unbounded"/>
 		  <xs:element name="UserControl" type="userControlElement" maxOccurs="unbounded" />
           <xs:element name="Template" type="templateElement" maxOccurs="unbounded" />
+          <xs:element name="Assistant" type="assistantElement" maxOccurs="unbounded" />
         </xs:choice>
 				<xs:attribute name="AllowUpdating" type="xs:boolean" use="optional" />
 			</xs:extension>
@@ -375,6 +381,13 @@
 		</xs:complexContent>
 	</xs:complexType>
 
+	<xs:complexType name="tileRowElement" mixed="true">
+		<xs:complexContent>
+			<xs:extension base="gridElement">
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<xs:complexType name="schedulerElement">
     <xs:complexContent>
       <xs:extension base="collectionElement">
@@ -386,6 +399,7 @@
         <xs:attribute name="Resources" type="xs:string" use="optional" />
         <xs:attribute name="SelectedResource" type="xs:string" use="optional" />
         <xs:attribute name="HideDateField" type="xs:boolean" use="optional" />
+				<xs:attribute name="WorkTimeMode" type="xs:boolean" use="optional" />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -677,7 +691,19 @@
     <xs:attribute name="FontItalic" type="xs:boolean" use="optional" />
   </xs:complexType>
 
-  <!-- ENUMS -->
+	<xs:complexType name="assistantElement" mixed="true">
+		<xs:complexContent>
+			<xs:extension base="uiElement">
+				<xs:sequence minOccurs="0">
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="Data" type="dataElement" maxOccurs="unbounded" />
+					</xs:choice>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ENUMS -->
 
   <xs:simpleType name="ChipsColorType">
 	<xs:union memberTypes="enumChipsColorPalette freePattern"/>
@@ -716,6 +742,17 @@
       <xs:enumeration value="Modal" />
 			<xs:enumeration value="Popup" />
 			<xs:enumeration value="Frame" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="enumDataFormTarget">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="Child" />
+      <xs:enumeration value="NewFrame" />
+      <xs:enumeration value="Popup" />
+      <xs:enumeration value="ComboBox" />
+	  <xs:enumeration value="Modal" />
     </xs:restriction>
   </xs:simpleType>
 
@@ -901,7 +938,16 @@
 		</xs:restriction>
 	</xs:simpleType>
 
-    <xs:simpleType name="enumPieChartLabelPosition">
+    <xs:simpleType name="enumSegmentChartLabelFormat">
+       <xs:restriction base="xs:string">
+          <xs:enumeration value="Percent" />
+          <xs:enumeration value="Value" />
+		  <xs:enumeration value="PercentAndValue" />
+		  <xs:enumeration value="ValueAndPercent" />
+       </xs:restriction>
+
+    </xs:simpleType>
+	<xs:simpleType name="enumPieChartLabelPosition">
        <xs:restriction base="xs:string">
           <xs:enumeration value="Circle" />
           <xs:enumeration value="Side" />
@@ -914,6 +960,16 @@
 		  <xs:enumeration value="Side" />
 		  <xs:enumeration value="Overlay" />
 		  <xs:enumeration value="Percentage" />
+	  </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="enumChartTrendLine">
+	  <xs:restriction base="xs:string">
+		  <xs:enumeration value="None" />
+		  <xs:enumeration value="LinearSingleLine" />
+		  <xs:enumeration value="LinearMultiline" />
+		  <xs:enumeration value="MovingAverageSingleLine" />
+		  <xs:enumeration value="MovingAverageMultiline" />
 	  </xs:restriction>
   </xs:simpleType>
 
@@ -1052,8 +1108,12 @@
 			<xs:enumeration value="Scrollable" />
 			<xs:enumeration value="NonClickable" />
 			<xs:enumeration value="LabelTop" />
-			<xs:enumeration value="LebelLeft" />
+			<xs:enumeration value="LabelLeft" />
 			<xs:enumeration value="FilesDropTarget" />
+			<xs:enumeration value="FlexRow" />
+			<xs:enumeration value="RadioChips" />
+			<xs:enumeration value="RadioSplitButton" />
+			<xs:enumeration value="RadioTab" />
 		</xs:restriction>
   </xs:simpleType>
 

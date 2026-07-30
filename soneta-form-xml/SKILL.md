@@ -67,9 +67,18 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 | `Class` | Klasy stylów (lista wartości oddzielonych spacją) |
 | `DataContext` | Zmienia kontekst danych dla elementu i elementów podrzędnych |
 | `Visibility` | Warunek widoczności (bindowalne): `true`/`false`/`{wyrażenie}` |
-| `Renderable` | Czy element ma być dostępny — liczone **raz** przy logowaniu |
-| `Width` | Szerokość w znakach lub px; `"*"` = wypełnij |
+| `Renderable` | Czy element w ogóle powstaje — liczone **raz**, przy budowie układu (patrz niżej) |
+| `Width` | Szerokość **samego pola edycyjnego** w znakach lub px; `"*"` = wypełnij |
+| `LabelWidth` | Szerokość samej etykiety |
+| `OuterWidth` | Szerokość **etykiety razem z polem** — tym wyrównuje się kolumny |
 | `Height` | Wysokość w wierszach lub px; `"*"` = wypełnij |
+
+**`Renderable` vs `Visibility`.** `Renderable` jest liczone raz, przy budowie układu formularza, a
+zbudowany układ jest cache'owany (odbudowuje się m.in. po zapisie konfiguracji, przy zmianie języka
+i osobno dla klienta web i mobile). Element z `Renderable=false` zostaje **usunięty z drzewa**,
+więc nie da się go potem pokazać — dlatego `Renderable` nadaje się wyłącznie do warunków
+licencyjnych i środowiskowych, nigdy do warunków zależnych od danych. Do tych drugich służy
+`Visibility`, liczone przy każdym przeliczeniu formularza.
 
 ### Atrybut CaptionHtml
 
@@ -99,7 +108,7 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 | `CaptionHtml` | Tytuł; może zawierać `/` do grupowania (np. `"Dokumenty/Faktury"`) |
 | `DataContext` | Źródło danych; `{DataSource}` = obiekt edytowany |
 | `Visibility` | Wyrażenie warunkowe widoczności (bindowalne) |
-| `Renderable` | Liczone raz przy logowaniu — dla warunków licencji/środowiska |
+| `Renderable` | Liczone raz przy budowie układu — tylko dla warunków licencji/środowiska |
 | `Key` | Skrót klawiaturowy |
 
 ### Group - Grupa pól
@@ -135,32 +144,49 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 </Flow>
 ```
 
-> **⚠️ Układ dwukolumnowy — NIE używaj `<Row>` z zagnieżdżonymi `<Stack>`!** Potwierdzone
-> wizualnie (zrzut ekranu z żywej aplikacji): `<Row>` zawierający `<Stack>` z polami `Width="*"`
-> renderuje „kolumny" **jedna na drugiej** — etykiety i pola się nakładają. **Poprawny wzorzec:**
-> pola `<Field>` **wprost** w `<Row>`, o **stałych** szerokościach, po jednym `<Row>` na każdy
-> wiersz layoutu:
->
-> ```xml
-> <!-- ŹLE: kolumny nakładają się na siebie -->
-> <Row>
->   <Stack><Field CaptionHtml="Kod"  Width="*" EditValue="{Kod}" /></Stack>
->   <Stack><Field CaptionHtml="Data" Width="*" EditValue="{Data}" /></Stack>
-> </Row>
->
-> <!-- DOBRZE: Field wprost w Row, stałe szerokości, jeden Row = jeden wiersz -->
-> <Row>
->   <Field CaptionHtml="Kod"    Width="20" EditValue="{Kod}" />
->   <Field CaptionHtml="Data"   Width="14" EditValue="{Data}" />
-> </Row>
-> <Row>
->   <Field CaptionHtml="Nazwa"  Width="40" EditValue="{Nazwa}" />
->   <Field CaptionHtml="Status" Width="15" EditValue="{Status}" />
-> </Row>
-> ```
->
-> Po zbudowaniu układu wielokolumnowego **zawsze zweryfikuj go wizualnie** zrzutem ekranu
-> (sekcja „Wizualna weryfikacja formularza (buscall)").
+### ★ Układ wielokolumnowy — szerokości ustawiaj przez `OuterWidth`
+
+To najczęstsze źródło rozjeżdżonych formularzy. Zapamiętaj różnicę:
+
+| Atrybut | Co obejmuje |
+|---------|-------------|
+| `Width` | **samo pole edycyjne**, bez etykiety |
+| `LabelWidth` | samą etykietę |
+| `OuterWidth` | **etykietę razem z polem** — czyli całą kolumnę |
+
+W układzie wielokolumnowym o wyrównaniu kolumn decyduje `OuterWidth`. Gdy ustawisz tylko `Width`,
+kolumny rozjadą się przy każdej różnicy w długości etykiet — bo etykieta dokłada się do szerokości
+poza tym, co zadeklarowałeś.
+
+Są dwa poprawne układy wielokolumnowe; oba wymagają **określonych szerokości kolumn**:
+
+```xml
+<!-- Kolumny jako Stack w Row — dla kolumn z wieloma polami -->
+<Row>
+  <Stack OuterWidth="40">
+    <Field CaptionHtml="Sposób dostawy" OuterWidth="40" EditValue="{SposobDostawy}" />
+    <Field CaptionHtml="Termin dostawy" OuterWidth="40" EditValue="{TerminDostawy}" />
+  </Stack>
+  <Gap Width="5" />
+  <Stack OuterWidth="40">
+    <Field CaptionHtml="Sposób zapłaty" OuterWidth="40" EditValue="{SposobZaplaty}" />
+    <Field CaptionHtml="Termin zapłaty" OuterWidth="40" EditValue="{TerminZaplaty}" />
+  </Stack>
+</Row>
+
+<!-- Field wprost w Row — dla pojedynczych wierszy z kilkoma polami -->
+<Row>
+  <Field CaptionHtml="Kod"  OuterWidth="30" EditValue="{Kod}" />
+  <Field CaptionHtml="Data" OuterWidth="26" EditValue="{Data}" />
+</Row>
+```
+
+> **⚠️ Czego unikać:** `<Stack>` **bez zadeklarowanej szerokości** z polami `Width="*"` w środku.
+> Taki układ renderuje „kolumny" jedna na drugiej — etykiety i pola się nakładają. Problemem nie
+> jest `Row` + `Stack` (to kanoniczny wzorzec dwukolumnowy), tylko brak szerokości kolumny.
+
+Po zbudowaniu układu wielokolumnowego **zawsze zweryfikuj go wizualnie** zrzutem ekranu
+(sekcja „Wizualna weryfikacja formularza (buscall)").
 
 ### Zasada budowania zakładki
 
@@ -169,10 +195,10 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
   <Group CaptionHtml="Dane podstawowe">
     <!-- pola pionowo -->
     <Field CaptionHtml="Kod" Width="20" EditValue="{Kod}" />
-    <!-- lub wielokolumnowo — Field WPROST w Row, stałe szerokości (patrz ostrzeżenie wyżej): -->
+    <!-- lub wielokolumnowo — kolumny z OuterWidth (patrz sekcja o układzie wielokolumnowym): -->
     <Row>
-      <Field CaptionHtml="Data" Width="14" EditValue="{Data}" />
-      <Field CaptionHtml="Status" Width="15" EditValue="{Status}" />
+      <Field CaptionHtml="Data" OuterWidth="26" EditValue="{Data}" />
+      <Field CaptionHtml="Status" OuterWidth="28" EditValue="{Status}" />
     </Row>
   </Group>
   <Group CaptionHtml="Pozycje">
@@ -186,9 +212,10 @@ Każdy plik formularza zaczyna się od deklaracji XML i elementu `DataForm`:
 > **Szerokość kolumn w `Grid`.** `Width="*"` (wypełnij) działa wyłącznie na **kontenerach**
 > (`Grid`, `Group`, `Stack`) oraz na samodzielnym polu w układzie formularza. **Kolumny listy**
 > — czyli `Field` będący bezpośrednim dzieckiem `Grid` — muszą mieć **stałą** szerokość w
-> znakach (np. `Width="30"`). `*` na kolumnie nie ma sensu i daje nieprawidłowy układ, bo
-> szerokości kolumn są zarządzane przez siatkę. Sam `Grid` ma natomiast zwykle `Width="*"
-> Height="*"`, żeby wypełnić zakładkę.
+> znakach (np. `Width="30"`). Siatka czyta szerokość kolumny jako liczbę: wartość nieliczbowa
+> (w tym `*`) jest **po cichu ignorowana** i kolumna dostaje szerokość domyślną. Nie licz więc,
+> że `Width="*"` „rozciągnie ostatnią kolumnę" — po prostu nic nie zrobi, a układ wyjdzie inny
+> niż zamierzony. Sam `Grid` ma natomiast zwykle `Width="*" Height="*"`, żeby wypełnić zakładkę.
 
 ## Elementy pól i kontrolek
 
@@ -205,13 +232,14 @@ Jest generowany **dynamicznie** — typ właściwości decyduje o kontrolce (int
 |---------|------|
 | `EditValue` | **Wymagany**. Binding do właściwości: `{Właściwość}` lub `{new Ext.Właściwość}` |
 | `CaptionHtml` | Etykieta pola |
-| `Width` | Szerokość pola (`*` = wypełnij) |
-| `Height` | Wysokość (dla pól wieloliniowych) |
+| `Width` | Szerokość samego pola edycyjnego (`*` = wypełnij) |
+| `OuterWidth` | Szerokość etykiety razem z polem — używaj do wyrównywania kolumn |
+| `Height` | Wysokość — **niepusta wartość włącza tryb wieloliniowy**, patrz niżej |
 | `Important` | `true` — pole oznaczone jako ważne (wyróżnione w widoku) |
 | `IsReadOnly` | Warunek tylko do odczytu (bindowalne) — **zwykle zbędny**, patrz niżej |
 | `Format` | Formatowanie w standardzie .NET: `N2`, `d`, `C` |
 | `Footer` | Agregacja w stopce listy: `Sum`, `Count`, `Average`, `Min`, `Max` |
-| `CheckedValue` | Wartość dla RadioButton |
+| `CheckedValue` | Wartość dla RadioButton — **zawsze przełącza edytor na radio**, patrz niżej |
 | `Class` | Klasy stylów |
 
 **Kiedy NIE dodawać `IsReadOnly`.** Tryb tylko-do-odczytu jest wyliczany automatycznie — nie
@@ -226,16 +254,93 @@ dokładaj `IsReadOnly="true"`, gdy pole i tak ma być nieedytowalne z jednego z 
 `IsReadOnly` na `Field` stosuj **tylko** gdy chcesz **nadpisać** ten standardowy mechanizm
 (np. zablokować w UI property, która ma setter i nie jest objęta `IsReadOnlyX()`).
 
+### ★ Metody sterujące obok property — konwencja nazewnicza
+
+`IsReadOnlyX()` to jedna z rodziny metod, których silnik szuka **po nazwie**, obok property `X`.
+Wszystkie są bezparametrowe i publiczne:
+
+| Metoda | Do czego |
+|--------|----------|
+| `IsReadOnly<X>()` | blokada edycji pola |
+| `IsReadOnly()` (bez nazwy pola) | blokada edycji całego obiektu |
+| `IsVisible<X>()` | **widoczność pola** |
+| `GetList<X>()` | lista dozwolonych wartości (combo, lookup) |
+| `GetAppearance<X>()` | formatowanie warunkowe wyliczane w kodzie |
+| `IsRequired<X>()` | pole wymagane |
+| `GetLocalized<X>()` | wartość zlokalizowana |
+
+Zaletą tych metod jest to, że logika zostaje przy danych i działa w każdym formularzu, który
+pokazuje to pole — nie trzeba jej powtarzać w XML.
+
+> **⚠️ Pułapka:** `IsVisible<X>()` działa **tylko wtedy, gdy element nie ma atrybutu `Visibility`
+> w XML**. Atrybut ma pierwszeństwo i po cichu wyłącza konwencję — pole będzie widoczne mimo
+> metody zwracającej `false`. Wybierz jedno: albo metodę przy property, albo `Visibility` w XML.
+
+### ★ `[Accessor(AutoChange = true)]` dla property spoza rekordu
+
+Gdy `EditValue` wskazuje property pomocniczą, której ustawienie **nie zmienia obiektu sesyjnego**
+(property na klasie parametrów, extenderze albo obiekcie sterującym oknem), oznacz ją atrybutem
+`[Accessor(AutoChange = true)]`. Bez tego formularz nie odświeży pól zależnych po zmianie wartości
+— zmiana „nie zostanie zauważona", bo nie przeszła przez sesję.
+
+```csharp
+[Accessor(AutoChange = true)]
+public string WybranaOpcja { get; set; }
+```
+
+Alternatywa dla bardziej złożonych przypadków: `Session.InvokeChanged()` / `Context.InvokeChanged()`
+w setterze. Szczegóły — skill **`/soneta-programming`** (contextbase.md, viewinfo.md).
+
+### RadioButton, przełącznik i lista wielokrotnego wyboru
+
 **RadioButton** — pola z tym samym `EditValue` i różnymi `CheckedValue`:
 ```xml
 <Field Width="15" CaptionHtml="Towar" EditValue="{Typ}" CheckedValue="Towar" />
 <Field Width="15" CaptionHtml="Usługa" EditValue="{Typ}" CheckedValue="Usługa" />
 ```
 
+Typ property po drugiej stronie może być:
+- **`string`** — porównanie tekstowe, jak wyżej;
+- **`enum`** — `CheckedValue` to nazwa wartości (`CheckedValue="Towar"`) albo jej numer
+  (`CheckedValue="2"`);
+- **`bool`** — `CheckedValue="true"` / `"false"` (akceptowane też `"1"` / `"0"`); tak buduje się
+  parę radiów „Tak/Nie" nad jednym polem logicznym.
+
+> **⚠️ `CheckedValue` nigdy nie daje checkboxa.** Samo jego ustawienie przełącza edytor na radio,
+> a razem z `Class="CheckButtonEdit"` — na przycisk-przełącznik. **Nie da się nim zbudować listy
+> wielokrotnego wyboru.** Do tego służą wzorce niżej.
+
+**Lista wielokrotnego wyboru** — trzy drogi, zależnie od długości listy:
+
+1. **Pojedyncze checkboxy** — pole `bool` na elemencie kolekcji, bindowane indeksem, **bez**
+   `CheckedValue`. Dla krótkiej listy o znanej długości:
+   ```xml
+   <Field CaptionHtml="{Opcje[0].Nazwa}" EditValue="{Opcje[0].Zaznaczona}" />
+   <Field CaptionHtml="{Opcje[1].Nazwa}" EditValue="{Opcje[1].Zaznaczona}" />
+   ```
+   Składnię indeksowania opisuje [references/dynamic-forms.md](references/dynamic-forms.md).
+2. **Grid z kolumną `bool`** i `EditInPlace="true"` — dla długiej listy, bo dochodzi sortowanie i
+   filtrowanie. Kolekcja nie musi składać się z obiektów biznesowych; wystarczą zwykłe obiekty
+   z property `bool`:
+   ```xml
+   <Grid Width="*" Height="*" EditValue="{Opcje}" EditInPlace="true"
+         NewButton="None" EditButton="None" RemoveButton="None">
+     <Field CaptionHtml="Nazwa"   Width="40" EditValue="{Nazwa}" IsReadOnly="true" />
+     <Field CaptionHtml="Wybrana" Width="10" EditValue="{Zaznaczona}" />
+   </Grid>
+   ```
+3. **`SelectedValue`** — zaznaczanie wierszy gridu (patrz „Multi-select" niżej). Najmniej kodu, ale
+   zaznaczenie gubi się przy przeładowaniu listy i trudniej ustawić je z kodu niż zwykłe pole
+   `bool`.
+
 **Pole wieloliniowe (memo).** Wieloliniowy edytor tekstu to zwykły `Field` z `Height="N"`
-(liczba wierszy) i `Width="*"`. Aby zrobić panel podglądu tylko-do-odczytu (np. tekst
-zbudowany w kodzie), dodaj `IsReadOnly="true"` albo zwiąż go z property bez settera — nie
-potrzeba `Class` ani specjalnego edytora:
+(liczba wierszy). **Tryb wieloliniowy włącza sam fakt podania `Height`** — dowolna niepusta
+wartość (`"4"`, `"250px"`, `"*"`) wystarczy; `Width` nie ma z tym nic wspólnego, choć zwykle daje
+się `Width="*"`, żeby pole zajęło całą szerokość. Działa dla property typu `string`; jeśli
+property ma własny typ edytora (przez `Class` albo atrybut edytora w kodzie), on ma pierwszeństwo.
+Aby zrobić panel podglądu tylko-do-odczytu (np. tekst zbudowany w kodzie), dodaj
+`IsReadOnly="true"` albo zwiąż go z property bez settera — nie potrzeba `Class` ani specjalnego
+edytora:
 ```xml
 <Field CaptionHtml="Podgląd" Width="*" Height="8" IsReadOnly="true" EditValue="{TekstPodgladu}" />
 ```
@@ -428,7 +533,7 @@ się automatycznie. `CaptionHtml` bez `/` → samodzielna zakładka; z `/` → h
 - `EditValue="{Pozycje}"` na **elemencie listowym** — zmienia kontekst **tylko podrzędnych**:
   pola/kolumny wewnątrz odnoszą się już do **elementu kolekcji** zwróconej przez to `EditValue`
   (inny obiekt niż kontekst rodzica), nie do bieżącego `DataSource`. Dotyczy to **wszystkich
-  elementów listowych**, nie tylko `Grid`: `Grid`, `TreeList`, `Scheduler`, `Gantt`,
+  elementów listowych**, nie tylko `Grid`: `Grid`, `List`, `Scheduler`, `Gantt`,
   `GanttDiagram`, `KanbanDiagram`, `Pivot`, `Chart`, `Diagram`, `TreeDiagram`. Np. w
   `<Grid EditValue="{Pozycje}">` kolumna `<Field EditValue="{Cena}">` to `Pozycje` → element →
   `Cena`. Pełne ścieżki pól z rozwiniętym kontekstem (marker `[]` dla elementu kolekcji)
@@ -454,6 +559,7 @@ bez osobnego obiektu kontekstu:
 |----------|------|
 | `{Właściwość}` | Publiczna właściwość w kontekście |
 | `{Obiekt.Właściwość}` | Właściwość zagnieżdżona |
+| `{Kolekcja[0].Właściwość}` | Element kolekcji po indeksie — [dynamiczne listy pól](references/dynamic-forms.md) |
 | `{Obiekt+SubObiekt.Właściwość}` | Operator `+` — nawigacja przez powiązany obiekt ViewInfo |
 | `{Workers.NazwaWorkera.Pole}` | Właściwość workera |
 | `{new NazwaExtender.Pole}` | Właściwość extendera |
@@ -494,7 +600,7 @@ Visibility="{?Aktywny and Widoczny}"    <!-- AND -->
 
 **Zachowania kontenerów:** `Collapsable`, `Expandable`, `Expanded`, `Scrollable`, `FirstResponder`
 
-**Przyciski:** `MainCommand`, `SplitCommand`, `CommandNoText`, `CommandIcoText`
+**Przyciski:** `MainCommand`, `SplitCommand`, `CommandText`, `CommandIco`, `CommandIcoText`
 
 **Wyrównanie:** `LeftAlign`, `RightAlign`, `TextRight`
 
@@ -648,6 +754,9 @@ narzędzie `buscall` — dokument `buscall-live-testing.md` (weryfikacja na żyw
 ## Referencje
 
 - Pełna specyfikacja elementów: [references/ELEMENTS.md](references/ELEMENTS.md)
+- Formularze budowane dynamicznie (bindowanie po indeksie `{Kolekcja[i].Pole}`, generowanie pól
+  przez `<Template RenderMethodName>`, pułapka cache'owanego układu, unikalność nazw plików):
+  [references/dynamic-forms.md](references/dynamic-forms.md)
 - Schemat XSD: [references/Form.xsd](references/Form.xsd)
 - Przykład pageform.xml: [assets/MojObiekt.Ogolne.pageform.xml](assets/MojObiekt.Ogolne.pageform.xml)
 - Przykład pageform.xml (warunki handlowe): [assets/Kontrahent.WarunkiHandlowe.pageform.xml](assets/Kontrahent.WarunkiHandlowe.pageform.xml)

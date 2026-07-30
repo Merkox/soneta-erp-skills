@@ -36,12 +36,12 @@ Układ poziomy - elementy obok siebie.
 </Row>
 ```
 
-> **⚠️ Układ dwukolumnowy formularza — NIE zagnieżdżaj `<Stack>` w `<Row>`.** Potwierdzone
-> wizualnie: `<Row>` z `<Stack>` i polami `Width="*"` renderuje kolumny **jedna na drugiej**
-> (etykiety i pola się nakładają). Poprawnie: pola `<Field>` **wprost** w `<Row>`, o **stałych**
-> szerokościach, po jednym `<Row>` na wiersz layoutu — przykład i pełne ostrzeżenie w `SKILL.md`
-> (sekcja „Stack, Row, Flow"). Zagnieżdżenie Row/Stack jest dopuszczalne w szablonach kart
-> (`Cards`/`CardTemplate`), które renderują się inaczej.
+> **⚠️ Układ dwukolumnowy — kolumnom nadaj szerokość przez `OuterWidth`.** `<Row>` z zagnieżdżonymi
+> `<Stack>` to poprawny i powszechny wzorzec dwukolumnowy, ale kolumny muszą mieć zadeklarowaną
+> szerokość. `<Stack>` **bez szerokości** z polami `Width="*"` w środku renderuje kolumny
+> **jedna na drugiej** (etykiety i pola się nakładają). `OuterWidth` obejmuje etykietę razem
+> z polem, więc tylko ono wyrównuje kolumny — samo `Width` opisuje wyłącznie edytor. Przykłady
+> w `SKILL.md`, sekcja „Układ wielokolumnowy".
 
 ### Flow
 Układ płynny z automatycznym zawijaniem.
@@ -691,13 +691,27 @@ Kontrolka użytkownika.
 ```
 
 ### Template
-Szablon warunkowy.
+Szablon. Dwa zastosowania.
+
+**a) Szablon warunkowy** — zawartość pokazywana, gdy warunek spełniony:
 
 ```xml
 <Template Visibility="{Warunek}" AllowUpdating="true">
   <!-- zawartość wyświetlana gdy warunek spełniony -->
 </Template>
 ```
+
+**b) Generator elementów** — z atrybutem `RenderMethodName` szablon jest klonowany z kodu tyle
+razy, ile potrzeba, a sam znika z gotowego formularza:
+
+```xml
+<Template Name="OpcjaTemplate" DataContext="{new MojExtender}" RenderMethodName="RenderujOpcje">
+  <Field />
+</Template>
+```
+
+Pełny przepis (klonowanie, nazwy klonów, pułapka cache'owanego układu) —
+[dynamic-forms.md](dynamic-forms.md).
 
 ---
 
@@ -838,7 +852,8 @@ Stronę kodu opisuje skill `/soneta-programming`: budowę ViewInfo (viewinfo.md)
 - `PrintButton` - drukowanie
 - `MainCommand` - główne polecenie
 - `SplitCommand` - polecenie dzielone
-- `CommandNoText` - bez tekstu
+- `CommandText` - sam tekst
+- `CommandIco` - sama ikona
 - `CommandIcoText` - ikona i tekst
 - `WorkerCommand` - polecenie workera
 - `WizardCommand` - polecenie kreatora
@@ -894,11 +909,13 @@ Stronę kodu opisuje skill `/soneta-programming`: budowę ViewInfo (viewinfo.md)
 - `ImageCircle` - okrągły obraz
 - `DashboardItem`, `LocatorItem`
 - `SmallSize`, `NormalSize`, `LargeSize`
-- `AutoUpdate` - automatyczna aktualizacja
+- `AutoUpdate` - wysyła wartość edytora do property po ~500 ms od zmiany, zamiast dopiero przy
+  utracie fokusu. **Domyślnie zbędne** — przed wykonaniem komendy wartość i tak zostanie zapisana.
+  Używaj tylko wtedy, gdy coś ma reagować w trakcie pisania (pole zależne przeliczane na bieżąco)
 - `ArrowsSelectNext` - strzałki wybierają następny
 - `Hidden` - ukryty
 - `NonClickable` - nieklikowalny
-- `LabelTop`, `LebelLeft` - pozycja etykiety
+- `LabelTop`, `LabelLeft` - pozycja etykiety
 - `FilesDropTarget` - cel upuszczania plików
 - `Rss` - kanał RSS
 - `PreventOrderBy` - zapobiegaj sortowaniu
