@@ -24,10 +24,10 @@ var outDir = Path.GetFullPath(Args[1]);
 if (!Directory.Exists(dllDir)) { Console.Error.WriteLine($"Katalog nie istnieje: {dllDir}"); return 1; }
 Directory.CreateDirectory(outDir);
 
-// Zbiór realnych RowType z sąsiedniego data/props/INDEX.md (jeśli jest) — do walidacji typu
-// wyliczanego z nazwy pliku. Bez tego pliku walidacja jest pomijana (fallback strukturalny).
-var rowTypes = LoadRowTypes(Path.Combine(outDir, "..", "props", "INDEX.md"));
-if (rowTypes.Count > 0) Console.Error.WriteLine($"# Walidacja typu wg {rowTypes.Count} RowType z data/props/INDEX.md");
+// Zbiór realnych RowType z sąsiedniego data/props/<Moduł>/INDEX.md (jeśli są) — do walidacji
+// typu wyliczanego z nazwy pliku. Bez nich walidacja jest pomijana (fallback strukturalny).
+var rowTypes = LoadRowTypes(Path.Combine(outDir, "..", "props"));
+if (rowTypes.Count > 0) Console.Error.WriteLine($"# Walidacja typu wg {rowTypes.Count} RowType z data/props/*/INDEX.md");
 
 var rows = new List<Rec>();
 var perDll = new SortedDictionary<string, int>(StringComparer.Ordinal);
@@ -117,15 +117,29 @@ sb.AppendLine("segment **przed** nazwą zakładki — albo jawny atrybut `DataTy
 sb.AppendLine("Segment typu jest walidowany względem realnych `RowType`; dla okien konfiguracji");
 sb.AppendLine($"(folder `Config`) typ bierzemy z nazwy zakładki. Zakładek z jawnym `DataType`: **{byDataType}**.");
 sb.AppendLine();
-sb.AppendLine("**Jak używać:** wyszukaj `Typ danych` (np. `Kontrahent`, `DokumentHandlowy`, `DashboardView`).");
+sb.AppendLine("## Jak znaleźć zakładki obiektu");
+sb.AppendLine();
+sb.AppendLine("Zakładki biznesowe są rozdzielone na pliki `<Przestrzeń>.md` (jeden na przestrzeń nazw),");
+sb.AppendLine("bo pełna lista nie mieści się w jednym odczycie. **Nie musisz wiedzieć, w której");
+sb.AppendLine("przestrzeni jest typ** — wyszukaj go od razu we wszystkich:");
+sb.AppendLine();
+sb.AppendLine("```bash");
+sb.AppendLine("rg '^\\| Kontrahent \\|' *.md            # wszystkie zakładki typu Kontrahent");
+sb.AppendLine("rg -l '^\\| DokumentHandlowy \\|' *.md    # sam plik przestrzeni");
+sb.AppendLine("rg '^\\| \\w*Pracownik\\w* \\|' *.md       # gdy nie znasz dokładnej nazwy typu");
+sb.AppendLine("```");
+sb.AppendLine();
 sb.AppendLine("Po znalezieniu obiektu odczytaj jego pola: `dotnet script scan-forms.csx -- <Typ|Namespace.Typ> <KatalogDll>`.");
+sb.AppendLine("Zakładki dokładane do wielu obiektów przez typ bazowy są niżej, w sekcji **systemowej**.");
 sb.AppendLine();
-sb.AppendLine("## Zakładki wg typu danych");
+sb.AppendLine("## Przestrzenie nazw");
 sb.AppendLine();
-sb.AppendLine("| Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka (DLL) | Przestrzeń |");
-sb.AppendLine("|---|---|---|---|---|---|");
-foreach (var r in bizRows)
-    sb.AppendLine($"| {Esc(r.Type)} | {Esc(r.TabFile)} | {Esc(r.Caption)} | {r.Priority} | {Esc(r.Dll)} | {Esc(r.NsHint)} |");
+sb.AppendLine("| Przestrzeń | Zakładek | Typów | Plik |");
+sb.AppendLine("|---|---:|---:|---|");
+var byNs = bizRows.GroupBy(r => string.IsNullOrEmpty(r.NsHint) ? "Inne" : r.NsHint)
+    .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+foreach (var g in byNs)
+    sb.AppendLine($"| {Esc(g.Key)} | {g.Count()} | {g.Select(r => r.Type).Distinct().Count()} | [{FileNs(g.Key)}]({FileNs(g.Key)}) |");
 sb.AppendLine();
 sb.AppendLine("## Zakładki systemowe (typy ogólne)");
 sb.AppendLine();
@@ -150,11 +164,45 @@ foreach (var kv in perDll.OrderByDescending(k => k.Value))
 
 var outPath = Path.Combine(outDir, "INDEX.md");
 File.WriteAllText(outPath, sb.ToString(), new UTF8Encoding(false));
-Console.WriteLine($"Zapisano {outPath}");
+
+// ── <Przestrzeń>.md — zakładki biznesowe jednej przestrzeni nazw ──────────────
+// Stare pliki przestrzeni usuwamy, żeby po zmianie zestawu DLL nie zostawały sieroty.
+foreach (var stale in Directory.EnumerateFiles(outDir, "*.md")
+             .Where(p => !string.Equals(Path.GetFileName(p), "INDEX.md", StringComparison.Ordinal)))
+    File.Delete(stale);
+
+foreach (var g in byNs)
+{
+    var ns = new StringBuilder();
+    ns.AppendLine($"# Zakładki formularzy — `{g.Key}`");
+    ns.AppendLine();
+    ns.AppendLine($"Zakładek: **{g.Count()}** · typów danych: **{g.Select(r => r.Type).Distinct().Count()}**.");
+    ns.AppendLine();
+    ns.AppendLine("Wycinek indeksu zakładek (pageform) dla jednej przestrzeni nazw. Pozostałe przestrzenie");
+    ns.AppendLine("i sposoby wyszukiwania: [INDEX.md](INDEX.md). Pełną zawartość zakładki (pola, sekcje,");
+    ns.AppendLine("`DataContext`/`EditValue`, `Include`) wypisuje `scan-forms.csx` —");
+    ns.AppendLine("patrz [../../references/scan-forms.md](../../references/scan-forms.md).");
+    ns.AppendLine();
+    ns.AppendLine("| Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka (DLL) | Przestrzeń |");
+    ns.AppendLine("|---|---|---|---|---|---|");
+    foreach (var r in g)
+        ns.AppendLine($"| {Esc(r.Type)} | {Esc(r.TabFile)} | {Esc(r.Caption)} | {r.Priority} | {Esc(r.Dll)} | {Esc(r.NsHint)} |");
+    ns.AppendLine();
+    File.WriteAllText(Path.Combine(outDir, FileNs(g.Key)), ns.ToString(), new UTF8Encoding(false));
+}
+
+Console.WriteLine($"Zapisano {outPath} + {byNs.Count} plików przestrzeni");
 Console.WriteLine($"- zakładek: {rows.Count}, typów: {distinctType}, po DataType: {byDataType}, bibliotek: {dllWithForms}");
 return 0;
 
 // --- pomocnicze ---
+
+// Nazwa pliku dla przestrzeni nazw (znaki spoza [A-Za-z0-9._-] → '_').
+static string FileNs(string ns)
+{
+    var chars = ns.Select(c => char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '-' ? c : '_');
+    return new string(chars.ToArray()) + ".md";
+}
 
 // Foldery/segmenty, które NIE są typem danych — gdy trafią na pozycję typu, typ bierzemy
 // z nazwy zakładki (np. okno konfiguracji `Config.<TypKonfig>.pageform.xml`).
@@ -175,19 +223,26 @@ static (string Type, string Src) DeriveType(string dtSimple, string typeSeg, str
     return (typeSeg, "nazwa");
 }
 
-static HashSet<string> LoadRowTypes(string indexPath)
+// Czyta RowType z indeksów modułowych `data/props/<Moduł>/INDEX.md`. Główny `props/INDEX.md`
+// jest samym routingiem (lista modułów) i nie zawiera wierszy z RowType.
+static HashSet<string> LoadRowTypes(string propsDir)
 {
     var set = new HashSet<string>(StringComparer.Ordinal);
     try
     {
-        if (!File.Exists(indexPath)) return set;
-        foreach (var line in File.ReadLines(indexPath))
+        if (!Directory.Exists(propsDir)) return set;
+        foreach (var indexPath in Directory.EnumerateFiles(propsDir, "INDEX.md", SearchOption.AllDirectories))
         {
-            if (!line.StartsWith("| ")) continue;
-            var cols = line.Split('|');
-            if (cols.Length < 3) continue;
-            var rt = cols[1].Trim();
-            if (rt.Length > 0 && rt != "RowType" && !rt.StartsWith("-")) set.Add(rt);
+            if (string.Equals(Path.GetDirectoryName(Path.GetFullPath(indexPath)),
+                              Path.GetFullPath(propsDir), StringComparison.Ordinal)) continue; // pomiń router
+            foreach (var line in File.ReadLines(indexPath))
+            {
+                if (!line.StartsWith("| ")) continue;
+                var cols = line.Split('|');
+                if (cols.Length < 3) continue;
+                var rt = cols[1].Trim();
+                if (rt.Length > 0 && rt != "RowType" && !rt.StartsWith("-")) set.Add(rt);
+            }
         }
     }
     catch { }

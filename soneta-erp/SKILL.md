@@ -2,18 +2,16 @@
 name: soneta-erp
 description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
-  soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
+  soneta-programming (ORM, kod biznesowy), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-repx (wydruki DevExpress .repx), soneta-place-def-elementow,
-  soneta-config (konfiguracja i funkcje domenowe — import/eksport XML, scan-folders,
-  konfiguracja uruchomieniowa appsettings.json
-  porty i adresy komponentów), soneta-config-reg (rejestr konfiguracji
-  ConfigReg — providery, *.reg.json, przenoszenie ustawień między bazami), soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (uruchamianie i wdrażanie w kontenerach:
-  docker compose, Apple container / Container Desktop, Helm/Kubernetes, wybór wersji
-  obrazów, tworzenie bazy w kontenerze). Używaj gdy użytkownik: (1) rozpoczyna
-  zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
-  o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
-  Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne
-  skille; (5) realizuje zadanie obejmujące wiele warstw platformy (np. moduł z bazą,
+  soneta-config (import/eksport XML, scan-folders, appsettings.json — porty i adresy
+  komponentów), soneta-config-reg (rejestr konfiguracji ConfigReg, providery, *.reg.json),
+  soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (docker
+  compose, Apple container, Helm/Kubernetes, wersje obrazów, baza w kontenerze). Używaj gdy
+  użytkownik: (1) rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać;
+  (2) pyta ogólnie o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta
+  Enterprise, Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać
+  dostępne skille; (5) realizuje zadanie obejmujące wiele warstw platformy (np. moduł z bazą,
   formularzami i logiką).
 ---
 

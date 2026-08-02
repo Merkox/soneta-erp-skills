@@ -162,45 +162,93 @@ foreach (var module in modules)
     }
 }
 
-// ── INDEX.md ──────────────────────────────────────────────────────────────────
+// ── INDEX.md (dwupoziomowy) ───────────────────────────────────────────────────
+// Główny INDEX to sam routing: statystyki, sposoby wyszukania tabeli i lista modułów.
+// Tabele tabel (setki wierszy) idą do `<Moduł>/INDEX.md`, żeby odczyt jednego modułu
+// nie wciągał całej inwentaryzacji. Monolityczny INDEX przekraczał limit odczytu pliku.
+var byModule = indexRows.GroupBy(r => r.Module)
+    .OrderBy(g => g.Key, StringComparer.Ordinal).ToList();
+
 var idx = new StringBuilder();
 idx.AppendLine("# Indeks pól tabel biznesowych (dane wygenerowane z DLL)");
 idx.AppendLine();
+idx.AppendLine($"Modułów z tabelami: **{modulesWithTables}** · tabel: **{filesWritten}** · interfejsów: **{interfaceImpls.Count}**.");
+idx.AppendLine();
 idx.AppendLine("Pliki w tym katalogu zostały wygenerowane wsadowo przez");
 idx.AppendLine("`scripts/export-props-all.csx` (ta sama logika co `scan-props.csx`).");
-idx.AppendLine("Każdy plik `<Moduł>/<RowType>.md` zawiera pełną tabelę pól jednej tabeli.");
-idx.AppendLine("Ten INDEX to zarazem pełna inwentaryzacja modułów i tabel (moduł z `Opis`; tabela:");
-idx.AppendLine("`RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`).");
-idx.AppendLine("Kolumna `Historia`: `historyczna → H` (obiekt wersjonowany, historia w tabeli H) albo");
-idx.AppendLine("`historia → P` (rekord historyczny obiektu P). Kolumna `Selektor`: `TypEnum (N)` gdy tabela");
-idx.AppendLine("przechowuje N podtypów rozróżnianych selektorem (szczegóły w sekcji `## Selektor` pliku tabeli).");
-idx.AppendLine("Lista interfejsów i tabel je implementujących:");
-idx.AppendLine("[Interfaces.md](Interfaces.md). Instrukcja odczytu i regeneracji: [../references/scan-props.md](../../references/scan-props.md).");
+idx.AppendLine("Każdy plik `<Moduł>/<RowType>.md` zawiera pełną tabelę pól jednej tabeli,");
+idx.AppendLine("a `<Moduł>/INDEX.md` — inwentaryzację tabel tego modułu.");
+idx.AppendLine("Instrukcja odczytu i regeneracji: [../../references/scan-props.md](../../references/scan-props.md).");
 idx.AppendLine();
-idx.AppendLine($"- Modułów z tabelami: {modulesWithTables}");
-idx.AppendLine($"- Tabel (plików): {filesWritten}");
+idx.AppendLine("## Jak znaleźć tabelę");
 idx.AppendLine();
-idx.AppendLine("Aby znaleźć tabelę: wyszukaj `RowType` w tabeli poniżej i otwórz plik z kolumny `Plik`.");
+idx.AppendLine("**Znasz `RowType`** (np. `DokumentHandlowy`) — plik ma nazwę `<Moduł>/<RowType>.md`,");
+idx.AppendLine("więc wystarczy jedno polecenie zamiast czytania indeksów:");
 idx.AppendLine();
-
-foreach (var grp in indexRows.GroupBy(r => r.Module).OrderBy(g => g.Key, StringComparer.Ordinal))
+idx.AppendLine("```bash");
+idx.AppendLine("ls */DokumentHandlowy.md          # → Handel/DokumentHandlowy.md");
+idx.AppendLine("ls */Pracownik*.md               # gdy nie znasz dokładnej nazwy");
+idx.AppendLine("```");
+idx.AppendLine();
+idx.AppendLine("**Znasz nazwę tabeli w bazie** (np. `DokHandlowe`) albo szukasz po tytule:");
+idx.AppendLine();
+idx.AppendLine("```bash");
+idx.AppendLine("rg -l '`DokHandlowe`' */INDEX.md          # moduł zawierający tabelę");
+idx.AppendLine("rg '^\\| \\w+ \\| Dokumenty handlowe ' */INDEX.md");
+idx.AppendLine("```");
+idx.AppendLine();
+idx.AppendLine("**Szukasz tabel z polem danego typu** (relacje do obiektu):");
+idx.AppendLine();
+idx.AppendLine("```bash");
+idx.AppendLine("rg -l 'Soneta\\.CRM\\.Kontrahenci\\.Kontrahent`' */*.md");
+idx.AppendLine("```");
+idx.AppendLine();
+idx.AppendLine("**Nie wiesz, gdzie szukać** — wybierz moduł z listy poniżej i otwórz jego `INDEX.md`.");
+idx.AppendLine("Interfejsy i tabele je implementujące: [Interfaces.md](Interfaces.md).");
+idx.AppendLine();
+idx.AppendLine("## Moduły");
+idx.AppendLine();
+idx.AppendLine("| Moduł | Tabel | Opis | Indeks |");
+idx.AppendLine("|-------|------:|------|--------|");
+foreach (var grp in byModule)
 {
-    idx.AppendLine($"## {grp.Key}");
-    idx.AppendLine();
-    if (moduleMeta.TryGetValue(grp.Key, out var meta))
-    {
-        if (!string.IsNullOrEmpty(meta.Caption)) idx.AppendLine($"- Tytuł: {InlineText(meta.Caption)}");
-        if (!string.IsNullOrEmpty(meta.Description)) idx.AppendLine($"- Opis: {InlineText(meta.Description)}");
-        if (!string.IsNullOrEmpty(meta.Caption) || !string.IsNullOrEmpty(meta.Description)) idx.AppendLine();
-    }
-    idx.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik |");
-    idx.AppendLine("|---------|-------|--------|--------|--------|----------|------------|----------|------|");
-    foreach (var r in grp.OrderBy(r => r.RowType, StringComparer.Ordinal))
-        idx.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.History)} | {EscapeCell(r.Interfaces)} | {EscapeCell(r.Selector)} | [{r.RelPath}]({r.RelPath}) |");
-    idx.AppendLine();
+    moduleMeta.TryGetValue(grp.Key, out var meta);
+    var desc = !string.IsNullOrEmpty(meta.Description) ? InlineText(meta.Description)
+        : (!string.IsNullOrEmpty(meta.Caption) ? InlineText(meta.Caption) : "");
+    idx.AppendLine($"| {grp.Key} | {grp.Count()} | {EscapeCell(desc)} | [{grp.Key}/INDEX.md]({grp.Key}/INDEX.md) |");
 }
+idx.AppendLine();
 
 File.WriteAllText(Path.Combine(outDir, "INDEX.md"), idx.ToString());
+
+// ── <Moduł>/INDEX.md ──────────────────────────────────────────────────────────
+foreach (var grp in byModule)
+{
+    var m = new StringBuilder();
+    moduleMeta.TryGetValue(grp.Key, out var meta);
+
+    m.AppendLine($"# Moduł `{grp.Key}` — tabele biznesowe");
+    m.AppendLine();
+    if (!string.IsNullOrEmpty(meta.Caption)) m.AppendLine($"- Tytuł: {InlineText(meta.Caption)}");
+    if (!string.IsNullOrEmpty(meta.Description)) m.AppendLine($"- Opis: {InlineText(meta.Description)}");
+    m.AppendLine($"- Tabel: **{grp.Count()}**");
+    m.AppendLine();
+    m.AppendLine("Kolumna `Historia`: `historyczna → H` (obiekt wersjonowany, historia w tabeli H) albo");
+    m.AppendLine("`historia → P` (rekord historyczny obiektu P). Kolumna `Selektor`: `TypEnum (N)` gdy tabela");
+    m.AppendLine("przechowuje N podtypów rozróżnianych selektorem (szczegóły w sekcji `## Selektor` pliku tabeli).");
+    m.AppendLine("Pozostałe moduły: [../INDEX.md](../INDEX.md) · interfejsy: [../Interfaces.md](../Interfaces.md).");
+    m.AppendLine();
+    m.AppendLine("| RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik |");
+    m.AppendLine("|---------|-------|--------|--------|--------|----------|------------|----------|------|");
+    foreach (var r in grp.OrderBy(r => r.RowType, StringComparer.Ordinal))
+    {
+        var local = r.RowType + ".md";
+        m.AppendLine($"| {r.RowType} | {EscapeCell(r.Caption)} | `{r.TableType}` | {r.Konfig} | {EscapeCell(r.Guided)} | {EscapeCell(r.History)} | {EscapeCell(r.Interfaces)} | {EscapeCell(r.Selector)} | [{local}]({local}) |");
+    }
+    m.AppendLine();
+
+    File.WriteAllText(Path.Combine(outDir, grp.Key, "INDEX.md"), m.ToString());
+}
 
 // ── Interfaces.md ─────────────────────────────────────────────────────────────
 // Interfejs → tabele implementujące (`[TableInfo(Interfaces=...)]`). Tabele linkujemy

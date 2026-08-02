@@ -1,22 +1,19 @@
 ---
 name: soneta-config-reg
 description: >
-  Silnik REJESTRU KONFIGURACJI (ConfigReg, "rejestr konfiguracji") platformy Soneta
-  (enova365, Triva) — od strony kodu C#: drzewo węzłów `ConfigReg`, providery
-  `IConfigRegProvider` (Root/Module/ConfigModule/Table/Row/SubRow/SubTable/Storage/Addins),
-  atrybut `[ConfigReg(Hide/Ignore/Include/ChildrenType)]` sterujący zakresem rejestru,
-  format plików `*.reg.json`, oraz potok Loader → Differ/Merger → SessionUpdater
-  zapisujący zmiany do sesji. Używaj ZAWSZE gdy użytkownik: (1) pyta o rejestr konfiguracji,
-  ConfigReg, `Soneta.Config.Reg`, tabelę `ConfigRegistry` lub menu "Zarządzanie konfiguracją";
-  (2) chce włączyć/wyłączyć tabelę, kolumnę lub węzeł konfiguracji z rejestru
-  (`ConfigReg(Ignore=true)`, `Hide`, `Include`, `ChildrenType`); (3) pisze lub modyfikuje
-  provider rejestru, obsługę zapisu (`SaveChild`, `delayed`), porównywanie (`ConfigRegDiffer`),
-  scalanie (`ConfigRegMerger`) albo serializację (`RegConfigJsonConverter`);
-  (4) buduje, czyta lub debuguje plik `*.reg.json` — sigile `$strict`, `$v`, `$`, `#klucz`,
-  `@atrybut`, `$blob`, ścieżki typu `Business/FeatureDefs/Name=CECHA`;
-  (5) diagnozuje przenoszenie ustawień między bazami przez rejestr (eksport całej bazy,
-  różnice, import, scalanie paczek). Import/eksport danych przez XML (`dbinit.xml`,
-  `<session>`) to INNY mechanizm → /soneta-config.
+  REJESTR KONFIGURACJI (ConfigReg) platformy Soneta (enova365, Triva) od strony kodu C#:
+  drzewo węzłów, providery `IConfigRegProvider`
+  (Root/Module/Table/Row/SubRow/SubTable/Storage/Addins), atrybut
+  `[ConfigReg(Hide/Ignore/Include/ChildrenType)]`, format `*.reg.json`, potok Loader →
+  Differ/Merger → SessionUpdater. Używaj ZAWSZE gdy użytkownik: (1) pyta o rejestr
+  konfiguracji, ConfigReg, `Soneta.Config.Reg`, tabelę `ConfigRegistry` lub menu „Zarządzanie
+  konfiguracją"; (2) chce włączyć/wyłączyć tabelę, kolumnę lub węzeł z rejestru (`Ignore`,
+  `Hide`, `Include`, `ChildrenType`); (3) pisze provider rejestru, obsługę zapisu
+  (`SaveChild`, `delayed`), porównywanie (`ConfigRegDiffer`), scalanie (`ConfigRegMerger`),
+  serializację (`RegConfigJsonConverter`); (4) buduje lub debuguje `*.reg.json` — sigile
+  `$strict`, `$v`, `#klucz`, `@atrybut`, `$blob`, ścieżki `Business/FeatureDefs/Name=CECHA`;
+  (5) przenosi ustawienia między bazami przez rejestr. Import/eksport przez XML (`dbinit.xml`)
+  to INNY mechanizm → /soneta-config.
 ---
 
 # Rejestr konfiguracji (ConfigReg) — silnik platformy Soneta

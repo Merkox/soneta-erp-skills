@@ -4,13 +4,16 @@ Narzędzie do wylistowania wszystkich modułów (`*Module`) platformy Soneta ora
 (`*Row` / `*Table`) zdefiniowanych w każdym z nich. Czyta metadane skompilowanych bibliotek dodatku,
 nie wymaga źródeł.
 
-> **Przegląd modułów/tabel masz już gotowy — bez skanowania.** Wygenerowany
-> [`../data/props/INDEX.md`](../data/props/INDEX.md) jest zarazem pełną inwentaryzacją: moduł
-> (z `Opis`) → tabele `RowType | Tytuł | Tabela | Konfig | Guided | Interfaces | Plik`, z linkiem
-> do kontraktu pól każdej tabeli. Sięgaj po `scan-modules.csx` (poniżej) tylko dla **innego
-> katalogu DLL** niż ten, z którego zbudowano `data/props/` (regeneracja INDEX-u: `export-props-all.csx`
-> — patrz [scan-props.md](scan-props.md)). Ten skaner i INDEX pokazują ten sam zestaw informacji;
-> INDEX dodatkowo linkuje do plików pól, więc dla istniejącej kompilacji jest wygodniejszy.
+> **Przegląd modułów/tabel masz już gotowy — bez skanowania.** Wygenerowany indeks jest
+> zarazem pełną inwentaryzacją, w układzie dwupoziomowym:
+> [`../data/props/INDEX.md`](../data/props/INDEX.md) (lista modułów z `Opis` i liczbą tabel)
+> → `../data/props/<Moduł>/INDEX.md` (tabele modułu:
+> `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`,
+> z linkiem do kontraktu pól każdej tabeli). Sięgaj po `scan-modules.csx` (poniżej) tylko dla
+> **innego katalogu DLL** niż ten, z którego zbudowano `data/props/` (regeneracja indeksu:
+> `export-props-all.csx` — patrz [scan-props.md](scan-props.md)). Ten skaner i indeks pokazują
+> ten sam zestaw informacji; indeks dodatkowo linkuje do plików pól, więc dla istniejącej
+> kompilacji jest wygodniejszy.
 
 ## Cel
 
@@ -152,11 +155,10 @@ _Łącznie tabel: 1196_
 
 ## Powiązania
 
-- Dane wygenerowane: [`../data/props/INDEX.md`](../data/props/INDEX.md) — gotowy przegląd
-  modułów/tabel (moduł → tabele z `Tytuł`/`Konfig`/`Guided`/`Interfaces` + link do pól).
+- Dane wygenerowane: [`../data/props/INDEX.md`](../data/props/INDEX.md) — router modułów;
+  tabele danego modułu w `../data/props/<Moduł>/INDEX.md` (`Tytuł`/`Konfig`/`Guided`/
+  `Interfaces` + link do pól).
 - [scan-props.md](./scan-props.md) — kontrakt pól pojedynczej tabeli; dane wygenerowane w
-  [`../data/props/`](../data/props/) (plik na tabelę + `INDEX.md`).
-- Patrz skill `soneta-business-xml` — definicje schematu z których `BusinessGenerator`
-  produkuje klasy `*Module`, `*Row`, `*Table` i `*Record`.
+  [`../data/props/`](../data/props/) (plik `<Moduł>/<RowType>.md` na tabelę).
 - Patrz skill `soneta-business-xml` — definicje schematu z których `BusinessGenerator`
   produkuje klasy `*Module`, `*Row`, `*Table` i `*Record`.

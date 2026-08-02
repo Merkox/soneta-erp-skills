@@ -53,9 +53,9 @@ SKILL.md zawiera "duży obraz" - hierarchię klas, thread-safety, kanoniczne wzo
 | Receptury kodu per obiekt biznesowy (domena Kadry-Płace) — `Pracownik` (zatrudnienie i dane kadrowe, historia `PracHistoria`+`Etat`, dodatki, nieobecności/limity, plan pracy/RCP, umowy cywilnoprawne, naliczanie wypłat, listy płac, wydruki PDF). Indeks + mapa receptur (KADRY-A*…K*); rozdziały `references/domeny/kadry/KADRY01..KADRY11` | [references/domeny/kadry.md](references/domeny/kadry.md) |
 | **Zasady bezpiecznego kodu biznesowego — checklist do review i refaktoringu**                     | [references/safe-code.md](references/safe-code.md) |
 | Pola obiektów biznesowych — dane wygenerowane (`data/props/`) + skaner/regeneracja z DLL      | [references/scan-props.md](references/scan-props.md) |
-| Moduły i tabele (`*Module` / `*Row` / `*Table`) — gotowy przegląd w `data/props/INDEX.md` + skaner z DLL | [references/scan-modules.md](references/scan-modules.md) |
+| Moduły i tabele (`*Module` / `*Row` / `*Table`) — gotowy przegląd w `data/props/` (`INDEX.md` → `<Moduł>/INDEX.md`) + skaner z DLL | [references/scan-modules.md](references/scan-modules.md) |
 | Inwentaryzacja workerów i extenderów (`[Worker<…>]`) z DLL                            | [references/scan-workers.md](references/scan-workers.md) |
-| Zakładki, sekcje danych i pola formularzy (zasoby `*.pageform.xml`/`*.form.xml`) z DLL — katalog `data/forms/INDEX.md` + skaner na żądanie (`DataContext`/`EditValue`, `Include`, listy, kolejność pól pod kod i import XML) | [references/scan-forms.md](references/scan-forms.md) |
+| Zakładki, sekcje danych i pola formularzy (zasoby `*.pageform.xml`/`*.form.xml`) z DLL — katalog `data/forms/` (`INDEX.md` → `<Przestrzeń>.md`) + skaner na żądanie (`DataContext`/`EditValue`, `Include`, listy, kolejność pól pod kod i import XML) | [references/scan-forms.md](references/scan-forms.md) |
 | Inwentaryzacja folderów statycznych menu (`[assembly: FolderView]`) z DLL — drzewo, listy, formularze | narzędzie `scan-folders` w skillu `/soneta-config` |
 | Wydruki DevExpress (pliki `.repx`) — struktura raportu, źródło danych `BusinessDataSource`, rejestracja `[assembly: DxReport(...)]`; **kod-behind wydruku** (`ReportSnippet`/`[DxBind]`, lub generyczny `Snippet`/`[Bind]` bez licencji DevExpress) liczący dane raportu w oparciu o ORM. **Parametry wydruku konstruuje się jak parametry workerów — klasa `ContextBase` + `[Context]`** (patrz wyżej) | skill `/soneta-repx` (warstwa `.repx`) |
 | **Testowanie na żywej aplikacji przez `buscall call` (CLI)** — zdalne sterowanie programem (nawigacja, formularze, gridy, edycja) i **zrzuty ekranu** do analizy wizualnej; jednorazowe wywołania CLI bez zarządzania procesem (`buscall --db <Baza> call <metoda> klucz=wartość`), plus wariant MCP `callmcp` | [references/buscall-live-testing.md](references/buscall-live-testing.md) (weryfikacja na żywo) |
@@ -341,16 +341,44 @@ Gotowe **receptury per obiekt biznesowy** (realne pola, kolekcje i workery) są 
 
 Skill udostępnia skrypty `dotnet script` (`scripts/`) do statycznej inwentaryzacji bibliotek Soneta — bez ładowania IL do CLR (metadane typów: Roslyn `MetadataReference.CreateFromFile`; zasoby osadzone: `System.Reflection.Metadata`):
 
-- **Pola tabel — najpierw dane wygenerowane.** Kontrakty pól **wszystkich ~1200 tabel** są już wyeksportowane do [`data/props/`](data/props/) (plik na tabelę + [`data/props/INDEX.md`](data/props/INDEX.md)). Odczyt jest natychmiastowy — nie skanuj DLL, gdy tabela tam jest. Jak znaleźć i jak regenerować po zmianie wersji: [references/scan-props.md](references/scan-props.md).
-- **Moduły i tabele — gotowy przegląd w [`data/props/INDEX.md`](data/props/INDEX.md).** To zarazem indeks propsów i pełna inwentaryzacja: moduł (z `Opis`) → tabele `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Plik` (kolumna `Historia`: `historyczna → H` / `historia → P`). Odczyt natychmiastowy, dobre na start i do znalezienia `RowType`/`TableType`.
+- **Pola tabel — najpierw dane wygenerowane.** Kontrakty pól **wszystkich ~1200 tabel** są już wyeksportowane do [`data/props/`](data/props/) (plik `<Moduł>/<RowType>.md` na tabelę). Odczyt jest natychmiastowy — nie skanuj DLL, gdy tabela tam jest. Znasz `RowType`? Nie czytaj indeksów, tylko `ls data/props/*/DokumentHandlowy.md` (pełny zestaw poleceń niżej). Jak regenerować po zmianie wersji: [references/scan-props.md](references/scan-props.md).
+- **Moduły i tabele — indeks dwupoziomowy.** [`data/props/INDEX.md`](data/props/INDEX.md) to **router**: statystyki, polecenia wyszukiwania i lista 37 modułów. Inwentaryzacja tabel modułu jest w `data/props/<Moduł>/INDEX.md` (`RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`; kolumna `Historia`: `historyczna → H` / `historia → P`). Podział jest celowy — monolityczny indeks (212 KB) przekraczał limit jednego odczytu.
 - **Interfejsy — [`data/props/Interfaces.md`](data/props/Interfaces.md).** Wszystkie interfejsy z `[TableInfo(Interfaces=...)]` i tabele je implementujące (relacje interfejsowe w jednym miejscu, tabele linkowane do plików).
 - `scan-modules.csx` — skaner **na żądanie** listujący moduły i tabele z DLL (dla innego katalogu DLL niż ten, z którego zbudowano `data/props/`). Szczegóły: [references/scan-modules.md](references/scan-modules.md).
 - `export-props-all.csx` — **wsadowo** regeneruje cały `data/props/` z DLL (kompilacja budowana raz, ~1200 tabel w kilka sekund). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku. Szczegóły: [references/scan-props.md](references/scan-props.md).
 - `scan-props.csx` — skaner **na żądanie** dla pojedynczej tabeli (fallback, gdy tabeli nie ma w `data/props/`). Wypisuje pola i właściwości kalkulowane klasy biznesowej, rekurencyjnie po polach typu subrow, oraz — dla tabel z **selektorem** — sekcję podtypów (`[BusinessRow]`/`[NewRow]`). Szczegóły: [references/scan-props.md](references/scan-props.md).
 - `scan-workers.csx` — wypisuje na stdout **JSON** z workerami i extenderami zarejestrowanymi atrybutem assembly `[Worker<…>]`, pogrupowanymi wg `DataType`. Dla każdej klasy: parametry inicjowane z `Context` (ctor + `[Context]`, z rozwinięciem pod-property dla typów dziedziczących z `ContextBase`), property do bindowania, akcje menu Czynności. Opcjonalny drugi argument filtruje wynik do konkretnego typu danych (np. `DokumentHandlowy`) — w praktyce konieczny, bo pełne skanowanie zwraca tysiące rejestracji. Wynik łatwo przetwarzać `jq`. Szczegóły: [references/scan-workers.md](references/scan-workers.md).
-- **Formularze — najpierw INDEX.** Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do [`data/forms/INDEX.md`](data/forms/INDEX.md) (`Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka | Przestrzeń`, **posortowany po typie danych**). Typ = segment przed nazwą zakładki w `…<TYP>.<ZAKŁADKA>.pageform.xml` (albo `DataType`). Zakładki typów ogólnych (`Row`/`IRow`/…) wydzielone jako **systemowe** (osobna sekcja; `scan-forms` nie raportuje ich per obiekt). Odczyt natychmiastowy, bez DLL — do ustalenia „obiekt → zakładki". Regeneracja: `export-forms-index.csx`. Szczegóły: [references/scan-forms.md](references/scan-forms.md).
+- **Formularze — najpierw INDEX.** Katalog **wszystkich ~5700 zakładek** (pageform) jest wyeksportowany do [`data/forms/`](data/forms/): [`INDEX.md`](data/forms/INDEX.md) to **router** (sposoby wyszukiwania, lista 26 przestrzeni nazw, sekcja systemowa), a zakładki biznesowe leżą w `data/forms/<Przestrzeń>.md` (`Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka | Przestrzeń`, sortowane po typie). **Nie musisz znać przestrzeni** — `rg '^\| Kontrahent \|' data/forms/*.md` przeszukuje wszystkie naraz. Typ = segment przed nazwą zakładki w `…<TYP>.<ZAKŁADKA>.pageform.xml` (albo `DataType`). Zakładki typów ogólnych (`Row`/`IRow`/…) wydzielone jako **systemowe** (osobna sekcja routera; `scan-forms` nie raportuje ich per obiekt). Odczyt natychmiastowy, bez DLL. Regeneracja: `export-forms-index.csx`. Szczegóły: [references/scan-forms.md](references/scan-forms.md).
 - `scan-forms.csx` — skaner **na żądanie** dla pojedynczego obiektu: odczytuje z zasobów osadzonych (`*.pageform.xml`/`*.form.xml`) **zakładki, sekcje danych (grupy) i pola** w **kolejności wprowadzania**, rozwijając ścieżki pól przez łańcuch `DataContext`/`EditValue`, dołączane `Include` (także między bibliotekami) oraz listy (`Grid`/`Scheduler`/… → kolumny elementu kolekcji, separator `:` między wczytaniem listy a polami elementu). Argument = prefiks nazwy pliku lub `DataType`/`Namespace.Typ`. Do budowania danych kodem i importu XML `business="true"`. Szczegóły: [references/scan-forms.md](references/scan-forms.md).
-- `export-forms-index.csx` — **wsadowo** generuje `data/forms/INDEX.md` z DLL (jeden przebieg, ~5700 zakładek w ~1 s). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku.
+- `export-forms-index.csx` — **wsadowo** generuje `data/forms/INDEX.md` i pliki przestrzeni z DLL (jeden przebieg, ~5700 zakładek w ~1 s). Uruchamiaj po zmianie wersji platformy lub przebudowie dodatku.
+
+### Jak szukać w danych wygenerowanych
+
+Dane w `data/` są tak zorganizowane, że **nazwa pliku niesie informację** — najczęściej
+wystarczy `ls` albo jeden `rg`, bez czytania indeksów. Polecenia uruchamiaj z katalogu skilla:
+
+```bash
+# Pola tabeli, gdy znasz RowType — plik nazywa się <Moduł>/<RowType>.md
+ls data/props/*/DokumentHandlowy.md          # → data/props/Handel/DokumentHandlowy.md
+ls data/props/*/*Pracownik*.md               # gdy nie znasz dokładnej nazwy
+
+# Tabela po nazwie w bazie (kolumna `Tabela`) lub po tytule
+rg -l '`DokHandlowe`' data/props/*/INDEX.md
+
+# Które tabele mają pole wskazujące na dany obiekt (relacje)
+rg -l 'Soneta\.CRM\.Kontrahenci\.Kontrahent`' data/props/*/*.md
+
+# Zakładki obiektu — bez znajomości przestrzeni nazw
+rg '^\| Kontrahent \|' data/forms/*.md
+
+# Które tabele implementują interfejs
+rg '^\| `IDokument' data/props/Interfaces.md
+```
+
+**Nie czytaj `data/props/<Moduł>/INDEX.md` ani `data/forms/<Przestrzeń>.md` w całości**, gdy
+szukasz jednego obiektu — to setki wierszy. Indeksy służą do przeglądu modułu, `rg`/`ls` do
+trafienia w konkret.
+
 Inwentaryzację **folderów statycznych menu** (`[assembly: FolderView]`) — drzewo pozycji menu, list i formularzy — realizuje narzędzie **`scan-folders`** przeniesione do skilla **`/soneta-config`** (komplementarne do `scan-modules`: perspektywa funkcjonalno-użytkowa zamiast danych).
 
 ## Konwencje nazewnicze

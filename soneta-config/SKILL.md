@@ -1,23 +1,17 @@
 ---
 name: soneta-config
 description: >
-  Narzędzia i mechanizmy platformy Soneta (enova365, Triva) związane z konfiguracją
-  systemu i funkcjami domenowymi. Obecnie: (A) IMPORT/EKSPORT DANYCH I USTAWIEŃ
-  KONFIGURACYJNYCH przez pliki XML — struktura pliku `<session>`, import według rekordów
-  (business="false", pliki *.dbinit.xml, baza demo), import przez logikę biznesową
-  (business="true"), eksport datapacku, identyfikacja rekordów po GUID, formaty wartości;
-  (B) `scan-folders` — inwentaryzacja statycznych folderów menu (`[assembly: FolderView]`)
-  z bibliotek DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty i adresy
-  komponentów (orchestrator/server/web/webapi/webwcf/router/commhub), kolejność nadpisań
-  konfiguracji (profil systemu, nakładki `-c`, zmienne `SONETA_`, argumenty CLI), znaczenie
-  kluczy. Używaj gdy użytkownik: (1) buduje lub analizuje plik XML importu danych
-  do platformy Soneta (dbinit.xml, dane demo, przenoszenie ustawień między bazami);
-  (2) pyta o atrybuty guid/where/key/id/business/deleted/dbversion w XML Soneta;
-  (3) eksportuje rekordy guidowane do XML; (4) chce zmapować strukturę menu programu
-  z DLL (drzewo folderów, listy, formularze) lub wpiąć nowy folder w istniejące menu;
-  (5) konfiguruje porty/adresy komponentów albo pyta, co robi klucz w `appsettings.json`
-  i która warstwa go nadpisuje.
-  Warstwa kodu importu (SessionReader/SessionWriter) i ORM → /soneta-programming;
+  Konfiguracja systemu i funkcje domenowe platformy Soneta (enova365, Triva): (A)
+  IMPORT/EKSPORT DANYCH I USTAWIEŃ przez pliki XML — element session, import według rekordów
+  (business="false", *.dbinit.xml, demo) i przez logikę biznesową (business="true"), eksport
+  datapacku, GUID, formaty wartości; (B) `scan-folders` — inwentaryzacja folderów menu
+  (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty
+  i adresy komponentów (orchestrator/server/web/webapi/router/commhub), kolejność nadpisań
+  (profil systemu, nakładki `-c`, zmienne `SONETA_`, CLI). Używaj gdy użytkownik: (1) buduje
+  lub analizuje XML importu danych (dbinit.xml, dane demo, przenoszenie ustawień); (2) pyta o
+  atrybuty guid/where/key/id/business/deleted/dbversion; (3) eksportuje rekordy guidowane; (4)
+  mapuje menu z DLL lub wpina nowy folder; (5) konfiguruje porty/adresy albo pyta o klucz w
+  `appsettings.json`. Kod importu (SessionReader/SessionWriter) → /soneta-programming;
   operacje na bazie z CLI → /soneta-tools.
 ---
 
