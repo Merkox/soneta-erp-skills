@@ -130,7 +130,7 @@ tworzenia obiektu.
 | `business` | session / rekord / pole | `true` = tryb przez logikę biznesową |
 | `fromto` | session | okres przetwarzania kolekcji datowanych |
 | `guid`, `where`, `key`, `id` | rekord | identyfikacja — zob. wyżej |
-| `class` | rekord (tryb biznesowy) | podtyp selektora przy tworzeniu **nowego** obiektu w tabeli z selektorem — zob. Część 2 |
+| `class` | rekord | podtyp selektora w tabeli z selektorem (oba tryby) — zob. sekcje o selektorze w Części 1 i 2 |
 | `deleted="True"` | rekord | kasuje wskazany rekord (bez treści elementu) |
 | `updateonly="true"` | rekord | tylko aktualizacja — gdy rekord nie istnieje, pomiń |
 | `insertonly="true"` | rekord | tylko nowy — gdy rekord istnieje, pomiń |
@@ -175,6 +175,42 @@ Zasady:
 </session>
 ```
 
+### Wiersze tabel z selektorem — atrybut `class` i obowiązkowy element selectora
+
+Tabele z kolumną `selector="true"` przechowują w jednej tabeli wiele typów wierszy (podklas
+rejestrowanych w kodzie). Import rekordowy takich wierszy rządzi się trzema regułami:
+
+- **Element XML wiersza to zawsze nazwa typu wiersza tabeli** (typ bazowy), nigdy nazwa podklasy
+  selektorowej — element o nazwie podklasy kończy się błędem „Tabela nieznaleziona".
+- Podklasę wybiera atrybut **`class="Pełny.Typ.Podklasy,Assembly"`** — działa także w imporcie
+  rekordowym (nie tylko `business="true"`); jest konieczny m.in. gdy typ bazowy wiersza jest
+  abstrakcyjny.
+- **Element kolumny selectora jest OBOWIĄZKOWY mimo atrybutu `class`** — import rekordowy tworzy
+  wiersz z pustym rekordem i nie wyprowadza wartości selectora z rejestracji podklasy; `class`
+  steruje wyłącznie klasą tworzonego obiektu. Bez elementu selector zapisze się jako `0`.
+
+```xml
+<!-- tabela PozycjeDefinicji: typ wiersza PozycjaDefinicji, selector Rodzaj,
+     podklasy zarejestrowane w kodzie -->
+<PozycjaDefinicji class="MojaFirma.Modul.PozycjaSpecjalna,MojaFirma.Modul">
+  <Rodzaj>Specjalna</Rodzaj>   <!-- selector: OBOWIĄZKOWY mimo class -->
+  <Nazwa>...</Nazwa>
+</PozycjaDefinicji>
+```
+
+**Wiersz z selectorem = 0 zatruwa całą tabelę:** każda materializacja dowolnego wiersza kończy
+się `UnrecognizedRowException` („Selektor 0 w tabeli X nieznaleziony") — w tym import naprawczy.
+Jedyna naprawa to usunięcie wierszy wprost w SQL (`DELETE FROM Tabela WHERE KolumnaSelectora = 0`).
+Dlatego projektując tabelę z selectorem, enum dyskryminatora numeruje się **od 1** — reguły
+i pułapki po stronie definicji tabeli opisuje `/soneta-business-xml` (table-reference, pole
+selector; tam też pułapka „Nierozpoznany typ wiersza").
+
+Checklista wierszy z selectorem:
+- [ ] element = nazwa typu wiersza tabeli (nie podklasy)
+- [ ] `class="Typ,Assembly"` przy podklasach selektorowych
+- [ ] element kolumny selectora w KAŻDYM wierszu
+- [ ] po imporcie: kontrola `SELECT KolumnaSelectora, COUNT(*)` — brak wartości 0
+
 ### Zachowanie kolekcji przy aktualizacji rekordu
 
 Gdy rekord nadrzędny już istnieje, element kolekcji domyślnie **zastępuje** jej zawartość:
@@ -182,6 +218,27 @@ istniejące elementy są kasowane (guidowane rekordy standardowe pozostają), po
 są elementy z pliku. Modyfikatory: `addnew="true"` (tylko dopisywanie),
 `relationsimportmode="update"` (aktualizacja po GUID; elementy nieobecne w pliku są kasowane
 po zakończeniu), `fromto` (kasowanie ogranicza się do okresu).
+
+**Detale (wiersze podrzędne) zapisuj zagnieżdżone w rodzicu, bez guidów.** Tabele detali nie
+powinny być guidowane (guided to obiekty główne — zob. *datapack-guidedrow*
+w `/soneta-programming`), a wiersze **nieguidowane importowane top-level tworzą duplikaty** przy
+każdym reimporcie — nie ma ich po czym rozpoznać. Poprawny zapis detali w plikach dbinit/demo to
+**obiekty zagnieżdżone w rodzicu**: wrapper o nazwie kolekcji `children` z definicji relacji
+(business.xml), w środku elementy typu wiersza detalu:
+
+```xml
+<Definicja id="..." guid="...">
+  <Nazwa>...</Nazwa>
+  <Pozycje>                       <!-- nazwa kolekcji children z business.xml -->
+    <PozycjaDefinicji>...</PozycjaDefinicji>
+  </Pozycje>
+</Definicja>
+```
+
+Ponieważ import kolekcji **zastępuje** nieguidowane dzieci rodzica, reimport jest idempotentny
+bez nadawania guidów detalom. Uwaga: **wewnątrz elementu kolekcji nie wolno umieszczać komentarzy
+XML** — czytnik akceptuje wyłącznie elementy; komentarz = `XmlException`. Komentarze umieszczaj
+przed/po kolekcji. Idempotencję weryfikuj **podwójnym** `dbmgr importxml` + policzeniem rekordów.
 
 **Kolekcje historyczne (zapisy „od–do") wymagają `addnew="true"`.** Kolekcja przechowująca
 zapisy historyczne obiektu (np. historia danych kadrowych pracownika) nie znosi domyślnej
@@ -236,6 +293,30 @@ zakładce **Historia zapisów** obiektu (kolumna „Ważny od" + zmienione pole)
 Wartością cechy referencyjnej jest GUID (lub `Obiekt:GUID`); cechy historyczne przyjmują
 wartość obowiązującą od daty importu.
 
+### Nadawanie praw obiektowych — rekord `<Right>`
+
+Obiekt będący **źródłem praw** (`IRightsSource`) jest dla ról domyślnie **Denied** — funkcja
+oparta o taki rekord jest martwa po utworzeniu bazy, dopóki prawo nie zostanie nadane (kontekst
+i pułapki: `/soneta-programming`, artykuł *rights-source*). W dbinit/demo prawo nadaje rekord
+`Right`, wiążący uprawnienie (`Entitle`) ze źródłem praw (`Source`); trzecia kolumna
+`ReadOnlyRight` (bool) oznacza prawo tylko do odczytu.
+
+```xml
+<Right dbversion="26100000">
+  <Entitle>Entitle:00000000-0015-0001-0001-000000000000</Entitle>
+  <Source>MojaDefinicja:00000000-0AB1-0003-0001-000000000000</Source>
+</Right>
+```
+
+- Kolumny typu interfejsowego (`IEntitle`, `IRightsSource`) serializują się w formacie
+  **`NazwaTypuWiersza:guid`**.
+- Standardowy **Entitle operatora Administrator** ma stały guid
+  `00000000-0015-0001-0001-000000000000` — nadanie mu prawa w dbinit sprawia, że funkcja działa
+  od razu na każdej nowej bazie (administrator i tak może nadać sobie wszystko).
+- Wpis z `dbversion` importuje się przy podbiciu wersji bazy (jak inne rekordy dbinit);
+  w plikach danych demo — bez `dbversion` (import raz, przy tworzeniu bazy —
+  zob. [demo-data.md](demo-data.md)).
+
 ## Część 2 — Import przez logikę biznesową (`business="true"`)
 
 Wartości ustawiane są przez **właściwości biznesowe** obiektów — z pełną walidacją,
@@ -258,10 +339,11 @@ Zasady:
   automatycznie. Atrybut `ctor` wybiera wariant tworzenia.
 - **Atrybut `class` — podtyp selektora.** Gdy tabela ma **selektor** (jedna tabela przechowuje
   wiele typów obiektów), atrybutem `class` wskazujesz **konkretny podtyp** do utworzenia
-  (np. `<EwidencjaSP class="Kasa">`). Stosuje się go **wyłącznie** w tym trybie
-  (`business="true"`) i **tylko przy tworzeniu nowego** obiektu — przy aktualizacji istniejącego
-  podtyp jest już ustalony, więc `class` jest zbędny (a niezgodny — błędny). Bez `class` obiekt
-  powstaje jako podtyp domyślny tabeli. Czy tabela ma selektor i jakie są dopuszczalne podtypy
+  (np. `<EwidencjaSP class="Kasa">`). Stosuj go **tylko przy tworzeniu nowego** obiektu — przy
+  aktualizacji istniejącego podtyp jest już ustalony, więc `class` jest zbędny (a niezgodny —
+  błędny). W tym trybie logika biznesowa ustawia wartość selectora sama; `class` działa też
+  w imporcie rekordowym, ale tam element kolumny selectora pozostaje obowiązkowy — zob.
+  *Wiersze tabel z selektorem* w Części 1. Czy tabela ma selektor i jakie są dopuszczalne podtypy
   sprawdzisz w sekcji `## Selektor — podtypy w jednej tabeli` narzędzia `scan-props`
   (`/soneta-programming`): wartością atrybutu `class` jest **nazwa klasy podtypu** (kolumna
   „Klasa podtypu"); brak sekcji `Selektor` = tabela bez selektora, `class` nie ma zastosowania.
@@ -406,6 +488,9 @@ Zasady:
 - [ ] Business-mode: kolejność elementów jak przy wpisywaniu na formularzu; stan dokumentu na końcu.
 - [ ] Referencje przenośne: GUID lub `where` po kodzie/symbolu; bez `#ID`.
 - [ ] Kolekcje: świadomy wybór zastąpienia (domyślne) vs `addnew` vs `relationsimportmode="update"`.
+- [ ] Detale (wiersze podrzędne) bez guidów, zapisane **zagnieżdżone w rodzicu** (wrapper = nazwa kolekcji children); brak komentarzy XML wewnątrz elementów kolekcji.
+- [ ] Tabele z selectorem: element = typ bazowy wiersza, `class` przy podklasach, element kolumny selectora w każdym wierszu (zob. *Wiersze tabel z selektorem*).
+- [ ] Źródła praw (`IRightsSource`): rekord `<Right>` nadający prawo (zob. *Nadawanie praw obiektowych*).
 - [ ] Kolekcje historyczne („od–do"): `addnew="true"` + stały `guid` na zapisach (idempotencja; inaczej błąd „kasowanie ostatniego zapisu historii").
 - [ ] Zmiana wartości „od dnia" → `date="RRRR-MM-DD"` na zapisie (cięcie okresu, nowy zapis) + tylko zmieniane pola; nie mylić z nadpisaniem zapisu przez `guid`. Zob. *Aktualizacja historyczna*.
 - [ ] Dane trzymane w osobnej strukturze (np. adresy) zapisane we właściwym miejscu, nie wprost w rekordzie — miejsce potwierdzone skanem.
@@ -416,13 +501,18 @@ Zasady:
 
 **Testowanie na bazie — tylko na wyraźne żądanie użytkownika (wtedy wykonuje agent, nie operator):**
 - [ ] Próbne wczytanie na bazie testowej/kopii: `dbmgr importxml <baza> plik.xml` (→ `/soneta-tools`).
-- [ ] Ponowne wczytanie nie duplikuje rekordów (idempotencja identyfikacji).
+- [ ] Ponowne wczytanie nie duplikuje rekordów (idempotencja identyfikacji — **podwójny** `dbmgr importxml` + policzenie rekordów; szczególnie detale zagnieżdżone).
 - [ ] Efekt odczytany z programu **przez agenta** (buscall: odczyt pól / zrzut ekranu → `/soneta-tools`) lub testem
   integracyjnym (`ImportBusinessXml` → artykuł *integration-tests* w `/soneta-programming`) — potwierdzona zgodność danych z zamiarem.
 
 ## Powiązania
 
-- `/soneta-programming` — warstwa programistyczna importu/eksportu (klasy `SessionReader` /
+- [demo-data.md](demo-data.md) — mechanizm zasilania bazy Demo: katalog `Demo`, kolejność
+  plików, sufiksy `.gold`/`.silver`, relacja do rekordów standardowych (dbinit).
+- `/soneta-business-xml` — definicja tabel z selectorem (enum dyskryminatora od 1, pułapka
+  „Nierozpoznany typ wiersza"), relacje i kolekcje `children`.
+- `/soneta-programming` — źródła praw (*rights-source*: nowe `IRightsSource` domyślnie Denied —
+  kontekst dla rekordów `<Right>`); warstwa programistyczna importu/eksportu (klasy `SessionReader` /
   `SessionWriter`): artykuł *sessionreader-sessionwriter*; ponadto *datapack-guidedrow*
   (rekordy guidowane, datapack), *row-types* (`OnImporting`/`OnImported`), *scan-props*
   (inwentaryzacja pól i właściwości; wylicza też kolekcje i relacje do zakresu eksportu),

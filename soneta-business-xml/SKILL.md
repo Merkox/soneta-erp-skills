@@ -34,9 +34,13 @@ bo nic Cię przed nimi nie ostrzeże automatycznie.
    `selector="true"` stosuj **wyłącznie**, gdy ta sama tabela SQL przechowuje różne typy
    biznesowe, każdy jako osobna klasa C# (`abstract` baza + podtypy rejestrowane
    `[assembly: BusinessRow(...)]`) — patrz [references/generated-classes.md](references/generated-classes.md).
-   Zwykłe pole statusu/kategorii/typu służące tylko do filtrowania i wyświetlania (`Status`,
-   `RecipientType`, `TypWpisu`...) **nigdy** nie dostaje `selector="true"` — to zwykły enum bez
-   dodatkowego atrybutu.
+   Zwykłe pole statusu/kategorii/typu służące tylko do filtrowania i wyświetlania
+   (`RecipientType`, `TypWpisu`...) **nigdy** nie dostaje `selector="true"` — to zwykły enum bez
+   dodatkowego atrybutu. Gdy selector jest zasadny: **enum dyskryminatora numeruj od 1** —
+   wartość `0` działa jak „puste" (mechanizm z pułapki 2 niżej), a wiersz z selectorem `0`
+   (np. z importu XML bez elementu selectora) **zatruwa całą tabelę** — każdy odczyt kończy się
+   `UnrecognizedRowException`, naprawa tylko przez `DELETE` w SQL
+   ([references/table-reference.md](references/table-reference.md#pole-selector-selectortrue)).
 2. **`required="true"` na polu, którego domyślna wartość typu jest poprawnym stanem.** Generator
    utożsamia `default(T)` z „polem pustym" dla **każdego typu wartościowego**, nie tylko `int`:
    `0` (int/double/decimal/currency), `Guid.Empty`, wartość enum o numerze `0`, `Date.MinValue`/

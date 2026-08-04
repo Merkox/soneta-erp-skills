@@ -34,9 +34,17 @@ Binarka `buscall` (oraz `BusCall.dll`) leży w katalogu build projektu BusCall
   folder, nie wywołując żadnej metody. Przydatne, gdy chcesz najpierw wystartować aplikację
   (start trwa kilkadziesiąt sekund), a dopiero potem mierzyć czas kolejnych `call`.
 
-`--db <Baza>` wskazuje **nazwę połączenia bazy** zdefiniowaną w SonetaFrame (nie fizyczną nazwę
-bazy SQL). To połączenie decyduje też, z jakiego kodu startuje aplikacja — szczegóły w
-`buscall-live-testing.md` w skillu `/soneta-programming`.
+`--db <Baza>` wskazuje **źródło bazy** zdefiniowane w SonetaFrame (nie fizyczną nazwę bazy SQL).
+Dopasowanie idzie w kolejności: **jednoznaczny identyfikator** (`IdentPart|NazwaBazy`, np.
+`Process|Demo`) → **`caption`** źródła → **nazwa bazy** — szczegóły w
+[sonetaframe.md](sonetaframe.md). Przykład: wpis `"process:Demo;caption=dev;path=…"` otwiera się
+przez `--db dev` (caption), a **nie** `--db Demo`. Pułapka: gdy caption **jednego** źródła pokrywa
+się z nazwą bazy **innego** (np. wpis HTTP z `caption=Demo` obok `process:Demo;caption=dev`),
+`--db Demo` trafi w źródło z `caption=Demo` — jeśli jest martwe, każde wywołanie kończy się
+`[-32603] Brak połączenia z serwerem: Demo`, a aplikacja stoi na ekranie wyboru baz. Rozwiązania:
+caption właściwego źródła (`--db dev`) albo jednoznaczny identyfikator (`--db "Process|Demo"`).
+To połączenie decyduje też, z jakiego kodu startuje aplikacja — szczegóły
+w `buscall-live-testing.md` w skillu `/soneta-programming`.
 
 ## Argumenty metod: pary `klucz=wartość`
 
@@ -54,7 +62,7 @@ buscall --db Demo call update_field_value 'fieldsValues=["Nazwa=Buciki"]' # wart
   `"programFolderPath=Handel/Kartoteki/Towary i usługi"`.
 - Wartość będąca JSON-em (obiekt/tablica) — cały argument w apostrofach powłoki, aby powłoka
   nie interpretowała `{}`/`[]`.
-- Metoda bez argumentów: po prostu `buscall --db Demo call where_I_am`.
+- Metoda bez argumentów: po prostu `buscall --db Demo call where_am_I`.
 
 > **Parametr tablicowy bez nawiasów = błąd.** Jeśli metoda oczekuje tablicy, a podasz gołą wartość,
 > dostaniesz:
@@ -98,11 +106,13 @@ buscall --db Demo call navigate_to_folder "programFolderPath=Kadry i płace/Kadr
 
 | Metoda | Do czego |
 |---|---|
-| `where_I_am` | bieżące położenie w aplikacji (bez argumentów); wywołane w korzeniu — punkt startowy odkrywania folderów |
+| `where_am_I` | bieżące położenie w aplikacji (bez argumentów); wywołane w korzeniu — punkt startowy odkrywania folderów |
 | `get_folders` | lista podfolderów wskazanego foldera: `programFolderPath=<folder>` (odkrywanie struktury menu) |
+| `get_configuration_folders` | strony okna konfiguracji (Ustawienia); z `regexFilter=<wzorzec>` przeszukuje **rekurencyjnie w głąb** — najszybszy sposób znalezienia strony ustawień (bez filtra zwraca jeden poziom) |
 | `navigate_to_folder` | przejście do foldera programu, np. `programFolderPath=Handel/Kartoteki/Towary i usługi` |
 | `retrieve_list` | odczyt danych listy (stronicowane); zwraca `data.rows[{objectID,values}]` i oznacza wiersze jako „odwiedzone" (wymagane przez `open_form`) |
 | `open_form` | otwarcie formularza obiektu: `tableName=Towary objectID=<id>` |
+| `open_subform` | otwarcie formularza **wiersza grida** bieżącego okna: `gridPath=<ścieżka-grida> id=<#id-wiersza>` — parametr nazywa się `id` (nie `objectID`!); wartości `gridPath` i `id` z odpowiedzi `detail=full` (patrz niżej) |
 | `search_object` | otwarcie formularza po warunku: `tableName=… objectSelector=Kod=…` |
 | `get_form_pages` | lista zakładek otwartego formularza (zwraca `pageID` do `switch_form_page`) |
 | `switch_form_page` | zmiana zakładki formularza: `pageID=TowarCennikKontrahentowPage` |
@@ -118,6 +128,33 @@ buscall --db Demo call navigate_to_folder "programFolderPath=Kadry i płace/Kadr
 Pełny, aktualny zestaw metod i ich parametry daje `methods.list` — powyższa tabela to najczęściej
 używane. Grid w danych formularza jest domyślnie **obcinany do kilku wierszy** (`data.truncated=true`);
 pełną zawartość pobiera `get_grid_rows`.
+
+### Parametr `detail=header|full|none` — ile okna zwrócić
+
+Metody renderujące okno (`navigate_to_folder`, `open_form`, `open_subform`, `switch_form_page`, …)
+domyślnie zwracają **sam nagłówek** (`detail=header`). Treść formularza — sekcje, gridy
+z `gridPath`, dane wierszy (`rowsCsv`), komendy — dopiero przy **`detail=full`**; `detail=none`
+wyłącza render (najtańsze, gdy wynik nie jest potrzebny). W skryptach automatyzujących `gridPath`
+i `#id` wierszy do `open_subform`/`edit_grid_rows` pozyskuje się z odpowiedzi `detail=full`
+(pole `rowsCsv`).
+
+### Identyfikatory obiektów są ulotne
+
+Identyfikatory (`#id` z gridów, `objectID` z `retrieve_list`) **tracą ważność po restarcie
+aplikacji / wylogowaniu**. Objaw: „Nieznany identyfikator obiektu 'X'… wczytaj listę zawierającą
+ten obiekt ponownie". Po `application_close` + ponownym starcie zawsze odczytaj listy od nowa —
+nie zapisuj identyfikatorów na później.
+
+### Szukanie stron konfiguracji — `get_configuration_folders` z `regexFilter`
+
+Bez `regexFilter` metoda zwraca jeden poziom drzewa; **z `regexFilter` przeszukuje rekurencyjnie
+w głąb** — to najszybszy sposób znalezienia strony ustawień (np. dodanej własnym plikiem
+`Config.*.pageform.xml` — `/soneta-form-xml`):
+
+```bash
+buscall --db dev call get_configuration_folders "regexFilter=Agenci" limit=30
+# → Ustawienia/Systemowe/Agenci AI/{Agenci,Dostawcy,Prompty}
+```
 
 ### `retrieve_list` przed `open_form`
 
@@ -140,6 +177,10 @@ echo "$SHOT"     # np. /var/folders/.../T/soneta-screenshots/screenshot-<data>.p
 - Wymaga prawa `Zrzuty ekranu` (`BundleRights.Screenshots`) w roli operatora.
 - Pliki są efemeryczne — kasuje je **Frame** (proces długożyjący) przy starcie serwera pipe;
   krótkożyjący `call` pliku **nie** usuwa, więc ścieżka pozostaje ważna po zakończeniu polecenia.
+
+- **Wymaga otwartej bazy** — gdy aplikacja stoi na ekranie wyboru baz albo na dialogu, zwraca
+  „Brak otwartej bazy danych". Diagnostycznie ratuje wtedy systemowy zrzut całego ekranu (macOS):
+  `screencapture -x /tmp/frame.png` i obejrzenie pliku.
 
 Wykorzystanie zrzutu do wizualnej weryfikacji layoutu/pól opisuje `buscall-live-testing.md` w skillu `/soneta-programming`.
 
@@ -172,7 +213,7 @@ Od zimnego startu do obejrzanego zrzutu ekranu (szczegóły i konfiguracja bazy 
 buscall --db moja_baza call cancel_form
 
 # 1) odkrywanie folderów: korzeń + drążenie
-buscall --db moja_baza call where_I_am
+buscall --db moja_baza call where_am_I
 buscall --db moja_baza call get_folders programFolderPath=<folder>
 
 # 2) lista → formularz → zakładka → zrzut
@@ -217,6 +258,23 @@ Uwaga: `application_close` **przerywa** takie oczekiwanie — zrywa named pipe, 
 wywołanie kończy się komunikatem o zerwanym połączeniu i wyniku już nie zobaczysz. Jeśli zależy ci
 na wyniku, zamknij okno w aplikacji (albo poproś operatora), a nie zamykaj całego frame'a.
 
+### Diagnostyka: log serwera
+
+Błędy widoczne w UI jako gołe dialogi (np. „Brak praw dostępu do danych") mają pełny stack trace
+w logu serwera — na macOS: `~/Library/Application Support/Soneta/Logs/server-RRRRMMDD.log`
+(JSON per linia, pole `Exception`). Pełny opis logowania: artykuł *translations-logging*
+w skillu `/soneta-programming`.
+
+## Checklista automatyzacji buscall
+
+- [ ] `--db` = **caption** źródła (albo nazwa bazy, gdy caption brak) — nie fizyczna nazwa bazy SQL;
+      przy niejednoznaczności: identyfikator `--db "Process|<NazwaBazy>"`.
+- [ ] Nazwy metod z `methods.list`, nie z pamięci (np. `where_am_I`, nie „where_I_am";
+      objaw literówki: `{"kind":"error","error":"Nazwa metody MCP nieznaleziona"}`).
+- [ ] `detail=full` tam, gdzie potrzebne `gridPath`/`rowsCsv`; `detail=none`, gdy wynik zbędny.
+- [ ] Po restarcie aplikacji identyfikatory (`#id`, `objectID`) czytane od nowa.
+- [ ] Przy błędach UI: log serwera `server-RRRRMMDD.log`.
+
 ## Wariant zgodny z MCP: `callmcp`
 
 Gdy potrzebujesz warstwy zgodnej z protokołem MCP (np. własny orkiestrator budujący JSON-RPC),
@@ -224,7 +282,7 @@ użyj `callmcp` — czyta **cały STDIN** jako pojedynczy komunikat JSON-RPC 2.0
 go i wypisuje na STDOUT **odpowiedź JSON-RPC MCP** (`result` = CallToolResult lub `error`):
 
 ```bash
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"where_I_am","arguments":{}}}' \
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"where_am_I","arguments":{}}}' \
   | buscall --db Demo callmcp
 # -> {"jsonrpc":"2.0","id":1,"result":{"content":[{"type":"text","text":"…"}],"isError":false}}
 ```

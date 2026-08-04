@@ -10,7 +10,8 @@ w `{...}`. Podstawy składni formularza: [../SKILL.md](../SKILL.md).
    - **interfejs** — wspólna zakładka wielu tabel implementujących dany interfejs (relacje
      interfejsowe, np. `IKontrahent...`);
    - **klasa dziedzicząca (selektor)** — zakładka dla wariantu/podtypu obiektu;
-   - **`Config.`** — okno konfiguracji (ustawienia modułów), np. `Config.DefDokHandlowych...`.
+   - **`Config.`** — okno konfiguracji (ustawienia modułów), np. `Config.DefDokHandlowych...` —
+     pełny opis: [Strony okna Opcji](#strony-okna-opcji-konfiguracja) niżej.
 2. **Przez atrybut DataType** — `<DataForm DataType="Soneta.Handel.Towar,Soneta.Handel">`;
    wiąże typ **jawnie**, gdy nazwa pliku jest niejednoznaczna (formularze parametrów workerów,
    konfiguracji, selektory) lub gdy typ jest w innej przestrzeni nazw.
@@ -42,6 +43,44 @@ się automatycznie. `CaptionHtml` bez `/` → samodzielna zakładka; z `/` → h
 > sekcje i rozwinięte ścieżki pól (łańcuch `DataContext`+`EditValue`, dołączane `Include`)
 > odczytasz z zasobów osadzonych skanerem **`scan-forms`** ze skilla `/soneta-programming`
 > (references/scan-forms.md).
+
+## Strony okna Opcji (konfiguracja)
+
+Stronę w oknie Opcji (Ustawienia / Narzędzia → Opcje) dodaje plik **`Config.{Nazwa}.pageform.xml`**
+w projekcie `.UI` — osadza się automatycznie, jak inne formy (zob. wyżej *Osadzanie zasobu*).
+
+- `Page CaptionHtml="Ścieżka/Poddrzewo/Nazwa"` — człony rozdzielone `/` budują **hierarchię
+  drzewa Opcji** (np. `CaptionHtml="Systemowe/Mój obszar/Definicje"` → gałąź Systemowe →
+  Mój obszar → strona Definicje). To zastosowanie ogólnej reguły „`CaptionHtml` z `/` =
+  hierarchia" specyficznie dla okna konfiguracji.
+- Dane strony dostarcza **extender** ustawiany jako kontekst strony:
+  `DataContext="{New MojConfigExtender}"` — klasa z property widoków list konfiguracyjnych
+  (np. `public View Definicje => …CreateView()` na sesji konfiguracyjnej okna Opcji).
+  Namespace klasy extendera wg katalogu pliku. Extendery i konwencje (`IsVisibleX()`,
+  `GetListX()`) opisuje `/soneta-programming` (worker-extender).
+- Typowa zawartość: `Group` + `Grid` bindowany do widoku z extendera + standardowe komendy
+  wierszy (Dodaj/Otwórz/Usuń) — grid otwiera formularze obiektów (pageformy `{Typ}.{Zakładka}`).
+
+```xml
+<!-- Config.MojeDefinicje.pageform.xml (projekt .UI) -->
+<Page CaptionHtml="Systemowe/Mój obszar/Definicje" DataContext="{New MojConfigExtender}">
+  <Group CaptionHtml="Definicje">
+    <Grid Width="*" Height="*" EditValue="{Definicje}">
+      <Field CaptionHtml="Nazwa" Width="40" EditValue="{Nazwa}" />
+      <Field CaptionHtml="Blokada" Width="10" EditValue="{Blokada}" />
+    </Grid>
+  </Group>
+</Page>
+```
+
+Checklista strony Opcji:
+- [ ] plik `Config.{Nazwa}.pageform.xml` w projekcie `.UI`
+- [ ] `CaptionHtml` z pełną ścieżką drzewa Opcji (człony `/`)
+- [ ] extender w `DataContext="{New …}"` dostarcza widoki list
+- [ ] jeżeli obiekty konfiguracyjne są źródłami praw (`IRightsSource`) — prawa nadane przy
+      tworzeniu bazy (`/soneta-programming` rights-source, `/soneta-config` import-export-xml)
+- [ ] weryfikacja wizualna na żywo: `get_configuration_folders "regexFilter=<nazwa>"` →
+      `navigate_to_folder` → `take_screenshot` (buscall — `/soneta-tools`)
 
 ## Zmiana kontekstu danych
 

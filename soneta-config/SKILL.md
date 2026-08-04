@@ -56,6 +56,15 @@ Artykuł specyfikuje identyfikację rekordów (GUID, `where`, `key`, `id`), form
 importem **przykład** (obiekt w modelu „root + historia") —
 [examples/import-pracownik-etatowy.xml](examples/import-pracownik-etatowy.xml).
 
+### Mechanizm zasilania bazy Demo — [references/demo-data.md](references/demo-data.md)
+
+Jak działa import danych przykładowych przy tworzeniu bazy (`dbmgr create --demo gold|silver`,
+kreator baz): katalog `Demo` obok binariów (bez manifestu, nierekurencyjnie), kolejność plików
+przez sortowanie leksykograficzne (prefiksy numeryczne stałej szerokości, referencje tylko
+„w przód"), sufiksy koloru licencji `.gold`/`.silver`, GUID-y wstawiane 1:1, rekordy standardowe
+(dbinit) przed danymi demo. Z checklistą nowego pliku demo i sposobami testowania
+(podwójny `importxml` / pełne `create --demo`).
+
 ### `scan-folders` — [references/scan-folders.md](references/scan-folders.md)
 
 Buduje drzewo **folderów statycznych menu** programu z atrybutów assembly

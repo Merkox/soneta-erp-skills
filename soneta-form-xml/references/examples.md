@@ -29,6 +29,30 @@ Plik: `MojObiekt.Ogolne.pageform.xml`
 </DataForm>
 ```
 
+## Config.*.pageform.xml — strona okna Opcji (konfiguracja)
+
+Plik: `Config.MojeDefinicje.pageform.xml` (projekt `.UI`). Człony `CaptionHtml` rozdzielone `/`
+budują hierarchię drzewa Opcji; dane dostarcza extender (`DataContext="{New …}"`) z property
+widoków list konfiguracyjnych — szczegóły i checklista:
+[binding.md](binding.md#strony-okna-opcji-konfiguracja).
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<DataForm xmlns="http://www.enova.pl/schema/form.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+          xsi:schemaLocation="http://www.enova.pl/schema/ https://www.enova.pl/schema/form.xsd">
+  <Page CaptionHtml="Systemowe/Mój obszar/Definicje" DataContext="{New MojConfigExtender}">
+    <Group CaptionHtml="Definicje">
+      <Grid Width="*" Height="*" EditValue="{Definicje}" IsToolbarVisible="true">
+        <Field CaptionHtml="Nazwa" Width="40" EditValue="{Nazwa}" />
+        <Field CaptionHtml="Blokada" Width="10" EditValue="{Blokada}" />
+      </Grid>
+    </Group>
+  </Page>
+</DataForm>
+```
+
 ## viewform.xml — widok listy z panelem filtrów
 
 Widok listy z panelem filtrów powyżej grida. `<Flow>` jako `FilterPanel` to standardowy wzorzec.

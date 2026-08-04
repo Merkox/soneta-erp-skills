@@ -93,7 +93,8 @@ var taskiSprawy = session.GetBusiness().Tasks.WgParent[matter];
   próbie założenia sprawy. Prawa nadaje się publicznym workerem
   `Soneta.Business.Db.SourceEntitleRightWorker` (`Source` = definicja, `Entitle` = uprawnienie,
   `AccessRight = AccessRights.Granted`) — dlatego w scenariuszach na Demo wygodniej użyć
-  **istniejącej** definicji standardowej.
+  **istniejącej** definicji standardowej. (To ogólna reguła źródeł praw — nowy rekord
+  `IRightsSource` jest domyślnie Denied; patrz [rights-source.md](../../rights-source.md).)
 - `Creator`, `RegistrationDatetime`, `Number` ustawia platforma — nie nadpisuj ich ręcznie.
 - Numerator standardowej definicji zawiera segmenty `SubstantiveCell.Kod` i
   `UnifiedRegisterClass.Symbol` — zmiana tych pól **przelicza numer** sprawy.

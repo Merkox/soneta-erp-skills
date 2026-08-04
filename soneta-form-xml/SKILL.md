@@ -42,6 +42,7 @@ formularze obiektów z `Soneta.X` zapisuj w projekcie `Soneta.X.UI`, nie obok kl
 | Typ pliku | Wzorzec nazwy | Przeznaczenie |
 |-----------|---------------|---------------|
 | **pageform.xml** | `{DataType}.{PageName}.pageform.xml` | Zakładka formularza edycji obiektu |
+| **Config.*.pageform.xml** | `Config.{Nazwa}.pageform.xml` | Strona okna Opcji (Ustawienia); `CaptionHtml` z `/` = hierarchia drzewa Opcji — [references/binding.md](references/binding.md#strony-okna-opcji-konfiguracja) |
 | **viewform.xml** | `{NazwaWidoku}.viewform.xml` | Widok listy zarejestrowanej jako folder (listy główne) |
 | **gridform.xml** | `{IdentyfikatorListy}.gridform.xml` | Indywidualne ustawienia listy na formularzu |
 | **lookupform.xml** | `{NazwaPodpowiedzi}.lookupform.xml` | Lista wyboru (lookup) |

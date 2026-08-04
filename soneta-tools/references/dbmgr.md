@@ -112,8 +112,8 @@ dbmgr register exampleDb --sqlserver localhost --sqldb exampleDbName --sqluser u
 | Opcja | Znaczenie |
 |---|---|
 | `--recreate` | Kasuje bazę, jeśli istnieje, i tworzy nową (idempotentnie w skryptach) |
-| `--demo silver\|gold\|platinum` | Wypełnia bazę danymi demo + licencją danego poziomu |
-| `--sampledata` | Wypełnia danymi przykładowymi z podkatalogu `Patterns` |
+| `--demo silver\|gold\|platinum` | Wypełnia bazę danymi demo + licencją danego poziomu (skąd pochodzą dane i jak dodać własny plik demo — artykuł *demo-data* w `/soneta-config`) |
+| `--sampledata` | Wypełnia danymi przykładowymi z podkatalogu `Patterns` — **inny mechanizm** (wzorce) niż dane demo z katalogu `Demo` |
 | `--licence <nr\|plik>` | Nakłada licencję na tworzoną bazę |
 | `--generateadminpwd` | Generuje i ustawia hasło administratora |
 | `--adminpwd <hasło>` | Ustawia konkretne hasło administratora |
@@ -126,6 +126,8 @@ dbmgr register exampleDb --sqlserver localhost --sqldb exampleDbName --sqluser u
 dbmgr create Test --standard --recreate --demo gold
 # baza produkcyjna na wskazanym serwerze:
 dbmgr create exampleDb --sqlserver localhost --sqldb exampleDbName --sqltrusted --licence licence.xml
+# sprzątanie po testach — usunięcie bazy:
+dbmgr drop Test
 ```
 
 ## Baza z własnym dodatkiem — `serversettings.json` + `--config-file`
@@ -199,6 +201,31 @@ Podnosi strukturę bazy do wersji bieżącej logiki biznesowej — wymagana po a
 dbmgr convert exampleDb
 dbmgr convert exampleDb --force --skip-compile --skip-indexrepair --convert-unicode
 ```
+
+### Pułapka: „Version OK" — konwersja nic nie zrobiła
+
+`dbmgr convert <db>` bez `--force` porównuje **numer wersji** bazy z wersją logiki — gdy wersja
+nie została podbita, kończy się komunikatem „Version OK" i **nic nie robi**, nawet jeśli schemat
+w kodzie się zmienił (nowe tabele/kolumny bez podbicia wersji, typowe w trakcie developmentu).
+Objaw w aplikacji: `Invalid column name 'X'` / `InvalidDatabaseStructureException`. W trakcie
+developmentu używaj **`dbmgr convert <db> --force`**.
+
+### Pułapka: zajęta baza — SINGLE_USER i uśpione sesje SQL
+
+Konwersja przełącza bazę w `SINGLE_USER` **bez zrywania połączeń** — każde otwarte połączenie
+(w tym **uśpione sesje klientów SQL, np. okno Database w IDE**) blokuje ją timeoutem. Dotyczy
+też `drop` i `create --recreate`. Przed tymi operacjami zamknij/ubij sesje do bazy:
+
+```sql
+DECLARE @kill varchar(2000) = '';
+SELECT @kill = @kill + 'KILL ' + CONVERT(varchar(8), session_id) + ';'
+FROM sys.dm_exec_sessions WHERE database_id = DB_ID('NazwaBazy') AND session_id <> @@SPID;
+EXEC(@kill);
+```
+
+**Checklista przed konwersją:**
+- [ ] sesje SQL do bazy zamknięte (IDE, inne narzędzia)
+- [ ] zmiana schematu bez podbicia wersji → `--force`
 
 ## Backup / Restore
 
