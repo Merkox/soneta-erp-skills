@@ -63,6 +63,15 @@ bo nic Cię przed nimi nie ostrzeże automatycznie.
    dodatków budowanych przez Soneta SDK — limit trzeba pilnować ręcznie, zawsze
    ≤16 znaków, z zachowaniem liczby mnogiej (`DokumentyHandlowe` → `DokHandlowe`) — patrz
    [references/table-reference.md](references/table-reference.md#atrybut-tablename--limit-16-znaków).
+4. **Brak wpisu nowej tabeli w `*.rightstree.xml`.** Build zielony, program działa, ale prawa do
+   tabeli lądują w gałęzi `Dodatki/<Moduł>` drzewa uprawnień zamiast tam, gdzie operator ich
+   szuka. Wpis dostaje **tylko korzeń drzewa praw** — tabela bez relacji nadrzędnej praw
+   (`relguided`, `relright="Primary"`, `relright="true"` do zwykłego obiektu). Uwaga na wyjątek:
+   relacja `relright="true"` do obiektu będącego źródłem praw (`IRightsSource`) **nie** czyni
+   tabeli dzieckiem — taka tabela nadal potrzebuje wpisu. Ten plik jest
+   drugą połową każdej zmiany struktury danych: dodanie tabeli, jej usunięcie, zmiana nazwy klasy
+   i zmiana relacji praw wymagają jego aktualizacji —
+   [references/rights-tree.md](references/rights-tree.md).
 
 ## Struktura pliku business.xml
 
@@ -328,12 +337,15 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
 5. **Zdefiniuj tabele** - główne obiekty biznesowe
 6. **Dodaj relacje** - powiązania między tabelami (zwykłe i interface'owe)
 7. **Dodaj indeksy** - klucze dla wyszukiwania
-8. **Utwórz klasy biznesowe obok** (nierozłączny krok — bez nich build nie przejdzie) - dla każdej
+8. **Zaktualizuj `*.rightstree.xml`** - wpis dla każdej nowej tabeli będącej korzeniem drzewa praw
+   (bez relacji `relright="true"` i bez `relguided`); usunięte tabele wykreśl
+   ([references/rights-tree.md](references/rights-tree.md))
+9. **Utwórz klasy biznesowe obok** (nierozłączny krok — bez nich build nie przejdzie) - dla każdej
    tabeli klasa obiektu biznesowego i klasa tabeli; przy polach `readonly` konstruktory; dla tabel
    z selector'em - `abstract` baza, podtypy z `[BusinessRow]` i `[DefaultConstructor]`, pozycje
    `[NewRow]` (patrz [references/generated-classes.md](references/generated-classes.md))
-9. **Waliduj** - sprawdź zgodność ze schematem XSD; po pierwszym buildzie przeczytaj wygenerowany
-   `*.business.cs` (kontrakt konstruktorów, setterów, akcesorów `Wg…`)
+10. **Waliduj** - sprawdź zgodność ze schematem XSD; po pierwszym buildzie przeczytaj wygenerowany
+    `*.business.cs` (kontrakt konstruktorów, setterów, akcesorów `Wg…`)
 
 ## Szczegółowa dokumentacja
 
@@ -341,6 +353,7 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
 - **[references/table-reference.md](references/table-reference.md)** - kompletna dokumentacja atrybutów table i col
 - **[references/generated-classes.md](references/generated-classes.md)** - klasy biznesowe tworzone obok XML (Row/Table, konstruktory, selector, `[BusinessRow]`, `[NewRow]`)
 - **[references/relations-guide.md](references/relations-guide.md)** - tworzenie relacji między obiektami
+- **[references/rights-tree.md](references/rights-tree.md)** - pliki `*.rightstree.xml`: miejsce tabel w drzewie uprawnień, reguła korzenia praw, osadzanie jako zasób
 - **[references/examples.md](references/examples.md)** - przykłady z rzeczywistych modułów Soneta
 
 > Po zdefiniowaniu struktury danych w business.xml kolumny prezentuje się w formularzach

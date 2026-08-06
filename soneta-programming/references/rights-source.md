@@ -1,5 +1,12 @@
 # Źródła praw (`IRightsSource`)
 
+> **Dwa różne mechanizmy — nie myl ich.** Ten dokument opisuje **prawa obiektowe**: dostęp do
+> danych operacyjnych sterowany wskazanym obiektem (magazyn, rejestr, definicja). Osobną sprawą
+> jest **miejsce tabeli w drzewie uprawnień** — decyduje o nim plik `*.rightstree.xml`
+> towarzyszący `business.xml` (skill `/soneta-business-xml`, `references/rights-tree.md`).
+> Każda nowa tabela wymaga tam wpisu, o ile nie dziedziczy praw przez relację
+> `relright="true"`/`relguided`.
+
 Obiekt (zwykle **konfiguracyjny**, np. magazyn, rejestr, definicja) może być **źródłem praw**:
 operatorowi/roli przypisuje się uprawnienia do tego obiektu, co steruje dostępem do **danych
 operacyjnych referujących** do niego — a nie tylko do samego obiektu konfiguracyjnego. Przykład:

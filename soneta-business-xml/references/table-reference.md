@@ -95,6 +95,11 @@ tabeli, nie pojedyncze pola; dla tabel szczegółów warto wskazać tabelę nadr
 **Bez `config`** - Tabele operacyjne:
 - Dane zbierane podczas pracy: dokumenty, transakcje
 
+> **Miejsce tabeli w drzewie uprawnień.** Tabela bez relacji praw (`relright="true"`) i bez
+> `relguided` jest korzeniem drzewa praw — wymaga wpisu w pliku `*.rightstree.xml`, inaczej jej
+> uprawnienia trafią do gałęzi „Dodatki". `config="true"` decyduje o gałęzi Konfiguracja zamiast
+> Program. Szczegóły: [rights-tree.md](rights-tree.md).
+
 ### Przykład table z wszystkimi atrybutami
 
 ```xml
