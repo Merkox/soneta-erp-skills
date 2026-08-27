@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  AKTUALIZACJA HISTORYCZNA pojedynczego pola w zapisie „od–do".
+  Przykład: zmiana stawki wynagrodzenia etatowego pracownika na 10 000,00 zł
+  obowiązująca OD 2026-08-01 (nie nadpisanie dotychczasowego zapisu).
+
+  Mechanizm (import WEDŁUG REKORDÓW, bez business="true"):
+    - <Historia addnew="true">      — nie kasuje istniejących zapisów historii;
+    - <PracHistoria date="2026-08-01"> — „aktualizuj od tej daty": silnik wykonuje
+      CIĘCIE OKRESU — klonuje zapis obowiązujący na tę datę i w kopii nadpisuje tylko
+      podane pola; poprzedni zapis pozostaje w mocy do dnia poprzedzającego (2026-07-31).
+    - W treści podajemy WYŁĄCZNIE zmieniane pole (Stawka). Pozostałe pola zaszeregowania
+      (RodzajStawki, Wymiar, Element) oraz cały pozostały etat przechodzą z klonu.
+
+  Identyfikacja pracownika: where po kluczu naturalnym. Gdy w bazie jest więcej niż jeden
+  rekord pasujący do warunku — import zgłasza błąd „wiele pasuje"; doprecyzuj klucz
+  (np. where="Kod=008").
+
+  Format kwoty z walutą: separator tysięcy przecinek, kropka dziesiętna → 10,000.00 PLN.
+
+  Zweryfikowane próbnym importem na bazie demo (dbmgr importxml). Efekt potwierdzony
+  w programie na zakładce „Historia zapisów" pracownika: powstał nowy wiersz
+  „Ważny od = 1.08.2026" ze stawką 10 000,00 zł, a wpis sprzed daty zachował 10 350,00 zł.
+
+  Struktura pól (Etat = subrow, Etat.Zaszeregowanie = subrow pojedynczy, Stawka: Currency)
+  zweryfikowana skanem scan-props — zob. /soneta:programming (Kadry/PracHistoria).
+-->
+<session xmlns="http://www.soneta.pl/schema/business" fromto="(wszystko)">
+  <Pracownik where="Nazwisko=Bujak">
+    <Historia addnew="true">
+      <PracHistoria date="2026-08-01">
+        <Etat>
+          <Zaszeregowanie>
+            <Stawka>10,000.00 PLN</Stawka>
+          </Zaszeregowanie>
+        </Etat>
+      </PracHistoria>
+    </Historia>
+  </Pracownik>
+</session>

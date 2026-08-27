@@ -1,0 +1,21 @@
+{
+  "name": "soneta-erp-skills",
+  "description": "Marketplace ze skillami platformy Soneta (enova365, Triva) — programowanie, definicje danych i UI, wydruki, płace, konfiguracja i wdrożenia.",
+  "owner": {
+    "name": "Soneta sp. z o.o.",
+    "email": "marcin.wojas@soneta.pl"
+  },
+  "plugins": [
+    {
+      "name": "soneta",
+      "version": "1.0.0",
+      "source": "./",
+      "description": "11 skilli platformy Soneta: ORM i kod biznesowy, business.xml, form.xml, planowanie dodatków, wydruki .repx, design system enova365, definicje elementów wynagrodzenia, konfiguracja i import XML, narzędzia CLI, kontenery.",
+      "author": {
+        "name": "Soneta sp. z o.o."
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/soneta/soneta-erp-skills"
+    }
+  ]
+}

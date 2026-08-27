@@ -20,7 +20,7 @@
 
 Przygotuj **listę zadań** dla domeny (parametr) — uporządkowany katalog procedur i operacji, jakie
 można wykonać na **głównym obiekcie biznesowym** i obiektach powiązanych w ramach **zakresu**. Lista
-będzie elementem skilla `/soneta-programming` i **wejściem do promptu „Code-Snippets"**, który na jej
+będzie elementem skilla `/soneta:programming` i **wejściem do promptu „Code-Snippets"**, który na jej
 podstawie wygeneruje receptury z kodem i testami.
 
 **Na tym etapie NIE piszesz kodu i NIE projektujesz snippetów.** Opisujesz wyłącznie *co* można zrobić
@@ -32,7 +32,7 @@ tylko jako orientacyjny trop dla etapu 2, nie jako gotowe API.
 1. **Formularze i listy w programie** — przejrzyj listy dokumentów/obiektów domeny, otwórz formularze,
    przejrzyj zakładki i czynności (menu „Czynności"). Każda zakładka i czynność to kandydat na pozycję.
 2. **Workery** — akcje w programie są zaimplementowane przez Workery; ich tytuły to dobre nazwy zadań
-   (pomocniczo: `/soneta-programming/scripts/scan-workers.csx`).
+   (pomocniczo: `/soneta:programming/scripts/scan-workers.csx`).
 3. **Istniejące listy zadań** — `domeny/kadry.md`, `domeny/handel.md` (mapy receptur) jako wzorzec
    zakresu i granulacji.
 4. **Wiedza biznesowa** — typowe procesy domeny, nawet jeśli nieoczywiste w UI.
