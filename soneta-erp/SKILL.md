@@ -5,8 +5,8 @@ description: >
   soneta-programming (ORM, kod biznesowy), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-repx (wydruki DevExpress .repx), soneta-place-def-elementow,
   soneta-config (import/eksport XML, scan-folders, appsettings.json — porty i adresy
-  komponentów), soneta-config-reg (rejestr konfiguracji ConfigReg, providery, *.reg.json),
-  soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (docker
+  komponentów, rejestr konfiguracji ConfigReg — *.reg.json, przenoszenie ustawień między
+  bazami), soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (docker
   compose, Apple container, Helm/Kubernetes, wersje obrazów, baza w kontenerze). Używaj gdy
   użytkownik: (1) rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać;
   (2) pyta ogólnie o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta
@@ -42,21 +42,18 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   (drzewo pozycji menu, listy, formularze, powiązanie z tabelą/`ViewInfo`); (C) **konfiguracja
   uruchomieniowa `appsettings.json`** — porty i adresy komponentów (orchestrator, server, web,
   webapi, webwcf, router, commhub), sprzężone pary adresów, kolejność warstw nadpisań
-  (profil systemu, `-c`, `SONETA_`, argumenty CLI), znaczenie kluczy. Używaj gdy
-  użytkownik buduje/analizuje XML importu danych Soneta, przenosi ustawienia między bazami,
-  eksportuje rekordy do XML, mapuje strukturę menu dodatku, albo konfiguruje porty/adresy
-  komponentów i pyta, co robi klucz w `appsettings.json`. Warstwa kodu importu
+  (profil systemu, `-c`, `SONETA_`, argumenty CLI), znaczenie kluczy; (D) **rejestr
+  konfiguracji (ConfigReg)**, czyli menu „Zarządzanie konfiguracją" — zrzut całej konfiguracji
+  bazy do pliku `*.reg.json`, porównanie dwóch baz, scalanie paczek ustawień, sigile formatu
+  (`$strict`, `$v`, `#klucz`, `@atrybut`, `$blob`) i ścieżki węzłów. Używaj gdy użytkownik
+  buduje/analizuje XML importu danych Soneta, przenosi ustawienia między bazami, eksportuje
+  rekordy do XML, mapuje strukturę menu dodatku, konfiguruje porty/adresy komponentów i pyta,
+  co robi klucz w `appsettings.json`, albo pyta o rejestr konfiguracji, buduje/debuguje plik
+  `*.reg.json` lub diagnozuje niedopasowany wiersz przy scalaniu. Odróżnij oba mechanizmy
+  przenoszenia ustawień: XML (`<session>`, `dbinit.xml`) przenosi wskazane rekordy i nie
+  wykrywa różnic, rejestr zdejmuje stan konfiguracji jako całość. Warstwa kodu importu
   (`SessionReader`/`SessionWriter`) i ORM → `/soneta-programming`; operacje na bazie z CLI →
   `/soneta-tools`.
-* `/soneta-config-reg` - **Rejestr konfiguracji (ConfigReg)** — silnik zrzucający całą
-  konfigurację bazy do drzewa `ConfigReg`, serializowanego do plików `*.reg.json` i tabeli
-  `ConfigRegistry`. Od strony kodu C#: providery `IConfigRegProvider` (Root/Module/Table/Row/
-  SubTable/Storage/Addins), atrybut `[ConfigReg(Hide/Ignore/Include/ChildrenType)]` sterujący
-  zakresem rejestru, potok Loader → Differ/Merger → SessionUpdater, format JSON (`$strict`,
-  `$v`, `#klucz`, `@atrybut`). Używaj gdy użytkownik pyta o rejestr konfiguracji, chce wyłączyć
-  tabelę lub kolumnę z rejestru, pisze/poprawia provider albo debuguje przenoszenie ustawień
-  między bazami przez rejestr. Odróżnij od `/soneta-config`: XML (`<session>`, `dbinit.xml`)
-  to inny, niezależny mechanizm.
 * `/soneta-tools` - Narzędzia deweloperskie wiersza poleceń Soneta. `dbmgr` — zarządzanie
   bazami danych (tworzenie/rejestracja, konwersja, backup/restore, licencje, rozszerzenia,
   analiza, kompilacja); przygotowanie baz testowych/demo i automatyzacja w CI. `buscall` —
