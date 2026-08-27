@@ -270,6 +270,10 @@ jq '.[] | arrays | .[] | select((.params // [])
   są pomijane (nie biorą udziału w bindowaniu / akcjach).
 - Property z modyfikatorem `internal` nie są ujęte — Soneta wymaga publicznych członków
   do bindowania UI.
+- **Czynności dynamiczne (`GetActions`) nie są wykrywane** — skaner inwentaryzuje wyłącznie
+  metody z atrybutem `[Action]`. Worker budujący pozycje menu statyczną metodą `GetActions`
+  (patrz [worker-extender.md](./worker-extender.md#czynności-dynamiczne--getactions)) pojawi się
+  na liście bez akcji, mimo że dodaje pozycje do menu Czynności.
 - Pierwsze uruchomienie pobiera pakiet NuGet `Microsoft.CodeAnalysis.CSharp` — wymaga
   połączenia internetowego (kolejne odpalenia działają offline).
 

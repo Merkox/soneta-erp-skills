@@ -41,15 +41,22 @@ wpis to string z parametrami rozdzielonymi `;`. Przykład bazy `Demo` startując
 
 ```json
 "Sources": [
-  "process:Demo;caption=dev;path=<katalog-projektu>;user=Administrator;pwd="
+  "process:Demo;path=<katalog-projektu>;user=Administrator;pwd="
 ]
 ```
 
 Znaczenie pól:
-- `process:Demo` — tryb `process` + **nazwa bazy** `Demo` (wartość podawana w `buscall --db Demo`),
-- `caption=dev` — etykieta połączenia w UI,
+- `process:Demo` — tryb `process` + **nazwa bazy** `Demo` (przy braku `caption` to wartość
+  podawana w `buscall --db Demo`),
 - `path=<katalog-projektu>` — **katalog projektu, z którego ładowany jest kod** (biblioteki z jego `bin/Debug`),
 - `user` / `pwd` — poświadczenia logowania (tu operator `Administrator`, puste hasło).
+
+> **⚠️ `--db` dopasowuje w kolejności: identyfikator → `caption` → nazwa bazy.** Gdy źródło ma
+> etykietę, np. `process:Demo;caption=dev;…`, wywołuj `buscall --db dev` — a **nie** `--db Demo`
+> (`--db Demo` może przy tym trafić w INNE źródło, którego caption to `Demo`). Objaw złej nazwy:
+> `[-32603] Brak połączenia z serwerem: Demo` przy każdym wywołaniu (aplikacja stoi na ekranie
+> wyboru baz). Jednoznacznie wskażesz źródło identyfikatorem: `--db "Process|Demo"`.
+> Szczegóły: *buscall* i *sonetaframe* w `/soneta-tools`.
 
 > **Poświadczenia a automatyzacja.** Podanie tu `user`/`pwd` sprawia, że frame **loguje się do
 > bazy automatycznie** — dzięki temu `buscall`/refaktoryzacja działają w pełni bezobsługowo

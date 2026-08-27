@@ -68,10 +68,39 @@
 | `children="Pozycje"` | | Nazwa kolekcji w dokumencie: `dokument.Pozycje` |
 | `delete="cascade"` | | Usunięcie dokumentu usuwa pozycje |
 | `relguided="inner"` | | **Wymagane** dla tabel szczegółów (bez `guided`) |
+| `relright="true"` | | Prawa dziedziczone z obiektu nadrzędnego (patrz niżej) |
 
 ### Zasada relguided="inner"
 
 Tabele bez atrybutu `guided` (tabele szczegółów) **muszą mieć dokładnie jedną** relację z `relguided="inner"`. Wskazuje ona obiekt główny, którego szczegóły są opisywane.
+
+### Relacja praw — `relright`
+
+`relright` wskazuje relację, przez którą tabela **dziedziczy prawa** dostępu z obiektu
+nadrzędnego. Bez niej tabela jest samodzielnym korzeniem drzewa uprawnień.
+
+| Wartość | Znaczenie |
+|---------|-----------|
+| `relright="true"` | Relacja praw. Tabela dziedziczy prawa z obiektu wskazanego tą kolumną — **chyba że** wskazany obiekt jest źródłem praw obiektowych (`IRightsSource`); wtedy dostępem steruje prawo obiektowe, a tabela pozostaje samodzielna. |
+| `relright="Primary"` | Jawne wskazanie relacji nadrzędnej praw; ma pierwszeństwo przed `relright="true"` i nie podlega wyjątkowi `IRightsSource`. |
+| `relright="false"` | Zwykła referencja bez wpływu na prawa (wartość domyślna). |
+| `relright="other"` / `relright="config"` | Warianty pomocnicze — **nie** ustanawiają dziedziczenia praw. |
+
+Gdy tabela ma kilka relacji, nadrzędną wybiera się w kolejności: `relguided` → `relright="Primary"`
+→ `reldefault="true"` → `relright="true"` (z pominięciem relacji do `IRightsSource`).
+
+Zasady:
+- **najwyżej jedna** relacja `relright="true"` w tabeli i powinna być `required="true"`
+  (obiekt nadrzędny musi istnieć, inaczej wiersz zostaje bez praw);
+- relacja z `relguided` powinna mieć również `relright="true"`; gdy jej brakuje, platforma
+  i tak traktuje relację guided jako relację praw, ale zapisuje ostrzeżenie do logu;
+- nie prowadź relacji praw z tabeli **operacyjnej** do tabeli **konfiguracyjnej** — prawa do
+  danych operacyjnych opiera się wtedy o obiekt konfiguracyjny; do takiego sterowania służą
+  prawa obiektowe (`IRightsSource`, skill `/soneta-programming`).
+
+**Konsekwencja dla drzewa uprawnień:** tabela z `relright="true"` albo `relguided` **nie ma**
+wpisu w pliku `*.rightstree.xml` — miejsce w drzewie dziedziczy po obiekcie nadrzędnym. Wpis
+dostają wyłącznie tabele bez tych relacji: [rights-tree.md](rights-tree.md).
 
 ### Klucz złożony z Lp
 

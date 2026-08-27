@@ -224,6 +224,10 @@ pustą listę, ukryte pole). Jeśli operacja faktycznie wymaga dostępu, któreg
 (Wszystkie dziedziczą po `AccessException : RowException`.) Te wyjątki rzuca i obsługuje sam ORM —
 nie „połykaj" ich w logice ani nie zastępuj cichym `return`.
 
+Jedyny kod, który sam sprawdza `AccessRight`, to **infrastruktura enumerująca źródła praw**
+(budowa menu, filtrowanie list po prawach) — to nie jest logika biznesowa; granicę i wzorzec
+opisuje [rights-source.md](rights-source.md#kod-infrastrukturalny-enumerujący-źródła-praw).
+
 ---
 
 ## 8. ExecuteConfig - dane konfiguracyjne

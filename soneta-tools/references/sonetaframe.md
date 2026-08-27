@@ -179,7 +179,7 @@ program `orchestrator.dll` (inny sposób startu procesów). Przyjmuje te same pa
 | `;user=Administrator;pwd=` | Operator i hasło programu — podanie ich daje **autologin** (start w pełni bezobsługowy, np. dla `buscall`). |
 | `;config-file=path-to-appsettings.json` | Indywidualne ustawienia serwerów (per baza). |
 | `;trusted=true` | Połączenie traktowane jako zaufane. |
-| `;caption=Nazwa_w_menu` | Alternatywna nazwa wyświetlana w menu. |
+| `;caption=Nazwa_w_menu` | Alternatywna nazwa wyświetlana w menu. **To także wartość dla `buscall --db`** — dopasowanie idzie w kolejności: jednoznaczny identyfikator (`IdentPart\|NazwaBazy`, np. `Process\|Demo`) → `caption` → nazwa bazy; gdy `caption` jest ustawiony, `--db` używa jego, nie nazwy bazy ze źródła. Uwaga na kolizję: caption jednego źródła pokrywający się z nazwą bazy innego przechwytuje `--db`; zob. [buscall.md](buscall.md). |
 
 ### Baza z własnym dodatkiem (`process:` + `config-file=`)
 

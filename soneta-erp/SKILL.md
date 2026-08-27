@@ -2,18 +2,16 @@
 name: soneta-erp
 description: >
   Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
-  soneta-programming (ORM), soneta-addon-planning, soneta-business-xml,
+  soneta-programming (ORM, kod biznesowy), soneta-addon-planning, soneta-business-xml,
   soneta-form-xml, soneta-repx (wydruki DevExpress .repx), soneta-place-def-elementow,
-  soneta-config (konfiguracja i funkcje domenowe — import/eksport XML, scan-folders,
-  konfiguracja uruchomieniowa appsettings.json — porty i adresy komponentów, rejestr
-  konfiguracji ConfigReg — *.reg.json i przenoszenie ustawień między bazami),
-  soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (uruchamianie i wdrażanie w kontenerach:
-  docker compose, Apple container / Container Desktop, Helm/Kubernetes, wybór wersji
-  obrazów, tworzenie bazy w kontenerze). Używaj gdy użytkownik: (1) rozpoczyna
-  zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie
-  o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise,
-  Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne
-  skille; (5) realizuje zadanie obejmujące wiele warstw platformy (np. moduł z bazą,
+  soneta-config (import/eksport XML, scan-folders, appsettings.json — porty i adresy
+  komponentów, rejestr konfiguracji ConfigReg — *.reg.json, przenoszenie ustawień między
+  bazami), soneta-tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta-containers (docker
+  compose, Apple container, Helm/Kubernetes, wersje obrazów, baza w kontenerze). Używaj gdy
+  użytkownik: (1) rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać;
+  (2) pyta ogólnie o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta
+  Enterprise, Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać
+  dostępne skille; (5) realizuje zadanie obejmujące wiele warstw platformy (np. moduł z bazą,
   formularzami i logiką).
 ---
 
@@ -44,17 +42,16 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   (drzewo pozycji menu, listy, formularze, powiązanie z tabelą/`ViewInfo`); (C) **konfiguracja
   uruchomieniowa `appsettings.json`** — porty i adresy komponentów (orchestrator, server, web,
   webapi, webwcf, router, commhub), sprzężone pary adresów, kolejność warstw nadpisań
-  (profil systemu, `-c`, `SONETA_`, argumenty CLI), znaczenie kluczy. Używaj gdy
-  użytkownik buduje/analizuje XML importu danych Soneta, przenosi ustawienia między bazami,
-  eksportuje rekordy do XML, mapuje strukturę menu dodatku, albo konfiguruje porty/adresy
-  komponentów i pyta, co robi klucz w `appsettings.json`; (D) **rejestr konfiguracji
-  (ConfigReg)**, czyli menu „Zarządzanie konfiguracją" — zrzut całej konfiguracji bazy do pliku
-  `*.reg.json`, porównanie dwóch baz, scalanie paczek ustawień, sigile formatu (`$strict`, `$v`,
-  `#klucz`, `@atrybut`, `$blob`) i ścieżki węzłów. Używaj gdy użytkownik pyta o rejestr
-  konfiguracji, buduje albo debuguje plik `*.reg.json`, przenosi ustawienia między bazami przez
-  rejestr lub diagnozuje niedopasowany wiersz przy scalaniu. Odróżnij oba mechanizmy przenoszenia
-  ustawień: XML (`<session>`, `dbinit.xml`) przenosi wskazane rekordy i nie wykrywa różnic,
-  rejestr zdejmuje stan konfiguracji jako całość. Warstwa kodu importu
+  (profil systemu, `-c`, `SONETA_`, argumenty CLI), znaczenie kluczy; (D) **rejestr
+  konfiguracji (ConfigReg)**, czyli menu „Zarządzanie konfiguracją" — zrzut całej konfiguracji
+  bazy do pliku `*.reg.json`, porównanie dwóch baz, scalanie paczek ustawień, sigile formatu
+  (`$strict`, `$v`, `#klucz`, `@atrybut`, `$blob`) i ścieżki węzłów. Używaj gdy użytkownik
+  buduje/analizuje XML importu danych Soneta, przenosi ustawienia między bazami, eksportuje
+  rekordy do XML, mapuje strukturę menu dodatku, konfiguruje porty/adresy komponentów i pyta,
+  co robi klucz w `appsettings.json`, albo pyta o rejestr konfiguracji, buduje/debuguje plik
+  `*.reg.json` lub diagnozuje niedopasowany wiersz przy scalaniu. Odróżnij oba mechanizmy
+  przenoszenia ustawień: XML (`<session>`, `dbinit.xml`) przenosi wskazane rekordy i nie
+  wykrywa różnic, rejestr zdejmuje stan konfiguracji jako całość. Warstwa kodu importu
   (`SessionReader`/`SessionWriter`) i ORM → `/soneta-programming`; operacje na bazie z CLI →
   `/soneta-tools`.
 * `/soneta-tools` - Narzędzia deweloperskie wiersza poleceń Soneta. `dbmgr` — zarządzanie

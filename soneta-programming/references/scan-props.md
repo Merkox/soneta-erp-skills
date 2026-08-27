@@ -10,12 +10,24 @@ Pola **wszystkich tabel** programu są już wyeksportowane do plików markdown w
 skanera, jeśli szukasz tabeli, która tam jest. Skaner (dalsza część dokumentu) to
 fallback dla tabel spoza wygenerowanego zestawu (świeży dodatek, nowsza kompilacja).
 
-**Jak znaleźć tabelę:**
-1. Otwórz [`../data/props/INDEX.md`](../data/props/INDEX.md) i wyszukaj `RowType` (np. `DokumentHandlowy`).
-   INDEX grupuje tabele wg modułu (z opisem modułu); kolumny:
+**Jak znaleźć tabelę** — plik nazywa się `<Moduł>/<RowType>.md`, więc zwykle wystarczy
+jedno polecenie, bez otwierania indeksów:
+
+```bash
+ls data/props/*/DokumentHandlowy.md              # znasz RowType
+ls data/props/*/*Pracownik*.md                   # nie znasz dokładnej nazwy
+rg -l '`DokHandlowe`' data/props/*/INDEX.md      # znasz nazwę tabeli w bazie
+rg -l 'Soneta\.CRM\.Kontrahenci\.Kontrahent`' data/props/*/*.md   # kto ma pole tego typu
+```
+
+Gdy potrzebujesz przeglądu, indeks jest **dwupoziomowy**:
+1. [`../data/props/INDEX.md`](../data/props/INDEX.md) — router: lista 37 modułów z opisem
+   i liczbą tabel. Nie zawiera wierszy `RowType` (monolityczna wersja nie mieściła się
+   w jednym odczycie).
+2. `data/props/<Moduł>/INDEX.md` — tabele modułu; kolumny:
    `RowType | Tytuł | Tabela | Konfig | Guided | Historia | Interfaces | Selektor | Plik`
    (kolumna `Selektor`: `TypEnum (N)` gdy tabela przechowuje N podtypów rozróżnianych selektorem).
-2. Otwórz plik `data/props/<Moduł>/<RowType>.md` — to dokładnie ten sam markdown,
+3. Plik `data/props/<Moduł>/<RowType>.md` — to dokładnie ten sam markdown,
    który wypisałby skaner na żywo (nagłówek z nazwą tabeli, `Tytuł`/`Opis`, `Guided`, `Historyczna`/`Historia`,
    interfejsami, `Selektor` gdy tabela przechowuje wiele typów; tabela
    `Pole | Typ | Rodzaj | Tytuł | Opis`; sekcje `## Selektor — podtypy w jednej tabeli`,
@@ -263,7 +275,8 @@ Pola oznaczone `[Obsolete]` są pomijane.
 
 ## Powiązania
 
-- Dane wygenerowane: [`../data/props/`](../data/props/) (indeks: [`../data/props/INDEX.md`](../data/props/INDEX.md)) — pierwsze źródło pól tabel.
+- Dane wygenerowane: [`../data/props/`](../data/props/) — pierwsze źródło pól tabel
+  (router [`INDEX.md`](../data/props/INDEX.md) → `<Moduł>/INDEX.md` → `<Moduł>/<RowType>.md`).
 - Skrypt wsadowej regeneracji: `scripts/export-props-all.csx` — buduje kompilację raz i eksportuje cały `data/props/`.
 - [row-types.md](row-types.md) — wzorzec selektora (`[BusinessRow]`/`[NewRow]`, klasa `abstract`,
   podtypy) leżący u podstaw sekcji `## Selektor`; [assembly-attributes.md](assembly-attributes.md) —

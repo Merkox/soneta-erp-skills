@@ -95,6 +95,11 @@ tabeli, nie pojedyncze pola; dla tabel szczegółów warto wskazać tabelę nadr
 **Bez `config`** - Tabele operacyjne:
 - Dane zbierane podczas pracy: dokumenty, transakcje
 
+> **Miejsce tabeli w drzewie uprawnień.** Tabela bez relacji praw (`relright="true"`) i bez
+> `relguided` jest korzeniem drzewa praw — wymaga wpisu w pliku `*.rightstree.xml`, inaczej jej
+> uprawnienia trafią do gałęzi „Dodatki". `config="true"` decyduje o gałęzi Konfiguracja zamiast
+> Program. Szczegóły: [rights-tree.md](rights-tree.md).
+
 ### Przykład table z wszystkimi atrybutami
 
 ```xml
@@ -128,6 +133,27 @@ tabeli, nie pojedyncze pola; dla tabel szczegółów warto wskazać tabelę nadr
 | `caption` | | string | Etykieta pola w UI |
 | `description` | | string | Jedno/dwuzdaniowy opis pola (tooltip) |
 | `category` | | string | Kategoria w edytorze właściwości |
+
+#### Kolizje nazw kolumn z członkami klasy `Row`
+
+Kolumna o nazwie pokrywającej się z publicznym członkiem bazowej klasy wiersza generuje property
+**przykrywającą** member odziedziczony — ostrzeżenie **CS0108** i mylący dostęp (raz pole, raz
+mechanizm platformy, zależnie od typu referencji). Publiczne property bazowej klasy wiersza,
+których **nie wolno użyć jako nazwy kolumny**:
+
+`AccessRight`, `Caption`, `Features`, `ID`, `IsLive`, `ReadOnlyFlag`, `Session`, `Stamp`,
+`State`, **`Status`**, `Table`, `TouchCounter` (+ `Guid` w wierszach guidowanych).
+
+Najczęstszy realny przypadek to kolumna **`Status`**. Rozwiązanie: prefiks domenowy —
+`UsageStatus`, `DocumentStatus` zamiast `Status`. Reguła praktyczna: przy „ogólnych" nazwach
+kolumn (Status, State, Caption) zawsze prefiksuj nazwą domeny.
+
+Checklista:
+- [ ] żadna kolumna nie nazywa się jak publiczny członek `Row` (lista wyżej)
+- [ ] build modułu bez ostrzeżeń CS0108
+
+(Analogiczna pułapka dla nazw **tabel**: ostatni segment `namespace` ≠ `name` tabeli —
+zob. zasady krytyczne w [SKILL.md](../SKILL.md).)
 
 ### Ograniczenia typów
 
@@ -192,6 +218,20 @@ też zwykły `int`. Typowa deklaracja:
 - `readonly="true"` — typ ustala się przy tworzeniu obiektu i nie zmienia,
 - `required="true"` — obiekt musi mieć określony typ.
 
+**Enum dyskryminatora numeruj od 1** (`Pierwszy=1, Drugi=2, …`) — wartość `0` jest traktowana
+jako „puste" (mechanizm `required` + `default(T)` opisany w zasadach krytycznych
+[SKILL.md](../SKILL.md)). Skutki `0` w selectorze są jednak cięższe niż zwykły
+`RequiredException`: wiersz z selectorem `0` (np. wprowadzony importem XML bez elementu kolumny
+selectora) **zatruwa całą tabelę** — każda materializacja dowolnego wiersza kończy się
+`UnrecognizedRowException` („Selektor 0 w tabeli X nieznaleziony"), a naprawa wymaga usunięcia
+wierszy wprost w SQL (`DELETE FROM Tabela WHERE KolumnaSelectora = 0`). Reguły importu wierszy
+tabel z selectorem (atrybut `class`, obowiązkowy element selectora) opisuje `/soneta-config`
+(import-export-xml, *Wiersze tabel z selektorem*).
+
+Checklista selectora:
+- [ ] enum zaczyna się od 1 (`0` niezdefiniowane albo jawnie „puste")
+- [ ] pliki dbinit/demo z wierszami tej tabeli zawierają element kolumny selectora w każdym wierszu
+
 Po stronie C# klasa obiektu biznesowego jest `abstract`, a warianty to podtypy rejestrowane
 atrybutem `[BusinessRow]`; pozycje menu „Nowy" wyznacza `[NewRow]`. Pełny wzorzec:
 [generated-classes.md](generated-classes.md). Wzorzec selektora po stronie kodu opisuje też
@@ -202,7 +242,7 @@ skill `/soneta-programming` (row-types.md).
 > ta sama tabela SQL przechowuje różne typy biznesowe, każdy jako osobna klasa `abstract`+podtyp
 > zarejestrowany `[assembly: BusinessRow(typeof(Podtyp), WartośćEnum)]` (patrz krok 3 w
 > [generated-classes.md](generated-classes.md)). Jeśli tabela ma **jedną** klasę C# dla
-> wszystkich wierszy — pole typu enum takie jak `Status`, `RecipientType`, `TypWpisu`,
+> wszystkich wierszy — pole typu enum takie jak `StatusFaktury`, `RecipientType`, `TypWpisu`,
 > `Kategoria` **nie dostaje `selector="true"`**, nawet jeśli jest `important="true"` i steruje
 > wyświetlaniem. Błędne dodanie selectora do zwykłego pola enum kompiluje się bez ostrzeżeń,
 > ale przy pierwszym odczycie listy rzuca w runtime `Nierozpoznany typ wiersza. Selektor N
@@ -433,7 +473,8 @@ Wzorce relacji — [relations-guide.md](relations-guide.md).
     <attribute>Context</attribute>
   </col>
   
-  <col name="Status" type="StatusFaktury" 
+  <!-- nie "Status" — kolizja z publicznym członkiem klasy Row (CS0108); zob. „Kolizje nazw kolumn" -->
+  <col name="StatusFaktury" type="StatusFaktury" 
        category="Ogólne" important="true"
        description="Status dokumentu"/>
   

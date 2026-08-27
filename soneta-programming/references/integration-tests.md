@@ -254,6 +254,31 @@ Najprościej: wyeksportuj z programu rolę systemową „Pełny dostęp" i użyj
 jest `Dodatki=Granted`. Plik **musi być w UTF-8** i mieć poprawnie zaescape'owaną treść `RoleText`;
 uszkodzone kodowanie lub niedomknięte encje objawiają się błędem importu przy budowie bazy.
 
+### Testy praw obiektowych (`IRightsSource`)
+
+Gdy obiekt dodatku jest **źródłem praw** ([rights-source.md](rights-source.md)), nowy rekord jest
+dla ról domyślnie **Denied** — test scenariusza „operator z prawem/bez prawa" musi jawnie nadać
+prawo obiektowe operatorowi testowemu. Robi się to rekordem `Right` w sesji konfiguracyjnej;
+uprawnienie operatora pobieraj przez `AuthorizationInfo` sesji (nie z `Login.Entitle` —
+reguła z [session-login.md](session-login.md#dostęp-do-informacji-o-operatorze)):
+
+```csharp
+// session = sesja konfiguracyjna (Right/Entitle to dane konfiguracyjne)
+var entitle = session.AuthorizationInfo.Operator.Entitles.GetFirst().Entitle;
+session.AddRow(new Right(entitle, definicja, false));   // false = pełne prawo, true = tylko odczyt
+```
+
+**Kolejność ma znaczenie — cache ról.** Prawa nadane w tej samej transakcji nie odświeżają cache
+ról zalogowanego loginu ([rights-source.md](rights-source.md#nadawanie-praw)). Jeśli funkcja jest
+sterowana flagą (opcją konfiguracyjną):
+
+1. Definicje i rekordy `Right` twórz przy **wyłączonej** fladze funkcji,
+2. flagę włączaj **po zapisie konfiguracji** — dopiero wtedy egzekwowanie praw widzi nadane `Right`.
+
+Włączenie flagi przed zapisem = fałszywy Denied (`AccessWriteDeniedException` przy `relright`).
+Sprzątanie i przywracanie flagi wykonuj w `try/finally`, żeby nieudany test nie zostawił
+konfiguracji w stanie włączonym.
+
 ### ⚠ Tabele `config="true"` są read-only w sesji operacyjnej
 
 Słowniki konfiguracyjne dodatku (tabele z `config="true"` w business.xml) **nie dadzą się edytować**

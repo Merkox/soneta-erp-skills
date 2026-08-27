@@ -7,12 +7,24 @@ w trybie `business="true"`, gdzie **kolejność pól i przynależność do sekcj
 Zakładki i listy (`Grid`) pokazują też, co logicznie stanowi „dane obiektu" — pomaga to
 **ustalić zakres eksportu** (które podkolekcje i cechy dołączyć do datapacku).
 
-## Najpierw INDEX (`data/forms/INDEX.md`) — szybkie wyszukanie „obiekt → zakładki”
+## Najpierw dane wygenerowane (`data/forms/`) — szybkie wyszukanie „obiekt → zakładki”
 
 Katalog **wszystkich zakładek** (pageform) jest wyeksportowany do
-[`../data/forms/INDEX.md`](../data/forms/INDEX.md) — jedna tabela:
+[`../data/forms/`](../data/forms/). Podział jest dwupoziomowy: [`INDEX.md`](../data/forms/INDEX.md)
+to router (lista 26 przestrzeni nazw + sekcja systemowa), a zakładki biznesowe leżą
+w plikach `<Przestrzeń>.md` — pełna lista (572 KB) nie mieściła się w jednym odczycie.
+
+**Nie musisz wiedzieć, w której przestrzeni jest typ** — przeszukaj wszystkie naraz:
+
+```bash
+rg '^\| Kontrahent \|' data/forms/*.md            # wszystkie zakładki typu
+rg -l '^\| DokumentHandlowy \|' data/forms/*.md   # sam plik przestrzeni
+rg '^\| \w*Pracownik\w* \|' data/forms/*.md       # gdy nie znasz dokładnej nazwy
+```
+
+Kolumny w plikach przestrzeni:
 `Typ danych | Zakładka (plik) | Nazwa zakładki | Priority | Biblioteka | Przestrzeń`,
-**posortowana po typie danych**. Nazwa zasobu ma postać `…<TYP>.<ZAKŁADKA>.pageform.xml`,
+**posortowane po typie danych**. Nazwa zasobu ma postać `…<TYP>.<ZAKŁADKA>.pageform.xml`,
 więc `Typ danych` to **segment przed nazwą zakładki** (walidowany względem realnych `RowType`;
 dla okien konfiguracji z folderem `Config` typ bierzemy z nazwy zakładki), albo atrybut
 `DataType`, gdy jest. Dzięki temu zakładki jednego typu są razem — np. całe okno
@@ -230,8 +242,9 @@ Dopasowano 51 zakładek (pageform) po typie danych lub `DataType`. …
 
 ## Powiązania
 
-- Dane wygenerowane: [`../data/forms/INDEX.md`](../data/forms/INDEX.md) — katalog wszystkich
-  zakładek (pierwsze źródło „obiekt → zakładki"); regeneracja skryptem `scripts/export-forms-index.csx`.
+- Dane wygenerowane: [`../data/forms/`](../data/forms/) — katalog wszystkich zakładek
+  (router [`INDEX.md`](../data/forms/INDEX.md) + pliki `<Przestrzeń>.md`; pierwsze źródło
+  „obiekt → zakładki"); regeneracja skryptem `scripts/export-forms-index.csx`.
 - [`/soneta-form-xml`](../../soneta-form-xml/SKILL.md) — składnia `Page`/`Group`/`Field`/`Include`,
   `DataContext`, `EditValue`; strona źródłowa tego, co skaner odczytuje.
 - [scan-props.md](scan-props.md) — pola bazodanowe i kalkulowane tabeli (typy, tytuły) do

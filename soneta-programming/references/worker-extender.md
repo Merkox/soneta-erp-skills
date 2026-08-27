@@ -207,9 +207,61 @@ public class PokazKontrahentaDokumentuWorker
 }
 ```
 
+### Czynności dynamiczne — `GetActions`
+
+Obok statycznych czynności `[Action("Tytuł")]` istnieje konwencja czynności **dynamicznych** —
+gdy lista pozycji menu zależy od danych (np. jedna pozycja na każdą definicję z konfiguracji).
+Na klasie workera deklaruje się publiczną **statyczną** metodę `GetActions`, wywoływaną przy
+budowie menu:
+
+```csharp
+[assembly: Worker(typeof(DefinicjeWorker), typeof(GuidedRow))]
+
+public class DefinicjeWorker
+{
+    public static IEnumerable GetActions(Session session, Context context)
+    {
+        // Zawężenie do właściwego kontekstu — rejestracja na GuidedRow oferuje
+        // czynność na wszystkich obiektach głównych.
+        if (context[typeof(GuidedRow), false] is not GuidedRow row)
+            yield break;
+
+        foreach (Definicja definicja in session.GetMojModul().Definicje) {
+            // Prawo przed kolumnami — patrz rights-source.md.
+            if (definicja.AccessRight == AccessRights.Denied)
+                continue;
+            yield return new DefinicjaAction(definicja);
+        }
+    }
+}
+```
+
+`GetActions` zwraca instancje własnej klasy dziedziczącej po `Soneta.Business.Action`
+z nadpisaniami:
+
+- `Name` — pełna ścieżka menu rozdzielana `/` (np. `"/Czynności/Grupa/" + nazwa`; człony
+  tłumaczone, np. `TranslatePath()`),
+- `Mode`, `Target` — np. `ActionMode.SingleSession`, `ActionTarget.Menu`,
+- `object Invoke(object instance, Context context)` — wykonanie; zwrócony obiekt przechodzi
+  standardową obsługę rezultatów (patrz [action-result.md](./action-result.md)).
+
+Zasady:
+
+* Rejestracja jak zwykłego workera; rejestracja na `GuidedRow` oferuje czynność na wszystkich
+  obiektach głównych — zawężenie robi się warunkami w `GetActions` (jak w przykładzie).
+* `GetActions` uczestniczy w budowie menu **każdego okna** — musi być tanie i odporne; niezłapany
+  wyjątek objawia się dialogiem błędu w całej aplikacji.
+* Przy definicjach będących źródłami praw sprawdzaj `AccessRight` **przed** odczytem kolumn
+  wiersza — szczegóły i pułapki: [rights-source.md](./rights-source.md).
+* Skaner [scan-workers.md](./scan-workers.md) **nie wykrywa** czynności dynamicznych — inwentaryzuje
+  tylko metody z atrybutem `[Action]`.
+
 ## Obiekty Extender
 
 Pozwalają na bindowanie logiki interface-owej do formularzy. Można bindować methods i properties z obiektu extender.
+Extender bywa też **kontekstem całej strony** (`DataContext="{New MojExtender}"`) — m.in. stron
+okna Opcji (`Config.*.pageform.xml`), gdzie dostarcza widoki list konfiguracyjnych; składnię
+opisuje `/soneta-form-xml` (binding, *Strony okna Opcji*).
 
 * Extender nie jest przypisany do danych
 * W nazwie klasy powinno się stosować sufiks `Extender`

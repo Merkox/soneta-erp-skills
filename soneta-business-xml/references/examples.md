@@ -308,7 +308,7 @@
     </key>
     <key name="WgKlienta">
       <keycol name="Klient"/>
-      <keycol name="Status"/>
+      <keycol name="StatusProjektu"/>
     </key>
 
     <col name="Kod" type="string" length="20" required="true" 
@@ -320,7 +320,9 @@
          relname="Projekty klienta" children="Projekty"/>
     <col name="Kierownik" type="Pracownik" category="Ogólne"
          relname="Projekty kierownika"/>
-    <col name="Status" type="StatusProjektu" category="Ogólne" important="true"/>
+    <!-- nie "Status" — kolizja z publicznym członkiem klasy Row (CS0108);
+         patrz table-reference.md, „Kolizje nazw kolumn" -->
+    <col name="StatusProjektu" type="StatusProjektu" category="Ogólne" important="true"/>
     <col name="Priorytet" type="PriorytetProjektu" category="Ogólne"/>
     <col name="Okres" type="OkresProjektu" category="Terminy"/>
     <col name="Opis" type="text" category="Dodatkowe"/>

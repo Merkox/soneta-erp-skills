@@ -1,19 +1,18 @@
 ---
 name: soneta-containers
 description: >
-  Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — dla
-  partnerów, bez dostępu do kodu programu. Używaj gdy użytkownik: (1) chce postawić
-  środowisko (server + web) na obrazach Soneta przez `docker compose` albo na Apple
-  `container` / Container Desktop; (2) tworzy lub zarządza bazą danych w kontenerze
-  (usługa init z `dbmgr create`, `--demo`, `--recreate`, licencja, konwersja); (3) wdraża
-  na Kubernetes przez Helm (`helm repo add soneta`, `values.yaml`, `dblist`, `adminMode`);
-  (4) wybiera wersję obrazów (tagi z Docker Hub `soneta/*` lub `registry.soneta.pl`),
-  architekturę (alpine/arm64/amd64), źródło i logowanie do registry; (5) potrzebuje SQL
-  Servera — zewnętrznego (`host.docker.internal` / `host.containers.internal`) albo jako
-  kontener `mssql`; (6) rozwiązuje problemy startu stacku (kolejność, port zajęty,
-  brak DNS między usługami w Apple container, zły host-alias). Słowa kluczowe:
-  docker compose, docker-compose.yaml, apple container, Container Desktop, helm,
-  kubernetes, obraz, tag, wersja, mssql, dbmgr, x-init, server.standard, web.standard.
+  Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach. Używaj gdy
+  użytkownik: (1) stawia środowisko (server + web) na obrazach Soneta przez `docker compose`
+  albo na Apple `container` / Container Desktop; (2) tworzy bazę danych w kontenerze (usługa
+  init z `dbmgr create`, `--demo`, `--recreate`, licencja, konwersja); (3) wdraża na
+  Kubernetes przez Helm (`helm repo add soneta`, `values.yaml`, `dblist`, `adminMode`); (4)
+  wybiera wersję obrazów (tagi z Docker Hub `soneta/*` lub `registry.soneta.pl`), architekturę
+  (alpine/arm64/amd64), logowanie do registry; (5) potrzebuje SQL Servera — zewnętrznego
+  (`host.docker.internal` / `host.containers.internal`) albo jako kontener `mssql`; (6)
+  rozwiązuje problemy startu stacku (kolejność, port zajęty, brak DNS między usługami w Apple
+  container, zły host-alias). Słowa kluczowe: docker compose, docker-compose.yaml, apple
+  container, Container Desktop, helm, kubernetes, obraz, tag, wersja, mssql, dbmgr, x-init,
+  server.standard, web.standard.
 ---
 
 # Soneta w kontenerach — uruchamianie i wdrażanie (enova365, Triva)

@@ -219,7 +219,8 @@ view.Condition &= new RowCondition.Exists(
     "OsobyKontrahenci", "Kontrahent",
     new FieldCondition.Equal("OsobaKontaktowa", pars.Osoba));
 
-// 4) FilterCondition — walidacja per-wiersz (gdy logika nie da się zSQL-ować, np. uprawnienia)
+// 4) FilterCondition — walidacja per-wiersz (gdy logika nie da się zSQL-ować, np. uprawnienia;
+//    odczyt praw PRZED kolumnami wiersza — patrz rights-source.md)
 view.FilterCondition += (s, e) => {
     if (e.Row is Faktura f)
         e.Accepted &= f.GetObjectRight() != AccessRights.Denied;

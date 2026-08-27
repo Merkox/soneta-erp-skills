@@ -1,29 +1,18 @@
 ---
 name: soneta-config
 description: >
-  Narzędzia i mechanizmy platformy Soneta (enova365, Triva) związane z konfiguracją
-  systemu i funkcjami domenowymi. Obecnie: (A) IMPORT/EKSPORT DANYCH I USTAWIEŃ
-  KONFIGURACYJNYCH przez pliki XML — struktura pliku `<session>`, import według rekordów
-  (business="false", pliki *.dbinit.xml, baza demo), import przez logikę biznesową
-  (business="true"), eksport datapacku, identyfikacja rekordów po GUID, formaty wartości;
-  (B) `scan-folders` — inwentaryzacja statycznych folderów menu (`[assembly: FolderView]`)
-  z bibliotek DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty i adresy
-  komponentów (orchestrator/server/web/webapi/webwcf/router/commhub), kolejność nadpisań
-  konfiguracji (profil systemu, nakładki `-c`, zmienne `SONETA_`, argumenty CLI), znaczenie
-  kluczy; (D) REJESTR KONFIGURACJI (ConfigReg, „Zarządzanie konfiguracją") — zrzut całej
-  konfiguracji bazy do pliku `*.reg.json`, porównanie dwóch baz, scalanie paczek ustawień,
-  sigile formatu (`$strict`, `$v`, `#klucz`, `@atrybut`, `$blob`), ścieżki węzłów.
-  Używaj gdy użytkownik: (1) buduje lub analizuje plik XML importu danych
-  do platformy Soneta (dbinit.xml, dane demo, przenoszenie ustawień między bazami);
-  (2) pyta o atrybuty guid/where/key/id/business/deleted/dbversion w XML Soneta;
-  (3) eksportuje rekordy guidowane do XML; (4) chce zmapować strukturę menu programu
-  z DLL (drzewo folderów, listy, formularze) lub wpiąć nowy folder w istniejące menu;
-  (5) konfiguruje porty/adresy komponentów albo pyta, co robi klucz w `appsettings.json`
-  i która warstwa go nadpisuje; (6) pyta o rejestr konfiguracji, ConfigReg lub menu
-  „Zarządzanie konfiguracją", buduje albo debuguje plik `*.reg.json`, przenosi ustawienia
-  między bazami przez rejestr lub diagnozuje, czemu wiersz nie został dopasowany przy scalaniu.
-  Warstwa kodu importu (SessionReader/SessionWriter) i ORM → /soneta-programming;
-  operacje na bazie z CLI → /soneta-tools.
+  Konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva): (A) IMPORT/EKSPORT
+  DANYCH I USTAWIEŃ przez pliki XML — element session, import według rekordów (*.dbinit.xml,
+  demo) i przez logikę biznesową (business="true"), eksport datapacku, GUID; (B)
+  `scan-folders` — foldery menu (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA
+  URUCHOMIENIOWA `appsettings.json` — porty i adresy komponentów, warstwy nadpisań (`-c`,
+  `SONETA_`, CLI); (D) REJESTR KONFIGURACJI (ConfigReg, „Zarządzanie konfiguracją") — zrzut
+  konfiguracji bazy do `*.reg.json`, porównanie i scalanie ustawień, sigile (`$strict`, `$v`,
+  `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu, pyta o atrybuty
+  guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane; (3) mapuje
+  menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji, debuguje
+  `*.reg.json` albo przenosi ustawienia między bazami przez rejestr. Kod importu →
+  /soneta-programming; operacje na bazie z CLI → /soneta-tools.
 ---
 
 # Ustawienia, konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva)
@@ -66,6 +55,15 @@ Artykuł specyfikuje identyfikację rekordów (GUID, `where`, `key`, `id`), form
 `*.dbinit.xml` (`priority`, `versionName`, `dbversion`). Zawiera też gotowy, zweryfikowany
 importem **przykład** (obiekt w modelu „root + historia") —
 [examples/import-pracownik-etatowy.xml](examples/import-pracownik-etatowy.xml).
+
+### Mechanizm zasilania bazy Demo — [references/demo-data.md](references/demo-data.md)
+
+Jak działa import danych przykładowych przy tworzeniu bazy (`dbmgr create --demo gold|silver`,
+kreator baz): katalog `Demo` obok binariów (bez manifestu, nierekurencyjnie), kolejność plików
+przez sortowanie leksykograficzne (prefiksy numeryczne stałej szerokości, referencje tylko
+„w przód"), sufiksy koloru licencji `.gold`/`.silver`, GUID-y wstawiane 1:1, rekordy standardowe
+(dbinit) przed danymi demo. Z checklistą nowego pliku demo i sposobami testowania
+(podwójny `importxml` / pełne `create --demo`).
 
 ### `scan-folders` — [references/scan-folders.md](references/scan-folders.md)
 

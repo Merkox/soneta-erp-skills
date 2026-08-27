@@ -126,6 +126,12 @@ Uszczegółowienie procesów z sekcji 1.7:
 
 - **Uprawnienia do danych** — ograniczenia widoczności (operator widzi swoje dokumenty, kierownik — podwładnych).
 - **Uprawnienia konfiguracyjne** — kto modyfikuje ustawienia, definicje, słowniki.
+- **Umiejscowienie w drzewie uprawnień** — gdzie osoba konfigurująca role znajdzie prawa modułu:
+  wspólna gałąź modułu czy rozbicie na obszary, oddzielenie danych operacyjnych od konfiguracji.
+  Ustalenie przekłada się wprost na plik `*.rightstree.xml` towarzyszący definicjom danych —
+  wpis dostaje każdy obiekt niedziedziczący praw po obiekcie nadrzędnym (skill
+  `/soneta-business-xml`, `references/rights-tree.md`). Bez tego prawa modułu trafią do zbiorczej
+  gałęzi „Dodatki".
 
 ### 3.12. Integracje szczegółowe
 Uszczegółowienie integracji z sekcji 2.5 i 2.6:
