@@ -4,13 +4,13 @@ Zestaw skills dla asystentów AI (Claude, Cursor, Windsurf, itp.) wspierających
 
 ## Dostępne skille
 
-### 0. soneta-erp (meta-skill)
+### 0. soneta:erp (meta-skill)
 
 Mapa i przewodnik po pozostałych skillach. Pomaga wybrać właściwy skill w zależności od warstwy zadania (dane, UI, logika, płace).
 
 **Kiedy używać:** rozpoczynasz nowe zadanie dla enova365/Soneta/Triva i nie wiesz, który skill zastosować; zadanie obejmuje wiele warstw platformy i potrzebna jest koordynacja między skillami.
 
-### 1. soneta-programming
+### 1. soneta:programming
 
 Fundamentalne klasy ORM platformy Soneta (enova365, Triva).
 
@@ -23,7 +23,7 @@ Fundamentalne klasy ORM platformy Soneta (enova365, Triva).
 
 **Kiedy używać:** pytania o klasy logiki biznesowej, sesje, transakcje, hierarchię `Row` → `Table` → `Module`.
 
-### 2. soneta-business-xml
+### 2. soneta:business-xml
 
 Generator plików `business.xml` definiujących strukturę obiektów biznesowych.
 
@@ -36,7 +36,7 @@ Generator plików `business.xml` definiujących strukturę obiektów biznesowych
 
 **Kiedy używać:** tworzenie nowego modułu biznesowego, definiowanie encji, generowanie plików `*.business.xml`.
 
-### 3. soneta-form-xml
+### 3. soneta:form-xml
 
 Tworzenie plików `form.xml` opisujących formularze i widoki UI platformy Soneta.
 
@@ -48,7 +48,7 @@ Tworzenie plików `form.xml` opisujących formularze i widoki UI platformy Sonet
 
 **Kiedy używać:** tworzenie zakładek, widoków list, formularzy i lookupów dla platformy Soneta.
 
-### 4. soneta-addon-planning
+### 4. soneta:addon-planning
 
 Planowanie projektów dodatków dla platformy Soneta.
 
@@ -61,7 +61,7 @@ Planowanie projektów dodatków dla platformy Soneta.
 
 **Kiedy używać:** planowanie nowego modułu/dodatku, przygotowanie założeń projektu, specyfikacja funkcjonalna.
 
-### 5. soneta-ui-style
+### 5. soneta:ui-style
 
 System projektowy (design system) platformy Soneta do budowania aplikacji webowych.
 
@@ -74,7 +74,7 @@ System projektowy (design system) platformy Soneta do budowania aplikacji webowy
 
 **Kiedy używać:** projektowanie stron/aplikacji w stylu Soneta, dashboardy, formularze, strony logowania, panele administracyjne.
 
-### 6. soneta-place-def-elementow
+### 6. soneta:place-def-elementow
 
 Tworzenie i konfiguracja definicji elementów wynagrodzenia na platformie Soneta (moduł Płace).
 
@@ -87,7 +87,7 @@ Tworzenie i konfiguracja definicji elementów wynagrodzenia na platformie Soneta
 
 **Kiedy używać:** tworzenie/modyfikacja definicji elementu wynagrodzenia, pisanie algorytmów płacowych (premia procentowa, dodatek stażowy, zasiłek chorobowy, ekwiwalent za urlop).
 
-### 7. soneta-tools
+### 7. soneta:tools
 
 Narzędzia deweloperskie wiersza poleceń używane w Soneta.
 
@@ -98,19 +98,19 @@ Narzędzia deweloperskie wiersza poleceń używane w Soneta.
 
 **Kiedy używać:** zarządzanie bazą enova z CLI, tworzenie bazy demo, backup/konwersja bazy, weryfikacja zmian w kodzie na uruchomionej aplikacji.
 
-### 8. soneta-config
+### 8. soneta:config
 
 Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami domenowymi platformy. Zawartość jest rozwijana — poniżej to, co faktycznie obecne w skillu.
 
 **Zakres:**
 - **Import/eksport danych i ustawień konfiguracyjnych przez pliki XML** — struktura pliku `<session>`: import według rekordów (dane konfiguracyjne, pliki `*.dbinit.xml`, baza demo), import przez logikę biznesową (`business="true"`, pełna walidacja), eksport rekordów guidowanych z datapackiem; identyfikacja rekordów (GUID, `where`, `key`, `id`), formaty wartości, atrybuty specjalne, przenoszenie ustawień między bazami.
-- `scan-folders` — inwentaryzacja **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL: drzewo pozycji menu (listy, formularze) i ich powiązanie z tabelą/`ViewInfo`; czyta metadane przez Roslyn, bez uruchamiania aplikacji. Perspektywa funkcjonalno-użytkowa, komplementarna do skanów danych (`scan-modules`) ze `soneta-programming`.
+- `scan-folders` — inwentaryzacja **folderów statycznych menu** (`[assembly: FolderView]`) z bibliotek DLL: drzewo pozycji menu (listy, formularze) i ich powiązanie z tabelą/`ViewInfo`; czyta metadane przez Roslyn, bez uruchamiania aplikacji. Perspektywa funkcjonalno-użytkowa, komplementarna do skanów danych (`scan-modules`) ze `soneta:programming`.
 
 **Kiedy używać:** budowa/analiza pliku XML importu danych, przenoszenie konfiguracji między bazami, eksport danych do XML; mapowanie struktury menu dodatku, szukanie ścieżki-rodzica dla nowego folderu.
 
-> Uwaga: warstwa kodu importu/eksportu (`SessionReader`/`SessionWriter`) i kod ORM → `soneta-programming`; operacje na bazie z CLI → `soneta-tools`.
+> Uwaga: warstwa kodu importu/eksportu (`SessionReader`/`SessionWriter`) i kod ORM → `soneta:programming`; operacje na bazie z CLI → `soneta:tools`.
 
-### 9. soneta-containers
+### 9. soneta:containers
 
 Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — dla partnerów, bez dostępu do kodu programu.
 
@@ -121,32 +121,84 @@ Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — d
 - **Wybór wersji obrazów**: `soneta/server.standard`, `web.standard` — Docker Hub (publiczne) i `registry.soneta.pl` (alfa)
 - **Baza w kontenerze**: usługa init z `dbmgr create` (`--demo`, `--recreate`), SQL zewnętrzny lub kontener `mssql`
 
-**Kiedy używać:** stawianie środowiska test/demo na obrazach Soneta, `docker compose up`, Container Desktop, `helm install`, wybór tagu/wersji, problemy startu stacku (kolejność, host-alias, porty). Składnię komend `dbmgr` → `soneta-tools`.
+**Kiedy używać:** stawianie środowiska test/demo na obrazach Soneta, `docker compose up`, Container Desktop, `helm install`, wybór tagu/wersji, problemy startu stacku (kolejność, host-alias, porty). Składnię komend `dbmgr` → `soneta:tools`.
 
 ## Powiązania między skillami
 
 Skille są zaprojektowane do współpracy:
 
-1. **soneta-erp** → wskazuje właściwy skill dla danego zadania
-2. **soneta-addon-planning** → planuje strukturę nowego dodatku
-3. **soneta-business-xml** → definiuje obiekty biznesowe w XML
-4. **soneta-programming** → pokazuje jak pracować z wygenerowanymi klasami C#
-5. **soneta-form-xml** → tworzy formularze UI dla obiektów
-6. **soneta-ui-style** → styluje interfejs webowy zgodnie z design systemem enova365
-7. **soneta-place-def-elementow** → konfiguruje warstwę płacową (definicje elementów wynagrodzenia)
-8. **soneta-config** → konfiguruje działający program (ustawienia, cechy, prawa) i uruchamia funkcje domenowe (czynności, harmonogram)
-9. **soneta-tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
-10. **soneta-containers** → uruchamia i wdraża gotowy produkt w kontenerach (docker compose, Apple container, Helm); bazę zakłada `dbmgr` w kontenerze (składnia → `soneta-tools`)
+1. **soneta:erp** → wskazuje właściwy skill dla danego zadania
+2. **soneta:addon-planning** → planuje strukturę nowego dodatku
+3. **soneta:business-xml** → definiuje obiekty biznesowe w XML
+4. **soneta:programming** → pokazuje jak pracować z wygenerowanymi klasami C#
+5. **soneta:form-xml** → tworzy formularze UI dla obiektów
+6. **soneta:ui-style** → styluje interfejs webowy zgodnie z design systemem enova365
+7. **soneta:place-def-elementow** → konfiguruje warstwę płacową (definicje elementów wynagrodzenia)
+8. **soneta:config** → konfiguruje działający program (ustawienia, cechy, prawa) i uruchamia funkcje domenowe (czynności, harmonogram)
+9. **soneta:tools** → narzędzia CLI wspierające cykl pracy: `dbmgr` (bazy testowe/demo, backup, konwersja) i `buscall` (weryfikacja zmian na żywej aplikacji)
+10. **soneta:containers** → uruchamia i wdraża gotowy produkt w kontenerach (docker compose, Apple container, Helm); bazę zakłada `dbmgr` w kontenerze (składnia → `soneta:tools`)
+
+## Struktura repozytorium
+
+```
+.claude-plugin/
+├── plugin.json          # manifest pluginu (name: soneta)
+└── marketplace.json     # manifest marketplace'u (name: soneta-erp-skills)
+skills/
+├── erp/  programming/  business-xml/  form-xml/  addon-planning/
+├── ui-style/  place-def-elementow/  tools/  config/  containers/  repx/
+```
+
+Każdy skill ma `SKILL.md` (frontmatter `name` + `description`) oraz opcjonalnie
+`references/`, `scripts/`, `assets/`, `examples/`, `data/`.
 
 ## Instalacja
 
-### Claude Code
+### Claude Code (plugin)
 
-Skopiuj foldery skilli do `~/.claude/skills/`.
+Repozytorium jest **pluginem `soneta`** i jednocześnie własnym marketplace'em. W sesji Claude Code:
+
+```
+/plugin marketplace add soneta/soneta-erp-skills
+/plugin install soneta@soneta-erp-skills
+```
+
+Po restarcie sesji skille są dostępne jako `soneta:programming`, `soneta:form-xml`,
+`soneta:ui-style` itd. Aktualizacja: `/plugin update soneta`.
+
+Podgląd zawartości pluginu i szacowanego kosztu tokenów:
+
+```bash
+claude plugin details soneta
+```
+
+### Rozwój lokalny
+
+Do pracy nad samymi skillami wygodniej podpiąć klon repo symlinkiem — katalog pod
+`~/.claude/skills/` zawierający `.claude-plugin/plugin.json` ładuje się automatycznie
+jako plugin `soneta@skills-dir`, więc zmiany działają na żywo, bez kopiowania:
+
+```bash
+git clone https://github.com/soneta/soneta-erp-skills.git ~/d/Skills
+ln -s ~/d/Skills ~/.claude/skills/soneta
+```
+
+Walidacja przed commitem:
+
+```bash
+claude plugin validate . --strict        # marketplace.json
+claude plugin validate ./skills --strict # 11 skilli (nazwa katalogu = frontmatter `name`)
+claude plugin validate .claude-plugin/plugin.json
+```
+
+Ostatnie polecenie celowo bez `--strict`: zgłasza ostrzeżenie o `Claude.md` w korzeniu
+(„not loaded as project context"). To oczekiwane — `Claude.md` zawiera **reguły pisania
+skilli dla kontrybutorów tego repo**, a nie treść dla użytkowników pluginu, i ładuje się
+jako kontekst projektu przy pracy w klonie.
 
 ### Cursor / Windsurf / inne IDE
 
-Dodaj zawartość skilli do kontekstu projektu lub rules.
+Dodaj zawartość katalogów w `skills/` do kontekstu projektu lub rules.
 
 ## Licencja
 

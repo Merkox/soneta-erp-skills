@@ -1,0 +1,23 @@
+{
+  "name": "soneta",
+  "version": "1.0.0",
+  "description": "Skille platformy Soneta (enova365, Triva): klasy ORM i kod biznesowy, business.xml, form.xml, planowanie dodatków, wydruki .repx, design system, definicje elementów wynagrodzenia, konfiguracja i import XML, narzędzia CLI oraz uruchamianie w kontenerach.",
+  "author": {
+    "name": "Soneta sp. z o.o."
+  },
+  "homepage": "https://github.com/soneta/soneta-erp-skills",
+  "repository": "https://github.com/soneta/soneta-erp-skills",
+  "license": "MIT",
+  "keywords": [
+    "soneta",
+    "enova365",
+    "triva",
+    "erp",
+    "dotnet",
+    "csharp",
+    "orm",
+    "business-xml",
+    "form-xml",
+    "devexpress"
+  ]
+}
