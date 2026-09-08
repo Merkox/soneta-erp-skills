@@ -8,7 +8,7 @@ o sposobie obsługi.
 
 > Akcje zwracające action result tworzy się w workerze/extenderze — patrz [worker-extender.md](worker-extender.md).
 > Element `Command` (`MethodName`/`OpenMethodName`) wywołujący taką akcję definiuje się po stronie
-> form.xml — opisuje to skill `/soneta:form-xml`.
+> form.xml — opisuje to skill [form-xml](../../form-xml/SKILL.md).
 
 ## Spis treści
 

@@ -144,8 +144,8 @@ _Łącznie folderów: …_
 
 ## Powiązania
 
-- `scan-modules` (skill `/soneta:programming`) — inwentaryzacja modułów i tabel; z niego weźmiesz
+- `scan-modules` (skill [programming](../../programming/SKILL.md)) — inwentaryzacja modułów i tabel; z niego weźmiesz
   nazwę `TableName`, którą zobaczysz jako źródło listy w folderze.
-- `scan-props` (skill `/soneta:programming`) — pola konkretnej tabeli/`ViewInfo` widocznej w folderze.
-- `viewinfo` (skill `/soneta:programming`) — jak działa `ViewInfo` sterujący zawartością listy w folderze.
-- Narzędzia inwentaryzacyjne komplementarne do tego skanu opisuje skill `/soneta:programming`.
+- `scan-props` (skill [programming](../../programming/SKILL.md)) — pola konkretnej tabeli/`ViewInfo` widocznej w folderze.
+- `viewinfo` (skill [programming](../../programming/SKILL.md)) — jak działa `ViewInfo` sterujący zawartością listy w folderze.
+- Narzędzia inwentaryzacyjne komplementarne do tego skanu opisuje skill [programming](../../programming/SKILL.md).

@@ -22,16 +22,16 @@ są wyłącznie mechanizmy faktycznie obecne w skillu; kolejne artykuły dodawan
 
 | Potrzeba | Skill |
 |---|---|
-| **Budowa pliku XML importu/eksportu danych i ustawień** (dbinit.xml, demo, przenoszenie konfiguracji) | **/soneta:config** ([import-export-xml](references/import-export-xml.md)) |
-| Inwentaryzacja/mapa **folderów statycznych menu** (`[assembly: FolderView]`) z DLL | **/soneta:config** ([scan-folders](references/scan-folders.md)) |
-| **Konfiguracja uruchomieniowa** (porty, adresy komponentów, warstwy nadpisań `appsettings.json`) | **/soneta:config** ([appsettings](references/appsettings.md)) |
-| **Rejestr konfiguracji** (ConfigReg): `*.reg.json`, porównanie i scalanie ustawień między bazami | **/soneta:config** ([config-reg](references/config-reg.md)) |
-| Kod obsługujący import/eksport (`SessionReader`/`SessionWriter`), klasy ORM, workery | [/soneta:programming](../programming/SKILL.md) |
-| Inwentaryzacja modułów/tabel (`scan-modules`), pól (`scan-props`), workerów (`scan-workers`) | [/soneta:programming](../programming/SKILL.md) |
-| Operacje na bazie z CLI (dbmgr), test na żywej aplikacji (buscall) | [/soneta:tools](../tools/SKILL.md) |
-| Definicja struktury tabel/kolumn/relacji w XML (business.xml) | [/soneta:business-xml](../business-xml/SKILL.md) |
-| Formularze i widoki UI (form.xml) | [/soneta:form-xml](../form-xml/SKILL.md) |
-| Planowanie całego dodatku/modułu | [/soneta:addon-planning](../addon-planning/SKILL.md) |
+| **Budowa pliku XML importu/eksportu danych i ustawień** (dbinit.xml, demo, przenoszenie konfiguracji) | **config** ([import-export-xml](references/import-export-xml.md)) |
+| Inwentaryzacja/mapa **folderów statycznych menu** (`[assembly: FolderView]`) z DLL | **config** ([scan-folders](references/scan-folders.md)) |
+| **Konfiguracja uruchomieniowa** (porty, adresy komponentów, warstwy nadpisań `appsettings.json`) | **config** ([appsettings](references/appsettings.md)) |
+| **Rejestr konfiguracji** (ConfigReg): `*.reg.json`, porównanie i scalanie ustawień między bazami | **config** ([config-reg](references/config-reg.md)) |
+| Kod obsługujący import/eksport (`SessionReader`/`SessionWriter`), klasy ORM, workery | [programming](../programming/SKILL.md) |
+| Inwentaryzacja modułów/tabel (`scan-modules`), pól (`scan-props`), workerów (`scan-workers`) | [programming](../programming/SKILL.md) |
+| Operacje na bazie z CLI (dbmgr), test na żywej aplikacji (buscall) | [tools](../tools/SKILL.md) |
+| Definicja struktury tabel/kolumn/relacji w XML (business.xml) | [business-xml](../business-xml/SKILL.md) |
+| Formularze i widoki UI (form.xml) | [form-xml](../form-xml/SKILL.md) |
+| Planowanie całego dodatku/modułu | [addon-planning](../addon-planning/SKILL.md) |
 
 ## Artykuły i narzędzia
 
@@ -72,9 +72,9 @@ i tryb `--flat`. Czyta metadane przez Roslyn — bez uruchamiania aplikacji i be
 do CLR. Skrypt: [scripts/scan-folders.csx](scripts/scan-folders.csx).
 
 Perspektywa **funkcjonalno-użytkowa** (co użytkownik klika w menu) — komplementarna do
-perspektywy **danych** (`scan-modules`) i **pól** (`scan-props`) ze skilla
-[/soneta:programming](../programming/SKILL.md). Planistyczne użycie inwentaryzacji
-opisuje [/soneta:addon-planning](../addon-planning/SKILL.md).
+perspektywy **danych** ([scan-modules](../programming/references/scan-modules.md)) i **pól** ([scan-props](../programming/references/scan-props.md)) ze skilla
+`programming`. Planistyczne użycie inwentaryzacji
+opisuje [addon-planning](../addon-planning/SKILL.md).
 
 ### Konfiguracja uruchomieniowa `appsettings.json` — [references/appsettings.md](references/appsettings.md)
 
@@ -89,7 +89,7 @@ zgadzać** (`Server:Urls`↔`ServerEndpoint`, `Router:Urls`↔`RouterEndpoint`,
 portu/adresu.
 
 Uruchamianie komponentów, ramki hostującej i zarządzanie bazami opisuje
-[/soneta:tools](../tools/SKILL.md).
+[tools](../tools/SKILL.md).
 
 ### Rejestr konfiguracji (ConfigReg) — [references/config-reg.md](references/config-reg.md)
 
@@ -109,14 +109,14 @@ początku artykułu.
 
 ## Powiązania
 
-- [/soneta:programming](../programming/SKILL.md) — warstwa kodu importu/eksportu
-  (*sessionreader-sessionwriter*), rekordy guidowane (*datapack-guidedrow*), `OnImporting`/
-  `OnImported` (*row-types*), testy z `ImportBusinessXml` (*integration-tests*), skany DLL
-  (`scan-modules`, `scan-props`, `scan-workers`) oraz pisanie folderów/list w C#.
-- [/soneta:addon-planning](../addon-planning/SKILL.md) — użycie inwentaryzacji menu
+- [programming](../programming/SKILL.md) — warstwa kodu importu/eksportu
+  ([sessionreader-sessionwriter](../programming/references/sessionreader-sessionwriter.md)), rekordy guidowane ([datapack-guidedrow](../programming/references/datapack-guidedrow.md)), `OnImporting`/
+  `OnImported` ([row-types](../programming/references/row-types.md)), testy z `ImportBusinessXml` ([integration-tests](../programming/references/integration-tests.md)), skany DLL
+  ([scan-modules](../programming/references/scan-modules.md), [scan-props](../programming/references/scan-props.md), [scan-workers](../programming/references/scan-workers.md)) oraz pisanie folderów/list w C#.
+- [addon-planning](../addon-planning/SKILL.md) — użycie inwentaryzacji menu
   na etapie planowania dodatku.
-- [/soneta:tools](../tools/SKILL.md) — operacje na bazie z CLI, weryfikacja efektów
+- [tools](../tools/SKILL.md) — operacje na bazie z CLI, weryfikacja efektów
   importu na żywej aplikacji (buscall).
-- [/soneta:business-xml](../business-xml/SKILL.md) — definicja tabel i kolumn, w tym
+- [business-xml](../business-xml/SKILL.md) — definicja tabel i kolumn, w tym
   oznaczanie tabeli jako konfiguracyjnej, co decyduje o jej obecności w rejestrze konfiguracji.
-- [/soneta:erp](../erp/SKILL.md) — mapa wyboru skilla.
+- [erp](../erp/SKILL.md) — mapa wyboru skilla.

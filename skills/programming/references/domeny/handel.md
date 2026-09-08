@@ -1,7 +1,7 @@
 # Dokument handlowy — receptury kodu biznesowego (platforma Soneta)
 
 Zbiór gotowych wzorców kodu dla obiektu biznesowego **`Soneta.Handel.DokumentHandlowy`**
-(tabela `DokHandlowe`, moduł `HandelModule`). Dokument jest częścią skilla `soneta:programming`.
+(tabela `DokHandlowe`, moduł `HandelModule`). Dokument jest częścią skilla [programming](../../SKILL.md).
 Celem jest, aby agent pisał **bezbłędny kod biznesowy** operujący na dokumencie handlowym — fakturach,
 dokumentach magazynowych, zamówieniach, ofertach i korektach — trafiający w realne pola, kolekcje i workery
 platformy.

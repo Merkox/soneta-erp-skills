@@ -11,11 +11,11 @@ Ten skill zawiera kompletną wiedzę o tworzeniu i konfigurowaniu definicji elem
 
 | Plik | Kiedy czytać | Zawartość |
 |---|---|---|
-| `references/algorytmy-naliczania.md` | Gdy trzeba wybrać typ algorytmu, skonfigurować kreator lub napisać kod edytora | Typy algorytmów, parametry kreatora (podstawa, mnożnik, korekty), struktura kodu C# edytora, przykłady kompletnych algorytmów |
-| `references/wzorce-algorytmiczne.md` | Gdy trzeba znaleźć najbliższy wzorzec dla nowego elementu | 12 wzorców dla Dodatków (A-L), 5 dla Nieobecności (A-E), 5 dla Dodatków automatycznych (A-E) — z analizy ~247 definicji |
-| `references/receptury-kodu.md` | Gdy trzeba napisać konkretny fragment kodu C# | 24 kategorie gotowych fragmentów: iterowanie po elementach, wynagrodzenie zasadnicze, nieobecności, wymiar etatu, czas pracy, okresy, staż, cechy, wskaźniki, parametry dodatku, zaokrąglenia, netto→brutto, urlopy, debugowanie |
-| `references/api-algorytmow.md` | Gdy potrzebna jest referencja API — pola, metody, klasy, typy | Pola WypSkladnik, metody pomocnicze, klasy naliczania, moduły, dostęp do konfiguracji, operacje na typach danych, sygnatury metod |
-| `references/metody-sterujace-naliczaniem.md` | Gdy element musi wpływać na podstawy urlopów lub zasiłków | Metody _PodstawaUrlopu, _PodstawaZasiłku, klasa PodstawaZasiłkuArgs |
+| [references/algorytmy-naliczania.md](references/algorytmy-naliczania.md) | Gdy trzeba wybrać typ algorytmu, skonfigurować kreator lub napisać kod edytora | Typy algorytmów, parametry kreatora (podstawa, mnożnik, korekty), struktura kodu C# edytora, przykłady kompletnych algorytmów |
+| [references/wzorce-algorytmiczne.md](references/wzorce-algorytmiczne.md) | Gdy trzeba znaleźć najbliższy wzorzec dla nowego elementu | 12 wzorców dla Dodatków (A-L), 5 dla Nieobecności (A-E), 5 dla Dodatków automatycznych (A-E) — z analizy ~247 definicji |
+| [references/receptury-kodu.md](references/receptury-kodu.md) | Gdy trzeba napisać konkretny fragment kodu C# | 24 kategorie gotowych fragmentów: iterowanie po elementach, wynagrodzenie zasadnicze, nieobecności, wymiar etatu, czas pracy, okresy, staż, cechy, wskaźniki, parametry dodatku, zaokrąglenia, netto→brutto, urlopy, debugowanie |
+| [references/api-algorytmow.md](references/api-algorytmow.md) | Gdy potrzebna jest referencja API — pola, metody, klasy, typy | Pola WypSkladnik, metody pomocnicze, klasy naliczania, moduły, dostęp do konfiguracji, operacje na typach danych, sygnatury metod |
+| [references/metody-sterujace-naliczaniem.md](references/metody-sterujace-naliczaniem.md) | Gdy element musi wpływać na podstawy urlopów lub zasiłków | Metody _PodstawaUrlopu, _PodstawaZasiłku, klasa PodstawaZasiłkuArgs |
 
 ## Lokalizacja w programie
 
@@ -100,7 +100,7 @@ Konfiguracja wliczania do podstaw urlopów i zasiłków:
 
 ### Algorytm/Ogólne (`DefinicjaElementuAlgorytmPage`)
 
-Główna zakładka konfiguracji algorytmu — szczegóły w `references/algorytmy-naliczania.md`.
+Główna zakładka konfiguracji algorytmu — szczegóły w [references/algorytmy-naliczania.md](references/algorytmy-naliczania.md).
 
 ### Algorytm/Edytor (`DefinicjaElementuEdytorPage`)
 
@@ -158,7 +158,7 @@ update_field_value(["_Tekst=public void Nazwa_Param(...) {\\n    ...\\n}\\n\\npu
    public void MojDodatek_Param(WypElementDodatek Element, WypSkladnik Składnik) { ... }
    ```
 
-2. **Wybierz wzorzec** — większość nowych elementów pasuje do jednego z istniejących wzorców. Przeczytaj `references/wzorce-algorytmiczne.md` i zacznij od skopiowania najbliższego wzorca.
+2. **Wybierz wzorzec** — większość nowych elementów pasuje do jednego z istniejących wzorców. Przeczytaj [references/wzorce-algorytmiczne.md](references/wzorce-algorytmiczne.md) i zacznij od skopiowania najbliższego wzorca.
 
 3. **Źródło kwoty** — zdecyduj skąd pochodzi podstawa:
    - Kwota z parametrów pracownika → `Element.DodHistoria.Podstawa` (Wzorzec A)
@@ -185,4 +185,4 @@ update_field_value(["_Tekst=public void Nazwa_Param(...) {\\n    ...\\n}\\n\\npu
 
 10. **Element.DodHistoria.Podstawa vs Element.DodHistoria.Kwota** — w rzeczywistych algorytmach kreatorowych kwota pobierana jest z `Element.DodHistoria.Podstawa` (nie `.Kwota`). Pole `.Kwota` występuje w dokumentacji, ale `.Podstawa` jest częściej stosowane w generowanym kodzie.
 
-11. **Dodatkowe metody** — jeśli element ma odbiorców płatności (potrącenia, alimenty), zdefiniuj metody `_Odbiorca` i `_RachunekOdbiorcy`. Jeśli okres naliczania wymaga podziału, zdefiniuj `_CięcieOkresu`. Jeśli element wpływa na podstawy urlopów/zasiłków — przeczytaj `references/metody-sterujace-naliczaniem.md`.
+11. **Dodatkowe metody** — jeśli element ma odbiorców płatności (potrącenia, alimenty), zdefiniuj metody `_Odbiorca` i `_RachunekOdbiorcy`. Jeśli okres naliczania wymaga podziału, zdefiniuj `_CięcieOkresu`. Jeśli element wpływa na podstawy urlopów/zasiłków — przeczytaj [references/metody-sterujace-naliczaniem.md](references/metody-sterujace-naliczaniem.md).

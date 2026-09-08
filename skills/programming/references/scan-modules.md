@@ -163,5 +163,5 @@ _Łącznie tabel: 1196_
   `Interfaces` + link do pól).
 - [scan-props.md](./scan-props.md) — kontrakt pól pojedynczej tabeli; dane wygenerowane w
   [`../data/props/`](../data/props/) (plik `<Moduł>/<RowType>.md` na tabelę).
-- Patrz skill `soneta:business-xml` — definicje schematu z których `BusinessGenerator`
+- Patrz skill [business-xml](../../business-xml/SKILL.md) — definicje schematu z których `BusinessGenerator`
   produkuje klasy `*Module`, `*Row`, `*Table` i `*Record`.

@@ -193,7 +193,7 @@ Interface może być implementowany przez wiele tabel. Deklaracja samego interfe
 > czyni obiekt (zwykle konfiguracyjny, np. magazyn) **źródłem uprawnień**: operatorowi przypisuje się
 > prawa do tego obiektu, co steruje dostępem do **danych operacyjnych referujących** do niego (np.
 > dokumentów z danego magazynu). System sam dba o widoczność i filtrowanie list. Mechanizm po stronie
-> kodu (`AccessRight`, `Login.GetObjectRight`) — patrz skill `/soneta:programming` (rights-source.md).
+> kodu (`AccessRight`, `Login.GetObjectRight`) — patrz [rights-source.md](../programming/references/rights-source.md).
 
 **Relacja interface'owa** - kolumna typu interface może wskazywać na obiekt z dowolnej tabeli implementującej ten interface. W bazie danych zapisywana jest para: `(nazwa_tabeli, ID)`.
 
@@ -266,7 +266,7 @@ jako źródło prawdy o kontrakcie (konstruktory, settery, akcesory `Wg…`, `se
 
 Pełny wzorzec (XML ↔ klasy, selector'y, konstruktory, `[BusinessRow]`, `[NewRow]`):
 [references/generated-classes.md](references/generated-classes.md). Implementację klas po stronie
-kodu opisuje skill `/soneta:programming` (row-types.md).
+kodu opisuje [row-types.md](../programming/references/row-types.md).
 
 ### Standardy kodu C# (.NET 10)
 
@@ -342,7 +342,7 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
    tabeli klasa obiektu biznesowego i klasa tabeli; przy polach `readonly` konstruktory; dla tabel
    z selector'em - `abstract` baza, podtypy z `[BusinessRow]` i `[DefaultConstructor]`, pozycje
    `[NewRow]` (patrz [references/generated-classes.md](references/generated-classes.md))
-10. **Waliduj** - sprawdź zgodność ze schematem XSD; po pierwszym buildzie przeczytaj wygenerowany
+10. **Waliduj** - sprawdź zgodność ze schematem [assets/Business.xsd](assets/Business.xsd); po pierwszym buildzie przeczytaj wygenerowany
     `*.business.cs` (kontrakt konstruktorów, setterów, akcesorów `Wg…`)
 
 ## Szczegółowa dokumentacja
@@ -355,7 +355,7 @@ Klasę obiektu biznesowego i klasę tabeli umieszczaj w **osobnych plikach** (`Z
 - **[references/examples.md](references/examples.md)** - przykłady z rzeczywistych modułów Soneta
 
 > Po zdefiniowaniu struktury danych w business.xml kolumny prezentuje się w formularzach
-> (elementy Field, Grid) — patrz skill `/soneta:form-xml` (ELEMENTS.md).
+> (elementy Field, Grid) — patrz [ELEMENTS.md](../form-xml/references/ELEMENTS.md).
 
 ## Konwencje nazewnicze Soneta
 

@@ -7,7 +7,7 @@ Zbiór gotowych wzorców kodu dla domeny **Workflow**: definicje procesów
 (**`Soneta.Workflow.WFWorkflow`**, tabela `WFWorkflows`, caption „Proces"), zadania operatora
 (**`Soneta.Business.Db.Task`**, tabela `Tasks`, caption „Zadanie") oraz zadania CRM / aktywności
 (**`Soneta.Zadania.Zadanie`**, tabela `Zadania`). Dokument jest częścią skilla
-`soneta:programming`. Celem jest, aby agent pisał **bezbłędny kod biznesowy** operujący na
+[programming](../../SKILL.md). Celem jest, aby agent pisał **bezbłędny kod biznesowy** operujący na
 procesach i zadaniach — trafiający w realne pola, kolekcje i workery platformy.
 
 > Format **zwarty**: każdy wzorzec opisuje ogólny przypadek + tabelę wariantów. Fundamenty (sesja,

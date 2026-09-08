@@ -143,7 +143,7 @@ Algorytm:
     Mechanizm wzorca selektora opisuje [row-types.md](row-types.md); odczyt atrybutów
     assembly-level — [assembly-attributes.md](assembly-attributes.md). „Klasa podtypu" z tej sekcji
     jest zarazem wartością atrybutu `class` przy imporcie **nowego** obiektu przez logikę biznesową
-    (`business="true"`) — zob. skill `/soneta:config` (import/eksport XML).
+    (`business="true"`) — zob. skill [config](../../config/SKILL.md) (import/eksport XML).
 13. **Znacznik `enum` i sekcja `## Enumy`** — dla każdego pola, którego typ jest enumem
     (`TypeKind.Enum`, także pod `Nullable<>`), kolumna `Rodzaj` dostaje tag `enum`. Po tabeli pól
     (i ewentualnej sekcji relacji interfejsowych) wypisywana jest sekcja `## Enumy`: dla każdego
@@ -290,4 +290,4 @@ Pola oznaczone `[Obsolete]` są pomijane.
   odczyt atrybutów assembly-level, na których opiera się wykrywanie podtypów.
 - [scan-modules.md](scan-modules.md) — inwentaryzacja modułów/tabel; przydatna, by ustalić `RowType`/moduł (ta sama informacja jest też w `INDEX.md`).
 - Patrz [datapack-guidedrow.md](datapack-guidedrow.md) — struktury `GuidedRow` / `ExportedRow` i mechanizm Datapack operujący na polach rekordu.
-- Patrz skill `soneta:business-xml` — definicja schematu, z którego `BusinessGenerator` produkuje klasę `XxxRecord`.
+- Patrz skill [business-xml](../../business-xml/SKILL.md) — definicja schematu, z którego `BusinessGenerator` produkuje klasę `XxxRecord`.

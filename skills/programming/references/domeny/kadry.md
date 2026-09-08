@@ -3,7 +3,7 @@
 Zbiór gotowych wzorców kodu dla domeny **Kadry i Płace**: obiekt biznesowy
 **`Soneta.Kadry.Pracownik`** (tabela `Pracownicy`) wraz z jego historią kadrową, etatem,
 nieobecnościami, planem pracy, umowami cywilnoprawnymi i wypłatami. Dokument jest częścią skilla
-`soneta:programming`. Celem jest, aby agent pisał **bezbłędny kod biznesowy** operujący na
+[programming](../../SKILL.md). Celem jest, aby agent pisał **bezbłędny kod biznesowy** operujący na
 pracowniku — trafiający w realne pola, kolekcje i workery platformy.
 
 > Format **zwarty**: każdy wzorzec opisuje ogólny przypadek + tabelę wariantów. Fundamenty (sesja,
@@ -104,5 +104,4 @@ Każdy wzorzec (`KADRY-Xn`, gdzie `X` = litera sekcji z listy zadań) ma stałą
 - [`rowcondition.md`](../rowcondition.md) — serwerowy LINQ, `RowCondition`, `SubTable[condition]`.
 - [`features.md`](../features.md) — cechy (`Features`), typy, dostęp typowany/nietypowany.
 - [`scan-props.md`](../scan-props.md) / [`scan-workers.md`](../scan-workers.md) — inwentaryzacja pól i workerów; weryfikacja dokładnych nazw i typów pól obiektu z DLL.
-- `/soneta:config` (*import-export-xml*) — import/eksport pracownika przez plik XML; gotowy przykład `examples/import-pracownik-etatowy.xml` (model „root + historia", kolekcja historyczna z `addnew="true"`).
-
+- [import-export-xml](../../../config/references/import-export-xml.md) — import/eksport pracownika przez plik XML; gotowy przykład `examples/import-pracownik-etatowy.xml` (model „root + historia", kolekcja historyczna z `addnew="true"`).
