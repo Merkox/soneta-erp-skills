@@ -40,6 +40,8 @@ Przed zakończeniem:
 
 - Sprawdź frontmatter zmienionych skilli (`name`, `description`, zgodność nazwy z katalogiem)
   oraz to, czy zmienione odnośniki prowadzą do właściwych plików. Przejrzyj diff.
+- Sprawdź przejście z `erp` do właściwego skilla zarówno przez mechanizm ładowania skilli,
+  jak i przez zwykły odczyt plików.
 - Uruchom zmienione skrypty w wymaganym środowisku.
 - Zmiany manifestów, sposobu instalacji lub ładowania skilli sprawdzaj w środowisku,
   którego dotyczą. Wskaż, czego nie udało się zweryfikować.
