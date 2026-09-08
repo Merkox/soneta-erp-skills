@@ -21,10 +21,32 @@ Mapowanie kroków z głównego skilla (zapis poglądowy, nie gotowy skrypt):
 9. save_form() — zapisz do bazy
 ```
 
-### Formatowanie kodu w edytorze (przez MCP)
+## Kod w edytorze
 
-Znaki nowej linii w kodzie C# przez MCP wstawiamy jako `\\n`:
+Do `update_field_value` przekazuj `fieldsValues` jako tablicę ciągów `pole=wartość`.
+Wartość `_Tekst` ma zawierać rzeczywiste znaki nowej linii. Metoda oddziela nazwę pola
+od wartości po pierwszym `=`; konwersja pola kodu nie odkodowuje dodatkowych sekwencji ucieczki.
 
+W obiekcie argumentów MCP zapisanym jako JSON używaj `\n` (jeden ukośnik w tekście JSON).
+Parser JSON zamienia tę sekwencję na znak nowej linii:
+
+```json
+{"fieldsValues":["_Tekst=public void Nazwa_Param(...) {\n    ...\n}\n\npublic Currency Nazwa_Wylicz(...) {\n    return ...;\n}"]}
 ```
-update_field_value(["_Tekst=public void Nazwa_Param(...) {\\n    ...\\n}\\n\\npublic Currency Nazwa_Wylicz(...) {\\n    return ...;\\n}"])
+
+Przez `buscall call` przekaż tę samą tablicę jako wartość argumentu `fieldsValues`.
+Przykład dla Bash (kod poglądowy, zastąp go właściwym algorytmem):
+
+```bash
+buscall --db Demo call update_field_value 'fieldsValues=["_Tekst=public void Nazwa_Param(...) {\n    ...\n}\n"]'
 ```
+
+Nie zamieniaj `\n` na `\\n` w powyższych przykładach: po odczytaniu JSON druga postać
+pozostawia w wartości dosłowny ukośnik i literę `n`. Jeśli budujesz argumenty w kodzie,
+przekaż tekst wielowierszowy i użyj serializatora JSON. Przy dodatkowej warstwie kodowania
+lub innej powłoce zachowaj ten sam wynik po odkodowaniu argumentów.
+
+Po wpisaniu odczytaj pole edytora i porównaj z przygotowanym kodem. Separatory wierszy
+powinny pozostać rzeczywistymi znakami nowej linii, a sekwencje ucieczki wewnątrz literałów
+C# — zachować oryginalną postać. Potwierdź też zapis konfiguracji i wynik naliczenia
+według głównego skilla.
