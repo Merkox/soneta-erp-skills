@@ -5,7 +5,8 @@ Narzędzie do wylistowania wszystkich modułów (`*Module`) platformy Soneta ora
 nie wymaga źródeł.
 
 > **Ścieżki poleceń** w tym dokumencie są względne wobec katalogu skilla (`skills/programming/`
-> w pluginie `soneta`) — uruchamiaj je z tego katalogu albo poprzedź jego ścieżką.
+> w repozytorium) — ustal lokalizację zainstalowanego skilla i uruchamiaj polecenia z tego
+> katalogu albo poprzedź jego ścieżką.
 
 > **Przegląd modułów/tabel masz już gotowy — bez skanowania.** Wygenerowany indeks jest
 > zarazem pełną inwentaryzacją, w układzie dwupoziomowym:

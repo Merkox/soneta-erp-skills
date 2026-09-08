@@ -40,6 +40,11 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 
 ## Wspólny kontekst
 
+- **Dostęp do narzędzi:** polecenia uruchamiaj przez terminal dostępny w danym środowisku
+  agenta. MCP jest opcjonalnym sposobem połączenia, a `callmcp` trybem narzędzia `buscall`;
+  dostępne nazwy i parametry sprawdzaj w kontrakcie połączenia lub przez `methods.list`.
+  Gdy brakuje terminala, binariów lub połączenia z aplikacją, przygotuj polecenia i wskaż,
+  które kroki pozostają niewykonane.
 - **Binaria** znajdują się w katalogu wyjściowym buildu (`bin/Debug`) odpowiedniego projektu.
   Dokładna ścieżka zależy od Twojego układu repozytoriów — w przykładach piszemy krótko
   `dbmgr` / `buscall`, zakładając alias, wpis w `PATH` albo uruchamianie z katalogu buildu:

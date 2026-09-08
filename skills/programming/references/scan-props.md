@@ -4,7 +4,8 @@ Odczyt rzeczywistych pól bazodanowych obiektu biznesowego platformy Soneta — 
 wyrażeń bindujących form.xml oraz [warunków filtrujących](./rowcondition.md).
 
 > **Ścieżki poleceń** w tym dokumencie są względne wobec katalogu skilla (`skills/programming/`
-> w pluginie `soneta`) — uruchamiaj je z tego katalogu albo poprzedź jego ścieżką.
+> w repozytorium) — ustal lokalizację zainstalowanego skilla i uruchamiaj polecenia z tego
+> katalogu albo poprzedź jego ścieżką.
 
 ## Najpierw sprawdź dane wygenerowane (`data/props/`) — bez skanowania
 
@@ -53,10 +54,9 @@ dotnet script scripts/export-props-all.csx \
 ```
 
 Przykład (macOS/Linux): `-- ~/d/dev/bin/Debug data/props`.
-> **Uwaga przy instalacji z marketplace'u.** Regeneracja nadpisuje `data/` w katalogu
-> zainstalowanego pluginu (`~/.claude/plugins/cache/...`), a `/plugin update` kasuje ten
-> katalog razem z wynikiem. Regeneruj w klonie repo `soneta-erp-skills` i wypchnij zmianę,
-> albo licz się z powtórzeniem po każdej aktualizacji pluginu.
+> **Miejsce regeneracji.** Katalog zainstalowanego skilla może być tylko do odczytu lub
+> zostać zastąpiony podczas aktualizacji. Regeneruj w klonie repo `soneta-erp-skills`
+> albo podaj zapisywalny katalog wynikowy w projekcie i korzystaj z danych z tej lokalizacji.
 Skrypt buduje kompilację Roslyn **raz** i iteruje po wszystkich realnych tabelach
 (`*Row` mające parę `*Table` i `*Record`), zapisując plik na tabelę, `INDEX.md` (z kolumną
 `Historia`) oraz `Interfaces.md` (interfejs → tabele). Cały program (~1200 tabel) eksportuje

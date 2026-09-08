@@ -8,7 +8,7 @@ Aby osadzić plan w istniejącym modelu danych platformy Soneta, **zinwentaryzuj
 - .NET SDK 10 oraz `dotnet-script` (`dotnet tool install -g dotnet-script`).
 
 > **Ścieżki skryptów** poniżej są względne wobec katalogu tego dokumentu
-> (`skills/addon-planning/references/` w pluginie `soneta`) i wskazują skrypty
+> (`skills/addon-planning/references/` w repozytorium) i wskazują skrypty
 > sąsiednich skilli — `../../programming/scripts/` i `../../config/scripts/`.
 
 Gdy środowiska brak (np. planowanie koncepcyjne bez dostępu do buildu) — **nie zgaduj istniejących struktur**; zapisz inwentaryzację jako otwartą kwestię **blokującą** dla Etapu 2 i kontynuuj Etap 1.

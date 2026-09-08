@@ -48,7 +48,9 @@ Najważniejsze parametry:
 | `IconName` | Nazwa zasobu ikony. |
 | `Description` | Tooltip / opis folderu. |
 
-Najważniejsze foldery `path` programu Soneta można znaleźć w skill /soneta-mcp-ui/common-folders.md. 
+Ścieżki `path` statycznych folderów menu odczytaj z DLL przez
+[scan-folders](../../config/references/scan-folders.md). Foldery dostępne w działającej
+aplikacji odkrywaj przez [buscall](../../tools/references/buscall.md#odkrywanie-ścieżki-folderów).
 
 ---
 

@@ -34,3 +34,17 @@ potrzebne do pracy. Przy zadaniu obejmującym kilka warstw korzystaj z kilku ski
 - XML importuje wskazane rekordy; rejestr konfiguracji porównuje i przenosi stan konfiguracji.
   Oba formaty opisuje `config`, kod `SessionReader`/`SessionWriter` — `programming`.
 - `containers` opisuje uruchomienie i wdrożenie; składnię operacji na bazie przez `dbmgr` — `tools`.
+
+## Korzystanie w różnych środowiskach agenta
+
+Linki do plików są właściwym sposobem przechodzenia między skillami; użycie konkretnej
+komendy aktywującej skill nie jest wymagane. Jeśli środowisko ma mechanizm ładowania skilli,
+możesz go użyć. W przeciwnym razie przeczytaj wskazany plik dostępnym narzędziem odczytu.
+Gdy celu linku brakuje, sprawdź dostępne skille po polu `name`; jeśli nadal go nie ma,
+wskaż brakujący materiał i kontynuuj część zadania, która od niego nie zależy.
+
+Linki rozwiązuj względem pliku, w którym występują. Ścieżki `scripts/`, `assets/` i `data/`
+w przykładach poleceń odnoszą się do katalogu danego skilla, a pliki wynikowe do ustalonego
+katalogu projektu. Ustal rzeczywistą lokalizację skilla zamiast zakładać katalog instalacji
+konkretnego asystenta. Składnię powłoki i narzędzia odczytu, wyszukiwania oraz MCP dopasuj
+do dostępnego środowiska; brak narzędzia opisz jako ograniczenie wykonania lub weryfikacji.

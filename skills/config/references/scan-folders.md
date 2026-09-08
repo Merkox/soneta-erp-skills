@@ -5,7 +5,8 @@ zadeklarowanych atrybutem assembly `[assembly: FolderView(...)]`. Czyta metadane
 bibliotek dodatku, nie wymaga źródeł ani uruchamiania aplikacji.
 
 > **Ścieżki poleceń** w tym dokumencie są względne wobec katalogu skilla (`skills/config/`
-> w pluginie `soneta`) — uruchamiaj je z tego katalogu albo poprzedź jego ścieżką.
+> w repozytorium) — ustal lokalizację zainstalowanego skilla i uruchamiaj polecenia z tego
+> katalogu albo poprzedź jego ścieżką.
 
 ## Cel
 

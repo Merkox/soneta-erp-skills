@@ -8,7 +8,8 @@ Zakładki i listy (`Grid`) pokazują też, co logicznie stanowi „dane obiektu"
 **ustalić zakres eksportu** (które podkolekcje i cechy dołączyć do datapacku).
 
 > **Ścieżki poleceń** w tym dokumencie są względne wobec katalogu skilla (`skills/programming/`
-> w pluginie `soneta`) — uruchamiaj je z tego katalogu albo poprzedź jego ścieżką.
+> w repozytorium) — ustal lokalizację zainstalowanego skilla i uruchamiaj polecenia z tego
+> katalogu albo poprzedź jego ścieżką.
 
 ## Najpierw dane wygenerowane (`data/forms/`) — szybkie wyszukanie „obiekt → zakładki”
 
@@ -48,10 +49,9 @@ Regeneracja po zmianie wersji/kompilacji (jeden przebieg po DLL):
 dotnet script scripts/export-forms-index.csx \
     -- <KatalogDll> data/forms
 ```
-> **Uwaga przy instalacji z marketplace'u.** Regeneracja nadpisuje `data/` w katalogu
-> zainstalowanego pluginu (`~/.claude/plugins/cache/...`), a `/plugin update` kasuje ten
-> katalog razem z wynikiem. Regeneruj w klonie repo `soneta-erp-skills` i wypchnij zmianę,
-> albo licz się z powtórzeniem po każdej aktualizacji pluginu.
+> **Miejsce regeneracji.** Katalog zainstalowanego skilla może być tylko do odczytu lub
+> zostać zastąpiony podczas aktualizacji. Regeneruj w klonie repo `soneta-erp-skills`
+> albo podaj zapisywalny katalog wynikowy w projekcie i korzystaj z danych z tej lokalizacji.
 
 ## Po co to
 
