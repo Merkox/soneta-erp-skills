@@ -13,7 +13,7 @@
 >
 > Wszystkie workery wymienione w tym rozdziale są **publiczne** i mogą być wywołane z dodatku zewnętrznego.
 > Operacje modyfikujące dokument wykonuj w transakcji (`session.Logout(true)` + `Commit`/`CommitUI`), potem
-> `session.Save()`. Kod zgodny z C# 10.
+> `session.Save()`. Kod zgodny z C# 14.
 
 ---
 

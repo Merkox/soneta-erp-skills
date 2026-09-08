@@ -11,9 +11,13 @@ platformy.
 > są opisane w [`safe-code.md`](../safe-code.md), [`session-login.md`](../session-login.md) oraz
 > [`worker-extender.md`](../worker-extender.md) — tutaj się do nich odwołujemy, nie powtarzamy ich.
 >
-> **Cały kod w tym dokumencie jest zgodny z C# 10** (target-typed `new`, `var`, wyrażenia `switch`,
-> nazwane parametry `bool`). Snippety operują wyłącznie na **publicznym kontrakcie** platformy — nie
-> ma odwołań do prywatnych klas ani kodu źródłowego aplikacji.
+> **Cały kod w tym dokumencie jest zgodny z C# 14**. Snippety operują wyłącznie na
+> **publicznym kontrakcie** platformy, bez odwołań do prywatnych klas ani kodu źródłowego aplikacji.
+>
+> **Styl kodu:** preferuj `var`, uwzględniając lokalne ustawienia projektu. Używaj target-typed
+> `new` i wyrażeń `switch`, gdy poprawiają czytelność. Przy argumentach `bool` podawaj nazwę
+> parametru, gdy samo `true` lub `false` nie wyjaśnia znaczenia wywołania. Nowsze konstrukcje
+> stosuj, gdy upraszczają kod.
 
 ## Fakty o typie (zweryfikowane skanem DLL — `scan-props.csx` / `scan-workers.csx`)
 
@@ -102,11 +106,11 @@ Konstruktor pozycji wymaga dokumentu: `new PozycjaDokHandlowego(dokument)`.
 
 Każdy wzorzec (`HANDEL-Wn`) ma stałą strukturę:
 
-- **Cel** — co robi i kiedy go użyć.
-- **Warianty** — tabela odmian przypadku.
-- **Pola i typy** — realne właściwości/kolekcje i ich typy.
-- **Snippet** — kod C# 10 na publicznym kontrakcie.
-- **Pułapki** — typowe błędy i zasady safe-code.
+- **Cel**: co robi i kiedy go użyć.
+- **Warianty**: tabela odmian przypadku.
+- **Pola i typy**: realne właściwości/kolekcje i ich typy.
+- **Snippet**: kod C# 14 na publicznym kontrakcie.
+- **Pułapki**: typowe błędy i zasady safe-code.
 
 ---
 
