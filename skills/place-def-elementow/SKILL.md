@@ -7,6 +7,12 @@ description: "Tworzenie i konfiguracja definicji elementów wynagrodzenia na pla
 
 Ten skill zawiera kompletną wiedzę o tworzeniu i konfigurowaniu definicji elementów wynagrodzenia na platformie Soneta. Wiedza jest podzielona na pliki referencyjne — czytaj odpowiedni plik w zależności od potrzeby.
 
+Konfigurację w działającej aplikacji wykonuj przez dostępne połączenie do Soneta
+(np. MCP `soneta_ui` lub `buscall` ze skilla [tools](../tools/SKILL.md)). Gdy połączenia
+brak, przygotuj ustawienia i kod C# do wprowadzenia przez użytkownika oraz wskaż,
+że zapis i naliczenie w aplikacji pozostają do sprawdzenia. Samo opracowanie algorytmu
+nie wymaga dostępu do UI.
+
 ## Spis treści referencji
 
 | Plik | Kiedy czytać | Zawartość |
@@ -16,6 +22,7 @@ Ten skill zawiera kompletną wiedzę o tworzeniu i konfigurowaniu definicji elem
 | [references/receptury-kodu.md](references/receptury-kodu.md) | Gdy trzeba napisać konkretny fragment kodu C# | 24 kategorie gotowych fragmentów: iterowanie po elementach, wynagrodzenie zasadnicze, nieobecności, wymiar etatu, czas pracy, okresy, staż, cechy, wskaźniki, parametry dodatku, zaokrąglenia, netto→brutto, urlopy, debugowanie |
 | [references/api-algorytmow.md](references/api-algorytmow.md) | Gdy potrzebna jest referencja API — pola, metody, klasy, typy | Pola WypSkladnik, metody pomocnicze, klasy naliczania, moduły, dostęp do konfiguracji, operacje na typach danych, sygnatury metod |
 | [references/metody-sterujace-naliczaniem.md](references/metody-sterujace-naliczaniem.md) | Gdy element musi wpływać na podstawy urlopów lub zasiłków | Metody _PodstawaUrlopu, _PodstawaZasiłku, klasa PodstawaZasiłkuArgs |
+| [references/soneta-ui.md](references/soneta-ui.md) | Gdy konfigurujesz element przez MCP `soneta_ui` lub `buscall` | Metody integracji, przekazywanie kodu do edytora i sprawdzenie zapisu |
 
 ## Lokalizacja w programie
 
@@ -110,19 +117,18 @@ Pole kodu C# (typ `code`) — edytor algorytmu. Aktywny gdy Algorytm = "Edytor a
 
 Podgląd wygenerowanego kodu C# (read-only).
 
-## Tworzenie nowego elementu — krok po kroku przez MCP
+## Tworzenie nowego elementu
 
-```
-1. navigate_to_folder("Ustawienia/Kadry i płace/Płace/Elementy wynagrodzenia")
-2. add_subobject(gridID="_New_CfgDefElementowExtender_DefElementow")
-3. update_field_value — wypełnij zakładkę Ogólne (nazwa, skrót, naliczanie, lista płac)
-4. switch_form_page("DefinicjaElementuAlgorytmPage") — skonfiguruj algorytm
-5. [opcjonalnie] switch_form_page("DefinicjaElementuEdytorPage") — wpisz kod C#
-6. switch_form_page("DefinicjaElementuDeklaracjePage") — skonfiguruj PIT/ZUS
-7. switch_form_page("DefinicjaElementuNieobecnosciProPage") — skonfiguruj wliczanie do podstaw
-8. accept_subform() — zatwierdź podformularz
-9. save_form() — zapisz do bazy
-```
+1. Otwórz `Ustawienia/Kadry i płace/Płace/Elementy wynagrodzenia` i dodaj definicję.
+2. Wypełnij zakładkę **Ogólne**: nazwa, skrót, naliczanie, lista płac.
+3. W **Algorytm/Ogólne** wybierz i skonfiguruj algorytm; dla edytora wpisz kod C#
+   w **Algorytm/Edytor**.
+4. Uzupełnij **Deklaracje** (PIT/ZUS) i **Nieobecności** (wliczanie do podstaw).
+5. Zatwierdź podformularz i zapisz definicję. Odczytaj zapisane wartości i sprawdź
+   naliczenie na przypadku testowym odpowiadającym wymaganiom.
+
+Przy użyciu MCP `soneta_ui` lub `buscall` przeczytaj [references/soneta-ui.md](references/soneta-ui.md):
+mapowanie tych kroków na metody i sposób przekazania kodu do edytora.
 
 ### Wybór algorytmu
 
@@ -132,14 +138,6 @@ Podgląd wygenerowanego kodu C# (read-only).
 | Złożona logika (warunki, nietypowe obliczenia) | **Edytor algorytmu** — własny kod C# |
 | Naliczanie jak urlop/ekwiwalent | **Jak urlop wypoczynkowy** / **Jak ekwiwalent za urlop** |
 | Naliczanie za okres nieobecności | **Za okres nieobecności** |
-
-### Formatowanie kodu w edytorze (przez MCP)
-
-Znaki nowej linii w kodzie C# przez MCP wstawiamy jako `\\n`:
-
-```
-update_field_value(["_Tekst=public void Nazwa_Param(...) {\\n    ...\\n}\\n\\npublic Currency Nazwa_Wylicz(...) {\\n    return ...;\\n}"])
-```
 
 ## Wskazówki przy tworzeniu nowych algorytmów
 
