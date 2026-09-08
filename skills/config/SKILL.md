@@ -1,18 +1,18 @@
 ---
 name: config
 description: >
-  Konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva): (A) IMPORT/EKSPORT
-  DANYCH I USTAWIEŃ przez pliki XML — element session, import według rekordów (*.dbinit.xml,
-  demo) i przez logikę biznesową (business="true"), eksport datapacku, GUID; (B)
-  `scan-folders` — foldery menu (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA
-  URUCHOMIENIOWA `appsettings.json` — porty i adresy komponentów, warstwy nadpisań (`-c`,
-  `SONETA_`, CLI); (D) REJESTR KONFIGURACJI (ConfigReg, „Zarządzanie konfiguracją") — zrzut
-  konfiguracji bazy do `*.reg.json`, porównanie i scalanie ustawień, sigile (`$strict`, `$v`,
-  `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu, pyta o atrybuty
-  guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane; (3) mapuje
-  menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji, debuguje
-  `*.reg.json` albo przenosi ustawienia między bazami przez rejestr. Kod importu →
-  /soneta:programming; operacje na bazie z CLI → /soneta:tools.
+  Konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva) — dla partnerów i zespołu Soneta:
+  (A) IMPORT/EKSPORT DANYCH I USTAWIEŃ przez XML —
+  element session, import według rekordów (*.dbinit.xml, demo) i przez logikę biznesową
+  (business="true"), eksport datapacku, GUID; (B) `scan-folders` — foldery menu
+  (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty i adresy,
+  warstwy nadpisań (`-c`, `SONETA_`, CLI); (D) REJESTR KONFIGURACJI (ConfigReg,
+  „Zarządzanie konfiguracją") — zrzut konfiguracji bazy do `*.reg.json`, porównanie i scalanie,
+  sigile (`$strict`, `$v`, `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu,
+  pyta o atrybuty guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane;
+  (3) mapuje menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji,
+  debuguje `*.reg.json` albo przenosi ustawienia między bazami. Kod importu → /soneta:programming;
+  operacje na bazie z CLI → /soneta:tools.
 ---
 
 # Ustawienia, konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva)

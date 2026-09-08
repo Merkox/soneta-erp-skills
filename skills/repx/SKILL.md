@@ -1,6 +1,17 @@
 ---
 name: repx
-description: "Wydruki i raporty w Soneta (enova365, Triva) — pliki .repx (DevExpress XtraReports, serializowany XML). Sięgaj przy KAŻDYM zadaniu z wydrukiem/raportem: faktura, dokument, deklaracja, lista, zestawienie; utworzenie, przeróbka lub poprawa .repx (też z załącznika); pytanie „jak w wydruku zrobić X”. Typowe X: podpięcie danych (lista, dokument z pozycjami, master-detail, podraport), podział stron, kolumna Lp, tabele, grupowanie i sumy, formatowanie warunkowe, kwoty, nakładanie wartości na skan formularza, nagłówek/stopka/podpisy, arkusz stylów (.repss), rejestracja wydruku. Wyzwalają też pojęcia: XtraReportsLayoutSerializer, StyleSheetSerializer, pasma (DetailBand/DetailReportBand/GroupHeaderBand/SubBand), kontrolki (XRLabel/XRTable/AmountLabel), BusinessDataSource/DataKind, ReportContext, ExpressionBindings/Summary/CalculatedFields/FilterString, [assembly: DxReport], ReportSnippet/[DxBind]. Wystarczy „wydruk”, „raport” lub „.repx” w kontekście Soneta. NIE dla: business.xml, form.xml, SQL, Excel, Word .dotx."
+description: >
+  Wydruki i raporty w Soneta (enova365, Triva) — pliki .repx (DevExpress XtraReports, serializowany
+  XML); dla dodatków partnerów i standardowych wydruków platformy. Sięgaj
+  przy KAŻDYM zadaniu z wydrukiem/raportem: faktura, dokument, deklaracja, lista, zestawienie;
+  utworzenie, przeróbka lub poprawa .repx; pytanie „jak w wydruku zrobić X”.
+  Typowe X: podpięcie danych (lista, dokument z pozycjami, master-detail, podraport), podział stron,
+  kolumna Lp, tabele, grupowanie i sumy, formatowanie warunkowe, kwoty, wartości na skanie formularza, nagłówek/stopka/podpisy, arkusz stylów (.repss), rejestracja wydruku. Wyzwalają też:
+  XtraReportsLayoutSerializer, pasma (DetailBand/DetailReportBand/
+  GroupHeaderBand/SubBand), kontrolki (XRLabel/XRTable/AmountLabel), BusinessDataSource/DataKind,
+  ReportContext, ExpressionBindings/Summary/CalculatedFields/FilterString, [assembly: DxReport],
+  ReportSnippet/[DxBind]. Wystarczy „wydruk”, „raport” lub „.repx” w kontekście Soneta. NIE dla:
+  business.xml, form.xml, SQL, Excel, Word .dotx.
 ---
 
 # Soneta DX Reports — wydruki DevExpress XtraReports (.repx)

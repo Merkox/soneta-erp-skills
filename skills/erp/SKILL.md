@@ -1,21 +1,26 @@
 ---
 name: erp
 description: >
-  Mapa i przewodnik po wyspecjalizowanych skillach platformy Soneta (enova365, Triva):
-  soneta:programming (ORM, kod biznesowy), soneta:addon-planning, soneta:business-xml,
-  soneta:form-xml, soneta:repx (wydruki DevExpress .repx), soneta:place-def-elementow,
-  soneta:config (import/eksport XML, scan-folders, appsettings.json — porty i adresy
-  komponentów, rejestr konfiguracji ConfigReg — *.reg.json, przenoszenie ustawień między
-  bazami), soneta:tools (narzędzia CLI: dbmgr, buscall, SonetaFrame), soneta:containers (docker
-  compose, Apple container, Helm/Kubernetes, wersje obrazów, baza w kontenerze). Używaj gdy
-  użytkownik: (1) rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać;
-  (2) pyta ogólnie o dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta
-  Enterprise, Triva bez sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać
-  dostępne skille; (5) realizuje zadanie obejmujące wiele warstw platformy (np. moduł z bazą,
-  formularzami i logiką).
+  Mapa i przewodnik po skillach platformy Soneta (enova365, Triva): soneta:programming (ORM, kod
+  biznesowy), soneta:addon-planning, soneta:business-xml, soneta:form-xml, soneta:repx (wydruki
+  .repx), soneta:place-def-elementow, soneta:config (import/eksport XML, scan-folders,
+  appsettings.json, rejestr konfiguracji *.reg.json), soneta:tools (dbmgr, buscall, SonetaFrame),
+  soneta:containers (docker compose, Apple container, Helm/Kubernetes). Używaj gdy użytkownik: (1)
+  rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie o
+  dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise, Triva bez
+  sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne skille; (5) realizuje
+  zadanie obejmujące wiele warstw platformy; (6) pracuje nad kodem samej platformy w repozytorium
+  źródłowym Soneta (`Soneta.*`, moduły standardowe) — skille opisują publiczną
+  bibliotekę platformy i obowiązują tak samo dla dodatków partnerów i kodu zespołu Soneta.
 ---
 
 # Mapa skills podczas pracy z platformą Soneta (enova365, Triva)
+
+> **Zakres stosowania.** Skille `/soneta:*` dokumentują publiczną bibliotekę platformy (ORM, kod
+> biznesowy, formularze, wydruki, narzędzia). Stosuj je **zawsze**, gdy powstaje kod na platformie —
+> niezależnie od tego, czy jest to dodatek partnera, czy kod modułów standardowych pisany przez zespół
+> Soneta w repozytorium źródłowym programu. Te same wzorce, checklisty i zasady bezpiecznego kodu
+> (safe-code) obowiązują w obu przypadkach.
 
 * `/soneta:programming` - Fundamentalne klasy ORM platformy Soneta. Obejmuje mapowanie 
 obiektowo-relacyjne (Row, Table, Module), zarządzanie sesją (Session), logowanie (Login, Database, BusApplication), 
@@ -72,7 +77,7 @@ synchronizację danych, lub kontekst aplikacji Soneta, Context
   wydruku (`ReportSnippet`, `[DxBind]`) i logika ORM licząca dane → `/soneta:programming`; formularz
   parametrów wydruku → `/soneta:form-xml`.
 * `/soneta:form-xml` - XML z nieistniejącymi elementami. ZAWSZE używaj tego skilla gdy użytkownik: (1) prosi o utworzenie lub modyfikację pliku pageform.xml, viewform.xml, form.xml, lookupform.xml lub gridform.xml dla platformy Soneta (enova365); (2) pyta o elementy DataForm, Page, Group, Grid, Field, Row, Stack, Flow, Command, Include, Appearance, GroupBy w Soneta; (3) pyta o składnię EditValue, DataContext, Visibility, RowCondition, Renderable, CaptionHtml, Footer, Class lub układ UI formularzy Soneta; (4) pokazuje istniejący plik form.xml/pageform.xml/viewform.xml i pyta o jego strukturę lub chce go rozszerzyć; (5) pyta o warunkową widoczność, formatowanie warunkowe (Appearance), bindowanie danych lub wzorce UI w Soneta.
-* `/soneta:containers` - Uruchamianie i wdrażanie platformy Soneta w kontenerach (dla partnerów,
+* `/soneta:containers` - Uruchamianie i wdrażanie platformy Soneta w kontenerach (bez odwołań do kodu programu,
   bez dostępu do kodu). Trzy ścieżki: **docker compose** (główna), **Apple `container` /
   Container Desktop** (macOS), **Helm / Kubernetes** (beta). Obejmuje: wybór wersji obrazów
   (`soneta/server.standard`, `web.standard` — Docker Hub lub `registry.soneta.pl`), tworzenie

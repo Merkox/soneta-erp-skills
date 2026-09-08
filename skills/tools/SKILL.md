@@ -1,18 +1,17 @@
 ---
 name: tools
 description: >
-  Narzędzia deweloperskie wiersza poleceń (CLI) platformy Soneta (enova365, Triva). Używaj gdy
-  użytkownik: (1) zarządza bazami danych przez `dbmgr` — tworzy, rejestruje, konwertuje,
-  backup/restore, licencje, rozszerzenia (extensions), analiza, kompilacja; (2) przygotowuje
-  bazę testową/demo z wiersza poleceń albo automatyzuje operacje na bazach w skrypcie/CI; (3)
-  testuje działającą aplikację przez `buscall` — zdalnie steruje programem (nawigacja,
-  formularze, gridy, edycja) i robi zrzuty ekranu; (4) uruchamia aplikację ramki `SonetaFrame`
-  (`SonetaFrameNew`), konfiguruje źródła baz danych (`demo:`, `http`, `docker:`, `process:`,
-  `orchestrator:`) albo pyta o plik ustawień `Settings_Product.json`; (5) pyta o składnię,
-  komendy lub opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame`; (6) wspomina „zarządzanie
-  bazą enova", „baza demo", „konwersja bazy", „testowanie na żywej aplikacji", „ramka Soneta".
-  Sięgnij też, gdy inny skill potrzebuje operacji na bazie lub weryfikacji zmian na
-  uruchomionej aplikacji.
+  Narzędzia deweloperskie wiersza poleceń (CLI) platformy Soneta (enova365, Triva) — dla partnerów
+  i zespołu Soneta (repozytorium źródłowe programu). Używaj gdy użytkownik: (1)
+  zarządza bazami przez `dbmgr` — tworzy, rejestruje, konwertuje, backup/restore, licencje,
+  rozszerzenia, analiza, kompilacja; (2) przygotowuje bazę testową/demo z CLI albo automatyzuje
+  operacje na bazach w skrypcie/CI; (3) testuje działającą aplikację przez `buscall` — zdalnie
+  steruje programem (nawigacja, formularze, gridy, edycja) i robi zrzuty ekranu; (4) uruchamia
+  ramkę `SonetaFrame` (`SonetaFrameNew`), konfiguruje źródła baz (`demo:`, `http`, `docker:`,
+  `process:`, `orchestrator:`) albo pyta o `Settings_Product.json`; (5) pyta o składnię, komendy
+  lub opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame`; (6) wspomina „zarządzanie bazą enova",
+  „baza demo", „konwersja bazy", „testowanie na żywej aplikacji", „ramka Soneta". Sięgnij też, gdy
+  inny skill potrzebuje operacji na bazie lub weryfikacji zmian na uruchomionej aplikacji.
 ---
 
 # Soneta Tools — narzędzia deweloperskie CLI

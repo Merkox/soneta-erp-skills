@@ -2,6 +2,8 @@
 
 Zestaw skills dla asystentów AI (Claude, Cursor, Windsurf, itp.) wspierających programowanie, projektowanie i konfigurację **platformy Soneta (enova365, Triva)**.
 
+Skille dokumentują publiczną bibliotekę platformy, dlatego są przeznaczone zarówno dla **partnerów** tworzących dodatki, jak i dla **zespołu Soneta** piszącego kod modułów standardowych w repozytorium źródłowym programu — te same wzorce i checklisty obowiązują w obu przypadkach.
+
 ## Dostępne skille
 
 ### 0. soneta:erp (meta-skill)
@@ -112,7 +114,7 @@ Narzędzia i mechanizmy związane z konfiguracją systemu i funkcjami domenowymi
 
 ### 9. soneta:containers
 
-Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — dla partnerów, bez dostępu do kodu programu.
+Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach — bez odwołań do kodu programu.
 
 **Zakres:**
 - **Docker Compose** (ścieżka główna): gotowe `docker-compose.yaml` (dbinit + server + web), cykl życia, zmienne `SONETA_...`

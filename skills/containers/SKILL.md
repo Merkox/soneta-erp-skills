@@ -17,7 +17,7 @@ description: >
 
 # Soneta w kontenerach — uruchamianie i wdrażanie (enova365, Triva)
 
-Skill dla **partnera**, który ma postawić i utrzymać środowisko Soneta w kontenerach
+Skill dla **partnera lub zespołu Soneta**, który ma postawić i utrzymać środowisko Soneta w kontenerach
 oraz założyć i zarządzać bazą — **bez dostępu do kodu programu**. Trzy ścieżki, wspólne
 pojęcia. Składnię komend `dbmgr` opisuje `/soneta:tools` (nie duplikujemy jej tutaj).
 
