@@ -44,7 +44,7 @@ Aby zobaczyć wszystkie definicje, ustaw Zakres=Razem i Stan=Razem.
 | **Etat** | `WypElementEtat` | Wynagrodzenie zasadnicze (mies./godz.), dochód deklarowany |
 | **Dodatek** | `WypElementDodatek` | Premie, dodatki (funkcyjny, stażowy), ekwiwalenty, ryczałty, odprawy, potrącenia, korekty, odsetki |
 | **Dodatek automatyczny** | `WypElementDodatekAutomatyczny` | Elementy naliczane automatycznie (PPK, potrącenie OPP, wynagrodzenie postojowe) |
-| **Nieobecność** | `WypElementNieobecnosc` | Wynagrodzenie za urlopy, zasiłki (chorobowy, macierzyński, opiekuńczy), świadczenia rehabilitacyjne |
+| **Nieobecność** | `WypElementNieobecność` | Wynagrodzenie za urlopy, zasiłki (chorobowy, macierzyński, opiekuńczy), świadczenia rehabilitacyjne |
 | **Nadgodziny I/II/św** | `WypElementNadgodziny` | Dopłata do nadgodzin 50%, 100%, za święta |
 | **Nocne** | `WypElementNocne` | Dopłata za godziny nocne |
 | **Akord** | `WypElementAkord` | Wynagrodzenie akordowe |
@@ -147,7 +147,7 @@ mapowanie tych kroków na metody i sposób przekazania kodu do edytora.
    - Etat → `Soneta.Place.WypElementEtat Element`
    - Dodatek → `Soneta.Place.WypElementDodatek Element`
    - Dodatek automatyczny → `Soneta.Place.WypElementDodatekAutomatyczny Element`
-   - Nieobecność → `Soneta.Place.WypElementNieobecnosc Element`
+   - Nieobecność → `Soneta.Place.WypElementNieobecność Element`
    - Nadgodziny → `Soneta.Place.WypElementNadgodziny Element`
    - Umowa → `Soneta.Place.WypElementUmowa Element`
 
