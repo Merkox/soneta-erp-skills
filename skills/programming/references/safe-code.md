@@ -194,6 +194,36 @@ foreach (DokumentHandlowy d in hm.DokHandlowe.WgDaty[d => d.Data >= od]) {
 
 ---
 
+### 6.4 `SubTable<TRow>` i `Key<TRow>` są typowane — bez `OfType<T>()` i bez `ToArray()`
+
+Kolekcje generowane z `business.xml` (`parent.Dzieci`, `Table.WgKlucz[wartość]`) to
+`SubTable<TRow>` / `Key<TRow>` implementujące `IEnumerable<TRow>` — iterują się od razu
+typowanymi wierszami, więc `OfType<TRow>()` jest nadmiarowe.
+
+Enumerator `SubTable` idzie po **utrwalonej liście** wierszy — modyfikacja pól zwracanych
+obiektów w trakcie pętli nie zmienia wyniku iteracji, więc kopiowanie przez `.ToArray()` przed
+edycją jest zbędne:
+
+```csharp
+// ŹLE - nadmiarowe OfType i ToArray
+foreach (Pozycja p in dokument.Pozycje.OfType<Pozycja>().Where(x => x.Domyslna).ToArray())
+    p.Domyslna = false;
+
+// DOBRZE - wzorzec „włącz znacznik, zdejmij z pozostałych"
+public new bool Domyslna {
+    get => base.Domyslna;
+    set {
+        base.Domyslna = value;
+        if (!value) return;
+        foreach (Pozycja other in Table.WgDokument[Dokument].Where(x => x.Domyslna && x != this))
+            other.Domyslna = false;
+    }
+}
+```
+
+`ToArray()` jest potrzebne dopiero, gdy pętla **usuwa** wiersze (`Delete()`) albo dodaje nowe
+do tej samej kolekcji.
+
 ## 7. Kod biznesowy vs UI
 
 ### 7.1 Brak referencji do UI w kodzie biznesowym
@@ -423,6 +453,7 @@ Do szybkiej weryfikacji PR-a / refaktoringu:
 **Dane**
 - [ ] Filtrowanie przez `Key[keyValue]` lub `SubTable[condition]`, nie pętle z `if` w pamięci (§6.1)
 - [ ] Brak `View` w kodzie biznesowym (§6.2)
+- [ ] Brak `OfType<TRow>()` na `SubTable<TRow>`/`Key<TRow>`; `ToArray()` tylko przy kasowaniu/dodawaniu w pętli (§6.4)
 - [ ] Brak pełnego skanu tabel kartotekowych; tabele operacyjne guided z zakresem czasowym; nie-guided w zakresie roota (§6.3)
 - [ ] Brak referencji do UI (`IsXxx`, `GetXxx`, `MessageBox`, `IUIServices`) w kodzie biznesowym (§7.1)
 - [ ] Brak sprawdzania `AccessRight` w logice biznesowej; wynik niezależny od praw, brak dostępu → wyjątek `AccessDeniedException`/`AccessWriteDeniedException`/`ReadOnlyException`, nie inny wynik (§7.2)

@@ -263,7 +263,9 @@ na wyniku, zamknij okno w aplikacji (albo poproś operatora), a nie zamykaj cał
 Błędy widoczne w UI jako gołe dialogi (np. „Brak praw dostępu do danych") mają pełny stack trace
 w logu serwera — na macOS: `~/Library/Application Support/Soneta/Logs/server-RRRRMMDD.log`
 (JSON per linia, pole `Exception`). Pełny opis logowania: artykuł *translations-logging*
-w skillu `/soneta:programming`.
+w skillu `/soneta:programming`. Błędy **samej ramki i `buscall`** (np. sterowanie oknem,
+protokół) leżą gdzie indziej — `Soneta.Frame/Logs/{Frame,BusCall}/error-*.log`, patrz
+[sonetaframe.md](sonetaframe.md), sekcja „Logi ramki i `buscall`".
 
 ## Checklista automatyzacji buscall
 
@@ -273,7 +275,9 @@ w skillu `/soneta:programming`.
       objaw literówki: `{"kind":"error","error":"Nazwa metody MCP nieznaleziona"}`).
 - [ ] `detail=full` tam, gdzie potrzebne `gridPath`/`rowsCsv`; `detail=none`, gdy wynik zbędny.
 - [ ] Po restarcie aplikacji identyfikatory (`#id`, `objectID`) czytane od nowa.
-- [ ] Przy błędach UI: log serwera `server-RRRRMMDD.log`.
+- [ ] Do testów źródło `process:` (`--db "Process|<Baza>"`) — stawia serwery samo; wpis `http://…`
+      wymaga zewnętrznego serwera, a jego brak daje mylące „Niepoprawny adres serwera" / „Nie znaleziono bazy".
+- [ ] Przy błędach UI: log serwera `server-RRRRMMDD.log`; błędy ramki/`buscall`: `Soneta.Frame/Logs/`.
 
 ## Wariant zgodny z MCP: `callmcp`
 
@@ -289,3 +293,30 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"where_am_I
 
 Błąd wykonania narzędzia wraca zgodnie z konwencją MCP w `result` z `isError:true` (a nie jako
 JSON-RPC `error`); błąd parsowania/nieprawidłowy komunikat → JSON-RPC `error` i kod wyjścia 1.
+
+## Tryb `mcp` — pułapki testowania z wiersza poleceń
+
+Długożyjący serwer stdio (`buscall --db <Baza> mcp`) ma trzy cechy, które mylą przy ręcznych testach:
+
+- **STDIN musi zostać otwarty.** Przy `mcp < plik.jsonl` proces kończy się na EOF, zanim wypłucze
+  odpowiedzi — STDOUT wychodzi pusty, choć w logu widać „sending message". Trzymaj wejście
+  otwarte przez FIFO i czytaj odpowiedzi z pliku wyjściowego:
+
+  ```bash
+  mkfifo in.fifo
+  buscall --db "Process|Demo" mcp < in.fifo > out.jsonl 2> err.log &
+  exec 8> in.fifo                      # deskryptor trzyma FIFO otwarte
+  head -4 wejscie.jsonl >&8            # initialize, initialized, tools/list, tools/call…
+  until grep -q '"id":3' out.jsonl; do sleep 1; done
+  echo '{"jsonrpc":"2.0","id":4,"method":"tools/list","params":{}}' >&8
+  ```
+
+- **Żądania są obsługiwane współbieżnie.** Wysłane hurtem `tools/call` i `tools/list` wykonają się
+  równolegle, więc lista może powstać przed skutkiem wywołania. Scenariusz „wywołaj narzędzie,
+  potem sprawdź odświeżoną listę" wymaga czekania na odpowiedź o danym `id` (jak wyżej).
+
+- **Lista metod jest cache'owana** w `~/Library/Application Support/BusCall/methods.{pipe}.{db}.{agent}.json`
+  (Windows: `%LOCALAPPDATA%\BusCall\`). `tools/list` czyta ten plik zamiast odpytywać program —
+  żeby sam odczyt listy nie budził ramki. Przy zmianach w zestawie metod nieaktualny plik wygląda
+  jak błąd serwera; lista odświeża się dopiero po pierwszym `tools/call` (wtedy przychodzi
+  `notifications/tools/list_changed`). W razie wątpliwości usuń plik cache.

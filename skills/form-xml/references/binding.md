@@ -119,6 +119,7 @@ bez osobnego obiektu kontekstu:
 | `{Workers.NazwaWorkera.Pole}` | Właściwość workera |
 | `{new NazwaExtender.Pole}` | Właściwość extendera |
 | `{Features.NazwaCechy}` | Cechy powiązane z Row |
+| `{Historia.Current.Pole}` | Pole obiektu z historią (`IRowWithHistory`, np. pracownik) — `Current` to wiersz historii aktualny na datę z kontekstu; inne: `First`, `Today`, `Last` |
 | `{Context.TypDanych.Pole}` | Wartość z kontekstu UI (`Soneta.Business.Context`) |
 | `{Licence.HAN}` | Warunek licencji (używany w `Renderable`) |
 | `{.}` | Aktualna wartość w kontekście elementu |
