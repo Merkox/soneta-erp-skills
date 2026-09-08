@@ -1,6 +1,15 @@
 ---
 name: repx
-description: "Wydruki i raporty w Soneta (enova365, Triva) — pliki .repx (DevExpress XtraReports, serializowany XML). Sięgaj przy KAŻDYM zadaniu z wydrukiem/raportem: faktura, dokument, deklaracja, lista, zestawienie; utworzenie, przeróbka lub poprawa .repx (też z załącznika); pytanie „jak w wydruku zrobić X”. Typowe X: podpięcie danych (lista, dokument z pozycjami, master-detail, podraport), podział stron, kolumna Lp, tabele, grupowanie i sumy, formatowanie warunkowe, kwoty, nakładanie wartości na skan formularza, nagłówek/stopka/podpisy, arkusz stylów (.repss), rejestracja wydruku. Wyzwalają też pojęcia: XtraReportsLayoutSerializer, StyleSheetSerializer, pasma (DetailBand/DetailReportBand/GroupHeaderBand/SubBand), kontrolki (XRLabel/XRTable/AmountLabel), BusinessDataSource/DataKind, ReportContext, ExpressionBindings/Summary/CalculatedFields/FilterString, [assembly: DxReport], ReportSnippet/[DxBind]. Wystarczy „wydruk”, „raport” lub „.repx” w kontekście Soneta. NIE dla: business.xml, form.xml, SQL, Excel, Word .dotx."
+description: >
+  Tworzenie, zmiana i naprawa wydruków i raportów Soneta (enova365, Triva), także z załącznika:
+  .repx (XML DevExpress XtraReports), faktury, dokumenty, deklaracje, listy, zestawienia. Używaj
+  też do pytań o dane (lista, dokument z pozycjami, master-detail, podraport), strony, Lp,
+  tabele, grupowanie, sumy, formatowanie warunkowe, kwoty, skan formularza, nagłówki, stopki,
+  podpisy, style (.repss) i rejestrację wydruku. Pojęcia: XtraReportsLayoutSerializer,
+  StyleSheetSerializer, DetailBand/DetailReportBand/GroupHeaderBand/SubBand,
+  XRLabel/XRTable/AmountLabel, BusinessDataSource/DataKind, ReportContext,
+  ExpressionBindings/Summary/CalculatedFields/FilterString, [assembly: DxReport],
+  ReportSnippet/[DxBind]. NIE dla: business.xml, form.xml, SQL, Excel, Word .dotx.
 ---
 
 # Soneta DX Reports — wydruki DevExpress XtraReports (.repx)

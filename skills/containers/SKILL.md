@@ -1,18 +1,15 @@
 ---
 name: containers
 description: >
-  Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach. Używaj gdy
-  użytkownik: (1) stawia środowisko (server + web) na obrazach Soneta przez `docker compose`
-  albo na Apple `container` / Container Desktop; (2) tworzy bazę danych w kontenerze (usługa
-  init z `dbmgr create`, `--demo`, `--recreate`, licencja, konwersja); (3) wdraża na
-  Kubernetes przez Helm (`helm repo add soneta`, `values.yaml`, `dblist`, `adminMode`); (4)
-  wybiera wersję obrazów (tagi z Docker Hub `soneta/*` lub `registry.soneta.pl`), architekturę
-  (alpine/arm64/amd64), logowanie do registry; (5) potrzebuje SQL Servera — zewnętrznego
-  (`host.docker.internal` / `host.containers.internal`) albo jako kontener `mssql`; (6)
-  rozwiązuje problemy startu stacku (kolejność, port zajęty, brak DNS między usługami w Apple
-  container, zły host-alias). Słowa kluczowe: docker compose, docker-compose.yaml, apple
-  container, Container Desktop, helm, kubernetes, obraz, tag, wersja, mssql, dbmgr, x-init,
-  server.standard, web.standard.
+  Kontenery Soneta (enova365, Triva). Używaj do uruchamiania i wdrażania server + web przez
+  Docker Compose (`docker-compose.yaml`), Apple `container` / Container Desktop (`x-init`) lub
+  Helm/Kubernetes (`helm repo add soneta`, `values.yaml`, `dblist`, `adminMode`); tworzenia baz
+  w kontenerze (usługa init, `dbmgr create`, `--demo`, `--recreate`) oraz obsługi licencji i
+  konwersji; wyboru obrazów (`soneta/*`, `server.standard`, `web.standard`) i tagów z Docker Hub
+  lub `registry.soneta.pl`, wariantu alpine, architektury arm64/amd64 i logowania do registry;
+  konfiguracji SQL Servera zewnętrznego (`host.docker.internal`, `host.containers.internal`) lub
+  kontenera `mssql`. Pomaga diagnozować start usług, kolejność, zajęte porty, DNS między
+  usługami Apple container i błędne host-aliasy.
 ---
 
 # Soneta w kontenerach — uruchamianie i wdrażanie (enova365, Triva)

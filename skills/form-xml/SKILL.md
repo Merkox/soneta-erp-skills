@@ -1,6 +1,13 @@
 ---
 name: form-xml
-description: "Specjalistyczna wiedza o WŁASNOŚCIOWYM formacie plików form.xml platformy Soneta (enova365) — bez tego skilla Claude generuje błędne XML z nieistniejącymi elementami. ZAWSZE używaj tego skilla gdy użytkownik: (1) prosi o utworzenie lub modyfikację pliku pageform.xml, viewform.xml, form.xml, lookupform.xml lub gridform.xml dla platformy Soneta (enova365); (2) pyta o elementy DataForm, Page, Group, Grid, Field, Row, Stack, Flow, Command, Include, Appearance, GroupBy w Soneta; (3) pyta o składnię EditValue, DataContext, Visibility, RowCondition, Renderable, CaptionHtml, Footer, Class lub układ UI formularzy Soneta; (4) pokazuje istniejący plik form.xml/pageform.xml/viewform.xml i pyta o jego strukturę lub chce go rozszerzyć; (5) pyta o warunkową widoczność, formatowanie warunkowe (Appearance), bindowanie danych lub wzorce UI w Soneta/enova365."
+description: >
+  Tworzenie, modyfikacja i analiza formularzy UI platformy Soneta (enova365, Triva)
+  w plikach pageform.xml, viewform.xml, form.xml, lookupform.xml i gridform.xml.
+  Używaj przy pytaniach o elementy formularzy (DataForm, Page, Group, Grid, Field,
+  Row, Stack, Flow, Command, Include, Appearance, GroupBy), wiązanie danych
+  (EditValue, DataContext), widoczność, formatowanie warunkowe i układ UI.
+  Format Soneta ma własny schemat XML — składnię i dostępne elementy sprawdzaj
+  w tym skillu i dołączonych referencjach.
 ---
 
 # Soneta Form XML - Formularze UI

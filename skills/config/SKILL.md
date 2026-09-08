@@ -1,18 +1,15 @@
 ---
 name: config
 description: >
-  Konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva): (A) IMPORT/EKSPORT
-  DANYCH I USTAWIEŃ przez pliki XML — element session, import według rekordów (*.dbinit.xml,
-  demo) i przez logikę biznesową (business="true"), eksport datapacku, GUID; (B)
-  `scan-folders` — foldery menu (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA
-  URUCHOMIENIOWA `appsettings.json` — porty i adresy komponentów, warstwy nadpisań (`-c`,
-  `SONETA_`, CLI); (D) REJESTR KONFIGURACJI (ConfigReg, „Zarządzanie konfiguracją") — zrzut
-  konfiguracji bazy do `*.reg.json`, porównanie i scalanie ustawień, sigile (`$strict`, `$v`,
-  `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu, pyta o atrybuty
-  guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane; (3) mapuje
-  menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji, debuguje
-  `*.reg.json` albo przenosi ustawienia między bazami przez rejestr. Kod importu →
-  /soneta:programming; operacje na bazie z CLI → /soneta:tools.
+  Konfiguracja i funkcje domenowe Soneta (enova365, Triva). Używaj przy: imporcie/eksporcie
+  danych i ustawień XML (`session`, `*.dbinit.xml`, demo, import według rekordów i przez logikę
+  biznesową `business="true"`, eksport datapacku i rekordów guidowanych, GUID); pytaniach o
+  atrybuty guid/where/key/id/business/deleted/dbversion; mapowaniu menu z DLL (`scan-folders`,
+  `[assembly: FolderView]`); konfiguracji `appsettings.json` (klucze, porty, adresy, nadpisania
+  `-c`, `SONETA_`, CLI); pracy z ConfigReg („Zarządzanie konfiguracją”): zrzuty, porównywanie,
+  scalanie i debugowanie `*.reg.json`, przenoszenie ustawień między bazami, sigile `$strict`,
+  `$v`, `#klucz`, `@atrybut`. Po kod importu sięgnij do programming, a po operacje na bazie z
+  CLI do tools.
 ---
 
 # Ustawienia, konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva)

@@ -1,18 +1,14 @@
 ---
 name: tools
 description: >
-  Narzędzia deweloperskie wiersza poleceń (CLI) platformy Soneta (enova365, Triva). Używaj gdy
-  użytkownik: (1) zarządza bazami danych przez `dbmgr` — tworzy, rejestruje, konwertuje,
-  backup/restore, licencje, rozszerzenia (extensions), analiza, kompilacja; (2) przygotowuje
-  bazę testową/demo z wiersza poleceń albo automatyzuje operacje na bazach w skrypcie/CI; (3)
-  testuje działającą aplikację przez `buscall` — zdalnie steruje programem (nawigacja,
-  formularze, gridy, edycja) i robi zrzuty ekranu; (4) uruchamia aplikację ramki `SonetaFrame`
-  (`SonetaFrameNew`), konfiguruje źródła baz danych (`demo:`, `http`, `docker:`, `process:`,
-  `orchestrator:`) albo pyta o plik ustawień `Settings_Product.json`; (5) pyta o składnię,
-  komendy lub opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame`; (6) wspomina „zarządzanie
-  bazą enova", „baza demo", „konwersja bazy", „testowanie na żywej aplikacji", „ramka Soneta".
-  Sięgnij też, gdy inny skill potrzebuje operacji na bazie lub weryfikacji zmian na
-  uruchomionej aplikacji.
+  Narzędzia CLI platformy Soneta (enova365, Triva). Używaj do zarządzania bazami przez `dbmgr`
+  (tworzenie, rejestracja, konwersja, backup/restore, licencje, rozszerzenia/extensions,
+  analiza, kompilacja), przygotowania baz testowych/demo i automatyzacji w skryptach/CI;
+  sterowania działającą aplikacją przez `buscall` (nawigacja, formularze, gridy, edycja, zrzuty
+  ekranu); uruchamiania ramki `SonetaFrame` (`SonetaFrameNew`) i konfiguracji źródeł baz
+  (`demo:`, `http`, `docker:`, `process:`, `orchestrator:`) oraz pliku `Settings_Product.json`.
+  Sięgaj też przy pytaniach o składnię i opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame` oraz
+  gdy inny skill potrzebuje operacji na bazie lub weryfikacji zmian w uruchomionej aplikacji.
 ---
 
 # Soneta Tools — narzędzia deweloperskie CLI
