@@ -93,13 +93,13 @@ dotnet script scripts/scan-folders.csx \
 
 ```bash
 # Całe drzewo (duże!)
-dotnet script scan-folders.csx -- ./bin/Debug/net10.0
+dotnet script scripts/scan-folders.csx -- ./bin/Debug/net10.0
 
 # Tylko poddrzewo Handel
-dotnet script scan-folders.csx -- ./bin/Debug/net10.0 Handel
+dotnet script scripts/scan-folders.csx -- ./bin/Debug/net10.0 Handel
 
 # Płaska lista folderów poczty CRM
-dotnet script scan-folders.csx -- ./bin/Debug/net10.0 "CRM/Poczta" --flat
+dotnet script scripts/scan-folders.csx -- ./bin/Debug/net10.0 "CRM/Poczta" --flat
 ```
 
 ### Przykładowe wyjście
