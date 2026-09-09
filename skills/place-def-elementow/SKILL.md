@@ -186,3 +186,11 @@ update_field_value(["_Tekst=public void Nazwa_Param(...) {\\n    ...\\n}\\n\\npu
 10. **Element.DodHistoria.Podstawa vs Element.DodHistoria.Kwota** — w rzeczywistych algorytmach kreatorowych kwota pobierana jest z `Element.DodHistoria.Podstawa` (nie `.Kwota`). Pole `.Kwota` występuje w dokumentacji, ale `.Podstawa` jest częściej stosowane w generowanym kodzie.
 
 11. **Dodatkowe metody** — jeśli element ma odbiorców płatności (potrącenia, alimenty), zdefiniuj metody `_Odbiorca` i `_RachunekOdbiorcy`. Jeśli okres naliczania wymaga podziału, zdefiniuj `_CięcieOkresu`. Jeśli element wpływa na podstawy urlopów/zasiłków — przeczytaj `references/metody-sterujace-naliczaniem.md`.
+
+## Powiązania
+
+- [/soneta:config](../config/SKILL.md) — przenoszenie definicji elementów między bazami plikiem
+  XML (import według rekordów, `*.dbinit.xml` dodatku): kształt rekordu `DefinicjaElementu`
+  i gotowy plik z kreatorem oraz edytorem algorytmu —
+  [import-definicja-elementu-wynagrodzenia.xml](../config/examples/import-definicja-elementu-wynagrodzenia.xml),
+  katalog wzorców [import-xml-examples.md](../config/references/import-xml-examples.md).

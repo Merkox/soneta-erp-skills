@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  WZORZEC PLIKU *.dbinit.xml DODATKU — złożony z konstrukcji spotykanych w plikach
+  standardowych platformy. Pokazuje:
+    1. nagłówek dbinit: xmlns, versionName (WŁASNA nazwa wersjonowania dodatku), priority;
+    2. słownik prosty z własnym, stałym prefiksem GUID;
+    3. przypięcie GUID-a do rekordu, który mógł już istnieć (key="Kod=...");
+    4. patch rekordu w kolejnej wersji: ten sam guid, nowy dbversion, unikalny id,
+       tylko zmienione pola, updateonly="true";
+    5. prawo do nowego obiektu dla roli administratora.
+
+  Nazwy pól są ilustracyjne — przed użyciem potwierdź je skanem scan-props (/soneta:programming).
+  Plik NIE był wczytywany próbnie. Katalog wzorców: references/import-xml-examples.md.
+
+  Reguły dbinit (szczegóły: references/import-export-xml.md):
+    - rekord bez dbversion jest pomijany; dbversion na <session> nie jest czytany;
+    - rekord wchodzi tylko, gdy dbversion > wersja bazy dla danego versionName;
+    - id musi być unikalne w pliku (stąd sufiks wersji w id patcha).
+-->
+<session xmlns="http://www.soneta.pl/schema/business" versionName="mojdodatek" priority="100">
+
+  <!-- 2. Słownik prosty: własny prefiks GUID 7a1d0c00-..., numeracja w ostatnim segmencie -->
+  <FormaPrawna id="FormaPrawna_FUN" guid="7a1d0c00-0001-0001-0001-000000000000" dbversion="1000">
+    <Kod>FUN</Kod>
+    <Nazwa>Fundacja rodzinna</Nazwa>
+    <StatusPodmiotu>PodmiotGospodarczy</StatusPodmiotu>
+    <Domyslna>false</Domyslna>
+  </FormaPrawna>
+
+  <!-- 3. key: jeśli jednostka "kpl" już istnieje (np. założona ręcznie), dostaje ten GUID;
+          jeśli nie istnieje — zostaje utworzona. where zamiast key wymagałoby istnienia. -->
+  <Jednostka guid="7a1d0c00-0001-0002-0001-000000000000" key="Kod=kpl" dbversion="1000">
+    <Kod>kpl</Kod>
+    <Opis>komplet</Opis>
+    <Precyzja>0</Precyzja>
+    <Typ>Ilość</Typ>
+    <Blokada>False</Blokada>
+  </Jednostka>
+
+  <!-- Definicja dokumentu z numeracją (subrow bez atrybutów); pola unikalne z duplicate="number" -->
+  <DefinicjaDokumentu id="DefinicjaDokumentu_PRO" guid="7a1d0c00-0001-0003-0001-000000000000" dbversion="1000">
+    <Symbol duplicate="number">PRO</Symbol>
+    <Typ>Umowa</Typ>
+    <Nazwa duplicate="number">Protokół dodatku</Nazwa>
+    <Domyslna>False</Domyslna>
+    <Blokada>False</Blokada>
+    <Numeracja>
+      <Wzor>Definicja.Symbol/Seria/Data.Year:4/*:4</Wzor>
+    </Numeracja>
+  </DefinicjaDokumentu>
+
+  <!-- 5. Nowy obiekt będący źródłem praw jest domyślnie niedostępny — nadaj prawo administratorowi -->
+  <Right dbversion="1000">
+    <Entitle>Entitle:00000000-0015-0001-0001-000000000000</Entitle>
+    <Source>DefinicjaDokumentu:7a1d0c00-0001-0003-0001-000000000000</Source>
+  </Right>
+
+  <!-- 4. Patch w wersji 1010: ten sam guid, inny id, tylko zmienione pole.
+          updateonly — jeśli klient usunął definicję, nie odtwarzaj jej z jednym polem. -->
+  <DefinicjaDokumentu id="DefinicjaDokumentu_PRO_1010" guid="7a1d0c00-0001-0003-0001-000000000000"
+                      dbversion="1010" updateonly="true">
+    <Nazwa>Protokół odbioru</Nazwa>
+  </DefinicjaDokumentu>
+
+</session>
