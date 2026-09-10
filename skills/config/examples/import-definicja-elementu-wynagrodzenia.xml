@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DEFINICJE ELEMENTÓW WYNAGRODZENIA — dwa warianty algorytmu, wzorowane na standardowych
+  definicjach platformy (import według rekordów, bez business="true" — tak wczytywane są
+  elementy standardowe).
+
+    A. „Premia uznaniowa”  — KREATOR ALGORYTMU, podstawa = kwota z parametru dodatku
+                             (PodstawaTyp=Kwota), opodatkowana i oskładkowana jak wynagrodzenie.
+    B. „Dodatek stażowy”   — EDYTOR ALGORYTMU, kod C# w polu <Tekst> (metody %NAZWA%_Param
+                             i %NAZWA%_Wylicz; symbole %NAZWA% i %TYP% podstawia platforma),
+                             procent zasadniczego zależny od stażu pracy.
+
+  Kształt rekordu (zakładki formularza → subrow-y XML):
+    Ogólne        → pola korzenia + <OkresNaliczania>
+    Algorytm      → <Algorytm> (Typ, Priorytet, Potracenie) → <KreatorAlgorytmu>
+                    (<PodstawaTyp>, <Wspolczynnik>, <Czas>, <Korekta>) albo <Tekst> (kod)
+    Deklaracje    → <Deklaracje> (PIT: Koszty/Zaliczka/Ulga; ZUS: Spoleczne/Zdrowotne, KodRSA…)
+    Nieobecności  → <Nieobecnosci> (wliczanie do podstaw urlopu, ekwiwalentu, zasiłków)
+    Zaokrąglenie  → <Zaokraglenie>
+  Podajemy tylko pola znaczące — puste elementy z eksportu (<Dod... />, <El... />) pominięto;
+  pusty element USTAWIA pustą wartość, więc nie kopiuj ich bezmyślnie.
+
+  Wartości specjalne: Nazwa duplicate="number" (unikalna; kolizja → przyrostek zamiast błędu),
+  DoDnia (max) = definicja bez daty końcowej, Podstawa "0.00 PLN", Ulamek "1/1", Procent "0%",
+  enumy z polskimi znakami (PłatnaZDołu, CoNMiesięcy, BezWspółczynnika).
+
+  GUID-y własne (prefiks 7a1d0c00-0007-...). Referencje standardowe:
+    PozycjaPIT „wynagrodzenie ze stosunku pracy” 00000000-0007-0004-0001-000000000000
+  Nazwy pól i wartości enum potwierdź skanem scan-props (/soneta:programming); znaczenie
+  parametrów algorytmu i API kodu opisuje /soneta:place-def-elementow.
+  Plik NIE był wczytywany próbnie.
+-->
+<session xmlns="http://www.soneta.pl/schema/business" fromto="(wszystko)">
+
+  <!-- ===== A. Premia uznaniowa — kreator algorytmu, kwota z parametru dodatku ===== -->
+  <DefinicjaElementu id="DefinicjaElementu_PremiaUzn" guid="7a1d0c00-0007-0002-0001-000000000000">
+    <RodzajZrodla>Dodatek</RodzajZrodla>
+    <Nazwa duplicate="number">Premia uznaniowa (dodatek)</Nazwa>
+    <Skrot>Prem.uzn.</Skrot>
+    <Blokada>False</Blokada>
+    <DoDnia>(max)</DoDnia>
+    <Kolejnosc>50</Kolejnosc>
+    <Zatrudnienie>Etat</Zatrudnienie>
+    <OkresNaliczania>
+      <Naliczanie>PłatnaZDołu</Naliczanie>
+      <Opoznienie>0</Opoznienie>
+      <Typ>CoNMiesięcy</Typ>
+      <Ilosc>1</Ilosc>
+    </OkresNaliczania>
+    <Algorytm>
+      <Priorytet>100</Priorytet>
+      <Potracenie>False</Potracenie>
+      <Typ>KreatorAlgorytmu</Typ>
+      <KreatorAlgorytmu>
+        <PodstawaTyp>Kwota</PodstawaTyp>
+        <Proporcjonalnie>False</Proporcjonalnie>
+        <PodstawaZa>NieZależyOdCzasu</PodstawaZa>
+        <Wspolczynnik>
+          <Typ>BezWspółczynnika</Typ>
+        </Wspolczynnik>
+        <Czas>
+          <Typ>NieUwzględniaj</Typ>
+        </Czas>
+        <Korekta>
+          <Odchylki>False</Odchylki>
+          <Nieusprawiedliwione>NiePomniejsza</Nieusprawiedliwione>
+          <Usprawiedliwione>NiePomniejsza</Usprawiedliwione>
+          <Chorobowe>NiePomniejsza</Chorobowe>
+        </Korekta>
+      </KreatorAlgorytmu>
+      <Podstawa>0.00 PLN</Podstawa>
+      <Ulamek>1/1</Ulamek>
+      <ElPodstawa1>Kwota premii:</ElPodstawa1>
+    </Algorytm>
+    <Deklaracje>
+      <PozycjaPIT>00000000-0007-0004-0001-000000000000</PozycjaPIT>
+      <Koszty>
+        <Typ>ZeStosunkuPracy</Typ>
+        <Procent>0%</Procent>
+      </Koszty>
+      <Zaliczka>
+        <Typ>NaliczaćWgSkaliPodatkowej</Typ>
+        <Procent>0%</Procent>
+        <PomniejszonaZUS>False</PomniejszonaZUS>
+      </Zaliczka>
+      <Ulga>
+        <Typ>Naliczać</Typ>
+      </Ulga>
+      <PozycjaRCA>NieDotyczy</PozycjaRCA>
+      <KodRNA>NieDotyczy</KodRNA>
+      <PozycjaRP7>NieDotyczy</PozycjaRP7>
+      <Spoleczne>
+        <Typ>Naliczać</Typ>
+      </Spoleczne>
+      <Zdrowotne>
+        <Typ>Naliczać</Typ>
+        <PomniejszaFIS>NiePomniejsza</PomniejszaFIS>
+        <PomniejszoneZUS>False</PomniejszoneZUS>
+      </Zdrowotne>
+      <Umowa>NieDotyczy</Umowa>
+    </Deklaracje>
+    <Nieobecnosci>
+      <WahaniaWysokosci>True</WahaniaWysokosci>
+      <Urlop>
+        <Typ>Wliczać</Typ>
+      </Urlop>
+      <Ekwiwalent>
+        <Typ>Wliczać</Typ>
+      </Ekwiwalent>
+      <ZasilkiPracownicy>
+        <Typ>Wliczać</Typ>
+        <Chorobowych>True</Chorobowych>
+        <Macierzynskich>True</Macierzynskich>
+        <Rehabilitacyjnych>True</Rehabilitacyjnych>
+        <Opiekunczych>True</Opiekunczych>
+      </ZasilkiPracownicy>
+    </Nieobecnosci>
+    <Zaokraglenie>
+      <Precyzja>DoPełnegoGrosza</Precyzja>
+      <Sposob>Standardowe</Sposob>
+    </Zaokraglenie>
+    <GUS>
+      <Kategoria>WgDefinicjiElementu</Kategoria>
+    </GUS>
+    <Korygowany>True</Korygowany>
+    <DoWyplaty>True</DoWyplaty>
+    <GenerujZerowy>False</GenerujZerowy>
+  </DefinicjaElementu>
+
+  <!-- ===== B. Dodatek stażowy — edytor algorytmu, kod C# w polu Tekst ===== -->
+  <DefinicjaElementu id="DefinicjaElementu_DodStaz" guid="7a1d0c00-0007-0002-0002-000000000000">
+    <RodzajZrodla>Dodatek</RodzajZrodla>
+    <Nazwa duplicate="number">Dodatek stażowy (dodatek)</Nazwa>
+    <Skrot>Dod.staż.</Skrot>
+    <Blokada>False</Blokada>
+    <DoDnia>(max)</DoDnia>
+    <Kolejnosc>40</Kolejnosc>
+    <Zatrudnienie>Etat</Zatrudnienie>
+    <OkresNaliczania>
+      <Naliczanie>PłatnaZDołu</Naliczanie>
+      <Opoznienie>0</Opoznienie>
+      <Typ>CoNMiesięcy</Typ>
+      <Ilosc>1</Ilosc>
+    </OkresNaliczania>
+    <Algorytm>
+      <Priorytet>90</Priorytet>
+      <Potracenie>False</Potracenie>
+      <Typ>EdytorAlgorytmu</Typ>
+      <ElPodstawa1>Zasadnicze nominalne:</ElPodstawa1>
+      <ElProcent>Procent za staż:</ElProcent>
+    </Algorytm>
+    <Deklaracje>
+      <PozycjaPIT>00000000-0007-0004-0001-000000000000</PozycjaPIT>
+      <Koszty>
+        <Typ>ZeStosunkuPracy</Typ>
+        <Procent>0%</Procent>
+      </Koszty>
+      <Zaliczka>
+        <Typ>NaliczaćWgSkaliPodatkowej</Typ>
+        <Procent>0%</Procent>
+        <PomniejszonaZUS>False</PomniejszonaZUS>
+      </Zaliczka>
+      <Ulga>
+        <Typ>Naliczać</Typ>
+      </Ulga>
+      <PozycjaRCA>NieDotyczy</PozycjaRCA>
+      <KodRNA>NieDotyczy</KodRNA>
+      <PozycjaRP7>NieDotyczy</PozycjaRP7>
+      <Spoleczne>
+        <Typ>Naliczać</Typ>
+      </Spoleczne>
+      <Zdrowotne>
+        <Typ>Naliczać</Typ>
+        <PomniejszaFIS>NiePomniejsza</PomniejszaFIS>
+        <PomniejszoneZUS>False</PomniejszoneZUS>
+      </Zdrowotne>
+      <Umowa>NieDotyczy</Umowa>
+    </Deklaracje>
+    <Nieobecnosci>
+      <WahaniaWysokosci>False</WahaniaWysokosci>
+      <Urlop>
+        <Typ>Wliczać</Typ>
+      </Urlop>
+      <Ekwiwalent>
+        <Typ>Wliczać</Typ>
+      </Ekwiwalent>
+      <ZasilkiPracownicy>
+        <Typ>Wliczać</Typ>
+        <Chorobowych>True</Chorobowych>
+        <Macierzynskich>True</Macierzynskich>
+        <Rehabilitacyjnych>True</Rehabilitacyjnych>
+        <Opiekunczych>True</Opiekunczych>
+      </ZasilkiPracownicy>
+    </Nieobecnosci>
+    <Zaokraglenie>
+      <Precyzja>DoPełnegoGrosza</Precyzja>
+      <Sposob>Standardowe</Sposob>
+    </Zaokraglenie>
+    <GUS>
+      <Kategoria>WgDefinicjiElementu</Kategoria>
+    </GUS>
+    <Korygowany>True</Korygowany>
+    <DoWyplaty>True</DoWyplaty>
+    <GenerujZerowy>False</GenerujZerowy>
+    <!-- Kod C# wprost w treści; znaki < > &amp; jako encje XML. Białe znaki są znaczące. -->
+    <Tekst>
+public void %NAZWA%_Param(%TYP% Element, WypSkladnik Składnik) {
+    // podstawa: wynagrodzenie zasadnicze nominalne na koniec okresu
+    Składnik.Podstawa1 = ZasadniczeNominalne(Element.Okres.To);
+
+    // procent wg stażu pracy (staż razem, liczony na pierwszy dzień okresu)
+    int lata = Element.Pracownik.StażPracy(Element.Okres.From).Lata;
+    if (lata &lt; 5)       Składnik.Procent = 0;
+    else if (lata &lt; 10) Składnik.Procent = 5;
+    else if (lata &lt; 20) Składnik.Procent = 10;
+    else                 Składnik.Procent = 20;
+}
+
+public Currency %NAZWA%_Wylicz(%TYP% Element, WypSkladnik Składnik) {
+    return Składnik.Podstawa1 * Składnik.Procent / 100;
+}
+    </Tekst>
+  </DefinicjaElementu>
+
+</session>

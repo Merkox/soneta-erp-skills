@@ -1,6 +1,6 @@
 ---
 name: place-def-elementow
-description: "Tworzenie i konfiguracja definicji elementów wynagrodzenia na platformie Soneta (enova365, Triva). Algorytmy naliczania (kreator, edytor C#, wbudowane), wzorce algorytmiczne, receptury kodu C# dla elementów płacowych, konfiguracja PIT/ZUS/nieobecności. Używaj gdy użytkownik: (1) chce utworzyć/skonfigurować definicję elementu wynagrodzenia (zakładki Ogólne, Deklaracje, Nieobecności, Algorytm); (2) pyta o algorytm naliczania (kreator, edytor, kod C#); (3) potrzebuje kodu C# do edytora algorytmu (_Param, _Wylicz, _Wartość1h); (4) pyta o wzorce dla dodatków, nieobecności, zasiłków; (5) wspomina 'definicja elementu', 'element wynagrodzenia', 'algorytm płacowy', 'WypSkladnik', 'WypElement', 'premia procentowa', 'dodatek stażowy', 'zasiłek chorobowy', 'ekwiwalent za urlop'; (6) pisze recepturę kodu płacowego (staż pracy, wymiar etatu, czas pracy, wskaźniki, cechy pracownika)."
+description: "Tworzenie i konfiguracja definicji elementów wynagrodzenia na platformie Soneta przez MCP soneta_ui. Algorytmy naliczania (kreator, edytor C#, wbudowane), wzorce algorytmiczne, receptury kodu C# dla elementów płacowych, konfiguracja PIT/ZUS/nieobecności. Używaj gdy użytkownik: (1) chce utworzyć/skonfigurować definicję elementu wynagrodzenia (zakładki Ogólne, Deklaracje, Nieobecności, Algorytm); (2) pyta o algorytm naliczania (kreator, edytor, kod C#); (3) potrzebuje kodu C# do edytora algorytmu (_Param, _Wylicz, _Wartość1h); (4) pyta o wzorce dla dodatków, nieobecności, zasiłków; (5) wspomina 'definicja elementu', 'element wynagrodzenia', 'algorytm płacowy', 'WypSkladnik', 'WypElement', 'premia procentowa', 'dodatek stażowy', 'zasiłek chorobowy', 'ekwiwalent za urlop'; (6) pisze recepturę kodu płacowego (staż pracy, wymiar etatu, czas pracy, wskaźniki, cechy pracownika)."
 ---
 
 # Definicje elementów wynagrodzenia — platforma Soneta (enova365, Triva)
@@ -184,3 +184,11 @@ mapowanie tych kroków na metody i sposób przekazania kodu do edytora.
 10. **Element.DodHistoria.Podstawa vs Element.DodHistoria.Kwota** — w rzeczywistych algorytmach kreatorowych kwota pobierana jest z `Element.DodHistoria.Podstawa` (nie `.Kwota`). Pole `.Kwota` występuje w dokumentacji, ale `.Podstawa` jest częściej stosowane w generowanym kodzie.
 
 11. **Dodatkowe metody** — jeśli element ma odbiorców płatności (potrącenia, alimenty), zdefiniuj metody `_Odbiorca` i `_RachunekOdbiorcy`. Jeśli okres naliczania wymaga podziału, zdefiniuj `_CięcieOkresu`. Jeśli element wpływa na podstawy urlopów/zasiłków — przeczytaj [references/metody-sterujace-naliczaniem.md](references/metody-sterujace-naliczaniem.md).
+
+## Powiązania
+
+- [config](../config/SKILL.md): przenoszenie definicji elementów między bazami plikiem
+  XML (import według rekordów, `*.dbinit.xml` dodatku): kształt rekordu `DefinicjaElementu`
+  i gotowy plik z kreatorem oraz edytorem algorytmu —
+  [import-definicja-elementu-wynagrodzenia.xml](../config/examples/import-definicja-elementu-wynagrodzenia.xml),
+  katalog wzorców [import-xml-examples.md](../config/references/import-xml-examples.md).

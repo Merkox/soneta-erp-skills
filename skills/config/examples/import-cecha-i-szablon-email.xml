@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  CECHA (FeatureDefinition) + SZABLON E-MAIL — wzorzec z plików standardowych platformy.
+
+  - FeatureDefinition: TableName = nazwa TABELI (l.mn., np. Kontrahenci), nie obiektu;
+    TypeNumber = typ wartości; Dictionary = nazwa słownika wartości; History = cecha historyczna.
+  - SzablonEmail: treść HTML ZAESCAPE'OWANA; placeholdery {Obiekt.Pole} rozwijane w kontekście
+    obiektu, do którego szablon jest przypięty (Typ).
+  - Import według rekordów; rekordy guidowane ze stałym GUID-em (własny prefiks 7a1d0c00-...).
+
+  Nazwy pól potwierdź skanem scan-props. Plik NIE był wczytywany próbnie.
+  Katalog wzorców: references/import-xml-examples.md.
+-->
+<session xmlns="http://www.soneta.pl/schema/business">
+
+  <FeatureDefinition guid="7a1d0c00-0003-0001-0001-000000000000">
+    <TableName>Kontrahenci</TableName>
+    <Name>Segment</Name>
+    <Category>Dodatek</Category>
+    <Description>Segment handlowy kontrahenta</Description>
+    <TypeNumber>String</TypeNumber>
+    <ReadOnlyMode>Standard</ReadOnlyMode>
+    <Algorithm>DB</Algorithm>
+    <ValueRequiredMode>NonRequired</ValueRequiredMode>
+    <TextLength>50</TextLength>
+    <Group>False</Group>
+    <History>False</History>
+    <StrictDictionary>True</StrictDictionary>
+    <Dictionary>SegmentKontrahenta</Dictionary>
+  </FeatureDefinition>
+
+  <SzablonEmail id="SzablonEmail_Powitanie" guid="7a1d0c00-0003-0002-0001-000000000000">
+    <Nazwa>Powitanie kontrahenta</Nazwa>
+    <Blokada>False</Blokada>
+    <Domyslny>False</Domyslny>
+    <DO>{Kontrahent.EMAIL}</DO>
+    <Temat>Witamy, {Kontrahent.Nazwa}</Temat>
+    <Tresc>&lt;p&gt;Dzień dobry,&lt;/p&gt;
+&lt;p&gt;Dziękujemy za nawiązanie współpracy. Państwa kod kontrahenta: &lt;strong&gt;{Kontrahent.Kod}&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Z poważaniem&lt;/p&gt;</Tresc>
+    <Typ>Kontrahent</Typ>
+  </SzablonEmail>
+
+</session>

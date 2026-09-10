@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ROLA SYSTEMOWA (cząstkowa) + PRAWA DO OBIEKTÓW — wzorzec z plików standardowych platformy.
+
+  - SystemRole: drzewo praw w polu RoleText jako ZAESCAPE'OWANY XML <Role>; AccessRight =
+    Granted | Denied | ReadOnly. Partial=True → rola cząstkowa (nakładka na inne role),
+    Destiny → przeznaczenie (Forms = operatorzy programu, WebUser = użytkownicy pulpitów).
+  - Right (rekord bez własnego guid): Entitle = uprawniony (Entitle:GUID — rola lub operator),
+    Source = obiekt w formie Tabela:GUID; ReadOnlyRight=True → tylko odczyt.
+  - Import według rekordów (bez business="true") — tak są wczytywane role standardowe.
+
+  Nazwy węzłów w RoleText i pól potwierdź skanem (scan-props / eksport istniejącej roli).
+  Plik NIE był wczytywany próbnie. UWAGA: błędny plik roli może zablokować logowanie —
+  testuj wyłącznie na kopii bazy. Katalog wzorców: references/import-xml-examples.md.
+-->
+<session xmlns="http://www.soneta.pl/schema/business">
+
+  <SystemRole id="SystemRole_TowaryEdycja" guid="7a1d0c00-0002-0001-0001-000000000000">
+    <Name>Towary - dodawanie i edycja (dodatek)</Name>
+    <Locked>False</Locked>
+    <Partial>True</Partial>
+    <IsSystem>False</IsSystem>
+    <Destiny>Forms</Destiny>
+    <Generation>0</Generation>
+    <RoleText>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Role Guid="7a1d0c00-0002-0001-0001-000000000000" Name="Towary - dodawanie i edycja (dodatek)" Mode="Advanced"&gt;
+  &lt;Right Name="Rights"&gt;
+    &lt;Right Name="Program"&gt;
+      &lt;Right Name="Handel"&gt;
+        &lt;Right Name="Towary"&gt;
+          &lt;Right Name="Towar" AccessRight="Granted"&gt;
+            &lt;Right Name="Reports" AccessRight="Denied" /&gt;
+            &lt;Right Name="Attachment" AccessRight="Denied" /&gt;
+          &lt;/Right&gt;
+        &lt;/Right&gt;
+      &lt;/Right&gt;
+    &lt;/Right&gt;
+  &lt;/Right&gt;
+&lt;/Role&gt;</RoleText>
+    <Rights />
+    <Powiazane />
+  </SystemRole>
+
+  <!-- Prawo pełne dla nowej roli do standardowego magazynu głównego -->
+  <Right>
+    <Entitle>Entitle:7a1d0c00-0002-0001-0001-000000000000</Entitle>
+    <Source>Magazyn:00000000-0011-0004-0001-000000000000</Source>
+  </Right>
+
+  <!-- Prawo tylko do odczytu do definicji dokumentu z pliku dbinit-slownik-i-poprawki -->
+  <Right>
+    <Entitle>Entitle:7a1d0c00-0002-0001-0001-000000000000</Entitle>
+    <Source>DefinicjaDokumentu:7a1d0c00-0001-0003-0001-000000000000</Source>
+    <ReadOnlyRight>True</ReadOnlyRight>
+  </Right>
+
+</session>

@@ -151,7 +151,7 @@ manualnego zwraca `WFDefinition.GetStartPoint(): TaskDefinition` — pierwszy w�
 | `IsStart` | `bool` | element startowy; **setter rzuca `ColReadOnlyException` w definicji Engine** |
 | `ActionRunAt` | `Soneta.Business.Db.ActionRunAt` | `Auto` („Automatyczna") / `InMenu` („W menu") / `Default`; setter także zablokowany w Engine |
 | `StartPointType` | `Soneta.Business.Db.TaskStartPointTypeEnum` (`[Flags]`) | **tylko definicje Engine**: `NoStartPoint` / `Automatic` / `InWorkflowPanel` / `InDocumentMenu` / `Subprocess`; setter sam uzgadnia `IsStart` i `ActionRunAt` |
-| `ShowInToolbar`, `ShowInListMenu`, `ShowInListToolbar` | `bool` | gdzie widać czynność startu; **zapisywalne wyłącznie w definicji Engine + `ActionRunAt = InMenu`** — w definicji Standard są read-only (`IsReadOnlyShowInToolbar()`), próba zapisu rzuca `ColReadOnlyException` |
+| `ShowInToolbar`, `ShowInListMenu`, `ShowInListToolbar` | `bool` | gdzie widać czynność startu; **zapisywalne w definicji Engine + `ActionRunAt = InMenu`** — w definicji Standard są read-only (`IsReadOnlyShowInToolbar()`), próba zapisu rzuca `ColReadOnlyException`. Wyjątek: flagi **listy** (`ShowInListMenu`/`ShowInListToolbar`) są zapisywalne także w definicji Standard z `ActionType = PromptAI` (prompt AI) |
 | `EnableCondition` | `string` | algorytm „Warunek utworzenia" — kiedy zadanie startowe wolno utworzyć |
 
 **Snippet:**
@@ -197,7 +197,9 @@ using (var session = login.CreateSession(readOnly: false, config: true, name: "W
   zapisywalna **tylko w definicji Engine** przy `ActionRunAt = InMenu` (warunek
   `IsReadOnlyShowInToolbar() => IsReadOnly() || ActionRunAt != InMenu || DefinitionType != Engine`).
   W definicji **Standard** te pola są read-only — sterowanie widocznością odbywa się tam pośrednio
-  (`ShowInToolbar` zwraca `ShowInMenu`); jawny zapis rzuca `ColReadOnlyException`.
+  (`ShowInToolbar` zwraca `ShowInMenu`); jawny zapis rzuca `ColReadOnlyException`. Jedyny wyjątek:
+  definicja Standard z `ActionType = PromptAI` (prompt AI, poza workflow) ma zapisywalne flagi
+  **listy** `ShowInListMenu`/`ShowInListToolbar` — szczegóły w WORKFLOW04 (start z dokumentu / listy).
 
 ### WORKFLOW-B3 — Określenie wykonawcy węzła (operator / rola / węzeł organizacyjny) (★)
 

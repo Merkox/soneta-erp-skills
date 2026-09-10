@@ -108,6 +108,14 @@ składni bindowania opisuje skill [form-xml](../../form-xml/SKILL.md).
 | `EditValue="{Workers.Cena.Netto}"` | `Workers.Cena.Netto` (accessor workera — wprost w ścieżce) |
 | `EditValue="{ObiektViewInfo+TypParams.Pole}"` | `ObiektViewInfo+TypParams.Pole` (nawigacja `ViewInfo`) |
 | `DataContext="{new FooExtender}"` | `new FooExtender` — nowy korzeń (obiekt z kodu), pola: `new FooExtender.Bar` |
+| obiekt z historią (`IRowWithHistory`, np. `Pracownik`) + `EditValue="{Historia.Current.Nazwisko}"` | `Historia.Current.Nazwisko` — pole siedzi na wierszu historii (`PracHistoria`), nie na obiekcie |
+
+**Obiekty z historią (`IRowWithHistory`).** Własne zakładki takiego obiektu opisują zwykle tylko
+interfejsy, a pola leżą na wierszu historii. Ścieżka to `<kolekcja historii>.Current.<pole>`
+(np. `Historia.Current.Etat.Zaszeregowanie.Stawka`). `Current` nie jest polem wiersza — podtabela
+historii rozwiązuje je **datą aktualności z kontekstu** (pozostałe nazwy: `First`, `Today`,
+`Last`). W kodzie odpowiednikiem jest indekser datą: `pracownik[Date.Today].Nazwisko`
+(patrz [scan-workers.md](scan-workers.md), reguła typu rekordu historycznego).
 
 Wyrażenia dostępowe (`Workers.…`, `Features.…`, `+`, `()`, `new …Extender`) zostają **wprost
 w ścieżce** — są standardową składnią accessor-ów, więc nie są opisywane osobną notą (mniej szumu).

@@ -3,6 +3,8 @@
 Skille do programowania, projektowania i konfiguracji platformy Soneta (enova365, Triva)
 w Claude Code, Codexie i innych asystentach AI.
 
+Skille dokumentują publiczną bibliotekę platformy, dlatego są przeznaczone zarówno dla **partnerów** tworzących dodatki, jak i dla **zespołu Soneta** piszącego kod modułów standardowych w repozytorium źródłowym programu — te same wzorce i checklisty obowiązują w obu przypadkach.
+
 ## Dostępne skille
 
 ### 0. [erp](skills/erp/SKILL.md) (meta-skill)
@@ -140,8 +142,7 @@ menu dodatku lub szukasz ścieżki folderu nadrzędnego dla nowego folderu.
 
 ### 9. [containers](skills/containers/SKILL.md)
 
-Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach.
-Instrukcje są przeznaczone dla partnerów bez dostępu do kodu źródłowego programu.
+Uruchamianie i wdrażanie platformy Soneta (enova365, Triva) w kontenerach bez odwołań do kodu programu.
 
 **Zakres:**
 

@@ -7,8 +7,8 @@ Skille w tym repozytorium znajdują się w `skills/`. Instalację opisuje [READM
   na udostępnionych referencjach, publicznych interfejsach, bibliotekach i narzędziach.
 - Pisz zwięźle, zachowując szczegóły potrzebne do wykonania zadania. Najważniejsze reguły
   i odnośniki umieszczaj na początku. Szczegóły dotyczące wybranych zadań przenoś do referencji.
-- Przykłady kodu powinny być ogólne. Stosuj C# 14 i .NET 10, z uwzględnieniem
-  wersji platformy opisanej w danym materiale.
+- Przykłady kodu powinny być ogólne, bez odwołań do kodu źródłowego programu Soneta.
+  Stosuj C# 14 i .NET 10, z uwzględnieniem wersji platformy opisanej w danym materiale.
 - Dodając materiał, umieść odnośnik do niego w odpowiednim `SKILL.md` lub indeksie
   i powiąż go z dokumentami opisującymi ten sam temat.
 - W checklistach zapisuj warunki poprawności, które agent ma sprawdzić.

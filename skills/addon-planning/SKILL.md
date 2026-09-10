@@ -3,8 +3,9 @@ name: addon-planning
 description: >
   Planowanie projektów dodatków dla platformy Soneta (enova365, Triva) — interaktywny,
   etapowy proces od wizji biznesowej po specyfikację implementacyjną, zasilającą skille
-  business-xml, form-xml i programming. Używaj, gdy użytkownik
-  chce zaplanować nowy moduł lub dodatek (założenia, specyfikacja funkcjonalna,
+  /soneta:business-xml, /soneta:form-xml i /soneta:programming. Używaj, gdy użytkownik
+  chce zaplanować nowy moduł lub dodatek — partnerski albo standardowy moduł platformy
+  tworzony przez zespół Soneta (założenia, specyfikacja funkcjonalna,
   struktura danych i interfejsu użytkownika).
 ---
 

@@ -1,15 +1,18 @@
 ---
 name: config
 description: >
-  Konfiguracja i funkcje domenowe Soneta (enova365, Triva). Używaj przy: imporcie/eksporcie
-  danych i ustawień XML (`session`, `*.dbinit.xml`, demo, import według rekordów i przez logikę
-  biznesową `business="true"`, eksport datapacku i rekordów guidowanych, GUID); pytaniach o
-  atrybuty guid/where/key/id/business/deleted/dbversion; mapowaniu menu z DLL (`scan-folders`,
-  `[assembly: FolderView]`); konfiguracji `appsettings.json` (klucze, porty, adresy, nadpisania
-  `-c`, `SONETA_`, CLI); pracy z ConfigReg („Zarządzanie konfiguracją”): zrzuty, porównywanie,
-  scalanie i debugowanie `*.reg.json`, przenoszenie ustawień między bazami, sigile `$strict`,
-  `$v`, `#klucz`, `@atrybut`. Po kod importu sięgnij do programming, a po operacje na bazie z
-  CLI do tools.
+  Konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva) — dla partnerów i zespołu Soneta:
+  (A) IMPORT/EKSPORT DANYCH I USTAWIEŃ przez XML —
+  element session, import według rekordów (*.dbinit.xml, demo) i przez logikę biznesową
+  (business="true"), eksport datapacku, GUID; (B) `scan-folders` — foldery menu
+  (`[assembly: FolderView]`) z DLL; (C) KONFIGURACJA URUCHOMIENIOWA `appsettings.json` — porty i adresy,
+  warstwy nadpisań (`-c`, `SONETA_`, CLI); (D) REJESTR KONFIGURACJI (ConfigReg,
+  „Zarządzanie konfiguracją") — zrzut konfiguracji bazy do `*.reg.json`, porównanie i scalanie,
+  sigile (`$strict`, `$v`, `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu,
+  pyta o atrybuty guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane;
+  (3) mapuje menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji,
+  debuguje `*.reg.json` albo przenosi ustawienia między bazami. Kod importu → /soneta:programming;
+  operacje na bazie z CLI → /soneta:tools.
 ---
 
 # Ustawienia, konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva)
@@ -23,6 +26,7 @@ są wyłącznie mechanizmy faktycznie obecne w skillu; kolejne artykuły dodawan
 | Potrzeba | Skill |
 |---|---|
 | **Budowa pliku XML importu/eksportu danych i ustawień** (dbinit.xml, demo, przenoszenie konfiguracji) | **config** ([import-export-xml](references/import-export-xml.md)) |
+| **Gotowy wzorzec pliku importu** dla typowego obiektu (słownik, definicja, rola, cecha, szablon, kokpit) | **config** ([import-xml-examples](references/import-xml-examples.md)) |
 | Inwentaryzacja/mapa **folderów statycznych menu** (`[assembly: FolderView]`) z DLL | **config** ([scan-folders](references/scan-folders.md)) |
 | **Konfiguracja uruchomieniowa** (porty, adresy komponentów, warstwy nadpisań `appsettings.json`) | **config** ([appsettings](references/appsettings.md)) |
 | **Rejestr konfiguracji** (ConfigReg): `*.reg.json`, porównanie i scalanie ustawień między bazami | **config** ([config-reg](references/config-reg.md)) |
@@ -52,6 +56,18 @@ Artykuł specyfikuje identyfikację rekordów (GUID, `where`, `key`, `id`), form
 `*.dbinit.xml` (`priority`, `versionName`, `dbversion`). Zawiera też gotowy, zweryfikowany
 importem **przykład** (obiekt w modelu „root + historia") —
 [examples/import-pracownik-etatowy.xml](examples/import-pracownik-etatowy.xml).
+
+### Katalog wzorców importu XML — [references/import-xml-examples.md](references/import-xml-examples.md)
+
+Wzorce wyniesione z kilkuset standardowych plików `*.dbinit.xml` platformy: nagłówek i piętra
+`priority`, strukturalne GUID-y, trzy formy referencji (`GUID`, `Tabela:GUID`, `id` z pliku),
+patch rekordu w kolejnej wersji (`updateonly`), `insertonly`, `key`, `duplicate`/
+`duplicateKeyField`, semantyka pustych elementów, kod C#/HTML/XML w treści pola. Szkielety dla
+typowych obiektów: słowniki, definicje dokumentów i zadań, cechy, szablony e-mail, konfiguracja
+(`CfgNode`), role systemowe i prawa (`Right`), projekty runtime, kokpity, tuple. Pliki
+w [examples/](examples/): `dbinit-slownik-i-poprawki.dbinit.xml`, `import-rola-i-prawa.xml`,
+`import-cecha-i-szablon-email.xml`, `import-definicja-elementu-wynagrodzenia.xml` (kreator
+algorytmu i edytor z kodem C#; parametry algorytmu → [place-def-elementow](../place-def-elementow/SKILL.md)).
 
 ### Mechanizm zasilania bazy Demo — [references/demo-data.md](references/demo-data.md)
 

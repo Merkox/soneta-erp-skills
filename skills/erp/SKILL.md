@@ -1,13 +1,25 @@
 ---
 name: erp
 description: >
-  Mapa skilli platformy Soneta (enova365, enova, Soneta Enterprise, Triva). Używaj przy rozpoczynaniu zadania,
-  gdy nie wiadomo, który skill wybrać, przy pytaniach o dostępne skille oraz przy
-  zadaniach obejmujących kilka warstw: planowanie dodatku, model danych, kod ORM,
-  formularze, wydruki, styl UI, płace, konfigurację, narzędzia CLI lub kontenery.
+  Mapa i przewodnik po skillach platformy Soneta (enova365, Triva): soneta:programming (ORM, kod
+  biznesowy), soneta:addon-planning, soneta:business-xml, soneta:form-xml, soneta:repx (wydruki
+  .repx), soneta:place-def-elementow, soneta:config (import/eksport XML, scan-folders,
+  appsettings.json, rejestr konfiguracji *.reg.json), soneta:tools (dbmgr, buscall, SonetaFrame),
+  soneta:containers (docker compose, Apple container, Helm/Kubernetes). Używaj gdy użytkownik: (1)
+  rozpoczyna zadanie dla platformy Soneta i nie wiadomo, który skill wybrać; (2) pyta ogólnie o
+  dodatki, moduły lub rozszerzenia Soneta ERP; (3) wspomina enova, Soneta Enterprise, Triva bez
+  sprecyzowania warstwy (dane, UI, logika, płace); (4) chce poznać dostępne skille; (5) realizuje
+  zadanie obejmujące wiele warstw platformy; (6) pracuje nad kodem samej platformy w repozytorium
+  źródłowym Soneta (`Soneta.*`, moduły standardowe) — skille opisują publiczną
+  bibliotekę platformy i obowiązują tak samo dla dodatków partnerów i kodu zespołu Soneta.
 ---
 
 # Mapa skilli platformy Soneta (enova365, Triva)
+
+Skille dokumentują publiczną bibliotekę platformy. Stosuj je przy tworzeniu kodu zarówno
+dodatków partnerów, jak i modułów standardowych w repozytorium źródłowym Soneta. W obu
+przypadkach obowiązują te same wzorce, checklisty i
+[zasady bezpiecznego kodu](../programming/references/safe-code.md).
 
 Wybierz skill według zadania i przeczytaj jego `SKILL.md`, a następnie tylko referencje
 potrzebne do pracy. Przy zadaniu obejmującym kilka warstw korzystaj z kilku skilli.

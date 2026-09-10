@@ -88,6 +88,9 @@ Pliki dzielą się po komponencie:
 | `test-*.log` | uruchomienia testów |
 | `*-*.log` | pozostałe komponenty wg analogicznego wzorca `<komponent>-*.log` |
 
+Aplikacja ramki (`SonetaFrame`) i `buscall` logują **osobno**, w `Soneta.Frame/Logs/{Frame,BusCall}/`
+(JSON lines, pliki `info-*`/`error-*`), patrz [sonetaframe](../../tools/references/sonetaframe.md#logi-ramki-i-buscall).
+
 ```bash
 # macOS/Linux — najnowszy log serwera i podgląd na żywo
 ls -t ~/Library/Application\ Support/Soneta/Logs/server-*.log | head -1

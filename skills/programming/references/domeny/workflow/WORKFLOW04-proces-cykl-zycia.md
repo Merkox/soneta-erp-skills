@@ -116,6 +116,13 @@ z wierszem (`Task.Parent = row`), wyznacza wiersz zarządzający procesu (WORKFL
 `SingleWorkflowInstance` — pilnuje jednej aktywnej instancji na wiersz. W UI czynności startu
 w menu dokumentu/listy generują workery platformy na podstawie pól węzła startowego:
 `ShowInMenu`/`ShowInToolbar` (formularz) i `ShowInListMenu`/`ShowInListToolbar` (lista).
+Na listę wchodzą wyłącznie punkty startu Engine ze `StartPointType = InDocumentMenu` i wtyczką
+„Zadanie uruchamiane z listy dokumentów” (`ShowInListToolbar` wymaga `ShowInListMenu`) oraz —
+poza workflow — definicje Standard z `ActionType = PromptAI`: tworzone automatycznie z promptu AI
+(pole „Widoczny w menu”), domyślnie `ShowInListMenu = true`, edytowalne na zakładce Ustawienia
+definicji; czynność działa dla **jednego** zaznaczonego zapisu, przy wielu jest ukryta. Dla pozostałych
+definicji Standard flagi listy są read-only, a zmiana `ActionType` z PromptAI lub `ActionRunAt`
+poza `InMenu` zeruje je.
 
 **Pola i typy:**
 

@@ -101,7 +101,8 @@ Przykładowa zawartość przy otwartej liście kontrahentów:
 | Typ | Opis                                   |
 |-----|----------------------------------------|
 | `SelectedCounter` | Liczba zaznaczonych wierszy na gridzie |
-| `Kontrahent[]` | Kolekcja zaznaczonych kontrahentów     |
+| `Kontrahent` | Wiersz bieżący (fokus) pod jego konkretnym typem |
+| `Kontrahent[]` | Kolekcja zaznaczonych kontrahentów — tablica typowana, dostępna też jako `GuidedRow[]` / `Row[]` (`Context[typeof(GuidedRow[])]`) |
 | `UILocation` | Aktywny element interfejsu             |
 | `INavigatorContext` | Context grida (zaznaczenia, focus)     |
 | `View` | Źródło danych grida                    |
@@ -109,6 +110,10 @@ Przykładowa zawartość przy otwartej liście kontrahentów:
 | `Session` | Gdy aktywny widok z danymi |
 | `Login` | Zalogowany użytkownik                  |
 | `[ViewInfo]+Params` | Klasa parametrów widoku |
+
+Lista **nie** zawiera `CurrentObject` — ten element wstawia wyłącznie formularz (obok samego
+wiersza pod jego typem). Obecność `CurrentObject` odróżnia więc kontekst formularza od listy —
+wykorzystanie w czynnościach dynamicznych: [worker-extender.md](./worker-extender.md#gdzie-akcja-się-pojawia--formularz-czy-lista).
 
 ## Odczyt z context
 

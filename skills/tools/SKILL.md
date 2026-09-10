@@ -1,14 +1,17 @@
 ---
 name: tools
 description: >
-  Narzędzia CLI platformy Soneta (enova365, Triva). Używaj do zarządzania bazami przez `dbmgr`
-  (tworzenie, rejestracja, konwersja, backup/restore, licencje, rozszerzenia/extensions,
-  analiza, kompilacja), przygotowania baz testowych/demo i automatyzacji w skryptach/CI;
-  sterowania działającą aplikacją przez `buscall` (nawigacja, formularze, gridy, edycja, zrzuty
-  ekranu); uruchamiania ramki `SonetaFrame` (`SonetaFrameNew`) i konfiguracji źródeł baz
-  (`demo:`, `http`, `docker:`, `process:`, `orchestrator:`) oraz pliku `Settings_Product.json`.
-  Sięgaj też przy pytaniach o składnię i opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame` oraz
-  gdy inny skill potrzebuje operacji na bazie lub weryfikacji zmian w uruchomionej aplikacji.
+  Narzędzia deweloperskie wiersza poleceń (CLI) platformy Soneta (enova365, Triva) — dla partnerów
+  i zespołu Soneta (repozytorium źródłowe programu). Używaj gdy użytkownik: (1)
+  zarządza bazami przez `dbmgr` — tworzy, rejestruje, konwertuje, backup/restore, licencje,
+  rozszerzenia, analiza, kompilacja; (2) przygotowuje bazę testową/demo z CLI albo automatyzuje
+  operacje na bazach w skrypcie/CI; (3) testuje działającą aplikację przez `buscall` — zdalnie
+  steruje programem (nawigacja, formularze, gridy, edycja) i robi zrzuty ekranu; (4) uruchamia
+  ramkę `SonetaFrame` (`SonetaFrameNew`), konfiguruje źródła baz (`demo:`, `http`, `docker:`,
+  `process:`, `orchestrator:`) albo pyta o `Settings_Product.json`; (5) pyta o składnię, komendy
+  lub opcje `dbmgr`, `buscall`, `callmcp`, `SonetaFrame`; (6) wspomina „zarządzanie bazą enova",
+  „baza demo", „konwersja bazy", „testowanie na żywej aplikacji", „ramka Soneta". Sięgnij też, gdy
+  inny skill potrzebuje operacji na bazie lub weryfikacji zmian na uruchomionej aplikacji.
 ---
 
 # Soneta Tools — narzędzia deweloperskie CLI
@@ -25,8 +28,8 @@ Każde narzędzie ma **referencję funkcji/parametrów** oraz osobny dokument o 
 |---|---|---|---|
 | **`dbmgr`** | [references/dbmgr.md](references/dbmgr.md) | referencja | Zarządzanie **bazami danych** z CLI: tworzenie/rejestracja/kasowanie, konwersja, backup/restore (`.bac`/`.zip`), licencje i klucz wirtualny, rozszerzenia, import XML, analiza, kompilacja. Wszystkie komendy i opcje. |
 | **`dbmgr`** | [references/dbmgr-cli-menu.md](references/dbmgr-cli-menu.md) + [assets/dbmgr-menu.cs](assets/dbmgr-menu.cs) | zastosowanie | Wzorzec + gotowy szablon: owinięcie `dbmgr` w interaktywne menu CLI (Spectre.Console) na jednoplikowej aplikacji C# — wybór bazy z listy, tryby środowisk, gotowe akcje. |
-| **`buscall`** | [references/buscall.md](references/buscall.md) | referencja | Zdalne wywoływanie metod aplikacji: tryby `call`/`callmcp`, składnia argumentów `klucz=wartość`, odkrywanie metod (`methods.list`), katalog metod Bundle (nawigacja, formularze, gridy, zrzuty), kody wyjścia. |
-| **`SonetaFrame`** | [references/sonetaframe.md](references/sonetaframe.md) | referencja | Aplikacja ramki (`SonetaFrameNew`) hostująca webową wersję programu: uruchamianie (`dotnet SonetaFrameNew.dll`), parametry `-s`/`--start`, `-c`/`--connection`, plik konfiguracyjny (`Settings_<Product>.json`) i pełna składnia **źródeł baz danych** (`demo:`, `http(s):`, `docker:`, `process:`, `orchestrator:` + modyfikatory). |
+| **`buscall`** | [references/buscall.md](references/buscall.md) | referencja | Zdalne wywoływanie metod aplikacji: tryby `call`/`callmcp`, składnia argumentów `klucz=wartość`, odkrywanie metod (`methods.list`), katalog metod Bundle (nawigacja, formularze, gridy, zrzuty), kody wyjścia, pułapki trybu `mcp` (otwarty STDIN, współbieżność, cache listy metod). |
+| **`SonetaFrame`** | [references/sonetaframe.md](references/sonetaframe.md) | referencja | Aplikacja ramki (`SonetaFrameNew`) hostująca webową wersję programu: uruchamianie (`dotnet SonetaFrameNew.dll`), parametry `-s`/`--start`, `-c`/`--connection`, plik konfiguracyjny (`Settings_<Product>.json`) i pełna składnia **źródeł baz danych** (`demo:`, `http(s):`, `docker:`, `process:`, `orchestrator:` + modyfikatory), logi ramki i `buscall` (`Soneta.Frame/Logs/`). |
 
 > **Uwaga:** wizualną **weryfikację kodu na żywej aplikacji** przez `buscall` (baza startująca z Twojego kodu,
 > przeładowanie DLL, pułapki osieroconych procesów/portów, zrzuty ekranu do oceny wyglądu formularzy) opisuje

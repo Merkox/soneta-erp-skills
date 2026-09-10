@@ -163,6 +163,18 @@ process:baza_danych;path=...;port=5005;serverport=22000
 ```
 Pozwala określić porty serwera web-owego (`port`) oraz biznesowego (`serverport`).
 
+**Do testów z `buscall` bierz źródło `process:`** — ramka podnosi serwery in-process razem
+z sobą, nie trzeba uruchamiać serwera biznesowego, web ani reszty stosu:
+
+```bash
+buscall --db "Process|Demo" call where_am_I          # ramka + serwery wstają same
+```
+
+**Pułapka:** wpis `http://…` wskazuje *zewnętrzny* serwer, który sam się nie uruchomi. Gdy go
+nie ma (`lsof -nP -i :5005` pusty), wywołania kończą się mylącymi komunikatami hosta:
+`Niepoprawny adres serwera: '//localhost:5005|Demo'` albo `Nie znaleziono bazy danych 'Dev'`.
+Komunikat sugeruje literówkę w `--db`, a naprawdę brakuje serwerów.
+
 ### Orchestrator
 
 ```
@@ -197,6 +209,40 @@ process:moja_baza;caption=moja_baza;path=<katalog-kodu-soneta>;user=Administrato
   **jedno źródło prawdy**; struktura pliku i utworzenie bazy: [dbmgr.md](dbmgr.md), sekcja
   „Baza z własnym dodatkiem". Pełny przepis weryfikacji dodatku na żywej aplikacji:
   [buscall-live-testing.md](../../programming/references/buscall-live-testing.md).
+
+## Logi ramki i `buscall`
+
+Ramka i `buscall` logują **osobno od serwera biznesowego** — w katalogu danych lokalnych
+aplikacji, podkatalog `Soneta.Frame/Logs/<komponent>`:
+
+| Platforma | Katalog |
+|---|---|
+| **macOS** | `~/Library/Application Support/Soneta.Frame/Logs/` |
+| **Windows** | `%LOCALAPPDATA%\Soneta.Frame\Logs\` |
+
+Podkatalog to komponent: `Frame` (aplikacja ramki) i `BusCall` (CLI / serwer MCP). W każdym
+dwa strumienie rolowane dziennie: `info-YYYYMMDD.log` (poziomy poniżej Error) i
+`error-YYYYMMDD.log` (Error i wyżej). W buildzie Debug dochodzi wyjście na konsolę.
+
+Pliki są w formacie **JSON lines**, więc `grep` po treści komunikatu zwykle nic nie znajduje —
+trzeba parsować. Istotne pola: `Timestamp`, `Properties.Caller`, `Properties.Message`, `Exception`:
+
+```bash
+python3 - "$HOME/Library/Application Support/Soneta.Frame/Logs/Frame/error-$(date +%Y%m%d).log" <<'PY'
+import json, sys
+for line in open(sys.argv[1]):
+    if not line.strip(): continue
+    d = json.loads(line)
+    p = d.get("Properties", {})
+    print(d["Timestamp"][11:19], f'[{p.get("Caller")}]', str(p.get("Message",""))[:200].replace("\n", " "))
+PY
+```
+
+Ślad stosu w `Exception` podaje plik i linię w kodzie ramki, więc `error-*.log` jest szybszą
+drogą do przyczyny niż powtarzanie scenariusza w UI. `Caller` równy `.ctor` oznacza zwykle
+handler zdarzenia podpięty lambdą w konstruktorze kontrolki. Katalog otwiera przycisk w panelu
+deweloperskim ustawień ramki. Logi **serwera biznesowego** (`Soneta/Logs/server-*.log`) opisuje
+artykuł [translations-logging](../../programming/references/translations-logging.md).
 
 ## Powiązania
 

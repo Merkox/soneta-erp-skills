@@ -64,8 +64,14 @@ budowa pliku; a gdy użytkownik zleci test — `dbmgr importxml` → odczyt efek
 |---|---|
 | Dane konfiguracyjne, słowniki, definicje (brak złożonej logiki biznesowej) | według rekordów |
 | Inicjowanie bazy (`*.dbinit.xml`), konwersje ustawień, baza demo/testowa | według rekordów |
+| Dane kartotekowe w modelu „root + historia" (np. pracownik, zapisy „od–do") | według rekordów |
 | Dokumenty i dane operacyjne wymagające walidacji (np. dokumenty handlowe) | przez logikę biznesową |
 | Obiekty ze złożoną logiką biznesową (przeliczenia, stany, zależności pól) | przez logikę biznesową |
+
+Kryterium **nie jest** podział „konfiguracja vs dane", lecz to, czy zapis obiektu wymaga
+przeliczeń i walidacji zależnych pól, których nie wolno pominąć. Tak robią pliki standardowe:
+dane kadrowe bazy demo idą według rekordów, tryb biznesowy występuje tylko przy dokumentach.
+Gotowe wzorce dla typowych obiektów: [import-xml-examples.md](import-xml-examples.md).
 
 ## Identyfikacja rekordu
 
@@ -138,6 +144,7 @@ tworzenia obiektu.
 | `addnew="true"` | kolekcja | tylko dopisuj — nie kasuj istniejących elementów kolekcji |
 | `relationsimportmode="update"` | kolekcja | aktualizuj po GUID zamiast zastępować |
 | `duplicate="Number"` | pole | przy konflikcie unikalności dołóż przyrostek ` 2`, ` 3`… |
+| `duplicateKeyField="Pole"` | pole (obok `duplicate`) | drugie pole klucza unikalności złożonego (np. nazwa unikalna w obrębie tabeli) |
 | `date` | rekord w kolekcji historycznej | aktualizacja **od tej daty** — cięcie okresu: nowy zapis (klon poprzedniego z nadpisanymi polami), poprzedni zostaje do dnia przed. Zob. *Aktualizacja historyczna* |
 | `ctor` | rekord (tryb biznesowy) | wybór wariantu tworzenia obiektu |
 | `priority`, `versionName` | session (dbinit) | zob. sekcję o dbinit |
@@ -444,6 +451,16 @@ regułami:
 - rekordy standardowe kasowane wpisem `deleted="True"` tracą status standardowego GUID-u,
   więc wpis może zostać ponownie zainicjowany w nowszej wersji.
 
+- `dbversion` postawiony na `<session>` **nie jest czytany** — musi być na każdym rekordzie;
+- poprawka w kolejnej wersji to **patch**: ten sam `guid`, nowy `dbversion`, unikalny `id`
+  (sufiks wersji), tylko zmienione pola, zwykle `updateonly="true"`; miejsce na kod klienta —
+  `insertonly="true"`. Konwencja plików: `Obiekt.dbinit.xml` + `Obiekt_RRMMDDPP.dbinit.xml`.
+
+Katalog wzorców wyniesionych z plików standardowych (słowniki, definicje dokumentów, zadania,
+cechy, szablony, konfiguracja, role i prawa, kokpity) z gotowymi szkieletami:
+[import-xml-examples.md](import-xml-examples.md); pełny plik przykładowy —
+[examples/dbinit-slownik-i-poprawki.dbinit.xml](../examples/dbinit-slownik-i-poprawki.dbinit.xml).
+
 W projekcie dodatku pliki `*.dbinit.xml` osadza się jako **EmbeddedResource** — sposób
 osadzania (automatyczny przez Soneta.Sdk lub ręczny wpis w projekcie) opisuje artykuł
 *sessionreader-sessionwriter* w [programming](../../programming/SKILL.md).
@@ -494,7 +511,7 @@ Zasady:
 - [ ] Kolekcje historyczne („od–do"): `addnew="true"` + stały `guid` na zapisach (idempotencja; inaczej błąd „kasowanie ostatniego zapisu historii").
 - [ ] Zmiana wartości „od dnia" → `date="RRRR-MM-DD"` na zapisie (cięcie okresu, nowy zapis) + tylko zmieniane pola; nie mylić z nadpisaniem zapisu przez `guid`. Zob. *Aktualizacja historyczna*.
 - [ ] Dane trzymane w osobnej strukturze (np. adresy) zapisane we właściwym miejscu, nie wprost w rekordzie — miejsce potwierdzone skanem.
-- [ ] dbinit: `versionName`, `priority` i `dbversion` na każdym rekordzie głównym.
+- [ ] dbinit: `versionName`, `priority` i `dbversion` na każdym rekordzie głównym; poprawki jako patch (`guid` ten sam, nowy `dbversion`, unikalny `id`, `updateonly`) — zob. [import-xml-examples.md](import-xml-examples.md).
 
 **Weryfikacja struktury (zawsze, część budowy pliku):**
 - [ ] Nazwy pól/typy/struktura (pole vs kolekcja vs subrow) zweryfikowane skanem przez agenta — read-only, nie zlecone użytkownikowi.
@@ -507,6 +524,8 @@ Zasady:
 
 ## Powiązania
 
+- [import-xml-examples.md](import-xml-examples.md) — katalog wzorców i szkieletów dla typowych
+  obiektów, wyniesiony z plików standardowych `*.dbinit.xml`; pliki w `examples/`.
 - [demo-data.md](demo-data.md) — mechanizm zasilania bazy Demo: katalog `Demo`, kolejność
   plików, sufiksy `.gold`/`.silver`, relacja do rekordów standardowych (dbinit).
 - [business-xml](../../business-xml/SKILL.md) — definicja tabel z selectorem (enum dyskryminatora od 1, pułapka

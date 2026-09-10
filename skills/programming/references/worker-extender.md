@@ -256,6 +256,55 @@ Zasady:
 * Skaner [scan-workers.md](./scan-workers.md) **nie wykrywa** czynności dynamicznych — inwentaryzuje
   tylko metody z atrybutem `[Action]`.
 
+### Gdzie akcja się pojawia — formularz czy lista
+
+O miejscu prezentacji akcji (statycznej i dynamicznej) decydują flagi `ActionMode` i `ActionTarget`:
+
+| Flaga | Znaczenie |
+|---|---|
+| `ActionMode.OnlyForm` | tylko na formularzu obiektu |
+| `ActionMode.OnlyTable` | tylko na liście |
+| `ActionMode.OnlyListOnForm` | tylko na liście osadzonej w formularzu |
+| brak flag `Only*` | wszędzie, gdzie worker pasuje typem danych |
+| `ActionTarget.Menu` + `LocalMenu` | pozycja w menu „Czynności” i w menu kontekstowym wiersza |
+| `ActionTarget.ToolbarWithText` | osobny przycisk z podpisem w pasku narzędzi formularza lub listy; w pasku **listy** renderuje się tylko przy `ActionMode.SingleSession` lub `IsolatedSession` |
+
+Rozpoznanie „formularz czy lista” w `GetActions` opiera się na zawartości kontekstu
+(szczegóły w [context.md](./context.md#zawartość-context)):
+
+- **formularz** wstawia `CurrentObject` (obiekt formularza) oraz sam wiersz pod jego typem;
+- **lista** nie ma `CurrentObject`; ma wiersz bieżący pod jego konkretnym typem, zaznaczenie jako
+  **tablicę typowaną** (np. `Kontrahent[]`, odczytywalną też jako `GuidedRow[]` / `Row[]`) i `View`.
+
+```csharp
+public static IEnumerable GetActions(Session session, Context context)
+{
+    var current = context.GetOrDefault<CurrentObject>()?.Value as GuidedRow;
+    var selected = context.GetOrDefault<GuidedRow[]>();
+    bool isList = current == null && selected?.Length > 0;
+    var row = current ?? selected?[0];
+    if (row == null) yield break;
+
+    // Czynność „tylko dla jednego zapisu”: przy zaznaczeniu wielu wierszy nie oferuj jej.
+    if (isList && selected!.Length != 1) yield break;
+
+    yield return new MojaAkcja(row) {
+        IsList = isList   // → Mode: OnlyTable zamiast OnlyForm, Target: Menu | LocalMenu
+    };
+}
+```
+
+Zasady wykonania na liście:
+
+* Uruchomienie z menu zaznaczenia jest **for-each** — silnik iteruje zaznaczone wiersze i przed
+  każdym `Invoke` wstawia bieżący wiersz do kontekstu (`context.Set(row)`). Akcja, która ma działać
+  raz dla całego zaznaczenia, przyjmuje tablicę (przykład „grupowo na liście kontrahentów” wyżej);
+  akcja „tylko dla jednego zapisu” ukrywa się w `GetActions`, gdy tablica ma więcej niż jeden element.
+* Parametry `GetActions` są wiązane najpierw z **bieżącej wartości** przekazanej przez UI (wiersz,
+  tablica zaznaczenia lub `View` — gdy typ parametru jest z niej przypisywalny), potem z `Context`.
+  Brak dopasowania oznacza brak akcji, bez wyjątku — przy nietypowych sygnaturach sprawdź menu
+  na obu rodzajach okien.
+
 ## Obiekty Extender
 
 Pozwalają na bindowanie logiki interface-owej do formularzy. Można bindować methods i properties z obiektu extender.

@@ -173,6 +173,7 @@ Dozwolone wartości typów enum użytych w polach powyżej (`wartość` — Tytu
 - `OpenObjectForm` = 2 — Otwórz formularz
 - `ThrowException` = 3 — Zgłoś wyjątek
 - `Email` = 4 — Wysyłka email
+- `PromptAI` = 5 — Prompt AI (definicja tworzona z promptu AI; jedyny rodzaj akcji definicji Standard, dla którego `ShowInListMenu`/`ShowInListToolbar` są zapisywalne — patrz [WORKFLOW02](../../../references/domeny/workflow/WORKFLOW02-wezly.md))
 
 ### DefinitionTypeEnum (`Db.DefinitionTypeEnum`)
 - `Standard` = 0 — Wielozakładkowy

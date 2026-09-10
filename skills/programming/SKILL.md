@@ -1,18 +1,17 @@
 ---
 name: programming
 description: >
-  Klasy ORM i wzorce kodu biznesowego platformy Soneta (enova365, Soneta Enterprise, Triva).
-  Używaj gdy użytkownik: (1) pisze, modyfikuje lub refaktoruje kod biznesowy
-  enova365/Soneta/Triva (Row/Table/Module, sesje i transakcje, selector, typy
-  wierszy); (2) pyta o konkretny mechanizm ORM — Session, Commit/Save, optimistic
-  lock, Context, RowCondition, Datapack, ViewInfo, Features, thread-safety; (3) prosi
-  o code review kodu biznesowego Soneta (safe-code); (4) pisze worker, extender,
-  akcję w menu Czynności, folder/listę; (5) chce zinwentaryzować moduły, pola,
-  workery lub formularze/zakładki (pola, sekcje, kolejność wprowadzania) z bibliotek
-  DLL; (6) chce rozpocząć nowy dodatek/rozszerzenie Soneta —
-  wygenerować szkielet źródeł z CLI (`dotnet new soneta-addon`, Soneta.MsBuild.SDK,
-  szablony Soneta Platform Developer). Sięgnij też, gdy inny skill potrzebuje warstwy
-  ORM/kodu biznesowego Soneta.
+  Klasy ORM i wzorce kodu biznesowego platformy Soneta (enova365, Soneta Enterprise, Triva) — dla
+  dodatków partnerów i dla kodu samej platformy pisanego przez zespół Soneta w repozytorium
+  źródłowym (przestrzenie nazw `Soneta.*`, moduły standardowe). Używaj gdy użytkownik: (1) pisze,
+  modyfikuje lub refaktoruje kod biznesowy (Row/Table/Module, sesje i transakcje, selector, typy
+  wierszy) albo edytuje plik `.cs` z klasami `Row`/`Table`/`Module`, workerem, `[Action]`,
+  `Session`/`Transaction`; (2) pyta o mechanizm ORM — Session, Commit/Save, optimistic lock,
+  Context, RowCondition, Datapack, ViewInfo, Features, thread-safety; (3) prosi o code review kodu
+  biznesowego Soneta (safe-code); (4) pisze worker, extender, akcję w menu Czynności, folder/listę;
+  (5) inwentaryzuje moduły, pola, workery lub formularze/zakładki z bibliotek DLL; (6) zaczyna nowy
+  dodatek — szkielet z CLI (`dotnet new soneta-addon`, Soneta.MsBuild.SDK). Sięgnij też, gdy inny
+  skill potrzebuje warstwy ORM/kodu biznesowego Soneta.
 ---
 
 # Soneta Programming Basics - Podstawowe klasy ORM
