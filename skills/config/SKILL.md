@@ -11,8 +11,8 @@ description: >
   sigile (`$strict`, `$v`, `#klucz`, `@atrybut`). Używaj gdy użytkownik: (1) buduje XML importu,
   pyta o atrybuty guid/where/key/id/business/deleted/dbversion; (2) eksportuje rekordy guidowane;
   (3) mapuje menu z DLL; (4) pyta o klucz `appsettings.json`; (5) pyta o rejestr konfiguracji,
-  debuguje `*.reg.json` albo przenosi ustawienia między bazami. Kod importu → /soneta:programming;
-  operacje na bazie z CLI → /soneta:tools.
+  debuguje `*.reg.json` albo przenosi ustawienia między bazami. Kod importu → programming;
+  operacje na bazie z CLI → tools.
 ---
 
 # Ustawienia, konfiguracja i funkcje domenowe platformy Soneta (enova365, Triva)
